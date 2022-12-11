@@ -2,7 +2,9 @@
 {
     public interface Renderable
     {
-        ICollection<Renderable> RenderableChilds{ get; set;}
+        ICollection<Renderable> RenderableChilds{ get;}
+
+        void display();
         void Render();
     }
 }

@@ -9,25 +9,24 @@ namespace Gift
 {
     public class GiftUI: Renderable
     {
-        public UIElement View { get; set; }
         public Renderer Renderer { get; set; }
-        public ICollection<Renderable> RenderableChilds { get; set; }
+        public ICollection<Renderable> RenderableChilds { get; private set; }
 
-        public GiftUI(UIElement view, Renderer renderer)
+        public GiftUI(Renderer renderer)
         {
-            View = view;
             Renderer = renderer;
+            RenderableChilds = new List<Renderable>();
         }
 
-        public virtual void run()
-        {
-
-        }
 
         public void Render()
         {
             Renderer.Render(this);
         }
 
+        public void display()
+        {
+            Console.Write("Hello");
+        }
     }
 }

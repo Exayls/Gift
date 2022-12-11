@@ -10,11 +10,16 @@ namespace Gift
         }
         public void Render(Renderable renderable)
         {
-            renderable.Render();
+            UpdateDisplay(renderable); 
             foreach (Renderable r in renderable.RenderableChilds)
             {
                 this.Render(r);
             }
+        }
+
+        private void UpdateDisplay(Renderable renderable)
+        {
+            renderable.display();
         }
     }
 }
