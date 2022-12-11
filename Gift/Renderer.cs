@@ -1,13 +1,16 @@
-﻿using Gift.View;
+﻿using Gift.UI.Interface;
 
 namespace Gift
 {
     public class Renderer
     {
-        public Renderer()
+        public TextWriter Output { get; }
+        public Renderer(TextWriter output)
         {
-
+            Output = output;
         }
+
+
         public void Render(Renderable renderable)
         {
             UpdateDisplay(renderable); 
@@ -19,7 +22,7 @@ namespace Gift
 
         private void UpdateDisplay(Renderable renderable)
         {
-            renderable.display();
+            renderable.Display(Output);
         }
     }
 }
