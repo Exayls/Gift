@@ -9,7 +9,7 @@ namespace Gift.UI
         private string text;
         private Position Position;
 
-        public Label(string text, Position Position): base()
+        public Label(string text, Position Position) : base()
         {
             this.text = text;
             this.Position = Position;
@@ -17,6 +17,11 @@ namespace Gift.UI
 
         public override void Display(TextWriter output)
         {
+            if (Position.y == 1000)
+            {
+                output.Write("".PadLeft(60));
+                return;
+            }
             output.Write(text.PadLeft(Position.y + text.Length));
         }
     }
