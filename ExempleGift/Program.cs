@@ -1,6 +1,8 @@
 ﻿
+using ExempleGift;
 using Gift;
 
-Console.WriteLine("Hello, World!");
 
-GiftUI ui = new GiftUI(new View());
+
+var ui = new UI(new Renderer());
+ui.Render();
