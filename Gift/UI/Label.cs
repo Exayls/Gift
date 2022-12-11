@@ -17,18 +17,7 @@ namespace Gift.UI
 
         public override void Display(TextWriter output)
         {
-            if(Position.y == 30)
-            {
-                output.Write("                              Hello");
-            }
-            else if(Position.y == 10)
-            {
-                output.Write("          Hello");
-            }
-            else
-            {
-            output.Write("Hello");
-            }
+            output.Write("Hello".PadLeft(Position.y + "Hello".Length));
         }
     }
 }
