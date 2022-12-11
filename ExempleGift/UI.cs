@@ -1,5 +1,5 @@
 ﻿using Gift;
-using Gift.View;
+using Gift.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ namespace ExempleGift
 {
     internal class UI : GiftUI
     {
-        public UI( Renderer renderer) : base( renderer)
+        public UI(Renderer renderer) : base(renderer)
         {
         }
     }
