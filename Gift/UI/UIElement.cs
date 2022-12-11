@@ -15,7 +15,7 @@ namespace Gift.UI
 
         public void Render()
         {
-            Renderer.Render(this);
+            Renderer?.Render(this);
         }
     }
 }
