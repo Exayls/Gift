@@ -21,6 +21,10 @@ namespace Gift.UI
             {
                 output.Write("                              Hello");
             }
+            else if(Position.y == 10)
+            {
+                output.Write("          Hello");
+            }
             else
             {
             output.Write("Hello");
