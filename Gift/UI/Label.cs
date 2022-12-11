@@ -22,6 +22,11 @@ namespace Gift.UI
                 output.Write("".PadLeft(60));
                 return;
             }
+            if (Position.y == 58)
+            {
+                output.Write("".PadLeft(58)+"He");
+                return;
+            }
             output.Write(text.PadLeft(Position.y + text.Length));
         }
     }
