@@ -17,17 +17,10 @@ namespace Gift.UI
 
         public override void Display(TextWriter output)
         {
-            if (Position.y == 1000)
-            {
-                output.Write("".PadLeft(60));
-                return;
-            }
-            if (Position.y == 58)
-            {
-                output.Write("".PadLeft(58)+"He");
-                return;
-            }
-            output.Write(text.PadLeft(Position.y + text.Length));
+            string display = text.PadLeft(Position.y + text.Length);
+            display = display.Length > 60 ? display.Substring(0, 60) : display;
+
+            output.Write(display);
         }
     }
 }
