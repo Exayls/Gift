@@ -2,13 +2,13 @@
 {
     public class Position
     {
-        private int v1;
-        private int v2;
+        public int x { get; private set; }
+        public int y { get; private set; }
 
-        public Position(int v1, int v2)
+        public Position(int x, int y)
         {
-            this.v1 = v1;
-            this.v2 = v2;
+            this.x = x;
+            this.y = y;
         }
     }
 }

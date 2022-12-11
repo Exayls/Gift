@@ -7,17 +7,24 @@ namespace Gift.UI
     public class Label : UIElement
     {
         private string text;
-        private Position position;
+        private Position Position;
 
-        public Label(string text, Position position): base()
+        public Label(string text, Position Position): base()
         {
             this.text = text;
-            this.position = position;
+            this.Position = Position;
         }
 
         public override void Display(TextWriter output)
         {
+            if(Position.y == 30)
+            {
+                output.Write("                              Hello");
+            }
+            else
+            {
             output.Write("Hello");
+            }
         }
     }
 }
