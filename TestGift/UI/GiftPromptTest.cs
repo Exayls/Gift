@@ -121,4 +121,20 @@ namespace TestGift.UI
             }
         }
     }
+        [Fact]
+        public void CanDisplayTextToPos()
+        {
+            var output = new StringBuilder();
+            using (var writer = new StringWriter(output))
+            {
+                var ui = new GiftUI(new Renderer(writer), new Bound(4,16));
+                var position = new Position(2, 10);
+                var element = new Label("Hello", position);
+                ui.setChild(element);
+
+                ui.Render();
+
+                Assert.Equal("                          Hello", output.ToString());
+            }
+        }
 }
