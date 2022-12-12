@@ -104,5 +104,21 @@ namespace TestGift.UI
                 Assert.Equal("".PadLeft(58)+ "He", output.ToString());
             }
         }
+        [Fact]
+        public void DoNotDisplaybarelyExcedingBounds80()
+        {
+            var output = new StringBuilder();
+            using (var writer = new StringWriter(output))
+            {
+                var ui = new GiftUI(new Renderer(writer), new Bound(10, 80));
+                var position = new Position(0, 58);
+                var element = new Label("Hello", position);
+                ui.setChild(element);
+
+                ui.Render();
+
+                Assert.Equal("".PadLeft(58)+ "Hello", output.ToString());
+            }
+        }
     }
 }
