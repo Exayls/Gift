@@ -1,4 +1,5 @@
-﻿using Gift.UI.Interface;
+﻿using Gift.UI;
+using Gift.UI.Interface;
 
 namespace Gift
 {
@@ -14,9 +15,13 @@ namespace Gift
         public void Render(Renderable renderable)
         {
             UpdateDisplay(renderable); 
-            foreach (Renderable r in renderable.RenderableChilds)
+            if (renderable is Container)
             {
-                this.Render(r);
+                Container container = (Container)renderable;
+                foreach (Renderable r in container.RenderableChilds)
+                {
+                    this.Render(r);
+                }
             }
         }
 

@@ -17,8 +17,9 @@ namespace Gift.UI
 
         public override void Display(TextWriter output)
         {
-            string display = text.PadLeft(Position.y + text.Length);
-            display = display.Length > 60 ? display.Substring(0, 60) : display;
+            int yMax = Context != null? Context.Y: 0;
+            string displayLeftSpace = text.PadLeft(Position.y + text.Length);
+            string display = displayLeftSpace.Length > yMax ? displayLeftSpace.Substring(0, yMax) : displayLeftSpace;
 
             output.Write(display);
         }

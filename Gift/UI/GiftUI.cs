@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace Gift.UI
 {
-    public class GiftUI : UIElement
+    public class GiftUI : Container
     {
 
-        public GiftUI(Renderer renderer) 
+        public GiftUI(Renderer renderer, Bound? b = null ): base(renderer, b)
         {
-            this.Renderer = renderer;
         }
 
         public void setChild(UIElement UIElement)
@@ -21,6 +20,8 @@ namespace Gift.UI
                 this.RenderableChilds.Remove(r);
             }
             this.RenderableChilds.Add(UIElement);
+
+            UIElement.setContext(Bound);
         }
 
         public override void Display(TextWriter output)
