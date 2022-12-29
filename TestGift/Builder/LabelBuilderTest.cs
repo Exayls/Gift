@@ -19,5 +19,15 @@ namespace TestGift.Builder
 
             Assert.Equal("Hello",l.Text );
         }
+        [Fact]
+        public void BuilderPositionTest()
+        {
+
+            LabelBuilder builder = new LabelBuilder();
+            Label l = builder.build();
+
+            Assert.Equal(0,l.Position.y );
+            Assert.Equal(0,l.Position.x );
+        }
     }
 }
