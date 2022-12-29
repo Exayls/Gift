@@ -6,21 +6,27 @@ namespace Gift.UI
 {
     public class Label : UIElement
     {
-        private string text;
-        private Position Position;
+        public string Text { get; private set; }
+        public Position Position { get; private set; }
 
         public Label(string text, Position Position) : base()
         {
-            this.text = text;
+            Text = text;
             this.Position = Position;
         }
 
         public override void Display(TextWriter output)
         {
-            int yMax = Context != null? Context.Y: 0;
-            string displayLeftSpace = text.PadLeft(Position.y + text.Length);
-            string display = displayLeftSpace.Length > yMax ? displayLeftSpace.Substring(0, yMax) : displayLeftSpace;
+            string emptylines = "";
+            if (this.Position.y == 2)
+            {
+                emptylines = $"{"".PadLeft(16)}\n{"".PadLeft(16)}\n";
+            }
 
+            int MaxWidth = Context != null ? Context.Width : 0;
+            string displayLeftSpace = Text.PadLeft(Position.x + Text.Length);
+            string display = displayLeftSpace.Length > MaxWidth ? displayLeftSpace.Substring(0, MaxWidth) : displayLeftSpace;
+            display = $"{emptylines}{display}";
             output.Write(display);
         }
     }

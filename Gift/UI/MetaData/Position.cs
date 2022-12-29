@@ -5,7 +5,7 @@
         public int x { get; private set; }
         public int y { get; private set; }
 
-        public Position(int x, int y)
+        public Position(int y, int x)
         {
             this.x = x;
             this.y = y;
