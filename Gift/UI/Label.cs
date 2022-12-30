@@ -18,9 +18,9 @@ namespace Gift.UI
         public override void Display(TextWriter output)
         {
             string emptylines = "";
-            if (this.Position.y == 2)
+            for (int i = 0; i < Position.y; i++)
             {
-                emptylines = $"{"".PadLeft(16)}\n{"".PadLeft(16)}\n";
+                emptylines += $"{"".PadLeft(16)}\n";
             }
 
             int MaxWidth = Context != null ? Context.Width : 0;
