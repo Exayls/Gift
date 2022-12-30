@@ -11,18 +11,17 @@ namespace Gift
             Output = output;
         }
 
-
-        public void Render(Renderable renderable)
+        public void Render(Container container)
         {
-            UpdateDisplay(renderable); 
-            if (renderable is Container)
+        UpdateDisplay(container); 
+            foreach (Renderable r in container.RenderableChilds)
             {
-                Container container = (Container)renderable;
-                foreach (Renderable r in container.RenderableChilds)
-                {
-                    this.Render(r);
-                }
+                this.Render(r);
             }
+        }
+        public void Render(Renderable Renderer)
+        {
+            UpdateDisplay(Renderer); 
         }
 
         private void UpdateDisplay(Renderable renderable)

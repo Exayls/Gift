@@ -28,5 +28,9 @@ namespace Gift.UI
             Renderer = renderer;
             RenderableChilds = new List<Renderable>();
         }
+        public override void Render()
+        {
+            Renderer?.Render(this);
+        }
     }
 }

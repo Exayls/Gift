@@ -13,7 +13,7 @@ namespace Gift.UI
         }
         public abstract void Display(TextWriter output);
 
-        public void Render()
+        public virtual void Render()
         {
             Renderer?.Render(this);
         }
