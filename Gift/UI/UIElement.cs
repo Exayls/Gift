@@ -6,7 +6,7 @@ namespace Gift.UI
     public abstract class UIElement : Renderable
     {
         public Renderer? Renderer { get; set; }
-        public Bound? Context { get; set; }
+        public Context? Context { get; set; }
 
         public UIElement()
         {
@@ -18,9 +18,9 @@ namespace Gift.UI
             Renderer?.Render(this);
         }
 
-        internal void setContext(Bound bound)
+        internal void setContext(Position globalPosition,Bound bound)
         {
-            Context = bound;
+            Context = new Context(globalPosition, bound);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Gift.UI
                 emptylines += $"{"".PadLeft(16)}\n";
             }
 
-            int MaxWidth = Context != null ? Context.Width : 0;
+            int MaxWidth = Context?.Bounds?.Width ?? 0;
             string displayLeftSpace = Text.PadLeft(Position.x + Text.Length);
             string display = displayLeftSpace.Length > MaxWidth ? displayLeftSpace.Substring(0, MaxWidth) : displayLeftSpace;
             display = $"{emptylines}{display}";

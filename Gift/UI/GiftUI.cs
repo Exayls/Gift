@@ -22,7 +22,7 @@ namespace Gift.UI
             }
             this.RenderableChilds.Add(UIElement);
 
-            UIElement.setContext(Bound);
+            UIElement.setContext(new Position(0,0),Bound);
         }
 
         public override void Display(TextWriter output)
