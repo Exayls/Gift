@@ -20,7 +20,7 @@ namespace Gift.UI
             string emptylines = "";
             for (int i = 0; i < Position.y; i++)
             {
-                emptylines += $"{"".PadLeft(16)}\n";
+                emptylines += $"{"".PadLeft(Context?.Bounds?.Width??0)}\n";
             }
             string LeftSpace = "".PadLeft(Math.Min(Position.x, Context?.Bounds?.Width??int.MaxValue));
 
