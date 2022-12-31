@@ -139,5 +139,20 @@ namespace TestGift.UI
                 Assert.Equal("                \n          Hello", output.ToString());
             }
         }
+        [Fact]
+        public void CanDisplayTextToPos3()
+
+        {
+            var output = new StringBuilder();
+            using (var writer = new StringWriter(output))
+            {
+                var ui = new GiftUI(new Renderer(writer), new Bound(4,32));
+                var position = new Position(1, 10);
+                var element = new LabelBuilder().WithPosition(position).build();
+                ui.setChild(element);
+                ui.Render();
+                Assert.Equal("                                \n          Hello", output.ToString());
+            }
+        }
     }
 }
