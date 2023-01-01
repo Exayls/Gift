@@ -18,7 +18,7 @@ namespace Gift.UI
                 }
                 else
                 {
-                    Bound = new Bound(1, 60);
+                    Bound = new Bound(20, 60);
                 }
             }
             else
