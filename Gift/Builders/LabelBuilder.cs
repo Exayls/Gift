@@ -13,6 +13,9 @@ namespace Gift.Builders
         private string text = "Hello";
         private Position position = new Position(0,0);
 
+    /// <summary>
+    /// build Label with "Hello" as default text and (0,0) as default position
+    /// </summary>
         public LabelBuilder()
         {
 
@@ -27,7 +30,7 @@ namespace Gift.Builders
             this.position = position;
             return this;
         }
-        public Label build()
+        public Label Build()
         {
             return new Label(text, position);
         }
