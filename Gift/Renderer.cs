@@ -13,7 +13,7 @@ namespace Gift
 
         public void Render(Container container)
         {
-        UpdateDisplay(container); 
+            UpdateDisplay(container);
             foreach (Renderable r in container.RenderableChilds)
             {
                 this.Render(r);
@@ -21,11 +21,11 @@ namespace Gift
         }
         public void Render(GiftUI giftUI)
         {
-            UpdateDisplay(giftUI); 
+            UpdateDisplay(giftUI);
         }
         public void Render(Renderable Renderer)
         {
-            UpdateDisplay(Renderer); 
+            UpdateDisplay(Renderer);
         }
 
         private void UpdateDisplay(Renderable renderable)
@@ -36,7 +36,7 @@ namespace Gift
         {
             for (int i = 0; i < renderable.Bound.Height; i++)
             {
-                Output.Write(new string(GiftBase.FILLINGCHAR,renderable.Bound.Width));
+                Output.Write(new string(GiftBase.FILLINGCHAR, renderable.Bound.Width));
                 Output.Write('\n');
             }
         }
