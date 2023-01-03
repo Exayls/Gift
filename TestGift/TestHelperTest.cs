@@ -19,7 +19,7 @@ namespace TestGift
             using (var writer = new StringWriter(output))
             {
                 var ui = new GiftUI(new Renderer(writer));
-                var element = new LabelBuilder().Build();
+                var element = new LabelBuilder().build();
                 ui.setChild(element);
                 ui.Render();
 
@@ -34,7 +34,7 @@ namespace TestGift
             using (var writer = new StringWriter(output))
             {
                 var ui = new GiftUI(new Renderer(writer));
-                var element = new LabelBuilder().WithPosition(new Position(0, 100)).Build();
+                var element = new LabelBuilder().WithPosition(new Position(0, 100)).build();
                 ui.setChild(element);
                 ui.Render();
 

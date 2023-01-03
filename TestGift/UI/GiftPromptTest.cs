@@ -16,7 +16,7 @@ namespace TestGift.UI
             using (var writer = new StringWriter(output))
             {
                 var ui = new GiftUI(new Renderer(writer));
-                var element = new LabelBuilder().Build();
+                var element = new LabelBuilder().build();
                 ui.setChild(element);
                 ui.Render();
 
@@ -31,7 +31,7 @@ namespace TestGift.UI
             {
                 var ui = new GiftUI(new Renderer(writer));
                 var position = new Position(0, 30);
-                var element = new LabelBuilder().WithPosition(position).Build();
+                var element = new LabelBuilder().WithPosition(position).build();
                 ui.setChild(element);
                 ui.Render();
                 Assert.Equal("                              Hello", output.ToString());
@@ -45,7 +45,7 @@ namespace TestGift.UI
             {
                 var ui = new GiftUI(new Renderer(writer));
                 var position = new Position(0, 10);
-                var element = new LabelBuilder().WithPosition(position).Build();
+                var element = new LabelBuilder().WithPosition(position).build();
                 ui.setChild(element);
                 ui.Render();
                 Assert.Equal("          Hello", output.ToString());
@@ -59,7 +59,7 @@ namespace TestGift.UI
             {
                 var ui = new GiftUI(new Renderer(writer));
                 var position = new Position(0, 10);
-                var element = new LabelBuilder().WithText("test").WithPosition(position).Build();
+                var element = new LabelBuilder().WithText("test").WithPosition(position).build();
                 ui.setChild(element);
 
                 ui.Render();
@@ -75,7 +75,7 @@ namespace TestGift.UI
             {
                 var ui = new GiftUI(new Renderer(writer));
                 var position = new Position(0, 1000);
-                var element = new LabelBuilder().WithPosition(position).Build();
+                var element = new LabelBuilder().WithPosition(position).build();
                 ui.setChild(element);
                 ui.Render();
                 Assert.Equal("".PadLeft(60), output.ToString());
@@ -89,7 +89,7 @@ namespace TestGift.UI
             {
                 var ui = new GiftUI(new Renderer(writer));
                 var position = new Position(0, 58);
-                var element = new LabelBuilder().WithPosition(position).Build();
+                var element = new LabelBuilder().WithPosition(position).build();
                 ui.setChild(element);
                 ui.Render();
                 Assert.Equal("".PadLeft(58)+ "He", output.ToString());
@@ -103,7 +103,7 @@ namespace TestGift.UI
             {
                 var ui = new GiftUI(new Renderer(writer), new Bound(10, 80));
                 var position = new Position(0, 58);
-                var element = new LabelBuilder().WithPosition(position).Build();
+                var element = new LabelBuilder().WithPosition(position).build();
                 ui.setChild(element);
                 ui.Render();
                 Assert.Equal("".PadLeft(58)+ "Hello", output.ToString());
@@ -118,7 +118,7 @@ namespace TestGift.UI
             {
                 var ui = new GiftUI(new Renderer(writer), new Bound(4,16));
                 var position = new Position(2, 10);
-                var element = new LabelBuilder().WithPosition(position).Build();
+                var element = new LabelBuilder().WithPosition(position).build();
                 ui.setChild(element);
                 ui.Render();
                 Assert.Equal("                \n                \n          Hello", output.ToString());
@@ -133,7 +133,7 @@ namespace TestGift.UI
             {
                 var ui = new GiftUI(new Renderer(writer), new Bound(4,16));
                 var position = new Position(1, 10);
-                var element = new LabelBuilder().WithPosition(position).Build();
+                var element = new LabelBuilder().WithPosition(position).build();
                 ui.setChild(element);
                 ui.Render();
                 Assert.Equal("                \n          Hello", output.ToString());
@@ -148,7 +148,7 @@ namespace TestGift.UI
             {
                 var ui = new GiftUI(new Renderer(writer), new Bound(4,32));
                 var position = new Position(1, 10);
-                var element = new LabelBuilder().WithPosition(position).Build();
+                var element = new LabelBuilder().WithPosition(position).build();
                 ui.setChild(element);
                 ui.Render();
                 Assert.Equal("                                \n          Hello", output.ToString());
