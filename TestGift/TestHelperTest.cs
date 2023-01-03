@@ -42,5 +42,20 @@ namespace TestGift
                 Assert.Equal("", str[0]);
             }
         }
+        [Fact]
+        public void TestHelperLabelTestMiddle()
+        {
+            var output = new StringBuilder();
+            using (var writer = new StringWriter(output))
+            {
+                var ui = new GiftUI(new Renderer(writer));
+                var element = new LabelBuilder().WithPosition(new Position(0, 58)).build();
+                ui.setChild(element);
+                ui.Render();
+
+                var str = TestHelper.GetElementString(element);
+                Assert.Equal("He", str[0]);
+            }
+        }
     }
 }
