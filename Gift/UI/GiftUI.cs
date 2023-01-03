@@ -28,5 +28,9 @@ namespace Gift.UI
         public override void Display(TextWriter output)
         {
         }
+        public override void Render()
+        {
+            Renderer?.Render(this);
+        }
     }
 }

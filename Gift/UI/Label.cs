@@ -24,19 +24,15 @@ namespace Gift.UI
             }
             string LeftSpace = "".PadLeft(Math.Min(Position.x, Context?.Bounds?.Width??int.MaxValue));
 
-            string display = GetVisibleText(this);
+            string display = GetVisibleText();
             display = $"{emptylines}{LeftSpace}{display}";
             output.Write(display);
         }
-        public static string GetVisibleText(Label Label)
+        public string GetVisibleText()
         {
-            if (Label == null)
-            {
-                throw new ArgumentNullException("label");
-            }
-            string text = Label.Text;
-            Context? Context = Label.Context;
-            int widthLine = Label.Position.x + text.Length;
+            string text = this.Text;
+            Context? Context = this.Context;
+            int widthLine = this.Position.x + text.Length;
             int MaxWidth = Context?.Bounds?.Width ?? 0;
             string display = widthLine <= MaxWidth+text.Length? (widthLine > MaxWidth ? text.Substring(0, widthLine-MaxWidth-1) : text) : "";
             return display;
