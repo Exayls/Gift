@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace Gift.Builders
 {
+    /// <summary>
+    /// build Label with "Hello" as default text and (0,0) as default position
+    /// </summary>
     public class LabelBuilder
     {
         private string text = "Hello";
         private Position position = new Position(0,0);
 
-    /// <summary>
-    /// build Label with "Hello" as default text and (0,0) as default position
-    /// </summary>
         public LabelBuilder()
         {
 

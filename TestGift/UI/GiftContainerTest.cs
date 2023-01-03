@@ -1,13 +1,16 @@
-﻿
-using Gift;
+﻿using Gift;
 using Gift.Builders;
 using Gift.UI;
 using Gift.UI.MetaData;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace TestGift.UI
 {
-    public class GiftPromptTest
+    public class GiftContainerTest
     {
         [Fact]
         public void CanDisplayTextToPosNeutral()

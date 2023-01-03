@@ -1,19 +1,16 @@
-﻿using Gift;
+﻿
+using Gift;
 using Gift.Builders;
 using Gift.UI;
 using Gift.UI.MetaData;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace TestGift
+namespace TestGift.UI
 {
-    public class TestHelperTest
+    public class GiftLabelTest
     {
         [Fact]
-        public void TestHelperLabelTest()
+        public void TestLabelOutputFull()
         {
             var output = new StringBuilder();
             using (var writer = new StringWriter(output))
@@ -28,7 +25,7 @@ namespace TestGift
             }
         }
         [Fact]
-        public void TestHelperLabelTestOut()
+        public void TestLabelOutputEmpty()
         {
             var output = new StringBuilder();
             using (var writer = new StringWriter(output))
@@ -43,7 +40,7 @@ namespace TestGift
             }
         }
         [Fact]
-        public void TestHelperLabelTestMiddle()
+        public void TestLabelOutputBeetween()
         {
             var output = new StringBuilder();
             using (var writer = new StringWriter(output))
