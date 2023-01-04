@@ -5,20 +5,24 @@ namespace Gift.UI
 {
     public abstract class Container : UIElement
     {
-        public Bound Bound { get; }
-        public ICollection<Renderable> RenderableChilds { get; private set; }
+        public Bound Bound { get; protected set; }
+        public ICollection<Renderable> RenderableChilds { get; protected set; }
         public Container(Renderer renderer, Bound? bound)
         {
 
             if (bound == null)
             {
-                if (!Console.IsInputRedirected && !Console.IsOutputRedirected)
+                if (Context?.Bounds != null)
                 {
-                    Bound = new Bound(Console.WindowWidth, Console.WindowHeight);
+                    Bound = new Bound(Context.Bounds.Height, Context.Bounds.Width);
+                }
+                else if (!Console.IsInputRedirected && !Console.IsOutputRedirected)
+                {
+                    Bound = new Bound(Console.WindowHeight, Console.WindowWidth);
                 }
                 else
                 {
-                    Bound = new Bound(20, 60);
+                    Bound = new Bound(0, 0);
                 }
             }
             else
