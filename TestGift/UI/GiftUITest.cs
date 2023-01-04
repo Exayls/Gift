@@ -13,7 +13,7 @@ namespace TestGift.UI
             var output = new StringBuilder();
             using (var writer = new StringWriter(output))
             {
-                var ui = new GiftUI(new Renderer(writer));
+                var ui = new GiftUI(new Renderer(writer),new Bound(20,60));
 
                 ui.Render();
                 var expectedBuilder = new StringBuilder();
