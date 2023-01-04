@@ -11,18 +11,19 @@ namespace Gift.UI
     public class GiftUI : Container
     {
 
-        public GiftUI(Renderer renderer, Bound? b = null ): base(renderer, b)
+        public GiftUI(Renderer renderer, Bound? bound = null) : base(renderer, bound)
         {
         }
 
         public void setChild(UIElement UIElement)
         {
-            foreach (Renderable r in this.RenderableChilds){
+            foreach (Renderable r in this.RenderableChilds)
+            {
                 this.RenderableChilds.Remove(r);
             }
             this.RenderableChilds.Add(UIElement);
 
-            UIElement.setContext(new Position(0,0),Bound);
+            UIElement.setContext(new Position(0, 0), Bound);
         }
 
         public override void Display(TextWriter output)
