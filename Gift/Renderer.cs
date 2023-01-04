@@ -47,7 +47,6 @@ namespace Gift
 
         private void UpdateDisplay(Renderable renderable, StringBuilder screenString)
         {
-            //renderable.Display(Output);
         }
         private void UpdateDisplay(GiftUI renderable, StringBuilder screenString)
         {
@@ -60,17 +59,7 @@ namespace Gift
         }
         public void UpdateDisplay(Label label, StringBuilder screenString)
         {
-            //string outputText = Output.
-            //string emptylines = "";
-            //for (int i = 0; i < label.Position.y; i++)
-            //{
-            //    emptylines += $"{"".PadLeft(label.Context?.Bounds?.Width??0)}\n";
-            //}
-            //string LeftSpace = "".PadLeft(Math.Min(label.Position.x, label.Context?.Bounds?.Width??int.MaxValue));
-
             string display = label.GetVisibleText();
-            //display = $"{emptylines}{LeftSpace}{display}";
-            //Output.Write(display);
             int context_y = label?.Context?.GlobalPosition?.y ?? 0;
             int context_x = label?.Context?.GlobalPosition?.x ?? 0;
             int relative_y = label?.Position?.y ?? 0;

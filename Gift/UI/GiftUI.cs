@@ -28,9 +28,6 @@ namespace Gift.UI
             UIElement.Renderer = Renderer;
         }
 
-        //public override void Display(TextWriter output)
-        //{
-        //}
         public void Render()
         {
             Renderer?.Render(this);
