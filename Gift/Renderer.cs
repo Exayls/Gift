@@ -1,5 +1,6 @@
 ﻿using Gift.UI;
 using Gift.UI.Interface;
+using Gift.UI.MetaData;
 using System.Text;
 
 namespace Gift
@@ -7,26 +8,19 @@ namespace Gift
     public class Renderer
     {
         public TextWriter Output { get; }
+        private Bound TotalBound { get; set; }
         public Renderer(TextWriter output)
         {
             Output = output;
 
         }
-
-        public void Render(Label Renderer, StringBuilder screenString)
+        public void Render(Renderable Renderer, StringBuilder screenString)
         {
             UpdateDisplay(Renderer, screenString);
         }
-        public void Render(Container container, StringBuilder screenString)
-        {
-            UpdateDisplay(container, screenString);
-            foreach (Renderable r in container.RenderableChilds)
-            {
-                r.Render(screenString);
-            }
-        }
         public void Render(GiftUI giftUI)// base render
         {
+            TotalBound = giftUI.Bound;
             StringBuilder screenString = new StringBuilder();
 
             UpdateDisplay(giftUI, screenString);
@@ -38,7 +32,15 @@ namespace Gift
             Output.Flush();
             Output.Write(screenString.ToString());
         }
-        public void Render(Renderable Renderer, StringBuilder screenString)
+        public void Render(Container container, StringBuilder screenString)
+        {
+            UpdateDisplay(container, screenString);
+            foreach (Renderable r in container.RenderableChilds)
+            {
+                r.Render(screenString);
+            }
+        }
+        public void Render(Label Renderer, StringBuilder screenString)
         {
             UpdateDisplay(Renderer, screenString);
         }
@@ -76,7 +78,7 @@ namespace Gift
 
             int global_y = context_y + relative_y;
             int global_x = context_x + relative_x;
-            Helper.Replace(screenString, display, global_y* 60 + global_x);
+            Helper.Replace(screenString, display, global_y* (TotalBound.Width+1) + global_x);
         }
     }
 }
