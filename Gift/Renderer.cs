@@ -22,6 +22,10 @@ namespace Gift
         public void Render(GiftUI giftUI)
         {
             UpdateDisplay(giftUI);
+            foreach (Renderable r in giftUI.RenderableChilds)
+            {
+                this.Render(r);
+            }
         }
         public void Render(Renderable Renderer)
         {
@@ -30,7 +34,7 @@ namespace Gift
 
         private void UpdateDisplay(Renderable renderable)
         {
-            renderable.Display(Output);
+            //renderable.Display(Output);
         }
         private void UpdateDisplay(GiftUI renderable)
         {
@@ -39,6 +43,19 @@ namespace Gift
                 Output.Write(new string(GiftBase.FILLINGCHAR, renderable.Bound.Width));
                 Output.Write('\n');
             }
+        }
+        public void UpdateDisplay(Label label)
+        {
+            string emptylines = "";
+            for (int i = 0; i < label.Position.y; i++)
+            {
+                emptylines += $"{"".PadLeft(label.Context?.Bounds?.Width??0)}\n";
+            }
+            string LeftSpace = "".PadLeft(Math.Min(label.Position.x, label.Context?.Bounds?.Width??int.MaxValue));
+
+            string display = label.GetVisibleText();
+            display = $"{emptylines}{LeftSpace}{display}";
+            Output.Write(display);
         }
     }
 }

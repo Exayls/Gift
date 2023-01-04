@@ -15,19 +15,19 @@ namespace Gift.UI
             this.Position = Position;
         }
 
-        public override void Display(TextWriter output)
-        {
-            string emptylines = "";
-            for (int i = 0; i < Position.y; i++)
-            {
-                emptylines += $"{"".PadLeft(Context?.Bounds?.Width??0)}\n";
-            }
-            string LeftSpace = "".PadLeft(Math.Min(Position.x, Context?.Bounds?.Width??int.MaxValue));
+        //public override void Display(TextWriter output)
+        //{
+        //    string emptylines = "";
+        //    for (int i = 0; i < Position.y; i++)
+        //    {
+        //        emptylines += $"{"".PadLeft(Context?.Bounds?.Width??0)}\n";
+        //    }
+        //    string LeftSpace = "".PadLeft(Math.Min(Position.x, Context?.Bounds?.Width??int.MaxValue));
 
-            string display = GetVisibleText();
-            display = $"{emptylines}{LeftSpace}{display}";
-            output.Write(display);
-        }
+        //    string display = GetVisibleText();
+        //    display = $"{emptylines}{LeftSpace}{display}";
+        //    output.Write(display);
+        //}
         public string GetVisibleText()
         {
             string text = this.Text;

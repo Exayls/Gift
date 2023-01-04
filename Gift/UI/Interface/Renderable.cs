@@ -2,7 +2,7 @@
 {
     public interface Renderable
     {
-        void Display(TextWriter output);
+        //void Display(TextWriter output);
         void Render();
     }
 }

@@ -26,9 +26,9 @@ namespace Gift.UI
             UIElement.setContext(new Position(0, 0), Bound);
         }
 
-        public override void Display(TextWriter output)
-        {
-        }
+        //public override void Display(TextWriter output)
+        //{
+        //}
         public override void Render()
         {
             Renderer?.Render(this);
