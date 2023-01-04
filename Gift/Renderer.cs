@@ -10,7 +10,7 @@ namespace Gift
         public Renderer(TextWriter output)
         {
             Output = output;
-            
+
         }
 
         public void Render(Label Renderer, StringBuilder screenString)
@@ -43,7 +43,7 @@ namespace Gift
             UpdateDisplay(Renderer, screenString);
         }
 
-        private void UpdateDisplay(Renderable renderable , StringBuilder screenString)
+        private void UpdateDisplay(Renderable renderable, StringBuilder screenString)
         {
             //renderable.Display(Output);
         }
@@ -69,7 +69,14 @@ namespace Gift
             string display = label.GetVisibleText();
             //display = $"{emptylines}{LeftSpace}{display}";
             //Output.Write(display);
-            Helper.Replace(screenString, display,0 );
+            int context_y = label?.Context?.GlobalPosition?.y ?? 0;
+            int context_x = label?.Context?.GlobalPosition?.x ?? 0;
+            int relative_y = label?.Position?.y ?? 0;
+            int relative_x = label?.Position?.x ?? 0;
+
+            int global_y = context_y + relative_y;
+            int global_x = context_x + relative_x;
+            Helper.Replace(screenString, display, global_y* 60 + global_x);
         }
     }
 }
