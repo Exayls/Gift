@@ -1,5 +1,6 @@
 ﻿using Gift.UI.Interface;
 using Gift.UI.MetaData;
+using System.Text;
 
 namespace Gift.UI
 {
@@ -7,7 +8,7 @@ namespace Gift.UI
     {
         public Bound Bound { get; protected set; }
         public ICollection<Renderable> RenderableChilds { get; protected set; }
-        public Container(Renderer renderer, Bound? bound)
+        public Container(Bound? bound)
         {
 
             if (bound == null)
@@ -29,12 +30,11 @@ namespace Gift.UI
             {
                 Bound = bound;
             }
-            Renderer = renderer;
             RenderableChilds = new List<Renderable>();
         }
-        public override void Render()
+        public override void Render(StringBuilder stringBuilder)
         {
-            Renderer?.Render(this);
+            Renderer?.Render(this, stringBuilder);
         }
-    }
+}
 }

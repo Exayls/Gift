@@ -1,11 +1,12 @@
 ﻿using Gift.UI.Interface;
 using Gift.UI.MetaData;
+using System.Text;
 
 namespace Gift.UI
 {
     public abstract class UIElement : Renderable
     {
-        public Renderer? Renderer { get; set; }
+        public Renderer Renderer { get; set; }
         public Context? Context { get; set; }
 
         public UIElement()
@@ -13,9 +14,9 @@ namespace Gift.UI
         }
         //public abstract void Display(TextWriter output);
 
-        public virtual void Render()
+        public virtual void Render(StringBuilder stringBuilder)
         {
-            Renderer?.Render(this);
+            Renderer?.Render(this, stringBuilder);
         }
 
         internal void setContext(Position globalPosition,Bound bound)

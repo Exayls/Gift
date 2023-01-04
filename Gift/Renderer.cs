@@ -1,5 +1,6 @@
 ﻿using Gift.UI;
 using Gift.UI.Interface;
+using System.Text;
 
 namespace Gift
 {
@@ -9,53 +10,66 @@ namespace Gift
         public Renderer(TextWriter output)
         {
             Output = output;
+            
         }
 
-        public void Render(Container container)
+        public void Render(Label Renderer, StringBuilder screenString)
         {
-            UpdateDisplay(container);
+            UpdateDisplay(Renderer, screenString);
+        }
+        public void Render(Container container, StringBuilder screenString)
+        {
+            UpdateDisplay(container, screenString);
             foreach (Renderable r in container.RenderableChilds)
             {
-                this.Render(r);
+                r.Render(screenString);
             }
         }
-        public void Render(GiftUI giftUI)
+        public void Render(GiftUI giftUI)// base render
         {
-            UpdateDisplay(giftUI);
+            StringBuilder screenString = new StringBuilder();
+
+            UpdateDisplay(giftUI, screenString);
             foreach (Renderable r in giftUI.RenderableChilds)
             {
-                this.Render(r);
+                r.Render(screenString);
             }
+
+            Output.Flush();
+            Output.Write(screenString.ToString());
         }
-        public void Render(Renderable Renderer)
+        public void Render(Renderable Renderer, StringBuilder screenString)
         {
-            UpdateDisplay(Renderer);
+            UpdateDisplay(Renderer, screenString);
         }
 
-        private void UpdateDisplay(Renderable renderable)
+        private void UpdateDisplay(Renderable renderable , StringBuilder screenString)
         {
             //renderable.Display(Output);
         }
-        private void UpdateDisplay(GiftUI renderable)
+        private void UpdateDisplay(GiftUI renderable, StringBuilder screenString)
         {
+            Output.Flush();
             for (int i = 0; i < renderable.Bound.Height; i++)
             {
-                Output.Write(new string(GiftBase.FILLINGCHAR, renderable.Bound.Width));
-                Output.Write('\n');
+                screenString.Append(new string(GiftBase.FILLINGCHAR, renderable.Bound.Width));
+                screenString.Append('\n');
             }
         }
-        public void UpdateDisplay(Label label)
+        public void UpdateDisplay(Label label, StringBuilder screenString)
         {
-            string emptylines = "";
-            for (int i = 0; i < label.Position.y; i++)
-            {
-                emptylines += $"{"".PadLeft(label.Context?.Bounds?.Width??0)}\n";
-            }
-            string LeftSpace = "".PadLeft(Math.Min(label.Position.x, label.Context?.Bounds?.Width??int.MaxValue));
+            //string outputText = Output.
+            //string emptylines = "";
+            //for (int i = 0; i < label.Position.y; i++)
+            //{
+            //    emptylines += $"{"".PadLeft(label.Context?.Bounds?.Width??0)}\n";
+            //}
+            //string LeftSpace = "".PadLeft(Math.Min(label.Position.x, label.Context?.Bounds?.Width??int.MaxValue));
 
             string display = label.GetVisibleText();
-            display = $"{emptylines}{LeftSpace}{display}";
-            Output.Write(display);
+            //display = $"{emptylines}{LeftSpace}{display}";
+            //Output.Write(display);
+            Helper.Replace(screenString, display,0 );
         }
     }
 }
