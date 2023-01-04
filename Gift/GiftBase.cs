@@ -10,7 +10,8 @@ namespace Gift
     public class GiftBase
     {
         public GiftUI? ui { get; set; }
-        
+        public const char FILLINGCHAR = '*';
+
         public virtual void initialize()
         {
             ui = null;

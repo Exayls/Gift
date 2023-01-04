@@ -1,8 +1,10 @@
-﻿namespace Gift.UI.Interface
+﻿using System.Text;
+
+namespace Gift.UI.Interface
 {
     public interface Renderable
     {
-        void Display(TextWriter output);
-        void Render();
+        //void Display(TextWriter output);
+        void Render( StringBuilder stringBuilder);
     }
 }

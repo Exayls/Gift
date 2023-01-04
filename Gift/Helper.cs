@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestGift
+namespace Gift
 {
-    public class TestHelper
+    internal class Helper
     {
         public static List<string> GetElementString(Label element)
         {
@@ -28,6 +28,10 @@ namespace TestGift
         public static string Replace(string s, string replace, int index)
         {
             return s.Remove(index, replace.Length).Insert(index, replace);
+        }
+        public static void Replace(StringBuilder s, string replace, int index)
+        {
+            s.Remove(index, replace.Length).Insert(index, replace);
         }
     }
 }
