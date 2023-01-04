@@ -13,17 +13,53 @@ namespace TestGift.UI
     public class GiftContainerTest
     {
         [Fact]
+        public void CanDisplayContainer()
+        {
+            var output = new StringBuilder();
+            using (var writer = new StringWriter(output))
+            {
+                var ui = new GiftUI(new Renderer(writer), new Bound(20, 60));
+                ui.Render();
+
+                var expectedBuilder = new StringBuilder();
+                string expected = "";
+                var actual = output.ToString().Split('\n');
+                for (int i = 0; i < ui.Bound.Height; i++)
+                {
+                    expectedBuilder.Clear();
+                    expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, ui.Bound.Width));
+                    expected = expectedBuilder.ToString();
+                    Assert.Equal(expected, actual[i]);
+                }
+
+            }
+        }
+        [Fact]
         public void CanDisplayTextToPosNeutral()
         {
             var output = new StringBuilder();
             using (var writer = new StringWriter(output))
             {
-                var ui = new GiftUI(new Renderer(writer));
+                var ui = new GiftUI(new Renderer(writer), new Bound(20, 60));
                 var element = new LabelBuilder().build();
                 ui.setChild(element);
                 ui.Render();
 
-                Assert.Equal("Hello", output.ToString());
+                var expectedBuilder = new StringBuilder();
+                string expected = "";
+                var actual = output.ToString().Split('\n');
+                for (int i = 0; i < ui.Bound.Height; i++)
+                {
+                    expectedBuilder.Clear();
+                    expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, ui.Bound.Width));
+                    expected = expectedBuilder.ToString();
+                    if (i == 0)
+                    {
+                        expected = TestHelper.Replace(expected, "Hello", 0);
+                    }
+                    Assert.Equal(expected, actual[i]);
+                }
+
             }
         }
         [Fact]
@@ -32,12 +68,26 @@ namespace TestGift.UI
             var output = new StringBuilder();
             using (var writer = new StringWriter(output))
             {
-                var ui = new GiftUI(new Renderer(writer));
+                var ui = new GiftUI(new Renderer(writer), new Bound(20, 60));
                 var position = new Position(0, 30);
                 var element = new LabelBuilder().WithPosition(position).build();
                 ui.setChild(element);
                 ui.Render();
-                Assert.Equal("                              Hello", output.ToString());
+
+                var expectedBuilder = new StringBuilder();
+                string expected = "";
+                var actual = output.ToString().Split('\n');
+                for (int i = 0; i < ui.Bound.Height; i++)
+                {
+                    expectedBuilder.Clear();
+                    expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, ui.Bound.Width));
+                    expected = expectedBuilder.ToString();
+                    if (i == 0)
+                    {
+                        expected = TestHelper.Replace(expected, "Hello", 30);
+                    }
+                    Assert.Equal(expected, actual[i]);
+                }
             }
         }
         [Fact]
@@ -46,12 +96,26 @@ namespace TestGift.UI
             var output = new StringBuilder();
             using (var writer = new StringWriter(output))
             {
-                var ui = new GiftUI(new Renderer(writer));
+                var ui = new GiftUI(new Renderer(writer), new Bound(20, 60));
                 var position = new Position(0, 10);
                 var element = new LabelBuilder().WithPosition(position).build();
                 ui.setChild(element);
                 ui.Render();
-                Assert.Equal("          Hello", output.ToString());
+
+                var expectedBuilder = new StringBuilder();
+                string expected = "";
+                var actual = output.ToString().Split('\n');
+                for (int i = 0; i < ui.Bound.Height; i++)
+                {
+                    expectedBuilder.Clear();
+                    expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, ui.Bound.Width));
+                    expected = expectedBuilder.ToString();
+                    if (i == 0)
+                    {
+                        expected = TestHelper.Replace(expected, "Hello", 10);
+                    }
+                    Assert.Equal(expected, actual[i]);
+                }
             }
         }
         [Fact]
@@ -60,14 +124,26 @@ namespace TestGift.UI
             var output = new StringBuilder();
             using (var writer = new StringWriter(output))
             {
-                var ui = new GiftUI(new Renderer(writer));
+                var ui = new GiftUI(new Renderer(writer), new Bound(20, 60));
                 var position = new Position(0, 10);
                 var element = new LabelBuilder().WithText("test").WithPosition(position).build();
                 ui.setChild(element);
-
                 ui.Render();
 
-                Assert.Equal("          test", output.ToString());
+                var expectedBuilder = new StringBuilder();
+                string expected = "";
+                var actual = output.ToString().Split('\n');
+                for (int i = 0; i < ui.Bound.Height; i++)
+                {
+                    expectedBuilder.Clear();
+                    expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, ui.Bound.Width));
+                    expected = expectedBuilder.ToString();
+                    if (i == 0)
+                    {
+                        expected = TestHelper.Replace(expected, "test", 10);
+                    }
+                    Assert.Equal(expected, actual[i]);
+                }
             }
         }
         [Fact]
@@ -76,12 +152,22 @@ namespace TestGift.UI
            var output = new StringBuilder();
             using (var writer = new StringWriter(output))
             {
-                var ui = new GiftUI(new Renderer(writer));
+                var ui = new GiftUI(new Renderer(writer), new Bound(20, 60));
                 var position = new Position(0, 1000);
                 var element = new LabelBuilder().WithPosition(position).build();
                 ui.setChild(element);
                 ui.Render();
-                Assert.Equal("".PadLeft(60), output.ToString());
+
+                var expectedBuilder = new StringBuilder();
+                string expected = "";
+                var actual = output.ToString().Split('\n');
+                for (int i = 0; i < ui.Bound.Height; i++)
+                {
+                    expectedBuilder.Clear();
+                    expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, ui.Bound.Width));
+                    expected = expectedBuilder.ToString();
+                    Assert.Equal(expected, actual[i]);
+                }
             }
         }
         [Fact]
@@ -90,16 +176,30 @@ namespace TestGift.UI
             var output = new StringBuilder();
             using (var writer = new StringWriter(output))
             {
-                var ui = new GiftUI(new Renderer(writer));
+                var ui = new GiftUI(new Renderer(writer), new Bound(20, 60));
                 var position = new Position(0, 58);
                 var element = new LabelBuilder().WithPosition(position).build();
                 ui.setChild(element);
                 ui.Render();
-                Assert.Equal("".PadLeft(58)+ "He", output.ToString());
+
+                var expectedBuilder = new StringBuilder();
+                string expected = "";
+                var actual = output.ToString().Split('\n');
+                for (int i = 0; i < ui.Bound.Height; i++)
+                {
+                    expectedBuilder.Clear();
+                    expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, ui.Bound.Width));
+                    expected = expectedBuilder.ToString();
+                    if (i == 0)
+                    {
+                        expected = TestHelper.Replace(expected, "He", 58);
+                    }
+                    Assert.Equal(expected, actual[i]);
+                }
             }
         }
         [Fact]
-        public void DoNotDisplaybarelyExcedingBounds80()
+        public void DisplayBounds80()
         {
             var output = new StringBuilder();
             using (var writer = new StringWriter(output))
@@ -109,7 +209,21 @@ namespace TestGift.UI
                 var element = new LabelBuilder().WithPosition(position).build();
                 ui.setChild(element);
                 ui.Render();
-                Assert.Equal("".PadLeft(58)+ "Hello", output.ToString());
+
+                var expectedBuilder = new StringBuilder();
+                string expected = "";
+                var actual = output.ToString().Split('\n');
+                for (int i = 0; i < ui.Bound.Height; i++)
+                {
+                    expectedBuilder.Clear();
+                    expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, ui.Bound.Width));
+                    expected = expectedBuilder.ToString();
+                    if (i == 0)
+                    {
+                        expected = TestHelper.Replace(expected, "Hello", 58);
+                    }
+                    Assert.Equal(expected, actual[i]);
+                }
             }
         }
         [Fact]
@@ -124,7 +238,21 @@ namespace TestGift.UI
                 var element = new LabelBuilder().WithPosition(position).build();
                 ui.setChild(element);
                 ui.Render();
-                Assert.Equal("                \n                \n          Hello", output.ToString());
+
+                var expectedBuilder = new StringBuilder();
+                string expected = "";
+                var actual = output.ToString().Split('\n');
+                for (int i = 0; i < ui.Bound.Height; i++)
+                {
+                    expectedBuilder.Clear();
+                    expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, ui.Bound.Width));
+                    expected = expectedBuilder.ToString();
+                    if (i == 2)
+                    {
+                        expected = TestHelper.Replace(expected, "Hello", 10);
+                    }
+                    Assert.Equal(expected, actual[i]);
+                }
             }
         }
         [Fact]
@@ -139,7 +267,21 @@ namespace TestGift.UI
                 var element = new LabelBuilder().WithPosition(position).build();
                 ui.setChild(element);
                 ui.Render();
-                Assert.Equal("                \n          Hello", output.ToString());
+
+                var expectedBuilder = new StringBuilder();
+                string expected = "";
+                var actual = output.ToString().Split('\n');
+                for (int i = 0; i < ui.Bound.Height; i++)
+                {
+                    expectedBuilder.Clear();
+                    expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, ui.Bound.Width));
+                    expected = expectedBuilder.ToString();
+                    if (i == 1)
+                    {
+                        expected = TestHelper.Replace(expected, "Hello", 10);
+                    }
+                    Assert.Equal(expected, actual[i]);
+                }
             }
         }
         [Fact]
@@ -154,7 +296,21 @@ namespace TestGift.UI
                 var element = new LabelBuilder().WithPosition(position).build();
                 ui.setChild(element);
                 ui.Render();
-                Assert.Equal("                                \n          Hello", output.ToString());
+
+                var expectedBuilder = new StringBuilder();
+                string expected = "";
+                var actual = output.ToString().Split('\n');
+                for (int i = 0; i < ui.Bound.Height; i++)
+                {
+                    expectedBuilder.Clear();
+                    expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, ui.Bound.Width));
+                    expected = expectedBuilder.ToString();
+                    if (i == 1)
+                    {
+                        expected = TestHelper.Replace(expected, "Hello", 10);
+                    }
+                    Assert.Equal(expected, actual[i]);
+                }
             }
         }
     }

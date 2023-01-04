@@ -21,9 +21,13 @@ namespace TestGift
             List<string> output = new List<string>();
             for (int lineNumber = 0; lineNumber < (element?.Context?.Bounds?.Height ?? 0); lineNumber++)
             {
-
+                //output.Add(element)
             }
             return output;
+        }
+        public static string Replace(string s, string replace, int index)
+        {
+            return s.Remove(index, replace.Length).Insert(index, replace);
         }
     }
 }
