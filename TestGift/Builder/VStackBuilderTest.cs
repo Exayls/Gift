@@ -15,7 +15,8 @@ namespace TestGift.Builder
         {
 
             VStackBuilder builder = new VStackBuilder();
-            VStack v = builder.build();
+            VStack v = builder.Build();
+            Assert.True(v != null);
 
         }
     }

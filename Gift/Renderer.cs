@@ -62,8 +62,8 @@ namespace Gift
             string display = label.GetVisibleText();
             int context_y = label?.Context?.GlobalPosition?.y ?? 0;
             int context_x = label?.Context?.GlobalPosition?.x ?? 0;
-            int relative_y = label?.Position?.y ?? 0;
-            int relative_x = label?.Position?.x ?? 0;
+            int relative_y = label?.Disposition.Position?.y ?? 0;
+            int relative_x = label?.Disposition.Position?.x ?? 0;
 
             int global_y = context_y + relative_y;
             int global_x = context_x + relative_x;

@@ -9,7 +9,7 @@ namespace Gift.Builders
 {
     public class VStackBuilder
     {
-        public VStack build()
+        public VStack Build()
         {
             return new VStack();
         }

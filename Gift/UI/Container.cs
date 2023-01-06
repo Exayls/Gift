@@ -32,6 +32,7 @@ namespace Gift.UI
             }
             RenderableChilds = new List<Renderable>();
         }
+
         public override void Render(StringBuilder stringBuilder)
         {
             Renderer?.Render(this, stringBuilder);

@@ -16,7 +16,7 @@ namespace TestGift.UI
             using (var writer = new StringWriter(output))
             {
                 var ui = new GiftUI(new Renderer(writer),new Bound(20,60));
-                var element = new LabelBuilder().build();
+                var element = new LabelBuilder().Build();
                 ui.setChild(element);
                 ui.Render();
 
@@ -31,7 +31,7 @@ namespace TestGift.UI
             using (var writer = new StringWriter(output))
             {
                 var ui = new GiftUI(new Renderer(writer),new Bound(20,60));
-                var element = new LabelBuilder().WithPosition(new Position(0, 100)).build();
+                var element = new LabelBuilder().WithPosition(new Position(0, 100)).Build();
                 ui.setChild(element);
                 ui.Render();
 
@@ -46,7 +46,7 @@ namespace TestGift.UI
             using (var writer = new StringWriter(output))
             {
                 var ui = new GiftUI(new Renderer(writer),new Bound(20,60));
-                var element = new LabelBuilder().WithPosition(new Position(0, 58)).build();
+                var element = new LabelBuilder().WithPosition(new Position(0, 58)).Build();
                 ui.setChild(element);
                 ui.Render();
 

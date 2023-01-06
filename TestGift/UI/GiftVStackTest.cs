@@ -13,14 +13,39 @@ namespace TestGift.UI
     public class GiftVStackTest
     {
         [Fact]
-        public void TestLabelOutputFull()
+        public void TestVStack()
         {
             var output = new StringBuilder();
             using (var writer = new StringWriter(output))
             {
                 var ui = new GiftUI(new Renderer(writer),new Bound(20,60));
-                var vstack = new VStackBuilder().build();
+                var vstack = new VStackBuilder().Build();
                 ui.setChild(vstack);
+                ui.Render();
+
+                var expectedBuilder = new StringBuilder();
+                string expected = "";
+                var actual = output.ToString().Split('\n');
+                for (int i = 0; i < ui.Bound.Height; i++)
+                {
+                    expectedBuilder.Clear();
+                    expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, ui.Bound.Width));
+                    expected = expectedBuilder.ToString();
+                    Assert.Equal(expected, actual[i]);
+                }
+            }
+        }
+        [Fact]
+        public void TestVStackWithLabelImplicit()
+        {
+            var output = new StringBuilder();
+            using (var writer = new StringWriter(output))
+            {
+                var ui = new GiftUI(new Renderer(writer),new Bound(20,60));
+                var vstack = new VStackBuilder().Build();
+                var label = new LabelBuilder().BuildImplicit();
+                ui.setChild(vstack);
+                stack.AddChild(label);
                 ui.Render();
 
                 var expectedBuilder = new StringBuilder();

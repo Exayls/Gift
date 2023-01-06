@@ -30,9 +30,14 @@ namespace Gift.Builders
             this.position = position;
             return this;
         }
-        public Label build()
+        public Label Build()
         {
             return new Label(text, position);
         }
+        public Label BuildImplicit()
+        {
+            return new Label(text);
+        }
+
     }
 }

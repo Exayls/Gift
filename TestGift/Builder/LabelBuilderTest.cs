@@ -15,7 +15,7 @@ namespace TestGift.Builder
         {
 
             LabelBuilder builder = new LabelBuilder();
-            Label l = builder.build();
+            Label l = builder.Build();
 
             Assert.Equal("Hello",l.Text );
         }
@@ -24,10 +24,10 @@ namespace TestGift.Builder
         {
 
             LabelBuilder builder = new LabelBuilder();
-            Label l = builder.build();
+            Label l = builder.Build();
 
-            Assert.Equal(0,l.Position.y );
-            Assert.Equal(0,l.Position.x );
+            Assert.Equal(0,l.Disposition.Position.y );
+            Assert.Equal(0,l.Disposition.Position.x );
         }
     }
 }
