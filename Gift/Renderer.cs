@@ -24,7 +24,7 @@ namespace Gift
             StringBuilder screenString = new StringBuilder();
 
             UpdateDisplay(giftUI, screenString);
-            foreach (Renderable r in giftUI.RenderableChilds)
+            foreach (Renderable r in giftUI.Childs)
             {
                 r.Render(screenString);
             }
@@ -35,7 +35,7 @@ namespace Gift
         public void Render(Container container, StringBuilder screenString)
         {
             UpdateDisplay(container, screenString);
-            foreach (Renderable r in container.RenderableChilds)
+            foreach (Renderable r in container.Childs)
             {
                 r.Render(screenString);
             }

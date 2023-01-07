@@ -18,11 +18,11 @@ namespace Gift.UI
 
         public void setChild(UIElement UIElement)
         {
-            foreach (Renderable r in this.RenderableChilds)
+            foreach (Renderable r in Childs)
             {
-                this.RenderableChilds.Remove(r);
+                Childs.Remove(r);
             }
-            this.RenderableChilds.Add(UIElement);
+            Childs.Add(UIElement);
 
             UIElement.setContext(new Position(0, 0), Bound);
             UIElement.Renderer = Renderer;

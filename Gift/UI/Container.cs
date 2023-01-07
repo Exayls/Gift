@@ -7,7 +7,7 @@ namespace Gift.UI
     public abstract class Container : UIElement
     {
         public Bound Bound { get; protected set; }
-        public ICollection<Renderable> RenderableChilds { get; protected set; }
+        public ICollection<Renderable> Childs { get; protected set; }
         public Container(Bound? bound)
         {
 
@@ -30,7 +30,7 @@ namespace Gift.UI
             {
                 Bound = bound;
             }
-            RenderableChilds = new List<Renderable>();
+            Childs = new List<Renderable>();
         }
 
         public override void Render(StringBuilder stringBuilder)
