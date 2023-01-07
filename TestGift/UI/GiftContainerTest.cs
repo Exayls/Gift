@@ -42,7 +42,7 @@ namespace TestGift.UI
             {
                 var ui = new GiftUI(new Renderer(writer), new Bound(20, 60));
                 var element = new LabelBuilder().Build();
-                ui.setChild(element);
+                ui.SetChild(element);
                 ui.Render();
 
                 var expectedBuilder = new StringBuilder();
@@ -71,7 +71,7 @@ namespace TestGift.UI
                 var ui = new GiftUI(new Renderer(writer), new Bound(20, 60));
                 var position = new Position(0, 30);
                 var element = new LabelBuilder().WithPosition(position).Build();
-                ui.setChild(element);
+                ui.SetChild(element);
                 ui.Render();
 
                 var expectedBuilder = new StringBuilder();
@@ -99,7 +99,7 @@ namespace TestGift.UI
                 var ui = new GiftUI(new Renderer(writer), new Bound(20, 60));
                 var position = new Position(0, 10);
                 var element = new LabelBuilder().WithPosition(position).Build();
-                ui.setChild(element);
+                ui.SetChild(element);
                 ui.Render();
 
                 var expectedBuilder = new StringBuilder();
@@ -127,7 +127,7 @@ namespace TestGift.UI
                 var ui = new GiftUI(new Renderer(writer), new Bound(20, 60));
                 var position = new Position(0, 10);
                 var element = new LabelBuilder().WithText("test").WithPosition(position).Build();
-                ui.setChild(element);
+                ui.SetChild(element);
                 ui.Render();
 
                 var expectedBuilder = new StringBuilder();
@@ -155,7 +155,7 @@ namespace TestGift.UI
                 var ui = new GiftUI(new Renderer(writer), new Bound(20, 60));
                 var position = new Position(0, 1000);
                 var element = new LabelBuilder().WithPosition(position).Build();
-                ui.setChild(element);
+                ui.SetChild(element);
                 ui.Render();
 
                 var expectedBuilder = new StringBuilder();
@@ -179,7 +179,7 @@ namespace TestGift.UI
                 var ui = new GiftUI(new Renderer(writer), new Bound(20, 60));
                 var position = new Position(0, 58);
                 var element = new LabelBuilder().WithPosition(position).Build();
-                ui.setChild(element);
+                ui.SetChild(element);
                 ui.Render();
 
                 var expectedBuilder = new StringBuilder();
@@ -207,7 +207,7 @@ namespace TestGift.UI
                 var ui = new GiftUI(new Renderer(writer), new Bound(10, 80));
                 var position = new Position(0, 58);
                 var element = new LabelBuilder().WithPosition(position).Build();
-                ui.setChild(element);
+                ui.SetChild(element);
                 ui.Render();
 
                 var expectedBuilder = new StringBuilder();
@@ -236,7 +236,7 @@ namespace TestGift.UI
                 var ui = new GiftUI(new Renderer(writer), new Bound(4,16));
                 var position = new Position(2, 10);
                 var element = new LabelBuilder().WithPosition(position).Build();
-                ui.setChild(element);
+                ui.SetChild(element);
                 ui.Render();
 
                 var expectedBuilder = new StringBuilder();
@@ -265,7 +265,7 @@ namespace TestGift.UI
                 var ui = new GiftUI(new Renderer(writer), new Bound(4,16));
                 var position = new Position(1, 10);
                 var element = new LabelBuilder().WithPosition(position).Build();
-                ui.setChild(element);
+                ui.SetChild(element);
                 ui.Render();
 
                 var expectedBuilder = new StringBuilder();
@@ -294,7 +294,7 @@ namespace TestGift.UI
                 var ui = new GiftUI(new Renderer(writer), new Bound(4,32));
                 var position = new Position(1, 10);
                 var element = new LabelBuilder().WithPosition(position).Build();
-                ui.setChild(element);
+                ui.SetChild(element);
                 ui.Render();
 
                 var expectedBuilder = new StringBuilder();

@@ -20,7 +20,7 @@ namespace TestGift.UI
             {
                 var ui = new GiftUI(new Renderer(writer),new Bound(20,60));
                 var vstack = new VStackBuilder().Build();
-                ui.setChild(vstack);
+                ui.SetChild(vstack);
                 ui.Render();
 
                 var expectedBuilder = new StringBuilder();
@@ -44,8 +44,8 @@ namespace TestGift.UI
                 var ui = new GiftUI(new Renderer(writer),new Bound(20,60));
                 var vstack = new VStackBuilder().Build();
                 var label = new LabelBuilder().BuildImplicit();
-                ui.setChild(vstack);
-                stack.AddChild(label);
+                ui.SetChild(vstack);
+                vstack.AddChild(label);
                 ui.Render();
 
                 var expectedBuilder = new StringBuilder();
@@ -56,6 +56,10 @@ namespace TestGift.UI
                     expectedBuilder.Clear();
                     expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, ui.Bound.Width));
                     expected = expectedBuilder.ToString();
+                    if (i == 0)
+                    {
+                        expected = TestHelper.Replace(expected, "Hello", 0);
+                    }
                     Assert.Equal(expected, actual[i]);
                 }
             }
