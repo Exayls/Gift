@@ -19,6 +19,7 @@ namespace Gift.UI
         public Label(string text)
         {
             Text = text;
+            Disposition = new ImplicitDisposition();
         }
 
         public string GetVisibleText()

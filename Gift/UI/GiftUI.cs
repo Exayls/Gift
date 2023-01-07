@@ -11,14 +11,18 @@ namespace Gift.UI
     public class GiftUI : Container
     {
 
-        public GiftUI(Renderer renderer, Bound? bound = null) : base(bound)
+        public GiftUI(Renderer renderer, Bound bound) : base(bound)
+        {
+            Renderer = renderer;
+        }
+        public GiftUI(Renderer renderer) 
         {
             Renderer = renderer;
         }
 
-        public void setChild(UIElement UIElement)
+        public void SetChild(UIElement UIElement)
         {
-            foreach (Renderable r in Childs)
+            foreach (UIElement r in Childs)
             {
                 Childs.Remove(r);
             }
