@@ -7,12 +7,15 @@ namespace Gift.UI
     public abstract class Container : UIElement
     {
         public Bound Bound { get; protected set; }
-        public ICollection<Renderable> RenderableChilds { get; protected set; }
-        public Container(Bound? bound)
+        public ICollection<UIElement> Childs { get; protected set; }
+        public Container(Bound bound)
         {
 
-            if (bound == null)
-            {
+            Bound = bound;
+            Childs = new List<UIElement>();
+        }
+        public Container()
+        {
                 if (Context?.Bounds != null)
                 {
                     Bound = new Bound(Context.Bounds.Height, Context.Bounds.Width);
@@ -25,13 +28,9 @@ namespace Gift.UI
                 {
                     Bound = new Bound(0, 0);
                 }
-            }
-            else
-            {
-                Bound = bound;
-            }
-            RenderableChilds = new List<Renderable>();
+            Childs = new List<UIElement>();
         }
+
         public override void Render(StringBuilder stringBuilder)
         {
             Renderer?.Render(this, stringBuilder);

@@ -12,7 +12,6 @@ namespace Gift.UI
         public UIElement()
         {
         }
-        //public abstract void Display(TextWriter output);
 
         public virtual void Render(StringBuilder stringBuilder)
         {

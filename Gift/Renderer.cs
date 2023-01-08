@@ -24,7 +24,7 @@ namespace Gift
             StringBuilder screenString = new StringBuilder();
 
             UpdateDisplay(giftUI, screenString);
-            foreach (Renderable r in giftUI.RenderableChilds)
+            foreach (Renderable r in giftUI.Childs)
             {
                 r.Render(screenString);
             }
@@ -35,7 +35,7 @@ namespace Gift
         public void Render(Container container, StringBuilder screenString)
         {
             UpdateDisplay(container, screenString);
-            foreach (Renderable r in container.RenderableChilds)
+            foreach (Renderable r in container.Childs)
             {
                 r.Render(screenString);
             }
@@ -47,7 +47,6 @@ namespace Gift
 
         private void UpdateDisplay(Renderable renderable, StringBuilder screenString)
         {
-            //renderable.Display(Output);
         }
         private void UpdateDisplay(GiftUI renderable, StringBuilder screenString)
         {
@@ -60,21 +59,11 @@ namespace Gift
         }
         public void UpdateDisplay(Label label, StringBuilder screenString)
         {
-            //string outputText = Output.
-            //string emptylines = "";
-            //for (int i = 0; i < label.Position.y; i++)
-            //{
-            //    emptylines += $"{"".PadLeft(label.Context?.Bounds?.Width??0)}\n";
-            //}
-            //string LeftSpace = "".PadLeft(Math.Min(label.Position.x, label.Context?.Bounds?.Width??int.MaxValue));
-
             string display = label.GetVisibleText();
-            //display = $"{emptylines}{LeftSpace}{display}";
-            //Output.Write(display);
             int context_y = label?.Context?.GlobalPosition?.y ?? 0;
             int context_x = label?.Context?.GlobalPosition?.x ?? 0;
-            int relative_y = label?.Position?.y ?? 0;
-            int relative_x = label?.Position?.x ?? 0;
+            int relative_y = label?.Disposition.Position?.y ?? 0;
+            int relative_x = label?.Disposition.Position?.x ?? 0;
 
             int global_y = context_y + relative_y;
             int global_x = context_x + relative_x;
