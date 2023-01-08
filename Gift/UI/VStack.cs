@@ -18,7 +18,7 @@ namespace Gift.UI
                 y = Context?.GlobalPosition?.y?? 0;
             }
             uIElement.Renderer = Renderer;
-            uIElement.setContext(new Position(y, Context?.GlobalPosition?.x?? 0), new Bound(1, Context.Bounds.Width));
+            uIElement.setContext(new Position(y, Context?.GlobalPosition?.x?? 0), new Bound(0, Context?.Bounds?.Width ?? 0));
         }
     }
 }
