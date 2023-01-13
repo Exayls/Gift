@@ -22,6 +22,7 @@ namespace Gift
 
         public void Render(GiftUI giftUI)// base render
         {
+            
             UpdateTotalBound(giftUI);
             StringBuilder screenString = new StringBuilder();//Replace by class
 
