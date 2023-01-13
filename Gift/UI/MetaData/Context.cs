@@ -8,10 +8,10 @@ namespace Gift.UI.MetaData
 {
     public class Context
     {
-        public Context(Position? globalPosition, Bound? bounds)
+        public Context(Position globalPosition, Bound localBounds)
         {
             GlobalPosition = globalPosition;
-            Bounds = bounds;
+            Bounds = localBounds;
         }
 
         public Position? GlobalPosition { get; private set; }

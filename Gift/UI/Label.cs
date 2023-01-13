@@ -31,9 +31,5 @@ namespace Gift.UI
             string display = widthLine <= MaxWidth+text.Length? (widthLine > MaxWidth ? text.Substring(0, widthLine-MaxWidth-1) : text) : "";
             return display;
         }
-        public override void Render(StringBuilder stringBuilder)
-        {
-            Renderer?.Render(this, stringBuilder);
-        }
     }
 }

@@ -10,7 +10,7 @@ namespace ExempleGift
 {
     internal class UI : GiftUI
     {
-        public UI(Renderer renderer) : base(renderer)
+        public UI() : base()
         {
         }
     }

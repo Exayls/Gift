@@ -30,10 +30,5 @@ namespace Gift.UI
                 }
             Childs = new List<UIElement>();
         }
-
-        public override void Render(StringBuilder stringBuilder)
-        {
-            Renderer?.Render(this, stringBuilder);
-        }
-}
+    }
 }

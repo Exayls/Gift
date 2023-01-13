@@ -11,13 +11,11 @@ namespace Gift.UI
     public class GiftUI : Container
     {
 
-        public GiftUI(Renderer renderer, Bound bound) : base(bound)
+        public GiftUI(Bound bound) : base(bound)
         {
-            Renderer = renderer;
         }
-        public GiftUI(Renderer renderer) 
+        public GiftUI() 
         {
-            Renderer = renderer;
         }
 
         public void SetChild(UIElement UIElement)
@@ -29,12 +27,6 @@ namespace Gift.UI
             Childs.Add(UIElement);
 
             UIElement.setContext(new Position(0, 0), Bound);
-            UIElement.Renderer = Renderer;
-        }
-
-        public void Render()
-        {
-            Renderer?.Render(this);
         }
     }
 }

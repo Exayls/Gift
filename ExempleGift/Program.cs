@@ -6,6 +6,6 @@ using Gift.UI.MetaData;
 using System.Text;
 
 
-var ui = new GiftUI(new Renderer(Console.Out));
-ui.SetChild(new Label("coucou", new Position(0, 58)));
-ui.Render();
+var ui = new GiftUI();
+ui.SetChild(new Label("coucou", new Position(2, 58)));
+new Renderer(Console.Out).Render(ui);

@@ -26,9 +26,9 @@ namespace Gift
             StringBuilder screenString = new StringBuilder();//Replace by class
 
             UpdateDisplay(giftUI, screenString);
-            foreach (Renderable r in giftUI.Childs)
+            foreach (dynamic renderable in giftUI.Childs)
             {
-                r.Render(screenString);
+                Render(renderable,screenString);
             }
 
             Output.Flush();
@@ -38,9 +38,9 @@ namespace Gift
         public void Render(Container container, StringBuilder screenString)
         {
             UpdateDisplay(container, screenString);
-            foreach (Renderable r in container.Childs)
+            foreach (dynamic renderable in container.Childs)
             {
-                r.Render(screenString);
+                Render(renderable, screenString);
             }
         }
         public void Render(Label Renderer, StringBuilder screenString)
