@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Gift
 {
+    /// <summary>
+    /// Render the UI to a TextWriter
+    /// </summary>
     public class Renderer
     {
         public TextWriter Output { get; }
@@ -20,7 +23,7 @@ namespace Gift
             UpdateDisplay(Renderer, screenString);
         }
 
-        public void Render(GiftUI giftUI)// base render
+        public TextWriter Render(GiftUI giftUI)// base render
         {
             
             UpdateTotalBound(giftUI);
@@ -34,6 +37,7 @@ namespace Gift
 
             Output.Flush();
             Output.Write(screenString.ToString());
+            return this.Output;
         }
 
         public void Render(Container container, StringBuilder screenString)
