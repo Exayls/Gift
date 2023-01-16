@@ -43,6 +43,10 @@ namespace Gift.Builders
             this.position = position;
             return this;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>instance of Label</returns>
         public Label Build()
         {
             return new Label(text, position);
