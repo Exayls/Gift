@@ -18,12 +18,12 @@ namespace TestGift.UI
             var output = new StringBuilder();
             using (var writer = new StringWriter(output))
             {
-                var ui = new GiftUI( new Bound(20, 60));
-                new Renderer(writer).Render(ui);
+                var ui = new GiftUI(new Bound(20, 60));
+                TextWriter renderedText = new Renderer(writer).Render(ui);
 
                 var expectedBuilder = new StringBuilder();
                 string expected = "";
-                var actual = output.ToString().Split('\n');
+                var actual = renderedText.ToString().Split('\n');
                 for (int i = 0; i < ui.Bound.Height; i++)
                 {
                     expectedBuilder.Clear();
@@ -40,14 +40,14 @@ namespace TestGift.UI
             var output = new StringBuilder();
             using (var writer = new StringWriter(output))
             {
-                var ui = new GiftUI( new Bound(20, 60));
+                var ui = new GiftUI(new Bound(20, 60));
                 var element = new LabelBuilder().Build();
                 ui.SetChild(element);
-                new Renderer(writer).Render(ui);
+                TextWriter renderedText = new Renderer(writer).Render(ui);
 
                 var expectedBuilder = new StringBuilder();
                 string expected = "";
-                var actual = output.ToString().Split('\n');
+                var actual = renderedText.ToString().Split('\n');
                 for (int i = 0; i < ui.Bound.Height; i++)
                 {
                     expectedBuilder.Clear();
@@ -68,15 +68,15 @@ namespace TestGift.UI
             var output = new StringBuilder();
             using (var writer = new StringWriter(output))
             {
-                var ui = new GiftUI( new Bound(20, 60));
+                var ui = new GiftUI(new Bound(20, 60));
                 var position = new Position(0, 30);
                 var element = new LabelBuilder().WithPosition(position).Build();
                 ui.SetChild(element);
-                new Renderer(writer).Render(ui);
+                TextWriter renderedText = new Renderer(writer).Render(ui);
 
                 var expectedBuilder = new StringBuilder();
                 string expected = "";
-                var actual = output.ToString().Split('\n');
+                var actual = renderedText.ToString().Split('\n');
                 for (int i = 0; i < ui.Bound.Height; i++)
                 {
                     expectedBuilder.Clear();
@@ -96,15 +96,15 @@ namespace TestGift.UI
             var output = new StringBuilder();
             using (var writer = new StringWriter(output))
             {
-                var ui = new GiftUI( new Bound(20, 60));
+                var ui = new GiftUI(new Bound(20, 60));
                 var position = new Position(0, 10);
                 var element = new LabelBuilder().WithPosition(position).Build();
                 ui.SetChild(element);
-                new Renderer(writer).Render(ui);
+                TextWriter renderedText = new Renderer(writer).Render(ui);
 
                 var expectedBuilder = new StringBuilder();
                 string expected = "";
-                var actual = output.ToString().Split('\n');
+                var actual = renderedText.ToString().Split('\n');
                 for (int i = 0; i < ui.Bound.Height; i++)
                 {
                     expectedBuilder.Clear();
@@ -128,11 +128,11 @@ namespace TestGift.UI
                 var position = new Position(0, 10);
                 var element = new LabelBuilder().WithText("test").WithPosition(position).Build();
                 ui.SetChild(element);
-                new Renderer(writer).Render(ui);
+                TextWriter renderedText = new Renderer(writer).Render(ui);
 
                 var expectedBuilder = new StringBuilder();
                 string expected = "";
-                var actual = output.ToString().Split('\n');
+                var actual = renderedText.ToString().Split('\n');
                 for (int i = 0; i < ui.Bound.Height; i++)
                 {
                     expectedBuilder.Clear();
@@ -149,18 +149,18 @@ namespace TestGift.UI
         [Fact]
         public void DoNotDisplayExcedingBounds60()
         {
-           var output = new StringBuilder();
+            var output = new StringBuilder();
             using (var writer = new StringWriter(output))
             {
                 var ui = new GiftUI(new Bound(20, 60));
                 var position = new Position(0, 1000);
                 var element = new LabelBuilder().WithPosition(position).Build();
                 ui.SetChild(element);
-                new Renderer(writer).Render(ui);
+                TextWriter renderedText = new Renderer(writer).Render(ui);
 
                 var expectedBuilder = new StringBuilder();
                 string expected = "";
-                var actual = output.ToString().Split('\n');
+                var actual = renderedText.ToString().Split('\n');
                 for (int i = 0; i < ui.Bound.Height; i++)
                 {
                     expectedBuilder.Clear();
@@ -180,11 +180,11 @@ namespace TestGift.UI
                 var position = new Position(0, 58);
                 var element = new LabelBuilder().WithPosition(position).Build();
                 ui.SetChild(element);
-                new Renderer(writer).Render(ui);
+                TextWriter renderedText = new Renderer(writer).Render(ui);
 
                 var expectedBuilder = new StringBuilder();
                 string expected = "";
-                var actual = output.ToString().Split('\n');
+                var actual = renderedText.ToString().Split('\n');
                 for (int i = 0; i < ui.Bound.Height; i++)
                 {
                     expectedBuilder.Clear();
@@ -208,11 +208,11 @@ namespace TestGift.UI
                 var position = new Position(0, 58);
                 var element = new LabelBuilder().WithPosition(position).Build();
                 ui.SetChild(element);
-                new Renderer(writer).Render(ui);
+                TextWriter renderedText = new Renderer(writer).Render(ui);
 
                 var expectedBuilder = new StringBuilder();
                 string expected = "";
-                var actual = output.ToString().Split('\n');
+                var actual = renderedText.ToString().Split('\n');
                 for (int i = 0; i < ui.Bound.Height; i++)
                 {
                     expectedBuilder.Clear();
@@ -233,15 +233,15 @@ namespace TestGift.UI
             var output = new StringBuilder();
             using (var writer = new StringWriter(output))
             {
-                var ui = new GiftUI(new Bound(4,16));
+                var ui = new GiftUI(new Bound(4, 16));
                 var position = new Position(2, 10);
                 var element = new LabelBuilder().WithPosition(position).Build();
                 ui.SetChild(element);
-                new Renderer(writer).Render(ui);
+                TextWriter renderedText = new Renderer(writer).Render(ui);
 
                 var expectedBuilder = new StringBuilder();
                 string expected = "";
-                var actual = output.ToString().Split('\n');
+                var actual = renderedText.ToString().Split('\n');
                 for (int i = 0; i < ui.Bound.Height; i++)
                 {
                     expectedBuilder.Clear();
@@ -262,15 +262,15 @@ namespace TestGift.UI
             var output = new StringBuilder();
             using (var writer = new StringWriter(output))
             {
-                var ui = new GiftUI(new Bound(4,16));
+                var ui = new GiftUI(new Bound(4, 16));
                 var position = new Position(1, 10);
                 var element = new LabelBuilder().WithPosition(position).Build();
                 ui.SetChild(element);
-                new Renderer(writer).Render(ui);
+                TextWriter renderedText = new Renderer(writer).Render(ui);
 
                 var expectedBuilder = new StringBuilder();
                 string expected = "";
-                var actual = output.ToString().Split('\n');
+                var actual = renderedText.ToString().Split('\n');
                 for (int i = 0; i < ui.Bound.Height; i++)
                 {
                     expectedBuilder.Clear();
@@ -291,15 +291,15 @@ namespace TestGift.UI
             var output = new StringBuilder();
             using (var writer = new StringWriter(output))
             {
-                var ui = new GiftUI(new Bound(4,32));
+                var ui = new GiftUI(new Bound(4, 32));
                 var position = new Position(1, 10);
                 var element = new LabelBuilder().WithPosition(position).Build();
                 ui.SetChild(element);
-                new Renderer(writer).Render(ui);
+                TextWriter renderedText = new Renderer(writer).Render(ui);
 
                 var expectedBuilder = new StringBuilder();
                 string expected = "";
-                var actual = output.ToString().Split('\n');
+                var actual = renderedText.ToString().Split('\n');
                 for (int i = 0; i < ui.Bound.Height; i++)
                 {
                     expectedBuilder.Clear();
