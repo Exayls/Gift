@@ -18,54 +18,54 @@ namespace Gift
             Output = output;
         }
 
-        public void Render(Renderable Renderer, StringBuilder screenString)
+        public void Render(Renderable Renderer, ScreenDisplay screen)
         {
-            UpdateDisplay(Renderer, screenString);
+            UpdateDisplay(Renderer, screen);
         }
 
         public TextWriter Render(GiftUI giftUI)// base render
         {
-            
-            UpdateTotalBound(giftUI);
-            StringBuilder screenString = new StringBuilder();//Replace by class
 
-            UpdateDisplay(giftUI, screenString);
+            UpdateTotalBound(giftUI);
+            ScreenDisplay screen = new ScreenDisplay();
+
+            UpdateDisplay(giftUI, screen);
             foreach (dynamic renderable in giftUI.Childs)
             {
-                Render(renderable,screenString);
+                Render(renderable, screen);
             }
 
             Output.Flush();
-            Output.Write(screenString.ToString());
+            Output.Write(screen.DisplayString.ToString());
             return this.Output;
         }
 
-        public void Render(Container container, StringBuilder screenString)
+        public void Render(Container container, ScreenDisplay screen)
         {
-            UpdateDisplay(container, screenString);
+            UpdateDisplay(container, screen);
             foreach (dynamic renderable in container.Childs)
             {
-                Render(renderable, screenString);
+                Render(renderable, screen);
             }
         }
-        public void Render(Label Renderer, StringBuilder screenString)
+        public void Render(Label Renderer, ScreenDisplay screen)
         {
-            UpdateDisplay(Renderer, screenString);
+            UpdateDisplay(Renderer, screen);
         }
 
-        private void UpdateDisplay(Renderable renderable, StringBuilder screenString)
+        private void UpdateDisplay(Renderable renderable, ScreenDisplay screen)
         {
         }
-        private void UpdateDisplay(GiftUI renderable, StringBuilder screenString)
+        private void UpdateDisplay(GiftUI renderable, ScreenDisplay screen)
         {
             Output.Flush();
             for (int i = 0; i < renderable.Bound.Height; i++)
             {
-                screenString.Append(new string(GiftBase.FILLINGCHAR, renderable.Bound.Width));
-                screenString.Append('\n');
+                screen.DisplayString.Append(new string(GiftBase.FILLINGCHAR, renderable.Bound.Width));
+                screen.DisplayString.Append('\n');
             }
         }
-        public void UpdateDisplay(Label label, StringBuilder screenString)
+        public void UpdateDisplay(Label label, ScreenDisplay screen)
         {
             string display = label.GetVisibleText();
             int context_y = label?.Context?.GlobalPosition?.y ?? 0;
@@ -75,7 +75,7 @@ namespace Gift
 
             int global_y = context_y + relative_y;
             int global_x = context_x + relative_x;
-            Helper.Replace(screenString, display, global_y * (TotalBound.Width + 1) + global_x);
+            Helper.Replace(screen.DisplayString, display, global_y * (TotalBound.Width + 1) + global_x);
         }
         public void UpdateTotalBound(GiftUI giftUi)
         {
