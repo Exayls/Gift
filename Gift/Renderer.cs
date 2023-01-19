@@ -11,7 +11,6 @@ namespace Gift
     public class Renderer
     {
         public TextWriter Output { get; }
-        private Bound TotalBound { get; set; }// really bad
 
         public Renderer(TextWriter output)
         {
@@ -26,8 +25,8 @@ namespace Gift
         public TextWriter Render(GiftUI giftUI)// base render
         {
 
-            UpdateTotalBound(giftUI);
             ScreenDisplay screen = new ScreenDisplay();
+            screen.TotalBound = giftUI.Bound;
 
             UpdateDisplay(giftUI, screen);
             foreach (dynamic renderable in giftUI.Childs)
@@ -75,11 +74,7 @@ namespace Gift
 
             int global_y = context_y + relative_y;
             int global_x = context_x + relative_x;
-            Helper.Replace(screen.DisplayString, display, global_y * (TotalBound.Width + 1) + global_x);
-        }
-        public void UpdateTotalBound(GiftUI giftUi)
-        {
-            TotalBound = giftUi.Bound;
+            Helper.Replace(screen.DisplayString, display, global_y * (screen.TotalBound.Width + 1) + global_x);
         }
     }
 }
