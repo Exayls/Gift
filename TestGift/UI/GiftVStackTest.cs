@@ -18,10 +18,10 @@ namespace TestGift.UI
             var output = new StringBuilder();
             using (var writer = new StringWriter(output))
             {
-                var ui = new GiftUI(new Bound(20,60));
+                var ui = new GiftUI(new Bound(20, 60));
                 var vstack = new VStackBuilder().Build();
                 ui.SetChild(vstack);
-                TextWriter renderedText= new Renderer().Render(ui);
+                TextWriter renderedText = new Renderer().Render(ui);
 
                 var expectedBuilder = new StringBuilder();
                 string expected = "";
@@ -41,12 +41,12 @@ namespace TestGift.UI
             var output = new StringBuilder();
             using (var writer = new StringWriter(output))
             {
-                var ui = new GiftUI(new Bound(20,60));
+                var ui = new GiftUI(new Bound(20, 60));
                 var vstack = new VStackBuilder().Build();
                 var label = new LabelBuilder().BuildImplicit();
                 ui.SetChild(vstack);
                 vstack.AddChild(label);
-                TextWriter renderedText= new Renderer().Render(ui);
+                TextWriter renderedText = new Renderer().Render(ui);
 
                 var expectedBuilder = new StringBuilder();
                 string expected = "";
@@ -70,12 +70,12 @@ namespace TestGift.UI
             var output = new StringBuilder();
             using (var writer = new StringWriter(output))
             {
-                var ui = new GiftUI(new Bound(20,60));
+                var ui = new GiftUI(new Bound(20, 60));
                 var vstack = new VStackBuilder().Build();
                 var label = new LabelBuilder().Build();
                 ui.SetChild(vstack);
                 vstack.AddChild(label);
-                TextWriter renderedText= new Renderer().Render(ui);
+                TextWriter renderedText = new Renderer().Render(ui);
 
                 var expectedBuilder = new StringBuilder();
                 string expected = "";
