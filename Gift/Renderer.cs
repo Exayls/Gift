@@ -5,76 +5,79 @@ using System.Text;
 
 namespace Gift
 {
+    /// <summary>
+    /// Render the UI to a TextWriter
+    /// </summary>
     public class Renderer
     {
-        public TextWriter Output { get; }
-        private Bound TotalBound { get; set; }// really bad
-
-        public Renderer(TextWriter output)
+        public Renderer()
         {
-            Output = output;
         }
 
-        public void Render(Renderable Renderer, StringBuilder screenString)
+        private void Render(Renderable Renderer, ScreenDisplay screen)
         {
-            UpdateDisplay(Renderer, screenString);
+            UpdateDisplay(Renderer, screen);
         }
 
-        public void Render(GiftUI giftUI)// base render
+        public TextWriter Render(GiftUI giftUI)
         {
-            UpdateTotalBound(giftUI);
-            StringBuilder screenString = new StringBuilder();//Replace by class
+            ScreenDisplay screen = new ScreenDisplay(giftUI.Bound);
+            UpdateDisplay(giftUI, screen);
+            RenderAllChilds(giftUI, screen);
+            TextWriter Output = new StringWriter();
+            Output.Write(screen.DisplayString);
+            return Output;
+        }
 
-            UpdateDisplay(giftUI, screenString);
-            foreach (Renderable r in giftUI.Childs)
+        private void RenderAllChilds(GiftUI giftUI, ScreenDisplay screen)
+        {
+            foreach (dynamic renderable in giftUI.Childs)//dynamic to use overloaded method
             {
-                r.Render(screenString);
-            }
-
-            Output.Flush();
-            Output.Write(screenString.ToString());
-        }
-
-        public void Render(Container container, StringBuilder screenString)
-        {
-            UpdateDisplay(container, screenString);
-            foreach (Renderable r in container.Childs)
-            {
-                r.Render(screenString);
+                Render(renderable, screen);
             }
         }
-        public void Render(Label Renderer, StringBuilder screenString)
+
+        private void Render(Container container, ScreenDisplay screen)
         {
-            UpdateDisplay(Renderer, screenString);
+            UpdateDisplay(container, screen);
+            foreach (dynamic renderable in container.Childs)
+            {
+                Render(renderable, screen);
+            }
+        }
+        private void Render(Label Renderer, ScreenDisplay screen)
+        {
+            UpdateDisplay(Renderer, screen);
         }
 
-        private void UpdateDisplay(Renderable renderable, StringBuilder screenString)
+        private void UpdateDisplay(Renderable renderable, ScreenDisplay screen)
         {
         }
-        private void UpdateDisplay(GiftUI renderable, StringBuilder screenString)
+        private void UpdateDisplay(GiftUI renderable, ScreenDisplay screen)
         {
-            Output.Flush();
             for (int i = 0; i < renderable.Bound.Height; i++)
             {
-                screenString.Append(new string(GiftBase.FILLINGCHAR, renderable.Bound.Width));
-                screenString.Append('\n');
+                screen.DisplayString.Append(new string(GiftBase.FILLINGCHAR, renderable.Bound.Width));
+                screen.DisplayString.Append('\n');
             }
         }
-        public void UpdateDisplay(Label label, StringBuilder screenString)
+        private void UpdateDisplay(Label label, ScreenDisplay screen)
         {
             string display = label.GetVisibleText();
+            Position globalPosition = GetGlobalPosition(label);
+            Helper.Replace(screen.DisplayString, display, globalPosition.y * (screen.TotalBound.Width + 1) + globalPosition.x);
+        }
+
+        private static Position GetGlobalPosition(Label label)
+        {
             int context_y = label?.Context?.GlobalPosition?.y ?? 0;
             int context_x = label?.Context?.GlobalPosition?.x ?? 0;
             int relative_y = label?.Disposition.Position?.y ?? 0;
             int relative_x = label?.Disposition.Position?.x ?? 0;
-
             int global_y = context_y + relative_y;
             int global_x = context_x + relative_x;
-            Helper.Replace(screenString, display, global_y * (TotalBound.Width + 1) + global_x);
-        }
-        public void UpdateTotalBound(GiftUI giftUi)
-        {
-            TotalBound = giftUi.Bound;
+            Position globalPosition = new Position(global_y, global_x);
+            return globalPosition;
         }
     }
 }

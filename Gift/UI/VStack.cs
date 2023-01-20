@@ -20,7 +20,6 @@ namespace Gift.UI
             {
                 GlobalPositionLastChild = Context?.GlobalPosition?.y?? 0;
             }
-            uIElement.Renderer = Renderer;
             uIElement.setContext(new Position(GlobalPositionLastChild, Context?.GlobalPosition?.x?? 0), new Bound(0, Context?.Bounds?.Width ?? 0));
         }
     }

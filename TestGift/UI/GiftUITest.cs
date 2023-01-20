@@ -13,9 +13,9 @@ namespace TestGift.UI
             var output = new StringBuilder();
             using (var writer = new StringWriter(output))
             {
-                var ui = new GiftUI(new Renderer(writer),new Bound(20,60));
+                var ui = new GiftUI(new Bound(20, 60));
 
-                ui.Render();
+                TextWriter renderedText = new Renderer().Render(ui);
                 var expectedBuilder = new StringBuilder();
                 for (int i = 0; i < 20; i++)
                 {
@@ -23,7 +23,7 @@ namespace TestGift.UI
                     expectedBuilder.Append('\n');
                 }
 
-                Assert.Equal(expectedBuilder.ToString(), output.ToString());
+                Assert.Equal(expectedBuilder.ToString(), renderedText.ToString());
             }
         }
         [Fact]
@@ -32,9 +32,9 @@ namespace TestGift.UI
             var output = new StringBuilder();
             using (var writer = new StringWriter(output))
             {
-                var ui = new GiftUI(new Renderer(writer),new Bound(10,15));
+                var ui = new GiftUI(new Bound(10, 15));
 
-                ui.Render();
+                TextWriter renderedText = new Renderer().Render(ui);
                 var expectedBuilder = new StringBuilder();
                 for (int i = 0; i < 10; i++)
                 {
@@ -42,7 +42,7 @@ namespace TestGift.UI
                     expectedBuilder.Append('\n');
                 }
 
-                Assert.Equal(expectedBuilder.ToString(), output.ToString());
+                Assert.Equal(expectedBuilder.ToString(), renderedText.ToString());
             }
         }
     }
