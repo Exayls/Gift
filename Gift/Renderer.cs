@@ -10,19 +10,16 @@ namespace Gift
     /// </summary>
     public class Renderer
     {
-        public TextWriter Output { get; }
-
         public Renderer(TextWriter output)
         {
-            Output = output;
         }
 
-        public void Render(Renderable Renderer, ScreenDisplay screen)
+        private void Render(Renderable Renderer, ScreenDisplay screen)
         {
             UpdateDisplay(Renderer, screen);
         }
 
-        public TextWriter Render(GiftUI giftUI)// base render
+        public TextWriter Render(GiftUI giftUI)
         {
 
             ScreenDisplay screen = new ScreenDisplay();
@@ -34,12 +31,13 @@ namespace Gift
                 Render(renderable, screen);
             }
 
-            Output.Flush();
+
+            TextWriter Output = new StringWriter();
             Output.Write(screen.DisplayString.ToString());
-            return this.Output;
+            return Output;
         }
 
-        public void Render(Container container, ScreenDisplay screen)
+        private void Render(Container container, ScreenDisplay screen)
         {
             UpdateDisplay(container, screen);
             foreach (dynamic renderable in container.Childs)
@@ -47,7 +45,7 @@ namespace Gift
                 Render(renderable, screen);
             }
         }
-        public void Render(Label Renderer, ScreenDisplay screen)
+        private void Render(Label Renderer, ScreenDisplay screen)
         {
             UpdateDisplay(Renderer, screen);
         }
@@ -57,14 +55,13 @@ namespace Gift
         }
         private void UpdateDisplay(GiftUI renderable, ScreenDisplay screen)
         {
-            Output.Flush();
             for (int i = 0; i < renderable.Bound.Height; i++)
             {
                 screen.DisplayString.Append(new string(GiftBase.FILLINGCHAR, renderable.Bound.Width));
                 screen.DisplayString.Append('\n');
             }
         }
-        public void UpdateDisplay(Label label, ScreenDisplay screen)
+        private void UpdateDisplay(Label label, ScreenDisplay screen)
         {
             string display = label.GetVisibleText();
             int context_y = label?.Context?.GlobalPosition?.y ?? 0;
