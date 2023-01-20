@@ -10,7 +10,7 @@ namespace Gift
     /// </summary>
     public class Renderer
     {
-        public Renderer(TextWriter output)
+        public Renderer()
         {
         }
 

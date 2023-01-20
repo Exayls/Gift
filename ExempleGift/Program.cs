@@ -8,4 +8,4 @@ using System.Text;
 
 var ui = new GiftUI();
 ui.SetChild(new Label("coucou", new Position(2, 58)));
-new Renderer(Console.Out).Render(ui);
+Console.Out.Write(new Renderer().Render(ui));
