@@ -21,20 +21,21 @@ namespace Gift
 
         public TextWriter Render(GiftUI giftUI)
         {
-
             ScreenDisplay screen = new ScreenDisplay();
             screen.TotalBound = giftUI.Bound;
-
             UpdateDisplay(giftUI, screen);
-            foreach (dynamic renderable in giftUI.Childs)
+            RenderAllChilds(giftUI, screen);
+            TextWriter Output = new StringWriter();
+            Output.Write(screen.DisplayString);
+            return Output;
+        }
+
+        private void RenderAllChilds(GiftUI giftUI, ScreenDisplay screen)
+        {
+            foreach (dynamic renderable in giftUI.Childs)//dynamic to use overloaded method
             {
                 Render(renderable, screen);
             }
-
-
-            TextWriter Output = new StringWriter();
-            Output.Write(screen.DisplayString.ToString());
-            return Output;
         }
 
         private void Render(Container container, ScreenDisplay screen)
@@ -64,14 +65,20 @@ namespace Gift
         private void UpdateDisplay(Label label, ScreenDisplay screen)
         {
             string display = label.GetVisibleText();
+            Position globalPosition = GetGlobalPosition(label);
+            Helper.Replace(screen.DisplayString, display, globalPosition.y * (screen.TotalBound.Width + 1) + globalPosition.x);
+        }
+
+        private static Position GetGlobalPosition(Label label)
+        {
             int context_y = label?.Context?.GlobalPosition?.y ?? 0;
             int context_x = label?.Context?.GlobalPosition?.x ?? 0;
             int relative_y = label?.Disposition.Position?.y ?? 0;
             int relative_x = label?.Disposition.Position?.x ?? 0;
-
             int global_y = context_y + relative_y;
             int global_x = context_x + relative_x;
-            Helper.Replace(screen.DisplayString, display, global_y * (screen.TotalBound.Width + 1) + global_x);
+            Position globalPosition = new Position(global_y, global_x);
+            return globalPosition;
         }
     }
 }
