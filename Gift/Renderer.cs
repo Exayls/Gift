@@ -21,8 +21,7 @@ namespace Gift
 
         public TextWriter Render(GiftUI giftUI)
         {
-            ScreenDisplay screen = new ScreenDisplay();
-            screen.TotalBound = giftUI.Bound;
+            ScreenDisplay screen = new ScreenDisplay(giftUI.Bound);
             UpdateDisplay(giftUI, screen);
             RenderAllChilds(giftUI, screen);
             TextWriter Output = new StringWriter();

@@ -5,12 +5,18 @@ namespace Gift
 {
     public class ScreenDisplay
     {
-        public Bound TotalBound { get; set; }
-        public StringBuilder DisplayString { get; internal set; }
+        public Bound TotalBound { get; }
+        public StringBuilder DisplayString { get; }
+
         public ScreenDisplay()
         {
             DisplayString = new StringBuilder();
         }
 
+        public ScreenDisplay(Bound bound)
+        {
+            DisplayString = new StringBuilder();
+            TotalBound = bound;
+        }
     }
 }
