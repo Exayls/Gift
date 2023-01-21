@@ -15,12 +15,14 @@ namespace Gift.UI
         public void AddChild(UIElement uIElement)
         {
             Childs.Add(uIElement);
-            int GlobalPositionLastChild = 0;
-            if (Childs.Count != 0)
+            int GlobalPositionLastChild = Context?.GlobalPosition?.y ?? 0;
+            int ChildContextPosition = GlobalPositionLastChild;
+            if (Childs.Count == 2)
             {
-                GlobalPositionLastChild = Context?.GlobalPosition?.y?? 0;
+                GlobalPositionLastChild = Childs[0].Context?.GlobalPosition?.y ?? 0;
+                ChildContextPosition = GlobalPositionLastChild + Childs[0].Context?.Bounds?.Height??0;
             }
-            uIElement.setContext(new Position(GlobalPositionLastChild, Context?.GlobalPosition?.x?? 0), new Bound(0, Context?.Bounds?.Width ?? 0));
+            uIElement.setContext(new Position(ChildContextPosition, Context?.GlobalPosition?.x?? 0), new Bound(1, Context?.Bounds?.Width ?? 0));
         }
     }
 }

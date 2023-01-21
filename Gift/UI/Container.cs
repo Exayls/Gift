@@ -7,7 +7,7 @@ namespace Gift.UI
     public abstract class Container : UIElement
     {
         public Bound Bound { get; protected set; }
-        public ICollection<UIElement> Childs { get; protected set; }
+        public IList<UIElement> Childs { get; protected set; }
         public Container(Bound bound)
         {
 
