@@ -93,5 +93,40 @@ namespace TestGift.UI
                 }
             }
         }
+        [Fact]
+        public void TestVStackWithMultipleLabelImplicit()
+        {
+            var output = new StringBuilder();
+            using (var writer = new StringWriter(output))
+            {
+                var ui = new GiftUI(new Bound(20, 60));
+                var vstack = new VStackBuilder().Build();
+                var label1 = new LabelBuilder().BuildImplicit();
+                var label2 = new LabelBuilder().WithText("test").BuildImplicit();
+                ui.SetChild(vstack);
+                vstack.AddChild(label1);
+                vstack.AddChild(label2);
+                TextWriter renderedText = new Renderer().Render(ui);
+
+                var expectedBuilder = new StringBuilder();
+                string expected = "";
+                var actual = renderedText.ToString().Split('\n');
+                for (int i = 0; i < ui.Bound.Height; i++)
+                {
+                    expectedBuilder.Clear();
+                    expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, ui.Bound.Width));
+                    expected = expectedBuilder.ToString();
+                    if (i == 0)
+                    {
+                        expected = TestHelper.Replace(expected, "Hello", 0);
+                    }
+                    if (i == 1)
+                    {
+                        expected = TestHelper.Replace(expected, "test", 0);
+                    }
+                    Assert.Equal(expected, actual[i]);
+                }
+            }
+        }
     }
 }
