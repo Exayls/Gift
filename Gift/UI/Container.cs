@@ -16,18 +16,18 @@ namespace Gift.UI
         }
         public Container()
         {
-                if (Context?.Bounds != null)
-                {
-                    Bound = new Bound(Context.Bounds.Height, Context.Bounds.Width);
-                }
-                else if (!Console.IsInputRedirected && !Console.IsOutputRedirected)
-                {
-                    Bound = new Bound(Console.WindowHeight, Console.WindowWidth);
-                }
-                else
-                {
-                    Bound = new Bound(0, 0);
-                }
+            if (Context?.Bounds != null)
+            {
+                Bound = new Bound(Context.Bounds.Height, Context.Bounds.Width);
+            }
+            else if (!Console.IsInputRedirected && !Console.IsOutputRedirected)
+            {
+                Bound = new Bound(Console.WindowHeight, Console.WindowWidth);
+            }
+            else
+            {
+                Bound = new Bound(0, 0);
+            }
             Childs = new List<UIElement>();
         }
     }
