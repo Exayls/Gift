@@ -18,12 +18,18 @@ namespace Gift.UI
             int GlobalPositionLastChild = Context?.GlobalPosition?.y ?? 0;
             int ChildContextPosition = GlobalPositionLastChild;
             int nbChilds = Childs.Count;
-            if (Childs.Count >1)
+            if (Childs.Count > 1)
             {
-                GlobalPositionLastChild = Childs[nbChilds-2].Context?.GlobalPosition?.y ?? 0;
-                ChildContextPosition = GlobalPositionLastChild + Childs[nbChilds-2].Context?.Bounds?.Height??0;
+                GlobalPositionLastChild = Childs[nbChilds - 2].Context?.GlobalPosition?.y ?? 0;
+                ChildContextPosition = GlobalPositionLastChild + Childs[nbChilds - 2].Context?.Bounds?.Height ?? 0;
             }
-            uIElement.setContext(new Position(ChildContextPosition, Context?.GlobalPosition?.x?? 0), new Bound(1, Context?.Bounds?.Width ?? 0));
+            dynamic element = uIElement;
+            setChildContext(element, ChildContextPosition);
+        }
+
+        private void setChildContext(Label uIElement, int ChildContextPosition)
+        {
+            uIElement.setContext(new Position(ChildContextPosition, Context?.GlobalPosition?.x ?? 0), new Bound(1, Context?.Bounds?.Width ?? 0));
         }
     }
 }
