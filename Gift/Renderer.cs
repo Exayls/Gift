@@ -19,19 +19,24 @@ namespace Gift
             UpdateDisplay(Renderer, screen);
         }
 
-        public TextWriter Render(GiftUI giftUI)
+        public TextWriter GetRenderedBuffer(GiftUI giftUI)
         {
             ScreenDisplay screen = new ScreenDisplay(giftUI.Bound);
-            UpdateDisplay(giftUI, screen);
-            RenderAllChilds(giftUI, screen);
+            Render(giftUI, screen);
             TextWriter Output = new StringWriter();
             Output.Write(screen.DisplayString);
             return Output;
         }
 
-        private void RenderAllChilds(GiftUI giftUI, ScreenDisplay screen)
+        private void Render(GiftUI giftUI, ScreenDisplay screen)
         {
-            foreach (dynamic renderable in giftUI.Childs)//dynamic to use overloaded method
+            UpdateDisplay(giftUI, screen);
+            RenderAllChilds(giftUI, screen);
+        }
+
+        private void RenderAllChilds(Container container, ScreenDisplay screen)
+        {
+            foreach (dynamic renderable in container.Childs)//dynamic to use overloaded method
             {
                 Render(renderable, screen);
             }
@@ -40,10 +45,7 @@ namespace Gift
         private void Render(Container container, ScreenDisplay screen)
         {
             UpdateDisplay(container, screen);
-            foreach (dynamic renderable in container.Childs)
-            {
-                Render(renderable, screen);
-            }
+            RenderAllChilds(container, screen);
         }
         private void Render(Label Renderer, ScreenDisplay screen)
         {

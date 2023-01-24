@@ -15,7 +15,7 @@ namespace TestGift.UI
             {
                 var ui = new GiftUI(new Bound(20, 60));
 
-                TextWriter renderedText = new Renderer().Render(ui);
+                TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
                 var expectedBuilder = new StringBuilder();
                 for (int i = 0; i < 20; i++)
                 {
@@ -34,7 +34,7 @@ namespace TestGift.UI
             {
                 var ui = new GiftUI(new Bound(10, 15));
 
-                TextWriter renderedText = new Renderer().Render(ui);
+                TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
                 var expectedBuilder = new StringBuilder();
                 for (int i = 0; i < 10; i++)
                 {

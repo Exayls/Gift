@@ -21,7 +21,7 @@ namespace TestGift.UI
                 var ui = new GiftUI(new Bound(20, 60));
                 var vstack = new VStackBuilder().Build();
                 ui.SetChild(vstack);
-                TextWriter renderedText = new Renderer().Render(ui);
+                TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
 
                 var expectedBuilder = new StringBuilder();
                 string expected = "";
@@ -46,7 +46,7 @@ namespace TestGift.UI
                 var label = new LabelBuilder().BuildImplicit();
                 ui.SetChild(vstack);
                 vstack.AddChild(label);
-                TextWriter renderedText = new Renderer().Render(ui);
+                TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
 
                 var expectedBuilder = new StringBuilder();
                 string expected = "";
@@ -75,7 +75,7 @@ namespace TestGift.UI
                 var label = new LabelBuilder().Build();
                 ui.SetChild(vstack);
                 vstack.AddChild(label);
-                TextWriter renderedText = new Renderer().Render(ui);
+                TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
 
                 var expectedBuilder = new StringBuilder();
                 string expected = "";
@@ -106,7 +106,7 @@ namespace TestGift.UI
                 ui.SetChild(vstack);
                 vstack.AddChild(label1);
                 vstack.AddChild(label2);
-                TextWriter renderedText = new Renderer().Render(ui);
+                TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
 
                 var expectedBuilder = new StringBuilder();
                 string expected = "";
@@ -143,7 +143,7 @@ namespace TestGift.UI
                 vstack.AddChild(label1);
                 vstack.AddChild(label2);
                 vstack.AddChild(label3);
-                TextWriter renderedText = new Renderer().Render(ui);
+                TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
 
                 var expectedBuilder = new StringBuilder();
                 string expected = "";

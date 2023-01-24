@@ -18,7 +18,7 @@ namespace TestGift.UI
                 var ui = new GiftUI(new Bound(20, 60));
                 var element = new LabelBuilder().Build();
                 ui.SetChild(element);
-                new Renderer().Render(ui);
+                new Renderer().GetRenderedBuffer(ui);
 
                 var str = TestHelper.GetElementString(element);
                 Assert.Equal("Hello", str[0]);
@@ -33,7 +33,7 @@ namespace TestGift.UI
                 var ui = new GiftUI(new Bound(20, 60));
                 var element = new LabelBuilder().WithPosition(new Position(0, 100)).Build();
                 ui.SetChild(element);
-                new Renderer().Render(ui);
+                new Renderer().GetRenderedBuffer(ui);
 
                 var str = TestHelper.GetElementString(element);
                 Assert.Equal("", str[0]);
@@ -48,7 +48,7 @@ namespace TestGift.UI
                 var ui = new GiftUI(new Bound(20, 60));
                 var element = new LabelBuilder().WithPosition(new Position(0, 58)).Build();
                 ui.SetChild(element);
-                new Renderer().Render(ui);
+                new Renderer().GetRenderedBuffer(ui);
 
                 var str = TestHelper.GetElementString(element);
                 Assert.Equal("He", str[0]);
