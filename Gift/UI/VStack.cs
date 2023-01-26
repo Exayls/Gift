@@ -3,9 +3,6 @@ using Gift.UI.MetaData;
 
 namespace Gift.UI
 {
-    /// <summary>
-    /// element container that stack them vertically
-    /// </summary>
     public class VStack: Container
     {
         public VStack()

@@ -7,9 +7,6 @@ namespace Gift.UI
     /// </summary>
     public interface DispositionStrategy
     {
-        /// <summary>
-        /// position where to render element
-        /// </summary>
         public Position Position { get; }
     }
 }
