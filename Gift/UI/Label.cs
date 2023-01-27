@@ -2,6 +2,7 @@
 using Gift.UI.Interface;
 using Gift.UI.MetaData;
 using Gift.UI.Strategy;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Gift.UI
@@ -20,6 +21,10 @@ namespace Gift.UI
         {
             Text = text;
             Disposition = new ImplicitDisposition();
+        }
+        public bool IsExplicit()
+        {
+            return Disposition is ExplicitDisposition;
         }
 
         public string GetVisibleText()
