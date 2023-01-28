@@ -14,7 +14,6 @@ namespace Gift.UI
             Childs.Add(uIElement);
             int GlobalPosition = Context?.GlobalPosition?.y ?? 0;
             int ChildContextPosition = GlobalPosition;
-            int nbChilds = Childs.Count;
             foreach (UIElement renderable in Childs)
             {
                 ChildContextPosition += renderable.Context?.Bounds?.Height ?? 0;
@@ -25,9 +24,17 @@ namespace Gift.UI
 
         private void setChildContext(Label UiElement, int ChildContextPosition)
         {
+            if (Context == null)
+            {
+                throw new ArgumentNullException();
+            }
             if (UiElement.IsExplicit())
             {
-                UiElement.setContext(Context.GlobalPosition , new Bound(0, Context?.Bounds?.Width ?? 0));
+                if (Context.GlobalPosition == null)
+                {
+                    throw new ArgumentNullException();
+                }
+                UiElement.setContext(Context.GlobalPosition, new Bound(0, Context?.Bounds?.Width ?? 0));
             }
             else
             {
