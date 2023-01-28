@@ -30,5 +30,7 @@ namespace Gift.UI
             }
             Childs = new List<UIElement>();
         }
+
+        internal abstract bool isVisible(Renderable renderable);
     }
 }

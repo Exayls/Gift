@@ -38,7 +38,10 @@ namespace Gift
         {
             foreach (dynamic renderable in container.Childs)//dynamic to use overloaded method
             {
-                Render(renderable, screen);
+                if (container.isVisible(renderable))
+                {
+                    Render(renderable, screen);
+                }
             }
         }
 
