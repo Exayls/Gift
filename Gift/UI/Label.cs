@@ -29,11 +29,10 @@ namespace Gift.UI
 
         public string GetVisibleText()
         {
-            string text = this.Text;
-            Context? Context = this.Context;
-            int widthLine = this.Disposition.Position.x + text.Length;
+            string text = Text;
+            int widthLine = Disposition.Position.x + text.Length;
             int MaxWidth = Context?.Bounds?.Width ?? 0;
-            string display = widthLine <= MaxWidth+text.Length? (widthLine > MaxWidth ? text.Substring(0, widthLine-MaxWidth-1) : text) : "";
+            string display = Disposition.Position.x <= MaxWidth? (widthLine > MaxWidth ? text.Substring(0, widthLine-MaxWidth-1) : text) : "";
             return display;
         }
     }
