@@ -2,6 +2,7 @@
 using Gift.UI.Interface;
 using Gift.UI.MetaData;
 using Gift.UI.Strategy;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Gift.UI
@@ -21,14 +22,17 @@ namespace Gift.UI
             Text = text;
             Disposition = new ImplicitDisposition();
         }
+        public bool IsExplicit()
+        {
+            return Disposition is ExplicitDisposition;
+        }
 
         public string GetVisibleText()
         {
-            string text = this.Text;
-            Context? Context = this.Context;
-            int widthLine = this.Disposition.Position.x + text.Length;
+            string text = Text;
+            int widthLine = Disposition.Position.x + text.Length;
             int MaxWidth = Context?.Bounds?.Width ?? 0;
-            string display = widthLine <= MaxWidth+text.Length? (widthLine > MaxWidth ? text.Substring(0, widthLine-MaxWidth-1) : text) : "";
+            string display = Disposition.Position.x <= MaxWidth? (widthLine > MaxWidth ? text.Substring(0, widthLine-MaxWidth-1) : text) : "";
             return display;
         }
     }

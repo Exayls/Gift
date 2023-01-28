@@ -28,5 +28,10 @@ namespace Gift.UI
 
             UIElement.setContext(new Position(0, 0), Bound);
         }
+
+        internal override bool isVisible(Renderable renderable)//TODO
+        {
+            return true;
+        }
     }
 }

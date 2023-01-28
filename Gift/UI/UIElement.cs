@@ -8,10 +8,6 @@ namespace Gift.UI
     {
         public Context? Context { get; set; }
 
-        public UIElement()
-        {
-        }
-
         internal void setContext(Position globalPosition,Bound bound)
         {
             Context = new Context(globalPosition, bound);
