@@ -12,18 +12,31 @@ namespace Gift
         public GiftUI? ui { get; set; }
         public const char FILLINGCHAR = '*';
 
+        
         public virtual void initialize()
         {
             ui = null;
-            
         }
         public virtual void run()
         {
-
+            while (true)
+            {
+                Tick();
+            }
         }
         public virtual void end()
         {
 
+        }
+
+        public void Tick()
+        {
+
+        }
+
+        public void GetCurrentView()
+        {
+            throw new NotImplementedException();
         }
     }
 }
