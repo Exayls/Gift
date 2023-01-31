@@ -10,12 +10,16 @@ namespace Gift
     public class GiftBase
     {
         public GiftUI? ui { get; set; }
+        public TextWriter? View { get; private set; }
+        private Renderer _renderer;
+
         public const char FILLINGCHAR = '*';
 
-        
+
         public virtual void initialize()
         {
-            ui = null;
+            ui = new GiftUI();
+            _renderer = new Renderer();
         }
         public virtual void run()
         {
@@ -31,12 +35,16 @@ namespace Gift
 
         public void Tick()
         {
+            if (ui != null)
+            {
+                View = _renderer.GetRenderedBuffer(ui);
+            }
 
         }
 
-        public void GetCurrentView()
+        public TextWriter GetCurrentView()
         {
-            throw new NotImplementedException();
+            return View;
         }
     }
 }
