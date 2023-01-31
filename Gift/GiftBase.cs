@@ -26,6 +26,13 @@ namespace Gift
             while (true)
             {
                 Tick();
+                if (View != null)
+                {
+                    Console.Out.Write(View);
+                }
+                Thread.Sleep(1000);
+                Console.Clear();
+                Console.Clear();
             }
         }
         public virtual void end()

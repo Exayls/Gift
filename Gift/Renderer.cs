@@ -60,10 +60,11 @@ namespace Gift
         }
         private void UpdateDisplay(GiftUI renderable, ScreenDisplay screen)
         {
-            for (int i = 0; i < renderable.Bound.Height; i++)
+            screen.DisplayString.Append(new string(GiftBase.FILLINGCHAR, renderable.Bound.Width));
+            for (int i = 1; i < renderable.Bound.Height; i++)
             {
-                screen.DisplayString.Append(new string(GiftBase.FILLINGCHAR, renderable.Bound.Width));
                 screen.DisplayString.Append('\n');
+                screen.DisplayString.Append(new string(GiftBase.FILLINGCHAR, renderable.Bound.Width));
             }
         }
         private void UpdateDisplay(Label label, ScreenDisplay screen)
