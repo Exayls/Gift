@@ -17,10 +17,11 @@ namespace TestGift.UI
 
                 TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
                 var expectedBuilder = new StringBuilder();
-                for (int i = 0; i < 20; i++)
+                expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, 60));
+                for (int i = 1; i < 20; i++)
                 {
-                    expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, 60));
                     expectedBuilder.Append('\n');
+                    expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, 60));
                 }
 
                 Assert.Equal(expectedBuilder.ToString(), renderedText.ToString());
@@ -36,10 +37,11 @@ namespace TestGift.UI
 
                 TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
                 var expectedBuilder = new StringBuilder();
-                for (int i = 0; i < 10; i++)
+                expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, 15));
+                for (int i = 1; i < 10; i++)
                 {
-                    expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, 15));
                     expectedBuilder.Append('\n');
+                    expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, 15));
                 }
 
                 Assert.Equal(expectedBuilder.ToString(), renderedText.ToString());
