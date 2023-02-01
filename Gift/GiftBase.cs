@@ -32,7 +32,6 @@ namespace Gift
                 }
                 Thread.Sleep(1000);
                 Console.Clear();
-                Console.Clear();
             }
         }
         public virtual void end()
