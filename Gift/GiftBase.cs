@@ -16,6 +16,11 @@ namespace Gift
         public const char FILLINGCHAR = '*';
 
 
+        public GiftBase( Renderer renderer)
+        {
+            _renderer = renderer;
+        }
+
         public virtual void initialize()
         {
             ui = new GiftUI();
