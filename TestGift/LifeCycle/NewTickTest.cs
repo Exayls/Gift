@@ -26,8 +26,18 @@ namespace TestGift.LifeCycle
         public void TestTickReturnNewRender()
         {
             var GiftBase = new GiftBase(_rendererMock.Object);
-            GiftBase.GetCurrentView();
+            GiftBase.initialize();
             GiftBase.Tick();
+            var view = GiftBase.GetCurrentView();
+            var expectedBuilder = new StringBuilder();
+            expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, 60));
+            for (int i = 1; i < 20; i++)
+            {
+                expectedBuilder.Append('\n');
+                expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, 60));
+            }
+
+            Assert.Equal(expectedBuilder.ToString(), view.ToString());
 
         }
     }
