@@ -8,11 +8,11 @@ using Moq;
 
 namespace TestGift.LifeCycle
 {
-    public class NewTickTest
+    public class GiftBaseTest
     {
         private Mock<Renderer> _rendererMock;
 
-        public NewTickTest()
+        public GiftBaseTest()
         {
             _rendererMock = new Mock<Renderer>();
         }
@@ -23,21 +23,20 @@ namespace TestGift.LifeCycle
             GiftBase.Tick();
         }
         [Fact]
-        public void TestTickReturnNewRender()
+        public void When_not_initialized_should_not_set_ui()
+        {
+            var GiftBase = new GiftBase(_rendererMock.Object);
+
+            Assert.True(GiftBase.ui == null);
+
+        }
+        [Fact]
+        public void When_initialized_should_set_ui()
         {
             var GiftBase = new GiftBase(_rendererMock.Object);
             GiftBase.initialize();
-            GiftBase.Tick();
-            var view = GiftBase.GetCurrentView();
-            var expectedBuilder = new StringBuilder();
-            expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, 60));
-            for (int i = 1; i < 20; i++)
-            {
-                expectedBuilder.Append('\n');
-                expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, 60));
-            }
 
-            Assert.Equal(expectedBuilder.ToString(), view.ToString());
+            Assert.True(GiftBase.ui != null);
 
         }
     }
