@@ -17,10 +17,14 @@ namespace TestGift.LifeCycle
             _rendererMock = new Mock<Renderer>();
         }
         [Fact]
-        public void TestTickExist()
+        public void When_Tick_should_update_view()
         {
             var GiftBase = new GiftBase(_rendererMock.Object);
+            GiftBase.initialize();
+            var viewBefore = GiftBase.View;
             GiftBase.Tick();
+            var viewAfter = GiftBase.View;
+            Assert.NotEqual(viewAfter, viewBefore);
         }
         [Fact]
         public void When_not_initialized_should_not_set_ui()
