@@ -16,23 +16,28 @@ namespace TestGift.UI
         public void TestVStack()
         {
             var output = new StringBuilder();
+            var expectedBuilder = new StringBuilder();
+            GiftUI ui = null;
+            string expected;
+
+            string[]  actual = null;
             using (var writer = new StringWriter(output))
             {
-                var ui = new GiftUI(new Bound(20, 60));
+                ui = new GiftUI(new Bound(20, 60));
                 var vstack = new VStackBuilder().Build();
                 ui.SetChild(vstack);
                 TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
 
-                var expectedBuilder = new StringBuilder();
-                string expected = "";
-                var actual = renderedText.ToString().Split('\n');
-                for (int i = 0; i < ui.Bound.Height; i++)
-                {
-                    expectedBuilder.Clear();
-                    expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, ui.Bound.Width));
-                    expected = expectedBuilder.ToString();
-                    Assert.Equal(expected, actual[i]);
-                }
+                expected = "";
+                actual = renderedText.ToString().Split('\n');
+            }
+
+            for (int i = 0; i < ui.Bound.Height; i++)
+            {
+                expectedBuilder.Clear();
+                expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, ui.Bound.Width));
+                expected = expectedBuilder.ToString();
+                Assert.Equal(expected, actual[i]);
             }
         }
         [Fact]
@@ -178,7 +183,7 @@ namespace TestGift.UI
                 var ui = new GiftUI(new Bound(20, 60));
                 var vstack = new VStackBuilder().Build();
                 var label1 = new LabelBuilder().BuildImplicit();
-                var label2 = new LabelBuilder().WithText("test").WithPosition(new Position(4,8)).Build();
+                var label2 = new LabelBuilder().WithText("test").WithPosition(new Position(4, 8)).Build();
                 var label3 = new LabelBuilder().WithText("label numero 3.").BuildImplicit();
                 ui.SetChild(vstack);
                 vstack.AddChild(label1);
