@@ -32,6 +32,16 @@ namespace TestGift.UI
             Assert.Equal("He", str[0]);
         }
 
+        private static Label createLabel(Position positionLabel)
+        {
+            return new LabelBuilder().WithPosition(positionLabel).Build();
+        }
+
+        private static Label createLabel()
+        {
+            return new LabelBuilder().Build();
+        }
+
         private static List<string> GetLabelStr(Bound boundUI, Label label)
         {
             List<string> str;
@@ -41,7 +51,6 @@ namespace TestGift.UI
                 var element = GetLabelWithUIContext(boundUI, label);
                 str = TestHelper.GetElementString(element);
             }
-
             return str;
         }
 
@@ -51,16 +60,6 @@ namespace TestGift.UI
             Label element = label;
             ui.SetChild(element);
             return element;
-        }
-
-        private static Label createLabel(Position positionLabel)
-        {
-            return new LabelBuilder().WithPosition(positionLabel).Build();
-        }
-
-        private static Label createLabel()
-        {
-            return new LabelBuilder().Build();
         }
     }
 }
