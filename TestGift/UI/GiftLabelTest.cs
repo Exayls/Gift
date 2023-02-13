@@ -10,7 +10,7 @@ namespace TestGift.UI
     public class GiftLabelTest
     {
         [Fact]
-        public void TestLabelOutputFull()
+        public void When_label_is_entirely_on_screen_should_display_Hello()
         {
             List<string> str = GetLabelStr(new Bound(20, 60), createLabel());
             Assert.Equal("Hello", str[0]);
@@ -18,7 +18,7 @@ namespace TestGift.UI
 
 
         [Fact]
-        public void TestLabelOutputEmpty()
+        public void When_label_is_entirely_off_screen_should_display_nothing()
         {
             List<string> str = GetLabelStr(new Bound(20, 60), createLabel(new Position(0, 100)));
             Assert.Equal("", str[0]);
@@ -26,7 +26,7 @@ namespace TestGift.UI
 
 
         [Fact]
-        public void TestLabelOutputBeetween()
+        public void When_label_has_2_first_letters_on_screen_should_display_He()
         {
             List<string> str = GetLabelStr(new Bound(20, 60), createLabel(new Position(0, 58)));
             Assert.Equal("He", str[0]);
