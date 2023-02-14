@@ -15,23 +15,12 @@ namespace TestGift.UI
         [Fact]
         public void TestVStack()
         {
-            var output = new StringBuilder();
+            GiftUI ui = CreateUI(new Bound(20, 60));
+            TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
+            string[] actual = renderedText.ToString()?.Split('\n')?? new string[0];
+
             var expectedBuilder = new StringBuilder();
-            GiftUI ui = null;
             string expected;
-
-            string[]  actual = null;
-            using (var writer = new StringWriter(output))
-            {
-                ui = new GiftUI(new Bound(20, 60));
-                var vstack = new VStackBuilder().Build();
-                ui.SetChild(vstack);
-                TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
-
-                expected = "";
-                actual = renderedText.ToString().Split('\n');
-            }
-
             for (int i = 0; i < ui.Bound.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -40,6 +29,15 @@ namespace TestGift.UI
                 Assert.Equal(expected, actual[i]);
             }
         }
+
+        private static GiftUI CreateUI(Bound bound)
+        {
+            GiftUI ui = new GiftUI(bound);
+            var vstack = new VStackBuilder().Build();
+            ui.SetChild(vstack);
+            return ui;
+        }
+
         [Fact]
         public void TestVStackWithLabelImplicit()
         {
