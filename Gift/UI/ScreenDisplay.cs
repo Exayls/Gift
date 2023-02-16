@@ -33,10 +33,20 @@ namespace Gift.UI
         {
             for (int i = 0; i < display.TotalBound.Height; i++)
             {
-                if (globalPosition.x == -2)
+                if (globalPosition.x > TotalBound.Width)
                 {
-                    int indexLineToReplace = (globalPosition.y + i) * (TotalBound.Width + 1) + globalPosition.x+2;
-                    int lenghtToReplace = display.TotalBound.Width - 2;
+                    return;
+                }
+                else if (globalPosition.x + display.TotalBound.Width > TotalBound.Width)
+                {
+                    int indexLineToReplace = (globalPosition.y + i) * (TotalBound.Width + 1) + globalPosition.x;
+                    int lenghtToReplace = TotalBound.Width - globalPosition.x;
+                    DisplayString.Remove(indexLineToReplace, lenghtToReplace).Insert(indexLineToReplace, display.GetLine(i).Substring(0, lenghtToReplace));
+                }
+                else if (globalPosition.x < 0)
+                {
+                    int indexLineToReplace = (globalPosition.y + i) * (TotalBound.Width + 1);
+                    int lenghtToReplace = display.TotalBound.Width + globalPosition.x;
                     DisplayString.Remove(indexLineToReplace, lenghtToReplace).Insert(indexLineToReplace, display.GetLine(i).Substring(0, lenghtToReplace));
                 }
                 else
