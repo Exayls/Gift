@@ -34,27 +34,23 @@ namespace Gift.UI
             for (int i = 0; i < display.TotalBound.Height; i++)
             {
 
-                if (globalPosition.x > TotalBound.Width || globalPosition.y + i +1  > TotalBound.Height)
+                if (globalPosition.x > TotalBound.Width || globalPosition.y + i + 1 > TotalBound.Height)
                 {
                     return;
                 }
-                else if (globalPosition.x + display.TotalBound.Width > TotalBound.Width)
+
+                int indexLineToReplace = (globalPosition.y + i) * (TotalBound.Width + 1) + globalPosition.x;
+                int lenghtToReplace = display.TotalBound.Width;
+                if (globalPosition.x + display.TotalBound.Width > TotalBound.Width)
                 {
-                    int indexLineToReplace = (globalPosition.y + i) * (TotalBound.Width + 1) + globalPosition.x;
-                    int lenghtToReplace = TotalBound.Width - globalPosition.x;
-                    DisplayString.Remove(indexLineToReplace, lenghtToReplace).Insert(indexLineToReplace, display.GetLine(i).Substring(0, lenghtToReplace));
+                    lenghtToReplace = TotalBound.Width - globalPosition.x;
                 }
                 else if (globalPosition.x < 0)
                 {
-                    int indexLineToReplace = (globalPosition.y + i) * (TotalBound.Width + 1);
-                    int lenghtToReplace = display.TotalBound.Width + globalPosition.x;
-                    DisplayString.Remove(indexLineToReplace, lenghtToReplace).Insert(indexLineToReplace, display.GetLine(i).Substring(0, lenghtToReplace));
+                    indexLineToReplace = (globalPosition.y + i) * (TotalBound.Width + 1);
+                    lenghtToReplace = display.TotalBound.Width + globalPosition.x;
                 }
-                else
-                {
-                    int indexLineToReplace = (globalPosition.y + i) * (TotalBound.Width + 1) + globalPosition.x;
-                    DisplayString.Remove(indexLineToReplace, display.TotalBound.Width).Insert(indexLineToReplace, display.GetLine(i));
-                }
+                DisplayString.Remove(indexLineToReplace, lenghtToReplace).Insert(indexLineToReplace, display.GetLine(i).Substring(0, lenghtToReplace));
             }
         }
 
