@@ -138,21 +138,21 @@ namespace TestGift.UnitTest
             string actual = screen.DisplayString.ToString();
             Assert.Equal(expectedDisplay, actual);
         }
-        //[Fact]
-        //public void AddDisplay_should_display_2nd_screen_over_when_2nd_screen_Bigger()
-        //{
-        //    //arrange
-        //    ScreenDisplay screen = new ScreenDisplay(new Bound(3, 10), '@'); ;
-        //    ScreenDisplay screenToAdd = new ScreenDisplay(new Bound(4, 14), '*');
-        //    //act
-        //    screen.AddDisplay(screenToAdd, new Position(1, 7));
-        //    //assert
-        //    string expectedDisplay =
-        //        "@@@@@@@@@@\n" +
-        //        "@@@@@@@***\n" +
-        //        "@@@@@@@***";
-        //    string actual = screen.DisplayString.ToString();
-        //    Assert.Equal(expectedDisplay, actual);
-        //}
+        [Fact]
+        public void AddDisplay_should_display_2nd_screen_over_when_2nd_screen_Bigger()
+        {
+            //arrange
+            ScreenDisplay screen = new ScreenDisplay(new Bound(3, 10), '@'); ;
+            ScreenDisplay screenToAdd = new ScreenDisplay(new Bound(4, 14), '*');
+            //act
+            screen.AddDisplay(screenToAdd, new Position(1, 7));
+            //assert
+            string expectedDisplay =
+                "@@@@@@@@@@\n" +
+                "@@@@@@@***\n" +
+                "@@@@@@@***";
+            string actual = screen.DisplayString.ToString();
+            Assert.Equal(expectedDisplay, actual);
+        }
     }
 }

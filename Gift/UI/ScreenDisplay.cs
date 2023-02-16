@@ -33,7 +33,8 @@ namespace Gift.UI
         {
             for (int i = 0; i < display.TotalBound.Height; i++)
             {
-                if (globalPosition.x > TotalBound.Width)
+
+                if (globalPosition.x > TotalBound.Width || globalPosition.y + i +1  > TotalBound.Height)
                 {
                     return;
                 }
