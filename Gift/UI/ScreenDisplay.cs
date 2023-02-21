@@ -33,30 +33,39 @@ namespace Gift.UI
         {
             for (int i = 0; i < display.TotalBound.Height; i++)
             {
-
-                if (globalPosition.x > TotalBound.Width || globalPosition.y + i + 1 > TotalBound.Height)
+                bool ShouldAddLine = globalPosition.x <= TotalBound.Width
+                    && globalPosition.y + i + 1 <= TotalBound.Height
+                    && globalPosition.y + i >= 0;
+                if (ShouldAddLine)
                 {
-                    return;
+                    AddOneLineToDisplay(display, globalPosition, i);
                 }
-
-                int indexLineToReplace = (globalPosition.y + i) * (TotalBound.Width + 1) + globalPosition.x;
-                int lenghtToReplace = display.TotalBound.Width;
-                if (globalPosition.x + display.TotalBound.Width > TotalBound.Width)
-                {
-                    lenghtToReplace = TotalBound.Width - globalPosition.x;
-                }
-                else if (globalPosition.x < 0)
-                {
-                    indexLineToReplace = (globalPosition.y + i) * (TotalBound.Width + 1);
-                    lenghtToReplace = display.TotalBound.Width + globalPosition.x;
-                }
-                DisplayString.Remove(indexLineToReplace, lenghtToReplace).Insert(indexLineToReplace, display.GetLine(i).Substring(0, lenghtToReplace));
             }
+        }
+
+        private void AddOneLineToDisplay(ScreenDisplay display, Position globalPosition, int i)
+        {
+            int indexLineToReplace = (globalPosition.y + i) * (TotalBound.Width + 1) + globalPosition.x;
+            int lenghtToReplace = display.TotalBound.Width;
+            if (globalPosition.x + display.TotalBound.Width > TotalBound.Width)
+            {
+                lenghtToReplace = TotalBound.Width - globalPosition.x;
+            }
+            else if (globalPosition.x < 0)
+            {
+                indexLineToReplace = (globalPosition.y + i) * (TotalBound.Width + 1);
+                lenghtToReplace = display.TotalBound.Width + globalPosition.x;
+            }
+            DisplayString.Remove(indexLineToReplace, lenghtToReplace);
+
+            string lineToInsert = display.GetLine(i);
+            string stringToInsert = lineToInsert.Substring(0, lenghtToReplace);
+            DisplayString.Insert(indexLineToReplace, stringToInsert);
         }
 
         private string GetLine(int i)
         {
-            return DisplayString.ToString().Substring((i * (TotalBound.Width + 1)), TotalBound.Width - i);
+            return DisplayString.ToString().Split('\n')[i];
         }
 
         internal void AddString(string display, Position position)
