@@ -38,12 +38,12 @@ namespace Gift.UI
                     && globalPosition.y + i >= 0;
                 if (ShouldAddLine)
                 {
-                    AddOneLineToDisplay(display, globalPosition, i);
+                    AddLineToDisplay(display, globalPosition, i);
                 }
             }
         }
 
-        private void AddOneLineToDisplay(ScreenDisplay display, Position globalPosition, int i)
+        private void AddLineToDisplay(ScreenDisplay display, Position globalPosition, int i)
         {
             int indexLineToReplace = (globalPosition.y + i) * (TotalBound.Width + 1) + globalPosition.x;
             int lenghtToReplace = display.TotalBound.Width;
