@@ -16,10 +16,15 @@ namespace Gift.UI
         {
             DisplayString = new StringBuilder();
             TotalBound = bound;
-            FillDisplayString(emptychar);
+            FillDisplay(emptychar);
         }
 
-        private void FillDisplayString(char emptychar)
+        public ScreenDisplay(string display):this(new(1, display.Length), GiftBase.FILLINGCHAR)
+        {
+            DisplayString.Clear().Append(display);
+        }
+
+        private void FillDisplay(char emptychar)
         {
             DisplayString.Append(new string(emptychar, TotalBound.Width));
             for (int i = 1; i < TotalBound.Height; i++)
@@ -68,9 +73,10 @@ namespace Gift.UI
             return DisplayString.ToString().Split('\n')[i];
         }
 
-        internal void AddString(string display, Position position)
+        public void AddString(string display, Position position)
         {
-            Helper.Replace(DisplayString, display, position.y * (TotalBound.Width + 1) + position.x);
+            ScreenDisplay tmpScreen = new ScreenDisplay(display);
+            AddDisplay(tmpScreen, position);
         }
     }
 }

@@ -250,5 +250,103 @@ namespace TestGift.UnitTest
             string actual = screen.DisplayString.ToString();
             Assert.Equal(expectedDisplay, actual);
         }
+        [Fact]
+        public void AddString_should_add_display_string_when_position_not_in_Display1()
+        {
+            //arrange
+            ScreenDisplay screen = new ScreenDisplay(new Bound(2, 3), '@'); ;
+            //act
+            screen.AddString("aa", new Position(2, 0));
+            //assert
+            string expectedDisplay =
+                "@@@\n" +
+                "@@@";
+            string actual = screen.DisplayString.ToString();
+            Assert.Equal(expectedDisplay, actual);
+        }
+        [Fact]
+        public void AddString_should_add_display_string_when_position_not_in_Display2()
+        {
+            //arrange
+            ScreenDisplay screen = new ScreenDisplay(new Bound(2, 3), '@'); ;
+            //act
+            screen.AddString("aa", new Position(3, 0));
+            //assert
+            string expectedDisplay =
+                "@@@\n" +
+                "@@@";
+            string actual = screen.DisplayString.ToString();
+            Assert.Equal(expectedDisplay, actual);
+        }
+        [Fact]
+        public void AddString_should_add_display_string_when_position_not_in_Display3()
+        {
+            //arrange
+            ScreenDisplay screen = new ScreenDisplay(new Bound(2, 3), '@'); ;
+            //act
+            screen.AddString("aa", new Position(-1, 0));
+            //assert
+            string expectedDisplay =
+                "@@@\n" +
+                "@@@";
+            string actual = screen.DisplayString.ToString();
+            Assert.Equal(expectedDisplay, actual);
+        }
+        [Fact]
+        public void AddString_should_add_display_string_when_position_in_Display1()
+        {
+            //arrange
+            ScreenDisplay screen = new ScreenDisplay(new Bound(2, 3), '@'); ;
+            //act
+            screen.AddString("aa", new Position(0, 0));
+            //assert
+            string expectedDisplay =
+                "aa@\n" +
+                "@@@";
+            string actual = screen.DisplayString.ToString();
+            Assert.Equal(expectedDisplay, actual);
+        }
+        [Fact]
+        public void AddString_should_add_display_string_when_position_in_Display2()
+        {
+            //arrange
+            ScreenDisplay screen = new ScreenDisplay(new Bound(2, 3), '@'); ;
+            //act
+            screen.AddString("aa", new Position(0, 1));
+            //assert
+            string expectedDisplay =
+                "@aa\n" +
+                "@@@";
+            string actual = screen.DisplayString.ToString();
+            Assert.Equal(expectedDisplay, actual);
+        }
+        [Fact]
+        public void AddString_should_add_display_string_when_position_in_Display3()
+        {
+            //arrange
+            ScreenDisplay screen = new ScreenDisplay(new Bound(2, 3), '@'); ;
+            //act
+            screen.AddString("aa", new Position(0, 2));
+            //assert
+            string expectedDisplay =
+                "@@a\n" +
+                "@@@";
+            string actual = screen.DisplayString.ToString();
+            Assert.Equal(expectedDisplay, actual);
+        }
+        [Fact]
+        public void AddString_should_add_display_string_when_position_in_Display4()
+        {
+            //arrange
+            ScreenDisplay screen = new ScreenDisplay(new Bound(2, 3), '@'); ;
+            //act
+            screen.AddString("aa", new Position(0, -1));
+            //assert
+            string expectedDisplay =
+                "a@@\n" +
+                "@@@";
+            string actual = screen.DisplayString.ToString();
+            Assert.Equal(expectedDisplay, actual);
+        }
     }
 }
