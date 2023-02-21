@@ -123,6 +123,38 @@ namespace TestGift.UnitTest
             Assert.Equal(expectedDisplay, actual);
         }
         [Fact]
+        public void AddDisplay_should_display_partof_2nd_screen_over_when_add_screen_offscreen5()
+        {
+            //arrange
+            ScreenDisplay screen = new ScreenDisplay(new Bound(3, 10), '@'); ;
+            ScreenDisplay screenToAdd = new ScreenDisplay(new Bound(1, 6), '*');
+            //act
+            screen.AddDisplay(screenToAdd, new Position(5, 5));
+            //assert
+            string expectedDisplay =
+                "@@@@@@@@@@\n" +
+                "@@@@@@@@@@\n" +
+                "@@@@@@@@@@";
+            string actual = screen.DisplayString.ToString();
+            Assert.Equal(expectedDisplay, actual);
+        }
+        [Fact]
+        public void AddDisplay_should_display_partof_2nd_screen_over_when_add_screen_offscreen6()
+        {
+            //arrange
+            ScreenDisplay screen = new ScreenDisplay(new Bound(3, 10), '@'); ;
+            ScreenDisplay screenToAdd = new ScreenDisplay(new Bound(2, 6), '*');
+            //act
+            screen.AddDisplay(screenToAdd, new Position(-1, 5));
+            //assert
+            string expectedDisplay =
+                "@@@@@*****\n" +
+                "@@@@@@@@@@\n" +
+                "@@@@@@@@@@";
+            string actual = screen.DisplayString.ToString();
+            Assert.Equal(expectedDisplay, actual);
+        }
+        [Fact]
         public void AddDisplay_should_display_1st_screen_when_add_screen_completely_offscreen1()
         {
             //arrange
@@ -167,6 +199,54 @@ namespace TestGift.UnitTest
                 "@@@@@@@@@@\n" +
                 "@@@@@@@***\n" +
                 "@@@@@@@***";
+            string actual = screen.DisplayString.ToString();
+            Assert.Equal(expectedDisplay, actual);
+        }
+        [Fact]
+        public void AddDisplay_should_display_2nd_screen_over_when_2nd_screen_Same_size1()
+        {
+            //arrange
+            ScreenDisplay screen = new ScreenDisplay(new Bound(3, 10), '@'); ;
+            ScreenDisplay screenToAdd = new ScreenDisplay(new Bound(1, 10), '*');
+            //act
+            screen.AddDisplay(screenToAdd, new Position(0, 0));
+            //assert
+            string expectedDisplay =
+                "**********\n" +
+                "@@@@@@@@@@\n" +
+                "@@@@@@@@@@";
+            string actual = screen.DisplayString.ToString();
+            Assert.Equal(expectedDisplay, actual);
+        }
+        [Fact]
+        public void AddDisplay_should_display_2nd_screen_over_when_2nd_screen_Same_size2()
+        {
+            //arrange
+            ScreenDisplay screen = new ScreenDisplay(new Bound(3, 10), '@'); ;
+            ScreenDisplay screenToAdd = new ScreenDisplay(new Bound(3, 10), '*');
+            //act
+            screen.AddDisplay(screenToAdd, new Position(0, 0));
+            //assert
+            string expectedDisplay =
+                "**********\n" +
+                "**********\n" +
+                "**********";
+            string actual = screen.DisplayString.ToString();
+            Assert.Equal(expectedDisplay, actual);
+        }
+        [Fact]
+        public void AddDisplay_should_display_2nd_screen_over_when_2nd_screen_Same_size3()
+        {
+            //arrange
+            ScreenDisplay screen = new ScreenDisplay(new Bound(3, 10), '@'); ;
+            ScreenDisplay screenToAdd = new ScreenDisplay(new Bound(1, 10), '*');
+            //act
+            screen.AddDisplay(screenToAdd, new Position(2, 0));
+            //assert
+            string expectedDisplay =
+                "@@@@@@@@@@\n" +
+                "@@@@@@@@@@\n" +
+                "**********";
             string actual = screen.DisplayString.ToString();
             Assert.Equal(expectedDisplay, actual);
         }
