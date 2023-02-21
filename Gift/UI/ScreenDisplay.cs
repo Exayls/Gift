@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Gift.UI
 {
-    public class ScreenDisplay
+    public class ScreenDisplay : IScreenDisplay
     {
         public Bound TotalBound { get; }
         public StringBuilder DisplayString { get; }
@@ -19,7 +19,7 @@ namespace Gift.UI
             FillDisplay(emptychar);
         }
 
-        public ScreenDisplay(string display):this(new(1, display.Length), GiftBase.FILLINGCHAR)
+        public ScreenDisplay(string display) : this(new(1, display.Length), GiftBase.FILLINGCHAR)
         {
             DisplayString.Clear().Append(display);
         }
@@ -34,7 +34,7 @@ namespace Gift.UI
             }
         }
 
-        public void AddDisplay(ScreenDisplay display, Position globalPosition)
+        public void AddDisplay(IScreenDisplay display, Position globalPosition)
         {
             for (int i = 0; i < display.TotalBound.Height; i++)
             {
@@ -48,7 +48,7 @@ namespace Gift.UI
             }
         }
 
-        private void AddLineToDisplay(ScreenDisplay display, Position globalPosition, int i)
+        private void AddLineToDisplay(IScreenDisplay display, Position globalPosition, int i)
         {
             int indexLineToReplace = (globalPosition.y + i) * (TotalBound.Width + 1) + globalPosition.x;
             int lenghtToReplace = display.TotalBound.Width;
@@ -68,7 +68,7 @@ namespace Gift.UI
             DisplayString.Insert(indexLineToReplace, stringToInsert);
         }
 
-        private string GetLine(int i)
+        public string GetLine(int i)
         {
             return DisplayString.ToString().Split('\n')[i];
         }
