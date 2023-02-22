@@ -6,6 +6,8 @@ namespace Gift.UI
     {
         int Height { get; }
         public Bound Bound { get; }
+
+        IScreenDisplay GetDisplay();
         bool IsFixed();
         void SetChild(UIElement UIElement);
     }

@@ -4,15 +4,15 @@ using System.Text;
 
 namespace Gift.UI
 {
-    public abstract class Container : UIElement
+    public abstract class Container : UIElement, IContainer
     {
         public Bound Bound { get; protected set; }
-        public IList<UIElement> Childs { get; protected set; }
+        public IList<IUIElement> Childs { get; protected set; }
         public Container(Bound bound)
         {
 
             Bound = bound;
-            Childs = new List<UIElement>();
+            Childs = new List<IUIElement>();
         }
         public Container()
         {
@@ -28,9 +28,13 @@ namespace Gift.UI
             {
                 Bound = new Bound(0, 0);
             }
-            Childs = new List<UIElement>();
+            Childs = new List<IUIElement>();
         }
 
-        internal abstract bool isVisible(Renderable renderable);
+        public abstract bool isVisible(Renderable renderable);
+
+
+        public abstract Context GetContext(Renderable renderable, Context context);
+
     }
 }

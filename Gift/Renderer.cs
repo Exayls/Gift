@@ -16,8 +16,7 @@ namespace Gift
 
         public TextWriter GetRenderedBuffer(IGiftUI giftUI)
         {
-            IScreenDisplay screen = new ScreenDisplay(giftUI.Bound);
-            return GetRenderedBuffer(giftUI, screen);
+            return GetRenderedBuffer(giftUI, giftUI.GetDisplay());
         }
         public TextWriter GetRenderedBuffer(IGiftUI giftUI, IScreenDisplay screen)
         {

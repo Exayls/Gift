@@ -31,19 +31,9 @@ namespace Gift
             while (true)
             {
                 Tick();
-                if (View != null)
-                {
-                    Console.Out.Write(View);
-                }
-                Thread.Sleep(1000);
-                Console.Clear();
+                PrintFrame(1000);
             }
         }
-        public virtual void end()
-        {
-
-        }
-
         public void Tick()
         {
             if (ui != null)
@@ -52,10 +42,20 @@ namespace Gift
             }
 
         }
-
-        public TextWriter GetCurrentView()
+        private void PrintFrame(int timeFrame)
         {
-            return View;
+            if (View != null)
+            {
+                Console.Out.Write(View);
+            }
+            Thread.Sleep(timeFrame);
+            Console.Clear();
         }
+
+        public virtual void end()
+        {
+
+        }
+
     }
 }

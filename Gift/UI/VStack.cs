@@ -5,6 +5,22 @@ namespace Gift.UI
 {
     public class VStack : Container
     {
+        public override int Height
+        {
+            get
+            {
+                int ChildContextPosition = 0;
+                foreach (UIElement renderable in Childs)
+                {
+                    if (!renderable.IsFixed())
+                    {
+                        ChildContextPosition += renderable.Height;
+                    }
+                }
+                return ChildContextPosition;
+            }
+        }
+
         public VStack()
         {
         }
@@ -43,7 +59,7 @@ namespace Gift.UI
             }
             return 0;
         }
-        internal override bool isVisible(Renderable renderable)
+        public override bool isVisible(Renderable renderable)
         {
             var ContextHeight = Context?.Bounds?.Height ?? 0;
             int HeightAfter = GetHeightAllChildsAfter(renderable);
@@ -61,7 +77,7 @@ namespace Gift.UI
             {
                 throw new ArgumentNullException();
             }
-            if (UiElement.IsExplicit())
+            if (UiElement.IsFixed())
             {
                 if (Context.GlobalPosition == null)
                 {
@@ -73,6 +89,55 @@ namespace Gift.UI
             {
                 UiElement.setContext(new Position(ChildContextPosition, Context?.GlobalPosition?.x ?? 0), new Bound(1, Context?.Bounds?.Width ?? 0));
             }
+        }
+
+        public override Context GetContext(Renderable renderable, Context context)
+        {
+            if (context.GlobalPosition == null)
+            {
+                throw new ArgumentNullException();
+            }
+            int ChildContextPosition = GetHeightOf(renderable);
+            if (renderable.IsFixed())
+            {
+                return new Context(context.GlobalPosition, new Bound(0, context.Bounds?.Width ?? 0));
+            }
+            else
+            {
+                return new Context(new Position(ChildContextPosition, context.GlobalPosition?.x ?? 0), new Bound(0, context.Bounds?.Width ?? 0));
+            }
+        }
+
+        private int GetHeightOf(Renderable renderableToFind)
+        {
+            int ChildContextPosition = 0;
+            foreach (UIElement renderable in Childs)
+            {
+                if (!renderable.IsFixed())
+                {
+                    if (renderable == renderableToFind)
+                    {
+                        return ChildContextPosition;
+                    }
+                    ChildContextPosition += renderable.Height;
+                }
+            }
+            return 0;
+        }
+
+        public override bool IsFixed()
+        {
+            return false;
+        }
+
+        public override Position GetGlobalPosition(Context context)
+        {
+            return context.GlobalPosition;
+        }
+
+        public override IScreenDisplay GetDisplay(Bound bound)
+        {
+            return new ScreenDisplay(bound);
         }
     }
 }
