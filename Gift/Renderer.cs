@@ -44,7 +44,6 @@ namespace Gift
             IScreenDisplay display = renderable.GetDisplay(context.Bounds);
             Position globalPosition = renderable.GetGlobalPosition(context);
             screen.AddDisplay(display, globalPosition);
-            //Helper.Replace(screen.DisplayString, display, globalPosition.y * (screen.TotalBound.Width + 1) + globalPosition.x);
         }
 
         private void RenderAllChilds(IScreenDisplay screen, IContainer container, Context context)
@@ -62,8 +61,8 @@ namespace Gift
             {
                 switch (renderable)
                 {
-                    case Container c:
-                        Render(screen, c, renderableContext);
+                    case Container containerToRender:
+                        Render(screen, containerToRender, renderableContext);
                         break;
                     default:
                         Render(screen, renderable, renderableContext);
@@ -71,23 +70,5 @@ namespace Gift
                 }
             }
         }
-        //private void UpdateDisplay(ScreenDisplay screen, Label label, Context context)
-        //{
-        //    string display = label.GetDisplay();
-        //    Position globalPosition = GetGlobalPosition(label, context);
-        //    Helper.Replace(screen.DisplayString, display, globalPosition.y * (screen.TotalBound.Width + 1) + globalPosition.x);
-        //}
-
-        //private static Position GetGlobalPosition(Label label, Context context)
-        //{
-        //    int context_y = context.GlobalPosition?.y ?? 0;
-        //    int context_x = context.GlobalPosition?.x ?? 0;
-        //    int relative_y = label.Disposition.Position.y;
-        //    int relative_x = label.Disposition.Position.x;
-        //    int global_y = context_y + relative_y;
-        //    int global_x = context_x + relative_x;
-        //    Position globalPosition = new Position(global_y, global_x);
-        //    return globalPosition;
-        //}
     }
 }
