@@ -1,5 +1,4 @@
 ﻿using Gift;
-using Gift.UI;
 using Gift.UI.Interface;
 using Gift.UI.MetaData;
 using Moq;

@@ -1,6 +1,4 @@
-﻿using Gift.UI;
-
-namespace Gift
+﻿namespace Gift.UI.Interface
 {
     public interface IRenderer
     {

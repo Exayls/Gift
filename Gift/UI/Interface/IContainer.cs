@@ -1,9 +1,8 @@
-﻿using Gift.UI.Interface;
-using Gift.UI.MetaData;
+﻿using Gift.UI.MetaData;
 
-namespace Gift.UI
+namespace Gift.UI.Interface
 {
-    public interface IContainer: IUIElement
+    public interface IContainer : IUIElement
     {
         Bound Bound { get; }
         IList<IUIElement> Childs { get; }
