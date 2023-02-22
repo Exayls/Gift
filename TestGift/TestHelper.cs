@@ -12,7 +12,7 @@ namespace TestGift
         public static List<string> GetElementString(Label element)
         {
             List<string> output = new List<string>();
-            output.Add(element.GetVisibleText());
+            output.Add(element.GetDisplay());
             return output;
         }
 
