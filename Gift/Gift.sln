@@ -5,9 +5,11 @@ VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gift", "Gift.csproj", "{820BC53C-7643-4875-BEF6-9BDD251900C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestGift", "..\TestGift\TestGift.csproj", "{C07BB1A3-9353-437D-96C0-7F73BDC369D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestGift", "..\TestGift\TestGift.csproj", "{C07BB1A3-9353-437D-96C0-7F73BDC369D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExempleGift", "..\ExempleGift\ExempleGift.csproj", "{EC761D0D-8F4C-4A4D-92BB-BDB2D963F969}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exemple1", "..\ExempleGift\Exemple1.csproj", "{EC761D0D-8F4C-4A4D-92BB-BDB2D963F969}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{E32D5572-AABA-44D9-B5A7-02A184E9FA3B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +32,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EC761D0D-8F4C-4A4D-92BB-BDB2D963F969} = {E32D5572-AABA-44D9-B5A7-02A184E9FA3B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A76C2D02-CF6B-43CC-AE53-90615555281C}

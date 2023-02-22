@@ -9,7 +9,6 @@ using System.Text;
 
 var ui = new GiftUI();
 ui.SetChild(new Label("coucou", new Position(2, 58)));
-Console.Out.Write(new Renderer().GetRenderedBuffer(ui));
 
 var vstack = new VStackBuilder().Build();
 ui.SetChild(vstack);
