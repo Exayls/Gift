@@ -1,0 +1,12 @@
+﻿using Gift.UI.MetaData;
+
+namespace Gift.UI
+{
+    public interface IGiftUI:IContainer
+    {
+        int Height { get; }
+        public Bound Bound { get; }
+        bool IsFixed();
+        void SetChild(UIElement UIElement);
+    }
+}
