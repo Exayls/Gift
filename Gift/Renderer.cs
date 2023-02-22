@@ -8,15 +8,10 @@ namespace Gift
     /// <summary>
     /// Render the UI to a TextWriter
     /// </summary>
-    public class Renderer
+    public class Renderer : IRenderer
     {
         public Renderer()
         {
-        }
-
-        private void Render(IScreenDisplay screen, Renderable Renderer, Context context)
-        {
-            UpdateDisplay(screen, Renderer, context);
         }
 
         public TextWriter GetRenderedBuffer(IGiftUI giftUI)
@@ -26,17 +21,31 @@ namespace Gift
         }
         public TextWriter GetRenderedBuffer(IGiftUI giftUI, IScreenDisplay screen)
         {
-            Render(giftUI, screen);
+            Context context = new Context(new(0, 0), screen.TotalBound);
+            Render(screen, giftUI, context);
+
             TextWriter Output = new StringWriter();
             Output.Write(screen.DisplayString);
             return Output;
         }
 
-        private void Render(IGiftUI giftUI, IScreenDisplay screen)
+        private void Render(IScreenDisplay screen, Renderable Renderer, Context context)
         {
-            Context context = new Context(new(0, 0), screen.TotalBound);
-            UpdateDisplay(screen, giftUI, context);
-            RenderAllChilds(screen, giftUI, context);
+            UpdateDisplay(screen, Renderer, context);
+        }
+
+        private void Render(IScreenDisplay screen, IContainer container, Context context)
+        {
+            UpdateDisplay(screen, container, context);
+            RenderAllChilds(screen, container, context);
+        }
+
+        private void UpdateDisplay(IScreenDisplay screen, Renderable renderable, Context context)
+        {
+            IScreenDisplay display = renderable.GetDisplay(context.Bounds);
+            Position globalPosition = renderable.GetGlobalPosition(context);
+            screen.AddDisplay(display, globalPosition);
+            //Helper.Replace(screen.DisplayString, display, globalPosition.y * (screen.TotalBound.Width + 1) + globalPosition.x);
         }
 
         private void RenderAllChilds(IScreenDisplay screen, IContainer container, Context context)
@@ -63,20 +72,6 @@ namespace Gift
                 }
             }
         }
-
-        private void Render(IScreenDisplay screen, Container container, Context context)
-        {
-            UpdateDisplay(screen, container, context);
-            RenderAllChilds(screen, container, context);
-        }
-        private void UpdateDisplay(IScreenDisplay screen, Renderable renderable, Context context)
-        {
-            IScreenDisplay display = renderable.GetDisplay(context.Bounds);
-            Position globalPosition = renderable.GetGlobalPosition(context);
-            screen.AddDisplay(display, globalPosition);
-            //Helper.Replace(screen.DisplayString, display, globalPosition.y * (screen.TotalBound.Width + 1) + globalPosition.x);
-        }
-
         //private void UpdateDisplay(ScreenDisplay screen, Label label, Context context)
         //{
         //    string display = label.GetDisplay();

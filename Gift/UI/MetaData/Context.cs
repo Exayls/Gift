@@ -14,8 +14,8 @@ namespace Gift.UI.MetaData
             Bounds = localBounds;
         }
 
-        public Position? GlobalPosition { get; private set; }
-        public Bound? Bounds { get; private set; }
+        public Position GlobalPosition { get; private set; }
+        public Bound Bounds { get; private set; }
 
     }
 }
