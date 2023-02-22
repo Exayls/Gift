@@ -5,7 +5,6 @@ namespace Gift.UI
 {
     public interface IUIElement: Renderable
     {
-        Context? Context { get; set; }
-
+        Context Context { get; set; }
     }
 }
