@@ -14,28 +14,32 @@ namespace Gift
         {
         }
 
-        private void Render(ScreenDisplay screen, Renderable Renderer, Context context)
+        private void Render(IScreenDisplay screen, Renderable Renderer, Context context)
         {
             UpdateDisplay(screen, Renderer, context);
         }
 
         public TextWriter GetRenderedBuffer(IGiftUI giftUI)
         {
-            ScreenDisplay screen = new ScreenDisplay(giftUI.Bound);
+            IScreenDisplay screen = new ScreenDisplay(giftUI.Bound);
+            return GetRenderedBuffer(giftUI, screen);
+        }
+        public TextWriter GetRenderedBuffer(IGiftUI giftUI, IScreenDisplay screen)
+        {
             Render(giftUI, screen);
             TextWriter Output = new StringWriter();
             Output.Write(screen.DisplayString);
             return Output;
         }
 
-        private void Render(IGiftUI giftUI, ScreenDisplay screen)
+        private void Render(IGiftUI giftUI, IScreenDisplay screen)
         {
             Context context = new Context(new(0, 0), screen.TotalBound);
             UpdateDisplay(screen, giftUI, context);
             RenderAllChilds(screen, giftUI, context);
         }
 
-        private void RenderAllChilds(ScreenDisplay screen, IContainer container, Context context)
+        private void RenderAllChilds(IScreenDisplay screen, IContainer container, Context context)
         {
             foreach (Renderable renderable in container.Childs)
             {
@@ -43,7 +47,7 @@ namespace Gift
             }
         }
 
-        private void RenderAnyRenderable(ScreenDisplay screen, IContainer container, Context context, Renderable renderable)
+        private void RenderAnyRenderable(IScreenDisplay screen, IContainer container, Context context, Renderable renderable)
         {
             Context renderableContext = container.GetContext(renderable, context);
             if (container.isVisible(renderable))
@@ -60,7 +64,7 @@ namespace Gift
             }
         }
 
-        private void Render(ScreenDisplay screen, Container container, Context context)
+        private void Render(IScreenDisplay screen, Container container, Context context)
         {
             UpdateDisplay(screen, container, context);
             RenderAllChilds(screen, container, context);

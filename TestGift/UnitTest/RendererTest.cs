@@ -28,13 +28,9 @@ namespace TestGift.UnitTest
         {
             //arrange
             _screenDisplayMock.Setup(s => s.DisplayString).Returns(new StringBuilder());
-            _screenDisplayMock.Setup(s => s.TotalBound).Returns(new Bound(0,0));
-            _giftuiMock.Setup(m => m.GetDisplay(It.IsAny<Bound>())).Returns(_screenDisplayMock.Object);
-            _giftuiMock.Setup(m => m.GetGlobalPosition(It.IsAny<Context>())).Returns(new Position(0,0));
-            _giftuiMock.Setup(m => m.Bound).Returns(new Bound(0,0));
             _giftuiMock.Setup(m => m.Childs).Returns(new List<UIElement>());
             //act
-            TextWriter actual = renderer.GetRenderedBuffer(_giftuiMock.Object);
+            TextWriter actual = renderer.GetRenderedBuffer(_giftuiMock.Object, _screenDisplayMock.Object);
             //assert
             Assert.Equal("", actual.ToString());
         }
@@ -43,13 +39,9 @@ namespace TestGift.UnitTest
         {
             //arrange
             _screenDisplayMock.Setup(s => s.DisplayString).Returns(new StringBuilder("hello"));
-            _screenDisplayMock.Setup(s => s.TotalBound).Returns(new Bound(1,5));
-            _giftuiMock.Setup(m => m.GetDisplay(It.IsAny<Bound>())).Returns(_screenDisplayMock.Object);
-            _giftuiMock.Setup(m => m.GetGlobalPosition(It.IsAny<Context>())).Returns(new Position(0,0));
-            _giftuiMock.Setup(m => m.Bound).Returns(new Bound(1,5));
             _giftuiMock.Setup(m => m.Childs).Returns(new List<UIElement>());
             //act
-            TextWriter actual = renderer.GetRenderedBuffer(_giftuiMock.Object);
+            TextWriter actual = renderer.GetRenderedBuffer(_giftuiMock.Object, _screenDisplayMock.Object);
             //assert
             Assert.Equal("hello", actual.ToString());
         }
