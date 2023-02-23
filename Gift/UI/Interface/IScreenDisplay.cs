@@ -10,6 +10,7 @@ namespace Gift.UI.Interface
 
         void AddDisplay(IScreenDisplay display, Position globalPosition);
         void AddString(string display, Position position);
+        void AddChar(char display, Position position);
         string GetLine(int i);
     }
 }

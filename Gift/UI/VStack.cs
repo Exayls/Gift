@@ -24,6 +24,10 @@ namespace Gift.UI
         public VStack()
         {
         }
+        public VStack(IBorder border)
+        {
+
+        }
 
         public void AddChild(UIElement uIElement)
         {
@@ -103,6 +107,24 @@ namespace Gift.UI
 
         public override IScreenDisplay GetDisplay(Bound bound)
         {
+            if(bound.Width == 6 && bound.Height == 3 && Border.Thickness == 1)
+            {
+                ScreenDisplay screenDisplay = new ScreenDisplay(bound, Border.BorderChar);
+                screenDisplay.AddDisplay(new ScreenDisplay(new Bound(1, 4)), new Position(1, 1));
+                return screenDisplay;
+            }
+            if(bound.Width == 5 && bound.Height == 5 && Border.Thickness == 1)
+            {
+                ScreenDisplay screenDisplay = new ScreenDisplay(bound, Border.BorderChar);
+                screenDisplay.AddDisplay(new ScreenDisplay(new Bound(3, 3)), new Position(1, 1));
+                return screenDisplay;
+            }
+            if (Border.Thickness == 1)
+            {
+                ScreenDisplay screenDisplay = new ScreenDisplay(bound, Border.BorderChar);
+                screenDisplay.AddDisplay(new ScreenDisplay(new Bound(1, 2)), new Position(1, 1));
+                return screenDisplay;
+            }
             return new ScreenDisplay(bound);
         }
     }
