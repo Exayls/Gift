@@ -49,6 +49,7 @@ namespace Gift.UI
             }
             return 0;
         }
+
         public override bool isVisible(Renderable renderable)
         {
             var ContextHeight = Context?.Bounds?.Height ?? 0;
@@ -59,7 +60,6 @@ namespace Gift.UI
             }
             return true;
         }
-
 
         public override Context GetContext(Renderable renderable, Context context)
         {
@@ -107,13 +107,17 @@ namespace Gift.UI
 
         public override IScreenDisplay GetDisplay(Bound bound)
         {
-            if (Border.Thickness == 1)
-            {
-                ScreenDisplay screenDisplay = new ScreenDisplay(bound, Border.BorderChar);
-                screenDisplay.AddDisplay(new ScreenDisplay(new Bound(bound.Height - 2, bound.Width - 2)), new Position(1, 1));
-                return screenDisplay;
-            }
-            return new ScreenDisplay(bound);
+            return GetDisplay(bound, GiftBase.FILLINGCHAR);
+        }
+
+        public IScreenDisplay GetDisplay(Bound bound, char fillingChar)
+        {
+            int thickness = Border.Thickness;
+            ScreenDisplay screenDisplay = new ScreenDisplay(bound, Border.BorderChar);
+            screenDisplay.AddDisplay(new ScreenDisplay(
+                new Bound(bound.Height - (2 * thickness), bound.Width - (2 * thickness)), fillingChar),
+                new Position(thickness, thickness));
+            return screenDisplay;
         }
     }
 }
