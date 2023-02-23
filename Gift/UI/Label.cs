@@ -1,5 +1,4 @@
-﻿using Gift.UI;
-using Gift.UI.Interface;
+﻿using Gift.UI.Interface;
 using Gift.UI.MetaData;
 using Gift.UI.Strategy;
 using System.Runtime.CompilerServices;

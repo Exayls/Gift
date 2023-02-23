@@ -1,4 +1,5 @@
-﻿using Gift.UI.MetaData;
+﻿using Gift.UI.Interface;
+using Gift.UI.MetaData;
 using System.Text;
 
 namespace Gift.UI
@@ -76,6 +77,12 @@ namespace Gift.UI
         public void AddString(string display, Position position)
         {
             ScreenDisplay tmpScreen = new ScreenDisplay(display);
+            AddDisplay(tmpScreen, position);
+        }
+
+        public void AddChar(char display, Position position)
+        {
+            ScreenDisplay tmpScreen = new ScreenDisplay(display.ToString());
             AddDisplay(tmpScreen, position);
         }
     }

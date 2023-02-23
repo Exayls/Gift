@@ -34,7 +34,7 @@ namespace Gift.UI
         public abstract bool isVisible(Renderable renderable);
 
 
-        public abstract Context GetContext(Renderable renderable, Context context);
+        public abstract Context GetContextRenderable(Renderable renderable, Context context);
 
     }
 }

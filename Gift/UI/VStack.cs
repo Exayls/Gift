@@ -21,29 +21,19 @@ namespace Gift.UI
             }
         }
 
-        public VStack()
+        public VStack() : this(new NoBorder())
         {
         }
-
-        public void AddChild(UIElement uIElement)
+        public VStack(IBorder border)
         {
-            int ChildContextPosition = GetHeightAllChilds();
+            Border = border;
+        }
+
+        public void AddChild(IUIElement uIElement)
+        {
             Childs.Add(uIElement);
-            dynamic element = uIElement;
-            setChildContext(element, ChildContextPosition);
         }
 
-        private int GetHeightAllChilds()
-        {
-            int GlobalPosition = Context?.GlobalPosition?.y ?? 0;
-            int ChildContextPosition = GlobalPosition;
-            foreach (UIElement renderable in Childs)
-            {
-                ChildContextPosition += renderable.Context?.Bounds?.Height ?? 0;
-            }
-
-            return ChildContextPosition;
-        }
 
         private int GetHeightAllChildsAfter(Renderable uIElement)
         {
@@ -59,6 +49,7 @@ namespace Gift.UI
             }
             return 0;
         }
+
         public override bool isVisible(Renderable renderable)
         {
             var ContextHeight = Context?.Bounds?.Height ?? 0;
@@ -70,48 +61,28 @@ namespace Gift.UI
             return true;
         }
 
-
-        private void setChildContext(Label UiElement, int ChildContextPosition)
+        public override Context GetContextRenderable(Renderable renderable, Context context)
         {
-            if (Context == null)
-            {
-                throw new ArgumentNullException();
-            }
-            if (UiElement.IsFixed())
-            {
-                if (Context.GlobalPosition == null)
-                {
-                    throw new ArgumentNullException();
-                }
-                UiElement.setContext(Context.GlobalPosition, new Bound(0, Context?.Bounds?.Width ?? 0));
-            }
-            else
-            {
-                UiElement.setContext(new Position(ChildContextPosition, Context?.GlobalPosition?.x ?? 0), new Bound(1, Context?.Bounds?.Width ?? 0));
-            }
-        }
-
-        public override Context GetContext(Renderable renderable, Context context)
-        {
-            if (context.GlobalPosition == null)
-            {
-                throw new ArgumentNullException();
-            }
-            int ChildContextPosition = GetHeightOf(renderable);
+            int ChildContextPosition = GetHeightRenderableFromTop(renderable);
             if (renderable.IsFixed())
             {
-                return new Context(context.GlobalPosition, new Bound(0, context.Bounds?.Width ?? 0));
+                return new Context(
+                    context.GlobalPosition,
+                    new Bound(0, 0));
             }
             else
             {
-                return new Context(new Position(ChildContextPosition, context.GlobalPosition?.x ?? 0), new Bound(0, context.Bounds?.Width ?? 0));
+                int thickness = Border.Thickness;
+                return new Context(
+                    new Position(thickness + ChildContextPosition, thickness),
+                    new Bound(0, 0));
             }
         }
 
-        private int GetHeightOf(Renderable renderableToFind)
+        private int GetHeightRenderableFromTop(Renderable renderableToFind)
         {
             int ChildContextPosition = 0;
-            foreach (UIElement renderable in Childs)
+            foreach (IUIElement renderable in Childs)
             {
                 if (!renderable.IsFixed())
                 {
@@ -137,7 +108,17 @@ namespace Gift.UI
 
         public override IScreenDisplay GetDisplay(Bound bound)
         {
-            return new ScreenDisplay(bound);
+            return GetDisplay(bound, GiftBase.FILLINGCHAR);
+        }
+
+        public IScreenDisplay GetDisplay(Bound bound, char fillingChar)
+        {
+            int thickness = Border.Thickness;
+            ScreenDisplay screenDisplay = new ScreenDisplay(bound, Border.BorderChar);
+            screenDisplay.AddDisplay(new ScreenDisplay(
+                new Bound(bound.Height - (2 * thickness), bound.Width - (2 * thickness)), fillingChar),
+                new Position(thickness, thickness));
+            return screenDisplay;
         }
     }
 }

@@ -9,6 +9,16 @@ namespace Gift.UI
         public Context? Context { get; set; }
 
         public abstract int Height { get; }
+        public IBorder Border { get ; set ; }
+
+        protected UIElement(IBorder border)
+        {
+            Border = border;
+        }
+        protected UIElement()
+        {
+            Border = new NoBorder();
+        }
 
         public abstract IScreenDisplay GetDisplay(Bound bound);
         public abstract Position GetGlobalPosition(Context context);

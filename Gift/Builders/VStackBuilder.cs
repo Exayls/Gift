@@ -4,20 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Gift.UI;
+using Gift.UI.Interface;
 
 namespace Gift.Builders
 {
-    /// <summary>
-    /// Build default VStack 
-    /// </summary>
     public class VStackBuilder
     {
-    /// <summary>
-    /// Get default VStack instance 
-    /// </summary>
+        private IBorder Border = new NoBorder();
+
+        public VStackBuilder WithBorder(IBorder border)
+        {
+            Border = border;
+            return this;
+        }
         public VStack Build()
         {
-            return new VStack();
+            return new VStack( Border);
         }
     }
 }

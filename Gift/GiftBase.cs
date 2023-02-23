@@ -24,7 +24,10 @@ namespace Gift
         public virtual void initialize()
         {
             ui = new GiftUI();
-            _renderer = new Renderer();
+        }
+        public virtual void initialize(GiftUI ui)
+        {
+            this.ui = ui;
         }
         public virtual void run()
         {
