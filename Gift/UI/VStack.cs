@@ -73,14 +73,8 @@ namespace Gift.UI
             else
             {
                 int thickness = Border.Thickness;
-                if (thickness >0)
-                {
-                    return new Context(
-                        new Position(thickness+ChildContextPosition,thickness),
-                        new Bound(0, 0));
-                }
                 return new Context(
-                    new Position(ChildContextPosition, context.GlobalPosition?.x ?? 0),
+                    new Position(thickness + ChildContextPosition, thickness),
                     new Bound(0, 0));
             }
         }
