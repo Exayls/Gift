@@ -35,7 +35,7 @@ namespace Gift.UI
             return true;
         }
 
-        public override Context GetContext(Renderable renderable, Context context)
+        public override Context GetContextRenderable(Renderable renderable, Context context)
         {
             if (Childs.Contains(renderable))
             {

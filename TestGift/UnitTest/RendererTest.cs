@@ -70,7 +70,7 @@ namespace TestGift.UnitTest
             });
             _giftuiMock.Setup(m => m.GetDisplay()).Returns(_screenDisplayMock.Object);
             _giftuiMock.Setup(m => m.isVisible(It.IsAny<Renderable>())).Returns(true);
-            _giftuiMock.Setup(m => m.GetContext(It.IsAny<Renderable>(),It.IsAny<Context>())).Returns(new Context(new(0,0), new(0, 0)));
+            _giftuiMock.Setup(m => m.GetContextRenderable(It.IsAny<Renderable>(),It.IsAny<Context>())).Returns(new Context(new(0,0), new(0, 0)));
             //act
             TextWriter actual = renderer.GetRenderedBuffer(_giftuiMock.Object);
             //assert

@@ -1,8 +1,7 @@
-﻿using Gift.UI;
-using Gift.UI.Interface;
+﻿using Gift.UI.Interface;
 using Gift.UI.MetaData;
 
-namespace TestGift.UnitTest
+namespace Gift.UI
 {
     public class SimpleBorder : IBorder
     {
@@ -40,7 +39,7 @@ namespace TestGift.UnitTest
 
         private bool IsBorder(int x, int y, Bound bound)
         {
-            return (x == 0 || y == 0 || x == bound.Width - 1 || y == bound.Height - 1);
+            return x == 0 || y == 0 || x == bound.Width - 1 || y == bound.Height - 1;
         }
     }
 }

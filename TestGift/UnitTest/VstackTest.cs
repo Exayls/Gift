@@ -8,7 +8,7 @@ namespace TestGift.UnitTest
 {
     public class VstackTest
     {
-        
+
         private Mock<IScreenDisplay> _screenDisplayMock;
         private Mock<IUIElement> _uiElementMock;
         private Mock<IBorder> _borderMock;
@@ -27,7 +27,7 @@ namespace TestGift.UnitTest
             //act
             IScreenDisplay screenDisplay = vstack.GetDisplay(new(2, 4));
             //assert
-            const string expected = "****\n"+
+            const string expected = "****\n" +
                                     "****";
             Assert.Equal(expected, screenDisplay.DisplayString.ToString());
         }
@@ -44,8 +44,8 @@ namespace TestGift.UnitTest
             //act
             IScreenDisplay screenDisplay = vstack.GetDisplay(new(3, 4));
             //assert
-            const string expected = "----\n"+
-                                    "-**-\n"+
+            const string expected = "----\n" +
+                                    "-**-\n" +
                                     "----";
             Assert.Equal(expected, screenDisplay.DisplayString.ToString());
         }
@@ -61,8 +61,8 @@ namespace TestGift.UnitTest
             //act
             IScreenDisplay screenDisplay = vstack.GetDisplay(new(3, 4));
             //assert
-            const string expected = "____\n"+
-                                    "_**_\n"+
+            const string expected = "____\n" +
+                                    "_**_\n" +
                                     "____";
             Assert.Equal(expected, screenDisplay.DisplayString.ToString());
         }
@@ -78,8 +78,8 @@ namespace TestGift.UnitTest
             //act
             IScreenDisplay screenDisplay = vstack.GetDisplay(new(3, 4));
             //assert
-            const string expected = "iiii\n"+
-                                    "i**i\n"+
+            const string expected = "iiii\n" +
+                                    "i**i\n" +
                                     "iiii";
             Assert.Equal(expected, screenDisplay.DisplayString.ToString());
         }
@@ -95,10 +95,10 @@ namespace TestGift.UnitTest
             //act
             IScreenDisplay screenDisplay = vstack.GetDisplay(new(5, 5));
             //assert
-            const string expected = "-----\n"+
-                                    "-***-\n"+
-                                    "-***-\n"+
-                                    "-***-\n"+
+            const string expected = "-----\n" +
+                                    "-***-\n" +
+                                    "-***-\n" +
+                                    "-***-\n" +
                                     "-----";
             Assert.Equal(expected, screenDisplay.DisplayString.ToString());
         }
@@ -114,8 +114,8 @@ namespace TestGift.UnitTest
             //act
             IScreenDisplay screenDisplay = vstack.GetDisplay(new(3, 6));
             //assert
-            const string expected = "------\n"+
-                                    "-****-\n"+
+            const string expected = "------\n" +
+                                    "-****-\n" +
                                     "------";
             Assert.Equal(expected, screenDisplay.DisplayString.ToString());
         }
@@ -131,10 +131,10 @@ namespace TestGift.UnitTest
             //act
             IScreenDisplay screenDisplay = vstack.GetDisplay(new(5, 5));
             //assert
-            const string expected = "-----\n"+
-                                    "-----\n"+
-                                    "--*--\n"+
-                                    "-----\n"+
+            const string expected = "-----\n" +
+                                    "-----\n" +
+                                    "--*--\n" +
+                                    "-----\n" +
                                     "-----";
             Assert.Equal(expected, screenDisplay.DisplayString.ToString());
         }
@@ -156,11 +156,11 @@ namespace TestGift.UnitTest
             //act
             IScreenDisplay screenDisplay = vstack.GetDisplay(new(6, 7));
             //assert
-            const string expected = "-------\n"+
-                                    "-------\n"+
-                                    "--***--\n"+
-                                    "--***--\n"+
-                                    "-------\n"+
+            const string expected = "-------\n" +
+                                    "-------\n" +
+                                    "--***--\n" +
+                                    "--***--\n" +
+                                    "-------\n" +
                                     "-------";
             Assert.Equal(expected, screenDisplay.DisplayString.ToString());
         }
@@ -183,12 +183,12 @@ namespace TestGift.UnitTest
             //act
             IScreenDisplay screenDisplay = vstack.GetDisplay(new(7, 7));
             //assert
-            const string expected = "-------\n"+
-                                    "-------\n"+
-                                    "-------\n"+
-                                    "---*---\n"+
-                                    "-------\n"+
-                                    "-------\n"+
+            const string expected = "-------\n" +
+                                    "-------\n" +
+                                    "-------\n" +
+                                    "---*---\n" +
+                                    "-------\n" +
+                                    "-------\n" +
                                     "-------";
             Assert.Equal(expected, screenDisplay.DisplayString.ToString());
         }
@@ -211,14 +211,59 @@ namespace TestGift.UnitTest
             //act
             IScreenDisplay screenDisplay = vstack.GetDisplay(new(7, 7));
             //assert
-            const string expected = "-------\n"+
-                                    "-------\n"+
-                                    "-------\n"+
-                                    "---*---\n"+
-                                    "-------\n"+
-                                    "-------\n"+
+            const string expected = "-------\n" +
+                                    "-------\n" +
+                                    "-------\n" +
+                                    "---*---\n" +
+                                    "-------\n" +
+                                    "-------\n" +
                                     "-------";
             Assert.Equal(expected, screenDisplay.DisplayString.ToString());
+        }
+
+        [Fact]
+        public void GetContext_should_return_context_with_0_0_position_when_vstack_has_no_border()
+        {
+            //arrange
+            _borderMock.Setup(b => b.Thickness).Returns(0);
+            _borderMock.Setup(b => b.BorderChar).Returns(' ');
+            vstack.Border = _borderMock.Object;
+            Context contextRenderable = new Context(new Position(0, 0), new Bound(0, 0));
+            //act
+            Context context = vstack.GetContextRenderable(_uiElementMock.Object, contextRenderable);
+            //assert
+            Assert.Equal(0, context.GlobalPosition.y);
+            Assert.Equal(0, context.GlobalPosition.x);
+        }
+        [Fact]
+        public void GetContext_should_return_context_with_1_1_position_when_vstack_has_border_thickness1()
+        {
+            //arrange
+            _borderMock.Setup(b => b.Thickness).Returns(1);
+            _borderMock.Setup(b => b.BorderChar).Returns(' ');
+            _uiElementMock.Setup(u => u.IsFixed()).Returns(false);
+            vstack.Border = _borderMock.Object;
+            Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
+            //act
+            Context context = vstack.GetContextRenderable(_uiElementMock.Object, contextRenderable);
+            //assert
+            Assert.Equal(1, context.GlobalPosition.y);
+            Assert.Equal(1, context.GlobalPosition.x);
+        }
+        [Fact]
+        public void GetContext_should_return_context_with_2_2_position_when_vstack_has_border_thickness2()
+        {
+            //arrange
+            _borderMock.Setup(b => b.Thickness).Returns(2);
+            _borderMock.Setup(b => b.BorderChar).Returns(' ');
+            _uiElementMock.Setup(u => u.IsFixed()).Returns(false);
+            vstack.Border = _borderMock.Object;
+            Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
+            //act
+            Context context = vstack.GetContextRenderable(_uiElementMock.Object, contextRenderable);
+            //assert
+            Assert.Equal(2, context.GlobalPosition.y);
+            Assert.Equal(2, context.GlobalPosition.x);
         }
     }
 }

@@ -21,15 +21,15 @@ namespace Gift.UI
             }
         }
 
-        public VStack()
+        public VStack() : this(new NoBorder())
         {
         }
         public VStack(IBorder border)
         {
-
+            Border = border;
         }
 
-        public void AddChild(UIElement uIElement)
+        public void AddChild(IUIElement uIElement)
         {
             Childs.Add(uIElement);
         }
@@ -61,24 +61,31 @@ namespace Gift.UI
             return true;
         }
 
-        public override Context GetContext(Renderable renderable, Context context)
+        public override Context GetContextRenderable(Renderable renderable, Context context)
         {
-            if (context.GlobalPosition == null)
-            {
-                throw new ArgumentNullException();
-            }
-            int ChildContextPosition = GetHeightOf(renderable);
+            int ChildContextPosition = GetHeightRenderableFromTop(renderable);
             if (renderable.IsFixed())
             {
-                return new Context(context.GlobalPosition, new Bound(0, context.Bounds?.Width ?? 0));
+                return new Context(
+                    context.GlobalPosition,
+                    new Bound(0, 0));
             }
             else
             {
-                return new Context(new Position(ChildContextPosition, context.GlobalPosition?.x ?? 0), new Bound(0, context.Bounds?.Width ?? 0));
+                int thickness = Border.Thickness;
+                if (thickness >0)
+                {
+                    return new Context(
+                        new Position(thickness,thickness),
+                        new Bound(0, 0));
+                }
+                return new Context(
+                    new Position(ChildContextPosition, context.GlobalPosition?.x ?? 0),
+                    new Bound(0, 0));
             }
         }
 
-        private int GetHeightOf(Renderable renderableToFind)
+        private int GetHeightRenderableFromTop(Renderable renderableToFind)
         {
             int ChildContextPosition = 0;
             foreach (UIElement renderable in Childs)

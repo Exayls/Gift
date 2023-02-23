@@ -7,7 +7,7 @@ namespace Gift.UI.Interface
         Bound Bound { get; }
         IList<IUIElement> Childs { get; }
 
-        Context GetContext(Renderable renderable, Context context);
+        Context GetContextRenderable(Renderable renderable, Context context);
         bool isVisible(Renderable renderable);
     }
 }

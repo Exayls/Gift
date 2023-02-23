@@ -56,7 +56,7 @@ namespace Gift
 
         private void RenderAnyRenderable(IScreenDisplay screen, IContainer container, Context context, Renderable renderable)
         {
-            Context renderableContext = container.GetContext(renderable, context);
+            Context renderableContext = container.GetContextRenderable(renderable, context);
             if (container.isVisible(renderable))
             {
                 switch (renderable)
