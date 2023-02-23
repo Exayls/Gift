@@ -76,7 +76,7 @@ namespace Gift.UI
                 if (thickness >0)
                 {
                     return new Context(
-                        new Position(thickness,thickness),
+                        new Position(thickness+ChildContextPosition,thickness),
                         new Bound(0, 0));
                 }
                 return new Context(
@@ -88,7 +88,7 @@ namespace Gift.UI
         private int GetHeightRenderableFromTop(Renderable renderableToFind)
         {
             int ChildContextPosition = 0;
-            foreach (UIElement renderable in Childs)
+            foreach (IUIElement renderable in Childs)
             {
                 if (!renderable.IsFixed())
                 {

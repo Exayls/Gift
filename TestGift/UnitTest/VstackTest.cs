@@ -11,6 +11,7 @@ namespace TestGift.UnitTest
 
         private Mock<IScreenDisplay> _screenDisplayMock;
         private Mock<IUIElement> _uiElementMock;
+        private Mock<IUIElement> _uiElementMock2;
         private Mock<IBorder> _borderMock;
         private VStack vstack;
 
@@ -18,6 +19,7 @@ namespace TestGift.UnitTest
         {
             _screenDisplayMock = new Mock<IScreenDisplay>();
             _uiElementMock = new Mock<IUIElement>();
+            _uiElementMock2 = new Mock<IUIElement>();
             _borderMock = new Mock<IBorder>();
             vstack = new VStack(_borderMock.Object);
         }
@@ -263,6 +265,44 @@ namespace TestGift.UnitTest
             Context context = vstack.GetContextRenderable(_uiElementMock.Object, contextRenderable);
             //assert
             Assert.Equal(2, context.GlobalPosition.y);
+            Assert.Equal(2, context.GlobalPosition.x);
+        }
+        [Fact]
+        public void GetContext_should_return_context_with_3_2_position_when_vstack_has_border_thickness2_and_1_first_child_with_height_of_1()
+        {
+            //arrange
+            _borderMock.Setup(b => b.Thickness).Returns(2);
+            _borderMock.Setup(b => b.BorderChar).Returns(' ');
+            _uiElementMock.Setup(u => u.IsFixed()).Returns(false);
+            _uiElementMock2.Setup(u => u.IsFixed()).Returns(false);
+            _uiElementMock2.Setup(u => u.Height).Returns(1);
+            vstack.Border = _borderMock.Object;
+            vstack.AddChild(_uiElementMock2.Object);
+            vstack.AddChild(_uiElementMock.Object);
+            Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
+            //act
+            Context context = vstack.GetContextRenderable(_uiElementMock.Object, contextRenderable);
+            //assert
+            Assert.Equal(3, context.GlobalPosition.y);
+            Assert.Equal(2, context.GlobalPosition.x);
+        }
+        [Fact]
+        public void GetContext_should_return_context_with_4_2_position_when_vstack_has_border_thickness2_and_1_first_child_with_height_of_2()
+        {
+            //arrange
+            _borderMock.Setup(b => b.Thickness).Returns(2);
+            _borderMock.Setup(b => b.BorderChar).Returns(' ');
+            _uiElementMock.Setup(u => u.IsFixed()).Returns(false);
+            _uiElementMock2.Setup(u => u.IsFixed()).Returns(false);
+            _uiElementMock2.Setup(u => u.Height).Returns(2);
+            vstack.Border = _borderMock.Object;
+            vstack.AddChild(_uiElementMock2.Object);
+            vstack.AddChild(_uiElementMock.Object);
+            Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
+            //act
+            Context context = vstack.GetContextRenderable(_uiElementMock.Object, contextRenderable);
+            //assert
+            Assert.Equal(4, context.GlobalPosition.y);
             Assert.Equal(2, context.GlobalPosition.x);
         }
     }
