@@ -5,10 +5,10 @@ using Gift.UI.Border;
 using Gift.UI.MetaData;
 
 var ui = new GiftUI();
-ui.SetChild(new Label("coucou", new Position(2, 58)));
 
 var vstack = new VStackBuilder().WithBorder(new SimpleBorder(1, '+')).Build();
 ui.SetChild(vstack);
+vstack.AddChild(new Label("coucou", new Position(2, 58)));
 vstack.AddChild(new LabelBuilder().WithText("coucou").BuildImplicit());
 vstack.AddChild(new LabelBuilder().BuildImplicit());
 vstack.AddChild(new LabelBuilder().BuildImplicit());
