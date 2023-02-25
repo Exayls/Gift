@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Gift.UI;
-using Gift.UI.Interface;
+using Gift.UI.Border;
 
 namespace Gift.Builders
 {

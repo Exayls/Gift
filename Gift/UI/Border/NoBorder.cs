@@ -1,7 +1,7 @@
 ﻿using Gift.UI.Interface;
 using Gift.UI.MetaData;
 
-namespace Gift.UI
+namespace Gift.UI.Border
 {
     public class NoBorder : IBorder
     {

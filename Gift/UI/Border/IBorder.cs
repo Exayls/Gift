@@ -1,11 +1,11 @@
-﻿using Gift.UI.MetaData;
+﻿using Gift.UI.Interface;
+using Gift.UI.MetaData;
 
-namespace Gift.UI.Interface
+namespace Gift.UI.Border
 {
     public interface IBorder
     {
         int Thickness { get; }
-        char BorderChar { get; }
 
         public IScreenDisplay GetDisplay(Bound bound);
     }

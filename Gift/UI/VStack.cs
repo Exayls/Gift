@@ -1,4 +1,5 @@
-﻿using Gift.UI.Interface;
+﻿using Gift.UI.Border;
+using Gift.UI.Interface;
 using Gift.UI.MetaData;
 
 namespace Gift.UI
@@ -114,7 +115,7 @@ namespace Gift.UI
         public IScreenDisplay GetDisplay(Bound bound, char fillingChar)
         {
             int thickness = Border.Thickness;
-            ScreenDisplay screenDisplay = new ScreenDisplay(bound, Border.BorderChar);
+            IScreenDisplay screenDisplay = Border.GetDisplay(bound);
             screenDisplay.AddDisplay(new ScreenDisplay(
                 new Bound(bound.Height - (2 * thickness), bound.Width - (2 * thickness)), fillingChar),
                 new Position(thickness, thickness));
