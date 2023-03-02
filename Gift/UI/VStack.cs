@@ -1,4 +1,5 @@
 ﻿using Gift.UI.Border;
+using Gift.UI.Factory;
 using Gift.UI.Interface;
 using Gift.UI.MetaData;
 
@@ -6,6 +7,8 @@ namespace Gift.UI
 {
     public class VStack : Container
     {
+        private readonly IScreenDisplayFactory _screenDisplayFactory;
+
         public override int Height
         {
             get
@@ -22,12 +25,13 @@ namespace Gift.UI
             }
         }
 
-        public VStack() : this(new NoBorder())
+        public VStack() : this(new NoBorder(), new ScreenDisplayFactory())
         {
         }
-        public VStack(IBorder border)
+        public VStack(IBorder border, IScreenDisplayFactory screenDisplayFactory)
         {
             Border = border;
+            _screenDisplayFactory = screenDisplayFactory;
         }
 
         public void AddChild(IUIElement uIElement)
@@ -116,9 +120,8 @@ namespace Gift.UI
         {//add merger class and inject screenDisplay
             int thickness = Border.Thickness;
             IScreenDisplay screenDisplay = Border.GetDisplay(bound);
-            IScreenDisplay emptyVstackScreen = new ScreenDisplay(
-                new Bound(bound.Height - (2 * thickness), bound.Width - (2 * thickness)), 
-                fillingChar);
+            Bound boundEmptyVStack = new Bound(bound.Height - (2 * thickness), bound.Width - (2 * thickness));
+            IScreenDisplay emptyVstackScreen = _screenDisplayFactory.Create(boundEmptyVStack, fillingChar);
             screenDisplay.AddDisplay(emptyVstackScreen, new Position(thickness, thickness));
             return screenDisplay;
         }

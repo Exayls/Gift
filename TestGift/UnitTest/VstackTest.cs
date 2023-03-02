@@ -1,5 +1,6 @@
 ﻿using Gift.UI;
 using Gift.UI.Border;
+using Gift.UI.Factory;
 using Gift.UI.Interface;
 using Gift.UI.MetaData;
 using Moq;
@@ -14,6 +15,7 @@ namespace TestGift.UnitTest
         private Mock<IUIElement> _uiElementMock;
         private Mock<IUIElement> _uiElementMock2;
         private Mock<IBorder> _borderMock;
+        private Mock<IScreenDisplayFactory> _ScreenDisplayFactoryMock;
         private VStack vstack;
 
         public VstackTest()
@@ -22,7 +24,8 @@ namespace TestGift.UnitTest
             _uiElementMock = new Mock<IUIElement>();
             _uiElementMock2 = new Mock<IUIElement>();
             _borderMock = new Mock<IBorder>();
-            vstack = new VStack(_borderMock.Object);
+            _ScreenDisplayFactoryMock = new Mock<IScreenDisplayFactory>();
+            vstack = new VStack(_borderMock.Object, _ScreenDisplayFactoryMock.Object);
         }
         //[Fact]
         //public void GetDisplay_should_return_screen_when_call_GetDisplay_whithout_border()
