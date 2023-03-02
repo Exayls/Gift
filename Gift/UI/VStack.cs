@@ -113,12 +113,13 @@ namespace Gift.UI
         }
 
         public IScreenDisplay GetDisplay(Bound bound, char fillingChar)
-        {
+        {//add merger class and inject screenDisplay
             int thickness = Border.Thickness;
             IScreenDisplay screenDisplay = Border.GetDisplay(bound);
-            screenDisplay.AddDisplay(new ScreenDisplay(
-                new Bound(bound.Height - (2 * thickness), bound.Width - (2 * thickness)), fillingChar),
-                new Position(thickness, thickness));
+            IScreenDisplay emptyVstackScreen = new ScreenDisplay(
+                new Bound(bound.Height - (2 * thickness), bound.Width - (2 * thickness)), 
+                fillingChar);
+            screenDisplay.AddDisplay(emptyVstackScreen, new Position(thickness, thickness));
             return screenDisplay;
         }
     }
