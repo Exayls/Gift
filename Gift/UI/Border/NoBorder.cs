@@ -18,5 +18,10 @@ namespace Gift.UI.Border
         {
             return new ScreenDisplay(bound);
         }
+
+        public IScreenDisplay GetDisplay(Bound bound, char fillingChar)
+        {
+            return new ScreenDisplay(bound, fillingChar);
+        }
     }
 }

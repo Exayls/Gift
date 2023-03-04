@@ -17,5 +17,10 @@ namespace Gift.UI.Border
         {
             throw new NotImplementedException();
         }
+
+        public IScreenDisplay GetDisplay(Bound bound, char fillingChar)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

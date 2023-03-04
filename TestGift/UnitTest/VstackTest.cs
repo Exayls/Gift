@@ -33,6 +33,7 @@ namespace TestGift.UnitTest
         [Fact]
         public void GetDisplay_should_return_screen_when_call_GetDisplay_whithout_border()
         {
+            //arrange
             _screenDisplayMock2.Setup(s => s.DisplayString).Returns(new StringBuilder().Append("    \n").Append("    "));
             _borderMock.Setup(b => b.Thickness).Returns(0);
             _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>())).Returns(_screenDisplayMock2.Object);
