@@ -60,23 +60,21 @@ namespace TestGift.UnitTest
             _screenDisplayMock2.Verify(s => s.AddDisplay(_screenDisplayMock1.Object, It.Is<Position>(p => p.y == 1 && p.x == 1)));
             Assert.Equal(_screenDisplayMock2.Object, screenDisplay);
         }
-        //        [Fact]
-        //        public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border2()
-        //        {
-        //            //arrange
-        //            _screenDisplayMock.Setup(s => s.DisplayString).Returns(new StringBuilder().Append("____\n").Append("_  _\n").Append("____"));
-        //            _borderMock.Setup(b => b.Thickness).Returns(1);
-        //            _borderMock.Setup(b => b.BorderChar).Returns('_');
-        //            _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>())).Returns(_screenDisplayMock.Object);
-        //            vstack.Border = _borderMock.Object;
-        //            //act
-        //            IScreenDisplay screenDisplay = vstack.GetDisplay(new(3, 4));
-        //            //assert
-        //            const string expected = "____\n" +
-        //                                    "_**_\n" +
-        //                                    "____";
-        //            Assert.Equal(expected, screenDisplay.DisplayString.ToString());
-        //        }
+        [Fact]
+        public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border2()
+        {
+            //arrange
+            _screenDisplayMock1.Setup(s => s.DisplayString).Returns(new StringBuilder().Append("____\n").Append("_ii_\n").Append("____"));
+            _borderMock.Setup(b => b.Thickness).Returns(1);
+            _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>())).Returns(_screenDisplayMock2.Object);
+            vstack.Border = _borderMock.Object;
+            //act
+            IScreenDisplay screenDisplay = vstack.GetDisplay(new  Bound(3, 4));
+            //assert
+            _ScreenDisplayFactoryMock.Verify(s => s.Create(It.Is<Bound>(b => b.Width == 2 && b.Height == 1), '*'));
+            _screenDisplayMock2.Verify(s => s.AddDisplay(_screenDisplayMock1.Object, It.Is<Position>(p => p.y == 1 && p.x == 1)));
+            Assert.Equal(_screenDisplayMock2.Object, screenDisplay);
+        }
         //        [Fact]
         //        public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border3()
         //        {
