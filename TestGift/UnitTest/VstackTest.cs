@@ -186,34 +186,28 @@ namespace TestGift.UnitTest
             _screenDisplayMock2.Verify(s => s.AddDisplay(_screenDisplayMock1.Object, It.Is<Position>(p => p.y == 3 && p.x == 3)));
             Assert.Equal(_screenDisplayMock2.Object, screenDisplay);
         }
-        //        [Fact]
-        //        public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border_thickness4()
-        //        {
-        //            //arrange
-        //            _screenDisplayMock.Setup(s => s.DisplayString).Returns(
-        //                new StringBuilder().Append("-------\n").
-        //                                    Append("-------\n").
-        //                                    Append("-------\n").
-        //                                    Append("--- ---\n").
-        //                                    Append("-------\n").
-        //                                    Append("-------\n").
-        //                                    Append("-------"));
-        //            _borderMock.Setup(b => b.Thickness).Returns(3);
-        //            _borderMock.Setup(b => b.BorderChar).Returns('-');
-        //            _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>())).Returns(_screenDisplayMock.Object);
-        //            vstack.Border = _borderMock.Object;
-        //            //act
-        //            IScreenDisplay screenDisplay = vstack.GetDisplay(new(7, 7));
-        //            //assert
-        //            const string expected = "-------\n" +
-        //                                    "-------\n" +
-        //                                    "-------\n" +
-        //                                    "---*---\n" +
-        //                                    "-------\n" +
-        //                                    "-------\n" +
-        //                                    "-------";
-        //            Assert.Equal(expected, screenDisplay.DisplayString.ToString());
-        //        }
+        [Fact]
+        public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border_thickness4()
+        {
+            //arrange
+            _screenDisplayMock1.Setup(s => s.DisplayString).Returns(
+                new StringBuilder().Append("-------\n").
+                                    Append("-------\n").
+                                    Append("-------\n").
+                                    Append("--- ---\n").
+                                    Append("-------\n").
+                                    Append("-------\n").
+                                    Append("-------"));
+            _borderMock.Setup(b => b.Thickness).Returns(3);
+            _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>())).Returns(_screenDisplayMock2.Object);
+            vstack.Border = _borderMock.Object;
+            //act
+            IScreenDisplay screenDisplay = vstack.GetDisplay(new(7, 7), 'b');
+            //assert
+            _ScreenDisplayFactoryMock.Verify(s => s.Create(It.Is<Bound>(b => b.Width == 1 && b.Height == 1), 'b'));
+            _screenDisplayMock2.Verify(s => s.AddDisplay(_screenDisplayMock1.Object, It.Is<Position>(p => p.y == 3 && p.x == 3)));
+            Assert.Equal(_screenDisplayMock2.Object, screenDisplay);
+        }
 
         [Fact]
         public void GetContext_should_return_context_with_0_0_position_when_vstack_has_no_border()
