@@ -1,11 +1,6 @@
 ﻿using Gift.UI.Border;
 using Gift.UI.Interface;
 using Gift.UI.MetaData;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestGift.UnitTest
 {
