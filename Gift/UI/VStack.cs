@@ -95,7 +95,8 @@ namespace Gift.UI
             {
                 int thickness = Border.Thickness;
                 return new Context(
-                    new Position(thickness + ChildContextPosition, thickness),
+                    new Position(thickness + ChildContextPosition + context.GlobalPosition.y
+                               , thickness + context.GlobalPosition.x),
                     new Bound(renderable.Height, renderable.Width));
             }
         }
@@ -124,8 +125,8 @@ namespace Gift.UI
 
         public override Position GetGlobalPosition(Context context)
         {
-            
-            return context.GlobalPosition;
+            return new Position(context.GlobalPosition.y,
+                                context.GlobalPosition.x);
         }
 
         public override IScreenDisplay GetDisplay(Bound bound)
