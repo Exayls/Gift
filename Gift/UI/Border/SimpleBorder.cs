@@ -1,7 +1,7 @@
 ﻿using Gift.UI.Interface;
 using Gift.UI.MetaData;
 
-namespace Gift.UI
+namespace Gift.UI.Border
 {
     public class SimpleBorder : IBorder
     {
@@ -17,7 +17,11 @@ namespace Gift.UI
 
         public IScreenDisplay GetDisplay(Bound bound)
         {
-            IScreenDisplay screenDisplay = new ScreenDisplay(bound);
+            return GetDisplay(bound, GiftBase.FILLINGCHAR);
+        }
+        public IScreenDisplay GetDisplay(Bound bound, char fillingChar )
+        {
+            IScreenDisplay screenDisplay = new ScreenDisplay(bound, fillingChar);
             AddBorder(screenDisplay);
             return screenDisplay;
         }
@@ -39,7 +43,7 @@ namespace Gift.UI
 
         private bool IsBorder(int x, int y, Bound bound)
         {
-            return x == 0 || y == 0 || x == bound.Width - 1 || y == bound.Height - 1;
+            return x < Thickness || y < Thickness || x >= bound.Width - Thickness || y >= bound.Height - Thickness;
         }
     }
 }

@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Gift.UI;
-using Gift.UI.Interface;
+using Gift.UI.Border;
+using Gift.UI.Factory;
 
 namespace Gift.Builders
 {
     public class VStackBuilder
     {
         private IBorder Border = new NoBorder();
+        private IScreenDisplayFactory screenDisplayFactory = new ScreenDisplayFactory();
 
         public VStackBuilder WithBorder(IBorder border)
         {
@@ -19,7 +21,7 @@ namespace Gift.Builders
         }
         public VStack Build()
         {
-            return new VStack( Border);
+            return new VStack( Border, screenDisplayFactory);
         }
     }
-}
+} 

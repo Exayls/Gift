@@ -1,32 +1,53 @@
-﻿using Gift.UI.Interface;
+﻿using Gift.UI.Border;
+using Gift.UI.Factory;
+using Gift.UI.Interface;
 using Gift.UI.MetaData;
 
 namespace Gift.UI
 {
     public class VStack : Container
     {
+        private readonly IScreenDisplayFactory _screenDisplayFactory;
+
         public override int Height
         {
             get
             {
-                int ChildContextPosition = 0;
-                foreach (UIElement renderable in Childs)
+                int HeightAllChilds = 0;
+                foreach (IUIElement renderable in Childs)
                 {
                     if (!renderable.IsFixed())
                     {
-                        ChildContextPosition += renderable.Height;
+                        HeightAllChilds += renderable.Height;
                     }
                 }
-                return ChildContextPosition;
+                return Border.Thickness * 2 + HeightAllChilds;
+            }
+        }
+        public override int Width
+        {
+            get
+            {
+                int maxWidthChild = 0;
+                foreach (IUIElement renderable in Childs)
+                {
+                    if (!renderable.IsFixed())
+                    {
+                        if (maxWidthChild < renderable.Width)
+                            maxWidthChild = renderable.Width;
+                    }
+                }
+                return Border.Thickness * 2 + maxWidthChild;
             }
         }
 
-        public VStack() : this(new NoBorder())
+        public VStack() : this(new NoBorder(), new ScreenDisplayFactory())
         {
         }
-        public VStack(IBorder border)
+        public VStack(IBorder border, IScreenDisplayFactory screenDisplayFactory)
         {
             Border = border;
+            _screenDisplayFactory = screenDisplayFactory;
         }
 
         public void AddChild(IUIElement uIElement)
@@ -74,8 +95,9 @@ namespace Gift.UI
             {
                 int thickness = Border.Thickness;
                 return new Context(
-                    new Position(thickness + ChildContextPosition, thickness),
-                    new Bound(0, 0));
+                    new Position(thickness + ChildContextPosition + context.GlobalPosition.y
+                               , thickness + context.GlobalPosition.x),
+                    new Bound(renderable.Height, renderable.Width));
             }
         }
 
@@ -103,7 +125,8 @@ namespace Gift.UI
 
         public override Position GetGlobalPosition(Context context)
         {
-            return context.GlobalPosition;
+            return new Position(context.GlobalPosition.y,
+                                context.GlobalPosition.x);
         }
 
         public override IScreenDisplay GetDisplay(Bound bound)
@@ -114,10 +137,10 @@ namespace Gift.UI
         public IScreenDisplay GetDisplay(Bound bound, char fillingChar)
         {
             int thickness = Border.Thickness;
-            ScreenDisplay screenDisplay = new ScreenDisplay(bound, Border.BorderChar);
-            screenDisplay.AddDisplay(new ScreenDisplay(
-                new Bound(bound.Height - (2 * thickness), bound.Width - (2 * thickness)), fillingChar),
-                new Position(thickness, thickness));
+            IScreenDisplay screenDisplay = Border.GetDisplay(bound);
+            Bound boundEmptyVStack = new Bound(bound.Height - (2 * thickness), bound.Width - (2 * thickness));
+            IScreenDisplay emptyVstackScreen = _screenDisplayFactory.Create(boundEmptyVStack, fillingChar);
+            screenDisplay.AddDisplay(emptyVstackScreen, new Position(thickness, thickness));
             return screenDisplay;
         }
     }
