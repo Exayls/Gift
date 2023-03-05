@@ -18,6 +18,13 @@ namespace Gift.UI
                 return 1;
             }
         }
+        public override int Width
+        {
+            get
+            {
+                return Text.Length;
+            }
+        }
 
         public Label(string text, Position position)
         {

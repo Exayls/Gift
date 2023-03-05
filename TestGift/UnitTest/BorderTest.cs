@@ -41,14 +41,14 @@ namespace TestGift.UnitTest
         public void GetDisplay_should_return_border_with_thickness_1_when_border_thickness_equal_1_3()
         {
             //arrange
-            _border = new Border(1, '┏', '┓', '┗', '┛', '━', '━', '┃', '┃');
+            _border = new Border(1, '┌', '┐', '└', '┘', '─', '─', '│', '│');
             //act
             IScreenDisplay display = _border.GetDisplay(new Bound(4, 4), '*');
             //assert
-            const string expected = "┏━━┓\n" +
-                                    "┃**┃\n" +
-                                    "┃**┃\n" +
-                                    "┗━━┛";
+            const string expected = "┌──┐\n" +
+                                    "│**│\n" +
+                                    "│**│\n" +
+                                    "└──┘";
             Assert.Equal(expected, display.DisplayString.ToString());
         }
         [Fact]
@@ -59,12 +59,12 @@ namespace TestGift.UnitTest
             //act
             IScreenDisplay display = _border.GetDisplay(new Bound(6, 6), ' ');
             //assert
-            const string expected = "┏━━━━┓\n" +
-                                    "┃┏━━┓┃\n" +
-                                    "┃┃  ┃┃\n" +
-                                    "┃┃  ┃┃\n" +
-                                    "┃┗━━┛┃\n" +
-                                    "┗━━━━┛";
+            const string expected = "┌────┐\n" +
+                                    "│┌──┐│\n" +
+                                    "││  ││\n" +
+                                    "││  ││\n" +
+                                    "│└──┘│\n" +
+                                    "└────┘";
             Assert.Equal(expected, display.DisplayString.ToString());
         }
         [Fact]
@@ -75,14 +75,14 @@ namespace TestGift.UnitTest
             //act
             IScreenDisplay display = _border.GetDisplay(new Bound(8, 8), ' ');
             //assert
-            const string expected = "┏━━━━━━┓\n" +
-                                    "┃┏━━━━┓┃\n" +
-                                    "┃┃    ┃┃\n" +
-                                    "┃┃    ┃┃\n" +
-                                    "┃┃    ┃┃\n" +
-                                    "┃┃    ┃┃\n" +
-                                    "┃┗━━━━┛┃\n" +
-                                    "┗━━━━━━┛";
+            const string expected = "┌──────┐\n" +
+                                    "│┌────┐│\n" +
+                                    "││    ││\n" +
+                                    "││    ││\n" +
+                                    "││    ││\n" +
+                                    "││    ││\n" +
+                                    "│└────┘│\n" +
+                                    "└──────┘";
             Assert.Equal(expected, display.DisplayString.ToString());
         }
         [Fact]
@@ -93,14 +93,14 @@ namespace TestGift.UnitTest
             //act
             IScreenDisplay display = _border.GetDisplay(new Bound(8, 8), ' ');
             //assert
-            const string expected = "┏━━━━━━┓\n" +
-                                    "┃┏━━━━┓┃\n" +
-                                    "┃┃┏━━┓┃┃\n" +
-                                    "┃┃┃  ┃┃┃\n" +
-                                    "┃┃┃  ┃┃┃\n" +
-                                    "┃┃┗━━┛┃┃\n" +
-                                    "┃┗━━━━┛┃\n" +
-                                    "┗━━━━━━┛";
+            const string expected = "┌──────┐\n" +
+                                    "│┌────┐│\n" +
+                                    "││┌──┐││\n" +
+                                    "│││  │││\n" +
+                                    "│││  │││\n" +
+                                    "││└──┘││\n" +
+                                    "│└────┘│\n" +
+                                    "└──────┘";
             Assert.Equal(expected, display.DisplayString.ToString());
         }
         [Fact]
@@ -111,18 +111,18 @@ namespace TestGift.UnitTest
             //act
             IScreenDisplay display = _border.GetDisplay(new Bound(12, 8), ' ');
             //assert
-            const string expected = "┏━━━━━━┓\n" +
-                                    "┃┏━━━━┓┃\n" +
-                                    "┃┃┏━━┓┃┃\n" +
-                                    "┃┃┃  ┃┃┃\n" +
-                                    "┃┃┃  ┃┃┃\n" +
-                                    "┃┃┃  ┃┃┃\n" +
-                                    "┃┃┃  ┃┃┃\n" +
-                                    "┃┃┃  ┃┃┃\n" +
-                                    "┃┃┃  ┃┃┃\n" +
-                                    "┃┃┗━━┛┃┃\n" +
-                                    "┃┗━━━━┛┃\n" +
-                                    "┗━━━━━━┛";
+            const string expected = "┌──────┐\n" +
+                                    "│┌────┐│\n" +
+                                    "││┌──┐││\n" +
+                                    "│││  │││\n" +
+                                    "│││  │││\n" +
+                                    "│││  │││\n" +
+                                    "│││  │││\n" +
+                                    "│││  │││\n" +
+                                    "│││  │││\n" +
+                                    "││└──┘││\n" +
+                                    "│└────┘│\n" +
+                                    "└──────┘";
             Assert.Equal(expected, display.DisplayString.ToString());
         }
         [Fact]
@@ -133,14 +133,14 @@ namespace TestGift.UnitTest
             //act
             IScreenDisplay display = _border.GetDisplay(new Bound(8, 12), ' ');
             //assert
-            const string expected = "┏━━━━━━━━━━┓\n" +
-                                    "┃┏━━━━━━━━┓┃\n" +
-                                    "┃┃┏━━━━━━┓┃┃\n" +
-                                    "┃┃┃      ┃┃┃\n" +
-                                    "┃┃┃      ┃┃┃\n" +
-                                    "┃┃┗━━━━━━┛┃┃\n" +
-                                    "┃┗━━━━━━━━┛┃\n" +
-                                    "┗━━━━━━━━━━┛";
+            const string expected = "┌──────────┐\n" +
+                                    "│┌────────┐│\n" +
+                                    "││┌──────┐││\n" +
+                                    "│││      │││\n" +
+                                    "│││      │││\n" +
+                                    "││└──────┘││\n" +
+                                    "│└────────┘│\n" +
+                                    "└──────────┘";
             Assert.Equal(expected, display.DisplayString.ToString());
         }
     }

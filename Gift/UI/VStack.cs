@@ -13,15 +13,31 @@ namespace Gift.UI
         {
             get
             {
-                int ChildContextPosition = 0;
-                foreach (UIElement renderable in Childs)
+                int HeightAllChilds = 0;
+                foreach (IUIElement renderable in Childs)
                 {
                     if (!renderable.IsFixed())
                     {
-                        ChildContextPosition += renderable.Height;
+                        HeightAllChilds += renderable.Height;
                     }
                 }
-                return ChildContextPosition;
+                return Border.Thickness * 2 + HeightAllChilds;
+            }
+        }
+        public override int Width
+        {
+            get
+            {
+                int maxWidthChild = 0;
+                foreach (IUIElement renderable in Childs)
+                {
+                    if (!renderable.IsFixed())
+                    {
+                        if (maxWidthChild < renderable.Width)
+                            maxWidthChild = renderable.Width;
+                    }
+                }
+                return Border.Thickness * 2 + maxWidthChild;
             }
         }
 
@@ -80,7 +96,7 @@ namespace Gift.UI
                 int thickness = Border.Thickness;
                 return new Context(
                     new Position(thickness + ChildContextPosition, thickness),
-                    new Bound(0, 0));
+                    new Bound(1, renderable.Width));
             }
         }
 

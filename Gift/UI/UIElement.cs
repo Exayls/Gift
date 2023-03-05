@@ -10,7 +10,9 @@ namespace Gift.UI
         public Context? Context { get; set; }
 
         public abstract int Height { get; }
+        public abstract int Width { get; }
         public IBorder Border { get ; set ; }
+
 
         protected UIElement(IBorder border)
         {

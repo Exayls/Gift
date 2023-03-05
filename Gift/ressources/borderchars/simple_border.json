@@ -1,13 +1,13 @@
 {
     "BorderChars":
     {
-        "TopLeft": "┏",
-        "TopRight": "┓",
-        "BottomLeft": "┗",
-        "BottomRight": "┛",
-        "Top": "━",
-        "Bottom": "━",
-        "Left": "┃",
-        "Right": "┃"
+        "TopLeft": "┌",
+        "TopRight": "┐",
+        "BottomLeft": "└",
+        "BottomRight": "┘",
+        "Top": "─",
+        "Bottom": "─",
+        "Left": "│",
+        "Right": "│"
     }
 }
