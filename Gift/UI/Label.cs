@@ -41,7 +41,7 @@ namespace Gift.UI
         {
             string text = Text;
             int widthLine = Disposition.Position.x + text.Length;
-            int MaxWidth = Context?.Bounds?.Width ?? 0;
+            int MaxWidth = Context.Bounds.Width;
             string display = Disposition.Position.x <= MaxWidth? (widthLine > MaxWidth ? text.Substring(0, widthLine-MaxWidth-1) : text) : "";
             return display;
         }
@@ -54,8 +54,8 @@ namespace Gift.UI
 
         public override Position GetGlobalPosition(Context context)
         {
-            int context_y = context.GlobalPosition?.y ?? 0;
-            int context_x = context.GlobalPosition?.x ?? 0;
+            int context_y = context.GlobalPosition.y;
+            int context_x = context.GlobalPosition.x;
             int relative_y = this.Disposition.Position.y;
             int relative_x = this.Disposition.Position.x;
             int global_y = context_y + relative_y;

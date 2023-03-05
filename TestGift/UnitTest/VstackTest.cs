@@ -320,7 +320,7 @@ namespace TestGift.UnitTest
             Assert.Equal(5, context.Bounds.Width);
         }
         [Fact]
-        public void GetContext_should_return_context_with_1_5_bound_when_vstack_has_child_with_height_of_1_and_width_3()
+        public void GetContext_should_return_context_with_1_3_bound_when_vstack_has_child_with_height_of_1_and_width_3()
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(2);
@@ -334,6 +334,38 @@ namespace TestGift.UnitTest
             //assert
             Assert.Equal(1, context.Bounds.Height);
             Assert.Equal(3, context.Bounds.Width);
+        }
+        [Fact]
+        public void GetContext_should_return_context_with_2_1_bound_when_vstack_has_child_with_height_of_2_and_width_1()
+        {
+            //arrange
+            _borderMock.Setup(b => b.Thickness).Returns(2);
+            _uiElementMock1.Setup(u => u.IsFixed()).Returns(false);
+            _uiElementMock1.Setup(u => u.Height).Returns(2);
+            _uiElementMock1.Setup(u => u.Width).Returns(1);
+            vstack.AddChild(_uiElementMock1.Object);
+            Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
+            //act
+            Context context = vstack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
+            //assert
+            Assert.Equal(2, context.Bounds.Height);
+            Assert.Equal(1, context.Bounds.Width);
+        }
+        [Fact]
+        public void GetContext_should_return_context_with_3_1_bound_when_vstack_has_child_with_height_of_3_and_width_1()
+        {
+            //arrange
+            _borderMock.Setup(b => b.Thickness).Returns(2);
+            _uiElementMock1.Setup(u => u.IsFixed()).Returns(false);
+            _uiElementMock1.Setup(u => u.Height).Returns(3);
+            _uiElementMock1.Setup(u => u.Width).Returns(1);
+            vstack.AddChild(_uiElementMock1.Object);
+            Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
+            //act
+            Context context = vstack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
+            //assert
+            Assert.Equal(3, context.Bounds.Height);
+            Assert.Equal(1, context.Bounds.Width);
         }
 
         [Fact]
@@ -459,6 +491,47 @@ namespace TestGift.UnitTest
             vstack.AddChild(_uiElementMock1.Object);
             //assert
             Assert.Equal(7, vstack.Height);
+        }
+        //should test with width
+
+        [Fact]
+        public void GetGlobalPosition_should_return_0_0_when_parent_at_0_0_and_no_border()
+        {
+            //arrange
+            _borderMock.Setup(b => b.Thickness).Returns(0);
+            vstack.Border = _borderMock.Object;
+            Context contextRenderable = new Context(new Position(0, 0), new Bound(0, 0));
+            //act
+            Position position = vstack.GetGlobalPosition(contextRenderable);
+            //assert
+            Assert.Equal(0, position.y);
+            Assert.Equal(0, position.x);
+        }
+        [Fact]
+        public void GetGlobalPosition_should_return_2_1_when_parent_at_2_1_and_no_border()
+        {
+            //arrange
+            _borderMock.Setup(b => b.Thickness).Returns(0);
+            vstack.Border = _borderMock.Object;
+            Context contextRenderable = new Context(new Position(2, 1), new Bound(0, 0));
+            //act
+            Position position = vstack.GetGlobalPosition(contextRenderable);
+            //assert
+            Assert.Equal(2, position.y);
+            Assert.Equal(1, position.x);
+        }
+        [Fact]
+        public void GetGlobalPosition_should_return_3_2_when_parent_at_3_2_and_no_border()
+        {
+            //arrange
+            _borderMock.Setup(b => b.Thickness).Returns(0);
+            vstack.Border = _borderMock.Object;
+            Context contextRenderable = new Context(new Position(3, 2), new Bound(0, 0));
+            //act
+            Position position = vstack.GetGlobalPosition(contextRenderable);
+            //assert
+            Assert.Equal(3, position.y);
+            Assert.Equal(2, position.x);
         }
     }
 }

@@ -96,7 +96,7 @@ namespace Gift.UI
                 int thickness = Border.Thickness;
                 return new Context(
                     new Position(thickness + ChildContextPosition, thickness),
-                    new Bound(1, renderable.Width));
+                    new Bound(renderable.Height, renderable.Width));
             }
         }
 
@@ -124,6 +124,7 @@ namespace Gift.UI
 
         public override Position GetGlobalPosition(Context context)
         {
+            
             return context.GlobalPosition;
         }
 

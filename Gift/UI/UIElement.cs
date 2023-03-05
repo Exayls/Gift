@@ -7,7 +7,7 @@ namespace Gift.UI
 {
     public abstract class UIElement : Renderable, IUIElement
     {
-        public Context? Context { get; set; }
+        public Context Context { get; set; }
 
         public abstract int Height { get; }
         public abstract int Width { get; }
