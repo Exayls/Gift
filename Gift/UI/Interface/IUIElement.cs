@@ -1,4 +1,5 @@
-﻿using Gift.UI.MetaData;
+﻿using Gift.UI.Border;
+using Gift.UI.MetaData;
 
 namespace Gift.UI.Interface
 {

@@ -14,6 +14,10 @@ namespace Gift.UI
         {
             get { return Bound.Height; }
         }
+        public override int Width
+        {
+            get { return Bound.Width; }
+        }
 
         public GiftUI(Bound bound) : base(bound)
         {

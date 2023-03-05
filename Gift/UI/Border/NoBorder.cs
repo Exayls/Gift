@@ -1,7 +1,7 @@
 ﻿using Gift.UI.Interface;
 using Gift.UI.MetaData;
 
-namespace Gift.UI
+namespace Gift.UI.Border
 {
     public class NoBorder : IBorder
     {
@@ -17,6 +17,11 @@ namespace Gift.UI
         public IScreenDisplay GetDisplay(Bound bound)
         {
             return new ScreenDisplay(bound);
+        }
+
+        public IScreenDisplay GetDisplay(Bound bound, char fillingChar)
+        {
+            return new ScreenDisplay(bound, fillingChar);
         }
     }
 }
