@@ -13,6 +13,10 @@ namespace Gift.UI
         {
             get
             {
+                if (Bound.Height != 0)
+                {
+                    return Bound.Height;
+                }
                 int HeightAllChilds = 0;
                 foreach (IUIElement renderable in Childs)
                 {
@@ -28,6 +32,10 @@ namespace Gift.UI
         {
             get
             {
+                if (Bound.Width != 0)
+                {
+                    return Bound.Width;
+                }
                 int maxWidthChild = 0;
                 foreach (IUIElement renderable in Childs)
                 {
@@ -41,12 +49,12 @@ namespace Gift.UI
             }
         }
 
-        public VStack() : this(new NoBorder(), new ScreenDisplayFactory())
+        public VStack(IBorder border, IScreenDisplayFactory screenDisplayFactory): this(border, screenDisplayFactory, new Bound(0,0))
         {
         }
-        public VStack(IBorder border, IScreenDisplayFactory screenDisplayFactory)
+
+        public VStack(IBorder border, IScreenDisplayFactory screenDisplayFactory, Bound bound):base(bound, border)
         {
-            Border = border;
             _screenDisplayFactory = screenDisplayFactory;
         }
 

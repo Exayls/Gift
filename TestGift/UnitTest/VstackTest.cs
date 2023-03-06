@@ -494,6 +494,30 @@ namespace TestGift.UnitTest
         }
         //should test with width
 
+
+        [Fact]
+        public void Height_Width_should_be_1_1_when_vstack_declared_with_1_1_Bound()
+        {
+            //arrange
+            _uiElementMock1.Setup(ui => ui.Height).Returns(1);
+            //act
+            vstack = new VStack(_borderMock.Object, _ScreenDisplayFactoryMock.Object, new Bound(1,1));
+            //assert
+            Assert.Equal(1, vstack.Height);
+            Assert.Equal(1, vstack.Width);
+        }
+        [Fact]
+        public void Height_Width_should_be_2_3_when_vstack_declared_with_2_3_Bound()
+        {
+            //arrange
+            _uiElementMock1.Setup(ui => ui.Height).Returns(1);
+            //act
+            vstack = new VStack(_borderMock.Object, _ScreenDisplayFactoryMock.Object, new Bound(2,3));
+            //assert
+            Assert.Equal(2, vstack.Height);
+            Assert.Equal(3, vstack.Width);
+        }
+
         [Fact]
         public void GetGlobalPosition_should_return_0_0_when_parent_at_0_0_and_no_border()
         {

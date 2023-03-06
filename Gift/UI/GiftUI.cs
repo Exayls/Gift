@@ -1,4 +1,5 @@
-﻿using Gift.UI.Interface;
+﻿using Gift.UI.Border;
+using Gift.UI.Interface;
 using Gift.UI.MetaData;
 using System;
 using System.Collections.Generic;
@@ -19,10 +20,13 @@ namespace Gift.UI
             get { return Bound.Width; }
         }
 
-        public GiftUI(Bound bound) : base(bound)
+        public GiftUI(Bound bound, IBorder border) : base(bound, border)
         {
         }
-        public GiftUI()
+        public GiftUI(Bound bound) : base(bound, new NoBorder())
+        {
+        }
+        public GiftUI():base()
         {
         }
 

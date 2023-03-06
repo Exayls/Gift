@@ -57,18 +57,18 @@ namespace Gift
         private void RenderAnyRenderable(IScreenDisplay screen, IContainer container, Context context, Renderable renderable)
         {
             Context renderableContext = container.GetContextRenderable(renderable, context);
-            if (container.isVisible(renderable))
+            //if (container.isVisible(renderable))//TODO
+            //{
+            switch (renderable)
             {
-                switch (renderable)
-                {
-                    case Container containerToRender:
-                        Render(screen, containerToRender, renderableContext);
-                        break;
-                    default:
-                        Render(screen, renderable, renderableContext);
-                        break;
-                }
+                case Container containerToRender:
+                    Render(screen, containerToRender, renderableContext);
+                    break;
+                default:
+                    Render(screen, renderable, renderableContext);
+                    break;
             }
+            //}
         }
     }
 }

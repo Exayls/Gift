@@ -1,4 +1,5 @@
-﻿using Gift.UI.Interface;
+﻿using Gift.UI.Border;
+using Gift.UI.Interface;
 using Gift.UI.MetaData;
 using System.Text;
 
@@ -8,19 +9,14 @@ namespace Gift.UI
     {
         public Bound Bound { get; protected set; }
         public IList<IUIElement> Childs { get; protected set; }
-        public Container(Bound bound)
+        public Container(Bound bound, IBorder border):base(border)
         {
-
             Bound = bound;
             Childs = new List<IUIElement>();
         }
         public Container()
         {
-            if (Context?.Bounds != null)
-            {
-                Bound = new Bound(Context.Bounds.Height, Context.Bounds.Width);
-            }
-            else if (!Console.IsInputRedirected && !Console.IsOutputRedirected)
+            if (!Console.IsInputRedirected && !Console.IsOutputRedirected)
             {
                 Bound = new Bound(Console.WindowHeight, Console.WindowWidth);
             }
