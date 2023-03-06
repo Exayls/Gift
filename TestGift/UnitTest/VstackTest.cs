@@ -517,6 +517,70 @@ namespace TestGift.UnitTest
             Assert.Equal(2, vstack.Height);
             Assert.Equal(3, vstack.Width);
         }
+        [Fact]
+        public void Height_Width_should_be_3_3_when_vstack_declared_with_0_3_Bound_and_1_element_of_height_3()
+        {
+            //arrange
+            _uiElementMock1.Setup(ui => ui.Height).Returns(3);
+            _borderMock.Setup(b => b.Thickness).Returns(0);
+            vstack.Border = _borderMock.Object;
+            //act
+            vstack = new VStack(_borderMock.Object, _ScreenDisplayFactoryMock.Object, new Bound(0,3));
+            vstack.AddChild(_uiElementMock1.Object);
+            //assert
+            Assert.Equal(3, vstack.Height);
+            Assert.Equal(3, vstack.Width);
+        }
+        [Fact]
+        public void Height_Width_should_be_5_3_when_vstack_declared_with_0_3_Bound_and_1_element_of_height_5()
+        {
+            //arrange
+            _uiElementMock1.Setup(ui => ui.Height).Returns(5);
+            _borderMock.Setup(b => b.Thickness).Returns(0);
+            vstack.Border = _borderMock.Object;
+            //act
+            vstack = new VStack(_borderMock.Object, _ScreenDisplayFactoryMock.Object, new Bound(0,3));
+            vstack.AddChild(_uiElementMock1.Object);
+            //assert
+            Assert.Equal(5, vstack.Height);
+            Assert.Equal(3, vstack.Width);
+        }
+        [Fact]
+        public void Height_Width_should_be_4_5_when_vstack_declared_with_0_0_Bound_and_2_element_of_height_1_3_and_width_1_5()
+        {
+            //arrange
+            _uiElementMock1.Setup(ui => ui.Height).Returns(1);
+            _uiElementMock2.Setup(ui => ui.Height).Returns(3);
+            _uiElementMock1.Setup(ui => ui.Width).Returns(1);
+            _uiElementMock2.Setup(ui => ui.Width).Returns(5);
+            _borderMock.Setup(b => b.Thickness).Returns(0);
+            vstack.Border = _borderMock.Object;
+            //act
+            vstack = new VStack(_borderMock.Object, _ScreenDisplayFactoryMock.Object, new Bound(0,0));
+            vstack.AddChild(_uiElementMock1.Object);
+            vstack.AddChild(_uiElementMock2.Object);
+            //assert
+            Assert.Equal(4, vstack.Height);
+            Assert.Equal(5, vstack.Width);
+        }
+        [Fact]
+        public void Height_Width_should_be_8_9_when_vstack_declared_with_0_0_Bound_and_2_element_of_height_1_3_and_width_1_5_with_border_thickness_2()
+        {
+            //arrange
+            _uiElementMock1.Setup(ui => ui.Height).Returns(1);
+            _uiElementMock2.Setup(ui => ui.Height).Returns(3);
+            _uiElementMock1.Setup(ui => ui.Width).Returns(1);
+            _uiElementMock2.Setup(ui => ui.Width).Returns(5);
+            _borderMock.Setup(b => b.Thickness).Returns(2);
+            vstack.Border = _borderMock.Object;
+            //act
+            vstack = new VStack(_borderMock.Object, _ScreenDisplayFactoryMock.Object, new Bound(0,0));
+            vstack.AddChild(_uiElementMock1.Object);
+            vstack.AddChild(_uiElementMock2.Object);
+            //assert
+            Assert.Equal(8, vstack.Height);
+            Assert.Equal(9, vstack.Width);
+        }
 
         [Fact]
         public void GetGlobalPosition_should_return_0_0_when_parent_at_0_0_and_no_border()
