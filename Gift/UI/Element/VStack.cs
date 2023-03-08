@@ -130,6 +130,10 @@ namespace Gift.UI.Element
             return false;
         }
 
+        public override Position GetRelativePosition(Context context)
+        {
+            return new Position(0, 0);
+        }
         public override Position GetGlobalPosition(Context context)
         {
             return new Position(context.GlobalPosition.y,
@@ -150,5 +154,6 @@ namespace Gift.UI.Element
             screenDisplay.AddDisplay(emptyVstackScreen, new Position(thickness, thickness));
             return screenDisplay;
         }
+
     }
 }

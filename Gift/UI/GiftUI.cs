@@ -70,6 +70,11 @@ namespace Gift.UI
             return new ScreenDisplay(bound);
         }
 
+        public override Position GetRelativePosition(Context context)
+        {
+            return context.GlobalPosition;
+        }
+
         public override Position GetGlobalPosition(Context context)
         {
             return context.GlobalPosition;

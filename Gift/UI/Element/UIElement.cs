@@ -24,6 +24,7 @@ namespace Gift.UI.Element
         }
 
         public abstract IScreenDisplay GetDisplay(Bound bound);
+        public abstract Position GetRelativePosition(Context context);
         public abstract Position GetGlobalPosition(Context context);
         public abstract bool IsFixed();
 
@@ -31,5 +32,6 @@ namespace Gift.UI.Element
         {
             Context = new Context(globalPosition, bound);
         }
+
     }
 }

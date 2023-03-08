@@ -11,6 +11,7 @@ namespace Gift.UI.Element
 
         IScreenDisplay GetDisplay(Bound bound);
         Position GetGlobalPosition(Context context);
+        Position GetRelativePosition(Context context);
         bool IsFixed();
     }
 }
