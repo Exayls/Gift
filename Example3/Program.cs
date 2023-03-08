@@ -13,7 +13,7 @@ vstack.AddChild(new LabelBuilder().BuildImplicit());
 vstack.AddChild(new LabelBuilder().BuildImplicit());
 vstack.AddChild(new LabelBuilder().WithText("test2").WithPosition(new Position(1,58)).Build());
 vstack.AddChild(new LabelBuilder().WithText("test4").BuildImplicit());
-var vstack2 = new VStackBuilder().WithBound(new Bound(3,5)).WithBorder(new Border(1, BorderChars.GetBorderCharsFromFile("ressources/borderChars/simple_border.json"))).Build();
+var vstack2 = new VStackBuilder().WithBound(new Bound(4,9)).WithBorder(new Border(1, BorderChars.GetBorderCharsFromFile("ressources/borderChars/simple_border.json"))).Build();
 vstack.AddChild(vstack2);
 vstack.AddChild(new LabelBuilder().WithText("test5").BuildImplicit());
 vstack.AddChild(new LabelBuilder().BuildImplicit());
