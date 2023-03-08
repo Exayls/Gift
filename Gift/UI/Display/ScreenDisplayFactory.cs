@@ -1,7 +1,6 @@
-﻿using Gift.UI.Interface;
-using Gift.UI.MetaData;
+﻿using Gift.UI.MetaData;
 
-namespace Gift.UI.Factory
+namespace Gift.UI.Display
 {
     internal class ScreenDisplayFactory : IScreenDisplayFactory
     {

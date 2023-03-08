@@ -1,15 +1,14 @@
 ﻿using Gift.UI.Border;
-using Gift.UI.Interface;
 using Gift.UI.MetaData;
 using System.Text;
 
-namespace Gift.UI
+namespace Gift.UI.Element
 {
     public abstract class Container : UIElement, IContainer
     {
         public Bound Bound { get; protected set; }
         public IList<IUIElement> Childs { get; protected set; }
-        public Container(Bound bound, IBorder border):base(border)
+        public Container(Bound bound, IBorder border) : base(border)
         {
             Bound = bound;
             Childs = new List<IUIElement>();

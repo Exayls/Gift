@@ -1,5 +1,6 @@
-﻿using Gift;
-using Gift.UI.Interface;
+﻿using Gift.UI;
+using Gift.UI.Display;
+using Gift.UI.Element;
 using Gift.UI.MetaData;
 using Moq;
 using System;

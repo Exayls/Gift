@@ -1,7 +1,7 @@
 ﻿using Gift.UI.Border;
 using Gift.UI.MetaData;
 
-namespace Gift.UI.Interface
+namespace Gift.UI.Element
 {
     public interface IUIElement : Renderable
     {

@@ -1,6 +1,6 @@
 ﻿using Gift.UI.MetaData;
 
-namespace Gift.UI.Interface
+namespace Gift.UI.Element
 {
     public interface IContainer : IUIElement
     {

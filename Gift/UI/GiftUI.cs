@@ -1,5 +1,6 @@
 ﻿using Gift.UI.Border;
-using Gift.UI.Interface;
+using Gift.UI.Display;
+using Gift.UI.Element;
 using Gift.UI.MetaData;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace Gift.UI
         public GiftUI(Bound bound) : base(bound, new NoBorder())
         {
         }
-        public GiftUI():base()
+        public GiftUI() : base()
         {
         }
 

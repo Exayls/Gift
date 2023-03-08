@@ -1,7 +1,6 @@
-﻿using Gift.UI;
-using Gift.UI.Border;
-using Gift.UI.Factory;
-using Gift.UI.Interface;
+﻿using Gift.UI.Border;
+using Gift.UI.Display;
+using Gift.UI.Element;
 using Gift.UI.MetaData;
 using Moq;
 using System.Text;

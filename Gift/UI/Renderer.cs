@@ -1,9 +1,9 @@
-﻿using Gift.UI;
-using Gift.UI.Interface;
+﻿using Gift.UI.Display;
+using Gift.UI.Element;
 using Gift.UI.MetaData;
 using System.Text;
 
-namespace Gift
+namespace Gift.UI
 {
     /// <summary>
     /// Render the UI to a TextWriter
@@ -70,5 +70,6 @@ namespace Gift
             }
             //}
         }
+
     }
 }

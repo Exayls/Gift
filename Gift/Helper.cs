@@ -10,13 +10,5 @@ namespace Gift
     internal class Helper
     {
 
-        public static string Replace(string s, string replace, int index)
-        {
-            return s.Remove(index, replace.Length).Insert(index, replace);
-        }
-        public static void Replace(StringBuilder s, string replace, int index)
-        {
-            s.Remove(index, replace.Length).Insert(index, replace);
-        }
     }
 }

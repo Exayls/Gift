@@ -1,6 +1,8 @@
-﻿using Gift.UI.MetaData;
+﻿using Gift.UI.Display;
+using Gift.UI.Element;
+using Gift.UI.MetaData;
 
-namespace Gift.UI.Interface
+namespace Gift.UI
 {
     public interface IGiftUI : IContainer
     {

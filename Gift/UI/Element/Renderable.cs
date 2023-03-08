@@ -1,7 +1,8 @@
-﻿using Gift.UI.MetaData;
+﻿using Gift.UI.Display;
+using Gift.UI.MetaData;
 using System.Text;
 
-namespace Gift.UI.Interface
+namespace Gift.UI.Element
 {
     public interface Renderable
     {

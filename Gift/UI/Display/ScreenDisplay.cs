@@ -1,8 +1,7 @@
-﻿using Gift.UI.Interface;
-using Gift.UI.MetaData;
+﻿using Gift.UI.MetaData;
 using System.Text;
 
-namespace Gift.UI
+namespace Gift.UI.Display
 {
     public class ScreenDisplay : IScreenDisplay
     {

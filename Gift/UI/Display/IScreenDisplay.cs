@@ -1,7 +1,7 @@
 ﻿using Gift.UI.MetaData;
 using System.Text;
 
-namespace Gift.UI.Interface
+namespace Gift.UI.Display
 {
     public interface IScreenDisplay
     {

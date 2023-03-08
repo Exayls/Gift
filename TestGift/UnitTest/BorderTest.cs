@@ -1,6 +1,6 @@
 ﻿using System;
 using Gift.UI.Border;
-using Gift.UI.Interface;
+using Gift.UI.Display;
 using Gift.UI.MetaData;
 
 namespace TestGift.UnitTest

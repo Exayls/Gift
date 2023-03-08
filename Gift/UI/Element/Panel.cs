@@ -1,6 +1,6 @@
-﻿using Gift.UI.Interface;
+﻿
 
-namespace Gift.UI
+namespace Gift.UI.Element
 {
     //public class Panel : Container
     //{
