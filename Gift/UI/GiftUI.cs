@@ -36,15 +36,15 @@ namespace Gift.UI
             Childs.Clear();
             Childs.Add(UIElement);
 
-            UIElement.setContext(new Position(0, 0), Bound);
+            UIElement.SetContext(new Position(0, 0), Bound);
         }
 
-        public override bool isVisible(Renderable renderable)//TODO
+        public override bool isVisible(IRenderable renderable)//TODO
         {
             return true;
         }
 
-        public override Context GetContextRenderable(Renderable renderable, Context context)
+        public override Context GetContextRenderable(IRenderable renderable, Context context)
         {
             if (Childs.Contains(renderable))
             {

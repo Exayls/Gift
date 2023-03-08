@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Gift.UI.Element
 {
-    public abstract class UIElement : Renderable, IUIElement
+    public abstract class UIElement : IRenderable, IUIElement
     {
         public Context Context { get; set; }
 
@@ -28,7 +28,7 @@ namespace Gift.UI.Element
         public abstract Position GetGlobalPosition(Context context);
         public abstract bool IsFixed();
 
-        internal void setContext(Position globalPosition, Bound bound)
+        internal void SetContext(Position globalPosition, Bound bound)
         {
             Context = new Context(globalPosition, bound);
         }

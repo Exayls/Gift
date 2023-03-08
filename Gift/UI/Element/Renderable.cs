@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Gift.UI.Element
 {
-    public interface Renderable
+    public interface IRenderable
     {
         int Height { get; }
         int Width { get; }

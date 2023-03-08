@@ -3,7 +3,7 @@ using Gift.UI.MetaData;
 
 namespace Gift.UI.Element
 {
-    public interface IUIElement : Renderable
+    public interface IUIElement : IRenderable
     {
         Context Context { get; set; }
         IBorder Border { get; set; }

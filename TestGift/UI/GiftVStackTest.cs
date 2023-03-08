@@ -17,7 +17,7 @@ namespace TestGift.UI
         {
             GiftUI ui = CreateUI(new Bound(20, 60));
             TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
-            string[] actual = renderedText.ToString()?.Split('\n')?? new string[0];
+            string[] actual = renderedText.ToString()?.Split('\n')?? Array.Empty<string>();
 
             var expectedBuilder = new StringBuilder();
             string expected;
@@ -113,7 +113,7 @@ namespace TestGift.UI
 
                 var expectedBuilder = new StringBuilder();
                 string expected = "";
-                var actual = renderedText.ToString().Split('\n');
+                string[] actual = renderedText.ToString().Split('\n');
                 for (int i = 0; i < ui.Bound.Height; i++)
                 {
                     expectedBuilder.Clear();

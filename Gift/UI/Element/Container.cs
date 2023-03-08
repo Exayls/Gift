@@ -26,10 +26,10 @@ namespace Gift.UI.Element
             Childs = new List<IUIElement>();
         }
 
-        public abstract bool isVisible(Renderable renderable);
+        public abstract bool isVisible(IRenderable renderable);
 
 
-        public abstract Context GetContextRenderable(Renderable renderable, Context context);
+        public abstract Context GetContextRenderable(IRenderable renderable, Context context);
 
     }
 }

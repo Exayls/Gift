@@ -63,7 +63,7 @@ namespace Gift.UI.Element
         }
 
 
-        private int GetHeightAllChildsAfter(Renderable uIElement)
+        private int GetHeightAllChildsAfter(IRenderable uIElement)
         {
             int GlobalPosition = Context?.GlobalPosition?.y ?? 0;
             int ChildContextPosition = GlobalPosition;
@@ -78,7 +78,7 @@ namespace Gift.UI.Element
             return 0;
         }
 
-        public override bool isVisible(Renderable renderable)
+        public override bool isVisible(IRenderable renderable)
         {
             var ContextHeight = Context?.Bounds?.Height ?? 0;
             int HeightAfter = GetHeightAllChildsAfter(renderable);
@@ -89,7 +89,7 @@ namespace Gift.UI.Element
             return true;
         }
 
-        public override Context GetContextRenderable(Renderable renderable, Context context)
+        public override Context GetContextRenderable(IRenderable renderable, Context context)
         {
             int ChildContextPosition = GetHeightRenderableFromTop(renderable);
             if (renderable.IsFixed())
@@ -108,7 +108,7 @@ namespace Gift.UI.Element
             }
         }
 
-        private int GetHeightRenderableFromTop(Renderable renderableToFind)
+        private int GetHeightRenderableFromTop(IRenderable renderableToFind)
         {
             int ChildContextPosition = 0;
             foreach (IUIElement renderable in Childs)

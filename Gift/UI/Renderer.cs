@@ -28,7 +28,7 @@ namespace Gift.UI
             return Output;
         }
 
-        private void Render(IScreenDisplay screen, Renderable Renderer, Context context)
+        private void Render(IScreenDisplay screen, IRenderable Renderer, Context context)
         {
             UpdateDisplay(screen, Renderer, context);
         }
@@ -39,7 +39,7 @@ namespace Gift.UI
             RenderAllChilds(screen, container, context);
         }
 
-        private void UpdateDisplay(IScreenDisplay screen, Renderable renderable, Context context)
+        private void UpdateDisplay(IScreenDisplay screen, IRenderable renderable, Context context)
         {
             IScreenDisplay display = renderable.GetDisplay(context.Bounds);
             Position globalPosition = renderable.GetGlobalPosition(context);
@@ -48,13 +48,13 @@ namespace Gift.UI
 
         private void RenderAllChilds(IScreenDisplay screen, IContainer container, Context context)
         {
-            foreach (Renderable renderable in container.Childs)
+            foreach (IRenderable renderable in container.Childs)
             {
                 RenderAnyRenderable(screen, container, context, renderable);
             }
         }
 
-        private void RenderAnyRenderable(IScreenDisplay screen, IContainer container, Context context, Renderable renderable)
+        private void RenderAnyRenderable(IScreenDisplay screen, IContainer container, Context context, IRenderable renderable)
         {
             Context renderableContext = container.GetContextRenderable(renderable, context);
             //if (container.isVisible(renderable))//TODO
