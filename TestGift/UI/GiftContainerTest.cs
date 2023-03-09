@@ -22,7 +22,7 @@ namespace TestGift.UI
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            var actual = renderedText.ToString().Split('\n');
+            string[] actual = renderedText.ToString()?.Split('\n') ?? Array.Empty<string>();
             for (int i = 0; i < ui.Bound.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -43,7 +43,7 @@ namespace TestGift.UI
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            var actual = renderedText.ToString().Split('\n');
+            string[] actual = renderedText.ToString()?.Split('\n') ?? Array.Empty<string>();
             for (int i = 0; i < ui.Bound.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -69,7 +69,7 @@ namespace TestGift.UI
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            var actual = renderedText.ToString().Split('\n');
+            string[] actual = renderedText.ToString()?.Split('\n') ?? Array.Empty<string>();
             for (int i = 0; i < ui.Bound.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -95,7 +95,7 @@ namespace TestGift.UI
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            var actual = renderedText.ToString().Split('\n');
+            string[] actual = renderedText.ToString()?.Split('\n') ?? Array.Empty<string>();
             for (int i = 0; i < ui.Bound.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -121,7 +121,7 @@ namespace TestGift.UI
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            var actual = renderedText.ToString().Split('\n');
+            string[] actual = renderedText.ToString()?.Split('\n') ?? Array.Empty<string>();
             for (int i = 0; i < ui.Bound.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -147,7 +147,7 @@ namespace TestGift.UI
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            var actual = renderedText.ToString().Split('\n');
+            string[] actual = renderedText.ToString()?.Split('\n') ?? Array.Empty<string>();
             for (int i = 0; i < ui.Bound.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -169,7 +169,7 @@ namespace TestGift.UI
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            var actual = renderedText.ToString().Split('\n');
+            string[] actual = renderedText.ToString()?.Split('\n') ?? Array.Empty<string>();
             for (int i = 0; i < ui.Bound.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -195,7 +195,7 @@ namespace TestGift.UI
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            var actual = renderedText.ToString().Split('\n');
+            string[] actual = renderedText.ToString()?.Split('\n') ?? Array.Empty<string>();
             for (int i = 0; i < ui.Bound.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -222,7 +222,7 @@ namespace TestGift.UI
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            var actual = renderedText.ToString().Split('\n');
+            string[] actual = renderedText.ToString()?.Split('\n') ?? Array.Empty<string>();
             for (int i = 0; i < ui.Bound.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -249,7 +249,7 @@ namespace TestGift.UI
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            var actual = renderedText.ToString().Split('\n');
+            string[] actual = renderedText.ToString()?.Split('\n') ?? Array.Empty<string>();
             for (int i = 0; i < ui.Bound.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -276,7 +276,7 @@ namespace TestGift.UI
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            var actual = renderedText.ToString().Split('\n');
+            string[] actual = renderedText.ToString()?.Split('\n') ?? Array.Empty<string>();
             for (int i = 0; i < ui.Bound.Height; i++)
             {
                 expectedBuilder.Clear();
