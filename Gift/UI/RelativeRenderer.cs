@@ -1,13 +1,9 @@
 ﻿using Gift.UI.Display;
 using Gift.UI.Element;
 using Gift.UI.MetaData;
-using System.Text;
 
 namespace Gift.UI
 {
-    /// <summary>
-    /// Render the UI to a TextWriter
-    /// </summary>
     public class RelativeRenderer : IRenderer
     {
         public RelativeRenderer()
@@ -63,8 +59,6 @@ namespace Gift.UI
         private void RenderAnyRenderable(IScreenDisplay screen, IContainer container, Context context, IRenderable renderable)
         {
             Context renderableContext = container.GetContextRenderable(renderable, context);
-            //if (container.isVisible(renderable))//TODO
-            //{
             switch (renderable)
             {
                 case Container containerToRender:
@@ -74,7 +68,6 @@ namespace Gift.UI
                     Render(screen, renderable, renderableContext);
                     break;
             }
-            //}
         }
 
     }

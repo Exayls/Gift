@@ -5,9 +5,6 @@ using System.Text;
 
 namespace Gift.UI
 {
-    /// <summary>
-    /// Render the UI to a TextWriter
-    /// </summary>
     public class Renderer : IRenderer
     {
         public Renderer()
