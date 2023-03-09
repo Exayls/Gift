@@ -9,21 +9,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestGift.UnitTest
+namespace TestGift.UnitTest.UI
 {
-    public class RendererTest
+    public class RelativeRendererTest
     {
         private Mock<IGiftUI> _giftuiMock;
         private Mock<IScreenDisplay> _screenDisplayMock;
         private Mock<IUIElement> _labelMock;
-        private Renderer renderer;
+        private RelativeRenderer renderer;
 
-        public RendererTest()
+        public RelativeRendererTest()
         {
             _giftuiMock = new Mock<IGiftUI>();
             _screenDisplayMock = new Mock<IScreenDisplay>();
             _labelMock = new Mock<IUIElement>();
-            renderer = new Renderer();
+            renderer = new RelativeRenderer();
         }
 
         [Fact]
@@ -69,9 +69,10 @@ namespace TestGift.UnitTest
             {
                 _labelMock.Object
             });
+            _giftuiMock.Setup(m => m.GetDisplay(It.IsAny<Bound>())).Returns(_screenDisplayMock.Object);
             _giftuiMock.Setup(m => m.GetDisplay()).Returns(_screenDisplayMock.Object);
             _giftuiMock.Setup(m => m.isVisible(It.IsAny<IRenderable>())).Returns(true);
-            _giftuiMock.Setup(m => m.GetContextRenderable(It.IsAny<IRenderable>(),It.IsAny<Context>())).Returns(new Context(new(0,0), new(0, 0)));
+            _giftuiMock.Setup(m => m.GetContextRenderable(It.IsAny<IRenderable>(), It.IsAny<Context>())).Returns(new Context(new(0, 0), new(0, 0)));
             //act
             TextWriter actual = renderer.GetRenderedBuffer(_giftuiMock.Object);
             //assert

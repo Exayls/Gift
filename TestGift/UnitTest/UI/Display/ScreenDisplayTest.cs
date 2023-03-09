@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestGift.UnitTest
+namespace TestGift.UI.Display
 {
     public class ScreenDisplayTest
     {

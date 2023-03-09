@@ -5,7 +5,7 @@ using Gift.UI.MetaData;
 using Moq;
 using System.Text;
 
-namespace TestGift.UnitTest
+namespace TestGift.UnitTest.UI.Element
 {
     public class VstackTest
     {

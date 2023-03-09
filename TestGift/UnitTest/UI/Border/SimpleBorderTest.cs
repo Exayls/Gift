@@ -2,7 +2,7 @@
 using Gift.UI.Display;
 using Gift.UI.MetaData;
 
-namespace TestGift.UnitTest
+namespace TestGift.UnitTest.UI.Border
 {
     public class SimpleBorderTest
     {
