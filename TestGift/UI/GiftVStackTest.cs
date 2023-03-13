@@ -1,17 +1,37 @@
 ﻿using Gift;
 using Gift.Builders;
 using Gift.UI;
+using Gift.UI.Border;
+using Gift.UI.Display;
+using Gift.UI.Element;
 using Gift.UI.MetaData;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Moq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace TestGift.UI
 {
     public class GiftVStackTest
     {
+        private Mock<IScreenDisplay> _screenDisplayMock1;
+        private Mock<IScreenDisplay> _screenDisplayMock2;
+        private Mock<IUIElement> _uiElementMock1;
+        private Mock<IUIElement> _uiElementMock2;
+        private Mock<IBorder> _borderMock;
+        private Mock<IScreenDisplayFactory> _ScreenDisplayFactoryMock;
+        private VStack vstack;
+
+        public GiftVStackTest()
+        {
+            _screenDisplayMock1 = new Mock<IScreenDisplay>();
+            _screenDisplayMock2 = new Mock<IScreenDisplay>();
+            _uiElementMock1 = new Mock<IUIElement>();
+            _uiElementMock2 = new Mock<IUIElement>();
+            _borderMock = new Mock<IBorder>();
+            _ScreenDisplayFactoryMock = new Mock<IScreenDisplayFactory>();
+            _ScreenDisplayFactoryMock.Setup(s => s.Create(It.IsAny<Bound>(), It.IsAny<char>())).Returns(_screenDisplayMock1.Object);
+            vstack = new VStack(_borderMock.Object, _ScreenDisplayFactoryMock.Object);
+        }
+
         [Fact]
         public void TestVStack()
         {
@@ -299,243 +319,170 @@ namespace TestGift.UI
                 Assert.Equal(expected, actual[i]);
             }
         }
-        //[Fact]
-        //public void GetDisplay_should_return_screen_when_call_GetDisplay_whithout_border()
-        //{
-        //    _screenDisplayMock.Setup(s => s.DisplayString).Returns(new StringBuilder().Append("    \n").Append("    "));
-        //    _borderMock.Setup(b => b.Thickness).Returns(0);
-        //    _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>())).Returns(_screenDisplayMock.Object);
-        //    vstack.Border = _borderMock.Object;
-        //    //act
-        //    IScreenDisplay screenDisplay = vstack.GetDisplay(new(2, 4), '*');
-        //    //assert
-        //    const string expected = "****\n" +
-        //                            "****";
-        //    Assert.Equal(expected, screenDisplay.DisplayString.ToString());
-        //}
 
-        //[Fact]
-        //public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border1()
-        //{
-        //    //arrange
-        //    _screenDisplayMock.Setup(s => s.DisplayString).Returns(new StringBuilder().Append("----\n").Append("-  -\n").Append("----"));
-        //    _borderMock.Setup(b => b.Thickness).Returns(1);
-        //    _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>())).Returns(_screenDisplayMock.Object);
-        //    vstack.Border = _borderMock.Object;
-        //    //act
-        //    IScreenDisplay screenDisplay = vstack.GetDisplay(new Bound(3, 4), '*');
-        //    //assert
-        //    const string expected = "----\n" +
-        //                            "-**-\n" +
-        //                            "----";
-        //    Assert.Equal(expected, screenDisplay.DisplayString.ToString());
-        //}
-        //        [Fact]
-        //        public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border2()
-        //        {
-        //            //arrange
-        //            _screenDisplayMock.Setup(s => s.DisplayString).Returns(new StringBuilder().Append("____\n").Append("_  _\n").Append("____"));
-        //            _borderMock.Setup(b => b.Thickness).Returns(1);
-        //            _borderMock.Setup(b => b.BorderChar).Returns('_');
-        //            _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>())).Returns(_screenDisplayMock.Object);
-        //            vstack.Border = _borderMock.Object;
-        //            //act
-        //            IScreenDisplay screenDisplay = vstack.GetDisplay(new(3, 4));
-        //            //assert
-        //            const string expected = "____\n" +
-        //                                    "_**_\n" +
-        //                                    "____";
-        //            Assert.Equal(expected, screenDisplay.DisplayString.ToString());
-        //        }
-        //        [Fact]
-        //        public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border3()
-        //        {
-        //            //arrange
-        //            _screenDisplayMock.Setup(s => s.DisplayString).Returns(new StringBuilder().Append("iiii\n").Append("illi\n").Append("iiii"));
-        //            _borderMock.Setup(b => b.Thickness).Returns(1);
-        //            _borderMock.Setup(b => b.BorderChar).Returns('i');
-        //            _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>())).Returns(_screenDisplayMock.Object);
-        //            vstack.Border = _borderMock.Object;
-        //            //act
-        //            IScreenDisplay screenDisplay = vstack.GetDisplay(new(3, 4));
-        //            //assert
-        //            const string expected = "iiii\n" +
-        //                                    "i**i\n" +
-        //                                    "iiii";
-        //            Assert.Equal(expected, screenDisplay.DisplayString.ToString());
-        //        }
-        //        [Fact]
-        //        public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border4()
-        //        {
-        //            //arrange
-        //            _screenDisplayMock.Setup(s => s.DisplayString).Returns(new StringBuilder().Append("-----\n").Append("-   -\n").Append("-   -\n").Append("-   -\n").Append("-----"));
-        //            _borderMock.Setup(b => b.Thickness).Returns(1);
-        //            _borderMock.Setup(b => b.BorderChar).Returns('-');
-        //            _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>())).Returns(_screenDisplayMock.Object);
-        //            vstack.Border = _borderMock.Object;
-        //            //act
-        //            IScreenDisplay screenDisplay = vstack.GetDisplay(new(5, 5));
-        //            //assert
-        //            const string expected = "-----\n" +
-        //                                    "-***-\n" +
-        //                                    "-***-\n" +
-        //                                    "-***-\n" +
-        //                                    "-----";
-        //            Assert.Equal(expected, screenDisplay.DisplayString.ToString());
-        //        }
-        //[Fact]
-        //public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border5()
-        //{
-        //    //arrange
-        //    _screenDisplayMock.Setup(s => s.DisplayString).Returns(
-        //        new StringBuilder().Append("------\n")
-        //                           .Append("-    -\n")
-        //                           .Append("------"));
-        //    _borderMock.Setup(b => b.Thickness).Returns(1);
-        //    _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>())).Returns(_screenDisplayMock.Object);
-        //    vstack.Border = _borderMock.Object;
-        //    //act
-        //    IScreenDisplay screenDisplay = vstack.GetDisplay(new(3, 6));
-        //    //assert
-        //    const string expected = "------\n" +
-        //                            "-****-\n" +
-        //                            "------";
-        //    Assert.Equal(expected, screenDisplay.DisplayString.ToString());
-        //}
-        //[Fact]
-        //public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border_thickness1()
-        //{
-        //    //arrange
-        //    _screenDisplayMock.Setup(s => s.DisplayString).Returns(
-        //        new StringBuilder().Append("-----\n")
-        //                           .Append("-----\n")
-        //                           .Append("-- --\n")
-        //                           .Append("-----\n")
-        //                           .Append("-----"));
-        //    _borderMock.Setup(b => b.Thickness).Returns(2);
-        //    _borderMock.Setup(b => b.BorderChar).Returns('-');
-        //    _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>())).Returns(_screenDisplayMock.Object);
-        //    vstack.Border = _borderMock.Object;
-        //    //act
-        //    IScreenDisplay screenDisplay = vstack.GetDisplay(new(5, 5));
-        //    //assert
-        //    const string expected = "-----\n" +
-        //                            "-----\n" +
-        //                            "--*--\n" +
-        //                            "-----\n" +
-        //                            "-----";
-        //    Assert.Equal(expected, screenDisplay.DisplayString.ToString());
-        //}
-        //        [Fact]
-        //        public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border_thickness2()
-        //        {
-        //            //arrange
-        //            _screenDisplayMock.Setup(s => s.DisplayString).Returns(
-        //                new StringBuilder().Append("-------\n").
-        //                                    Append("-------\n").
-        //                                    Append("--   --\n").
-        //                                    Append("--   --\n").
-        //                                    Append("-------\n").
-        //                                    Append("-------"));
-        //            _borderMock.Setup(b => b.Thickness).Returns(2);
-        //            _borderMock.Setup(b => b.BorderChar).Returns('-');
-        //            _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>())).Returns(_screenDisplayMock.Object);
-        //            vstack.Border = _borderMock.Object;
-        //            //act
-        //            IScreenDisplay screenDisplay = vstack.GetDisplay(new(6, 7));
-        //            //assert
-        //            const string expected = "-------\n" +
-        //                                    "-------\n" +
-        //                                    "--***--\n" +
-        //                                    "--***--\n" +
-        //                                    "-------\n" +
-        //                                    "-------";
-        //            Assert.Equal(expected, screenDisplay.DisplayString.ToString());
-        //        }
-        //        [Fact]
-        //        public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border_thickness3()
-        //        {
-        //            //arrange
-        //            _screenDisplayMock.Setup(s => s.DisplayString).Returns(
-        //                new StringBuilder().Append("-------\n").
-        //                                    Append("-------\n").
-        //                                    Append("-------\n").
-        //                                    Append("--- ---\n").
-        //                                    Append("-------\n").
-        //                                    Append("-------\n").
-        //                                    Append("-------"));
-        //            _borderMock.Setup(b => b.Thickness).Returns(3);
-        //            _borderMock.Setup(b => b.BorderChar).Returns('-');
-        //            _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>())).Returns(_screenDisplayMock.Object);
-        //            vstack.Border = _borderMock.Object;
-        //            //act
-        //            IScreenDisplay screenDisplay = vstack.GetDisplay(new(7, 7));
-        //            //assert
-        //            const string expected = "-------\n" +
-        //                                    "-------\n" +
-        //                                    "-------\n" +
-        //                                    "---*---\n" +
-        //                                    "-------\n" +
-        //                                    "-------\n" +
-        //                                    "-------";
-        //            Assert.Equal(expected, screenDisplay.DisplayString.ToString());
-        //        }
-        //        [Fact]
-        //        public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border_thickness4()
-        //        {
-        //            //arrange
-        //            _screenDisplayMock.Setup(s => s.DisplayString).Returns(
-        //                new StringBuilder().Append("-------\n").
-        //                                    Append("-------\n").
-        //                                    Append("-------\n").
-        //                                    Append("--- ---\n").
-        //                                    Append("-------\n").
-        //                                    Append("-------\n").
-        //                                    Append("-------"));
-        //            _borderMock.Setup(b => b.Thickness).Returns(3);
-        //            _borderMock.Setup(b => b.BorderChar).Returns('-');
-        //            _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>())).Returns(_screenDisplayMock.Object);
-        //            vstack.Border = _borderMock.Object;
-        //            //act
-        //            IScreenDisplay screenDisplay = vstack.GetDisplay(new(7, 7));
-        //            //assert
-        //            const string expected = "-------\n" +
-        //                                    "-------\n" +
-        //                                    "-------\n" +
-        //                                    "---*---\n" +
-        //                                    "-------\n" +
-        //                                    "-------\n" +
-        //                                    "-------";
-        //            Assert.Equal(expected, screenDisplay.DisplayString.ToString());
-        //        }
-        //[Fact]
-        //public void TestBoundedVStack()
-        //{
-        //    var output = new StringBuilder();
-        //    using (var writer = new StringWriter(output))
-        //    {
-        //        var ui = new GiftUI(new Bound(20, 60));
-        //        var vstack = new VStackBuilder().WithFraction(0.3)).Build();
-        //        var label1 = new LabelBuilder().BuildImplicit();
-        //        ui.SetChild(vstack);
-        //        vstack.AddChild(label1);
-        //        TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
+        [Fact]
+        public void GetDisplay_should_return_screen_when_call_GetDisplay_whithout_border()
+        {
+            var vstack = new VStackBuilder().
+                WithBorder(new NoBorder()).
+                Build();
+            //act
+            IScreenDisplay screenDisplay = vstack.GetDisplay(new Bound(2, 4), '*');
+            //assert
+            const string expected = "****\n" +
+                                    "****";
+            Assert.Equal(expected, screenDisplay.DisplayString.ToString());
+        }
 
-        //        var expectedBuilder = new StringBuilder();
-        //        string expected = "";
-        //        var actual = renderedText.ToString().Split('\n');
-        //        for (int i = 0; i < ui.Bound.Height; i++)
-        //        {
-        //            expectedBuilder.Clear();
-        //            expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, ui.Bound.Width));
-        //            expected = expectedBuilder.ToString();
-        //            if (i == 0)
-        //            {
-        //                expected = TestHelper.Replace(expected, "Hello", 0);
-        //            }
-        //            Assert.Equal(expected, actual[i]);
-        //        }
-        //    }
-        //}
+        [Fact]
+        public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border1()
+        {
+            //arrange
+            var vstack = new VStackBuilder().
+                WithBorder(new SimpleBorder(1, '-')).
+                Build();
+            //act
+            IScreenDisplay screenDisplay = vstack.GetDisplay(new Bound(3, 4), '*');
+            //assert
+            const string expected = "----\n" +
+                                    "-**-\n" +
+                                    "----";
+            Assert.Equal(expected, screenDisplay.DisplayString.ToString());
+        }
+        [Fact]
+        public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border2()
+        {
+            //arrange
+            var vstack = new VStackBuilder().
+                WithBorder(new SimpleBorder(1, '_')).
+                Build();
+            //act
+            IScreenDisplay screenDisplay = vstack.GetDisplay(new(3, 4));
+            //assert
+            const string expected = "____\n" +
+                                    "_**_\n" +
+                                    "____";
+            Assert.Equal(expected, screenDisplay.DisplayString.ToString());
+        }
+        [Fact]
+        public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border3()
+        {
+            //arrange
+            var vstack = new VStackBuilder().
+                WithBorder(new SimpleBorder(1, 'i')).
+                Build();
+            //act
+            IScreenDisplay screenDisplay = vstack.GetDisplay(new(3, 4));
+            //assert
+            const string expected = "iiii\n" +
+                                    "i**i\n" +
+                                    "iiii";
+            Assert.Equal(expected, screenDisplay.DisplayString.ToString());
+        }
+        [Fact]
+        public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border4()
+        {
+            //arrange
+            var vstack = new VStackBuilder().
+                WithBorder(new SimpleBorder(1, '-')).
+                Build();
+            //act
+            IScreenDisplay screenDisplay = vstack.GetDisplay(new(5, 5));
+            //assert
+            const string expected = "-----\n" +
+                                    "-***-\n" +
+                                    "-***-\n" +
+                                    "-***-\n" +
+                                    "-----";
+            Assert.Equal(expected, screenDisplay.DisplayString.ToString());
+        }
+        [Fact]
+        public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border5()
+        {
+            //arrange
+            var vstack = new VStackBuilder().
+                WithBorder(new SimpleBorder(1, '-')).
+                Build();
+            //act
+            IScreenDisplay screenDisplay = vstack.GetDisplay(new(3, 6));
+            //assert
+            const string expected = "------\n" +
+                                    "-****-\n" +
+                                    "------";
+            Assert.Equal(expected, screenDisplay.DisplayString.ToString());
+        }
+        [Fact]
+        public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border_thickness1()
+        {
+            //arrange
+            var vstack = new VStackBuilder().
+                WithBorder(new SimpleBorder(2, '-')).
+                Build();
+            //act
+            IScreenDisplay screenDisplay = vstack.GetDisplay(new(5, 5));
+            //assert
+            const string expected = "-----\n" +
+                                    "-----\n" +
+                                    "--*--\n" +
+                                    "-----\n" +
+                                    "-----";
+            Assert.Equal(expected, screenDisplay.DisplayString.ToString());
+        }
+        [Fact]
+        public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border_thickness2()
+        {
+            //arrange
+            var vstack = new VStackBuilder().
+                WithBorder(new SimpleBorder(2, '-')).
+                Build();
+            //act
+            IScreenDisplay screenDisplay = vstack.GetDisplay(new(6, 7));
+            //assert
+            const string expected = "-------\n" +
+                                    "-------\n" +
+                                    "--***--\n" +
+                                    "--***--\n" +
+                                    "-------\n" +
+                                    "-------";
+            Assert.Equal(expected, screenDisplay.DisplayString.ToString());
+        }
+        [Fact]
+        public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border_thickness3()
+        {
+            //arrange
+            var vstack = new VStackBuilder().
+                WithBorder(new SimpleBorder(3, '-')).
+                Build();
+            //act
+            IScreenDisplay screenDisplay = vstack.GetDisplay(new(7, 7));
+            //assert
+            const string expected = "-------\n" +
+                                    "-------\n" +
+                                    "-------\n" +
+                                    "---*---\n" +
+                                    "-------\n" +
+                                    "-------\n" +
+                                    "-------";
+            Assert.Equal(expected, screenDisplay.DisplayString.ToString());
+        }
+        [Fact]
+        public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border_thickness4()
+        {
+            //arrange
+            var vstack = new VStackBuilder().
+                WithBorder(new SimpleBorder(3, '-')).
+                Build();
+            //act
+            IScreenDisplay screenDisplay = vstack.GetDisplay(new(7, 7));
+            //assert
+            const string expected = "-------\n" +
+                                    "-------\n" +
+                                    "-------\n" +
+                                    "---*---\n" +
+                                    "-------\n" +
+                                    "-------\n" +
+                                    "-------";
+            Assert.Equal(expected, screenDisplay.DisplayString.ToString());
+        }
     }
 }
