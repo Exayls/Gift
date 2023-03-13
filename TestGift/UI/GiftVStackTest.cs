@@ -85,6 +85,7 @@ namespace TestGift.UI
                 Assert.Equal(expected, actual[i]);
             }
         }
+
         [Fact]
         public void TestVStackWithLabelExplicit()
         {
@@ -112,6 +113,7 @@ namespace TestGift.UI
                 Assert.Equal(expected, actual[i]);
             }
         }
+
         [Fact]
         public void TestVStackWith2LabelsImplicit()
         {
@@ -145,6 +147,7 @@ namespace TestGift.UI
                 Assert.Equal(expected, actual[i]);
             }
         }
+
         [Fact]
         public void TestVStackWith3LabelsImplicit()
         {
@@ -184,6 +187,7 @@ namespace TestGift.UI
                 Assert.Equal(expected, actual[i]);
             }
         }
+
         [Fact]
         public void TestVStackWithExplicitLabel()
         {
@@ -223,6 +227,7 @@ namespace TestGift.UI
                 Assert.Equal(expected, actual[i]);
             }
         }
+
         [Fact]
         public void TestVStackWithTooMuchElement()
         {
@@ -242,7 +247,6 @@ namespace TestGift.UI
             vstack.AddChild(label4);
             vstack.AddChild(label5);
             TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
-
             var expectedBuilder = new StringBuilder();
             string expected = "";
             string[] actual = renderedText.ToString()?.Split('\n') ?? Array.Empty<string>();
@@ -349,6 +353,7 @@ namespace TestGift.UI
                                     "----";
             Assert.Equal(expected, screenDisplay.DisplayString.ToString());
         }
+
         [Fact]
         public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border2()
         {
@@ -364,6 +369,7 @@ namespace TestGift.UI
                                     "____";
             Assert.Equal(expected, screenDisplay.DisplayString.ToString());
         }
+
         [Fact]
         public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border3()
         {
@@ -379,6 +385,7 @@ namespace TestGift.UI
                                     "iiii";
             Assert.Equal(expected, screenDisplay.DisplayString.ToString());
         }
+
         [Fact]
         public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border4()
         {
@@ -396,6 +403,7 @@ namespace TestGift.UI
                                     "-----";
             Assert.Equal(expected, screenDisplay.DisplayString.ToString());
         }
+
         [Fact]
         public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border5()
         {
@@ -411,6 +419,7 @@ namespace TestGift.UI
                                     "------";
             Assert.Equal(expected, screenDisplay.DisplayString.ToString());
         }
+
         [Fact]
         public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border_thickness1()
         {
@@ -429,6 +438,7 @@ namespace TestGift.UI
             Assert.Equal(expected, screenDisplay.DisplayString.ToString());
         }
         [Fact]
+
         public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border_thickness2()
         {
             //arrange
@@ -446,6 +456,7 @@ namespace TestGift.UI
                                     "-------";
             Assert.Equal(expected, screenDisplay.DisplayString.ToString());
         }
+
         [Fact]
         public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border_thickness3()
         {
@@ -465,6 +476,7 @@ namespace TestGift.UI
                                     "-------";
             Assert.Equal(expected, screenDisplay.DisplayString.ToString());
         }
+
         [Fact]
         public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border_thickness4()
         {
