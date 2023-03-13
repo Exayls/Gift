@@ -85,7 +85,6 @@ namespace TestGift.UI
                 Assert.Equal(expected, actual[i]);
             }
         }
-
         [Fact]
         public void TestVStackWithLabelExplicit()
         {
@@ -437,8 +436,8 @@ namespace TestGift.UI
                                     "-----";
             Assert.Equal(expected, screenDisplay.DisplayString.ToString());
         }
-        [Fact]
 
+        [Fact]
         public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border_thickness2()
         {
             //arrange
