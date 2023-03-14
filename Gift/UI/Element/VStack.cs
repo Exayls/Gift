@@ -142,10 +142,10 @@ namespace Gift.UI.Element
 
         public override IScreenDisplay GetDisplay(Bound bound)
         {
-            return GetDisplay(bound, GiftBase.FILLINGCHAR);
+            return GetDisplayWithBorder(bound, GiftBase.FILLINGCHAR);
         }
 
-        public IScreenDisplay GetDisplay(Bound bound, char fillingChar)
+        public IScreenDisplay GetDisplayWithBorder(Bound bound, char fillingChar)
         {
             int thickness = Border.Thickness;
             IScreenDisplay screenDisplay = Border.GetDisplay(bound);

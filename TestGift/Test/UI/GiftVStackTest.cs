@@ -330,7 +330,7 @@ namespace TestGift.UI
                 WithBorder(new NoBorder()).
                 Build();
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplay(new Bound(2, 4), '*');
+            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new Bound(2, 4), '*');
             //assert
             const string expected = "****\n" +
                                     "****";
@@ -345,7 +345,7 @@ namespace TestGift.UI
                 WithBorder(new SimpleBorder(1, '-')).
                 Build();
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplay(new Bound(3, 4), '*');
+            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new Bound(3, 4), '*');
             //assert
             const string expected = "----\n" +
                                     "-**-\n" +
