@@ -9,6 +9,8 @@ namespace TestGift.Test.UI
 {
     public class RelativeRendererTest
     {
+        private TextWriter rendered;
+
         public RelativeRendererTest()
         {
             GiftUI ui = new GiftUI(new Bound(5, 10));
@@ -23,7 +25,20 @@ namespace TestGift.Test.UI
             vstack2.AddChild(new LabelBuilder().BuildImplicit());
             vstack2.AddChild(new LabelBuilder().WithText("test6").WithPosition(new Position(-2, 58)).Build());
 
+        }
+
+        [Fact]
+        public void Can_render_Simple_UI()
+        {
+            GiftUI ui = new GiftUI(new Bound(5, 10), new NoBorder());
             RelativeRenderer relativeRenderer = new RelativeRenderer();
+            rendered = relativeRenderer.GetRenderedBuffer(ui);
+            const string expected = "**********\n" +
+                                    "**********\n" +
+                                    "**********\n" +
+                                    "**********\n" +
+                                    "**********";
+            Assert.Equal(expected,rendered.ToString() );
         }
 
 
