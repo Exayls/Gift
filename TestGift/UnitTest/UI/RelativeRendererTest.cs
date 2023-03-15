@@ -5,6 +5,7 @@ using Gift.UI.MetaData;
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,15 +15,15 @@ namespace TestGift.UnitTest.UI
     public class RelativeRendererTest
     {
         private Mock<IGiftUI> _giftuiMock;
-        private Mock<IScreenDisplay> _screenDisplayMock;
         private Mock<IUIElement> _labelMock;
+        private MockRepository _mockFactory;
         private RelativeRenderer renderer;
 
         public RelativeRendererTest()
         {
             _giftuiMock = new Mock<IGiftUI>();
-            _screenDisplayMock = new Mock<IScreenDisplay>();
             _labelMock = new Mock<IUIElement>();
+            _mockFactory = new MockRepository(MockBehavior.Default);
             renderer = new RelativeRenderer();
         }
 
@@ -30,47 +31,59 @@ namespace TestGift.UnitTest.UI
         public void GetRenderedBuffer_should_return_empty_text_when_giftui_is_empty()
         {
             //arrange
-            _screenDisplayMock.Setup(s => s.DisplayString).Returns(new StringBuilder());
+            var screenDisplay = _mockFactory.Of<IScreenDisplay>()
+                .Where(s => s.DisplayString == new StringBuilder())
+                .First();
             _giftuiMock.Setup(m => m.Childs).Returns(new List<IUIElement>());
             //act
-            TextWriter actual = renderer.GetRenderedBuffer(_giftuiMock.Object, _screenDisplayMock.Object);
+            TextWriter actual = renderer.GetRenderedBuffer(_giftuiMock.Object, screenDisplay);
             //assert
             Assert.Equal("", actual.ToString());
         }
+
         [Fact]
         public void GetRenderedBuffer_should_return_hello_text_when_giftui_has_label_hello()
         {
             //arrange
-            _screenDisplayMock.Setup(s => s.DisplayString).Returns(new StringBuilder("hello"));
+            var screenDisplay = _mockFactory.Of<IScreenDisplay>()
+                .Where(s => s.DisplayString == new StringBuilder("hello"))
+                .First();
+            //screenDisplay.Setup(s => s.DisplayString).Returns(new StringBuilder("hello"));
             _giftuiMock.Setup(m => m.Childs).Returns(new List<IUIElement>());
             //act
-            TextWriter actual = renderer.GetRenderedBuffer(_giftuiMock.Object, _screenDisplayMock.Object);
+            TextWriter actual = renderer.GetRenderedBuffer(_giftuiMock.Object, screenDisplay);
             //assert
             Assert.Equal("hello", actual.ToString());
         }
+
         [Fact]
         public void GetRenderedBuffer_should_Call_GetDisplay_when_giftui_is_alone()
         {
             //arrange
-            _screenDisplayMock.Setup(s => s.DisplayString).Returns(new StringBuilder("hello"));
+            var screenDisplay = _mockFactory.Of<IScreenDisplay>()
+                .Where(s => s.DisplayString == new StringBuilder("hello"))
+                .First();
             _giftuiMock.Setup(m => m.Childs).Returns(new List<IUIElement>());
-            _giftuiMock.Setup(m => m.GetDisplay()).Returns(_screenDisplayMock.Object);
+            _giftuiMock.Setup(m => m.GetDisplay()).Returns(screenDisplay);
             //act
             TextWriter actual = renderer.GetRenderedBuffer(_giftuiMock.Object);
             //assert
             _giftuiMock.Verify(g => g.GetDisplay());
         }
+
         [Fact]
         public void GetRenderedBuffer_should_Call_GetDisplay_when_giftui_has_element()
         {
             //arrange
-            _screenDisplayMock.Setup(s => s.DisplayString).Returns(new StringBuilder("hello"));
+            var screenDisplay = _mockFactory.Of<IScreenDisplay>()
+                .Where(s => s.DisplayString == new StringBuilder("hello"))
+                .First();
             _giftuiMock.Setup(m => m.Childs).Returns(new List<IUIElement>()
             {
                 _labelMock.Object
             });
-            _giftuiMock.Setup(m => m.GetDisplay(It.IsAny<Bound>())).Returns(_screenDisplayMock.Object);
-            _giftuiMock.Setup(m => m.GetDisplay()).Returns(_screenDisplayMock.Object);
+            _giftuiMock.Setup(m => m.GetDisplay(It.IsAny<Bound>())).Returns(screenDisplay);
+            _giftuiMock.Setup(m => m.GetDisplay()).Returns(screenDisplay);
             _giftuiMock.Setup(m => m.isVisible(It.IsAny<IRenderable>())).Returns(true);
             _giftuiMock.Setup(m => m.GetContextRenderable(It.IsAny<IRenderable>(), It.IsAny<Context>())).Returns(new Context(new(0, 0), new(0, 0)));
             //act
@@ -78,5 +91,75 @@ namespace TestGift.UnitTest.UI
             //assert
             _labelMock.Verify(g => g.GetDisplay(It.IsAny<Bound>()));
         }
+
+        //[Fact]
+        //public void GetRenderedBuffer_should_return_correct_vstack()
+        //{
+        //    //arrange
+        //    //label1
+        //    IScreenDisplay screenDisplayLabel1 = _mockFactory.Of<IScreenDisplay>()
+        //        .Where(s => s.DisplayString == new StringBuilder(
+        //            "hello"))
+        //        .First();
+        //    IUIElement element1 = _mockFactory.Of<IUIElement>()
+        //        .Where(s => s.GetDisplay(It.IsAny<Bound>()) == screenDisplayLabel1)
+        //        .First();
+        //    //label2
+        //    IScreenDisplay screenDisplayLabel2 = _mockFactory.Of<IScreenDisplay>()
+        //        .Where(s => s.DisplayString == new StringBuilder(
+        //            "test"))
+        //        .First();
+        //    IUIElement element2 = _mockFactory.Of<IUIElement>()
+        //        .Where(s => s.GetDisplay(It.IsAny<Bound>()) == screenDisplayLabel2)
+        //        .First();
+        //    //label3
+        //    IScreenDisplay screenDisplayLabel3 = _mockFactory.Of<IScreenDisplay>()
+        //        .Where(s => s.DisplayString == new StringBuilder(
+        //            "testToLongString"))
+        //        .First();
+        //    IUIElement element3 = _mockFactory.Of<IUIElement>()
+        //        .Where(s => s.GetDisplay(It.IsAny<Bound>()) == screenDisplayLabel3)
+        //        .First();
+
+
+        //    IScreenDisplay screenDisplayVstack = _mockFactory.Of<IScreenDisplay>()
+        //        .Where(s => s.DisplayString == new StringBuilder(
+        //            "+++++\n" +
+        //            "+   +\n" +
+        //            "+   +\n" +
+        //            "+   +\n" +
+        //            "+++++"))
+        //        .First();
+        //    IContainer vstack = _mockFactory.Of<IContainer>()
+        //        .Where(s => s.GetDisplay(It.IsAny<Bound>()) == screenDisplayVstack)
+        //        .Where(s => s.Childs == new Collection<IUIElement>()
+        //        {
+        //            element1,
+        //            element2,
+        //            element3
+        //        }
+        //        )
+        //        .First();
+
+        //    IScreenDisplay screenDisplayGift = _mockFactory.Of<IScreenDisplay>()
+        //        .Where(s => s.DisplayString == new StringBuilder(
+        //            "     \n" +
+        //            "     \n" +
+        //            "     \n" +
+        //            "     \n" +
+        //            "     "))
+        //        .First();
+        //    _giftuiMock.Setup(m => m.Childs).Returns(new List<IUIElement>()
+        //    {
+        //        vstack
+        //    });
+        //    _giftuiMock.Setup(m => m.GetDisplay(It.IsAny<Bound>())).Returns(screenDisplayGift);
+        //    _giftuiMock.Setup(m => m.GetDisplay()).Returns(screenDisplayGift);
+        //    _giftuiMock.Setup(m => m.isVisible(It.IsAny<IRenderable>())).Returns(true);
+        //    _giftuiMock.Setup(m => m.GetContextRenderable(It.IsAny<IRenderable>(), It.IsAny<Context>())).Returns(new Context(new(0, 0), new(0, 0)));
+        //    //act
+        //    TextWriter actual = renderer.GetRenderedBuffer(_giftuiMock.Object);
+        //    //assert
+        //}
     }
 }
