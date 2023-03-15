@@ -30,6 +30,6 @@ namespace Gift.UI.Element
 
 
         public abstract Context GetContextRenderable(IRenderable renderable, Context context);
-
+        public abstract Context GetContextRelativeRenderable(IRenderable renderable, Context context);
     }
 }

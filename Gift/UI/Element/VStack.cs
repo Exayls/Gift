@@ -107,6 +107,25 @@ namespace Gift.UI.Element
                     new Bound(renderable.Height, renderable.Width));
             }
         }
+        public override Context GetContextRelativeRenderable(IRenderable renderable, Context context)
+        {
+            int ChildContextPosition = GetHeightRenderableFromTop(renderable);
+            int thickness = Border.Thickness;
+            if (renderable.IsFixed())
+            {
+                return new Context(
+                    new Position(thickness + ChildContextPosition
+                               , thickness),
+                    new Bound(0, 0));
+            }
+            else
+            {
+                return new Context(
+                    new Position(thickness + ChildContextPosition
+                               , thickness),
+                    new Bound(renderable.Height, renderable.Width));
+            }
+        }
 
         private int GetHeightRenderableFromTop(IRenderable renderableToFind)
         {
@@ -132,7 +151,8 @@ namespace Gift.UI.Element
 
         public override Position GetRelativePosition(Context context)
         {
-            return new Position(0, 0);
+            return new Position(context.GlobalPosition.y,
+                                context.GlobalPosition.x);
         }
         public override Position GetGlobalPosition(Context context)
         {

@@ -44,6 +44,11 @@ namespace Gift.UI
             return true;
         }
 
+        public override Context GetContextRelativeRenderable(IRenderable renderable, Context context)
+        {
+            return context;
+        }
+
         public override Context GetContextRenderable(IRenderable renderable, Context context)
         {
             if (Childs.Contains(renderable))
@@ -79,5 +84,6 @@ namespace Gift.UI
         {
             return context.GlobalPosition;
         }
+
     }
 }

@@ -7,21 +7,20 @@ using Gift.UI.MetaData;
 
 namespace TestGift.Test.UI
 {
-    public class RelativeRendererTest
+    public class RendererTest
     {
-        private RelativeRenderer renderer;
+        private Renderer Renderer;
 
-        public RelativeRendererTest()
+        public RendererTest()
         {
-            renderer = new RelativeRenderer();
+            Renderer = new Renderer();
         }
 
         [Fact]
         public void Can_render_Simple_UI()
         {
             GiftUI ui = new GiftUI(new Bound(5, 10), new NoBorder());
-            Renderer relativeRenderer = new Renderer();
-            TextWriter rendered = relativeRenderer.GetRenderedBuffer(ui);
+            TextWriter rendered = Renderer.GetRenderedBuffer(ui);
             const string expected = "**********\n" +
                                     "**********\n" +
                                     "**********\n" +
@@ -42,7 +41,7 @@ namespace TestGift.Test.UI
             vstack.AddChild(vstack2);
             vstack2.AddChild(new LabelBuilder().WithText("hey").BuildImplicit());
             vstack2.AddChild(new LabelBuilder().BuildImplicit());
-            TextWriter rendered = renderer.GetRenderedBuffer(ui);
+            TextWriter rendered = Renderer.GetRenderedBuffer(ui);
             const string expected = "╔════════╗\n" +
                                     "║Hello***║\n" +
                                     "║┌─────┐*║\n" +
@@ -69,6 +68,7 @@ namespace TestGift.Test.UI
         //    vstack2.AddChild(new LabelBuilder().WithText("testwithbiggerwidth").BuildImplicit());
         //    vstack2.AddChild(new LabelBuilder().BuildImplicit());
         //    vstack2.AddChild(new LabelBuilder().WithText("test6").WithPosition(new Position(-2, 3)).Build());
+        //    RelativeRenderer relativeRenderer = new RelativeRenderer();
         //    rendered = relativeRenderer.GetRenderedBuffer(ui);
         //    const string expected = "╔════════╗\n" +
         //                            "║hello***║\n" +

@@ -18,7 +18,6 @@ namespace Gift.UI
         {
             Context context = new Context(new(0, 0), screen.TotalBound);
             Render(screen, giftUI, context);
-
             TextWriter Output = new StringWriter();
             Output.Write(screen.DisplayString);
             return Output;
@@ -27,14 +26,14 @@ namespace Gift.UI
         private void Render(IScreenDisplay screen, IRenderable Renderer, Context context)
         {
             IScreenDisplay display = CreateDisplay(Renderer, context);
-            UpdateDisplay(screen, Renderer, context, display);
+            UpdateScreenDisplay(screen, Renderer, context, display);
         }
 
         private void Render(IScreenDisplay screen, IContainer container, Context context)
         {
             IScreenDisplay display = CreateDisplay(container, context);
             RenderAllChilds(display, container, context);
-            UpdateDisplay(screen, container, context, display);
+            UpdateScreenDisplay(screen, container, context, display);
         }
 
         private IScreenDisplay CreateDisplay(IRenderable container, Context context)
@@ -42,23 +41,23 @@ namespace Gift.UI
             return container.GetDisplay(context.Bounds);
         }
 
-        private void UpdateDisplay(IScreenDisplay screen, IRenderable renderable, Context context, IScreenDisplay display)
+        private void UpdateScreenDisplay(IScreenDisplay screen, IRenderable renderable, Context context, IScreenDisplay display)
         {
-            Position globalPosition = renderable.GetGlobalPosition(context);
-            screen.AddDisplay(display, globalPosition);
+            Position relativePosition = renderable.GetRelativePosition(context);
+            screen.AddDisplay(display, relativePosition);
         }
 
         private void RenderAllChilds(IScreenDisplay screen, IContainer container, Context context)
         {
             foreach (IRenderable renderable in container.Childs)
             {
-                RenderAnyRenderable(screen, container, context, renderable);
+                RenderContainerOrElement(screen, container, context, renderable);
             }
         }
 
-        private void RenderAnyRenderable(IScreenDisplay screen, IContainer container, Context context, IRenderable renderable)
+        private void RenderContainerOrElement(IScreenDisplay screen, IContainer container, Context context, IRenderable renderable)
         {
-            Context renderableContext = container.GetContextRenderable(renderable, context);
+            Context renderableContext = container.GetContextRelativeRenderable(renderable, context);
             switch (renderable)
             {
                 case Container containerToRender:
