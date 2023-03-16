@@ -77,12 +77,12 @@ namespace Gift.UI
 
         public override Position GetRelativePosition(Context context)
         {
-            return context.GlobalPosition;
+            return context.Position;
         }
 
         public override Position GetGlobalPosition(Context context)
         {
-            return context.GlobalPosition;
+            return context.Position;
         }
 
     }

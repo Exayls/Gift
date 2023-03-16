@@ -26,14 +26,14 @@ namespace Gift.UI
         private void Render(IScreenDisplay screen, IRenderable Renderer, Context context)
         {
             IScreenDisplay display = CreateDisplay(Renderer, context);
-            UpdateScreenDisplay(screen, Renderer, context, display);
+            UpdateScreenWithNewDisplay(screen, Renderer, context, display);
         }
 
         private void Render(IScreenDisplay screen, IContainer container, Context context)
         {
             IScreenDisplay display = CreateDisplay(container, context);
             RenderAllChilds(display, container, context);
-            UpdateScreenDisplay(screen, container, context, display);
+            UpdateScreenWithNewDisplay(screen, container, context, display);
         }
 
         private IScreenDisplay CreateDisplay(IRenderable container, Context context)
@@ -41,7 +41,7 @@ namespace Gift.UI
             return container.GetDisplay(context.Bounds);
         }
 
-        private void UpdateScreenDisplay(IScreenDisplay screen, IRenderable renderable, Context context, IScreenDisplay display)
+        private void UpdateScreenWithNewDisplay(IScreenDisplay screen, IRenderable renderable, Context context, IScreenDisplay display)
         {
             Position relativePosition = renderable.GetRelativePosition(context);
             screen.AddDisplay(display, relativePosition);

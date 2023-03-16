@@ -65,7 +65,7 @@ namespace Gift.UI.Element
 
         private int GetHeightAllChildsAfter(IRenderable uIElement)
         {
-            int GlobalPosition = Context?.GlobalPosition?.y ?? 0;
+            int GlobalPosition = Context?.Position?.y ?? 0;
             int ChildContextPosition = GlobalPosition;
             foreach (UIElement renderable in Childs)
             {
@@ -95,15 +95,15 @@ namespace Gift.UI.Element
             if (renderable.IsFixed())
             {
                 return new Context(
-                    context.GlobalPosition,
+                    context.Position,
                     new Bound(0, 0));
             }
             else
             {
                 int thickness = Border.Thickness;
                 return new Context(
-                    new Position(thickness + ChildContextPosition + context.GlobalPosition.y
-                               , thickness + context.GlobalPosition.x),
+                    new Position(thickness + ChildContextPosition + context.Position.y
+                               , thickness + context.Position.x),
                     new Bound(renderable.Height, renderable.Width));
             }
         }
@@ -151,13 +151,13 @@ namespace Gift.UI.Element
 
         public override Position GetRelativePosition(Context context)
         {
-            return new Position(context.GlobalPosition.y,
-                                context.GlobalPosition.x);
+            return new Position(context.Position.y,
+                                context.Position.x);
         }
         public override Position GetGlobalPosition(Context context)
         {
-            return new Position(context.GlobalPosition.y,
-                                context.GlobalPosition.x);
+            return new Position(context.Position.y,
+                                context.Position.x);
         }
 
         public override IScreenDisplay GetDisplay(Bound bound)

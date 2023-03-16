@@ -10,11 +10,11 @@ namespace Gift.UI.MetaData
     {
         public Context(Position globalPosition, Bound localBounds)
         {
-            GlobalPosition = globalPosition;
+            Position = globalPosition;
             Bounds = localBounds;
         }
 
-        public Position GlobalPosition { get; private set; }
+        public Position Position { get; private set; }
         public Bound Bounds { get; private set; }
 
     }
