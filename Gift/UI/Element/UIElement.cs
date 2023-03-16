@@ -7,7 +7,6 @@ namespace Gift.UI.Element
 {
     public abstract class UIElement : IRenderable, IUIElement
     {
-        public Context Context { get; set; }
 
         public abstract int Height { get; }
         public abstract int Width { get; }
@@ -29,11 +28,5 @@ namespace Gift.UI.Element
         public abstract Position GetRelativePosition(Context context);
         public abstract Position GetGlobalPosition(Context context);
         public abstract bool IsFixed();
-
-        internal void SetContext(Position globalPosition, Bound bound)
-        {
-            Context = new Context(globalPosition, bound);
-        }
-
     }
 }

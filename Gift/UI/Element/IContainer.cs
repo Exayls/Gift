@@ -10,6 +10,5 @@ namespace Gift.UI.Element
 
         Context GetContextRelativeRenderable(IRenderable renderable, Context context);
         Context GetContextRenderable(IRenderable renderable, Context context);
-        bool isVisible(IRenderable renderable);
     }
 }

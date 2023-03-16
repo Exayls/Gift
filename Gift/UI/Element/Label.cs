@@ -37,15 +37,6 @@ namespace Gift.UI.Element
             Disposition = new ImplicitDisposition();
         }
 
-        public string GetDisplay()
-        {
-            string text = Text;
-            int widthLine = Disposition.Position.x + text.Length;
-            int MaxWidth = Context.Bounds.Width;
-            string display = Disposition.Position.x <= MaxWidth ? widthLine > MaxWidth ? text.Substring(0, widthLine - MaxWidth - 1) : text : "";
-            return display;
-        }
-
         public override bool IsFixed()
         {
             return Disposition is ExplicitDisposition;

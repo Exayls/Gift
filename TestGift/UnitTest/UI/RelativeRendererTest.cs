@@ -84,7 +84,6 @@ namespace TestGift.UnitTest.UI
             });
             _giftuiMock.Setup(m => m.GetDisplay(It.IsAny<Bound>())).Returns(screenDisplay);
             _giftuiMock.Setup(m => m.GetDisplay()).Returns(screenDisplay);
-            _giftuiMock.Setup(m => m.isVisible(It.IsAny<IRenderable>())).Returns(true);
             _giftuiMock.Setup(m => m.GetContextRenderable(It.IsAny<IRenderable>(), It.IsAny<Context>())).Returns(new Context(new(0, 0), new(0, 0)));
             //act
             TextWriter actual = renderer.GetRenderedBuffer(_giftuiMock.Object);
@@ -155,7 +154,6 @@ namespace TestGift.UnitTest.UI
         //    });
         //    _giftuiMock.Setup(m => m.GetDisplay(It.IsAny<Bound>())).Returns(screenDisplayGift);
         //    _giftuiMock.Setup(m => m.GetDisplay()).Returns(screenDisplayGift);
-        //    _giftuiMock.Setup(m => m.isVisible(It.IsAny<IRenderable>())).Returns(true);
         //    _giftuiMock.Setup(m => m.GetContextRenderable(It.IsAny<IRenderable>(), It.IsAny<Context>())).Returns(new Context(new(0, 0), new(0, 0)));
         //    //act
         //    TextWriter actual = renderer.GetRenderedBuffer(_giftuiMock.Object);

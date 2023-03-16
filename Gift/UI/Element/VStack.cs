@@ -63,32 +63,6 @@ namespace Gift.UI.Element
         }
 
 
-        private int GetHeightAllChildsAfter(IRenderable uIElement)
-        {
-            int GlobalPosition = Context?.Position?.y ?? 0;
-            int ChildContextPosition = GlobalPosition;
-            foreach (UIElement renderable in Childs)
-            {
-                ChildContextPosition += renderable.Context?.Bounds?.Height ?? 0;
-                if (renderable == uIElement)
-                {
-                    return ChildContextPosition;
-                }
-            }
-            return 0;
-        }
-
-        public override bool isVisible(IRenderable renderable)
-        {
-            var ContextHeight = Context?.Bounds?.Height ?? 0;
-            int HeightAfter = GetHeightAllChildsAfter(renderable);
-            if (HeightAfter > ContextHeight)
-            {
-                return false;
-            }
-            return true;
-        }
-
         public override Context GetContextRenderable(IRenderable renderable, Context context)
         {
             int ChildContextPosition = GetHeightRenderableFromTop(renderable);
