@@ -1,4 +1,6 @@
-﻿using Gift.UI.Interface;
+﻿using Gift.UI.Border;
+using Gift.UI.Display;
+using Gift.UI.Element;
 using Gift.UI.MetaData;
 using System;
 using System.Collections.Generic;
@@ -19,10 +21,13 @@ namespace Gift.UI
             get { return Bound.Width; }
         }
 
-        public GiftUI(Bound bound) : base(bound)
+        public GiftUI(Bound bound, IBorder border) : base(bound, border)
         {
         }
-        public GiftUI()
+        public GiftUI(Bound bound) : base(bound, new NoBorder())
+        {
+        }
+        public GiftUI() : base()
         {
         }
 
@@ -30,16 +35,14 @@ namespace Gift.UI
         {
             Childs.Clear();
             Childs.Add(UIElement);
-
-            UIElement.setContext(new Position(0, 0), Bound);
         }
 
-        public override bool isVisible(Renderable renderable)//TODO
+        public override Context GetContextRelativeRenderable(IRenderable renderable, Context context)
         {
-            return true;
+            return context;
         }
 
-        public override Context GetContextRenderable(Renderable renderable, Context context)
+        public override Context GetContextRenderable(IRenderable renderable, Context context)
         {
             if (Childs.Contains(renderable))
             {
@@ -60,14 +63,31 @@ namespace Gift.UI
         {
             return new ScreenDisplay(Bound);
         }
+
         public override IScreenDisplay GetDisplay(Bound bound)
         {
             return new ScreenDisplay(bound);
         }
 
+        public override IScreenDisplay GetDisplayWithoutBorder(Bound bound)
+        {
+            return new ScreenDisplay(Bound);
+        }
+
+        public override IScreenDisplay GetDisplayBorder(Bound bound)
+        {
+            return Border.GetDisplay(bound);
+        }
+
+        public override Position GetRelativePosition(Context context)
+        {
+            return context.Position;
+        }
+
         public override Position GetGlobalPosition(Context context)
         {
-            return context.GlobalPosition;
+            return context.Position;
         }
+
     }
 }
