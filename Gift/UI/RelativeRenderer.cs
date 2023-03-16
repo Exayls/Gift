@@ -26,22 +26,37 @@ namespace Gift.UI
         private void Render(IScreenDisplay screen, IRenderable Renderer, Context context)
         {
             IScreenDisplay display = CreateDisplay(Renderer, context);
-            UpdateScreenWithNewDisplay(screen, Renderer, context, display);
+            AddDisplayToSreen(screen, Renderer, context, display);
         }
 
         private void Render(IScreenDisplay screen, IContainer container, Context context)
         {
+            IScreenDisplay border = CreateBorder(container, context);
+
             IScreenDisplay display = CreateDisplay(container, context);
             RenderAllChilds(display, container, context);
-            UpdateScreenWithNewDisplay(screen, container, context, display);
+            AddDisplayToBorder(border, container, display);
+
+            AddDisplayToSreen(screen, container, context, border);
         }
 
         private IScreenDisplay CreateDisplay(IRenderable container, Context context)
         {
-            return container.GetDisplay(context.Bounds);
+            return container.GetDisplayWithoutBorder(context.Bounds);
         }
 
-        private void UpdateScreenWithNewDisplay(IScreenDisplay screen, IRenderable renderable, Context context, IScreenDisplay display)
+        private void AddDisplayToBorder(IScreenDisplay screen, IContainer renderable, IScreenDisplay display)
+        {
+            Position relativePosition = new Position(renderable.Border.Thickness, renderable.Border.Thickness);
+            screen.AddDisplay(display, relativePosition);
+        }
+
+        private IScreenDisplay CreateBorder(IContainer container, Context context)
+        {
+            return container.GetDisplayBorder(context.Bounds);
+        }
+
+        private void AddDisplayToSreen(IScreenDisplay screen, IRenderable renderable, Context context, IScreenDisplay display)
         {
             Position relativePosition = renderable.GetRelativePosition(context);
             screen.AddDisplay(display, relativePosition);

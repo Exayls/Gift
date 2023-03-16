@@ -114,15 +114,15 @@ namespace Gift.UI.Element
             if (renderable.IsFixed())
             {
                 return new Context(
-                    new Position(thickness + ChildContextPosition
-                               , thickness),
+                    new Position(ChildContextPosition
+                               , 0),
                     new Bound(0, 0));
             }
             else
             {
                 return new Context(
-                    new Position(thickness + ChildContextPosition
-                               , thickness),
+                    new Position(ChildContextPosition
+                               , 0),
                     new Bound(renderable.Height, renderable.Width));
             }
         }
@@ -175,5 +175,18 @@ namespace Gift.UI.Element
             return screenDisplay;
         }
 
+        public override IScreenDisplay GetDisplayWithoutBorder(Bound bound)
+        {
+            int thickness = Border.Thickness;
+            Bound boundEmptyVStack = new Bound(bound.Height - 2 * thickness, bound.Width - 2 * thickness);
+            IScreenDisplay emptyVstackScreen = _screenDisplayFactory.Create(boundEmptyVStack, GiftBase.FILLINGCHAR);
+            return emptyVstackScreen;
+        }
+
+        public override IScreenDisplay GetDisplayBorder(Bound bound)
+        {
+            IScreenDisplay screenDisplay = Border.GetDisplay(bound);
+            return screenDisplay;
+        }
     }
 }

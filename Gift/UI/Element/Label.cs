@@ -88,5 +88,15 @@ namespace Gift.UI.Element
             //screen.AddString(display, Disposition.Position);
             //return screen;
         }
+
+        public override IScreenDisplay GetDisplayWithoutBorder(Bound bound)
+        {
+            return new ScreenDisplay(Text);
+        }
+
+        public override IScreenDisplay GetDisplayBorder(Bound bound)
+        {
+            return Border.GetDisplay(bound);
+        }
     }
 }

@@ -24,6 +24,8 @@ namespace Gift.UI.Element
         }
 
         public abstract IScreenDisplay GetDisplay(Bound bound);
+        public abstract IScreenDisplay GetDisplayWithoutBorder(Bound bound);
+        public abstract IScreenDisplay GetDisplayBorder(Bound bounds);
         public abstract Position GetRelativePosition(Context context);
         public abstract Position GetGlobalPosition(Context context);
         public abstract bool IsFixed();

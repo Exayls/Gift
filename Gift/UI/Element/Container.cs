@@ -1,4 +1,5 @@
 ﻿using Gift.UI.Border;
+using Gift.UI.Display;
 using Gift.UI.MetaData;
 using System.Text;
 

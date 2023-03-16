@@ -10,6 +10,8 @@ namespace Gift.UI.Element
         int Width { get; }
 
         IScreenDisplay GetDisplay(Bound bound);
+        IScreenDisplay GetDisplayWithoutBorder(Bound bounds);
+        IScreenDisplay GetDisplayBorder(Bound bounds);
         Position GetGlobalPosition(Context context);
         Position GetRelativePosition(Context context);
         bool IsFixed();

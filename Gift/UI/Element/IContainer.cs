@@ -1,4 +1,5 @@
-﻿using Gift.UI.MetaData;
+﻿using Gift.UI.Display;
+using Gift.UI.MetaData;
 
 namespace Gift.UI.Element
 {

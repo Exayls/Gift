@@ -70,9 +70,20 @@ namespace Gift.UI
         {
             return new ScreenDisplay(Bound);
         }
+
         public override IScreenDisplay GetDisplay(Bound bound)
         {
             return new ScreenDisplay(bound);
+        }
+
+        public override IScreenDisplay GetDisplayWithoutBorder(Bound bound)
+        {
+            return new ScreenDisplay(Bound);
+        }
+
+        public override IScreenDisplay GetDisplayBorder(Bound bound)
+        {
+            return Border.GetDisplay(bound);
         }
 
         public override Position GetRelativePosition(Context context)
