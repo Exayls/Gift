@@ -11,12 +11,12 @@ namespace Gift
     {
         public GiftUI? ui { get; set; }
         public TextWriter? View { get; private set; }
-        private Renderer _renderer;
+        private IRenderer _renderer;
 
         public const char FILLINGCHAR = '*';
 
 
-        public GiftBase( Renderer renderer)
+        public GiftBase( IRenderer renderer)
         {
             _renderer = renderer;
         }

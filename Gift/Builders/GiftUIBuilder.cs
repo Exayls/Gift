@@ -1,4 +1,5 @@
 ﻿using Gift.UI;
+using Gift.UI.Border;
 using Gift.UI.MetaData;
 using System;
 using System.Collections.Generic;
@@ -39,7 +40,7 @@ namespace Gift.Builders
         /// <returns>GiftUI instance</returns>
         public GiftUI Build()
         {
-            return new GiftUI(Bound);
+            return new GiftUI(Bound, new NoBorder());
         }
     }
 }
