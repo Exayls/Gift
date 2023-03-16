@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Gift.UI.Element
 {
-    public abstract class UIElement : IRenderable, IUIElement
+    public abstract class UIElement : IUIElement
     {
 
         public abstract int Height { get; }
@@ -24,7 +24,7 @@ namespace Gift.UI.Element
 
         public abstract IScreenDisplay GetDisplay(Bound bound);
         public abstract IScreenDisplay GetDisplayWithoutBorder(Bound bound);
-        public abstract IScreenDisplay GetDisplayBorder(Bound bounds);
+        public abstract IScreenDisplay GetDisplayBorder(Bound bound);
         public abstract Position GetRelativePosition(Context context);
         public abstract Position GetGlobalPosition(Context context);
         public abstract bool IsFixed();
