@@ -9,10 +9,12 @@ namespace Gift.UI.Element
     {
         public Bound Bound { get; protected set; }
         public IList<IUIElement> Childs { get; protected set; }
-        public Container(Bound bound, IBorder border) : base(border)
+        protected readonly IScreenDisplayFactory _screenDisplayFactory;
+        public Container(IScreenDisplayFactory screenDisplayFactory, Bound bound, IBorder border) : base(border)
         {
             Bound = bound;
             Childs = new List<IUIElement>();
+            _screenDisplayFactory = screenDisplayFactory;
         }
         public Container()
         {
@@ -25,6 +27,7 @@ namespace Gift.UI.Element
                 Bound = new Bound(0, 0);
             }
             Childs = new List<IUIElement>();
+            _screenDisplayFactory = new ScreenDisplayFactory();
         }
 
         public abstract Context GetContextRenderable(IRenderable renderable, Context context);

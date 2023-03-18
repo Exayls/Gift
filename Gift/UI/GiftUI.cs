@@ -21,10 +21,10 @@ namespace Gift.UI
             get { return Bound.Width; }
         }
 
-        public GiftUI(Bound bound, IBorder border) : base(bound, border)
+        public GiftUI(Bound bound, IBorder border) : base(new ScreenDisplayFactory(), bound, border)
         {
         }
-        public GiftUI(Bound bound) : base(bound, new NoBorder())
+        public GiftUI(Bound bound) : this(bound, new NoBorder())
         {
         }
         public GiftUI() : base()
@@ -61,17 +61,17 @@ namespace Gift.UI
 
         public IScreenDisplay GetDisplay()
         {
-            return new ScreenDisplay(Bound);
+            return _screenDisplayFactory.Create(Bound);
         }
 
         public override IScreenDisplay GetDisplay(Bound bound)
         {
-            return new ScreenDisplay(bound);
+            return _screenDisplayFactory.Create(Bound);
         }
 
         public override IScreenDisplay GetDisplayWithoutBorder(Bound bound)
         {
-            return new ScreenDisplay(Bound);
+            return _screenDisplayFactory.Create(Bound);
         }
 
         public override IScreenDisplay GetDisplayBorder(Bound bound)

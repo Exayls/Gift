@@ -2,7 +2,7 @@
 
 namespace Gift.UI.Display
 {
-    internal class ScreenDisplayFactory : IScreenDisplayFactory
+    public class ScreenDisplayFactory : IScreenDisplayFactory
     {
         public IScreenDisplay Create(Bound bound)
         {
