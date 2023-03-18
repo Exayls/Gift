@@ -16,7 +16,7 @@ namespace Gift
         public const char FILLINGCHAR = '*';
 
 
-        public GiftBase( IRenderer renderer)
+        public GiftBase(IRenderer renderer)
         {
             _renderer = renderer;
         }
@@ -34,7 +34,8 @@ namespace Gift
             while (true)
             {
                 Tick();
-                PrintFrame(1000);
+                PrintFrame();
+                Thread.Sleep(1000);
             }
         }
         public void Tick()
@@ -45,14 +46,13 @@ namespace Gift
             }
 
         }
-        private void PrintFrame(int timeFrame)
+        private void PrintFrame()
         {
+            Console.Clear();
             if (View != null)
             {
                 Console.Out.Write(View);
             }
-            Thread.Sleep(timeFrame);
-            Console.Clear();
         }
 
         public virtual void end()
