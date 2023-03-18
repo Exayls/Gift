@@ -36,6 +36,6 @@ vstack.AddChild(new LabelBuilder().BuildImplicit());
 
 
 
-var gift = new GiftBase(new Renderer());
+var gift = new GiftBase(new RelativeRenderer());
 gift.initialize(ui);
 gift.run();

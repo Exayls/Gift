@@ -82,7 +82,6 @@ namespace Gift.UI.Element
         public override Context GetContextRelativeRenderable(IRenderable renderable, Context context)
         {
             int ChildContextPosition = GetHeightRenderableFromTop(renderable);
-            int thickness = Border.Thickness;
             if (renderable.IsFixed())
             {
                 return new Context(
