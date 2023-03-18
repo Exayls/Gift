@@ -33,7 +33,7 @@ namespace TestGift.UnitTest.UI
             _screenDisplayMock.Setup(s => s.DisplayString).Returns(new StringBuilder());
             _giftuiMock.Setup(m => m.Childs).Returns(new List<IUIElement>());
             //act
-            TextWriter actual = renderer.GetRenderedBuffer(_giftuiMock.Object, _screenDisplayMock.Object);
+            TextWriter actual = renderer.GetRenderWriter(_giftuiMock.Object, _screenDisplayMock.Object);
             //assert
             Assert.Equal("", actual.ToString());
         }
@@ -44,7 +44,7 @@ namespace TestGift.UnitTest.UI
             _screenDisplayMock.Setup(s => s.DisplayString).Returns(new StringBuilder("hello"));
             _giftuiMock.Setup(m => m.Childs).Returns(new List<IUIElement>());
             //act
-            TextWriter actual = renderer.GetRenderedBuffer(_giftuiMock.Object, _screenDisplayMock.Object);
+            TextWriter actual = renderer.GetRenderWriter(_giftuiMock.Object, _screenDisplayMock.Object);
             //assert
             Assert.Equal("hello", actual.ToString());
         }
@@ -56,7 +56,7 @@ namespace TestGift.UnitTest.UI
             _giftuiMock.Setup(m => m.Childs).Returns(new List<IUIElement>());
             _giftuiMock.Setup(m => m.GetDisplay()).Returns(_screenDisplayMock.Object);
             //act
-            TextWriter actual = renderer.GetRenderedBuffer(_giftuiMock.Object);
+            TextWriter actual = renderer.GetRenderWriter(_giftuiMock.Object);
             //assert
             _giftuiMock.Verify(g => g.GetDisplay());
         }
@@ -72,7 +72,7 @@ namespace TestGift.UnitTest.UI
             _giftuiMock.Setup(m => m.GetDisplay()).Returns(_screenDisplayMock.Object);
             _giftuiMock.Setup(m => m.GetContextRenderable(It.IsAny<IRenderable>(), It.IsAny<Context>())).Returns(new Context(new(0, 0), new(0, 0)));
             //act
-            TextWriter actual = renderer.GetRenderedBuffer(_giftuiMock.Object);
+            TextWriter actual = renderer.GetRenderWriter(_giftuiMock.Object);
             //assert
             _labelMock.Verify(g => g.GetDisplay(It.IsAny<Bound>()));
         }

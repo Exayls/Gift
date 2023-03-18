@@ -20,7 +20,7 @@ namespace TestGift.Test.UI
         public void Can_render_Simple_UI()
         {
             GiftUI ui = new GiftUI(new Bound(5, 10), new NoBorder());
-            TextWriter rendered = Renderer.GetRenderedBuffer(ui);
+            TextWriter rendered = Renderer.GetRenderWriter(ui);
             const string expected = "**********\n" +
                                     "**********\n" +
                                     "**********\n" +
@@ -41,7 +41,7 @@ namespace TestGift.Test.UI
             vstack.AddChild(vstack2);
             vstack2.AddChild(new LabelBuilder().WithText("hey").BuildImplicit());
             vstack2.AddChild(new LabelBuilder().BuildImplicit());
-            TextWriter rendered = Renderer.GetRenderedBuffer(ui);
+            TextWriter rendered = Renderer.GetRenderWriter(ui);
             const string expected = "╔════════╗\n" +
                                     "║Hello***║\n" +
                                     "║┌─────┐*║\n" +

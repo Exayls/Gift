@@ -21,7 +21,7 @@ namespace TestGift.Test.UI
         {
             GiftUI ui = new GiftUI(new Bound(5, 10), new NoBorder());
             Renderer relativeRenderer = new Renderer();
-            TextWriter rendered = relativeRenderer.GetRenderedBuffer(ui);
+            TextWriter rendered = relativeRenderer.GetRenderWriter(ui);
             const string expected = "**********\n" +
                                     "**********\n" +
                                     "**********\n" +
@@ -42,7 +42,7 @@ namespace TestGift.Test.UI
             vstack.AddChild(vstack2);
             vstack2.AddChild(new LabelBuilder().WithText("hey").BuildImplicit());
             vstack2.AddChild(new LabelBuilder().BuildImplicit());
-            TextWriter rendered = renderer.GetRenderedBuffer(ui);
+            TextWriter rendered = renderer.GetRenderWriter(ui);
             const string expected = "╔════════╗\n" +
                                     "║Hello***║\n" +
                                     "║┌─────┐*║\n" +
@@ -68,7 +68,7 @@ namespace TestGift.Test.UI
             vstack2.AddChild(new LabelBuilder().WithText("hey").BuildImplicit());
             vstack2.AddChild(new LabelBuilder().WithText("test6").WithPosition(new Position(-2, 3)).Build());
             vstack2.AddChild(new LabelBuilder().BuildImplicit());
-            TextWriter rendered = renderer.GetRenderedBuffer(ui);
+            TextWriter rendered = renderer.GetRenderWriter(ui);
             const string expected = "╔════════╗\n" +
                                     "║Hello***║\n" +
                                     "║┌─────┐*║\n" +

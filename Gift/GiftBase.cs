@@ -42,7 +42,7 @@ namespace Gift
         {
             if (ui != null)
             {
-                View = _renderer.GetRenderedBuffer(ui);
+                View = _renderer.GetRenderWriter(ui);
             }
 
         }

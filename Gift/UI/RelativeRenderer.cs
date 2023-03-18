@@ -10,11 +10,11 @@ namespace Gift.UI
         {
         }
 
-        public TextWriter GetRenderedBuffer(IGiftUI giftUI)
+        public TextWriter GetRenderWriter(IGiftUI giftUI)
         {
-            return GetRenderedBuffer(giftUI, giftUI.GetDisplay());
+            return GetRenderWriter(giftUI, giftUI.GetDisplay());
         }
-        public TextWriter GetRenderedBuffer(IGiftUI giftUI, IScreenDisplay screen)
+        public TextWriter GetRenderWriter(IGiftUI giftUI, IScreenDisplay screen)
         {
             Context context = new Context(new(0, 0), screen.TotalBound);
             Render(screen, giftUI, context);

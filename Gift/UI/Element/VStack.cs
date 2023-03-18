@@ -63,7 +63,7 @@ namespace Gift.UI.Element
 
         public override Context GetContextRenderable(IRenderable renderable, Context context)
         {
-            int ChildContextPosition = GetHeightRenderableFromTop(renderable);
+            int ChildContextPosition = GetHeightRenderable(renderable);
             if (renderable.IsFixed())
             {
                 return new Context(
@@ -81,7 +81,7 @@ namespace Gift.UI.Element
         }
         public override Context GetContextRelativeRenderable(IRenderable renderable, Context context)
         {
-            int ChildContextPosition = GetHeightRenderableFromTop(renderable);
+            int ChildContextPosition = GetHeightRenderable(renderable);
             if (renderable.IsFixed())
             {
                 return new Context(
@@ -98,7 +98,7 @@ namespace Gift.UI.Element
             }
         }
 
-        private int GetHeightRenderableFromTop(IRenderable renderableToFind)
+        private int GetHeightRenderable(IRenderable renderableToFind)
         {
             int ChildContextPosition = 0;
             foreach (IUIElement renderable in Childs)

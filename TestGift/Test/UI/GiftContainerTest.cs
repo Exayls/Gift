@@ -18,7 +18,7 @@ namespace TestGift.UI
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
             var ui = new GiftUI(new Bound(20, 60));
-            TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
+            TextWriter renderedText = new Renderer().GetRenderWriter(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -39,7 +39,7 @@ namespace TestGift.UI
             var ui = new GiftUI(new Bound(20, 60));
             var element = new LabelBuilder().Build();
             ui.SetChild(element);
-            TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
+            TextWriter renderedText = new Renderer().GetRenderWriter(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -65,7 +65,7 @@ namespace TestGift.UI
             var position = new Position(0, 30);
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.SetChild(element);
-            TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
+            TextWriter renderedText = new Renderer().GetRenderWriter(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -91,7 +91,7 @@ namespace TestGift.UI
             var position = new Position(0, 10);
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.SetChild(element);
-            TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
+            TextWriter renderedText = new Renderer().GetRenderWriter(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -117,7 +117,7 @@ namespace TestGift.UI
             var position = new Position(0, 10);
             var element = new LabelBuilder().WithText("test").WithPosition(position).Build();
             ui.SetChild(element);
-            TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
+            TextWriter renderedText = new Renderer().GetRenderWriter(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -143,7 +143,7 @@ namespace TestGift.UI
             var position = new Position(0, 1000);
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.SetChild(element);
-            TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
+            TextWriter renderedText = new Renderer().GetRenderWriter(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -165,7 +165,7 @@ namespace TestGift.UI
             var position = new Position(0, 58);
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.SetChild(element);
-            TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
+            TextWriter renderedText = new Renderer().GetRenderWriter(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -191,7 +191,7 @@ namespace TestGift.UI
             var position = new Position(0, 58);
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.SetChild(element);
-            TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
+            TextWriter renderedText = new Renderer().GetRenderWriter(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -218,7 +218,7 @@ namespace TestGift.UI
             var position = new Position(2, 10);
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.SetChild(element);
-            TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
+            TextWriter renderedText = new Renderer().GetRenderWriter(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -245,7 +245,7 @@ namespace TestGift.UI
             var position = new Position(1, 10);
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.SetChild(element);
-            TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
+            TextWriter renderedText = new Renderer().GetRenderWriter(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -272,7 +272,7 @@ namespace TestGift.UI
             var position = new Position(1, 10);
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.SetChild(element);
-            TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
+            TextWriter renderedText = new Renderer().GetRenderWriter(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
