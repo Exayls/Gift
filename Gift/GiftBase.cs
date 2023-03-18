@@ -20,6 +20,11 @@ namespace Gift
         {
             _renderer = renderer;
         }
+        public GiftBase(IRenderer renderer, GiftUI ui)
+        {
+            _renderer = renderer;
+            this.ui = ui;
+        }
 
         public virtual void initialize()
         {
@@ -48,6 +53,8 @@ namespace Gift
         }
         private void PrintFrame()
         {
+            Console.Clear();
+            Console.WriteLine("\x1b[3J");
             Console.Clear();
             if (View != null)
             {
