@@ -6,7 +6,7 @@ namespace Gift.UI
 {
     public interface IGiftUI : IContainer
     {
-
+        List<IContainer> ContainersCycle { get; set; }
         IScreenDisplay GetDisplay();
         void SetChild(UIElement UIElement);
     }
