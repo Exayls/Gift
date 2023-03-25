@@ -22,9 +22,8 @@ namespace TestGift.LifeCycle
         {
             var GiftBase = new GiftBase(_rendererMock.Object);
             GiftBase.initialize();
-            var viewBefore = GiftBase.View;
-            GiftBase.Tick();
-            var viewAfter = GiftBase.View;
+            var viewBefore = GiftBase.CreateView();
+            var viewAfter = GiftBase.CreateView();
             Assert.NotEqual(viewAfter, viewBefore);
         }
         [Fact]
