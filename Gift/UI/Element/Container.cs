@@ -9,6 +9,9 @@ namespace Gift.UI.Element
     {
         public Bound Bound { get; protected set; }
         public IList<IUIElement> Childs { get; protected set; }
+        public List<IUIElement> SelectableElements { get; set ; }
+        public IUIElement SelectedElement { get; set ; }
+
         protected readonly IScreenDisplayFactory _screenDisplayFactory;
         public Container(IScreenDisplayFactory screenDisplayFactory, Bound bound, IBorder border) : base(border)
         {

@@ -10,7 +10,6 @@ namespace Gift
     public class GiftBase
     {
         public GiftUI? ui { get; set; }
-        public TextWriter? View { get; private set; }
         private IRenderer _renderer;
 
         public const char FILLINGCHAR = '*';
@@ -19,11 +18,6 @@ namespace Gift
         public GiftBase(IRenderer renderer)
         {
             _renderer = renderer;
-        }
-        public GiftBase(IRenderer renderer, GiftUI ui)
-        {
-            _renderer = renderer;
-            this.ui = ui;
         }
 
         public virtual void initialize()
@@ -38,20 +32,21 @@ namespace Gift
         {
             while (true)
             {
-                Tick();
-                PrintFrame();
+                TextWriter view = CreateView();
+                PrintFrame(view);
                 Thread.Sleep(1000);
             }
         }
-        public void Tick()
+        public TextWriter? CreateView()
         {
+            TextWriter? View = null;
             if (ui != null)
             {
                 View = _renderer.GetRenderWriter(ui);
             }
-
+            return View;
         }
-        private void PrintFrame()
+        private void PrintFrame(TextWriter View)
         {
             Console.Clear();
             Console.WriteLine("\x1b[3J");

@@ -21,6 +21,9 @@ namespace Gift.UI
             get { return Bound.Width; }
         }
 
+        public List<IContainer> SelectableContainers { get; set; }
+        public IContainer SelectedContainer { get; set; }
+
         public GiftUI(Bound bound, IBorder border) : base(new ScreenDisplayFactory(), bound, border)
         {
         }
