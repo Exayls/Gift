@@ -8,6 +8,7 @@ namespace Gift.UI.Element
         Bound Bound { get; }
         IList<IUIElement> Childs { get; }
         List<IUIElement> SelectableElements { get; set; }
+        IUIElement? SelectedElement { get; set; }
 
         Context GetContextRelativeRenderable(IRenderable renderable, Context context);
         Context GetContextRenderable(IRenderable renderable, Context context);
