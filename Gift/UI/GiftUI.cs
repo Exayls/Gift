@@ -22,16 +22,18 @@ namespace Gift.UI
         }
 
         public List<IContainer> SelectableContainers { get; set; }
-        public IContainer SelectedContainer { get; set; }
+        public IContainer? SelectedContainer { get; set; }
 
         public GiftUI(Bound bound, IBorder border) : base(new ScreenDisplayFactory(), bound, border)
         {
+            SelectableContainers = new List<IContainer>();
         }
         public GiftUI(Bound bound) : this(bound, new NoBorder())
         {
         }
         public GiftUI() : base()
         {
+            SelectableContainers = new List<IContainer>();
         }
 
         public void SetChild(UIElement UIElement)

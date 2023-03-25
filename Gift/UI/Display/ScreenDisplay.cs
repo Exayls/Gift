@@ -65,6 +65,7 @@ namespace Gift.UI.Display
 
             string lineToInsert = display.GetLine(i);
             string stringToInsert = lineToInsert.Substring(0, lenghtToReplace);
+            
             DisplayString.Insert(indexLineToReplace, stringToInsert);
         }
 
