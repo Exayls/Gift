@@ -23,8 +23,7 @@ namespace Gift.UI.Element
         }
 
         public abstract IScreenDisplay GetDisplay(Bound bound);
-        public abstract IScreenDisplay GetDisplayWithoutBorder(Bound bound);
-        public abstract IScreenDisplay GetDisplayWithoutBorder(Bound bounds, Color frontColor, Color BackColor);
+        public abstract IScreenDisplay GetDisplayWithoutBorder(Bound bounds, Color frontColor = Color.White, Color BackColor = Color.Black);
         public abstract IScreenDisplay GetDisplayBorder(Bound bound);
         public abstract IScreenDisplay GetDisplayBorder(Bound bounds, Color frontColor, Color BackColor);
         public abstract Position GetRelativePosition(Context context);

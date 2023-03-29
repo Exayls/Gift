@@ -89,12 +89,17 @@ namespace Gift.UI.Display
             string lineToInsert = display.GetLine(i);
             string stringToInsert = lineToInsert.Substring(0, lenghtToReplace);
 
+            FillColorMapAtPosition(display, position, i, indexLineToReplace, indexWidthToReplace, lenghtToReplace);
+            DisplayString.Insert(indexLineToReplace, stringToInsert);
+        }
+
+        private void FillColorMapAtPosition(IScreenDisplay display, Position position, int i, int indexLineToReplace, int indexWidthToReplace, int lenghtToReplace)
+        {
             for (int j = indexLineToReplace; j < lenghtToReplace; j++)
             {
                 frontColorMap[position.y + i, indexWidthToReplace + j] = display.FrontColor;
                 backColorMap[position.y + i, indexWidthToReplace + j] = display.BackColor;
             }
-            DisplayString.Insert(indexLineToReplace, stringToInsert);
         }
 
         public string GetLine(int i)

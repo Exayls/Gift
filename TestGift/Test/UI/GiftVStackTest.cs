@@ -28,7 +28,7 @@ namespace TestGift.UI
             _uiElementMock2 = new Mock<IUIElement>();
             _borderMock = new Mock<IBorder>();
             _ScreenDisplayFactoryMock = new Mock<IScreenDisplayFactory>();
-            _ScreenDisplayFactoryMock.Setup(s => s.Create(It.IsAny<Bound>(), It.IsAny<char>())).Returns(_screenDisplayMock1.Object);
+            _ScreenDisplayFactoryMock.Setup(s => s.Create(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock1.Object);
             vstack = new VStack(_borderMock.Object, _ScreenDisplayFactoryMock.Object);
         }
 
