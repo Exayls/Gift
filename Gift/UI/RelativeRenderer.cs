@@ -42,7 +42,7 @@ namespace Gift.UI
 
         private IScreenDisplay CreateDisplay(IRenderable container, Context context)
         {
-            return container.GetDisplayWithoutBorder(context.Bounds);
+            return container.GetDisplayWithoutBorder(context.Bounds, Color.Cyan, Color.Magenta);
         }
 
         private void AddDisplayToBorder(IScreenDisplay screen, IContainer renderable, IScreenDisplay display)
@@ -53,7 +53,7 @@ namespace Gift.UI
 
         private IScreenDisplay CreateBorder(IContainer container, Context context)
         {
-            return container.GetDisplayBorder(context.Bounds);
+            return container.GetDisplayBorder(context.Bounds, Color.Green, Color.Blue);
         }
 
         private void AddDisplayToSreen(IScreenDisplay screen, IRenderable renderable, Context context, IScreenDisplay display)
