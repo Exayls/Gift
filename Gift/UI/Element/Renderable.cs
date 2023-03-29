@@ -11,7 +11,9 @@ namespace Gift.UI.Element
 
         IScreenDisplay GetDisplay(Bound bound);
         IScreenDisplay GetDisplayWithoutBorder(Bound bounds);
+        IScreenDisplay GetDisplayWithoutBorder(Bound bounds, Color frontColor, Color BackColor);
         IScreenDisplay GetDisplayBorder(Bound bounds);
+        IScreenDisplay GetDisplayBorder(Bound bounds, Color frontColor, Color BackColor);
         Position GetGlobalPosition(Context context);
         Position GetRelativePosition(Context context);
         bool IsFixed();

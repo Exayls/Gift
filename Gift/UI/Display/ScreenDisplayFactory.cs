@@ -10,7 +10,12 @@ namespace Gift.UI.Display
         }
         public IScreenDisplay Create(Bound bound, char emptyChar)
         {
-            return new ScreenDisplay(bound, emptyChar);
+            return new ScreenDisplay(bound, emptychar: emptyChar);
+        }
+
+        public IScreenDisplay Create(Bound bound, Color frontColor, Color backColor, char emptyChar)
+        {
+            return new ScreenDisplay(bound,frontColor, backColor, emptyChar);
         }
     }
 }

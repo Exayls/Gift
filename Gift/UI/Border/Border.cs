@@ -54,7 +54,13 @@ namespace Gift.UI.Border
 
         public IScreenDisplay GetDisplay(Bound bound, char fillingChar )
         {
-            IScreenDisplay screenDisplay = new ScreenDisplay(bound, fillingChar);
+            IScreenDisplay screenDisplay = new ScreenDisplay(bound, emptychar:fillingChar);
+            AddBorder(screenDisplay);
+            return screenDisplay;
+        }
+        public IScreenDisplay GetDisplay(Bound bound, Color frontColor, Color backColor, char fillingChar = ' ')
+        {
+            IScreenDisplay screenDisplay = new ScreenDisplay(bound, frontColor, backColor);
             AddBorder(screenDisplay);
             return screenDisplay;
         }
@@ -146,5 +152,6 @@ namespace Gift.UI.Border
         {
             return x < Thickness || y < Thickness || x >= bound.Width - Thickness || y >= bound.Height - Thickness;
         }
+
     }
 }

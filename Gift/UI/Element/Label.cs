@@ -76,10 +76,18 @@ namespace Gift.UI.Element
         {
             return new ScreenDisplay(Text);
         }
-
+        public override IScreenDisplay GetDisplayWithoutBorder(Bound bound, Color frontColor, Color BackColor)
+        {
+            return new ScreenDisplay(Text);
+        }
         public override IScreenDisplay GetDisplayBorder(Bound bound)
         {
             return Border.GetDisplay(bound);
+        }
+
+        public override IScreenDisplay GetDisplayBorder(Bound bound, Color frontColor, Color backColor)
+        {
+            return Border.GetDisplay(bound, frontColor, backColor);
         }
     }
 }

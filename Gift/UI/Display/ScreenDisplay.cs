@@ -5,25 +5,46 @@ namespace Gift.UI.Display
 {
     public class ScreenDisplay : IScreenDisplay
     {
+        public Color FrontColor { get; set; }
+        public Color BackColor { get; set; }
+
+        private Color[,] frontColorMap;
+        private Color[,] backColorMap;
+
         public Bound TotalBound { get; }
         public StringBuilder DisplayString { get; }
 
 
-        public ScreenDisplay(Bound bound) : this(bound, GiftBase.FILLINGCHAR)
-        {
-        }
-        public ScreenDisplay(Bound bound, char emptychar)
-        {
-            DisplayString = new StringBuilder();
-            TotalBound = bound;
-            FillDisplay(emptychar);
-        }
-
-        public ScreenDisplay(string display) : this(new(1, display.Length), GiftBase.FILLINGCHAR)
+        public ScreenDisplay(string display, Color frontColor = Color.White, Color backColor = Color.Black) : this(new(1, display.Length),frontColor, backColor, GiftBase.FILLINGCHAR)
         {
             DisplayString.Clear().Append(display);
         }
 
+        public ScreenDisplay(Bound bound, Color frontColor = Color.White, Color backColor = Color.Black, char emptychar = GiftBase.FILLINGCHAR)
+        {
+            DisplayString = new StringBuilder();
+            TotalBound = bound;
+            FillDisplay(emptychar);
+
+            FrontColor = frontColor;
+            BackColor = backColor;
+
+            frontColorMap = new Color[bound.Height, bound.Width];
+            backColorMap = new Color[bound.Height, bound.Width];
+            fillColor(frontColorMap, frontColor);
+            fillColor(backColorMap, backColor);
+        }
+
+        public void fillColor(Color[,] colormap, Color color)
+        {
+            for (int i = 0; i < colormap.GetLength(0); i++)
+            {
+                for (int j = 0; j < colormap.GetLength(1); j++)
+                {
+                    colormap[i, j] = color;
+                }
+            }
+        }
         private void FillDisplay(char emptychar)
         {
             DisplayString.Append(new string(emptychar, TotalBound.Width));
@@ -48,24 +69,31 @@ namespace Gift.UI.Display
             }
         }
 
-        private void AddLineToDisplay(IScreenDisplay display, Position globalPosition, int i)
+        private void AddLineToDisplay(IScreenDisplay display, Position position, int i)
         {
-            int indexLineToReplace = (globalPosition.y + i) * (TotalBound.Width + 1) + globalPosition.x;
+            int indexLineToReplace = (position.y + i) * (TotalBound.Width + 1) + position.x;
+            int indexWidthToReplace = position.x;
             int lenghtToReplace = display.TotalBound.Width;
-            if (globalPosition.x + display.TotalBound.Width > TotalBound.Width)
+            if (position.x + display.TotalBound.Width > TotalBound.Width)
             {
-                lenghtToReplace = TotalBound.Width - globalPosition.x;
+                lenghtToReplace = TotalBound.Width - position.x;
             }
-            else if (globalPosition.x < 0)
+            else if (position.x < 0)
             {
-                indexLineToReplace = (globalPosition.y + i) * (TotalBound.Width + 1);
-                lenghtToReplace = display.TotalBound.Width + globalPosition.x;
+                indexLineToReplace = (position.y + i) * (TotalBound.Width + 1);
+                indexWidthToReplace = 0;
+                lenghtToReplace = display.TotalBound.Width + position.x;
             }
             DisplayString.Remove(indexLineToReplace, lenghtToReplace);
 
             string lineToInsert = display.GetLine(i);
             string stringToInsert = lineToInsert.Substring(0, lenghtToReplace);
-            
+
+            for (int j = indexLineToReplace; j < lenghtToReplace; j++)
+            {
+                frontColorMap[position.y + i, indexWidthToReplace + j] = display.FrontColor;
+                backColorMap[position.y + i, indexWidthToReplace + j] = display.BackColor;
+            }
             DisplayString.Insert(indexLineToReplace, stringToInsert);
         }
 
