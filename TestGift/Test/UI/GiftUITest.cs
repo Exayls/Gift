@@ -16,7 +16,7 @@ namespace TestGift.UI
             {
                 var ui = new GiftUI(new Bound(20, 60));
 
-                IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
+                IScreenDisplay renderedText = new RelativeRenderer().GetRenderDisplay(ui);
                 var expectedBuilder = new StringBuilder();
                 expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, 60));
                 for (int i = 1; i < 20; i++)
@@ -36,7 +36,7 @@ namespace TestGift.UI
             {
                 var ui = new GiftUI(new Bound(10, 15));
 
-                IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
+                IScreenDisplay renderedText = new RelativeRenderer().GetRenderDisplay(ui);
                 var expectedBuilder = new StringBuilder();
                 expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, 15));
                 for (int i = 1; i < 10; i++)

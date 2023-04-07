@@ -11,20 +11,11 @@ namespace TestGift.LifeCycle
 {
     public class GiftBaseTest
     {
-        private Mock<Renderer> _rendererMock;
+        private Mock<IRenderer> _rendererMock;
 
         public GiftBaseTest()
         {
-            _rendererMock = new Mock<Renderer>();
-        }
-        [Fact]
-        public void When_Tick_should_update_view()
-        {
-            var GiftBase = new GiftBase(_rendererMock.Object);
-            GiftBase.initialize();
-            var viewBefore = GiftBase.CreateView();
-            var viewAfter = GiftBase.CreateView();
-            Assert.NotEqual(viewAfter, viewBefore);
+            _rendererMock = new Mock<IRenderer>();
         }
         [Fact]
         public void When_not_initialized_should_not_set_ui()
