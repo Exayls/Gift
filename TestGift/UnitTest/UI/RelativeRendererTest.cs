@@ -35,10 +35,11 @@ namespace TestGift.UnitTest.UI
                 .Where(s => s.DisplayString == new StringBuilder())
                 .First();
             _giftuiMock.Setup(m => m.Childs).Returns(new List<IUIElement>());
+            _giftuiMock.Setup(m => m.GetDisplay()).Returns(screenDisplay);
             //act
-            TextWriter actual = renderer.GetRenderWriter(_giftuiMock.Object, screenDisplay);
+            IScreenDisplay actual = renderer.GetRenderDisplay(_giftuiMock.Object);
             //assert
-            Assert.Equal("", actual.ToString());
+            Assert.Equal("", actual.DisplayString.ToString());
         }
 
         [Fact]
@@ -50,10 +51,11 @@ namespace TestGift.UnitTest.UI
                 .First();
             //screenDisplay.Setup(s => s.DisplayString).Returns(new StringBuilder("hello"));
             _giftuiMock.Setup(m => m.Childs).Returns(new List<IUIElement>());
+            _giftuiMock.Setup(m => m.GetDisplay()).Returns(screenDisplay);
             //act
-            TextWriter actual = renderer.GetRenderWriter(_giftuiMock.Object, screenDisplay);
+            IScreenDisplay actual = renderer.GetRenderDisplay(_giftuiMock.Object);
             //assert
-            Assert.Equal("hello", actual.ToString());
+            Assert.Equal("hello", actual.DisplayString.ToString());
         }
 
         [Fact]
@@ -66,7 +68,7 @@ namespace TestGift.UnitTest.UI
             _giftuiMock.Setup(m => m.Childs).Returns(new List<IUIElement>());
             _giftuiMock.Setup(m => m.GetDisplay()).Returns(screenDisplay);
             //act
-            TextWriter actual = renderer.GetRenderWriter(_giftuiMock.Object);
+            IScreenDisplay actual = renderer.GetRenderDisplay(_giftuiMock.Object);
             //assert
             _giftuiMock.Verify(g => g.GetDisplay());
         }
@@ -86,7 +88,7 @@ namespace TestGift.UnitTest.UI
             _giftuiMock.Setup(m => m.GetDisplay()).Returns(screenDisplay);
             _giftuiMock.Setup(m => m.GetContextRenderable(It.IsAny<IRenderable>(), It.IsAny<Context>())).Returns(new Context(new(0, 0), new(0, 0)));
             //act
-            TextWriter actual = renderer.GetRenderWriter(_giftuiMock.Object);
+            IScreenDisplay actual = renderer.GetRenderDisplay(_giftuiMock.Object);
             //assert
             _labelMock.Verify(g => g.GetDisplay(It.IsAny<Bound>()));
         }

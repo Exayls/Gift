@@ -2,6 +2,7 @@
 using Gift.Builders;
 using Gift.UI;
 using Gift.UI.Border;
+using Gift.UI.Display;
 using Gift.UI.Element;
 using Gift.UI.MetaData;
 
@@ -20,13 +21,13 @@ namespace TestGift.Test.UI
         public void Can_render_Simple_UI()
         {
             GiftUI ui = new GiftUI(new Bound(5, 10), new NoBorder());
-            TextWriter rendered = Renderer.GetRenderWriter(ui);
+            IScreenDisplay rendered = Renderer.GetRenderDisplay(ui);
             const string expected = "**********\n" +
                                     "**********\n" +
                                     "**********\n" +
                                     "**********\n" +
                                     "**********";
-            Assert.Equal(expected,rendered.ToString() );
+            Assert.Equal(expected,rendered.DisplayString.ToString() );
         }
 
         [Fact]
@@ -41,7 +42,7 @@ namespace TestGift.Test.UI
             vstack.AddChild(vstack2);
             vstack2.AddChild(new LabelBuilder().WithText("hey").BuildImplicit());
             vstack2.AddChild(new LabelBuilder().BuildImplicit());
-            TextWriter rendered = Renderer.GetRenderWriter(ui);
+            IScreenDisplay rendered = Renderer.GetRenderDisplay(ui);
             const string expected = "╔════════╗\n" +
                                     "║Hello***║\n" +
                                     "║┌─────┐*║\n" +
@@ -52,7 +53,7 @@ namespace TestGift.Test.UI
                                     "║********║\n" +
                                     "║********║\n" +
                                     "╚════════╝";
-            Assert.Equal(expected, rendered.ToString());
+            Assert.Equal(expected,rendered.DisplayString.ToString() );
         }
 
         //[Fact]

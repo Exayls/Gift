@@ -32,10 +32,11 @@ namespace TestGift.UnitTest.UI
             //arrange
             _screenDisplayMock.Setup(s => s.DisplayString).Returns(new StringBuilder());
             _giftuiMock.Setup(m => m.Childs).Returns(new List<IUIElement>());
+            _giftuiMock.Setup(m => m.GetDisplay()).Returns(_screenDisplayMock.Object);
             //act
-            TextWriter actual = renderer.GetRenderWriter(_giftuiMock.Object, _screenDisplayMock.Object);
+            IScreenDisplay actual = renderer.GetRenderDisplay(_giftuiMock.Object);
             //assert
-            Assert.Equal("", actual.ToString());
+            Assert.Equal("", actual.DisplayString.ToString());
         }
         [Fact]
         public void GetRenderedBuffer_should_return_hello_text_when_giftui_has_label_hello()
@@ -43,10 +44,11 @@ namespace TestGift.UnitTest.UI
             //arrange
             _screenDisplayMock.Setup(s => s.DisplayString).Returns(new StringBuilder("hello"));
             _giftuiMock.Setup(m => m.Childs).Returns(new List<IUIElement>());
+            _giftuiMock.Setup(m => m.GetDisplay()).Returns(_screenDisplayMock.Object);
             //act
-            TextWriter actual = renderer.GetRenderWriter(_giftuiMock.Object, _screenDisplayMock.Object);
+            IScreenDisplay actual = renderer.GetRenderDisplay(_giftuiMock.Object);
             //assert
-            Assert.Equal("hello", actual.ToString());
+            Assert.Equal("hello", actual.DisplayString.ToString());
         }
         [Fact]
         public void GetRenderedBuffer_should_Call_GetDisplay_when_giftui_is_alone()
@@ -56,7 +58,7 @@ namespace TestGift.UnitTest.UI
             _giftuiMock.Setup(m => m.Childs).Returns(new List<IUIElement>());
             _giftuiMock.Setup(m => m.GetDisplay()).Returns(_screenDisplayMock.Object);
             //act
-            TextWriter actual = renderer.GetRenderWriter(_giftuiMock.Object);
+            IScreenDisplay actual = renderer.GetRenderDisplay(_giftuiMock.Object);
             //assert
             _giftuiMock.Verify(g => g.GetDisplay());
         }
@@ -72,7 +74,7 @@ namespace TestGift.UnitTest.UI
             _giftuiMock.Setup(m => m.GetDisplay()).Returns(_screenDisplayMock.Object);
             _giftuiMock.Setup(m => m.GetContextRenderable(It.IsAny<IRenderable>(), It.IsAny<Context>())).Returns(new Context(new(0, 0), new(0, 0)));
             //act
-            TextWriter actual = renderer.GetRenderWriter(_giftuiMock.Object);
+            IScreenDisplay actual = renderer.GetRenderDisplay(_giftuiMock.Object);
             //assert
             _labelMock.Verify(g => g.GetDisplay(It.IsAny<Bound>()));
         }
