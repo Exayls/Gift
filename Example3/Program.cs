@@ -26,6 +26,6 @@ vstack2.AddChild(new LabelBuilder().WithText("test6").WithPosition(new Position(
 
 
 
-var gift = new GiftBase(new Renderer());
+var gift = new GiftBase(new RelativeRenderer());
 gift.initialize(ui);
 gift.run();

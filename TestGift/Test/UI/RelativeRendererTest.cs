@@ -21,8 +21,7 @@ namespace TestGift.Test.UI
         public void Can_render_Simple_UI()
         {
             GiftUI ui = new GiftUI(new Bound(5, 10), new NoBorder());
-            Renderer relativeRenderer = new Renderer();
-            IScreenDisplay rendered = relativeRenderer.GetRenderDisplay(ui);
+            IScreenDisplay rendered = renderer.GetRenderDisplay(ui);
             const string expected = "**********\n" +
                                     "**********\n" +
                                     "**********\n" +
