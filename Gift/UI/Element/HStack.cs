@@ -146,22 +146,17 @@ namespace Gift.UI.Element
             return screenDisplay;
         }
 
-        public override IScreenDisplay GetDisplayWithoutBorder(Bound bound, Color frontColor = Color.White, Color backColor = Color.Black)
+        public override IScreenDisplay GetDisplayWithoutBorder(Bound bound)
         {
             int thickness = Border.Thickness;
             Bound boundEmptyVStack = new Bound(bound.Height - 2 * thickness, bound.Width - 2 * thickness);
-            IScreenDisplay emptyVstackScreen = _screenDisplayFactory.Create(boundEmptyVStack,frontColor, backColor, GiftBase.FILLINGCHAR);
+            IScreenDisplay emptyVstackScreen = _screenDisplayFactory.Create(boundEmptyVStack,FrontColor, BackColor, GiftBase.FILLINGCHAR);
             return emptyVstackScreen;
         }
 
         public override IScreenDisplay GetDisplayBorder(Bound bound)
         {
-            IScreenDisplay screenDisplay = Border.GetDisplay(bound);
-            return screenDisplay;
-        }
-        public override IScreenDisplay GetDisplayBorder(Bound bound, Color frontColor, Color backColor)
-        {
-            IScreenDisplay screenDisplay = Border.GetDisplay(bound, frontColor, backColor);
+            IScreenDisplay screenDisplay = Border.GetDisplay(bound, FrontColor, BackColor);
             return screenDisplay;
         }
     }

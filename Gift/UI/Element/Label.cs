@@ -1,4 +1,5 @@
-﻿using Gift.UI.Display;
+﻿using Gift.UI.Border;
+using Gift.UI.Display;
 using Gift.UI.MetaData;
 using Gift.UI.Strategy;
 using System.Runtime.CompilerServices;
@@ -26,15 +27,17 @@ namespace Gift.UI.Element
             }
         }
 
-        public Label(string text, Position position)
+        public Label(string text, Position? position = null, IBorder? border = null, Color frontColor = Color.White, Color backColor = Color.Black): base(border, frontColor, backColor)
         {
             Text = text;
-            Disposition = new ExplicitDisposition(position);
-        }
-        public Label(string text)
-        {
-            Text = text;
-            Disposition = new ImplicitDisposition();
+            if (position != null)
+            {
+                Disposition = new ExplicitDisposition(position);
+            }
+            else
+            {
+                Disposition = new ImplicitDisposition();
+            }
         }
 
         public override bool IsFixed()
@@ -67,23 +70,19 @@ namespace Gift.UI.Element
             return globalPosition;
         }
 
-        public override IScreenDisplay GetDisplay(Bound bound)
+        public override IScreenDisplay GetDisplayWithoutBorder(Bound bound)
         {
-            return new ScreenDisplay(Text);
+            return new ScreenDisplay(Text,FrontColor, BackColor);
         }
 
-        public override IScreenDisplay GetDisplayWithoutBorder(Bound bound, Color frontColor = Color.White, Color BackColor = Color.Black)
-        {
-            return new ScreenDisplay(Text);
-        }
         public override IScreenDisplay GetDisplayBorder(Bound bound)
         {
-            return Border.GetDisplay(bound);
+            return Border.GetDisplay(bound, FrontColor, BackColor);
         }
 
-        public override IScreenDisplay GetDisplayBorder(Bound bound, Color frontColor, Color backColor)
+        public override IScreenDisplay GetDisplay(Bound bound)
         {
-            return Border.GetDisplay(bound, frontColor, backColor);
+            throw new NotImplementedException();
         }
     }
 }

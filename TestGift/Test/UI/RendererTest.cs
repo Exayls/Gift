@@ -36,12 +36,12 @@ namespace TestGift.Test.UI
             GiftUI ui = new GiftUI(new Bound(10, 10), new NoBorder());
 
             VStack vstack = new VStackBuilder().WithBorder(new Border(1, BorderChars.GetBorderCharsFromFile("ressources/borderChars/double_border.json"))).Build();
-            vstack.AddChild(new LabelBuilder().BuildImplicit());
+            vstack.AddChild(new LabelBuilder().Build());
             ui.SetChild(vstack);
             VStack vstack2 = new VStackBuilder().WithBorder(new Border(1, BorderChars.GetBorderCharsFromFile("ressources/borderChars/simple_border.json"))).Build();
             vstack.AddChild(vstack2);
-            vstack2.AddChild(new LabelBuilder().WithText("hey").BuildImplicit());
-            vstack2.AddChild(new LabelBuilder().BuildImplicit());
+            vstack2.AddChild(new LabelBuilder().WithText("hey").Build());
+            vstack2.AddChild(new LabelBuilder().Build());
             IScreenDisplay rendered = renderer.GetRenderDisplay(ui);
             const string expected = "╔════════╗\n" +
                                     "║Hello***║\n" +
@@ -61,13 +61,13 @@ namespace TestGift.Test.UI
             GiftUI ui = new GiftUI(new Bound(10, 10), new NoBorder());
 
             VStack vstack = new VStackBuilder().WithBorder(new Border(1, BorderChars.GetBorderCharsFromFile("ressources/borderChars/double_border.json"))).Build();
-            vstack.AddChild(new LabelBuilder().BuildImplicit());
+            vstack.AddChild(new LabelBuilder().Build());
             ui.SetChild(vstack);
             VStack vstack2 = new VStackBuilder().WithBorder(new Border(1, BorderChars.GetBorderCharsFromFile("ressources/borderChars/simple_border.json"))).Build();
             vstack.AddChild(vstack2);
-            vstack2.AddChild(new LabelBuilder().WithText("hey").BuildImplicit());
+            vstack2.AddChild(new LabelBuilder().WithText("hey").Build());
             vstack2.AddChild(new LabelBuilder().WithText("test6").WithPosition(new Position(-2, 3)).Build());
-            vstack2.AddChild(new LabelBuilder().BuildImplicit());
+            vstack2.AddChild(new LabelBuilder().Build());
             IScreenDisplay rendered = renderer.GetRenderDisplay(ui);
             const string expected = "╔════════╗\n" +
                                     "║Hello***║\n" +

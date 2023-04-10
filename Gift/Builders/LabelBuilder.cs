@@ -14,7 +14,9 @@ namespace Gift.Builders
     public class LabelBuilder
     {
         private string text = "Hello";
-        private Position position = new Position(0,0);
+        private Position? position = null;
+        private Color backColor = Color.Black;
+        private Color frontColor = Color.White;
 
         /// <summary>
         /// Get Label instance with "Hello" as default text and (0,0) as default position
@@ -33,6 +35,18 @@ namespace Gift.Builders
             this.text = text;
             return this;
         }
+
+        public LabelBuilder WithBackgroundColor(Color color)
+        {
+            this.backColor = color;
+            return this;
+        }
+        public LabelBuilder WithForegroundColor(Color color)
+        {
+            this.frontColor = color;
+            return this;
+        }
+
         /// <summary>
         /// Set position parameter to the builder
         /// </summary>
@@ -49,12 +63,8 @@ namespace Gift.Builders
         /// <returns>instance of Label</returns>
         public Label Build()
         {
-            return new Label(text, position);
+            return new Label(text, position: position,frontColor: this.frontColor, backColor: this.backColor);
         }
-        public Label BuildImplicit()
-        {
-            return new Label(text);
-        }
-
     }
+
 }
