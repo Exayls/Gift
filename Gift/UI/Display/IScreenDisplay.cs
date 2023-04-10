@@ -9,6 +9,7 @@ namespace Gift.UI.Display
         Bound TotalBound { get; }
         Color BackColor { get; set; }
         Color FrontColor { get; set; }
+        char[,] DisplayMap { get; }
 
         void AddDisplay(IScreenDisplay display, Position globalPosition);
         void AddString(string display, Position position);
