@@ -21,14 +21,19 @@ namespace Gift.UI
             get { return Bound.Width; }
         }
 
-        public GiftUI(Bound bound, IBorder border) : base(bound, border)
+        public List<IContainer> SelectableContainers { get; set; }
+        public IContainer? SelectedContainer { get; set; }
+
+        public GiftUI(Bound bound, IBorder border) : base(new ScreenDisplayFactory(), bound, border)
         {
+            SelectableContainers = new List<IContainer>();
         }
-        public GiftUI(Bound bound) : base(bound, new NoBorder())
+        public GiftUI(Bound bound) : this(bound, new NoBorder())
         {
         }
         public GiftUI() : base()
         {
+            SelectableContainers = new List<IContainer>();
         }
 
         public void SetChild(UIElement UIElement)
@@ -61,22 +66,26 @@ namespace Gift.UI
 
         public IScreenDisplay GetDisplay()
         {
-            return new ScreenDisplay(Bound);
+            return _screenDisplayFactory.Create(Bound);
         }
 
         public override IScreenDisplay GetDisplay(Bound bound)
         {
-            return new ScreenDisplay(bound);
+            return _screenDisplayFactory.Create(Bound);
         }
 
-        public override IScreenDisplay GetDisplayWithoutBorder(Bound bound)
+        public override IScreenDisplay GetDisplayWithoutBorder(Bound bound, Color frontColor = Color.White, Color backColor = Color.Black)
         {
-            return new ScreenDisplay(Bound);
+            return _screenDisplayFactory.Create(Bound, frontColor, backColor, GiftBase.FILLINGCHAR);
         }
 
         public override IScreenDisplay GetDisplayBorder(Bound bound)
         {
             return Border.GetDisplay(bound);
+        }
+        public override IScreenDisplay GetDisplayBorder(Bound bound, Color frontColor, Color backColor)
+        {
+            return Border.GetDisplay(bound, frontColor, backColor);
         }
 
         public override Position GetRelativePosition(Context context)

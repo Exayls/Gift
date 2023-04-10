@@ -7,7 +7,7 @@ namespace Gift.UI.Border
     {
         int Thickness { get; }
 
-        public IScreenDisplay GetDisplay(Bound bound);
-        public IScreenDisplay GetDisplay(Bound bound, char fillingChar);
+        public IScreenDisplay GetDisplay(Bound bound, char fillingChar = ' ');
+        IScreenDisplay GetDisplay(Bound bound, Color frontColor, Color backColor, char fillingChar = ' ');
     }
 }

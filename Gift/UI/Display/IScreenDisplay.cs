@@ -7,6 +7,12 @@ namespace Gift.UI.Display
     {
         StringBuilder DisplayString { get; }
         Bound TotalBound { get; }
+        Color BackColor { get; set; }
+        Color FrontColor { get; set; }
+
+        Color[,] FrontColorMap { get; }
+        Color[,] BackColorMap { get; }
+        char[,] DisplayMap { get; }
 
         void AddDisplay(IScreenDisplay display, Position globalPosition);
         void AddString(string display, Position position);

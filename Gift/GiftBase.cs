@@ -4,21 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Gift.UI;
+using Gift.UI.Display;
+using Gift.UI.MetaData;
 
 namespace Gift
 {
     public class GiftBase
     {
         public GiftUI? ui { get; set; }
-        public TextWriter? View { get; private set; }
         private IRenderer _renderer;
+        private IDisplayer _displayer;
+
 
         public const char FILLINGCHAR = '*';
 
 
-        public GiftBase( IRenderer renderer)
+        public GiftBase(IRenderer renderer)
         {
             _renderer = renderer;
+            _displayer = new ConsoleDisplayer();
         }
 
         public virtual void initialize()
@@ -33,26 +37,33 @@ namespace Gift
         {
             while (true)
             {
-                Tick();
-                PrintFrame(1000);
+                IScreenDisplay view = CreateView();
+                PrintFrame(view);
+                Thread.Sleep(1000);
             }
         }
-        public void Tick()
+        public IScreenDisplay CreateView()
         {
+            IScreenDisplay View = new ScreenDisplay(new Bound(0,0));
             if (ui != null)
             {
-                View = _renderer.GetRenderedBuffer(ui);
+                View = _renderer.GetRenderDisplay(ui);
             }
-
+            return View;
         }
-        private void PrintFrame(int timeFrame)
+        private void PrintFrame(IScreenDisplay? View)
         {
             if (View != null)
             {
-                Console.Out.Write(View);
+                _displayer.display(View);
             }
-            Thread.Sleep(timeFrame);
-            Console.Clear();
+            //Console.Clear();
+            //Console.WriteLine("\x1b[3J");
+            //Console.Clear();
+            //if (View != null)
+            //{
+            //    Console.Out.Write(View);
+            //}
         }
 
         public virtual void end()

@@ -4,23 +4,18 @@ using Gift.UI.MetaData;
 
 namespace Gift.UI
 {
-    public class RelativeRenderer : IRenderer
+    public class Renderer : IRenderer
     {
-        public RelativeRenderer()
+        public Renderer()
         {
         }
 
-        public TextWriter GetRenderedBuffer(IGiftUI giftUI)
+        public IScreenDisplay GetRenderDisplay(IGiftUI giftUI)
         {
-            return GetRenderedBuffer(giftUI, giftUI.GetDisplay());
-        }
-        public TextWriter GetRenderedBuffer(IGiftUI giftUI, IScreenDisplay screen)
-        {
+            var screen = giftUI.GetDisplay();
             Context context = new Context(new(0, 0), screen.TotalBound);
             Render(screen, giftUI, context);
-            TextWriter Output = new StringWriter();
-            Output.Write(screen.DisplayString);
-            return Output;
+            return screen;
         }
 
         private void Render(IScreenDisplay screen, IRenderable Renderer, Context context)
@@ -42,7 +37,7 @@ namespace Gift.UI
 
         private IScreenDisplay CreateDisplay(IRenderable container, Context context)
         {
-            return container.GetDisplayWithoutBorder(context.Bounds);
+            return container.GetDisplayWithoutBorder(context.Bounds, Color.Cyan, Color.Magenta);
         }
 
         private void AddDisplayToBorder(IScreenDisplay screen, IContainer renderable, IScreenDisplay display)
@@ -53,7 +48,7 @@ namespace Gift.UI
 
         private IScreenDisplay CreateBorder(IContainer container, Context context)
         {
-            return container.GetDisplayBorder(context.Bounds);
+            return container.GetDisplayBorder(context.Bounds, Color.Green, Color.Blue);
         }
 
         private void AddDisplayToSreen(IScreenDisplay screen, IRenderable renderable, Context context, IScreenDisplay display)

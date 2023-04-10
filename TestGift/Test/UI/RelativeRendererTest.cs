@@ -2,6 +2,7 @@
 using Gift.Builders;
 using Gift.UI;
 using Gift.UI.Border;
+using Gift.UI.Display;
 using Gift.UI.Element;
 using Gift.UI.MetaData;
 
@@ -9,25 +10,24 @@ namespace TestGift.Test.UI
 {
     public class RelativeRendererTest
     {
-        private RelativeRenderer renderer;
+        private Renderer renderer;
 
         public RelativeRendererTest()
         {
-            renderer = new RelativeRenderer();
+            renderer = new Renderer();
         }
 
         [Fact]
         public void Can_render_Simple_UI()
         {
             GiftUI ui = new GiftUI(new Bound(5, 10), new NoBorder());
-            Renderer relativeRenderer = new Renderer();
-            TextWriter rendered = relativeRenderer.GetRenderedBuffer(ui);
+            IScreenDisplay rendered = renderer.GetRenderDisplay(ui);
             const string expected = "**********\n" +
                                     "**********\n" +
                                     "**********\n" +
                                     "**********\n" +
                                     "**********";
-            Assert.Equal(expected,rendered.ToString() );
+            Assert.Equal(expected,rendered.DisplayString.ToString() );
         }
 
         [Fact]
@@ -42,7 +42,7 @@ namespace TestGift.Test.UI
             vstack.AddChild(vstack2);
             vstack2.AddChild(new LabelBuilder().WithText("hey").BuildImplicit());
             vstack2.AddChild(new LabelBuilder().BuildImplicit());
-            TextWriter rendered = renderer.GetRenderedBuffer(ui);
+            IScreenDisplay rendered = renderer.GetRenderDisplay(ui);
             const string expected = "╔════════╗\n" +
                                     "║Hello***║\n" +
                                     "║┌─────┐*║\n" +
@@ -53,7 +53,7 @@ namespace TestGift.Test.UI
                                     "║********║\n" +
                                     "║********║\n" +
                                     "╚════════╝";
-            Assert.Equal(expected, rendered.ToString());
+            Assert.Equal(expected, rendered.DisplayString.ToString());
         }
         [Fact]
         public void Can_render_UI_with_relative_position_and_out_of_bound()
@@ -68,7 +68,7 @@ namespace TestGift.Test.UI
             vstack2.AddChild(new LabelBuilder().WithText("hey").BuildImplicit());
             vstack2.AddChild(new LabelBuilder().WithText("test6").WithPosition(new Position(-2, 3)).Build());
             vstack2.AddChild(new LabelBuilder().BuildImplicit());
-            TextWriter rendered = renderer.GetRenderedBuffer(ui);
+            IScreenDisplay rendered = renderer.GetRenderDisplay(ui);
             const string expected = "╔════════╗\n" +
                                     "║Hello***║\n" +
                                     "║┌─────┐*║\n" +
@@ -79,7 +79,7 @@ namespace TestGift.Test.UI
                                     "║********║\n" +
                                     "║********║\n" +
                                     "╚════════╝";
-            Assert.Equal(expected, rendered.ToString());
+            Assert.Equal(expected, rendered.DisplayString.ToString());
         }
 
         //[Fact]

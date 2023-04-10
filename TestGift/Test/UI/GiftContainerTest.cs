@@ -1,6 +1,7 @@
 ﻿using Gift;
 using Gift.Builders;
 using Gift.UI;
+using Gift.UI.Display;
 using Gift.UI.MetaData;
 using System;
 using System.Collections.Generic;
@@ -18,11 +19,11 @@ namespace TestGift.UI
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
             var ui = new GiftUI(new Bound(20, 60));
-            TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
+            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            string[] actual = renderedText.ToString()?.Split('\n') ?? Array.Empty<string>();
+            string[] actual = renderedText.DisplayString.ToString().Split('\n') ?? Array.Empty<string>();
             for (int i = 0; i < ui.Bound.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -39,11 +40,11 @@ namespace TestGift.UI
             var ui = new GiftUI(new Bound(20, 60));
             var element = new LabelBuilder().Build();
             ui.SetChild(element);
-            TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
+            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            string[] actual = renderedText.ToString()?.Split('\n') ?? Array.Empty<string>();
+            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
             for (int i = 0; i < ui.Bound.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -65,11 +66,11 @@ namespace TestGift.UI
             var position = new Position(0, 30);
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.SetChild(element);
-            TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
+            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            string[] actual = renderedText.ToString()?.Split('\n') ?? Array.Empty<string>();
+            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
             for (int i = 0; i < ui.Bound.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -91,11 +92,11 @@ namespace TestGift.UI
             var position = new Position(0, 10);
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.SetChild(element);
-            TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
+            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            string[] actual = renderedText.ToString()?.Split('\n') ?? Array.Empty<string>();
+            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
             for (int i = 0; i < ui.Bound.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -117,11 +118,11 @@ namespace TestGift.UI
             var position = new Position(0, 10);
             var element = new LabelBuilder().WithText("test").WithPosition(position).Build();
             ui.SetChild(element);
-            TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
+            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            string[] actual = renderedText.ToString()?.Split('\n') ?? Array.Empty<string>();
+            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
             for (int i = 0; i < ui.Bound.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -143,11 +144,11 @@ namespace TestGift.UI
             var position = new Position(0, 1000);
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.SetChild(element);
-            TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
+            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            string[] actual = renderedText.ToString()?.Split('\n') ?? Array.Empty<string>();
+            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
             for (int i = 0; i < ui.Bound.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -165,11 +166,11 @@ namespace TestGift.UI
             var position = new Position(0, 58);
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.SetChild(element);
-            TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
+            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            string[] actual = renderedText.ToString()?.Split('\n') ?? Array.Empty<string>();
+            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
             for (int i = 0; i < ui.Bound.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -191,11 +192,11 @@ namespace TestGift.UI
             var position = new Position(0, 58);
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.SetChild(element);
-            TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
+            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            string[] actual = renderedText.ToString()?.Split('\n') ?? Array.Empty<string>();
+            string[] actual = renderedText.DisplayString.ToString().Split('\n') ?? Array.Empty<string>();
             for (int i = 0; i < ui.Bound.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -218,11 +219,11 @@ namespace TestGift.UI
             var position = new Position(2, 10);
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.SetChild(element);
-            TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
+            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            string[] actual = renderedText.ToString()?.Split('\n') ?? Array.Empty<string>();
+            string[] actual = renderedText.DisplayString.ToString().Split('\n') ?? Array.Empty<string>();
             for (int i = 0; i < ui.Bound.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -245,11 +246,11 @@ namespace TestGift.UI
             var position = new Position(1, 10);
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.SetChild(element);
-            TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
+            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            string[] actual = renderedText.ToString()?.Split('\n') ?? Array.Empty<string>();
+            string[] actual = renderedText.DisplayString.ToString().Split('\n') ?? Array.Empty<string>();
             for (int i = 0; i < ui.Bound.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -272,11 +273,11 @@ namespace TestGift.UI
             var position = new Position(1, 10);
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.SetChild(element);
-            TextWriter renderedText = new Renderer().GetRenderedBuffer(ui);
+            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            string[] actual = renderedText.ToString()?.Split('\n') ?? Array.Empty<string>();
+            string[] actual = renderedText.DisplayString.ToString().Split('\n') ?? Array.Empty<string>();
             for (int i = 0; i < ui.Bound.Height; i++)
             {
                 expectedBuilder.Clear();

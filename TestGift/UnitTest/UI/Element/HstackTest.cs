@@ -1,4 +1,5 @@
-﻿using Gift.UI.Border;
+﻿
+using Gift.UI.Border;
 using Gift.UI.Display;
 using Gift.UI.Element;
 using Gift.UI.MetaData;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace TestGift.UnitTest.UI.Element
 {
-    public class VstackTest
+    public class HStackTest
     {
 
         private Mock<IScreenDisplay> _screenDisplayMock1;
@@ -16,9 +17,9 @@ namespace TestGift.UnitTest.UI.Element
         private Mock<IUIElement> _uiElementMock2;
         private Mock<IBorder> _borderMock;
         private Mock<IScreenDisplayFactory> _ScreenDisplayFactoryMock;
-        private VStack vstack;
+        private HStack HStack;
 
-        public VstackTest()
+        public HStackTest()
         {
             _screenDisplayMock1 = new Mock<IScreenDisplay>();
             _screenDisplayMock2 = new Mock<IScreenDisplay>();
@@ -27,7 +28,7 @@ namespace TestGift.UnitTest.UI.Element
             _borderMock = new Mock<IBorder>();
             _ScreenDisplayFactoryMock = new Mock<IScreenDisplayFactory>();
             _ScreenDisplayFactoryMock.Setup(s => s.Create(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock1.Object);
-            vstack = new VStack(_borderMock.Object, _ScreenDisplayFactoryMock.Object);
+            HStack = new HStack(_borderMock.Object, _ScreenDisplayFactoryMock.Object);
         }
         //GetDisplay tests
         [Fact]
@@ -37,9 +38,9 @@ namespace TestGift.UnitTest.UI.Element
             _screenDisplayMock2.Setup(s => s.DisplayString).Returns(new StringBuilder().Append("    \n").Append("    "));
             _borderMock.Setup(b => b.Thickness).Returns(0);
             _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
-            vstack.Border = _borderMock.Object;
+            HStack.Border = _borderMock.Object;
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(2, 4), '*');
+            IScreenDisplay screenDisplay = HStack.GetDisplayWithBorder(new(2, 4), '*');
             //assert
             _ScreenDisplayFactoryMock.Verify(s => s.Create(It.Is<Bound>(b => b.Width == 4 && b.Height == 2), It.IsAny<Color>(), It.IsAny<Color>(), '*'));
             _screenDisplayMock2.Verify(s => s.AddDisplay(_screenDisplayMock1.Object, It.Is<Position>(p => p.y == 0 && p.x == 0)));
@@ -53,9 +54,9 @@ namespace TestGift.UnitTest.UI.Element
             _screenDisplayMock2.Setup(s => s.DisplayString).Returns(new StringBuilder().Append("----\n").Append("-  -\n").Append("----"));
             _borderMock.Setup(b => b.Thickness).Returns(1);
             _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
-            vstack.Border = _borderMock.Object;
+            HStack.Border = _borderMock.Object;
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new Bound(3, 4), '*');
+            IScreenDisplay screenDisplay = HStack.GetDisplayWithBorder(new Bound(3, 4), '*');
             //assert
             _ScreenDisplayFactoryMock.Verify(s => s.Create(It.Is<Bound>(b => b.Width == 2 && b.Height == 1), It.IsAny<Color>(), It.IsAny<Color>(), '*'));
             _screenDisplayMock2.Verify(s => s.AddDisplay(_screenDisplayMock1.Object, It.Is<Position>(p => p.y == 1 && p.x == 1)));
@@ -68,9 +69,9 @@ namespace TestGift.UnitTest.UI.Element
             _screenDisplayMock1.Setup(s => s.DisplayString).Returns(new StringBuilder().Append("____\n").Append("_ii_\n").Append("____"));
             _borderMock.Setup(b => b.Thickness).Returns(1);
             _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
-            vstack.Border = _borderMock.Object;
+            HStack.Border = _borderMock.Object;
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new Bound(3, 4), '*');
+            IScreenDisplay screenDisplay = HStack.GetDisplayWithBorder(new Bound(3, 4), '*');
             //assert
             _ScreenDisplayFactoryMock.Verify(s => s.Create(It.Is<Bound>(b => b.Width == 2 && b.Height == 1), It.IsAny<Color>(), It.IsAny<Color>(), '*'));
             _screenDisplayMock2.Verify(s => s.AddDisplay(_screenDisplayMock1.Object, It.Is<Position>(p => p.y == 1 && p.x == 1)));
@@ -83,9 +84,9 @@ namespace TestGift.UnitTest.UI.Element
             _screenDisplayMock1.Setup(s => s.DisplayString).Returns(new StringBuilder().Append("iiii\n").Append("illi\n").Append("iiii"));
             _borderMock.Setup(b => b.Thickness).Returns(1);
             _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
-            vstack.Border = _borderMock.Object;
+            HStack.Border = _borderMock.Object;
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplay(new(3, 4));
+            IScreenDisplay screenDisplay = HStack.GetDisplay(new(3, 4));
             //assert
             _ScreenDisplayFactoryMock.Verify(s => s.Create(It.Is<Bound>(b => b.Width == 2 && b.Height == 1), It.IsAny<Color>(), It.IsAny<Color>(), '*'));
             _screenDisplayMock2.Verify(s => s.AddDisplay(_screenDisplayMock1.Object, It.Is<Position>(p => p.y == 1 && p.x == 1)));
@@ -98,9 +99,9 @@ namespace TestGift.UnitTest.UI.Element
             _screenDisplayMock1.Setup(s => s.DisplayString).Returns(new StringBuilder().Append("-----\n").Append("-   -\n").Append("-   -\n").Append("-   -\n").Append("-----"));
             _borderMock.Setup(b => b.Thickness).Returns(1);
             _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
-            vstack.Border = _borderMock.Object;
+            HStack.Border = _borderMock.Object;
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplay(new(5, 5));
+            IScreenDisplay screenDisplay = HStack.GetDisplay(new(5, 5));
             //assert
             _ScreenDisplayFactoryMock.Verify(s => s.Create(It.Is<Bound>(b => b.Width == 3 && b.Height == 3), It.IsAny<Color>(), It.IsAny<Color>(), '*'));
             _screenDisplayMock2.Verify(s => s.AddDisplay(_screenDisplayMock1.Object, It.Is<Position>(p => p.y == 1 && p.x == 1)));
@@ -116,9 +117,9 @@ namespace TestGift.UnitTest.UI.Element
                                    .Append("------"));
             _borderMock.Setup(b => b.Thickness).Returns(1);
             _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
-            vstack.Border = _borderMock.Object;
+            HStack.Border = _borderMock.Object;
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplay(new(3, 6));
+            IScreenDisplay screenDisplay = HStack.GetDisplay(new(3, 6));
             //assert
             _ScreenDisplayFactoryMock.Verify(s => s.Create(It.Is<Bound>(b => b.Width == 4 && b.Height == 1), It.IsAny<Color>(), It.IsAny<Color>(), '*'));
             _screenDisplayMock2.Verify(s => s.AddDisplay(_screenDisplayMock1.Object, It.Is<Position>(p => p.y == 1 && p.x == 1)));
@@ -136,9 +137,9 @@ namespace TestGift.UnitTest.UI.Element
                                    .Append("-----"));
             _borderMock.Setup(b => b.Thickness).Returns(2);
             _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
-            vstack.Border = _borderMock.Object;
+            HStack.Border = _borderMock.Object;
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplay(new(5, 5));
+            IScreenDisplay screenDisplay = HStack.GetDisplay(new(5, 5));
             //assert
             _ScreenDisplayFactoryMock.Verify(s => s.Create(It.Is<Bound>(b => b.Width == 1 && b.Height == 1), It.IsAny<Color>(), It.IsAny<Color>(), '*'));
             _screenDisplayMock2.Verify(s => s.AddDisplay(_screenDisplayMock1.Object, It.Is<Position>(p => p.y == 2 && p.x == 2)));
@@ -157,9 +158,9 @@ namespace TestGift.UnitTest.UI.Element
                                     Append("-------"));
             _borderMock.Setup(b => b.Thickness).Returns(2);
             _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
-            vstack.Border = _borderMock.Object;
+            HStack.Border = _borderMock.Object;
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplay(new(6, 7));
+            IScreenDisplay screenDisplay = HStack.GetDisplay(new(6, 7));
             //assert
             _ScreenDisplayFactoryMock.Verify(s => s.Create(It.Is<Bound>(b => b.Width == 3 && b.Height == 2), It.IsAny<Color>(), It.IsAny<Color>(), '*'));
             _screenDisplayMock2.Verify(s => s.AddDisplay(_screenDisplayMock1.Object, It.Is<Position>(p => p.y == 2 && p.x == 2)));
@@ -179,9 +180,9 @@ namespace TestGift.UnitTest.UI.Element
                                     Append("-------"));
             _borderMock.Setup(b => b.Thickness).Returns(3);
             _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
-            vstack.Border = _borderMock.Object;
+            HStack.Border = _borderMock.Object;
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplay(new(7, 7));
+            IScreenDisplay screenDisplay = HStack.GetDisplay(new(7, 7));
             //assert
             _ScreenDisplayFactoryMock.Verify(s => s.Create(It.Is<Bound>(b => b.Width == 1 && b.Height == 1), It.IsAny<Color>(), It.IsAny<Color>(), '*'));
             _screenDisplayMock2.Verify(s => s.AddDisplay(_screenDisplayMock1.Object, It.Is<Position>(p => p.y == 3 && p.x == 3)));
@@ -201,385 +202,386 @@ namespace TestGift.UnitTest.UI.Element
                                     Append("-------"));
             _borderMock.Setup(b => b.Thickness).Returns(3);
             _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
-            vstack.Border = _borderMock.Object;
+            HStack.Border = _borderMock.Object;
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(7, 7), 'b');
+            IScreenDisplay screenDisplay = HStack.GetDisplayWithBorder(new(7, 7), 'b');
             //assert
             _screenDisplayMock2.Verify(s => s.AddDisplay(_screenDisplayMock1.Object, It.Is<Position>(p => p.y == 3 && p.x == 3)));
             Assert.Equal(_screenDisplayMock2.Object, screenDisplay);
         }
         //GetContext tests
         [Fact]
-        public void GetContext_should_return_context_with_0_0_position_when_vstack_has_no_border()
+        public void GetContext_should_return_context_with_0_0_position_when_HStack_has_no_border()
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(0);
-            vstack.Border = _borderMock.Object;
+            HStack.Border = _borderMock.Object;
             Context contextRenderable = new Context(new Position(0, 0), new Bound(0, 0));
             //act
-            Context context = vstack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
+            Context context = HStack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
             //assert
             Assert.Equal(0, context.Position.y);
             Assert.Equal(0, context.Position.x);
         }
         [Fact]
-        public void GetContext_should_return_context_with_1_1_position_when_vstack_has_border_thickness1()
+        public void GetContext_should_return_context_with_1_1_position_when_HStack_has_border_thickness1()
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(1);
             _uiElementMock1.Setup(u => u.IsFixed()).Returns(false);
-            vstack.Border = _borderMock.Object;
+            HStack.Border = _borderMock.Object;
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
-            Context context = vstack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
+            Context context = HStack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
             //assert
             Assert.Equal(1, context.Position.y);
             Assert.Equal(1, context.Position.x);
         }
         [Fact]
-        public void GetContext_should_return_context_with_2_2_position_when_vstack_has_border_thickness2()
+        public void GetContext_should_return_context_with_2_2_position_when_HStack_has_border_thickness2()
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(2);
             _uiElementMock1.Setup(u => u.IsFixed()).Returns(false);
-            vstack.Border = _borderMock.Object;
+            HStack.Border = _borderMock.Object;
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
-            Context context = vstack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
+            Context context = HStack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
             //assert
             Assert.Equal(2, context.Position.y);
             Assert.Equal(2, context.Position.x);
         }
         [Fact]
-        public void GetContext_should_return_context_with_3_2_position_when_vstack_has_border_thickness2_and_1_first_child_with_height_of_1()
+        public void GetContext_should_return_context_with_3_2_position_when_HStack_has_border_thickness2_and_1_first_child_with_Width_of_1()
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(2);
             _uiElementMock1.Setup(u => u.IsFixed()).Returns(false);
             _uiElementMock2.Setup(u => u.IsFixed()).Returns(false);
-            _uiElementMock2.Setup(u => u.Height).Returns(1);
-            vstack.Border = _borderMock.Object;
-            vstack.AddChild(_uiElementMock2.Object);
-            vstack.AddChild(_uiElementMock1.Object);
+            _uiElementMock2.Setup(u => u.Width).Returns(1);
+            HStack.Border = _borderMock.Object;
+            HStack.AddChild(_uiElementMock2.Object);
+            HStack.AddChild(_uiElementMock1.Object);
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
-            Context context = vstack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
+            Context context = HStack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
             //assert
-            Assert.Equal(3, context.Position.y);
-            Assert.Equal(2, context.Position.x);
+            Assert.Equal(2, context.Position.y);
+            Assert.Equal(3, context.Position.x);
         }
         [Fact]
-        public void GetContext_should_return_context_with_4_2_position_when_vstack_has_border_thickness2_and_1_first_child_with_height_of_2()
+        public void GetContext_should_return_context_with_4_2_position_when_HStack_has_border_thickness2_and_1_first_child_with_Width_of_2()
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(2);
             _uiElementMock1.Setup(u => u.IsFixed()).Returns(false);
             _uiElementMock2.Setup(u => u.IsFixed()).Returns(false);
-            _uiElementMock2.Setup(u => u.Height).Returns(2);
-            vstack.Border = _borderMock.Object;
-            vstack.AddChild(_uiElementMock2.Object);
-            vstack.AddChild(_uiElementMock1.Object);
+            _uiElementMock2.Setup(u => u.Width).Returns(2);
+            HStack.Border = _borderMock.Object;
+            HStack.AddChild(_uiElementMock2.Object);
+            HStack.AddChild(_uiElementMock1.Object);
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
-            Context context = vstack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
+            Context context = HStack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
             //assert
-            Assert.Equal(4, context.Position.y);
-            Assert.Equal(2, context.Position.x);
+            Assert.Equal(2, context.Position.y);
+            Assert.Equal(4, context.Position.x);
         }
         [Fact]
-        public void GetContext_should_return_context_with_1_1_bound_when_vstack_has_child_with_height_of_1_and_width_1()
+        public void GetContext_should_return_context_with_1_1_bound_when_HStack_has_child_with_Width_of_1_and_width_1()
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(2);
             _uiElementMock1.Setup(u => u.IsFixed()).Returns(false);
-            _uiElementMock1.Setup(u => u.Height).Returns(1);
             _uiElementMock1.Setup(u => u.Width).Returns(1);
-            vstack.AddChild(_uiElementMock1.Object);
+            _uiElementMock1.Setup(u => u.Height).Returns(1);
+            HStack.AddChild(_uiElementMock1.Object);
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
-            Context context = vstack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
+            Context context = HStack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
             //assert
-            Assert.Equal(1, context.Bounds.Height);
             Assert.Equal(1, context.Bounds.Width);
-        }
-        [Fact]
-        public void GetContext_should_return_context_with_1_5_bound_when_vstack_has_child_with_height_of_1_and_width_5()
-        {
-            //arrange
-            _borderMock.Setup(b => b.Thickness).Returns(2);
-            _uiElementMock1.Setup(u => u.IsFixed()).Returns(false);
-            _uiElementMock1.Setup(u => u.Height).Returns(1);
-            _uiElementMock1.Setup(u => u.Width).Returns(5);
-            vstack.AddChild(_uiElementMock1.Object);
-            Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
-            //act
-            Context context = vstack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
-            //assert
             Assert.Equal(1, context.Bounds.Height);
-            Assert.Equal(5, context.Bounds.Width);
         }
         [Fact]
-        public void GetContext_should_return_context_with_1_3_bound_when_vstack_has_child_with_height_of_1_and_width_3()
+        public void GetContext_should_return_context_with_1_5_bound_when_HStack_has_child_with_Width_of_1_and_width_5()
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(2);
             _uiElementMock1.Setup(u => u.IsFixed()).Returns(false);
-            _uiElementMock1.Setup(u => u.Height).Returns(1);
-            _uiElementMock1.Setup(u => u.Width).Returns(3);
-            vstack.AddChild(_uiElementMock1.Object);
-            Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
-            //act
-            Context context = vstack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
-            //assert
-            Assert.Equal(1, context.Bounds.Height);
-            Assert.Equal(3, context.Bounds.Width);
-        }
-        [Fact]
-        public void GetContext_should_return_context_with_2_1_bound_when_vstack_has_child_with_height_of_2_and_width_1()
-        {
-            //arrange
-            _borderMock.Setup(b => b.Thickness).Returns(2);
-            _uiElementMock1.Setup(u => u.IsFixed()).Returns(false);
-            _uiElementMock1.Setup(u => u.Height).Returns(2);
             _uiElementMock1.Setup(u => u.Width).Returns(1);
-            vstack.AddChild(_uiElementMock1.Object);
+            _uiElementMock1.Setup(u => u.Height).Returns(5);
+            HStack.AddChild(_uiElementMock1.Object);
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
-            Context context = vstack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
+            Context context = HStack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
             //assert
-            Assert.Equal(2, context.Bounds.Height);
             Assert.Equal(1, context.Bounds.Width);
+            Assert.Equal(5, context.Bounds.Height);
         }
         [Fact]
-        public void GetContext_should_return_context_with_3_1_bound_when_vstack_has_child_with_height_of_3_and_width_1()
+        public void GetContext_should_return_context_with_1_3_bound_when_HStack_has_child_with_Width_of_1_and_width_3()
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(2);
             _uiElementMock1.Setup(u => u.IsFixed()).Returns(false);
+            _uiElementMock1.Setup(u => u.Width).Returns(1);
             _uiElementMock1.Setup(u => u.Height).Returns(3);
-            _uiElementMock1.Setup(u => u.Width).Returns(1);
-            vstack.AddChild(_uiElementMock1.Object);
+            HStack.AddChild(_uiElementMock1.Object);
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
-            Context context = vstack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
+            Context context = HStack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
             //assert
-            Assert.Equal(3, context.Bounds.Height);
             Assert.Equal(1, context.Bounds.Width);
+            Assert.Equal(3, context.Bounds.Height);
+        }
+        [Fact]
+        public void GetContext_should_return_context_with_2_1_bound_when_HStack_has_child_with_Width_of_2_and_width_1()
+        {
+            //arrange
+            _borderMock.Setup(b => b.Thickness).Returns(2);
+            _uiElementMock1.Setup(u => u.IsFixed()).Returns(false);
+            _uiElementMock1.Setup(u => u.Width).Returns(2);
+            _uiElementMock1.Setup(u => u.Height).Returns(1);
+            HStack.AddChild(_uiElementMock1.Object);
+            Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
+            //act
+            Context context = HStack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
+            //assert
+            Assert.Equal(2, context.Bounds.Width);
+            Assert.Equal(1, context.Bounds.Height);
+        }
+        [Fact]
+        public void GetContext_should_return_context_with_3_1_bound_when_HStack_has_child_with_Width_of_3_and_width_1()
+        {
+            //arrange
+            _borderMock.Setup(b => b.Thickness).Returns(2);
+            _uiElementMock1.Setup(u => u.IsFixed()).Returns(false);
+            _uiElementMock1.Setup(u => u.Width).Returns(3);
+            _uiElementMock1.Setup(u => u.Height).Returns(1);
+            HStack.AddChild(_uiElementMock1.Object);
+            Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
+            //act
+            Context context = HStack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
+            //assert
+            Assert.Equal(3, context.Bounds.Width);
+            Assert.Equal(1, context.Bounds.Height);
         }
 
         //Height/Width Tests
         [Fact]
-        public void Height_should_be_1_when_1_element_height_1_in_it_with_no_border()
+        public void Width_should_be_1_when_1_element_Width_1_in_it_with_no_border()
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(0);
-            vstack.Border = _borderMock.Object;
-            _uiElementMock1.Setup(ui => ui.Height).Returns(1);
+            HStack.Border = _borderMock.Object;
+            _uiElementMock1.Setup(ui => ui.Width).Returns(1);
             //act
-            vstack.AddChild(_uiElementMock1.Object);
+            HStack.AddChild(_uiElementMock1.Object);
             //assert
-            Assert.Equal(1, vstack.Height);
+            Assert.Equal(1, HStack.Width);
         }
         [Fact]
-        public void Height_should_be_4_when_2_element_height_2_in_it_with_no_border()
+        public void Width_should_be_4_when_2_element_Width_2_in_it_with_no_border()
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(0);
-            vstack.Border = _borderMock.Object;
-            _uiElementMock1.Setup(ui => ui.Height).Returns(2);
-            _uiElementMock2.Setup(ui => ui.Height).Returns(2);
+            HStack.Border = _borderMock.Object;
+            _uiElementMock1.Setup(ui => ui.Width).Returns(2);
+            _uiElementMock2.Setup(ui => ui.Width).Returns(2);
             //act
-            vstack.AddChild(_uiElementMock1.Object);
-            vstack.AddChild(_uiElementMock2.Object);
+            HStack.AddChild(_uiElementMock1.Object);
+            HStack.AddChild(_uiElementMock2.Object);
             //assert
-            Assert.Equal(4, vstack.Height);
+            Assert.Equal(4, HStack.Width);
         }
         [Fact]
-        public void Height_should_be_5_when_2_element_height_total_is_5_in_it_with_no_border()
+        public void Width_should_be_5_when_2_element_Width_total_is_5_in_it_with_no_border()
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(0);
-            vstack.Border = _borderMock.Object;
-            _uiElementMock1.Setup(ui => ui.Height).Returns(2);
-            _uiElementMock2.Setup(ui => ui.Height).Returns(3);
+            HStack.Border = _borderMock.Object;
+            _uiElementMock1.Setup(ui => ui.Width).Returns(2);
+            _uiElementMock2.Setup(ui => ui.Width).Returns(3);
             //act
-            vstack.AddChild(_uiElementMock1.Object);
-            vstack.AddChild(_uiElementMock2.Object);
+            HStack.AddChild(_uiElementMock1.Object);
+            HStack.AddChild(_uiElementMock2.Object);
             //assert
-            Assert.Equal(5, vstack.Height);
+            Assert.Equal(5, HStack.Width);
         }
         [Fact]
-        public void Height_should_be_3_when_1_element_height_1_in_it_with_border_thickness_1()
+        public void Width_should_be_3_when_1_element_Width_1_in_it_with_border_thickness_1()
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(1);
-            vstack.Border = _borderMock.Object;
-            _uiElementMock1.Setup(ui => ui.Height).Returns(1);
+            HStack.Border = _borderMock.Object;
+            _uiElementMock1.Setup(ui => ui.Width).Returns(1);
             //act
-            vstack.AddChild(_uiElementMock1.Object);
+            HStack.AddChild(_uiElementMock1.Object);
             //assert
-            Assert.Equal(3, vstack.Height);
+            Assert.Equal(3, HStack.Width);
         }
         [Fact]
-        public void Height_should_be_4_when_1_element_height_2_in_it_with_border_thickness_1()
+        public void Width_should_be_4_when_1_element_Width_2_in_it_with_border_thickness_1()
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(1);
-            vstack.Border = _borderMock.Object;
-            _uiElementMock1.Setup(ui => ui.Height).Returns(2);
+            HStack.Border = _borderMock.Object;
+            _uiElementMock1.Setup(ui => ui.Width).Returns(2);
             //act
-            vstack.AddChild(_uiElementMock1.Object);
+            HStack.AddChild(_uiElementMock1.Object);
             //assert
-            Assert.Equal(4, vstack.Height);
+            Assert.Equal(4, HStack.Width);
         }
         [Fact]
-        public void Height_should_be_6_when_1_element_height_4_in_it_with_border_thickness_1()
+        public void Width_should_be_6_when_1_element_Width_4_in_it_with_border_thickness_1()
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(1);
-            vstack.Border = _borderMock.Object;
-            _uiElementMock1.Setup(ui => ui.Height).Returns(4);
+            HStack.Border = _borderMock.Object;
+            _uiElementMock1.Setup(ui => ui.Width).Returns(4);
             //act
-            vstack.AddChild(_uiElementMock1.Object);
+            HStack.AddChild(_uiElementMock1.Object);
             //assert
-            Assert.Equal(6, vstack.Height);
+            Assert.Equal(6, HStack.Width);
         }
         [Fact]
-        public void Height_should_be_5_when_1_element_height_1_in_it_with_border_thickness_2()
+        public void Width_should_be_5_when_1_element_Width_1_in_it_with_border_thickness_2()
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(2);
-            vstack.Border = _borderMock.Object;
-            _uiElementMock1.Setup(ui => ui.Height).Returns(1);
+            HStack.Border = _borderMock.Object;
+            _uiElementMock1.Setup(ui => ui.Width).Returns(1);
             //act
-            vstack.AddChild(_uiElementMock1.Object);
+            HStack.AddChild(_uiElementMock1.Object);
             //assert
-            Assert.Equal(5, vstack.Height);
+            Assert.Equal(5, HStack.Width);
         }
         [Fact]
-        public void Height_should_be_6_when_1_element_height_2_in_it_with_border_thickness_2()
+        public void Width_should_be_6_when_1_element_Width_2_in_it_with_border_thickness_2()
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(2);
-            vstack.Border = _borderMock.Object;
-            _uiElementMock1.Setup(ui => ui.Height).Returns(2);
+            HStack.Border = _borderMock.Object;
+            _uiElementMock1.Setup(ui => ui.Width).Returns(2);
             //act
-            vstack.AddChild(_uiElementMock1.Object);
+            HStack.AddChild(_uiElementMock1.Object);
             //assert
-            Assert.Equal(6, vstack.Height);
+            Assert.Equal(6, HStack.Width);
         }
         [Fact]
-        public void Height_should_be_7_when_1_element_height_3_in_it_with_border_thickness_2()
+        public void Width_should_be_7_when_1_element_Width_3_in_it_with_border_thickness_2()
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(2);
-            vstack.Border = _borderMock.Object;
-            _uiElementMock1.Setup(ui => ui.Height).Returns(3);
+            HStack.Border = _borderMock.Object;
+            _uiElementMock1.Setup(ui => ui.Width).Returns(3);
             //act
-            vstack.AddChild(_uiElementMock1.Object);
+            HStack.AddChild(_uiElementMock1.Object);
             //assert
-            Assert.Equal(7, vstack.Height);
+            Assert.Equal(7, HStack.Width);
         }
         [Fact]
-        public void Height_should_be_7_when_1_element_height_1_in_it_with_border_thickness_3()
+        public void Width_should_be_7_when_1_element_Width_1_in_it_with_border_thickness_3()
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(3);
-            vstack.Border = _borderMock.Object;
-            _uiElementMock1.Setup(ui => ui.Height).Returns(1);
+            HStack.Border = _borderMock.Object;
+            _uiElementMock1.Setup(ui => ui.Width).Returns(1);
             //act
-            vstack.AddChild(_uiElementMock1.Object);
+            HStack.AddChild(_uiElementMock1.Object);
             //assert
-            Assert.Equal(7, vstack.Height);
+            Assert.Equal(7, HStack.Width);
         }
         //should test with width
 
 
         [Fact]
-        public void Height_Width_should_be_1_1_when_vstack_declared_with_1_1_Bound()
+        public void Width_Height_should_be_1_1_when_HStack_declared_with_1_1_Bound()
         {
             //arrange
-            _uiElementMock1.Setup(ui => ui.Height).Returns(1);
-            //act
-            vstack = new VStack(_borderMock.Object, _ScreenDisplayFactoryMock.Object, new Bound(1, 1));
-            //assert
-            Assert.Equal(1, vstack.Height);
-            Assert.Equal(1, vstack.Width);
-        }
-        [Fact]
-        public void Height_Width_should_be_2_3_when_vstack_declared_with_2_3_Bound()
-        {
-            //arrange
-            _uiElementMock1.Setup(ui => ui.Height).Returns(1);
-            //act
-            vstack = new VStack(_borderMock.Object, _ScreenDisplayFactoryMock.Object, new Bound(2, 3));
-            //assert
-            Assert.Equal(2, vstack.Height);
-            Assert.Equal(3, vstack.Width);
-        }
-        [Fact]
-        public void Height_Width_should_be_3_3_when_vstack_declared_with_0_3_Bound_and_1_element_of_height_3()
-        {
-            //arrange
-            _uiElementMock1.Setup(ui => ui.Height).Returns(3);
-            _borderMock.Setup(b => b.Thickness).Returns(0);
-            vstack.Border = _borderMock.Object;
-            //act
-            vstack = new VStack(_borderMock.Object, _ScreenDisplayFactoryMock.Object, new Bound(0, 3));
-            vstack.AddChild(_uiElementMock1.Object);
-            //assert
-            Assert.Equal(3, vstack.Height);
-            Assert.Equal(3, vstack.Width);
-        }
-        [Fact]
-        public void Height_Width_should_be_5_3_when_vstack_declared_with_0_3_Bound_and_1_element_of_height_5()
-        {
-            //arrange
-            _uiElementMock1.Setup(ui => ui.Height).Returns(5);
-            _borderMock.Setup(b => b.Thickness).Returns(0);
-            vstack.Border = _borderMock.Object;
-            //act
-            vstack = new VStack(_borderMock.Object, _ScreenDisplayFactoryMock.Object, new Bound(0, 3));
-            vstack.AddChild(_uiElementMock1.Object);
-            //assert
-            Assert.Equal(5, vstack.Height);
-            Assert.Equal(3, vstack.Width);
-        }
-        [Fact]
-        public void Height_Width_should_be_4_5_when_vstack_declared_with_0_0_Bound_and_2_element_of_height_1_3_and_width_1_5()
-        {
-            //arrange
-            _uiElementMock1.Setup(ui => ui.Height).Returns(1);
-            _uiElementMock2.Setup(ui => ui.Height).Returns(3);
             _uiElementMock1.Setup(ui => ui.Width).Returns(1);
-            _uiElementMock2.Setup(ui => ui.Width).Returns(5);
-            _borderMock.Setup(b => b.Thickness).Returns(0);
-            vstack.Border = _borderMock.Object;
             //act
-            vstack = new VStack(_borderMock.Object, _ScreenDisplayFactoryMock.Object, new Bound(0, 0));
-            vstack.AddChild(_uiElementMock1.Object);
-            vstack.AddChild(_uiElementMock2.Object);
+            HStack = new HStack(_borderMock.Object, _ScreenDisplayFactoryMock.Object, new Bound(1, 1));
             //assert
-            Assert.Equal(4, vstack.Height);
-            Assert.Equal(5, vstack.Width);
+            Assert.Equal(1, HStack.Width);
+            Assert.Equal(1, HStack.Height);
         }
         [Fact]
-        public void Height_Width_should_be_8_9_when_vstack_declared_with_0_0_Bound_and_2_element_of_height_1_3_and_width_1_5_with_border_thickness_2()
+        public void Width_Height_should_be_2_3_when_HStack_declared_with_2_3_Bound()
         {
             //arrange
-            _uiElementMock1.Setup(ui => ui.Height).Returns(1);
-            _uiElementMock2.Setup(ui => ui.Height).Returns(3);
             _uiElementMock1.Setup(ui => ui.Width).Returns(1);
-            _uiElementMock2.Setup(ui => ui.Width).Returns(5);
+            //act
+            HStack = new HStack(_borderMock.Object, _ScreenDisplayFactoryMock.Object, new Bound(2, 3));
+            //assert
+            Assert.Equal(3, HStack.Width);
+            Assert.Equal(2, HStack.Height);
+        }
+        [Fact]
+        public void Width_Height_should_be_3_3_when_HStack_declared_with_0_3_Bound_and_1_element_of_Width_3()
+        {
+            //arrange
+            _uiElementMock1.Setup(ui => ui.Width).Returns(3);
+            _uiElementMock1.Setup(ui => ui.Height).Returns(1);
+            _borderMock.Setup(b => b.Thickness).Returns(0);
+            HStack.Border = _borderMock.Object;
+            //act
+            HStack = new HStack(_borderMock.Object, _ScreenDisplayFactoryMock.Object, new Bound(0, 3));
+            HStack.AddChild(_uiElementMock1.Object);
+            //assert
+            Assert.Equal(3, HStack.Width);
+            Assert.Equal(1, HStack.Height);
+        }
+        [Fact]
+        public void Width_Height_should_be_5_3_when_HStack_declared_with_0_3_Bound_and_1_element_of_Width_5()
+        {
+            //arrange
+            _uiElementMock1.Setup(ui => ui.Width).Returns(5);
+            _borderMock.Setup(b => b.Thickness).Returns(0);
+            HStack.Border = _borderMock.Object;
+            //act
+            HStack = new HStack(_borderMock.Object, _ScreenDisplayFactoryMock.Object, new Bound(3, 0));
+            HStack.AddChild(_uiElementMock1.Object);
+            //assert
+            Assert.Equal(5, HStack.Width);
+            Assert.Equal(3, HStack.Height);
+        }
+        [Fact]
+        public void Width_Width_should_be_4_5_when_HStack_declared_with_0_0_Bound_and_2_element_of_Width_1_3_and_width_1_5()
+        {
+            //arrange
+            _uiElementMock1.Setup(ui => ui.Width).Returns(1);
+            _uiElementMock2.Setup(ui => ui.Width).Returns(3);
+            _uiElementMock1.Setup(ui => ui.Height).Returns(1);
+            _uiElementMock2.Setup(ui => ui.Height).Returns(5);
+            _borderMock.Setup(b => b.Thickness).Returns(0);
+            HStack.Border = _borderMock.Object;
+            //act
+            HStack = new HStack(_borderMock.Object, _ScreenDisplayFactoryMock.Object, new Bound(0, 0));
+            HStack.AddChild(_uiElementMock1.Object);
+            HStack.AddChild(_uiElementMock2.Object);
+            //assert
+            Assert.Equal(4, HStack.Width);
+            Assert.Equal(5, HStack.Height);
+        }
+        [Fact]
+        public void Width_Width_should_be_8_9_when_HStack_declared_with_0_0_Bound_and_2_element_of_Width_1_3_and_width_1_5_with_border_thickness_2()
+        {
+            //arrange
+            _uiElementMock1.Setup(ui => ui.Width).Returns(1);
+            _uiElementMock2.Setup(ui => ui.Width).Returns(3);
+            _uiElementMock1.Setup(ui => ui.Height).Returns(1);
+            _uiElementMock2.Setup(ui => ui.Height).Returns(5);
             _borderMock.Setup(b => b.Thickness).Returns(2);
-            vstack.Border = _borderMock.Object;
+            HStack.Border = _borderMock.Object;
             //act
-            vstack = new VStack(_borderMock.Object, _ScreenDisplayFactoryMock.Object, new Bound(0, 0));
-            vstack.AddChild(_uiElementMock1.Object);
-            vstack.AddChild(_uiElementMock2.Object);
+            HStack = new HStack(_borderMock.Object, _ScreenDisplayFactoryMock.Object, new Bound(0, 0));
+            HStack.AddChild(_uiElementMock1.Object);
+            HStack.AddChild(_uiElementMock2.Object);
             //assert
-            Assert.Equal(8, vstack.Height);
-            Assert.Equal(9, vstack.Width);
+            Assert.Equal(8, HStack.Width);
+            Assert.Equal(9, HStack.Height);
         }
         //GetGlbalPosition Tests
         [Fact]
@@ -587,10 +589,10 @@ namespace TestGift.UnitTest.UI.Element
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(0);
-            vstack.Border = _borderMock.Object;
+            HStack.Border = _borderMock.Object;
             Context contextRenderable = new Context(new Position(0, 0), new Bound(0, 0));
             //act
-            Position position = vstack.GetGlobalPosition(contextRenderable);
+            Position position = HStack.GetGlobalPosition(contextRenderable);
             //assert
             Assert.Equal(0, position.y);
             Assert.Equal(0, position.x);
@@ -600,10 +602,10 @@ namespace TestGift.UnitTest.UI.Element
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(0);
-            vstack.Border = _borderMock.Object;
+            HStack.Border = _borderMock.Object;
             Context contextRenderable = new Context(new Position(2, 1), new Bound(0, 0));
             //act
-            Position position = vstack.GetGlobalPosition(contextRenderable);
+            Position position = HStack.GetGlobalPosition(contextRenderable);
             //assert
             Assert.Equal(2, position.y);
             Assert.Equal(1, position.x);
@@ -613,10 +615,10 @@ namespace TestGift.UnitTest.UI.Element
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(0);
-            vstack.Border = _borderMock.Object;
+            HStack.Border = _borderMock.Object;
             Context contextRenderable = new Context(new Position(3, 2), new Bound(0, 0));
             //act
-            Position position = vstack.GetGlobalPosition(contextRenderable);
+            Position position = HStack.GetGlobalPosition(contextRenderable);
             //assert
             Assert.Equal(3, position.y);
             Assert.Equal(2, position.x);
@@ -626,10 +628,10 @@ namespace TestGift.UnitTest.UI.Element
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(1);
-            vstack.Border = _borderMock.Object;
+            HStack.Border = _borderMock.Object;
             Context contextRenderable = new Context(new Position(1, 1), new Bound(0, 0));
             //act
-            Position position = vstack.GetGlobalPosition(contextRenderable);
+            Position position = HStack.GetGlobalPosition(contextRenderable);
             //assert
             Assert.Equal(1, position.y);
             Assert.Equal(1, position.x);
@@ -639,10 +641,10 @@ namespace TestGift.UnitTest.UI.Element
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(1);
-            vstack.Border = _borderMock.Object;
+            HStack.Border = _borderMock.Object;
             Context contextRenderable = new Context(new Position(2, 1), new Bound(0, 0));
             //act
-            Position position = vstack.GetGlobalPosition(contextRenderable);
+            Position position = HStack.GetGlobalPosition(contextRenderable);
             //assert
             Assert.Equal(2, position.y);
             Assert.Equal(1, position.x);
@@ -652,10 +654,10 @@ namespace TestGift.UnitTest.UI.Element
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(2);
-            vstack.Border = _borderMock.Object;
+            HStack.Border = _borderMock.Object;
             Context contextRenderable = new Context(new Position(2, 1), new Bound(0, 0));
             //act
-            Position position = vstack.GetGlobalPosition(contextRenderable);
+            Position position = HStack.GetGlobalPosition(contextRenderable);
             //assert
             Assert.Equal(2, position.y);
             Assert.Equal(1, position.x);

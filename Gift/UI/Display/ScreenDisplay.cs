@@ -5,23 +5,59 @@ namespace Gift.UI.Display
 {
     public class ScreenDisplay : IScreenDisplay
     {
+        public Color FrontColor { get; set; }
+        public Color BackColor { get; set; }
+
+        public Color[,] FrontColorMap{ get; }
+        public Color[,] BackColorMap{ get; }
+
         public Bound TotalBound { get; }
         public StringBuilder DisplayString { get; }
+        public char[,] DisplayMap { get; }
 
 
-        public ScreenDisplay(Bound bound) : this(bound, GiftBase.FILLINGCHAR)
+        public ScreenDisplay(string display, Color frontColor = Color.White, Color backColor = Color.Black) : this(new(1, display.Length),frontColor, backColor, GiftBase.FILLINGCHAR)
         {
+            DisplayString.Clear().Append(display);
         }
-        public ScreenDisplay(Bound bound, char emptychar)
+
+        public ScreenDisplay(Bound bound, Color frontColor = Color.White, Color backColor = Color.Black, char emptychar = GiftBase.FILLINGCHAR)
         {
             DisplayString = new StringBuilder();
             TotalBound = bound;
             FillDisplay(emptychar);
+
+            FrontColor = frontColor;
+            BackColor = backColor;
+
+            FrontColorMap = new Color[bound.Height, bound.Width];
+            BackColorMap = new Color[bound.Height, bound.Width];
+            DisplayMap = new char[bound.Height, bound.Width];
+
+            fillColor(FrontColorMap, frontColor);
+            fillColor(BackColorMap, backColor);
+            fillDisplayMap(DisplayMap, emptychar);
         }
 
-        public ScreenDisplay(string display) : this(new(1, display.Length), GiftBase.FILLINGCHAR)
+        public void fillColor(Color[,] colormap, Color color)
         {
-            DisplayString.Clear().Append(display);
+            for (int i = 0; i < colormap.GetLength(0); i++)
+            {
+                for (int j = 0; j < colormap.GetLength(1); j++)
+                {
+                    colormap[i, j] = color;
+                }
+            }
+        }
+        public void fillDisplayMap(char[,] displaymap, char emptychar)
+        {
+            for (int i = 0; i < displaymap.GetLength(0); i++)
+            {
+                for (int j = 0; j < displaymap.GetLength(1); j++)
+                {
+                    displaymap[i, j] = emptychar;
+                }
+            }
         }
 
         private void FillDisplay(char emptychar)
@@ -48,24 +84,46 @@ namespace Gift.UI.Display
             }
         }
 
-        private void AddLineToDisplay(IScreenDisplay display, Position globalPosition, int i)
+        private void AddLineToDisplay(IScreenDisplay display, Position position, int i)
         {
-            int indexLineToReplace = (globalPosition.y + i) * (TotalBound.Width + 1) + globalPosition.x;
+            int indexLineToReplace = (position.y + i) * (TotalBound.Width + 1) + position.x;
+            int indexWidthToReplace = position.x;
             int lenghtToReplace = display.TotalBound.Width;
-            if (globalPosition.x + display.TotalBound.Width > TotalBound.Width)
+            if (position.x + display.TotalBound.Width > TotalBound.Width)
             {
-                lenghtToReplace = TotalBound.Width - globalPosition.x;
+                lenghtToReplace = TotalBound.Width - position.x;
             }
-            else if (globalPosition.x < 0)
+            else if (position.x < 0)
             {
-                indexLineToReplace = (globalPosition.y + i) * (TotalBound.Width + 1);
-                lenghtToReplace = display.TotalBound.Width + globalPosition.x;
+                indexLineToReplace = (position.y + i) * (TotalBound.Width + 1);
+                indexWidthToReplace = 0;
+                lenghtToReplace = display.TotalBound.Width + position.x;
             }
-            DisplayString.Remove(indexLineToReplace, lenghtToReplace);
 
+            DisplayString.Remove(indexLineToReplace, lenghtToReplace);
             string lineToInsert = display.GetLine(i);
             string stringToInsert = lineToInsert.Substring(0, lenghtToReplace);
             DisplayString.Insert(indexLineToReplace, stringToInsert);
+
+            FillColorMapAtPosition(display, position, i, indexLineToReplace, indexWidthToReplace, lenghtToReplace);
+            FillDisplayMapAtPosition(position, i, indexLineToReplace, indexWidthToReplace, lenghtToReplace,stringToInsert);
+        }
+
+        private void FillColorMapAtPosition(IScreenDisplay display, Position position, int i, int indexLineToReplace, int indexWidthToReplace, int lenghtToReplace)
+        {
+            for (int j = 0; j < lenghtToReplace; j++)
+            {
+                FrontColorMap[position.y + i, indexWidthToReplace + j] = display.FrontColor;
+                BackColorMap[position.y + i, indexWidthToReplace + j] = display.BackColor;
+            }
+        }
+
+        private void FillDisplayMapAtPosition(Position position, int i, int indexLineToReplace, int indexWidthToReplace, int lenghtToReplace, string stringToInsert)
+        {
+            for (int j = 0; j < lenghtToReplace; j++)
+            {
+                DisplayMap[position.y + i, indexWidthToReplace + j] = stringToInsert[j];
+            }
         }
 
         public string GetLine(int i)

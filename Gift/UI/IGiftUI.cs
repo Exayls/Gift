@@ -6,7 +6,7 @@ namespace Gift.UI
 {
     public interface IGiftUI : IContainer
     {
-
+        List<IContainer> SelectableContainers { get; set; }
         IScreenDisplay GetDisplay();
         void SetChild(UIElement UIElement);
     }

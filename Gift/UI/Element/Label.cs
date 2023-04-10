@@ -70,24 +70,20 @@ namespace Gift.UI.Element
         public override IScreenDisplay GetDisplay(Bound bound)
         {
             return new ScreenDisplay(Text);
-            //IScreenDisplay screen = new ScreenDisplay(bound);
-
-            //string text = Text;
-            //int widthLine = Disposition.Position.x + text.Length;
-            //int MaxWidth = Context?.Bounds?.Width ?? 0;
-            //string display = Disposition.Position.x <= MaxWidth? (widthLine > MaxWidth ? text.Substring(0, widthLine-MaxWidth-1) : text) : "";
-            //screen.AddString(display, Disposition.Position);
-            //return screen;
         }
 
-        public override IScreenDisplay GetDisplayWithoutBorder(Bound bound)
+        public override IScreenDisplay GetDisplayWithoutBorder(Bound bound, Color frontColor = Color.White, Color BackColor = Color.Black)
         {
             return new ScreenDisplay(Text);
         }
-
         public override IScreenDisplay GetDisplayBorder(Bound bound)
         {
             return Border.GetDisplay(bound);
+        }
+
+        public override IScreenDisplay GetDisplayBorder(Bound bound, Color frontColor, Color backColor)
+        {
+            return Border.GetDisplay(bound, frontColor, backColor);
         }
     }
 }

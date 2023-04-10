@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Gift.UI.MetaData
 {
     public class Context
     {
-        public Context(Position globalPosition, Bound localBounds)
+        public Context(Position position, Bound bounds)
         {
-            Position = globalPosition;
-            Bounds = localBounds;
+            Position = position;
+            Bounds = bounds;
         }
 
         public Position Position { get; private set; }
