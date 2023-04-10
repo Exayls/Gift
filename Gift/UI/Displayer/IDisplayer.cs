@@ -1,6 +1,6 @@
 ﻿using Gift.UI.Display;
 
-namespace Gift
+namespace Gift.UI.Displayer
 {
     public interface IDisplayer
     {

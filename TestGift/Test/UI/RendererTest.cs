@@ -8,11 +8,11 @@ using Gift.UI.MetaData;
 
 namespace TestGift.Test.UI
 {
-    public class RelativeRendererTest
+    public class RendererTest
     {
         private Renderer renderer;
 
-        public RelativeRendererTest()
+        public RendererTest()
         {
             renderer = new Renderer();
         }

@@ -12,14 +12,14 @@ using System.Threading.Tasks;
 
 namespace TestGift.UnitTest.UI
 {
-    public class RelativeRendererTest
+    public class RendererTest
     {
         private Mock<IGiftUI> _giftuiMock;
         private Mock<IUIElement> _labelMock;
         private MockRepository _mockFactory;
         private Renderer renderer;
 
-        public RelativeRendererTest()
+        public RendererTest()
         {
             _giftuiMock = new Mock<IGiftUI>();
             _labelMock = new Mock<IUIElement>();
