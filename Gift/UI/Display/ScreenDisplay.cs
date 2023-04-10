@@ -8,8 +8,8 @@ namespace Gift.UI.Display
         public Color FrontColor { get; set; }
         public Color BackColor { get; set; }
 
-        private Color[,] frontColorMap;
-        private Color[,] backColorMap;
+        public Color[,] FrontColorMap{ get; }
+        public Color[,] BackColorMap{ get; }
 
         public Bound TotalBound { get; }
         public StringBuilder DisplayString { get; }
@@ -30,12 +30,12 @@ namespace Gift.UI.Display
             FrontColor = frontColor;
             BackColor = backColor;
 
-            frontColorMap = new Color[bound.Height, bound.Width];
-            backColorMap = new Color[bound.Height, bound.Width];
+            FrontColorMap = new Color[bound.Height, bound.Width];
+            BackColorMap = new Color[bound.Height, bound.Width];
             DisplayMap = new char[bound.Height, bound.Width];
 
-            fillColor(frontColorMap, frontColor);
-            fillColor(backColorMap, backColor);
+            fillColor(FrontColorMap, frontColor);
+            fillColor(BackColorMap, backColor);
             fillDisplayMap(DisplayMap, emptychar);
         }
 
@@ -113,8 +113,8 @@ namespace Gift.UI.Display
         {
             for (int j = 0; j < lenghtToReplace; j++)
             {
-                frontColorMap[position.y + i, indexWidthToReplace + j] = display.FrontColor;
-                backColorMap[position.y + i, indexWidthToReplace + j] = display.BackColor;
+                FrontColorMap[position.y + i, indexWidthToReplace + j] = display.FrontColor;
+                BackColorMap[position.y + i, indexWidthToReplace + j] = display.BackColor;
             }
         }
 
