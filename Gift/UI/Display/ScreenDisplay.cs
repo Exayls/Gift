@@ -5,18 +5,15 @@ namespace Gift.UI.Display
 {
     public class ScreenDisplay : IScreenDisplay
     {
-        public Color FrontColor { get; set; }
-        public Color BackColor { get; set; }
-
-        public Color[,] FrontColorMap{ get; }
-        public Color[,] BackColorMap{ get; }
+        public Color[,] FrontColorMap { get; }
+        public Color[,] BackColorMap { get; }
 
         public Bound TotalBound { get; }
         public StringBuilder DisplayString { get; }
         public char[,] DisplayMap { get; }
 
 
-        public ScreenDisplay(string display, Color frontColor = Color.White, Color backColor = Color.Black) : this(new(1, display.Length),frontColor, backColor, GiftBase.FILLINGCHAR)
+        public ScreenDisplay(string display, Color frontColor = Color.White, Color backColor = Color.Black) : this(new(1, display.Length), frontColor, backColor, GiftBase.FILLINGCHAR)
         {
             DisplayString.Clear().Append(display);
         }
@@ -26,9 +23,6 @@ namespace Gift.UI.Display
             DisplayString = new StringBuilder();
             TotalBound = bound;
             FillDisplay(emptychar);
-
-            FrontColor = frontColor;
-            BackColor = backColor;
 
             FrontColorMap = new Color[bound.Height, bound.Width];
             BackColorMap = new Color[bound.Height, bound.Width];
@@ -106,15 +100,15 @@ namespace Gift.UI.Display
             DisplayString.Insert(indexLineToReplace, stringToInsert);
 
             FillColorMapAtPosition(display, position, i, indexLineToReplace, indexWidthToReplace, lenghtToReplace);
-            FillDisplayMapAtPosition(position, i, indexLineToReplace, indexWidthToReplace, lenghtToReplace,stringToInsert);
+            FillDisplayMapAtPosition(position, i, indexLineToReplace, indexWidthToReplace, lenghtToReplace, stringToInsert);
         }
 
         private void FillColorMapAtPosition(IScreenDisplay display, Position position, int i, int indexLineToReplace, int indexWidthToReplace, int lenghtToReplace)
         {
             for (int j = 0; j < lenghtToReplace; j++)
             {
-                FrontColorMap[position.y + i, indexWidthToReplace + j] = display.FrontColor;
-                BackColorMap[position.y + i, indexWidthToReplace + j] = display.BackColor;
+                FrontColorMap[position.y + i, indexWidthToReplace + j] = display.FrontColorMap[i, j];
+                BackColorMap[position.y + i, indexWidthToReplace + j] = display.BackColorMap[i, j];
             }
         }
 

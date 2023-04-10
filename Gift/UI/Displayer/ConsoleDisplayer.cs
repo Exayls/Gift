@@ -33,11 +33,12 @@ namespace Gift.UI.Displayer
                     if (oldBackColor != currentBackColor)
                         displayString += currentBackColor.GetBackgroundEscapeCode();
 
-                    displayString += displayMap[i, j];
+                    displayString += displayMap[i,j];
 
                     oldFrontColor = frontColorMap[i, j];
                     oldBackColor = backColorMap[i, j];
                 }
+                    displayString += "\n";
             }
 
             Console.SetCursorPosition(0, 0);

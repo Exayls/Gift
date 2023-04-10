@@ -418,5 +418,72 @@ namespace TestGift.UI.Display
             char[,] actual = screen.DisplayMap;
             Assert.Equal(expectedDisplay, actual);
         }
+
+        [Fact]
+        public void AddDisplay_should_add_display_to_screen_when_add_nested_screen()
+        {
+            //arrange
+            ScreenDisplay screen = new ScreenDisplay(new Bound(3, 3), emptychar: '@'); ;
+            ScreenDisplay screenToAdd = new ScreenDisplay(new Bound(1, 2), backColor: Color.Red, emptychar: '*');
+            ScreenDisplay screenToAdd2 = new ScreenDisplay(new Bound(1, 1), backColor: Color.Green, emptychar: ' ');
+            //act
+            screenToAdd.AddDisplay(screenToAdd2, new Position(0, 0));
+            screen.AddDisplay(screenToAdd, new Position(1, 0));
+            //assert
+            char[,] expectedDisplay = convert_string_to_char(new string[]
+             {
+                 "@@@",
+                 " *@",
+                 "@@@"
+             });
+            char[,] actual = screen.DisplayMap;
+            Assert.Equal(expectedDisplay, actual);
+        }
+
+
+        // color test
+
+        [Fact]
+        public void AddDisplay_should_put_color_to_screen_when_add_screen()
+        {
+            //arrange
+            ScreenDisplay screen = new ScreenDisplay(new Bound(3, 3), emptychar: '@'); ;
+            ScreenDisplay screenToAdd = new ScreenDisplay(new Bound(1, 2), backColor: Color.Red, emptychar: '*');
+            //act
+            screen.AddDisplay(screenToAdd, new Position(1, 0));
+            //assert
+            Color[,] expectedColors =
+             {
+                {Color.Black, Color.Black, Color.Black },
+                {Color.Red,Color.Red, Color.Black },
+                {Color.Black, Color.Black, Color.Black }
+             };
+
+            Color[,] actual = screen.BackColorMap;
+            Assert.Equal(expectedColors, actual);
+        }
+
+        [Fact]
+        public void AddDisplay_should_put_color_to_screen_when_add_nested_screen()
+        {
+            //arrange
+            ScreenDisplay screen = new ScreenDisplay(new Bound(3, 3), emptychar: '@'); ;
+            ScreenDisplay screenToAdd = new ScreenDisplay(new Bound(1, 2), backColor: Color.Red, emptychar: '*');
+            ScreenDisplay screenToAdd2 = new ScreenDisplay(new Bound(1, 1), backColor: Color.Green, emptychar: '*');
+            //act
+            screenToAdd.AddDisplay(screenToAdd2, new Position(0, 0));
+            screen.AddDisplay(screenToAdd, new Position(1, 0));
+            //assert
+            Color[,] expectedColors =
+             {
+                {Color.Black, Color.Black, Color.Black },
+                {Color.Green,Color.Red, Color.Black },
+                {Color.Black, Color.Black, Color.Black }
+             };
+
+            Color[,] actual = screen.BackColorMap;
+            Assert.Equal(expectedColors, actual);
+        }
+
     }
 }
