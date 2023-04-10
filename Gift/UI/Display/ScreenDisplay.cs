@@ -111,7 +111,7 @@ namespace Gift.UI.Display
 
         private void FillColorMapAtPosition(IScreenDisplay display, Position position, int i, int indexLineToReplace, int indexWidthToReplace, int lenghtToReplace)
         {
-            for (int j = indexLineToReplace; j < lenghtToReplace; j++)
+            for (int j = 0; j < lenghtToReplace; j++)
             {
                 frontColorMap[position.y + i, indexWidthToReplace + j] = display.FrontColor;
                 backColorMap[position.y + i, indexWidthToReplace + j] = display.BackColor;
@@ -120,7 +120,7 @@ namespace Gift.UI.Display
 
         private void FillDisplayMapAtPosition(Position position, int i, int indexLineToReplace, int indexWidthToReplace, int lenghtToReplace, string stringToInsert)
         {
-            for (int j = indexLineToReplace; j < lenghtToReplace; j++)
+            for (int j = 0; j < lenghtToReplace; j++)
             {
                 DisplayMap[position.y + i, indexWidthToReplace + j] = stringToInsert[j];
             }
