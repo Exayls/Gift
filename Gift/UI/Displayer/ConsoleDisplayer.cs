@@ -38,7 +38,6 @@ namespace Gift.UI.Displayer
                     oldFrontColor = frontColorMap[i, j];
                     oldBackColor = backColorMap[i, j];
                 }
-                    displayString += "\n";
             }
 
             Console.SetCursorPosition(0, 0);
