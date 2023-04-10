@@ -10,11 +10,11 @@ namespace TestGift.Test.UI
 {
     public class RelativeRendererTest
     {
-        private RelativeRenderer renderer;
+        private Renderer renderer;
 
         public RelativeRendererTest()
         {
-            renderer = new RelativeRenderer();
+            renderer = new Renderer();
         }
 
         [Fact]

@@ -17,14 +17,14 @@ namespace TestGift.UnitTest.UI
         private Mock<IGiftUI> _giftuiMock;
         private Mock<IUIElement> _labelMock;
         private MockRepository _mockFactory;
-        private RelativeRenderer renderer;
+        private Renderer renderer;
 
         public RelativeRendererTest()
         {
             _giftuiMock = new Mock<IGiftUI>();
             _labelMock = new Mock<IUIElement>();
             _mockFactory = new MockRepository(MockBehavior.Default);
-            renderer = new RelativeRenderer();
+            renderer = new Renderer();
         }
 
         //[Fact]

@@ -4,9 +4,9 @@ using Gift.UI.MetaData;
 
 namespace Gift.UI
 {
-    public class RelativeRenderer : IRenderer
+    public class Renderer : IRenderer
     {
-        public RelativeRenderer()
+        public Renderer()
         {
         }
 

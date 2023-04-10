@@ -19,7 +19,7 @@ vstack.AddChild(new LabelBuilder().BuildImplicit());
 vstack.AddChild(new LabelBuilder().WithText("tieaucit").BuildImplicit());
 vstack.AddChild(new LabelBuilder().BuildImplicit());
 
-new ConsoleDisplayer().display(new RelativeRenderer().GetRenderDisplay(ui));
+new ConsoleDisplayer().display(new Renderer().GetRenderDisplay(ui));
 
 
 //var gift = new GiftBase();

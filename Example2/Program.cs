@@ -49,6 +49,6 @@ ui.SelectedContainer = vstack2;
 
 
 
-var gift = new GiftBase(new RelativeRenderer());
+var gift = new GiftBase(new Renderer());
 gift.initialize(ui);
 gift.run();
