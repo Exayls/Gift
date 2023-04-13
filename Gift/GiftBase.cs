@@ -20,10 +20,10 @@ namespace Gift
         public const char FILLINGCHAR = '*';
 
 
-        public GiftBase(IRenderer renderer)
+        public GiftBase(IRenderer? renderer = null, IDisplayer? displayer = null)
         {
-            _renderer = renderer;
-            _displayer = new ConsoleDisplayer();
+            _renderer = renderer?? new Renderer();
+            _displayer = displayer?? new ConsoleDisplayer();
         }
 
         public virtual void initialize()
@@ -58,13 +58,6 @@ namespace Gift
             {
                 _displayer.display(View);
             }
-            //Console.Clear();
-            //Console.WriteLine("\x1b[3J");
-            //Console.Clear();
-            //if (View != null)
-            //{
-            //    Console.Out.Write(View);
-            //}
         }
 
         public virtual void end()
