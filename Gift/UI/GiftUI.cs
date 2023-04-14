@@ -13,6 +13,7 @@ namespace Gift.UI
 {
     public class GiftUI : Container, IGiftUI
     {
+
         public override int Height
         {
             get { return Bound.Height; }
@@ -23,22 +24,24 @@ namespace Gift.UI
         }
 
         public List<IContainer> SelectableContainers { get; set; }
+
+        private IContainer? _selectedContainer;
         public IContainer? SelectedContainer
         {
             get
             {
-                return SelectedContainer;
+                return _selectedContainer;
             }
             set
             {
-                SelectedContainer = value;
+                _selectedContainer = value;
                 foreach (IContainer container in SelectableContainers)
                 {
-                    container.IsSelected = false;
+                    container.IsSelectedContainer = false;
                 }
                 if (SelectedContainer != null)
                 {
-                    SelectedContainer.IsSelected = true;
+                    SelectedContainer.IsSelectedContainer = true;
                 }
             }
         }
@@ -96,11 +99,6 @@ namespace Gift.UI
         public override IScreenDisplay GetDisplayWithoutBorder(Bound bound, IConfiguration configuration)
         {
             return _screenDisplayFactory.Create(Bound, FrontColor ?? configuration.DefaultFrontColor, BackColor ?? configuration.DefaultBackColor, GiftBase.FILLINGCHAR);
-        }
-
-        public override IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuration)
-        {
-            return Border.GetDisplay(bound, FrontColor ?? configuration.DefaultFrontColor, BackColor ?? configuration.DefaultBackColor);
         }
 
         public override Position GetRelativePosition(Context context)

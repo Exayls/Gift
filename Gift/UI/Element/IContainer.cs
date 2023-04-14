@@ -9,7 +9,7 @@ namespace Gift.UI.Element
         IList<IUIElement> Childs { get; }
         List<IUIElement> SelectableElements { get; set; }
         IUIElement? SelectedElement { get; set; }
-        bool IsSelected { get; set; }
+        bool IsSelectedContainer { get; set; }
 
         Context GetContextRelativeRenderable(IRenderable renderable, Context context);
         Context GetContextRenderable(IRenderable renderable, Context context);

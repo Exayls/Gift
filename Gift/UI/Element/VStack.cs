@@ -155,10 +155,5 @@ namespace Gift.UI.Element
             return emptyVstackScreen;
         }
 
-        public override IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuration)
-        {
-            IScreenDisplay screenDisplay = Border.GetDisplay(bound, FrontColor ?? configuration.DefaultFrontColor, BackColor ?? configuration.DefaultBackColor);
-            return screenDisplay;
-        }
     }
 }

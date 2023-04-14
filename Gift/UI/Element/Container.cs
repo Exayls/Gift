@@ -14,7 +14,7 @@ namespace Gift.UI.Element
         public IUIElement? SelectedElement { get; set; }
 
         private bool isSelected;
-        public bool IsSelected
+        public bool IsSelectedContainer
         {
             get => isSelected;
             set
@@ -51,9 +51,13 @@ namespace Gift.UI.Element
         public abstract Context GetContextRelativeRenderable(IRenderable renderable, Context context);
         public override IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuration)
         {
-
             Color frontColor = FrontColor ?? configuration.DefaultFrontColor;
             Color backColor = BackColor ?? configuration.DefaultBackColor;
+            if (IsSelectedContainer)
+            {
+                frontColor = configuration.SelectedContainerFrontColor ?? frontColor;
+                backColor = configuration.SelectedContainerBackColor ?? backColor;
+            }
             IScreenDisplay screenDisplay = Border.GetDisplay(bound, frontColor, backColor);
             return screenDisplay;
         }
