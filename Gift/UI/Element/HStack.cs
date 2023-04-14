@@ -139,9 +139,8 @@ namespace Gift.UI.Element
         public IScreenDisplay GetDisplayWithBorder(Bound bound, char fillingChar)
         {
             int thickness = Border.Thickness;
-            IScreenDisplay screenDisplay = Border.GetDisplay(bound);
-            Bound boundEmptyVStack = new Bound(bound.Height - 2 * thickness, bound.Width - 2 * thickness);
-            IScreenDisplay emptyVstackScreen = _screenDisplayFactory.Create(boundEmptyVStack, fillingChar: fillingChar);
+            IScreenDisplay screenDisplay = GetDisplayBorder(bound, new DefaultConfiguration());
+            IScreenDisplay emptyVstackScreen = GetDisplayWithoutBorder(bound, new DefaultConfiguration());
             screenDisplay.AddDisplay(emptyVstackScreen, new Position(thickness, thickness));
             return screenDisplay;
         }

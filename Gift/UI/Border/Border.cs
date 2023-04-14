@@ -60,7 +60,7 @@ namespace Gift.UI.Border
         }
         public IScreenDisplay GetDisplay(Bound bound, Color frontColor, Color backColor, char fillingChar = ' ')
         {
-            IScreenDisplay screenDisplay = new ScreenDisplay(bound, frontColor, backColor);
+            IScreenDisplay screenDisplay = new ScreenDisplay(bound, frontColor, backColor, fillingChar);
             AddBorder(screenDisplay);
             return screenDisplay;
         }

@@ -148,6 +148,7 @@ namespace Gift.UI.Element
         public override IScreenDisplay GetDisplayWithoutBorder(Bound bound, IConfiguration configuration)
         {
             int thickness = Border.Thickness;
+
             Bound boundEmptyVStack = new Bound(bound.Height - 2 * thickness, bound.Width - 2 * thickness);
             IScreenDisplay emptyVstackScreen = _screenDisplayFactory.Create(boundEmptyVStack, FrontColor ?? configuration.DefaultFrontColor, BackColor ?? configuration.DefaultBackColor, GiftBase.FILLINGCHAR);
             return emptyVstackScreen;
@@ -155,7 +156,7 @@ namespace Gift.UI.Element
 
         public override IScreenDisplay GetDisplayBorder(Bound bounds, IConfiguration configuration)
         {
-            IScreenDisplay screenDisplay = Border.GetDisplay(bounds);
+            IScreenDisplay screenDisplay = Border.GetDisplay(bounds, FrontColor ?? configuration.DefaultFrontColor, BackColor ?? configuration.DefaultBackColor);
             return screenDisplay;
         }
     }

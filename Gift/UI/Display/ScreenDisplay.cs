@@ -5,6 +5,9 @@ namespace Gift.UI.Display
 {
     public class ScreenDisplay : IScreenDisplay
     {
+        private Color frontColor;
+        private Color backColor;
+
         public Color[,] FrontColorMap { get; }
         public Color[,] BackColorMap { get; }
 
@@ -31,6 +34,9 @@ namespace Gift.UI.Display
             fillColor(FrontColorMap, frontColor);
             fillColor(BackColorMap, backColor);
             fillDisplayMap(DisplayMap, emptychar);
+
+            this.frontColor = frontColor;
+            this.backColor = backColor;
         }
 
         public void fillColor(Color[,] colormap, Color color)
@@ -127,13 +133,13 @@ namespace Gift.UI.Display
 
         public void AddString(string display, Position position)
         {
-            ScreenDisplay tmpScreen = new ScreenDisplay(display);
+            ScreenDisplay tmpScreen = new ScreenDisplay(display,frontColor,backColor);
             AddDisplay(tmpScreen, position);
         }
 
         public void AddChar(char display, Position position)
         {
-            ScreenDisplay tmpScreen = new ScreenDisplay(display.ToString());
+            ScreenDisplay tmpScreen = new ScreenDisplay(display.ToString(),frontColor, backColor);
             AddDisplay(tmpScreen, position);
         }
     }

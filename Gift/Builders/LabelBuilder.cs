@@ -15,8 +15,8 @@ namespace Gift.Builders
     {
         private string text = "Hello";
         private Position? position = null;
-        private Color backColor = Color.Black;
-        private Color frontColor = Color.White;
+        private Color? backColor = null;
+        private Color? frontColor = null;
 
         /// <summary>
         /// Get Label instance with "Hello" as default text and (0,0) as default position

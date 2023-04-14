@@ -37,7 +37,7 @@ namespace TestGift.UnitTest.UI.Element
             //arrange
             _screenDisplayMock2.Setup(s => s.DisplayString).Returns(new StringBuilder().Append("    \n").Append("    "));
             _borderMock.Setup(b => b.Thickness).Returns(0);
-            _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
+            _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
             HStack.Border = _borderMock.Object;
             //act
             IScreenDisplay screenDisplay = HStack.GetDisplayWithBorder(new(2, 4), '*');
@@ -53,7 +53,7 @@ namespace TestGift.UnitTest.UI.Element
             //arrange
             _screenDisplayMock2.Setup(s => s.DisplayString).Returns(new StringBuilder().Append("----\n").Append("-  -\n").Append("----"));
             _borderMock.Setup(b => b.Thickness).Returns(1);
-            _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
+            _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
             HStack.Border = _borderMock.Object;
             //act
             IScreenDisplay screenDisplay = HStack.GetDisplayWithBorder(new Bound(3, 4), '*');
@@ -68,7 +68,7 @@ namespace TestGift.UnitTest.UI.Element
             //arrange
             _screenDisplayMock1.Setup(s => s.DisplayString).Returns(new StringBuilder().Append("____\n").Append("_ii_\n").Append("____"));
             _borderMock.Setup(b => b.Thickness).Returns(1);
-            _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
+            _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
             HStack.Border = _borderMock.Object;
             //act
             IScreenDisplay screenDisplay = HStack.GetDisplayWithBorder(new Bound(3, 4), '*');
@@ -83,7 +83,7 @@ namespace TestGift.UnitTest.UI.Element
             //arrange
             _screenDisplayMock1.Setup(s => s.DisplayString).Returns(new StringBuilder().Append("iiii\n").Append("illi\n").Append("iiii"));
             _borderMock.Setup(b => b.Thickness).Returns(1);
-            _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
+            _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
             HStack.Border = _borderMock.Object;
             //act
             IScreenDisplay screenDisplay = HStack.GetDisplay(new(3, 4));
@@ -98,7 +98,7 @@ namespace TestGift.UnitTest.UI.Element
             //arrange
             _screenDisplayMock1.Setup(s => s.DisplayString).Returns(new StringBuilder().Append("-----\n").Append("-   -\n").Append("-   -\n").Append("-   -\n").Append("-----"));
             _borderMock.Setup(b => b.Thickness).Returns(1);
-            _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
+            _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
             HStack.Border = _borderMock.Object;
             //act
             IScreenDisplay screenDisplay = HStack.GetDisplay(new(5, 5));
@@ -116,7 +116,7 @@ namespace TestGift.UnitTest.UI.Element
                                    .Append("-    -\n")
                                    .Append("------"));
             _borderMock.Setup(b => b.Thickness).Returns(1);
-            _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
+            _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
             HStack.Border = _borderMock.Object;
             //act
             IScreenDisplay screenDisplay = HStack.GetDisplay(new(3, 6));
@@ -136,7 +136,7 @@ namespace TestGift.UnitTest.UI.Element
                                    .Append("-----\n")
                                    .Append("-----"));
             _borderMock.Setup(b => b.Thickness).Returns(2);
-            _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
+            _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
             HStack.Border = _borderMock.Object;
             //act
             IScreenDisplay screenDisplay = HStack.GetDisplay(new(5, 5));
@@ -157,7 +157,7 @@ namespace TestGift.UnitTest.UI.Element
                                     Append("-------\n").
                                     Append("-------"));
             _borderMock.Setup(b => b.Thickness).Returns(2);
-            _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
+            _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
             HStack.Border = _borderMock.Object;
             //act
             IScreenDisplay screenDisplay = HStack.GetDisplay(new(6, 7));
@@ -179,7 +179,7 @@ namespace TestGift.UnitTest.UI.Element
                                     Append("-------\n").
                                     Append("-------"));
             _borderMock.Setup(b => b.Thickness).Returns(3);
-            _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
+            _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
             HStack.Border = _borderMock.Object;
             //act
             IScreenDisplay screenDisplay = HStack.GetDisplay(new(7, 7));
@@ -201,7 +201,7 @@ namespace TestGift.UnitTest.UI.Element
                                     Append("-------\n").
                                     Append("-------"));
             _borderMock.Setup(b => b.Thickness).Returns(3);
-            _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
+            _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
             HStack.Border = _borderMock.Object;
             //act
             IScreenDisplay screenDisplay = HStack.GetDisplayWithBorder(new(7, 7), 'b');
