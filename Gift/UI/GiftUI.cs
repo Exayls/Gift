@@ -1,4 +1,5 @@
 ﻿using Gift.UI.Border;
+using Gift.UI.Configuration;
 using Gift.UI.Display;
 using Gift.UI.Element;
 using Gift.UI.MetaData;
@@ -22,7 +23,25 @@ namespace Gift.UI
         }
 
         public List<IContainer> SelectableContainers { get; set; }
-        public IContainer? SelectedContainer { get; set; }
+        public IContainer? SelectedContainer
+        {
+            get
+            {
+                return SelectedContainer;
+            }
+            set
+            {
+                SelectedContainer = value;
+                foreach (IContainer container in SelectableContainers)
+                {
+                    container.IsSelected = false;
+                }
+                if (SelectedContainer != null)
+                {
+                    SelectedContainer.IsSelected = true;
+                }
+            }
+        }
 
         public GiftUI(Bound bound, IBorder border) : base(new ScreenDisplayFactory(), bound, border)
         {

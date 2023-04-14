@@ -1,4 +1,5 @@
 ﻿using Gift.UI.Border;
+using Gift.UI.Configuration;
 using Gift.UI.Display;
 using Gift.UI.MetaData;
 
@@ -154,9 +155,9 @@ namespace Gift.UI.Element
             return emptyVstackScreen;
         }
 
-        public override IScreenDisplay GetDisplayBorder(Bound bounds, IConfiguration configuration)
+        public override IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuration)
         {
-            IScreenDisplay screenDisplay = Border.GetDisplay(bounds, FrontColor ?? configuration.DefaultFrontColor, BackColor ?? configuration.DefaultBackColor);
+            IScreenDisplay screenDisplay = Border.GetDisplay(bound, FrontColor ?? configuration.DefaultFrontColor, BackColor ?? configuration.DefaultBackColor);
             return screenDisplay;
         }
     }
