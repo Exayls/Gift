@@ -74,14 +74,14 @@ namespace Gift.UI
             return _screenDisplayFactory.Create(Bound);
         }
 
-        public override IScreenDisplay GetDisplayWithoutBorder(Bound bound)
+        public override IScreenDisplay GetDisplayWithoutBorder(Bound bound, IConfiguration configuration)
         {
-            return _screenDisplayFactory.Create(Bound, FrontColor, BackColor, GiftBase.FILLINGCHAR);
+            return _screenDisplayFactory.Create(Bound, FrontColor ?? configuration.DefaultFrontColor, BackColor ?? configuration.DefaultBackColor, GiftBase.FILLINGCHAR);
         }
 
-        public override IScreenDisplay GetDisplayBorder(Bound bound)
+        public override IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuration)
         {
-            return Border.GetDisplay(bound, FrontColor, BackColor);
+            return Border.GetDisplay(bound, FrontColor ?? configuration.DefaultFrontColor, BackColor ?? configuration.DefaultBackColor);
         }
 
         public override Position GetRelativePosition(Context context)

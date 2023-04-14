@@ -6,8 +6,11 @@ namespace Gift.UI
 {
     public class Renderer : IRenderer
     {
-        public Renderer()
+        public IConfiguration Configuration { get; }
+
+        public Renderer(IConfiguration? configuration = null)
         {
+            Configuration = configuration ?? new DefaultConfiguration();
         }
 
         public IScreenDisplay GetRenderDisplay(IGiftUI giftUI)
@@ -37,7 +40,7 @@ namespace Gift.UI
 
         private IScreenDisplay CreateDisplay(IRenderable container, Context context)
         {
-            return container.GetDisplayWithoutBorder(context.Bounds);
+            return container.GetDisplayWithoutBorder(context.Bounds, Configuration);
         }
 
         private void AddDisplayToBorder(IScreenDisplay screen, IContainer renderable, IScreenDisplay display)
@@ -48,7 +51,7 @@ namespace Gift.UI
 
         private IScreenDisplay CreateBorder(IContainer container, Context context)
         {
-            return container.GetDisplayBorder(context.Bounds);
+            return container.GetDisplayBorder(context.Bounds, Configuration);
         }
 
         private void AddDisplayToSreen(IScreenDisplay screen, IRenderable renderable, Context context, IScreenDisplay display)

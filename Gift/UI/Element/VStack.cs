@@ -139,21 +139,21 @@ namespace Gift.UI.Element
         public IScreenDisplay GetDisplayWithBorder(Bound bound, char fillingChar)
         {
             int thickness = Border.Thickness;
-            IScreenDisplay screenDisplay = GetDisplayBorder(bound);
-            IScreenDisplay emptyVstackScreen = GetDisplayWithoutBorder(bound);
+            IScreenDisplay screenDisplay = GetDisplayBorder(bound, new DefaultConfiguration());
+            IScreenDisplay emptyVstackScreen = GetDisplayWithoutBorder(bound, new DefaultConfiguration());
             screenDisplay.AddDisplay(emptyVstackScreen, new Position(thickness, thickness));
             return screenDisplay;
         }
 
-        public override IScreenDisplay GetDisplayWithoutBorder(Bound bound)
+        public override IScreenDisplay GetDisplayWithoutBorder(Bound bound, IConfiguration configuration)
         {
             int thickness = Border.Thickness;
             Bound boundEmptyVStack = new Bound(bound.Height - 2 * thickness, bound.Width - 2 * thickness);
-            IScreenDisplay emptyVstackScreen = _screenDisplayFactory.Create(boundEmptyVStack, FrontColor, BackColor, GiftBase.FILLINGCHAR);
+            IScreenDisplay emptyVstackScreen = _screenDisplayFactory.Create(boundEmptyVStack, FrontColor ?? configuration.DefaultFrontColor, BackColor ?? configuration.DefaultBackColor, GiftBase.FILLINGCHAR);
             return emptyVstackScreen;
         }
 
-        public override IScreenDisplay GetDisplayBorder(Bound bounds)
+        public override IScreenDisplay GetDisplayBorder(Bound bounds, IConfiguration configuration)
         {
             IScreenDisplay screenDisplay = Border.GetDisplay(bounds);
             return screenDisplay;

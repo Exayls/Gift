@@ -141,22 +141,22 @@ namespace Gift.UI.Element
             int thickness = Border.Thickness;
             IScreenDisplay screenDisplay = Border.GetDisplay(bound);
             Bound boundEmptyVStack = new Bound(bound.Height - 2 * thickness, bound.Width - 2 * thickness);
-            IScreenDisplay emptyVstackScreen = _screenDisplayFactory.Create(boundEmptyVStack, fillingChar:fillingChar);
+            IScreenDisplay emptyVstackScreen = _screenDisplayFactory.Create(boundEmptyVStack, fillingChar: fillingChar);
             screenDisplay.AddDisplay(emptyVstackScreen, new Position(thickness, thickness));
             return screenDisplay;
         }
 
-        public override IScreenDisplay GetDisplayWithoutBorder(Bound bound)
+        public override IScreenDisplay GetDisplayWithoutBorder(Bound bound, IConfiguration configuration)
         {
             int thickness = Border.Thickness;
             Bound boundEmptyVStack = new Bound(bound.Height - 2 * thickness, bound.Width - 2 * thickness);
-            IScreenDisplay emptyVstackScreen = _screenDisplayFactory.Create(boundEmptyVStack,FrontColor, BackColor, GiftBase.FILLINGCHAR);
+            IScreenDisplay emptyVstackScreen = _screenDisplayFactory.Create(boundEmptyVStack, FrontColor ?? configuration.DefaultFrontColor, BackColor ?? configuration.DefaultBackColor, GiftBase.FILLINGCHAR);
             return emptyVstackScreen;
         }
 
-        public override IScreenDisplay GetDisplayBorder(Bound bound)
+        public override IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuration)
         {
-            IScreenDisplay screenDisplay = Border.GetDisplay(bound, FrontColor, BackColor);
+            IScreenDisplay screenDisplay = Border.GetDisplay(bound, FrontColor ?? configuration.DefaultFrontColor, BackColor ?? configuration.DefaultBackColor);
             return screenDisplay;
         }
     }

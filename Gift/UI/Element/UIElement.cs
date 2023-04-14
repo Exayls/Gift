@@ -11,10 +11,10 @@ namespace Gift.UI.Element
         public abstract int Height { get; }
         public abstract int Width { get; }
         public IBorder Border { get; set; }
-        public Color FrontColor { get; private set; }
-        public Color BackColor { get; private set; }
+        public Color? FrontColor { get; private set; }
+        public Color? BackColor { get; private set; }
 
-        protected UIElement(IBorder? border = null , Color frontColor = Color.White, Color backColor = Color.Black)
+        protected UIElement(IBorder? border = null , Color? frontColor = null, Color? backColor = null)
         {
             Border = border?? new NoBorder();
             FrontColor = frontColor;
@@ -22,8 +22,8 @@ namespace Gift.UI.Element
         }
 
         public abstract IScreenDisplay GetDisplay(Bound bound);
-        public abstract IScreenDisplay GetDisplayWithoutBorder(Bound bounds);
-        public abstract IScreenDisplay GetDisplayBorder(Bound bound);
+        public abstract IScreenDisplay GetDisplayWithoutBorder(Bound bounds, IConfiguration configuration);
+        public abstract IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuration);
         public abstract Position GetRelativePosition(Context context);
         public abstract Position GetGlobalPosition(Context context);
         public abstract bool IsFixed();
