@@ -38,10 +38,18 @@ namespace Gift.UI
                 foreach (IContainer container in SelectableContainers)
                 {
                     container.IsSelectedContainer = false;
+                    foreach (IUIElement element in container.SelectableElements)
+                    {
+                        element.IsInSelectedContainer = false;
+                    }
                 }
                 if (SelectedContainer != null)
                 {
                     SelectedContainer.IsSelectedContainer = true;
+                    foreach (IUIElement element in SelectedContainer.SelectableElements)
+                    {
+                        element.IsInSelectedContainer = true;
+                    }
                 }
             }
         }

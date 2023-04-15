@@ -25,6 +25,8 @@ namespace Gift.UI.Element
             }
         }
 
+        public bool IsInSelectedContainer { get; set; }
+
         protected UIElement(IBorder? border = null , Color? frontColor = null, Color? backColor = null)
         {
             Border = border?? new NoBorder();

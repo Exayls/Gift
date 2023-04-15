@@ -75,7 +75,7 @@ namespace Gift.UI.Element
         {
             Color frontColor = FrontColor ?? configuration.DefaultFrontColor;
             Color backColor = BackColor ?? configuration.DefaultBackColor;
-            if (IsSelectedElement)
+            if (IsSelectedElement && IsInSelectedContainer)
             {
                 frontColor = configuration.SelectedElementFrontColor ?? frontColor;
                 backColor = configuration.SelectedElementBackColor ?? backColor;

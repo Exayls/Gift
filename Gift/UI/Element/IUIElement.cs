@@ -7,5 +7,6 @@ namespace Gift.UI.Element
     {
         IBorder Border { get; set; }
         bool IsSelectedElement { get; set; }
+        bool IsInSelectedContainer { get; set; }
     }
 }
