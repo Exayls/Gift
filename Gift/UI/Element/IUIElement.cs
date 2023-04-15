@@ -6,5 +6,6 @@ namespace Gift.UI.Element
     public interface IUIElement : IRenderable
     {
         IBorder Border { get; set; }
+        bool IsSelectedElement { get; set; }
     }
 }

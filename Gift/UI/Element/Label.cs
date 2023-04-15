@@ -73,7 +73,14 @@ namespace Gift.UI.Element
 
         public override IScreenDisplay GetDisplayWithoutBorder(Bound bound, IConfiguration configuration)
         {
-            return new ScreenDisplay(Text, FrontColor ?? configuration.DefaultFrontColor, BackColor ?? configuration.DefaultBackColor);
+            Color frontColor = FrontColor ?? configuration.DefaultFrontColor;
+            Color backColor = BackColor ?? configuration.DefaultBackColor;
+            if (IsSelectedElement)
+            {
+                frontColor = configuration.SelectedElementFrontColor ?? frontColor;
+                backColor = configuration.SelectedElementBackColor ?? backColor;
+            }
+            return new ScreenDisplay(Text, frontColor, backColor);
         }
 
         public override IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuration)

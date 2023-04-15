@@ -15,6 +15,16 @@ namespace Gift.UI.Element
         public Color? FrontColor { get; private set; }
         public Color? BackColor { get; private set; }
 
+        private bool isSelectedElement;
+        public bool IsSelectedElement
+        {
+            get => isSelectedElement;
+            set
+            {
+                isSelectedElement = value;
+            }
+        }
+
         protected UIElement(IBorder? border = null , Color? frontColor = null, Color? backColor = null)
         {
             Border = border?? new NoBorder();

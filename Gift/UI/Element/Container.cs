@@ -11,15 +11,32 @@ namespace Gift.UI.Element
         public Bound Bound { get; protected set; }
         public IList<IUIElement> Childs { get; protected set; }
         public List<IUIElement> SelectableElements { get; set; }
-        public IUIElement? SelectedElement { get; set; }
 
-        private bool isSelected;
+        private IUIElement? selectedElement;
+        public IUIElement? SelectedElement
+        {
+            get => selectedElement; set
+            {
+                selectedElement = value;
+
+                foreach (IUIElement element in SelectableElements)
+                {
+                    element.IsSelectedElement = false;
+                }
+                if (SelectedElement != null)
+                {
+                    SelectedElement.IsSelectedElement = true;
+                }
+            }
+        }
+
+        private bool isSelectedContainer;
         public bool IsSelectedContainer
         {
-            get => isSelected;
+            get => isSelectedContainer;
             set
             {
-                isSelected = value;
+                isSelectedContainer = value;
             }
         }
 
