@@ -8,7 +8,7 @@ namespace Gift.UI.Element
 {
     public abstract class Container : UIElement, IContainer
     {
-        public Bound Bound { get; protected set; }
+        public Bound Bound { get;  set; }
         public IList<IUIElement> Childs { get; protected set; }
         public List<IUIElement> SelectableElements { get; set; }
 
@@ -54,6 +54,7 @@ namespace Gift.UI.Element
             if (!Console.IsInputRedirected && !Console.IsOutputRedirected)
             {
                 Bound = new Bound(Console.WindowHeight, Console.WindowWidth);
+
             }
             else
             {

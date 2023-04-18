@@ -5,13 +5,14 @@ class ConsoleSizeMonitor
 
     private int ConsoleWidth;
     private int ConsoleHeight;
+    private Timer timer;
 
     public ConsoleSizeMonitor()
     {
         ConsoleWidth = Console.WindowWidth;
         ConsoleHeight = Console.WindowHeight;
 
-        var timer = new Timer(CheckWindowSize, null, 0, 100);
+        timer = new Timer(CheckWindowSize, null, 0, 100);
     }
 
     private void CheckWindowSize(object? state)

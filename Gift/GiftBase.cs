@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Gift.SignalHandler;
 using Gift.UI;
 using Gift.UI.Display;
 using Gift.UI.Displayer;
@@ -15,15 +16,18 @@ namespace Gift
         public GiftUI? ui { get; set; }
         private IRenderer _renderer;
         private IDisplayer _displayer;
-
-
+        private ISignalManager _signalManager;
+        private ConsoleSizeMonitor sizeMonitor;
         public const char FILLINGCHAR = '*';
 
 
-        public GiftBase(IRenderer? renderer = null, IDisplayer? displayer = null)
+        public GiftBase(IRenderer? renderer = null, IDisplayer? displayer = null, ISignalManager? signalManager = null)
         {
-            _renderer = renderer?? new Renderer();
-            _displayer = displayer?? new ConsoleDisplayer();
+            _renderer = renderer ?? new Renderer();
+            _displayer = displayer ?? new ConsoleDisplayer();
+            _signalManager = signalManager ?? new SignalManager();
+            sizeMonitor = new ConsoleSizeMonitor();
+            sizeMonitor.SizeChanged += OnSizeChanged;
         }
 
         public virtual void initialize()
@@ -36,16 +40,30 @@ namespace Gift
         }
         public virtual void run()
         {
+
+
             while (true)
             {
                 IScreenDisplay view = CreateView();
                 PrintFrame(view);
                 Thread.Sleep(1000);
+
+            }
+        }
+
+        private void OnSizeChanged(object? sender, EventArgs e)
+        {
+            if (_displayer is ConsoleDisplayer)
+            {
+                this.ui.Bound = new Bound(Console.WindowHeight, Console.WindowWidth);
+                IScreenDisplay view = CreateView();
+                PrintFrame(view);
+
             }
         }
         public IScreenDisplay CreateView()
         {
-            IScreenDisplay View = new ScreenDisplay(new Bound(0,0));
+            IScreenDisplay View = new ScreenDisplay(new Bound(0, 0));
             if (ui != null)
             {
                 View = _renderer.GetRenderDisplay(ui);
