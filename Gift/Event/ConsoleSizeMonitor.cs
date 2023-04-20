@@ -9,8 +9,12 @@ class ConsoleSizeMonitor
 
     public ConsoleSizeMonitor()
     {
-        ConsoleWidth = Console.WindowWidth;
-        ConsoleHeight = Console.WindowHeight;
+        if (!Console.IsInputRedirected && !Console.IsOutputRedirected)
+        {
+            ConsoleWidth = Console.WindowWidth;
+            ConsoleHeight = Console.WindowHeight;
+
+        }
 
         timer = new Timer(CheckWindowSize, null, 0, 100);
     }
@@ -22,12 +26,14 @@ class ConsoleSizeMonitor
             ConsoleWidth = Console.WindowWidth;
             ConsoleHeight = Console.WindowHeight;
 
-            OnSizeChanged();
+            OnSizeChanged(ConsoleHeight, ConsoleWidth);
         }
     }
 
-    protected virtual void OnSizeChanged()
+    private void OnSizeChanged(int consoleHeight, int consoleWidth)
     {
-        SizeChanged?.Invoke(this, EventArgs.Empty);
+        EventArgs eventArgs = new ConsoleSizeEventArgs(consoleHeight, consoleWidth);
+        SizeChanged?.Invoke(this, eventArgs);
     }
+
 }
