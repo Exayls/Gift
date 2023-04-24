@@ -53,9 +53,10 @@ namespace Gift
 
         private void OnSizeChanged(object? sender, EventArgs e)
         {
+            ConsoleSizeEventArgs eventArgs = (ConsoleSizeEventArgs)e;
             if (_displayer is ConsoleDisplayer)
             {
-                this.ui.Bound = new Bound(Console.WindowHeight, Console.WindowWidth);
+                ui?.Resize(new Bound(eventArgs.ConsoleHeight, eventArgs.ConsoleWidth));
                 IScreenDisplay view = CreateView();
                 PrintFrame(view);
 

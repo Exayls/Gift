@@ -1,11 +1,11 @@
 ﻿internal class ConsoleSizeEventArgs : EventArgs
 {
-    private int consoleHeight;
-    private int consoleWidth;
+    public int ConsoleHeight { get; }
+    public int ConsoleWidth { get; }
 
     public ConsoleSizeEventArgs(int consoleHeight, int consoleWidth)
     {
-        this.consoleHeight = consoleHeight;
-        this.consoleWidth = consoleWidth;
+        ConsoleHeight = consoleHeight;
+        ConsoleWidth = consoleWidth;
     }
 }
