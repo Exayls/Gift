@@ -119,5 +119,10 @@ namespace Gift.UI
             return context.Position;
         }
 
+        public void Resize(Bound bound)
+        {
+            this.Bound = bound;
+        }
+
     }
 }
