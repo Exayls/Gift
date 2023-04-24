@@ -40,14 +40,13 @@ namespace Gift
         }
         public virtual void run()
         {
-
-
             while (true)
             {
                 IScreenDisplay view = CreateView();
                 PrintFrame(view);
                 Thread.Sleep(1000);
 
+                _signalManager.HandleSignal(new Signal("next"), ui);
             }
         }
 
@@ -59,9 +58,9 @@ namespace Gift
                 ui?.Resize(new Bound(eventArgs.ConsoleHeight, eventArgs.ConsoleWidth));
                 IScreenDisplay view = CreateView();
                 PrintFrame(view);
-
             }
         }
+
         public IScreenDisplay CreateView()
         {
             IScreenDisplay View = new ScreenDisplay(new Bound(0, 0));

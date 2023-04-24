@@ -124,5 +124,9 @@ namespace Gift.UI
             this.Bound = bound;
         }
 
+        public void nextElement()
+        {
+            this.SelectedContainer.SelectedElement = this.SelectedContainer.SelectableElements[(this.SelectedContainer.SelectableElements.IndexOf(this.SelectedContainer.SelectedElement)+1)%this.SelectedContainer.SelectableElements.Count];
+        }
     }
 }

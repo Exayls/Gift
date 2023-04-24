@@ -2,7 +2,7 @@
 
 namespace Gift.SignalHandler
 {
-    internal class Signal
+    internal class Signal : ISignal
     {
         private IList<IObserver<Signal>> observers;
 
