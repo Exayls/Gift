@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Gift.Event;
 using Gift.SignalHandler;
 using Gift.UI;
 using Gift.UI.Display;
@@ -17,17 +18,20 @@ namespace Gift
         private IRenderer _renderer;
         private IDisplayer _displayer;
         private ISignalManager _signalManager;
-        private ConsoleSizeMonitor sizeMonitor;
+        private IMonitorManager _monitorManager;
         public const char FILLINGCHAR = '*';
 
 
-        public GiftBase(IRenderer? renderer = null, IDisplayer? displayer = null, ISignalManager? signalManager = null)
+        public GiftBase(IRenderer? renderer = null, IDisplayer? displayer = null, ISignalManager? signalManager = null, IMonitorManager monitorManager = null)
         {
             _renderer = renderer ?? new Renderer();
             _displayer = displayer ?? new ConsoleDisplayer();
             _signalManager = signalManager ?? new SignalManager();
-            sizeMonitor = new ConsoleSizeMonitor();
-            sizeMonitor.SizeChanged += OnSizeChanged;
+            _monitorManager = monitorManager ?? new MonitorManager();
+
+            ConsoleSizeMonitor monitor = new ConsoleSizeMonitor();
+            _monitorManager.Add(monitor);
+            monitor.SizeChanged += OnSizeChanged;
         }
 
         public virtual void initialize()

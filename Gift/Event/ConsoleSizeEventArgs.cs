@@ -1,11 +1,14 @@
-﻿internal class ConsoleSizeEventArgs : EventArgs
+﻿namespace Gift.Event
 {
-    public int ConsoleHeight { get; }
-    public int ConsoleWidth { get; }
-
-    public ConsoleSizeEventArgs(int consoleHeight, int consoleWidth)
+    internal class ConsoleSizeEventArgs : EventArgs
     {
-        ConsoleHeight = consoleHeight;
-        ConsoleWidth = consoleWidth;
+        public int ConsoleHeight { get; }
+        public int ConsoleWidth { get; }
+
+        public ConsoleSizeEventArgs(int consoleHeight, int consoleWidth)
+        {
+            ConsoleHeight = consoleHeight;
+            ConsoleWidth = consoleWidth;
+        }
     }
 }

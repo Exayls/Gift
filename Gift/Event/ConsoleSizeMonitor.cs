@@ -1,38 +1,37 @@
 ﻿using System;
-class ConsoleSizeMonitor
+
+namespace Gift.Event
 {
-    public event EventHandler? SizeChanged;
-
-    private int ConsoleWidth;
-    private int ConsoleHeight;
-    private Timer timer;
-
-    public ConsoleSizeMonitor()
+    class ConsoleSizeMonitor : IMonitor
     {
-        if (!Console.IsInputRedirected && !Console.IsOutputRedirected)
+        public event EventHandler? SizeChanged;
+
+        private int ConsoleWidth;
+        private int ConsoleHeight;
+
+        public ConsoleSizeMonitor()
         {
-            ConsoleWidth = Console.WindowWidth;
-            ConsoleHeight = Console.WindowHeight;
-
+            if (!Console.IsInputRedirected && !Console.IsOutputRedirected)
+            {
+                ConsoleWidth = Console.WindowWidth;
+                ConsoleHeight = Console.WindowHeight;
+            }
         }
-        timer = new Timer(CheckWindowSize, null, 0, 100);
-    }
 
-    private void CheckWindowSize(object? state)
-    {
-        if (Console.WindowWidth != ConsoleWidth || Console.WindowHeight != ConsoleHeight)
+        private void OnSizeChanged(int consoleHeight, int consoleWidth)
         {
-            ConsoleWidth = Console.WindowWidth;
-            ConsoleHeight = Console.WindowHeight;
+            EventArgs eventArgs = new ConsoleSizeEventArgs(consoleHeight, consoleWidth);
+            SizeChanged?.Invoke(this, eventArgs);
+        }
 
-            OnSizeChanged(ConsoleHeight, ConsoleWidth);
+        public void Check()
+        {
+            if (Console.WindowWidth != ConsoleWidth || Console.WindowHeight != ConsoleHeight)
+            {
+                ConsoleWidth = Console.WindowWidth;
+                ConsoleHeight = Console.WindowHeight;
+                OnSizeChanged(ConsoleHeight, ConsoleWidth);
+            }
         }
     }
-
-    private void OnSizeChanged(int consoleHeight, int consoleWidth)
-    {
-        EventArgs eventArgs = new ConsoleSizeEventArgs(consoleHeight, consoleWidth);
-        SizeChanged?.Invoke(this, eventArgs);
-    }
-
 }
