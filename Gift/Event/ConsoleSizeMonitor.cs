@@ -15,7 +15,6 @@ class ConsoleSizeMonitor
             ConsoleHeight = Console.WindowHeight;
 
         }
-
         timer = new Timer(CheckWindowSize, null, 0, 100);
     }
 
