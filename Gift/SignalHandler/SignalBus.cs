@@ -1,23 +1,24 @@
 ﻿using Gift.Event;
+using Gift.SignalHandler;
 
 namespace Gift.SignalHandler
 {
     public class SignalBus : ISignalBus
     {
-        private IList<ISignalManager> subscribers;
+        private IList<ISignalHandler> subscribers;
         public SignalBus()
         {
-            subscribers = new List<ISignalManager>();
+            subscribers = new List<ISignalHandler>();
         }
 
         public void PushSignal(ISignal signal)
         {
-            foreach (ISignalManager subscriber in subscribers)
+            foreach (ISignalHandler subscriber in subscribers)
             {
                 subscriber.HandleSignal(signal);
             }
         }
-        public void Subscribe(ISignalManager subscriber)
+        public void Subscribe(ISignalHandler subscriber)
         {
             subscribers.Add(subscriber);
         }

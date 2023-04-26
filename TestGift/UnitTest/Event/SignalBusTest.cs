@@ -1,4 +1,5 @@
 ﻿using Gift.SignalHandler;
+using Gift.SignalHandler;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -12,13 +13,13 @@ namespace TestGift.Test.Event
     {
         ISignalBus bus;
         Mock<ISignal> _mockSignal;
-        private Mock<ISignalManager> _mockSubscriber;
+        private Mock<ISignalHandler> _mockSubscriber;
 
         public SignalBusTest()
         {
             bus = new SignalBus();
             _mockSignal = new Mock<ISignal>();
-            _mockSubscriber = new Mock<ISignalManager>();
+            _mockSubscriber = new Mock<ISignalHandler>();
         }
 
         [Fact]

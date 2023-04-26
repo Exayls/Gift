@@ -1,8 +1,9 @@
-﻿namespace Gift.SignalHandler
+﻿
+namespace Gift.SignalHandler
 {
     public interface ISignalBus
     {
         void PushSignal(ISignal signal);
-        void Subscribe(ISignalManager @object);
+        void Subscribe(ISignalHandler signalmanager);
     }
 }

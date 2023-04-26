@@ -2,9 +2,8 @@
 
 namespace Gift.SignalHandler
 {
-    public interface ISignalManager
+    public interface ISignalHandler
     {
-        void HandleSignal(ISignal signal, GiftUI ui);
         void HandleSignal(ISignal signal);
     }
 }

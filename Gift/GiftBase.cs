@@ -17,19 +17,18 @@ namespace Gift
         public GiftUI? Ui { get; set; }
         private readonly IRenderer _renderer;
         private readonly IDisplayer _displayer;
-        private ISignalManager _signalManager;
+        private ISignalHandler? _signalManager;
         private readonly IMonitorManager _monitorManager;
         private readonly ISignalBus _signalQueue;
         public const char FILLINGCHAR = '*';
 
 
-        public GiftBase(IRenderer? renderer = null, IDisplayer? displayer = null, ISignalManager? signalManager = null, IMonitorManager? monitorManager = null, ISignalBus? queue = null)
+        public GiftBase(IRenderer? renderer = null, IDisplayer? displayer = null, IMonitorManager? monitorManager = null, ISignalBus? queue = null)
         {
             _renderer = renderer ?? new Renderer();
             _displayer = displayer ?? new ConsoleDisplayer();
             _monitorManager = monitorManager ?? new MonitorManager();
             _signalQueue = queue ?? new SignalBus();
-
 
             ConsoleSizeMonitor monitor = new ConsoleSizeMonitor(_signalQueue);
             _monitorManager.Add(monitor);
@@ -38,13 +37,13 @@ namespace Gift
         public virtual void Initialize()
         {
             Ui = new GiftUI();
-            _signalManager =  new SignalManager(Ui);
+            _signalManager =  new UISignalHandler(Ui);
             _signalQueue.Subscribe(_signalManager);
         }
         public virtual void Initialize(GiftUI ui)
         {
             this.Ui = ui;
-            _signalManager =  new SignalManager(Ui);
+            _signalManager =  new UISignalHandler(Ui);
             _signalQueue.Subscribe(_signalManager);
         }
         public virtual void Run()
@@ -60,16 +59,6 @@ namespace Gift
             }
         }
 
-        private void OnSizeChanged(object? sender, EventArgs e)
-        {
-            ConsoleSizeEventArgs eventArgs = (ConsoleSizeEventArgs)e;
-            if (_displayer is ConsoleDisplayer)
-            {
-                Ui?.Resize(new Bound(eventArgs.ConsoleHeight, eventArgs.ConsoleWidth));
-                IScreenDisplay view = CreateView();
-                PrintFrame(view);
-            }
-        }
 
         public IScreenDisplay CreateView()
         {
