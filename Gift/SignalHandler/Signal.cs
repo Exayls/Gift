@@ -4,23 +4,16 @@ namespace Gift.SignalHandler
 {
     internal class Signal : ISignal
     {
-        private IList<IObserver<Signal>> observers;
+        private EventArgs eventArgs;
 
         public string Name { get; }
 
-        public Signal(string name)
+        public Signal(string name, EventArgs eventArgs) 
         {
             Name = name;
-            this.observers = new List<IObserver<Signal>>();
+            this.eventArgs = eventArgs;
         }
 
-        public void Trigger()
-        {
-            foreach (IObserver<Signal> observer in observers)
-            {
-                //observer.
-            }
-        }
 
     }
 }

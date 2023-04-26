@@ -1,27 +1,22 @@
-﻿using System;
+﻿using Gift.SignalHandler;
+using System;
 
 namespace Gift.Event
 {
     class ConsoleSizeMonitor : IMonitor
     {
-        public event EventHandler? SizeChanged;
-
         private int ConsoleWidth;
         private int ConsoleHeight;
+        private ISignalBus _signalBus;
 
-        public ConsoleSizeMonitor()
+        public ConsoleSizeMonitor(ISignalBus signalBus)
         {
             if (!Console.IsInputRedirected && !Console.IsOutputRedirected)
             {
                 ConsoleWidth = Console.WindowWidth;
                 ConsoleHeight = Console.WindowHeight;
             }
-        }
-
-        private void OnSizeChanged(int consoleHeight, int consoleWidth)
-        {
-            EventArgs eventArgs = new ConsoleSizeEventArgs(consoleHeight, consoleWidth);
-            SizeChanged?.Invoke(this, eventArgs);
+            _signalBus = signalBus;
         }
 
         public void Check()
@@ -30,7 +25,10 @@ namespace Gift.Event
             {
                 ConsoleWidth = Console.WindowWidth;
                 ConsoleHeight = Console.WindowHeight;
-                OnSizeChanged(ConsoleHeight, ConsoleWidth);
+
+                EventArgs eventArgs = new ConsoleSizeEventArgs(ConsoleHeight, ConsoleWidth);
+                ISignal signal = new Signal("Console.resize", eventArgs);
+                _signalBus.PushSignal(signal);
             }
         }
     }

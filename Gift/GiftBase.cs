@@ -14,35 +14,40 @@ namespace Gift
 {
     public class GiftBase
     {
-        public GiftUI? ui { get; set; }
-        private IRenderer _renderer;
-        private IDisplayer _displayer;
+        public GiftUI? Ui { get; set; }
+        private readonly IRenderer _renderer;
+        private readonly IDisplayer _displayer;
         private ISignalManager _signalManager;
-        private IMonitorManager _monitorManager;
+        private readonly IMonitorManager _monitorManager;
+        private readonly ISignalBus _signalQueue;
         public const char FILLINGCHAR = '*';
 
 
-        public GiftBase(IRenderer? renderer = null, IDisplayer? displayer = null, ISignalManager? signalManager = null, IMonitorManager monitorManager = null)
+        public GiftBase(IRenderer? renderer = null, IDisplayer? displayer = null, ISignalManager? signalManager = null, IMonitorManager? monitorManager = null, ISignalBus? queue = null)
         {
             _renderer = renderer ?? new Renderer();
             _displayer = displayer ?? new ConsoleDisplayer();
-            _signalManager = signalManager ?? new SignalManager();
             _monitorManager = monitorManager ?? new MonitorManager();
+            _signalQueue = queue ?? new SignalBus();
 
-            ConsoleSizeMonitor monitor = new ConsoleSizeMonitor();
+
+            ConsoleSizeMonitor monitor = new ConsoleSizeMonitor(_signalQueue);
             _monitorManager.Add(monitor);
-            monitor.SizeChanged += OnSizeChanged;
         }
 
-        public virtual void initialize()
+        public virtual void Initialize()
         {
-            ui = new GiftUI();
+            Ui = new GiftUI();
+            _signalManager =  new SignalManager(Ui);
+            _signalQueue.Subscribe(_signalManager);
         }
-        public virtual void initialize(GiftUI ui)
+        public virtual void Initialize(GiftUI ui)
         {
-            this.ui = ui;
+            this.Ui = ui;
+            _signalManager =  new SignalManager(Ui);
+            _signalQueue.Subscribe(_signalManager);
         }
-        public virtual void run()
+        public virtual void Run()
         {
             while (true)
             {
@@ -50,7 +55,8 @@ namespace Gift
                 PrintFrame(view);
                 Thread.Sleep(1000);
 
-                _signalManager.HandleSignal(new Signal("next"), ui);
+                //_signalManager.HandleSignal(new Signal("next", EventArgs.Empty), Ui);
+                _signalQueue.PushSignal(new Signal("next", EventArgs.Empty));
             }
         }
 
@@ -59,7 +65,7 @@ namespace Gift
             ConsoleSizeEventArgs eventArgs = (ConsoleSizeEventArgs)e;
             if (_displayer is ConsoleDisplayer)
             {
-                ui?.Resize(new Bound(eventArgs.ConsoleHeight, eventArgs.ConsoleWidth));
+                Ui?.Resize(new Bound(eventArgs.ConsoleHeight, eventArgs.ConsoleWidth));
                 IScreenDisplay view = CreateView();
                 PrintFrame(view);
             }
@@ -68,9 +74,9 @@ namespace Gift
         public IScreenDisplay CreateView()
         {
             IScreenDisplay View = new ScreenDisplay(new Bound(0, 0));
-            if (ui != null)
+            if (Ui != null)
             {
-                View = _renderer.GetRenderDisplay(ui);
+                View = _renderer.GetRenderDisplay(Ui);
             }
             return View;
         }
@@ -82,7 +88,7 @@ namespace Gift
             }
         }
 
-        public virtual void end()
+        public virtual void End()
         {
 
         }

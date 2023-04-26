@@ -22,16 +22,16 @@ namespace TestGift.LifeCycle
         {
             var GiftBase = new GiftBase(_rendererMock.Object);
 
-            Assert.True(GiftBase.ui == null);
+            Assert.True(GiftBase.Ui == null);
 
         }
         [Fact]
         public void When_initialized_should_set_ui()
         {
             var GiftBase = new GiftBase(_rendererMock.Object);
-            GiftBase.initialize();
+            GiftBase.Initialize();
 
-            Assert.True(GiftBase.ui != null);
+            Assert.True(GiftBase.Ui != null);
 
         }
     }

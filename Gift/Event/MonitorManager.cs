@@ -25,12 +25,14 @@ namespace Gift.Event
             Monitors.Remove(monitor);
         }
 
-
         private void CheckMonitors(object? state)
         {
-            foreach (IMonitor monitor in Monitors)
+            lock (Monitors)
             {
-                monitor.Check();
+                foreach (IMonitor monitor in Monitors)
+                {
+                    monitor.Check();
+                }
             }
         }
     }

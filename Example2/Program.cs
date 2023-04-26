@@ -50,5 +50,5 @@ ui.SelectedContainer = vstack2;
 
 
 var gift = new GiftBase(new Renderer());
-gift.initialize(ui);
-gift.run();
+gift.Initialize(ui);
+gift.Run();
