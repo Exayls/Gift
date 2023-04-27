@@ -8,6 +8,9 @@ namespace Gift.UI
     {
         List<IContainer> SelectableContainers { get; set; }
         IScreenDisplay GetDisplay();
-        void SetChild(UIElement UIElement);
+        void AddChild(UIElement UIElement);
+        void PreviousElementInSelectedContainer();
+        void NextElementInSelectedContainer();
+        void Resize(Bound bound);
     }
 }

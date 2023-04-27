@@ -3,7 +3,7 @@ using Gift.SignalHandler;
 
 namespace Gift.KeyInput
 {
-    public class KeyInputHandler
+    public class KeyInputHandler : IKeyInputHandler
     {
         private ISignalBus _signalBus;
         public KeyInputHandler(ISignalBus signalBus)
@@ -15,11 +15,12 @@ namespace Gift.KeyInput
         {
             while (true)
             {
+                await Task.Delay(1);
                 if (Console.KeyAvailable)
                 {
                     ConsoleKeyInfo consoleKeyInfo = Console.ReadKey(true);
-                    _signalBus.PushSignal(new Signal(consoleKeyInfo.ToString()?? "", EventArgs.Empty));
-                    await Task.Delay(1);
+                    string keyValue = consoleKeyInfo.Key.ToString();
+                    _signalBus.PushSignal(new Signal(keyValue ?? "", EventArgs.Empty));
                 }
             }
         }

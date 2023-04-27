@@ -9,7 +9,7 @@ using Gift.UI.Render;
 var ui = new GiftUI();
 
 var hstack = new HStackBuilder().WithBorder(new Border(2, BorderChars.GetBorderCharsFromFile("ressources/borderChars/double_border.json"))).Build();
-ui.SetChild(hstack);
+ui.AddChild(hstack);
 
 var vstack = new VStackBuilder().WithBorder(new Border(1, BorderChars.GetBorderCharsFromFile("ressources/borderChars/simple_border.json"))).Build();
 hstack.AddChild(vstack);
@@ -61,6 +61,9 @@ ui.SelectableContainers.Add(vstack2);
 ui.SelectedContainer = vstack2;
 
 
+
+var frontElem = new LabelBuilder().WithText("front").WithPosition(new Position(30, 40)).Build();
+ui.AddChild(frontElem);
 
 
 var gift = new GiftBase(new Renderer());

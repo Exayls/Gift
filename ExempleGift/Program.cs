@@ -9,10 +9,10 @@ using Gift.UI.Render;
 
 
 var ui = new GiftUI();
-ui.SetChild(new Label("coucou", new Position(2, 58)));
+ui.AddChild(new Label("coucou", new Position(2, 58)));
 
 var vstack = new VStackBuilder().Build();
-ui.SetChild(vstack);
+ui.AddChild(vstack);
 vstack.AddChild(new LabelBuilder().WithText("coucou").Build());
 vstack.AddChild(new LabelBuilder().Build());
 vstack.AddChild(new LabelBuilder().Build());

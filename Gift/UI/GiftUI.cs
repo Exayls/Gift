@@ -66,9 +66,8 @@ namespace Gift.UI
             SelectableContainers = new List<IContainer>();
         }
 
-        public void SetChild(UIElement UIElement)
+        public void AddChild(UIElement UIElement)
         {
-            Childs.Clear();
             Childs.Add(UIElement);
         }
 
@@ -129,6 +128,13 @@ namespace Gift.UI
             if (SelectedContainer != null)
             {
                 SelectedContainer.NextElement();
+            }
+        }
+        public void PreviousElementInSelectedContainer()
+        {
+            if (SelectedContainer != null)
+            {
+                SelectedContainer.PreviousElement();
             }
         }
     }

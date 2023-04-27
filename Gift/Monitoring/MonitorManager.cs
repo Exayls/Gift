@@ -18,11 +18,17 @@ namespace Gift.Monitor
         }
         public void Add(IMonitor monitor)
         {
-            Monitors.Add(monitor);
+            lock (Monitors)
+            {
+                Monitors.Add(monitor);
+            }
         }
         public void Remove(IMonitor monitor)
         {
-            Monitors.Remove(monitor);
+            lock (Monitors)
+            {
+                Monitors.Remove(monitor);
+            }
         }
 
         private void CheckMonitors(object? state)

@@ -10,6 +10,7 @@ using Gift.SignalHandler;
 using Gift.UI;
 using Gift.UI.Display;
 using Gift.UI.Displayer;
+using Gift.UI.DisplayManager;
 using Gift.UI.MetaData;
 using Gift.UI.Render;
 
@@ -20,10 +21,12 @@ namespace Gift
         public GiftUI? Ui { get; set; }
         private readonly IRenderer _renderer;
         private readonly IDisplayer _displayer;
-        private ISignalHandler? _signalManager;
+        private ISignalHandler? _uiSignalHandler;
+        private ISignalHandler? _keySignalHandler;
         private readonly IMonitorManager _monitorManager;
         private readonly ISignalBus _signalQueue;
-        private KeyInputHandler _keyInputHandler;
+        private IKeyInputHandler _keyInputHandler;
+        private IDisplayManager? _displayManager;
         public const char FILLINGCHAR = '*';
 
 
@@ -39,50 +42,34 @@ namespace Gift
             _monitorManager.Add(monitor);
         }
 
-        public virtual void Initialize()
+        public virtual void Initialize(GiftUI? ui = null)
         {
-            Ui = new GiftUI();
-            _signalManager =  new UISignalHandler(Ui);
-            _signalQueue.Subscribe(_signalManager);
-            _keyInputHandler.StartCheckUserInput();
+            this.Ui = ui ?? new GiftUI();
+            init();
         }
-        public virtual void Initialize(GiftUI ui)
+        private void init()
         {
-            this.Ui = ui;
-            _signalManager =  new UISignalHandler(Ui);
-            _signalQueue.Subscribe(_signalManager);
+            _displayManager = new DisplayManager(_displayer, _renderer, Ui);
+
+            _uiSignalHandler =  new UISignalHandler(_displayManager);
+            _keySignalHandler =  new KeySignalHandler(_displayManager);
+
+            _signalQueue.Subscribe(_uiSignalHandler);
+            _signalQueue.Subscribe(_keySignalHandler);
+
+            _keyInputHandler.StartCheckUserInput();
+
+            _displayManager.UpdateDisplay();
 
         }
+
         public virtual void Run()
         {
             while (true)
             {
-                IScreenDisplay view = CreateView();
-                PrintFrame(view);
-                Thread.Sleep(1000);
-
-                //_signalManager.HandleSignal(new Signal("next", EventArgs.Empty), Ui);
-                _signalQueue.PushSignal(new Signal("UI.NextElement", EventArgs.Empty));
             }
         }
 
-
-        public IScreenDisplay CreateView()
-        {
-            IScreenDisplay View = new ScreenDisplay(new Bound(0, 0));
-            if (Ui != null)
-            {
-                View = _renderer.GetRenderDisplay(Ui);
-            }
-            return View;
-        }
-        private void PrintFrame(IScreenDisplay? View)
-        {
-            if (View != null)
-            {
-                _displayer.display(View);
-            }
-        }
 
         public virtual void End()
         {

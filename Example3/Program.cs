@@ -8,7 +8,7 @@ using Gift.UI.Render;
 var ui = new GiftUI();
 
 var vstack = new VStackBuilder().WithBorder(new Border(2, BorderChars.GetBorderCharsFromFile("ressources/borderChars/double_border.json"))).Build();
-ui.SetChild(vstack);
+ui.AddChild(vstack);
 vstack.AddChild(new LabelBuilder().WithText("test1").Build());
 vstack.AddChild(new LabelBuilder().Build());
 vstack.AddChild(new LabelBuilder().Build());

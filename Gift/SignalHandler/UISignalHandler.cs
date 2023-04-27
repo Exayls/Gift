@@ -1,17 +1,19 @@
 ﻿using Gift.Monitor;
 using Gift.UI;
 using Gift.UI.Display;
+using Gift.UI.DisplayManager;
 using Gift.UI.MetaData;
 
 namespace Gift.SignalHandler
 {
     public class UISignalHandler : ISignalHandler
     {
-        public GiftUI Ui { get; }
+        private IDisplayManager _displayManager;
 
-        public UISignalHandler(GiftUI ui)
+
+        public UISignalHandler(IDisplayManager displayManager)
         {
-            Ui = ui;
+            _displayManager = displayManager;
         }
 
         public void HandleSignal(ISignal signal)
@@ -19,7 +21,7 @@ namespace Gift.SignalHandler
             switch (signal.Name)
             {
                 case "UI.NextElement":
-                    Ui.NextElementInSelectedContainer();
+                    _displayManager.Ui.NextElementInSelectedContainer();
                     break;
                 case "Console.Resize":
                     OnSizeChanged(signal.EventArgs);
@@ -31,7 +33,8 @@ namespace Gift.SignalHandler
         private void OnSizeChanged(EventArgs e)
         {
             ConsoleSizeEventArgs eventArgs = (ConsoleSizeEventArgs)e;
-            Ui.Resize(new Bound(eventArgs.ConsoleHeight, eventArgs.ConsoleWidth));
+            _displayManager.Ui.Resize(new Bound(eventArgs.ConsoleHeight, eventArgs.ConsoleWidth));
+            _displayManager.UpdateDisplay();
         }
     }
 }

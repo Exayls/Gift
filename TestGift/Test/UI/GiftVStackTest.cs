@@ -55,7 +55,7 @@ namespace TestGift.UI
         {
             GiftUI ui = new GiftUI(bound);
             var vstack = new VStackBuilder().Build();
-            ui.SetChild(vstack);
+            ui.AddChild(vstack);
             return ui;
         }
 
@@ -67,7 +67,7 @@ namespace TestGift.UI
             var ui = new GiftUI(new Bound(20, 60));
             var vstack = new VStackBuilder().Build();
             var label = new LabelBuilder().Build();
-            ui.SetChild(vstack);
+            ui.AddChild(vstack);
             vstack.AddChild(label);
             IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
 
@@ -94,7 +94,7 @@ namespace TestGift.UI
             var ui = new GiftUI(new Bound(20, 60));
             var vstack = new VStackBuilder().Build();
             var label = new LabelBuilder().Build();
-            ui.SetChild(vstack);
+            ui.AddChild(vstack);
             vstack.AddChild(label);
             IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
 
@@ -123,7 +123,7 @@ namespace TestGift.UI
             var vstack = new VStackBuilder().Build();
             var label1 = new LabelBuilder().Build();
             var label2 = new LabelBuilder().WithText("test").Build();
-            ui.SetChild(vstack);
+            ui.AddChild(vstack);
             vstack.AddChild(label1);
             vstack.AddChild(label2);
             IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
@@ -158,7 +158,7 @@ namespace TestGift.UI
             var label1 = new LabelBuilder().Build();
             var label2 = new LabelBuilder().WithText("test").Build();
             var label3 = new LabelBuilder().WithText("label numero 3.").Build();
-            ui.SetChild(vstack);
+            ui.AddChild(vstack);
             vstack.AddChild(label1);
             vstack.AddChild(label2);
             vstack.AddChild(label3);
@@ -198,7 +198,7 @@ namespace TestGift.UI
             var label1 = new LabelBuilder().Build();
             var label2 = new LabelBuilder().WithText("test").WithPosition(new Position(4, 8)).Build();
             var label3 = new LabelBuilder().WithText("label numero 3.").Build();
-            ui.SetChild(vstack);
+            ui.AddChild(vstack);
             vstack.AddChild(label1);
             vstack.AddChild(label2);
             vstack.AddChild(label3);
@@ -240,7 +240,7 @@ namespace TestGift.UI
             var label3 = new LabelBuilder().WithText("label numero 3.").Build();
             var label4 = new LabelBuilder().WithText("label numero 4.").Build();
             var label5 = new LabelBuilder().WithText("label numero 5.").Build();
-            ui.SetChild(vstack);
+            ui.AddChild(vstack);
             vstack.AddChild(label1);
             vstack.AddChild(label2);
             vstack.AddChild(label3);
@@ -287,7 +287,7 @@ namespace TestGift.UI
             var label4 = new LabelBuilder().WithText("label numero 4.").Build();
             var label5 = new LabelBuilder().WithText("label numero 5.").Build();
             var label6 = new LabelBuilder().WithText("label numero 6.").Build();
-            ui.SetChild(vstack);
+            ui.AddChild(vstack);
             vstack.AddChild(label1);
             vstack.AddChild(label2);
             vstack.AddChild(label3);

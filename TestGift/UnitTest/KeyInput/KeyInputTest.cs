@@ -18,7 +18,6 @@ namespace TestGift.UnitTest.KeyInput
         [Fact]
         public void When_Pushing_signal_should_trigger_bus_subscribers()
         {
-           Console.ReadKey(true); 
         }
     }
 }

@@ -38,7 +38,7 @@ namespace TestGift.Test.UI
 
             VStack vstack = new VStackBuilder().WithBorder(new Border(1, BorderChars.GetBorderCharsFromFile("ressources/borderChars/double_border.json"))).Build();
             vstack.AddChild(new LabelBuilder().Build());
-            ui.SetChild(vstack);
+            ui.AddChild(vstack);
             VStack vstack2 = new VStackBuilder().WithBorder(new Border(1, BorderChars.GetBorderCharsFromFile("ressources/borderChars/simple_border.json"))).Build();
             vstack.AddChild(vstack2);
             vstack2.AddChild(new LabelBuilder().WithText("hey").Build());
@@ -63,7 +63,7 @@ namespace TestGift.Test.UI
 
             VStack vstack = new VStackBuilder().WithBorder(new Border(1, BorderChars.GetBorderCharsFromFile("ressources/borderChars/double_border.json"))).Build();
             vstack.AddChild(new LabelBuilder().Build());
-            ui.SetChild(vstack);
+            ui.AddChild(vstack);
             VStack vstack2 = new VStackBuilder().WithBorder(new Border(1, BorderChars.GetBorderCharsFromFile("ressources/borderChars/simple_border.json"))).Build();
             vstack.AddChild(vstack2);
             vstack2.AddChild(new LabelBuilder().WithText("hey").Build());

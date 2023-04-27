@@ -63,9 +63,12 @@ namespace Gift.UI.Render
 
         private void RenderAllChilds(IScreenDisplay screen, IContainer container, Context context)
         {
-            foreach (IRenderable renderable in container.Childs)
+            lock (container.Childs)
             {
-                RenderContainerOrElement(screen, container, context, renderable);
+                foreach (IRenderable renderable in container.Childs)
+                {
+                    RenderContainerOrElement(screen, container, context, renderable);
+                }
             }
         }
 
