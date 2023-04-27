@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Gift.Bus;
+using Gift.KeyInput;
 using Gift.Monitor;
 using Gift.SignalHandler;
 using Gift.UI;
@@ -22,6 +23,7 @@ namespace Gift
         private ISignalHandler? _signalManager;
         private readonly IMonitorManager _monitorManager;
         private readonly ISignalBus _signalQueue;
+        private KeyInputHandler _keyInputHandler;
         public const char FILLINGCHAR = '*';
 
 
@@ -31,6 +33,7 @@ namespace Gift
             _displayer = displayer ?? new ConsoleDisplayer();
             _monitorManager = monitorManager ?? new MonitorManager();
             _signalQueue = queue ?? new SignalBus();
+            _keyInputHandler = new KeyInputHandler(_signalQueue);
 
             ConsoleSizeMonitor monitor = new ConsoleSizeMonitor(_signalQueue);
             _monitorManager.Add(monitor);
@@ -41,12 +44,14 @@ namespace Gift
             Ui = new GiftUI();
             _signalManager =  new UISignalHandler(Ui);
             _signalQueue.Subscribe(_signalManager);
+            _keyInputHandler.StartCheckUserInput();
         }
         public virtual void Initialize(GiftUI ui)
         {
             this.Ui = ui;
             _signalManager =  new UISignalHandler(Ui);
             _signalQueue.Subscribe(_signalManager);
+
         }
         public virtual void Run()
         {

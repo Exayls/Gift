@@ -8,7 +8,7 @@ namespace Gift.UI.Element
 {
     public abstract class Container : UIElement, IContainer
     {
-        public Bound Bound { get;  protected set; }
+        public Bound Bound { get; protected set; }
         public IList<IUIElement> Childs { get; protected set; }
         public List<IUIElement> SelectableElements { get; set; }
 
@@ -66,7 +66,9 @@ namespace Gift.UI.Element
         }
 
         public abstract Context GetContextRenderable(IRenderable renderable, Context context);
+
         public abstract Context GetContextRelativeRenderable(IRenderable renderable, Context context);
+
         public override IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuration)
         {
             Color frontColor = FrontColor ?? configuration.DefaultFrontColor;
@@ -79,5 +81,22 @@ namespace Gift.UI.Element
             IScreenDisplay screenDisplay = Border.GetDisplay(bound, frontColor, backColor);
             return screenDisplay;
         }
+
+        public void NextElement()
+        {
+            if (SelectedElement != null)
+            {
+                SelectedElement = SelectableElements[(SelectableElements.IndexOf(SelectedElement) + 1) % SelectableElements.Count];
+            }
+        }
+
+        public void PreviousElement()
+        {
+            if (SelectedElement != null)
+            {
+                SelectedElement = SelectableElements[(SelectableElements.IndexOf(SelectedElement) - 1 + SelectableElements.Count) % SelectableElements.Count];
+            }
+        }
+
     }
 }

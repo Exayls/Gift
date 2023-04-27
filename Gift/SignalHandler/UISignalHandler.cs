@@ -19,7 +19,7 @@ namespace Gift.SignalHandler
             switch (signal.Name)
             {
                 case "UI.NextElement":
-                    Ui.nextElement();
+                    Ui.NextElementInSelectedContainer();
                     break;
                 case "Console.Resize":
                     OnSizeChanged(signal.EventArgs);
