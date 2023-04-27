@@ -5,6 +5,7 @@ using Gift.UI.Border;
 using Gift.UI.Display;
 using Gift.UI.Element;
 using Gift.UI.MetaData;
+using Gift.UI.Render;
 
 namespace TestGift.Test.UI
 {

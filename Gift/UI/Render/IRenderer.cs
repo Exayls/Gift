@@ -1,6 +1,6 @@
 ﻿using Gift.UI.Display;
 
-namespace Gift.UI
+namespace Gift.UI.Render
 {
     public interface IRenderer
     {

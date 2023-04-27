@@ -1,4 +1,4 @@
-﻿using Gift.SignalHandler;
+﻿using Gift.Bus;
 using Gift.SignalHandler;
 using System;
 

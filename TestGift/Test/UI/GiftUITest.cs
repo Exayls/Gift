@@ -2,7 +2,9 @@ using Gift;
 using Gift.UI;
 using Gift.UI.Display;
 using Gift.UI.MetaData;
+using Gift.UI.Render;
 using System.Text;
+using Gift.UI.Render;
 
 namespace TestGift.UI
 {

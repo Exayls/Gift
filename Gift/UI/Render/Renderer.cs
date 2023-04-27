@@ -3,7 +3,7 @@ using Gift.UI.Display;
 using Gift.UI.Element;
 using Gift.UI.MetaData;
 
-namespace Gift.UI
+namespace Gift.UI.Render
 {
     public class Renderer : IRenderer
     {

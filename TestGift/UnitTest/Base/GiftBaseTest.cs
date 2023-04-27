@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Moq;
-using Gift.UI;
+using Gift.UI.Render;
 
 namespace TestGift.LifeCycle
 {
