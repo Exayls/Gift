@@ -1,7 +1,7 @@
-﻿using Gift.Event;
+﻿using Gift.Monitor;
 using Gift.SignalHandler;
 
-namespace Gift.SignalHandler
+namespace Gift.Bus
 {
     public class SignalBus : ISignalBus
     {

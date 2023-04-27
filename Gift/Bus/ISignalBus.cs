@@ -1,5 +1,6 @@
-﻿
-namespace Gift.SignalHandler
+﻿using Gift.SignalHandler;
+
+namespace Gift.Bus
 {
     public interface ISignalBus
     {

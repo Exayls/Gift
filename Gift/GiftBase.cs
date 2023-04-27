@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Gift.Event;
+using Gift.Monitor;
 using Gift.SignalHandler;
 using Gift.UI;
 using Gift.UI.Display;
@@ -55,7 +55,7 @@ namespace Gift
                 Thread.Sleep(1000);
 
                 //_signalManager.HandleSignal(new Signal("next", EventArgs.Empty), Ui);
-                _signalQueue.PushSignal(new Signal("next", EventArgs.Empty));
+                _signalQueue.PushSignal(new Signal("UI.NextElement", EventArgs.Empty));
             }
         }
 

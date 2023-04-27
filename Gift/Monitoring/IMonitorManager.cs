@@ -1,4 +1,4 @@
-﻿namespace Gift.Event
+﻿namespace Gift.Monitor
 {
     public interface IMonitorManager
     {

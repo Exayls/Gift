@@ -2,7 +2,7 @@
 using Gift.SignalHandler;
 using System;
 
-namespace Gift.Event
+namespace Gift.Monitor
 {
     class ConsoleSizeMonitor : IMonitor
     {
@@ -28,7 +28,7 @@ namespace Gift.Event
                 ConsoleHeight = Console.WindowHeight;
 
                 EventArgs eventArgs = new ConsoleSizeEventArgs(ConsoleHeight, ConsoleWidth);
-                ISignal signal = new Signal("Console.resize", eventArgs);
+                ISignal signal = new Signal("Console.Resize", eventArgs);
                 _signalBus.PushSignal(signal);
             }
         }

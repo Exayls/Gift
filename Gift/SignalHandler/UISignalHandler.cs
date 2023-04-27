@@ -1,4 +1,4 @@
-﻿using Gift.Event;
+﻿using Gift.Monitor;
 using Gift.UI;
 using Gift.UI.Display;
 using Gift.UI.MetaData;
@@ -18,10 +18,10 @@ namespace Gift.SignalHandler
         {
             switch (signal.Name)
             {
-                case "next":
+                case "UI.NextElement":
                     Ui.nextElement();
                     break;
-                case "Console.resize":
+                case "Console.Resize":
                     OnSizeChanged(signal.EventArgs);
                     break;
                 default:

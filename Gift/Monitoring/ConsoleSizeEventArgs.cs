@@ -1,4 +1,4 @@
-﻿namespace Gift.Event
+﻿namespace Gift.Monitor
 {
     internal class ConsoleSizeEventArgs : EventArgs
     {
