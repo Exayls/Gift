@@ -137,5 +137,19 @@ namespace Gift.UI
                 SelectedContainer.PreviousElement();
             }
         }
+        public void NextContainer()
+        {
+            if (SelectedContainer != null)
+            {
+                SelectedContainer = SelectableContainers[(SelectableContainers.IndexOf(SelectedContainer) + 1) % SelectableContainers.Count];
+            }
+        }
+        public void PreviousContainer()
+        {
+            if (SelectedContainer != null)
+            {
+                SelectedContainer = SelectableContainers[(SelectableContainers.IndexOf(SelectedContainer) - 1 + SelectableContainers.Count) % SelectableContainers.Count];
+            }
+        }
     }
 }

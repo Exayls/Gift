@@ -1,6 +1,6 @@
 ﻿namespace Gift.Monitor
 {
-    internal class ConsoleSizeEventArgs : EventArgs
+    public class ConsoleSizeEventArgs : EventArgs
     {
         public int ConsoleHeight { get; }
         public int ConsoleWidth { get; }

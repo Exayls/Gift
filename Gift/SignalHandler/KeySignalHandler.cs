@@ -1,30 +1,34 @@
 ﻿using Gift.Builders;
+using Gift.Bus;
+using Gift.KeyInput;
 using Gift.UI;
 using Gift.UI.DisplayManager;
 
 namespace Gift.SignalHandler
 {
-    internal class KeySignalHandler: ISignalHandler
+    internal class KeySignalHandler : ISignalHandler
     {
-        private IDisplayManager _displayManager;
+        private ISignalBus _bus;
 
-        public KeySignalHandler(IDisplayManager displayManager)
+        public KeySignalHandler(ISignalBus bus)
         {
-            _displayManager = displayManager;
+            _bus = bus;
         }
 
         public void HandleSignal(ISignal signal)
         {
-            if(signal.Name == "T")
+            if (signal.EventArgs is KeyEventArgs)
             {
-                _displayManager.Ui.NextElementInSelectedContainer();
+                KeyEventArgs eventsArgs = (KeyEventArgs)signal.EventArgs;
+                if (eventsArgs.KeyValue == ConsoleKey.T)
+                {
+                    _bus.PushSignal(new Signal("Ui.NextElementInSelectedContainer", EventArgs.Empty));
+                }
+                if (eventsArgs.KeyValue == ConsoleKey.S)
+                {
+                    _bus.PushSignal(new Signal("Ui.PreviousElementInSelectedContainer", EventArgs.Empty));
+                }
             }
-            if(signal.Name == "S")
-            {
-                _displayManager.Ui.PreviousElementInSelectedContainer();
-            }
-            _displayManager.Ui.AddChild(new LabelBuilder().WithPosition(new(30, 30)).WithText(signal.Name).Build());
-            _displayManager.UpdateDisplay();
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Gift.SignalHandler
 {
-    internal class Signal : ISignal
+    public class Signal : ISignal
     {
         public EventArgs EventArgs { get; private set; }
 

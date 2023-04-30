@@ -15,13 +15,15 @@ namespace Gift.KeyInput
         {
             while (true)
             {
-                await Task.Delay(1);
                 if (Console.KeyAvailable)
                 {
                     ConsoleKeyInfo consoleKeyInfo = Console.ReadKey(true);
-                    string keyValue = consoleKeyInfo.Key.ToString();
-                    _signalBus.PushSignal(new Signal(keyValue ?? "", EventArgs.Empty));
+                    ConsoleModifiers modifier = consoleKeyInfo.Modifiers;
+                    ConsoleKey keyValue = consoleKeyInfo.Key;
+                    KeyEventArgs keyEventArgs = new KeyEventArgs(keyValue, modifier);
+                    _signalBus.PushSignal(new Signal("KeyPressed", keyEventArgs));
                 }
+                await Task.Yield();
             }
         }
     }

@@ -24,7 +24,7 @@ namespace Gift
         private ISignalHandler? _uiSignalHandler;
         private ISignalHandler? _keySignalHandler;
         private readonly IMonitorManager _monitorManager;
-        private readonly ISignalBus _signalQueue;
+        private readonly ISignalBus _signalBus;
         private IKeyInputHandler _keyInputHandler;
         private IDisplayManager? _displayManager;
         public const char FILLINGCHAR = '*';
@@ -35,10 +35,10 @@ namespace Gift
             _renderer = renderer ?? new Renderer();
             _displayer = displayer ?? new ConsoleDisplayer();
             _monitorManager = monitorManager ?? new MonitorManager();
-            _signalQueue = queue ?? new SignalBus();
-            _keyInputHandler = new KeyInputHandler(_signalQueue);
+            _signalBus = queue ?? new SignalBus();
+            _keyInputHandler = new KeyInputHandler(_signalBus);
 
-            ConsoleSizeMonitor monitor = new ConsoleSizeMonitor(_signalQueue);
+            ConsoleSizeMonitor monitor = new ConsoleSizeMonitor(_signalBus);
             _monitorManager.Add(monitor);
         }
 
@@ -52,10 +52,10 @@ namespace Gift
             _displayManager = new DisplayManager(_displayer, _renderer, Ui);
 
             _uiSignalHandler =  new UISignalHandler(_displayManager);
-            _keySignalHandler =  new KeySignalHandler(_displayManager);
+            _keySignalHandler =  new KeySignalHandler(_signalBus);
 
-            _signalQueue.Subscribe(_uiSignalHandler);
-            _signalQueue.Subscribe(_keySignalHandler);
+            _signalBus.Subscribe(_uiSignalHandler);
+            _signalBus.Subscribe(_keySignalHandler);
 
             _keyInputHandler.StartCheckUserInput();
 

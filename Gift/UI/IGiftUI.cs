@@ -12,5 +12,7 @@ namespace Gift.UI
         void PreviousElementInSelectedContainer();
         void NextElementInSelectedContainer();
         void Resize(Bound bound);
+        void NextContainer();
+        void PreviousContainer();
     }
 }
