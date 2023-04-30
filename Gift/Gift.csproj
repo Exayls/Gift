@@ -18,6 +18,9 @@
     <None Update="ressources\borderchars\simple_border.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="ressources\keyconfig\keymap.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties ressources_4borderchars_4simple_3border_1json__JsonSchema="o" /></VisualStudio></ProjectExtensions>

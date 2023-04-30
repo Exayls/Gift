@@ -34,6 +34,7 @@ vstack.SelectableElements.Add(l4);
 vstack.SelectableElements.Add(l5);
 vstack.SelectedElement = l1;
 
+
 var vstack2 = new VStackBuilder().WithBorder(new Border(1, BorderChars.GetBorderCharsFromFile("ressources/borderChars/simple_border.json"))).Build();
 vstack.AddChild(vstack2);
 var element1 = new LabelBuilder().WithText("testwithbiggerwidth").Build();
@@ -44,6 +45,8 @@ var element3 = new LabelBuilder().Build();
 vstack2.AddChild(element3);
 var element4 = new LabelBuilder().WithText("test6").WithPosition(new Position(-2, 58)).Build();
 vstack2.AddChild(element4);
+
+
 
 vstack2.SelectableElements.Add(element1);
 vstack2.SelectableElements.Add(element2);

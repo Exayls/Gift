@@ -7,6 +7,7 @@ using Gift.Bus;
 using Gift.KeyInput;
 using Gift.Monitor;
 using Gift.SignalHandler;
+using Gift.SignalHandler.KeyInput;
 using Gift.UI;
 using Gift.UI.Display;
 using Gift.UI.Displayer;
@@ -27,16 +28,18 @@ namespace Gift
         private readonly ISignalBus _signalBus;
         private IKeyInputHandler _keyInputHandler;
         private IDisplayManager? _displayManager;
+        private IKeyMapper _keyMapper;
         public const char FILLINGCHAR = '*';
 
 
-        public GiftBase(IRenderer? renderer = null, IDisplayer? displayer = null, IMonitorManager? monitorManager = null, ISignalBus? queue = null)
+        public GiftBase(IRenderer? renderer = null, IDisplayer? displayer = null, IMonitorManager? monitorManager = null, ISignalBus? queue = null, KeyMapper? keyMapper = null)
         {
             _renderer = renderer ?? new Renderer();
             _displayer = displayer ?? new ConsoleDisplayer();
             _monitorManager = monitorManager ?? new MonitorManager();
             _signalBus = queue ?? new SignalBus();
             _keyInputHandler = new KeyInputHandler(_signalBus);
+            _keyMapper = new KeyMapper();
 
             ConsoleSizeMonitor monitor = new ConsoleSizeMonitor(_signalBus);
             _monitorManager.Add(monitor);
@@ -52,7 +55,7 @@ namespace Gift
             _displayManager = new DisplayManager(_displayer, _renderer, Ui);
 
             _uiSignalHandler =  new UISignalHandler(_displayManager);
-            _keySignalHandler =  new KeySignalHandler(_signalBus);
+            _keySignalHandler =  new KeySignalHandler(_signalBus, _keyMapper);
 
             _signalBus.Subscribe(_uiSignalHandler);
             _signalBus.Subscribe(_keySignalHandler);
