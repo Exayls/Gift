@@ -58,9 +58,14 @@ vstack.AddChild(new LabelBuilder().WithText("test3").Build());
 vstack.AddChild(new LabelBuilder().Build());
 
 ui.SelectableContainers.Add(vstack2);
+ui.SelectableContainers.Add(vstack);
+ui.SelectableContainers.Add(ui);
 ui.SelectedContainer = vstack2;
 
 
+ui.SelectableElements.Add(vstack2);
+ui.SelectableElements.Add(vstack);
+ui.SelectedElement = vstack2;
 
 var frontElem = new LabelBuilder().WithText("front").WithPosition(new Position(30, 40)).Build();
 ui.AddChild(frontElem);

@@ -28,6 +28,14 @@ namespace Gift.SignalHandler
                 {
                     _bus.PushSignal(new Signal("Ui.PreviousElementInSelectedContainer", EventArgs.Empty));
                 }
+                if (eventsArgs.KeyValue == ConsoleKey.C)
+                {
+                    _bus.PushSignal(new Signal("Ui.NextContainer", EventArgs.Empty));
+                }
+                if (eventsArgs.KeyValue == ConsoleKey.R)
+                {
+                    _bus.PushSignal(new Signal("Ui.PreviousContainer", EventArgs.Empty));
+                }
             }
         }
     }
