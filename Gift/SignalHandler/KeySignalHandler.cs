@@ -25,12 +25,17 @@ namespace Gift.SignalHandler
             if (signal.EventArgs is KeyEventArgs)
             {
                 KeyEventArgs eventsArgs = (KeyEventArgs)signal.EventArgs;
-                foreach (IKeyMapping mapping in _mappings)
+                PushEveryConfigSignal(eventsArgs);
+            }
+        }
+
+        private void PushEveryConfigSignal(KeyEventArgs eventsArgs)
+        {
+            foreach (IKeyMapping mapping in _mappings)
+            {
+                if (eventsArgs.KeyValue == mapping.KeyInfo.key && eventsArgs.Modifier == mapping.KeyInfo.modifiers)
                 {
-                    if (eventsArgs.KeyValue == mapping.KeyInfo.key && eventsArgs.Modifier == mapping.KeyInfo.modifiers)
-                    {
-                        _bus.PushSignal(new Signal(mapping.SignalName, EventArgs.Empty));
-                    }
+                    _bus.PushSignal(new Signal(mapping.SignalName, EventArgs.Empty));
                 }
             }
         }
