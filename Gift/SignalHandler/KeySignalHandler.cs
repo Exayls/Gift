@@ -11,12 +11,13 @@ namespace Gift.SignalHandler
     {
         private ISignalBus _bus;
         private IKeyMapper _keyMapper;
+        private IList<IKeyMapping> _mappings;
 
         public KeySignalHandler(ISignalBus bus, IKeyMapper keyMapper)
         {
             _bus = bus;
             _keyMapper = keyMapper;
-            
+            _mappings = _keyMapper.GetMapping();
         }
 
         public void HandleSignal(ISignal signal)
@@ -24,21 +25,12 @@ namespace Gift.SignalHandler
             if (signal.EventArgs is KeyEventArgs)
             {
                 KeyEventArgs eventsArgs = (KeyEventArgs)signal.EventArgs;
-                if (eventsArgs.KeyValue == ConsoleKey.T)
+                foreach (IKeyMapping mapping in _mappings)
                 {
-                    _bus.PushSignal(new Signal("Ui.NextElementInSelectedContainer", EventArgs.Empty));
-                }
-                if (eventsArgs.KeyValue == ConsoleKey.S)
-                {
-                    _bus.PushSignal(new Signal("Ui.PreviousElementInSelectedContainer", EventArgs.Empty));
-                }
-                if (eventsArgs.KeyValue == ConsoleKey.C)
-                {
-                    _bus.PushSignal(new Signal("Ui.NextContainer", EventArgs.Empty));
-                }
-                if (eventsArgs.KeyValue == ConsoleKey.R)
-                {
-                    _bus.PushSignal(new Signal("Ui.PreviousContainer", EventArgs.Empty));
+                    if (eventsArgs.KeyValue == mapping.KeyInfo.key && eventsArgs.Modifier == mapping.KeyInfo.modifiers)
+                    {
+                        _bus.PushSignal(new Signal(mapping.SignalName, EventArgs.Empty));
+                    }
                 }
             }
         }

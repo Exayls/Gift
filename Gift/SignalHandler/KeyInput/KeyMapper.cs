@@ -8,9 +8,13 @@ namespace Gift.SignalHandler.KeyInput
     {
         public KeyMap()
         {
-            Map = new Dictionary<string, string>();
+            Map = new List<(string, string)>();
         }
-        public Dictionary<string, string> Map { get; set; }
+        public KeyMap(List<(string, string)> values)
+        {
+            Map = values;
+        }
+        public List<(string, string)> Map { get; set; }
     }
     public class KeyMapper : IKeyMapper
     {
@@ -18,14 +22,15 @@ namespace Gift.SignalHandler.KeyInput
         public IList<IKeyMapping> GetMapping()
         {
             // Load the JSON file
-            string json = File.ReadAllText("keymap.json");
+            string json = File.ReadAllText("ressources/keyconfig/keymap.json");
 
             // Deserialize the JSON into a KeyMap object
-            KeyMap keyMap = JsonSerializer.Deserialize<KeyMap>(json)?? new KeyMap();
+            Dictionary<string, string>? keyMap = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
+
 
             // Convert the key strings to ConsoleKey and ConsoleModifiers
             List<IKeyMapping> map = new List<IKeyMapping>();
-            foreach (KeyValuePair<string, string> pair in keyMap.Map)
+            foreach (KeyValuePair<string, string> pair in keyMap)
             {
                 string[] keys = pair.Key.Split('+');
                 ConsoleKey key = (ConsoleKey)Enum.Parse(typeof(ConsoleKey), keys[keys.Length - 1], true);
