@@ -3,6 +3,7 @@ using Gift.KeyInput;
 using Gift.Monitor;
 using Gift.SignalHandler.KeyInput;
 using Gift.src.Services.Monitor;
+using Gift.UI.Configuration;
 using Gift.UI.Displayer;
 using Gift.UI.DisplayManager;
 using Gift.UI.Render;
@@ -17,8 +18,9 @@ namespace Gift.src.Extension
 {
     public static class GiftServiceCollectionExtensions
     {
-        public static IServiceCollection AddMyLibrary(this IServiceCollection services)
+        public static IServiceCollection AddGiftServices(this IServiceCollection services)
         {
+            services.AddSingleton<IConfiguration,DefaultConfiguration>();
             services.AddSingleton<IRenderer, Renderer>();
             services.AddSingleton<IDisplayManager, DisplayManager>();
             services.AddSingleton<IDisplayer, ConsoleDisplayer>();
@@ -27,6 +29,7 @@ namespace Gift.src.Extension
             services.AddSingleton<IConsoleSizeMonitor, ConsoleSizeMonitor>();
             services.AddSingleton<IMonitorManager, MonitorManager>();
             services.AddSingleton<ISignalBus, SignalBus>();
+            services.AddSingleton<GiftBase>();
 
             return services;
         }

@@ -1,9 +1,11 @@
 ﻿using Gift;
 using Gift.Builders;
+using Gift.src.Extension;
 using Gift.UI;
 using Gift.UI.Border;
 using Gift.UI.MetaData;
 using Gift.UI.Render;
+using Microsoft.Extensions.DependencyInjection;
 
 var ui = new GiftUI();
 
@@ -27,6 +29,9 @@ vstack2.AddChild(new LabelBuilder().WithText("test6").WithPosition(new Position(
 
 
 
-var gift = new GiftBase(new Renderer());
+var services = new ServiceCollection();
+services.AddGiftServices();
+var serviceProvider = services.BuildServiceProvider();
+var gift = serviceProvider.GetService<GiftBase>();
 gift.Initialize(ui);
 gift.Run();
