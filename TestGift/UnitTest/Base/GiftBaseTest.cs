@@ -35,6 +35,7 @@ namespace TestGift.LifeCycle
             keyInputHandlerMock = new Mock<IKeyInputHandler>();
             consoleSizeMonitorMock = new Mock<IConsoleSizeMonitor>();
         }
+
         [Fact]
         public void When_not_initialized_should_not_set_ui()
         {
@@ -49,8 +50,8 @@ namespace TestGift.LifeCycle
                        );
 
             Assert.True(giftBase.Ui == null);
-
         }
+
         [Fact]
         public void When_initialized_should_set_ui()
         {
@@ -66,7 +67,6 @@ namespace TestGift.LifeCycle
             giftBase.Initialize();
 
             Assert.True(giftBase.Ui != null);
-
         }
     }
 }
