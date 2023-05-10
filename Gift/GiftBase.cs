@@ -3,70 +3,77 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Gift.Bus;
+using Gift.KeyInput;
+using Gift.Monitor;
+using Gift.SignalHandler;
+using Gift.SignalHandler.KeyInput;
+using Gift.src.Services.Monitor;
 using Gift.UI;
 using Gift.UI.Display;
+using Gift.UI.Displayer;
+using Gift.UI.DisplayManager;
 using Gift.UI.MetaData;
+using Gift.UI.Render;
 
 namespace Gift
 {
     public class GiftBase
     {
-        public GiftUI? ui { get; set; }
-        private IRenderer _renderer;
-        private IDisplayer _displayer;
-
-
+        public GiftUI? Ui { get; set; }
+        private readonly IRenderer _renderer;
+        private readonly IDisplayer _displayer;
+        private ISignalHandler? _uiSignalHandler;
+        private ISignalHandler? _keySignalHandler;
+        private readonly IMonitorManager _monitorManager;
+        private readonly ISignalBus _signalBus;
+        private IKeyInputHandler _keyInputHandler;
+        private IDisplayManager? _displayManager;
+        private IKeyMapper _keyMapper;
         public const char FILLINGCHAR = '*';
 
 
-        public GiftBase(IRenderer renderer)
+        public GiftBase(IRenderer renderer, IDisplayer displayer, IMonitorManager monitorManager, ISignalBus queue, IKeyMapper keyMapper, IKeyInputHandler keyInputHandler, IConsoleSizeMonitor consoleSizeMonitor)
         {
             _renderer = renderer;
-            _displayer = new ConsoleDisplayer();
+            _displayer = displayer;
+            _monitorManager = monitorManager;
+            _signalBus = queue;
+            _keyMapper =keyMapper;
+            _keyInputHandler = keyInputHandler;
+            _monitorManager.Add(consoleSizeMonitor);
         }
 
-        public virtual void initialize()
+        public virtual void Initialize(GiftUI? ui = null)
         {
-            ui = new GiftUI();
+            this.Ui = ui ?? new GiftUI();
+            init();
         }
-        public virtual void initialize(GiftUI ui)
+        private void init()
         {
-            this.ui = ui;
+            _displayManager = new DisplayManager(_displayer, _renderer, Ui);
+
+            _uiSignalHandler =  new UISignalHandler(_displayManager);
+            _keySignalHandler =  new KeySignalHandler(_signalBus, _keyMapper);
+
+            _signalBus.Subscribe(_uiSignalHandler);
+            _signalBus.Subscribe(_keySignalHandler);
+
+            _keyInputHandler.StartCheckUserInput();
+
+            _displayManager.UpdateDisplay();
+
         }
-        public virtual void run()
+
+        public virtual void Run()
         {
             while (true)
             {
-                IScreenDisplay view = CreateView();
-                PrintFrame(view);
-                Thread.Sleep(1000);
             }
-        }
-        public IScreenDisplay CreateView()
-        {
-            IScreenDisplay View = new ScreenDisplay(new Bound(0,0));
-            if (ui != null)
-            {
-                View = _renderer.GetRenderDisplay(ui);
-            }
-            return View;
-        }
-        private void PrintFrame(IScreenDisplay? View)
-        {
-            if (View != null)
-            {
-                _displayer.display(View);
-            }
-            //Console.Clear();
-            //Console.WriteLine("\x1b[3J");
-            //Console.Clear();
-            //if (View != null)
-            //{
-            //    Console.Out.Write(View);
-            //}
         }
 
-        public virtual void end()
+
+        public virtual void End()
         {
 
         }

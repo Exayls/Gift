@@ -2,9 +2,11 @@
 using Gift.Builders;
 using Gift.UI;
 using Gift.UI.Border;
+using Gift.UI.Configuration;
 using Gift.UI.Display;
 using Gift.UI.Element;
 using Gift.UI.MetaData;
+using Gift.UI.Render;
 using Moq;
 using System.Text;
 
@@ -36,7 +38,7 @@ namespace TestGift.UI
         public void TestVStack()
         {
             GiftUI ui = CreateUI(new Bound(20, 60));
-            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
             string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
 
             var expectedBuilder = new StringBuilder();
@@ -54,7 +56,7 @@ namespace TestGift.UI
         {
             GiftUI ui = new GiftUI(bound);
             var vstack = new VStackBuilder().Build();
-            ui.SetChild(vstack);
+            ui.AddChild(vstack);
             return ui;
         }
 
@@ -65,10 +67,10 @@ namespace TestGift.UI
             using var writer = new StringWriter(output);
             var ui = new GiftUI(new Bound(20, 60));
             var vstack = new VStackBuilder().Build();
-            var label = new LabelBuilder().BuildImplicit();
-            ui.SetChild(vstack);
+            var label = new LabelBuilder().Build();
+            ui.AddChild(vstack);
             vstack.AddChild(label);
-            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -93,9 +95,9 @@ namespace TestGift.UI
             var ui = new GiftUI(new Bound(20, 60));
             var vstack = new VStackBuilder().Build();
             var label = new LabelBuilder().Build();
-            ui.SetChild(vstack);
+            ui.AddChild(vstack);
             vstack.AddChild(label);
-            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -120,12 +122,12 @@ namespace TestGift.UI
             using var writer = new StringWriter(output);
             var ui = new GiftUI(new Bound(20, 60));
             var vstack = new VStackBuilder().Build();
-            var label1 = new LabelBuilder().BuildImplicit();
-            var label2 = new LabelBuilder().WithText("test").BuildImplicit();
-            ui.SetChild(vstack);
+            var label1 = new LabelBuilder().Build();
+            var label2 = new LabelBuilder().WithText("test").Build();
+            ui.AddChild(vstack);
             vstack.AddChild(label1);
             vstack.AddChild(label2);
-            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -154,14 +156,14 @@ namespace TestGift.UI
             using var writer = new StringWriter(output);
             var ui = new GiftUI(new Bound(20, 60));
             var vstack = new VStackBuilder().Build();
-            var label1 = new LabelBuilder().BuildImplicit();
-            var label2 = new LabelBuilder().WithText("test").BuildImplicit();
-            var label3 = new LabelBuilder().WithText("label numero 3.").BuildImplicit();
-            ui.SetChild(vstack);
+            var label1 = new LabelBuilder().Build();
+            var label2 = new LabelBuilder().WithText("test").Build();
+            var label3 = new LabelBuilder().WithText("label numero 3.").Build();
+            ui.AddChild(vstack);
             vstack.AddChild(label1);
             vstack.AddChild(label2);
             vstack.AddChild(label3);
-            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -194,14 +196,14 @@ namespace TestGift.UI
             using var writer = new StringWriter(output);
             var ui = new GiftUI(new Bound(20, 60));
             var vstack = new VStackBuilder().Build();
-            var label1 = new LabelBuilder().BuildImplicit();
+            var label1 = new LabelBuilder().Build();
             var label2 = new LabelBuilder().WithText("test").WithPosition(new Position(4, 8)).Build();
-            var label3 = new LabelBuilder().WithText("label numero 3.").BuildImplicit();
-            ui.SetChild(vstack);
+            var label3 = new LabelBuilder().WithText("label numero 3.").Build();
+            ui.AddChild(vstack);
             vstack.AddChild(label1);
             vstack.AddChild(label2);
             vstack.AddChild(label3);
-            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -234,18 +236,18 @@ namespace TestGift.UI
             using var writer = new StringWriter(output);
             var ui = new GiftUI(new Bound(4, 60));
             var vstack = new VStackBuilder().Build();
-            var label1 = new LabelBuilder().BuildImplicit();
-            var label2 = new LabelBuilder().WithText("test").BuildImplicit();
-            var label3 = new LabelBuilder().WithText("label numero 3.").BuildImplicit();
-            var label4 = new LabelBuilder().WithText("label numero 4.").BuildImplicit();
-            var label5 = new LabelBuilder().WithText("label numero 5.").BuildImplicit();
-            ui.SetChild(vstack);
+            var label1 = new LabelBuilder().Build();
+            var label2 = new LabelBuilder().WithText("test").Build();
+            var label3 = new LabelBuilder().WithText("label numero 3.").Build();
+            var label4 = new LabelBuilder().WithText("label numero 4.").Build();
+            var label5 = new LabelBuilder().WithText("label numero 5.").Build();
+            ui.AddChild(vstack);
             vstack.AddChild(label1);
             vstack.AddChild(label2);
             vstack.AddChild(label3);
             vstack.AddChild(label4);
             vstack.AddChild(label5);
-            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
             var expectedBuilder = new StringBuilder();
             string expected = "";
             string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
@@ -280,20 +282,20 @@ namespace TestGift.UI
             using var writer = new StringWriter(output);
             var ui = new GiftUI(new Bound(4, 60));
             var vstack = new VStackBuilder().Build();
-            var label1 = new LabelBuilder().BuildImplicit();
-            var label2 = new LabelBuilder().WithText("test").BuildImplicit();
-            var label3 = new LabelBuilder().WithText("label numero 3.").BuildImplicit();
-            var label4 = new LabelBuilder().WithText("label numero 4.").BuildImplicit();
-            var label5 = new LabelBuilder().WithText("label numero 5.").BuildImplicit();
-            var label6 = new LabelBuilder().WithText("label numero 6.").BuildImplicit();
-            ui.SetChild(vstack);
+            var label1 = new LabelBuilder().Build();
+            var label2 = new LabelBuilder().WithText("test").Build();
+            var label3 = new LabelBuilder().WithText("label numero 3.").Build();
+            var label4 = new LabelBuilder().WithText("label numero 4.").Build();
+            var label5 = new LabelBuilder().WithText("label numero 5.").Build();
+            var label6 = new LabelBuilder().WithText("label numero 6.").Build();
+            ui.AddChild(vstack);
             vstack.AddChild(label1);
             vstack.AddChild(label2);
             vstack.AddChild(label3);
             vstack.AddChild(label4);
             vstack.AddChild(label5);
             vstack.AddChild(label6);
-            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";

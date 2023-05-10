@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Gift.UI.Render;
+using Gift.UI.Configuration;
 
 namespace TestGift.UI
 {
@@ -19,7 +21,7 @@ namespace TestGift.UI
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
             var ui = new GiftUI(new Bound(20, 60));
-            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -39,8 +41,8 @@ namespace TestGift.UI
             using var writer = new StringWriter(output);
             var ui = new GiftUI(new Bound(20, 60));
             var element = new LabelBuilder().Build();
-            ui.SetChild(element);
-            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
+            ui.AddChild(element);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -65,8 +67,8 @@ namespace TestGift.UI
             var ui = new GiftUI(new Bound(20, 60));
             var position = new Position(0, 30);
             var element = new LabelBuilder().WithPosition(position).Build();
-            ui.SetChild(element);
-            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
+            ui.AddChild(element);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -91,8 +93,8 @@ namespace TestGift.UI
             var ui = new GiftUI(new Bound(20, 60));
             var position = new Position(0, 10);
             var element = new LabelBuilder().WithPosition(position).Build();
-            ui.SetChild(element);
-            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
+            ui.AddChild(element);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -117,8 +119,8 @@ namespace TestGift.UI
             var ui = new GiftUI(new Bound(20, 60));
             var position = new Position(0, 10);
             var element = new LabelBuilder().WithText("test").WithPosition(position).Build();
-            ui.SetChild(element);
-            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
+            ui.AddChild(element);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -143,8 +145,8 @@ namespace TestGift.UI
             var ui = new GiftUI(new Bound(20, 60));
             var position = new Position(0, 1000);
             var element = new LabelBuilder().WithPosition(position).Build();
-            ui.SetChild(element);
-            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
+            ui.AddChild(element);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -165,8 +167,8 @@ namespace TestGift.UI
             var ui = new GiftUI(new Bound(20, 60));
             var position = new Position(0, 58);
             var element = new LabelBuilder().WithPosition(position).Build();
-            ui.SetChild(element);
-            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
+            ui.AddChild(element);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -191,8 +193,8 @@ namespace TestGift.UI
             var ui = new GiftUI(new Bound(10, 80));
             var position = new Position(0, 58);
             var element = new LabelBuilder().WithPosition(position).Build();
-            ui.SetChild(element);
-            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
+            ui.AddChild(element);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -218,8 +220,8 @@ namespace TestGift.UI
             var ui = new GiftUI(new Bound(4, 16));
             var position = new Position(2, 10);
             var element = new LabelBuilder().WithPosition(position).Build();
-            ui.SetChild(element);
-            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
+            ui.AddChild(element);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -245,8 +247,8 @@ namespace TestGift.UI
             var ui = new GiftUI(new Bound(4, 16));
             var position = new Position(1, 10);
             var element = new LabelBuilder().WithPosition(position).Build();
-            ui.SetChild(element);
-            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
+            ui.AddChild(element);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -272,8 +274,8 @@ namespace TestGift.UI
             var ui = new GiftUI(new Bound(4, 32));
             var position = new Position(1, 10);
             var element = new LabelBuilder().WithPosition(position).Build();
-            ui.SetChild(element);
-            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
+            ui.AddChild(element);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";

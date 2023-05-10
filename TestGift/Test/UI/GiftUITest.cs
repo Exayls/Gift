@@ -2,7 +2,10 @@ using Gift;
 using Gift.UI;
 using Gift.UI.Display;
 using Gift.UI.MetaData;
+using Gift.UI.Render;
 using System.Text;
+using Gift.UI.Render;
+using Gift.UI.Configuration;
 
 namespace TestGift.UI
 {
@@ -16,7 +19,7 @@ namespace TestGift.UI
             {
                 var ui = new GiftUI(new Bound(20, 60));
 
-                IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
+                IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
                 var expectedBuilder = new StringBuilder();
                 expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, 60));
                 for (int i = 1; i < 20; i++)
@@ -36,7 +39,7 @@ namespace TestGift.UI
             {
                 var ui = new GiftUI(new Bound(10, 15));
 
-                IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
+                IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
                 var expectedBuilder = new StringBuilder();
                 expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, 15));
                 for (int i = 1; i < 10; i++)
