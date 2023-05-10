@@ -8,6 +8,7 @@ using Gift.KeyInput;
 using Gift.Monitor;
 using Gift.SignalHandler;
 using Gift.SignalHandler.KeyInput;
+using Gift.src.Services.Monitor;
 using Gift.UI;
 using Gift.UI.Display;
 using Gift.UI.Displayer;
@@ -32,17 +33,15 @@ namespace Gift
         public const char FILLINGCHAR = '*';
 
 
-        public GiftBase(IRenderer? renderer = null, IDisplayer? displayer = null, IMonitorManager? monitorManager = null, ISignalBus? queue = null, KeyMapper? keyMapper = null)
+        public GiftBase(IRenderer renderer, IDisplayer displayer, IMonitorManager monitorManager, ISignalBus queue, IKeyMapper keyMapper, IKeyInputHandler keyInputHandler, IConsoleSizeMonitor consoleSizeMonitor)
         {
-            _renderer = renderer ?? new Renderer();
-            _displayer = displayer ?? new ConsoleDisplayer();
-            _monitorManager = monitorManager ?? new MonitorManager();
-            _signalBus = queue ?? new SignalBus();
-            _keyInputHandler = new KeyInputHandler(_signalBus);
-            _keyMapper = new KeyMapper();
-
-            ConsoleSizeMonitor monitor = new ConsoleSizeMonitor(_signalBus);
-            _monitorManager.Add(monitor);
+            _renderer = renderer;
+            _displayer = displayer;
+            _monitorManager = monitorManager;
+            _signalBus = queue;
+            _keyMapper =keyMapper;
+            _keyInputHandler = keyInputHandler;
+            _monitorManager.Add(consoleSizeMonitor);
         }
 
         public virtual void Initialize(GiftUI? ui = null)

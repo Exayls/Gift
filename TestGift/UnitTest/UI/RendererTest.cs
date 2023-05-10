@@ -1,4 +1,5 @@
 ﻿using Gift.UI;
+using Gift.UI.Configuration;
 using Gift.UI.Display;
 using Gift.UI.Element;
 using Gift.UI.MetaData;
@@ -15,6 +16,7 @@ namespace TestGift.UnitTest.UI
 {
     public class RendererTest
     {
+        private Mock<IConfiguration> _confMock;
         private Mock<IGiftUI> _giftuiMock;
         private Mock<IUIElement> _labelMock;
         private MockRepository _mockFactory;
@@ -22,10 +24,11 @@ namespace TestGift.UnitTest.UI
 
         public RendererTest()
         {
+            _confMock = new Mock<IConfiguration>();
             _giftuiMock = new Mock<IGiftUI>();
             _labelMock = new Mock<IUIElement>();
             _mockFactory = new MockRepository(MockBehavior.Default);
-            renderer = new Renderer();
+            renderer = new Renderer(_confMock.Object);
         }
 
         //[Fact]

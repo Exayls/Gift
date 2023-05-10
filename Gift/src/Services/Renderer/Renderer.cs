@@ -9,9 +9,9 @@ namespace Gift.UI.Render
     {
         public IConfiguration Configuration { get; }
 
-        public Renderer(IConfiguration? configuration = null)
+        public Renderer(IConfiguration configuration)
         {
-            Configuration = configuration ?? new DefaultConfiguration();
+            Configuration = configuration;
         }
 
         public IScreenDisplay GetRenderDisplay(IGiftUI giftUI)

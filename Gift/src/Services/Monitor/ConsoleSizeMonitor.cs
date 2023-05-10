@@ -1,10 +1,11 @@
 ﻿using Gift.Bus;
 using Gift.SignalHandler;
+using Gift.src.Services.Monitor;
 using System;
 
 namespace Gift.Monitor
 {
-    class ConsoleSizeMonitor : IMonitor
+    class ConsoleSizeMonitor : IConsoleSizeMonitor
     {
         private int ConsoleWidth;
         private int ConsoleHeight;
