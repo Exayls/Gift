@@ -2,6 +2,7 @@
 using Gift;
 using Gift.Builders;
 using Gift.UI;
+using Gift.UI.Configuration;
 using Gift.UI.Displayer;
 using Gift.UI.Element;
 using Gift.UI.MetaData;
@@ -21,7 +22,7 @@ vstack.AddChild(new LabelBuilder().Build());
 vstack.AddChild(new LabelBuilder().WithText("tieaucit").Build());
 vstack.AddChild(new LabelBuilder().Build());
 
-new ConsoleDisplayer().display(new Renderer().GetRenderDisplay(ui));
+new ConsoleDisplayer().display(new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui));
 
 
 //var gift = new GiftBase();

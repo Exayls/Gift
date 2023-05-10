@@ -2,6 +2,7 @@
 using Gift.Builders;
 using Gift.UI;
 using Gift.UI.Border;
+using Gift.UI.Configuration;
 using Gift.UI.Display;
 using Gift.UI.Element;
 using Gift.UI.MetaData;
@@ -37,7 +38,7 @@ namespace TestGift.UI
         public void TestVStack()
         {
             GiftUI ui = CreateUI(new Bound(20, 60));
-            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
             string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
 
             var expectedBuilder = new StringBuilder();
@@ -69,7 +70,7 @@ namespace TestGift.UI
             var label = new LabelBuilder().Build();
             ui.AddChild(vstack);
             vstack.AddChild(label);
-            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -96,7 +97,7 @@ namespace TestGift.UI
             var label = new LabelBuilder().Build();
             ui.AddChild(vstack);
             vstack.AddChild(label);
-            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -126,7 +127,7 @@ namespace TestGift.UI
             ui.AddChild(vstack);
             vstack.AddChild(label1);
             vstack.AddChild(label2);
-            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -162,7 +163,7 @@ namespace TestGift.UI
             vstack.AddChild(label1);
             vstack.AddChild(label2);
             vstack.AddChild(label3);
-            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -202,7 +203,7 @@ namespace TestGift.UI
             vstack.AddChild(label1);
             vstack.AddChild(label2);
             vstack.AddChild(label3);
-            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -246,7 +247,7 @@ namespace TestGift.UI
             vstack.AddChild(label3);
             vstack.AddChild(label4);
             vstack.AddChild(label5);
-            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
             var expectedBuilder = new StringBuilder();
             string expected = "";
             string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
@@ -294,7 +295,7 @@ namespace TestGift.UI
             vstack.AddChild(label4);
             vstack.AddChild(label5);
             vstack.AddChild(label6);
-            IScreenDisplay renderedText = new Renderer().GetRenderDisplay(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";

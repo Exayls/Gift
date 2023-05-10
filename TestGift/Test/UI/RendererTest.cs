@@ -2,6 +2,7 @@
 using Gift.Builders;
 using Gift.UI;
 using Gift.UI.Border;
+using Gift.UI.Configuration;
 using Gift.UI.Display;
 using Gift.UI.Element;
 using Gift.UI.MetaData;
@@ -15,7 +16,7 @@ namespace TestGift.Test.UI
 
         public RendererTest()
         {
-            renderer = new Renderer();
+            renderer = new Renderer(new DefaultConfiguration());
         }
 
         [Fact]
