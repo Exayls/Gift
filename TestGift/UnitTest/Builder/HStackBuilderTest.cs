@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace TestGift.Builder
 {
-    public class VStackBuilderTest
+    public class HStackBuilderTest
     {
         [Fact]
         public void BuilderNameTest()
         {
 
-            VStackBuilder builder = new VStackBuilder();
-            VStack v = builder.Build();
-            Assert.True(v != null);
+            HStackBuilder builder = new HStackBuilder();
+            HStack h = builder.Build();
+            Assert.True(h != null);
 
         }
 
@@ -28,12 +28,12 @@ namespace TestGift.Builder
 
             NoBorder border = new NoBorder();
             Bound bound = new Bound(0, 0);
-            VStackBuilder builder = new VStackBuilder()
+            HStackBuilder builder = new HStackBuilder()
                 .WithBorder(border)
                 .WithBound(bound);
-            VStack v = builder.Build();
-            Assert.Equal(v.Border, border);
-            Assert.Equal(v.Bound, bound);
+            HStack h = builder.Build();
+            Assert.Equal(h.Border, border);
+            Assert.Equal(h.Bound, bound);
 
         }
     }
