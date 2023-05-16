@@ -72,11 +72,5 @@ namespace Gift
             }
         }
 
-
-        public virtual void End()
-        {
-
-        }
-
     }
 }

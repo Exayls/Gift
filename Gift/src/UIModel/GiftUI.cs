@@ -34,7 +34,16 @@ namespace Gift.UI
             }
             set
             {
-                _selectedContainer = value;
+                if (value == null)
+                {
+                    throw new ArgumentNullException("value");
+                }
+                if (!SelectableContainers.Contains(value))
+                {
+                    throw new InvalidOperationException("trying to select a container outside of the selectable range");
+                }
+
+
                 foreach (IContainer container in SelectableContainers)
                 {
                     container.IsSelectedContainer = false;
@@ -43,13 +52,11 @@ namespace Gift.UI
                         element.IsInSelectedContainer = false;
                     }
                 }
-                if (SelectedContainer != null)
+                _selectedContainer = value;
+                value.IsSelectedContainer = true;
+                foreach (IUIElement element in _selectedContainer.SelectableElements)
                 {
-                    SelectedContainer.IsSelectedContainer = true;
-                    foreach (IUIElement element in SelectedContainer.SelectableElements)
-                    {
-                        element.IsInSelectedContainer = true;
-                    }
+                    element.IsInSelectedContainer = true;
                 }
             }
         }
