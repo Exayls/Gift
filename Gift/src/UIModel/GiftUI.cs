@@ -32,6 +32,7 @@ namespace Gift.UI
             {
                 return _selectedContainer;
             }
+
             set
             {
                 if (value == null)
@@ -42,21 +43,29 @@ namespace Gift.UI
                 {
                     throw new InvalidOperationException("trying to select a container outside of the selectable range");
                 }
+                RemoveOldSelectedContainer();
+                SetNewSelectedContainer(value);
+            }
+        }
 
+        private void SetNewSelectedContainer(IContainer selected)
+        {
+            _selectedContainer = selected;
+            selected.IsSelectedContainer = true;
+            foreach (IUIElement element in selected.SelectableElements)
+            {
+                element.IsInSelectedContainer = true;
+            }
+        }
 
-                foreach (IContainer container in SelectableContainers)
+        private void RemoveOldSelectedContainer()
+        {
+            foreach (IContainer container in SelectableContainers)
+            {
+                container.IsSelectedContainer = false;
+                foreach (IUIElement element in container.SelectableElements)
                 {
-                    container.IsSelectedContainer = false;
-                    foreach (IUIElement element in container.SelectableElements)
-                    {
-                        element.IsInSelectedContainer = false;
-                    }
-                }
-                _selectedContainer = value;
-                value.IsSelectedContainer = true;
-                foreach (IUIElement element in _selectedContainer.SelectableElements)
-                {
-                    element.IsInSelectedContainer = true;
+                    element.IsInSelectedContainer = false;
                 }
             }
         }
