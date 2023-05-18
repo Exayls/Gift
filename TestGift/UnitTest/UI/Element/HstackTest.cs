@@ -218,7 +218,7 @@ namespace TestGift.UnitTest.UI.Element
             HStack.Border = _borderMock.Object;
             Context contextRenderable = new Context(new Position(0, 0), new Bound(0, 0));
             //act
-            Context context = HStack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
+            Context context = HStack.GetContextRelativeRenderable(_uiElementMock1.Object, contextRenderable);
             //assert
             Assert.Equal(0, context.Position.y);
             Assert.Equal(0, context.Position.x);
@@ -232,10 +232,10 @@ namespace TestGift.UnitTest.UI.Element
             HStack.Border = _borderMock.Object;
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
-            Context context = HStack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
+            Context context = HStack.GetContextRelativeRenderable(_uiElementMock1.Object, contextRenderable);
             //assert
-            Assert.Equal(1, context.Position.y);
-            Assert.Equal(1, context.Position.x);
+            Assert.Equal(0, context.Position.y);
+            Assert.Equal(0, context.Position.x);
         }
         [Fact]
         public void GetContext_should_return_context_with_2_2_position_when_HStack_has_border_thickness2()
@@ -246,10 +246,10 @@ namespace TestGift.UnitTest.UI.Element
             HStack.Border = _borderMock.Object;
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
-            Context context = HStack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
+            Context context = HStack.GetContextRelativeRenderable(_uiElementMock1.Object, contextRenderable);
             //assert
-            Assert.Equal(2, context.Position.y);
-            Assert.Equal(2, context.Position.x);
+            Assert.Equal(0, context.Position.y);
+            Assert.Equal(0, context.Position.x);
         }
         [Fact]
         public void GetContext_should_return_context_with_3_2_position_when_HStack_has_border_thickness2_and_1_first_child_with_Width_of_1()
@@ -264,10 +264,10 @@ namespace TestGift.UnitTest.UI.Element
             HStack.AddChild(_uiElementMock1.Object);
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
-            Context context = HStack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
+            Context context = HStack.GetContextRelativeRenderable(_uiElementMock1.Object, contextRenderable);
             //assert
-            Assert.Equal(2, context.Position.y);
-            Assert.Equal(3, context.Position.x);
+            Assert.Equal(0, context.Position.y);
+            Assert.Equal(1, context.Position.x);
         }
         [Fact]
         public void GetContext_should_return_context_with_4_2_position_when_HStack_has_border_thickness2_and_1_first_child_with_Width_of_2()
@@ -282,10 +282,10 @@ namespace TestGift.UnitTest.UI.Element
             HStack.AddChild(_uiElementMock1.Object);
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
-            Context context = HStack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
+            Context context = HStack.GetContextRelativeRenderable(_uiElementMock1.Object, contextRenderable);
             //assert
-            Assert.Equal(2, context.Position.y);
-            Assert.Equal(4, context.Position.x);
+            Assert.Equal(0, context.Position.y);
+            Assert.Equal(2, context.Position.x);
         }
         [Fact]
         public void GetContext_should_return_context_with_1_1_bound_when_HStack_has_child_with_Width_of_1_and_width_1()
@@ -298,7 +298,7 @@ namespace TestGift.UnitTest.UI.Element
             HStack.AddChild(_uiElementMock1.Object);
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
-            Context context = HStack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
+            Context context = HStack.GetContextRelativeRenderable(_uiElementMock1.Object, contextRenderable);
             //assert
             Assert.Equal(1, context.Bounds.Width);
             Assert.Equal(1, context.Bounds.Height);
@@ -314,7 +314,7 @@ namespace TestGift.UnitTest.UI.Element
             HStack.AddChild(_uiElementMock1.Object);
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
-            Context context = HStack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
+            Context context = HStack.GetContextRelativeRenderable(_uiElementMock1.Object, contextRenderable);
             //assert
             Assert.Equal(1, context.Bounds.Width);
             Assert.Equal(5, context.Bounds.Height);
@@ -330,7 +330,7 @@ namespace TestGift.UnitTest.UI.Element
             HStack.AddChild(_uiElementMock1.Object);
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
-            Context context = HStack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
+            Context context = HStack.GetContextRelativeRenderable(_uiElementMock1.Object, contextRenderable);
             //assert
             Assert.Equal(1, context.Bounds.Width);
             Assert.Equal(3, context.Bounds.Height);
@@ -346,7 +346,7 @@ namespace TestGift.UnitTest.UI.Element
             HStack.AddChild(_uiElementMock1.Object);
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
-            Context context = HStack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
+            Context context = HStack.GetContextRelativeRenderable(_uiElementMock1.Object, contextRenderable);
             //assert
             Assert.Equal(2, context.Bounds.Width);
             Assert.Equal(1, context.Bounds.Height);
@@ -362,7 +362,7 @@ namespace TestGift.UnitTest.UI.Element
             HStack.AddChild(_uiElementMock1.Object);
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
-            Context context = HStack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
+            Context context = HStack.GetContextRelativeRenderable(_uiElementMock1.Object, contextRenderable);
             //assert
             Assert.Equal(3, context.Bounds.Width);
             Assert.Equal(1, context.Bounds.Height);
