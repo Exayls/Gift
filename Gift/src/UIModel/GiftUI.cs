@@ -92,18 +92,6 @@ namespace Gift.UI
             return context;
         }
 
-        public override Context GetContextRenderable(IRenderable renderable, Context context)
-        {
-            if (Childs.Contains(renderable))
-            {
-                return context;
-            }
-            else
-            {
-                throw new Exception($"{renderable} has no context in {this}");
-            }
-        }
-
         public override bool IsFixed()
         {
             return false;
