@@ -12,7 +12,6 @@ namespace Gift.UI.Element
 
         IScreenDisplay GetDisplayWithoutBorder(Bound bounds, IConfiguration configuration);
         IScreenDisplay GetDisplayBorder(Bound bounds, IConfiguration configuration);
-        Position GetGlobalPosition(Context context);
         Position GetRelativePosition(Context context);
         bool IsFixed();
     }

@@ -108,11 +108,6 @@ namespace Gift.UI.Element
             return new Position(context.Position.y,
                                 context.Position.x);
         }
-        public override Position GetGlobalPosition(Context context)
-        {
-            return new Position(context.Position.y,
-                                context.Position.x);
-        }
 
         public IScreenDisplay GetDisplayWithBorder(Bound bound, char fillingChar)
         {

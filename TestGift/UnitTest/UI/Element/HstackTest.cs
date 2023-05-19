@@ -585,79 +585,79 @@ namespace TestGift.UnitTest.UI.Element
         }
         //GetGlbalPosition Tests
         [Fact]
-        public void GetGlobalPosition_should_return_0_0_when_parent_at_0_0_and_no_border()
+        public void GetRelativePosition_should_return_0_0_when_parent_at_0_0_and_no_border()
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(0);
             HStack.Border = _borderMock.Object;
             Context contextRenderable = new Context(new Position(0, 0), new Bound(0, 0));
             //act
-            Position position = HStack.GetGlobalPosition(contextRenderable);
+            Position position = HStack.GetRelativePosition(contextRenderable);
             //assert
             Assert.Equal(0, position.y);
             Assert.Equal(0, position.x);
         }
         [Fact]
-        public void GetGlobalPosition_should_return_2_1_when_parent_at_2_1_and_no_border()
+        public void GetRelativePosition_should_return_2_1_when_parent_at_2_1_and_no_border()
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(0);
             HStack.Border = _borderMock.Object;
             Context contextRenderable = new Context(new Position(2, 1), new Bound(0, 0));
             //act
-            Position position = HStack.GetGlobalPosition(contextRenderable);
+            Position position = HStack.GetRelativePosition(contextRenderable);
             //assert
             Assert.Equal(2, position.y);
             Assert.Equal(1, position.x);
         }
         [Fact]
-        public void GetGlobalPosition_should_return_3_2_when_parent_at_3_2_and_no_border()
+        public void GetRelativePosition_should_return_3_2_when_parent_at_3_2_and_no_border()
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(0);
             HStack.Border = _borderMock.Object;
             Context contextRenderable = new Context(new Position(3, 2), new Bound(0, 0));
             //act
-            Position position = HStack.GetGlobalPosition(contextRenderable);
+            Position position = HStack.GetRelativePosition(contextRenderable);
             //assert
             Assert.Equal(3, position.y);
             Assert.Equal(2, position.x);
         }
         [Fact]
-        public void GetGlobalPosition_should_return_2_2_when_parent_at_1_1_and_border_1()
+        public void GetRelativePosition_should_return_2_2_when_parent_at_1_1_and_border_1()
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(1);
             HStack.Border = _borderMock.Object;
             Context contextRenderable = new Context(new Position(1, 1), new Bound(0, 0));
             //act
-            Position position = HStack.GetGlobalPosition(contextRenderable);
+            Position position = HStack.GetRelativePosition(contextRenderable);
             //assert
             Assert.Equal(1, position.y);
             Assert.Equal(1, position.x);
         }
         [Fact]
-        public void GetGlobalPosition_should_return_3_2_when_parent_at_2_1_and_border_1()
+        public void GetRelativePosition_should_return_3_2_when_parent_at_2_1_and_border_1()
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(1);
             HStack.Border = _borderMock.Object;
             Context contextRenderable = new Context(new Position(2, 1), new Bound(0, 0));
             //act
-            Position position = HStack.GetGlobalPosition(contextRenderable);
+            Position position = HStack.GetRelativePosition(contextRenderable);
             //assert
             Assert.Equal(2, position.y);
             Assert.Equal(1, position.x);
         }
         [Fact]
-        public void GetGlobalPosition_should_return_4_3_when_parent_at_2_1_and_border_2()
+        public void GetRelativePosition_should_return_4_3_when_parent_at_2_1_and_border_2()
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(2);
             HStack.Border = _borderMock.Object;
             Context contextRenderable = new Context(new Position(2, 1), new Bound(0, 0));
             //act
-            Position position = HStack.GetGlobalPosition(contextRenderable);
+            Position position = HStack.GetRelativePosition(contextRenderable);
             //assert
             Assert.Equal(2, position.y);
             Assert.Equal(1, position.x);

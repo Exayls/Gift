@@ -107,11 +107,6 @@ namespace Gift.UI
             return context.Position;
         }
 
-        public override Position GetGlobalPosition(Context context)
-        {
-            return context.Position;
-        }
-
         public void Resize(Bound bound)
         {
             this.Bound = bound;
