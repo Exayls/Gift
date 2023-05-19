@@ -9,6 +9,7 @@ using Gift.UI.MetaData;
 using Gift.UI.Render;
 using Moq;
 using System.Text;
+using Xunit;
 
 namespace TestGift.UI
 {

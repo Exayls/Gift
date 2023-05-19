@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Gift.KeyInput;
+using Xunit;
 
 namespace TestGift.UnitTest.KeyInput
 {

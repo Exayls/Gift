@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace TestGift.UnitTest.UI.Element
 {
@@ -61,6 +62,12 @@ namespace TestGift.UnitTest.UI.Element
             giftui.SelectedContainer = container.Object;
             Assert.Equal(container.Object, giftui.SelectedContainer);
             container.VerifySet(c => c.IsSelectedContainer = true);
+        }
+
+        [Fact]
+        public void isFixed_should_return_false()
+        {
+            Assert.False(giftui.IsFixed());
         }
     }
 }
