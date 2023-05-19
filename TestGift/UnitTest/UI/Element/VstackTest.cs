@@ -85,7 +85,7 @@ namespace TestGift.UnitTest.UI.Element
             _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
             vstack.Border = _borderMock.Object;
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplay(new(3, 4));
+            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(3, 4), '*');
             //assert
             _ScreenDisplayFactoryMock.Verify(s => s.Create(It.Is<Bound>(b => b.Width == 2 && b.Height == 1), It.IsAny<Color>(), It.IsAny<Color>(), '*'));
             _screenDisplayMock2.Verify(s => s.AddDisplay(_screenDisplayMock1.Object, It.Is<Position>(p => p.y == 1 && p.x == 1)));
@@ -100,7 +100,7 @@ namespace TestGift.UnitTest.UI.Element
             _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
             vstack.Border = _borderMock.Object;
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplay(new(5, 5));
+            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(5, 5), '*');
             //assert
             _ScreenDisplayFactoryMock.Verify(s => s.Create(It.Is<Bound>(b => b.Width == 3 && b.Height == 3), It.IsAny<Color>(), It.IsAny<Color>(), '*'));
             _screenDisplayMock2.Verify(s => s.AddDisplay(_screenDisplayMock1.Object, It.Is<Position>(p => p.y == 1 && p.x == 1)));
@@ -118,7 +118,7 @@ namespace TestGift.UnitTest.UI.Element
             _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
             vstack.Border = _borderMock.Object;
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplay(new(3, 6));
+            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(3, 6), '*');
             //assert
             _ScreenDisplayFactoryMock.Verify(s => s.Create(It.Is<Bound>(b => b.Width == 4 && b.Height == 1), It.IsAny<Color>(), It.IsAny<Color>(), '*'));
             _screenDisplayMock2.Verify(s => s.AddDisplay(_screenDisplayMock1.Object, It.Is<Position>(p => p.y == 1 && p.x == 1)));
@@ -138,7 +138,7 @@ namespace TestGift.UnitTest.UI.Element
             _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
             vstack.Border = _borderMock.Object;
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplay(new(5, 5));
+            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(5, 5), '*');
             //assert
             _ScreenDisplayFactoryMock.Verify(s => s.Create(It.Is<Bound>(b => b.Width == 1 && b.Height == 1), It.IsAny<Color>(), It.IsAny<Color>(), '*'));
             _screenDisplayMock2.Verify(s => s.AddDisplay(_screenDisplayMock1.Object, It.Is<Position>(p => p.y == 2 && p.x == 2)));
@@ -159,7 +159,7 @@ namespace TestGift.UnitTest.UI.Element
             _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
             vstack.Border = _borderMock.Object;
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplay(new(6, 7));
+            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(6, 7), '*');
             //assert
             _ScreenDisplayFactoryMock.Verify(s => s.Create(It.Is<Bound>(b => b.Width == 3 && b.Height == 2), It.IsAny<Color>(), It.IsAny<Color>(), '*'));
             _screenDisplayMock2.Verify(s => s.AddDisplay(_screenDisplayMock1.Object, It.Is<Position>(p => p.y == 2 && p.x == 2)));
@@ -181,7 +181,7 @@ namespace TestGift.UnitTest.UI.Element
             _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
             vstack.Border = _borderMock.Object;
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplay(new(7, 7));
+            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(7, 7), '*');
             //assert
             _ScreenDisplayFactoryMock.Verify(s => s.Create(It.Is<Bound>(b => b.Width == 1 && b.Height == 1), It.IsAny<Color>(), It.IsAny<Color>(), '*'));
             _screenDisplayMock2.Verify(s => s.AddDisplay(_screenDisplayMock1.Object, It.Is<Position>(p => p.y == 3 && p.x == 3)));

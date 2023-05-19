@@ -87,10 +87,5 @@ namespace Gift.UI.Element
         {
             return Border.GetDisplay(bound, FrontColor ?? configuration.DefaultFrontColor, BackColor ?? configuration.DefaultBackColor);
         }
-
-        public override IScreenDisplay GetDisplay(Bound bound)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

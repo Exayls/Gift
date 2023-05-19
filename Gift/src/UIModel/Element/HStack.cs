@@ -114,11 +114,6 @@ namespace Gift.UI.Element
                                 context.Position.x);
         }
 
-        public override IScreenDisplay GetDisplay(Bound bound)
-        {
-            return GetDisplayWithBorder(bound, GiftBase.FILLINGCHAR);
-        }
-
         public IScreenDisplay GetDisplayWithBorder(Bound bound, char fillingChar)
         {
             int thickness = Border.Thickness;

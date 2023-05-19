@@ -97,16 +97,6 @@ namespace Gift.UI
             return false;
         }
 
-        public IScreenDisplay GetDisplay()
-        {
-            return _screenDisplayFactory.Create(Bound);
-        }
-
-        public override IScreenDisplay GetDisplay(Bound bound)
-        {
-            return _screenDisplayFactory.Create(Bound);
-        }
-
         public override IScreenDisplay GetDisplayWithoutBorder(Bound bound, IConfiguration configuration)
         {
             return _screenDisplayFactory.Create(Bound, FrontColor ?? configuration.DefaultFrontColor, BackColor ?? configuration.DefaultBackColor, GiftBase.FILLINGCHAR);
