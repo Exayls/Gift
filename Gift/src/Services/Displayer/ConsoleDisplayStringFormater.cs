@@ -13,6 +13,10 @@ namespace Gift.src.Services.Displayer
             char[,] displayMap = screenDisplay.DisplayMap;
             Color[,] frontColorMap = screenDisplay.FrontColorMap;
             Color[,] backColorMap = screenDisplay.BackColorMap;
+            if (displayMap.GetLength(0)!= frontColorMap.GetLength(0) || displayMap.GetLength(0)!= backColorMap.GetLength(0) || displayMap.GetLength(1)!= frontColorMap.GetLength(1) || displayMap.GetLength(1)!= backColorMap.GetLength(1))
+            {
+                throw new RankException($"All maps are not of the same dimension in {screenDisplay}");
+            }
 
             Color? oldFrontColor = null;
             Color? oldBackColor = null;

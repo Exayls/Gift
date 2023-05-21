@@ -1,5 +1,6 @@
 ﻿using Gift.src.Services.Displayer;
 using Gift.UI.Display;
+using Gift.UI.MetaData;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -32,9 +33,26 @@ namespace TestGift.UnitTest.Displayer
         public void Should_return_string_based_on_screenDisplay()
         {
             Mock<IScreenDisplay> screenDisplay = new Mock<IScreenDisplay>();
+            screenDisplay.Setup(s => s.TotalBound).Returns(new Bound(2, 2));
+            screenDisplay.Setup(s => s.DisplayMap).Returns(new char[,]
+            {
+                { '1', '2' },
+                { '3', '4' }
+            });
+            screenDisplay.Setup(s => s.BackColorMap).Returns(new Color[,]
+            {
+                { Color.Magenta, Color.Black },
+                { Color.Red, Color.Cyan }
+            });
+            screenDisplay.Setup(s => s.FrontColorMap).Returns(new Color[,]
+            {
+                { Color.Blue, Color.Green },
+                { Color.White, Color.Yellow }
+            });
 
             string displayString = formater.CreateDislayString(screenDisplay.Object);
-            Assert.Equal("", displayString);
+            Console.WriteLine(displayString);
+            Assert.Equal("\u001b[34m\u001b[45m1\u001b[32m\u001b[40m2\u001b[37m\u001b[41m3\u001b[33m\u001b[46m4", displayString);
         }
     }
 }
