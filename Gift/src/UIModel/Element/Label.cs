@@ -55,9 +55,8 @@ namespace Gift.UI.Element
             int relative_x = Disposition.Position.x;
             int global_y = context_y + relative_y;
             int global_x = context_x + relative_x;
-            Position globalPosition = new Position(global_y, global_x);
-            //Position globalPosition = new Position(context_y, context_x);
-            return globalPosition;
+            Position position = new Position(global_y, global_x);
+            return position;
         }
 
         public override IScreenDisplay GetDisplayWithoutBorder(Bound bound, IConfiguration configuration)
