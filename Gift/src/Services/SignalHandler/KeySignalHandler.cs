@@ -7,7 +7,7 @@ using Gift.UI.DisplayManager;
 
 namespace Gift.SignalHandler
 {
-    internal class KeySignalHandler : ISignalHandler
+    internal class KeySignalHandler : IKeySignalHandler
     {
         private ISignalBus _bus;
         private IKeyMapper _keyMapper;
