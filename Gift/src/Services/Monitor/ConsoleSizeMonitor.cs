@@ -5,7 +5,7 @@ using System;
 
 namespace Gift.Monitor
 {
-    class ConsoleSizeMonitor : IConsoleSizeMonitor
+    public class ConsoleSizeMonitor : IConsoleSizeMonitor
     {
         private int ConsoleWidth;
         private int ConsoleHeight;
