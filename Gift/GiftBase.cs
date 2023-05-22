@@ -42,7 +42,7 @@ namespace Gift
 
         private readonly IMonitorManager _monitorManager;//truc a faire avec ça. le keyInputHandler est un monitor
         private readonly IKeyInputHandler _keyInputHandler;
-
+        private TaskCompletionSource<bool> _completionSource;
         public const char FILLINGCHAR = '*';
 
         public GiftBase(IRenderer renderer,
@@ -91,11 +91,19 @@ namespace Gift
             _displayManager.UpdateDisplay();
         }
 
+        public virtual async Task RunAsync()
+        {
+            await _completionSource.Task;
+        }
+
+        public void Stop()
+        {
+            _completionSource.SetResult(true);
+        }
         public virtual void Run()
         {
-            while (true)
-            {
-            }
+            _completionSource = new TaskCompletionSource<bool>();
+             RunAsync().Wait();
         }
 
     }
