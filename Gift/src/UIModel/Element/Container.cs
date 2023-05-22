@@ -65,8 +65,6 @@ namespace Gift.UI.Element
             SelectableElements = new List<IUIElement>();
         }
 
-        public abstract Context GetContextRenderable(IRenderable renderable, Context context);
-
         public abstract Context GetContextRelativeRenderable(IRenderable renderable, Context context);
 
         public override IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuration)

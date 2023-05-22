@@ -5,6 +5,7 @@ using Gift.UI.Element;
 using Gift.UI.MetaData;
 using Moq;
 using System.Text;
+using Xunit;
 
 namespace TestGift.UnitTest.UI.Element
 {
@@ -86,7 +87,7 @@ namespace TestGift.UnitTest.UI.Element
             _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
             HStack.Border = _borderMock.Object;
             //act
-            IScreenDisplay screenDisplay = HStack.GetDisplay(new(3, 4));
+            IScreenDisplay screenDisplay = HStack.GetDisplayWithBorder(new(3, 4), '*');
             //assert
             _ScreenDisplayFactoryMock.Verify(s => s.Create(It.Is<Bound>(b => b.Width == 2 && b.Height == 1), It.IsAny<Color>(), It.IsAny<Color>(), '*'));
             _screenDisplayMock2.Verify(s => s.AddDisplay(_screenDisplayMock1.Object, It.Is<Position>(p => p.y == 1 && p.x == 1)));
@@ -101,7 +102,7 @@ namespace TestGift.UnitTest.UI.Element
             _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
             HStack.Border = _borderMock.Object;
             //act
-            IScreenDisplay screenDisplay = HStack.GetDisplay(new(5, 5));
+            IScreenDisplay screenDisplay = HStack.GetDisplayWithBorder(new(5, 5), '*');
             //assert
             _ScreenDisplayFactoryMock.Verify(s => s.Create(It.Is<Bound>(b => b.Width == 3 && b.Height == 3), It.IsAny<Color>(), It.IsAny<Color>(), '*'));
             _screenDisplayMock2.Verify(s => s.AddDisplay(_screenDisplayMock1.Object, It.Is<Position>(p => p.y == 1 && p.x == 1)));
@@ -119,7 +120,7 @@ namespace TestGift.UnitTest.UI.Element
             _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
             HStack.Border = _borderMock.Object;
             //act
-            IScreenDisplay screenDisplay = HStack.GetDisplay(new(3, 6));
+            IScreenDisplay screenDisplay = HStack.GetDisplayWithBorder(new(3, 6), '*');
             //assert
             _ScreenDisplayFactoryMock.Verify(s => s.Create(It.Is<Bound>(b => b.Width == 4 && b.Height == 1), It.IsAny<Color>(), It.IsAny<Color>(), '*'));
             _screenDisplayMock2.Verify(s => s.AddDisplay(_screenDisplayMock1.Object, It.Is<Position>(p => p.y == 1 && p.x == 1)));
@@ -139,7 +140,7 @@ namespace TestGift.UnitTest.UI.Element
             _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
             HStack.Border = _borderMock.Object;
             //act
-            IScreenDisplay screenDisplay = HStack.GetDisplay(new(5, 5));
+            IScreenDisplay screenDisplay = HStack.GetDisplayWithBorder(new(5, 5), '*');
             //assert
             _ScreenDisplayFactoryMock.Verify(s => s.Create(It.Is<Bound>(b => b.Width == 1 && b.Height == 1), It.IsAny<Color>(), It.IsAny<Color>(), '*'));
             _screenDisplayMock2.Verify(s => s.AddDisplay(_screenDisplayMock1.Object, It.Is<Position>(p => p.y == 2 && p.x == 2)));
@@ -160,7 +161,7 @@ namespace TestGift.UnitTest.UI.Element
             _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
             HStack.Border = _borderMock.Object;
             //act
-            IScreenDisplay screenDisplay = HStack.GetDisplay(new(6, 7));
+            IScreenDisplay screenDisplay = HStack.GetDisplayWithBorder(new(6, 7), '*');
             //assert
             _ScreenDisplayFactoryMock.Verify(s => s.Create(It.Is<Bound>(b => b.Width == 3 && b.Height == 2), It.IsAny<Color>(), It.IsAny<Color>(), '*'));
             _screenDisplayMock2.Verify(s => s.AddDisplay(_screenDisplayMock1.Object, It.Is<Position>(p => p.y == 2 && p.x == 2)));
@@ -182,7 +183,7 @@ namespace TestGift.UnitTest.UI.Element
             _borderMock.Setup(b => b.GetDisplay(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock2.Object);
             HStack.Border = _borderMock.Object;
             //act
-            IScreenDisplay screenDisplay = HStack.GetDisplay(new(7, 7));
+            IScreenDisplay screenDisplay = HStack.GetDisplayWithBorder(new(7, 7), '*');
             //assert
             _ScreenDisplayFactoryMock.Verify(s => s.Create(It.Is<Bound>(b => b.Width == 1 && b.Height == 1), It.IsAny<Color>(), It.IsAny<Color>(), '*'));
             _screenDisplayMock2.Verify(s => s.AddDisplay(_screenDisplayMock1.Object, It.Is<Position>(p => p.y == 3 && p.x == 3)));
@@ -218,7 +219,7 @@ namespace TestGift.UnitTest.UI.Element
             HStack.Border = _borderMock.Object;
             Context contextRenderable = new Context(new Position(0, 0), new Bound(0, 0));
             //act
-            Context context = HStack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
+            Context context = HStack.GetContextRelativeRenderable(_uiElementMock1.Object, contextRenderable);
             //assert
             Assert.Equal(0, context.Position.y);
             Assert.Equal(0, context.Position.x);
@@ -232,10 +233,10 @@ namespace TestGift.UnitTest.UI.Element
             HStack.Border = _borderMock.Object;
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
-            Context context = HStack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
+            Context context = HStack.GetContextRelativeRenderable(_uiElementMock1.Object, contextRenderable);
             //assert
-            Assert.Equal(1, context.Position.y);
-            Assert.Equal(1, context.Position.x);
+            Assert.Equal(0, context.Position.y);
+            Assert.Equal(0, context.Position.x);
         }
         [Fact]
         public void GetContext_should_return_context_with_2_2_position_when_HStack_has_border_thickness2()
@@ -246,10 +247,10 @@ namespace TestGift.UnitTest.UI.Element
             HStack.Border = _borderMock.Object;
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
-            Context context = HStack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
+            Context context = HStack.GetContextRelativeRenderable(_uiElementMock1.Object, contextRenderable);
             //assert
-            Assert.Equal(2, context.Position.y);
-            Assert.Equal(2, context.Position.x);
+            Assert.Equal(0, context.Position.y);
+            Assert.Equal(0, context.Position.x);
         }
         [Fact]
         public void GetContext_should_return_context_with_3_2_position_when_HStack_has_border_thickness2_and_1_first_child_with_Width_of_1()
@@ -264,10 +265,10 @@ namespace TestGift.UnitTest.UI.Element
             HStack.AddChild(_uiElementMock1.Object);
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
-            Context context = HStack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
+            Context context = HStack.GetContextRelativeRenderable(_uiElementMock1.Object, contextRenderable);
             //assert
-            Assert.Equal(2, context.Position.y);
-            Assert.Equal(3, context.Position.x);
+            Assert.Equal(0, context.Position.y);
+            Assert.Equal(1, context.Position.x);
         }
         [Fact]
         public void GetContext_should_return_context_with_4_2_position_when_HStack_has_border_thickness2_and_1_first_child_with_Width_of_2()
@@ -282,10 +283,10 @@ namespace TestGift.UnitTest.UI.Element
             HStack.AddChild(_uiElementMock1.Object);
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
-            Context context = HStack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
+            Context context = HStack.GetContextRelativeRenderable(_uiElementMock1.Object, contextRenderable);
             //assert
-            Assert.Equal(2, context.Position.y);
-            Assert.Equal(4, context.Position.x);
+            Assert.Equal(0, context.Position.y);
+            Assert.Equal(2, context.Position.x);
         }
         [Fact]
         public void GetContext_should_return_context_with_1_1_bound_when_HStack_has_child_with_Width_of_1_and_width_1()
@@ -298,7 +299,7 @@ namespace TestGift.UnitTest.UI.Element
             HStack.AddChild(_uiElementMock1.Object);
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
-            Context context = HStack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
+            Context context = HStack.GetContextRelativeRenderable(_uiElementMock1.Object, contextRenderable);
             //assert
             Assert.Equal(1, context.Bounds.Width);
             Assert.Equal(1, context.Bounds.Height);
@@ -314,7 +315,7 @@ namespace TestGift.UnitTest.UI.Element
             HStack.AddChild(_uiElementMock1.Object);
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
-            Context context = HStack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
+            Context context = HStack.GetContextRelativeRenderable(_uiElementMock1.Object, contextRenderable);
             //assert
             Assert.Equal(1, context.Bounds.Width);
             Assert.Equal(5, context.Bounds.Height);
@@ -330,7 +331,7 @@ namespace TestGift.UnitTest.UI.Element
             HStack.AddChild(_uiElementMock1.Object);
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
-            Context context = HStack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
+            Context context = HStack.GetContextRelativeRenderable(_uiElementMock1.Object, contextRenderable);
             //assert
             Assert.Equal(1, context.Bounds.Width);
             Assert.Equal(3, context.Bounds.Height);
@@ -346,7 +347,7 @@ namespace TestGift.UnitTest.UI.Element
             HStack.AddChild(_uiElementMock1.Object);
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
-            Context context = HStack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
+            Context context = HStack.GetContextRelativeRenderable(_uiElementMock1.Object, contextRenderable);
             //assert
             Assert.Equal(2, context.Bounds.Width);
             Assert.Equal(1, context.Bounds.Height);
@@ -362,7 +363,7 @@ namespace TestGift.UnitTest.UI.Element
             HStack.AddChild(_uiElementMock1.Object);
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
-            Context context = HStack.GetContextRenderable(_uiElementMock1.Object, contextRenderable);
+            Context context = HStack.GetContextRelativeRenderable(_uiElementMock1.Object, contextRenderable);
             //assert
             Assert.Equal(3, context.Bounds.Width);
             Assert.Equal(1, context.Bounds.Height);
@@ -585,79 +586,79 @@ namespace TestGift.UnitTest.UI.Element
         }
         //GetGlbalPosition Tests
         [Fact]
-        public void GetGlobalPosition_should_return_0_0_when_parent_at_0_0_and_no_border()
+        public void GetRelativePosition_should_return_0_0_when_parent_at_0_0_and_no_border()
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(0);
             HStack.Border = _borderMock.Object;
             Context contextRenderable = new Context(new Position(0, 0), new Bound(0, 0));
             //act
-            Position position = HStack.GetGlobalPosition(contextRenderable);
+            Position position = HStack.GetRelativePosition(contextRenderable);
             //assert
             Assert.Equal(0, position.y);
             Assert.Equal(0, position.x);
         }
         [Fact]
-        public void GetGlobalPosition_should_return_2_1_when_parent_at_2_1_and_no_border()
+        public void GetRelativePosition_should_return_2_1_when_parent_at_2_1_and_no_border()
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(0);
             HStack.Border = _borderMock.Object;
             Context contextRenderable = new Context(new Position(2, 1), new Bound(0, 0));
             //act
-            Position position = HStack.GetGlobalPosition(contextRenderable);
+            Position position = HStack.GetRelativePosition(contextRenderable);
             //assert
             Assert.Equal(2, position.y);
             Assert.Equal(1, position.x);
         }
         [Fact]
-        public void GetGlobalPosition_should_return_3_2_when_parent_at_3_2_and_no_border()
+        public void GetRelativePosition_should_return_3_2_when_parent_at_3_2_and_no_border()
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(0);
             HStack.Border = _borderMock.Object;
             Context contextRenderable = new Context(new Position(3, 2), new Bound(0, 0));
             //act
-            Position position = HStack.GetGlobalPosition(contextRenderable);
+            Position position = HStack.GetRelativePosition(contextRenderable);
             //assert
             Assert.Equal(3, position.y);
             Assert.Equal(2, position.x);
         }
         [Fact]
-        public void GetGlobalPosition_should_return_2_2_when_parent_at_1_1_and_border_1()
+        public void GetRelativePosition_should_return_2_2_when_parent_at_1_1_and_border_1()
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(1);
             HStack.Border = _borderMock.Object;
             Context contextRenderable = new Context(new Position(1, 1), new Bound(0, 0));
             //act
-            Position position = HStack.GetGlobalPosition(contextRenderable);
+            Position position = HStack.GetRelativePosition(contextRenderable);
             //assert
             Assert.Equal(1, position.y);
             Assert.Equal(1, position.x);
         }
         [Fact]
-        public void GetGlobalPosition_should_return_3_2_when_parent_at_2_1_and_border_1()
+        public void GetRelativePosition_should_return_3_2_when_parent_at_2_1_and_border_1()
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(1);
             HStack.Border = _borderMock.Object;
             Context contextRenderable = new Context(new Position(2, 1), new Bound(0, 0));
             //act
-            Position position = HStack.GetGlobalPosition(contextRenderable);
+            Position position = HStack.GetRelativePosition(contextRenderable);
             //assert
             Assert.Equal(2, position.y);
             Assert.Equal(1, position.x);
         }
         [Fact]
-        public void GetGlobalPosition_should_return_4_3_when_parent_at_2_1_and_border_2()
+        public void GetRelativePosition_should_return_4_3_when_parent_at_2_1_and_border_2()
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(2);
             HStack.Border = _borderMock.Object;
             Context contextRenderable = new Context(new Position(2, 1), new Bound(0, 0));
             //act
-            Position position = HStack.GetGlobalPosition(contextRenderable);
+            Position position = HStack.GetRelativePosition(contextRenderable);
             //assert
             Assert.Equal(2, position.y);
             Assert.Equal(1, position.x);

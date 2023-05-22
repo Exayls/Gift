@@ -22,14 +22,14 @@ namespace TestGift.UnitTest.UI
         private MockRepository _mockFactory;
         private Renderer renderer;
 
-        public RendererTest()
-        {
-            _confMock = new Mock<IConfiguration>();
-            _giftuiMock = new Mock<IGiftUI>();
-            _labelMock = new Mock<IUIElement>();
-            _mockFactory = new MockRepository(MockBehavior.Default);
-            renderer = new Renderer(_confMock.Object);
-        }
+        //public RendererTest()
+        //{
+        //    _confMock = new Mock<IConfiguration>();
+        //    _giftuiMock = new Mock<IGiftUI>();
+        //    _labelMock = new Mock<IUIElement>();
+        //    _mockFactory = new MockRepository(MockBehavior.Default);
+        //    renderer = new Renderer(_confMock.Object);
+        //}
 
         //[Fact]
         //public void GetRenderedBuffer_should_return_empty_text_when_giftui_is_empty()

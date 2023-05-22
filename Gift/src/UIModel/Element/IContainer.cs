@@ -12,7 +12,6 @@ namespace Gift.UI.Element
         bool IsSelectedContainer { get; set; }
 
         Context GetContextRelativeRenderable(IRenderable renderable, Context context);
-        Context GetContextRenderable(IRenderable renderable, Context context);
         void NextElement();
         void PreviousElement();
     }

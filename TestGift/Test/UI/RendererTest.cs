@@ -7,6 +7,7 @@ using Gift.UI.Display;
 using Gift.UI.Element;
 using Gift.UI.MetaData;
 using Gift.UI.Render;
+using Xunit;
 
 namespace TestGift.Test.UI
 {

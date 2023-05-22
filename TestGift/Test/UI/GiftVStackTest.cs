@@ -9,6 +9,7 @@ using Gift.UI.MetaData;
 using Gift.UI.Render;
 using Moq;
 using System.Text;
+using Xunit;
 
 namespace TestGift.UI
 {
@@ -356,22 +357,6 @@ namespace TestGift.UI
         }
 
         [Fact]
-        public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border2()
-        {
-            //arrange
-            var vstack = new VStackBuilder().
-                WithBorder(new SimpleBorder(1, '_')).
-                Build();
-            //act
-            IScreenDisplay screenDisplay = vstack.GetDisplay(new(3, 4));
-            //assert
-            const string expected = "____\n" +
-                                    "_**_\n" +
-                                    "____";
-            Assert.Equal(expected, screenDisplay.DisplayString.ToString());
-        }
-
-        [Fact]
         public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border3()
         {
             //arrange
@@ -379,7 +364,7 @@ namespace TestGift.UI
                 WithBorder(new SimpleBorder(1, 'i')).
                 Build();
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplay(new(3, 4));
+            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(3, 4), '*');
             //assert
             const string expected = "iiii\n" +
                                     "i**i\n" +
@@ -395,7 +380,7 @@ namespace TestGift.UI
                 WithBorder(new SimpleBorder(1, '-')).
                 Build();
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplay(new(5, 5));
+            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(5, 5), '*');
             //assert
             const string expected = "-----\n" +
                                     "-***-\n" +
@@ -413,7 +398,7 @@ namespace TestGift.UI
                 WithBorder(new SimpleBorder(1, '-')).
                 Build();
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplay(new(3, 6));
+            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(3, 6), '*');
             //assert
             const string expected = "------\n" +
                                     "-****-\n" +
@@ -429,7 +414,7 @@ namespace TestGift.UI
                 WithBorder(new SimpleBorder(2, '-')).
                 Build();
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplay(new(5, 5));
+            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(5, 5), '*');
             //assert
             const string expected = "-----\n" +
                                     "-----\n" +
@@ -447,7 +432,7 @@ namespace TestGift.UI
                 WithBorder(new SimpleBorder(2, '-')).
                 Build();
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplay(new(6, 7));
+            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(6, 7), '*');
             //assert
             const string expected = "-------\n" +
                                     "-------\n" +
@@ -466,7 +451,7 @@ namespace TestGift.UI
                 WithBorder(new SimpleBorder(3, '-')).
                 Build();
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplay(new(7, 7));
+            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(7, 7), '*');
             //assert
             const string expected = "-------\n" +
                                     "-------\n" +
@@ -486,7 +471,7 @@ namespace TestGift.UI
                 WithBorder(new SimpleBorder(3, '-')).
                 Build();
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplay(new(7, 7));
+            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(7, 7), '*');
             //assert
             const string expected = "-------\n" +
                                     "-------\n" +
