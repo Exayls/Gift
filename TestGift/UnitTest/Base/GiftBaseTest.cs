@@ -12,6 +12,7 @@ using Gift.SignalHandler.KeyInput;
 using Gift.Bus;
 using Gift.Monitor;
 using Gift.UI.Displayer;
+using Xunit;
 
 namespace TestGift.LifeCycle
 {

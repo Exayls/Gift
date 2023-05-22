@@ -32,24 +32,40 @@ namespace Gift.UI
             {
                 return _selectedContainer;
             }
+
             set
             {
-                _selectedContainer = value;
-                foreach (IContainer container in SelectableContainers)
+                if (value == null)
                 {
-                    container.IsSelectedContainer = false;
-                    foreach (IUIElement element in container.SelectableElements)
-                    {
-                        element.IsInSelectedContainer = false;
-                    }
+                    throw new ArgumentNullException("value");
                 }
-                if (SelectedContainer != null)
+                if (!SelectableContainers.Contains(value))
                 {
-                    SelectedContainer.IsSelectedContainer = true;
-                    foreach (IUIElement element in SelectedContainer.SelectableElements)
-                    {
-                        element.IsInSelectedContainer = true;
-                    }
+                    throw new InvalidOperationException("trying to select a container outside of the selectable range");
+                }
+                RemoveOldSelectedContainer();
+                SetNewSelectedContainer(value);
+            }
+        }
+
+        private void SetNewSelectedContainer(IContainer selected)
+        {
+            _selectedContainer = selected;
+            selected.IsSelectedContainer = true;
+            foreach (IUIElement element in selected.SelectableElements)
+            {
+                element.IsInSelectedContainer = true;
+            }
+        }
+
+        private void RemoveOldSelectedContainer()
+        {
+            foreach (IContainer container in SelectableContainers)
+            {
+                container.IsSelectedContainer = false;
+                foreach (IUIElement element in container.SelectableElements)
+                {
+                    element.IsInSelectedContainer = false;
                 }
             }
         }
@@ -76,31 +92,9 @@ namespace Gift.UI
             return context;
         }
 
-        public override Context GetContextRenderable(IRenderable renderable, Context context)
-        {
-            if (Childs.Contains(renderable))
-            {
-                return context;
-            }
-            else
-            {
-                throw new Exception($"{renderable} has no context in {this}");
-            }
-        }
-
         public override bool IsFixed()
         {
             return false;
-        }
-
-        public IScreenDisplay GetDisplay()
-        {
-            return _screenDisplayFactory.Create(Bound);
-        }
-
-        public override IScreenDisplay GetDisplay(Bound bound)
-        {
-            return _screenDisplayFactory.Create(Bound);
         }
 
         public override IScreenDisplay GetDisplayWithoutBorder(Bound bound, IConfiguration configuration)
@@ -109,11 +103,6 @@ namespace Gift.UI
         }
 
         public override Position GetRelativePosition(Context context)
-        {
-            return context.Position;
-        }
-
-        public override Position GetGlobalPosition(Context context)
         {
             return context.Position;
         }

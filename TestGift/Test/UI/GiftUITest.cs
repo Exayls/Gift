@@ -6,6 +6,7 @@ using Gift.UI.Render;
 using System.Text;
 using Gift.UI.Render;
 using Gift.UI.Configuration;
+using Xunit;
 
 namespace TestGift.UI
 {

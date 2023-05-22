@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Gift.UI.Render;
 using Gift.UI.Configuration;
+using Xunit;
 
 namespace TestGift.UI
 {

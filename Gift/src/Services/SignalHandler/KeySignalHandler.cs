@@ -25,11 +25,11 @@ namespace Gift.SignalHandler
             if (signal.EventArgs is KeyEventArgs)
             {
                 KeyEventArgs eventsArgs = (KeyEventArgs)signal.EventArgs;
-                PushEveryConfigSignal(eventsArgs);
+                PushAllSignalMappedToKey(eventsArgs);
             }
         }
 
-        private void PushEveryConfigSignal(KeyEventArgs eventsArgs)
+        private void PushAllSignalMappedToKey(KeyEventArgs eventsArgs)
         {
             foreach (IKeyMapping mapping in _mappings)
             {

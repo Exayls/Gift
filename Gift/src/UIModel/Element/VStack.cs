@@ -61,25 +61,6 @@ namespace Gift.UI.Element
             Childs.Add(uIElement);
         }
 
-
-        public override Context GetContextRenderable(IRenderable renderable, Context context)
-        {
-            int ChildContextPosition = GetHeightRenderable(renderable);
-            if (renderable.IsFixed())
-            {
-                return new Context(
-                    context.Position,
-                    new Bound(0, 0));
-            }
-            else
-            {
-                int thickness = Border.Thickness;
-                return new Context(
-                    new Position(thickness + ChildContextPosition + context.Position.y
-                               , thickness + context.Position.x),
-                    new Bound(renderable.Height, renderable.Width));
-            }
-        }
         public override Context GetContextRelativeRenderable(IRenderable renderable, Context context)
         {
             int ChildContextPosition = GetHeightRenderable(renderable);
@@ -125,16 +106,6 @@ namespace Gift.UI.Element
         {
             return new Position(context.Position.y,
                                 context.Position.x);
-        }
-        public override Position GetGlobalPosition(Context context)
-        {
-            return new Position(context.Position.y,
-                                context.Position.x);
-        }
-
-        public override IScreenDisplay GetDisplay(Bound bound)
-        {
-            return GetDisplayWithBorder(bound, GiftBase.FILLINGCHAR);
         }
 
         public IScreenDisplay GetDisplayWithBorder(Bound bound, char fillingChar)
