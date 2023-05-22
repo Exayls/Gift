@@ -28,19 +28,33 @@ namespace Gift
                 return _uiProvider.Ui;
             }
         }
+
+        private readonly ISignalBus _signalBus;
+
         private readonly IRenderer _renderer;
         private readonly IDisplayer _displayer;
+
         private readonly IGiftUiProvider _uiProvider;
-        private ISignalHandler? _uiSignalHandler;
-        private IKeySignalHandler _keySignalHandler;
-        private readonly IMonitorManager _monitorManager;
-        private readonly ISignalBus _signalBus;
+        private readonly IDisplayManager _displayManager;
+
+        private readonly IUISignalHandler _uiSignalHandler;
+        private readonly IKeySignalHandler _keySignalHandler;
+
+        private readonly IMonitorManager _monitorManager;//truc a faire avec ça. le keyInputHandler est un monitor
         private readonly IKeyInputHandler _keyInputHandler;
-        private IDisplayManager? _displayManager;
+
         public const char FILLINGCHAR = '*';
 
-
-        public GiftBase(IRenderer renderer, IDisplayer displayer, IMonitorManager monitorManager, ISignalBus queue, IKeyInputHandler keyInputHandler, IConsoleSizeMonitor consoleSizeMonitor, IKeySignalHandler keySignalHandler, IGiftUiProvider uiProvider, IUISignalHandler uISignalHandler)
+        public GiftBase(IRenderer renderer,
+                        IDisplayer displayer,
+                        IMonitorManager monitorManager,
+                        ISignalBus queue,
+                        IKeyInputHandler keyInputHandler,
+                        IConsoleSizeMonitor consoleSizeMonitor,
+                        IKeySignalHandler keySignalHandler,
+                        IGiftUiProvider uiProvider,
+                        IUISignalHandler uISignalHandler,
+                        IDisplayManager displayManager)
         {
             _renderer = renderer;
             _displayer = displayer;
@@ -52,7 +66,7 @@ namespace Gift
 
             _signalBus.Subscribe(_keySignalHandler);
 
-            _displayManager = new DisplayManager(_displayer, _renderer, _uiProvider);
+            _displayManager = displayManager;
             _uiSignalHandler = uISignalHandler;
 
             _signalBus.Subscribe(_uiSignalHandler);
@@ -62,7 +76,6 @@ namespace Gift
 
             _keyInputHandler.StartCheckUserInput();
 
-            _displayManager.UpdateDisplay();
         }
 
         public virtual void Initialize(IGiftUI? ui = null)
@@ -75,7 +88,7 @@ namespace Gift
         }
         private void init()
         {
-
+            _displayManager.UpdateDisplay();
         }
 
         public virtual void Run()
