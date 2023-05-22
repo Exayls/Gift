@@ -2,5 +2,6 @@
     "t": "Ui.NextElementInSelectedContainer",
     "s": "Ui.PreviousElementInSelectedContainer",
     "r": "Ui.NextContainer",
-    "c": "Ui.PreviousContainer"
+    "c": "Ui.PreviousContainer",
+    "q": "Global.Quit"
 }
