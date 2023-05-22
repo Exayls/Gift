@@ -101,5 +101,19 @@ namespace TestGift.UnitTest.Event
             _mockDisplayManger.Verify(dm => dm.Ui.PreviousContainer());
             _mockDisplayManger.Verify(dm => dm.UpdateDisplay());
         }
+
+        [Fact]
+        public void When_sending_random_signal_should_do_nothing()
+        {
+            //Arrange
+            _mockDisplayManger.Setup(dm => dm.Ui).Returns(_mockUi.Object);
+            _mockSignal.Setup(s => s.Name ).Returns("ieuteieIEAsr");
+            _mockSignal.Setup(s => s.EventArgs ).Returns(EventArgs.Empty);
+            //Act
+            signalHandler.HandleSignal(_mockSignal.Object);
+            //Assert
+            _mockDisplayManger.Verify(dm => dm.Ui.PreviousContainer(), Times.Never);
+            _mockDisplayManger.Verify(dm => dm.UpdateDisplay(), Times.Never);
+        }
     }
 }

@@ -65,9 +65,72 @@ namespace TestGift.UnitTest.UI.Element
         }
 
         [Fact]
-        public void isFixed_should_return_false()
+        public void IsFixed_should_return_false()
         {
             Assert.False(giftui.IsFixed());
+        }
+
+        [Fact]
+        public void NextContainer_should_do_nothing_if_selectedContainer_null()
+        {
+            //Act
+            giftui.NextContainer();
+            //Assert
+            Assert.Null(giftui.SelectedContainer);
+        }
+
+        [Fact]
+        public void NextContainer_should_not_change_container_if_selectedContainer_is_only_selectable()
+        {
+            //Arrange
+            Mock<IContainer> container = new Mock<IContainer>();
+            container.Setup(c => c.SelectableElements).Returns(new List<IUIElement>());
+            giftui.SelectableContainers.Add(container.Object);
+            giftui.SelectedContainer = container.Object;
+            //Act
+            giftui.NextContainer();
+            //Assert
+            Assert.Equal(container.Object, giftui.SelectedContainer);
+        }
+
+        [Fact]
+        public void NextContainer_should_not_change_container_if_selectedContainer_is_not_only_selectable()
+        {
+            //Arrange
+            Mock<IContainer> container1 = new Mock<IContainer>();
+            container1.Setup(c => c.SelectableElements).Returns(new List<IUIElement>());
+
+            Mock<IContainer> container2 = new Mock<IContainer>();
+            container2.Setup(c => c.SelectableElements).Returns(new List<IUIElement>());
+
+            giftui.SelectableContainers.Add(container1.Object);
+            giftui.SelectableContainers.Add(container2.Object);
+
+            giftui.SelectedContainer = container1.Object;
+            //Act
+            giftui.NextContainer();
+            //Assert
+            Assert.Equal(container2.Object, giftui.SelectedContainer);
+        }
+
+        [Fact]
+        public void PreviousContainer_should_not_change_container_if_selectedContainer_is_not_only_selectable()
+        {
+            //Arrange
+            Mock<IContainer> container1 = new Mock<IContainer>();
+            container1.Setup(c => c.SelectableElements).Returns(new List<IUIElement>());
+
+            Mock<IContainer> container2 = new Mock<IContainer>();
+            container2.Setup(c => c.SelectableElements).Returns(new List<IUIElement>());
+
+            giftui.SelectableContainers.Add(container1.Object);
+            giftui.SelectableContainers.Add(container2.Object);
+
+            giftui.SelectedContainer = container1.Object;
+            //Act
+            giftui.PreviousContainer();
+            //Assert
+            Assert.Equal(container2.Object, giftui.SelectedContainer);
         }
     }
 }
