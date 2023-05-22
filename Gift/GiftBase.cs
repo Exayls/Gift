@@ -9,6 +9,7 @@ using Gift.Monitor;
 using Gift.SignalHandler;
 using Gift.SignalHandler.KeyInput;
 using Gift.src.Services.Monitor;
+using Gift.src.UIModel;
 using Gift.UI;
 using Gift.UI.Display;
 using Gift.UI.Displayer;
@@ -20,48 +21,60 @@ namespace Gift
 {
     public class GiftBase
     {
-        public GiftUI? Ui { get; set; }
+        public IGiftUI Ui
+        {
+            get
+            {
+                return _uiProvider.Ui;
+            }
+        }
         private readonly IRenderer _renderer;
         private readonly IDisplayer _displayer;
+        private readonly IGiftUiProvider _uiProvider;
         private ISignalHandler? _uiSignalHandler;
-        private ISignalHandler? _keySignalHandler;
+        private IKeySignalHandler _keySignalHandler;
         private readonly IMonitorManager _monitorManager;
         private readonly ISignalBus _signalBus;
-        private IKeyInputHandler _keyInputHandler;
+        private readonly IKeyInputHandler _keyInputHandler;
         private IDisplayManager? _displayManager;
-        private IKeyMapper _keyMapper;
         public const char FILLINGCHAR = '*';
 
 
-        public GiftBase(IRenderer renderer, IDisplayer displayer, IMonitorManager monitorManager, ISignalBus queue, IKeyMapper keyMapper, IKeyInputHandler keyInputHandler, IConsoleSizeMonitor consoleSizeMonitor)
+        public GiftBase(IRenderer renderer, IDisplayer displayer, IMonitorManager monitorManager, ISignalBus queue, IKeyInputHandler keyInputHandler, IConsoleSizeMonitor consoleSizeMonitor, IKeySignalHandler keySignalHandler, IGiftUiProvider uiProvider, IUISignalHandler uISignalHandler)
         {
             _renderer = renderer;
             _displayer = displayer;
-            _monitorManager = monitorManager;
+            _uiProvider = uiProvider;
+
             _signalBus = queue;
-            _keyMapper =keyMapper;
             _keyInputHandler = keyInputHandler;
-            _monitorManager.Add(consoleSizeMonitor);
-        }
+            _keySignalHandler = keySignalHandler;
 
-        public virtual void Initialize(GiftUI? ui = null)
-        {
-            this.Ui = ui ?? new GiftUI();
-            init();
-        }
-        private void init()
-        {
-            _displayManager = new DisplayManager(_displayer, _renderer, Ui);
+            _signalBus.Subscribe(_keySignalHandler);
 
-            _uiSignalHandler =  new UISignalHandler(_displayManager);
-            _keySignalHandler =  new KeySignalHandler(_signalBus, _keyMapper);
+            _displayManager = new DisplayManager(_displayer, _renderer, _uiProvider);
+            _uiSignalHandler = uISignalHandler;
 
             _signalBus.Subscribe(_uiSignalHandler);
-            _signalBus.Subscribe(_keySignalHandler);
+
+            _monitorManager = monitorManager;
+            _monitorManager.Add(consoleSizeMonitor);
 
             _keyInputHandler.StartCheckUserInput();
 
             _displayManager.UpdateDisplay();
+        }
+
+        public virtual void Initialize(IGiftUI? ui = null)
+        {
+            if (ui != null)
+            {
+                this._uiProvider.Ui = ui;
+            }
+            init();
+        }
+        private void init()
+        {
 
         }
 

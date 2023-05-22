@@ -13,6 +13,10 @@ using Gift.Bus;
 using Gift.Monitor;
 using Gift.UI.Displayer;
 using Xunit;
+using Gift.SignalHandler;
+using Gift.src.UIModel;
+using Gift.src.Extensions;
+using Gift.UI;
 
 namespace TestGift.LifeCycle
 {
@@ -25,6 +29,9 @@ namespace TestGift.LifeCycle
         private Mock<IKeyMapper> keyMapperMock;
         private Mock<IKeyInputHandler> keyInputHandlerMock;
         private Mock<IConsoleSizeMonitor> consoleSizeMonitorMock;
+        private Mock<IKeySignalHandler> keySignalHandlerMock;
+        private Mock<IGiftUiProvider> giftUiProviderMock;
+        private Mock<IUISignalHandler> uiSignalHandlerMock;
 
         public GiftBaseTest()
         {
@@ -35,39 +42,49 @@ namespace TestGift.LifeCycle
             keyMapperMock = new Mock<IKeyMapper>();
             keyInputHandlerMock = new Mock<IKeyInputHandler>();
             consoleSizeMonitorMock = new Mock<IConsoleSizeMonitor>();
+            keySignalHandlerMock = new Mock<IKeySignalHandler>();
+            giftUiProviderMock = new Mock<IGiftUiProvider>();
+            uiSignalHandlerMock = new Mock<IUISignalHandler>();
         }
 
         [Fact]
-        public void When_not_initialized_should_not_set_ui()
+        public void should_return_provider_ui()
         {
+            Mock<IGiftUI> uiMock = new Mock<IGiftUI>();
+            giftUiProviderMock.Setup(p => p.Ui).Returns(uiMock.Object);
+
             var giftBase = new GiftBase(
                            rendererMock.Object,
                            displayerMock.Object,
                            monitorManagerMock.Object,
                            queueMock.Object,
-                           keyMapperMock.Object,
                            keyInputHandlerMock.Object,
-                           consoleSizeMonitorMock.Object
-                       );
+                           consoleSizeMonitorMock.Object,
+                           keySignalHandlerMock.Object,
+                           giftUiProviderMock.Object,
+                           uiSignalHandlerMock.Object);
 
-            Assert.True(giftBase.Ui == null);
+            Assert.Equal(uiMock.Object, giftBase.Ui);
         }
 
         [Fact]
         public void When_initialized_should_set_ui()
         {
+            Mock<IGiftUI> uiMock = new Mock<IGiftUI>();
+
             var giftBase = new GiftBase(
                            rendererMock.Object,
                            displayerMock.Object,
                            monitorManagerMock.Object,
                            queueMock.Object,
-                           keyMapperMock.Object,
                            keyInputHandlerMock.Object,
-                           consoleSizeMonitorMock.Object
-                       );
-            giftBase.Initialize();
+                           consoleSizeMonitorMock.Object,
+                           keySignalHandlerMock.Object,
+                           giftUiProviderMock.Object,
+                           uiSignalHandlerMock.Object);
+            giftBase.Initialize(uiMock.Object);
 
-            Assert.True(giftBase.Ui != null);
+            giftUiProviderMock.VerifySet(p => p.Ui = uiMock.Object);
         }
     }
 }

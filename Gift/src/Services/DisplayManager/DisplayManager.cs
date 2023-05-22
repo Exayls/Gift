@@ -1,4 +1,5 @@
-﻿using Gift.UI.Display;
+﻿using Gift.src.UIModel;
+using Gift.UI.Display;
 using Gift.UI.Displayer;
 using Gift.UI.MetaData;
 using Gift.UI.Render;
@@ -13,13 +14,13 @@ namespace Gift.UI.DisplayManager
     public class DisplayManager : IDisplayManager
     {
         private IDisplayer _displayer;
-        public IGiftUI Ui { get; private set; }
+        private IGiftUiProvider _uiProvider;
         private IRenderer _renderer;
 
-        public DisplayManager(IDisplayer displayer, IRenderer renderer, IGiftUI ui)
+        public DisplayManager(IDisplayer displayer, IRenderer renderer, IGiftUiProvider ui)
         {
             _displayer = displayer;
-            Ui = ui;
+            _uiProvider = ui;
             _renderer = renderer;
         }
         public void UpdateDisplay()
@@ -30,11 +31,7 @@ namespace Gift.UI.DisplayManager
 
         public IScreenDisplay CreateView()
         {
-            IScreenDisplay View = new ScreenDisplay(new Bound(0, 0));
-            if (Ui != null)
-            {
-                View = _renderer.GetRenderDisplay(Ui);
-            }
+            IScreenDisplay View = _renderer.GetRenderDisplay(_uiProvider.Ui);
             return View;
         }
         private void PrintFrame(IScreenDisplay? View)
@@ -43,6 +40,31 @@ namespace Gift.UI.DisplayManager
             {
                 _displayer.display(View);
             }
+        }
+
+        public void NextContainer()
+        {
+            _uiProvider.Ui.NextContainer();
+        }
+
+        public void PreviousContainer()
+        {
+            _uiProvider.Ui.PreviousContainer();
+        }
+
+        public void NextElementInSelectedContainer()
+        {
+            _uiProvider.Ui.NextElementInSelectedContainer();
+        }
+
+        public void PreviousElementInSelectedContainer()
+        {
+            _uiProvider.Ui.PreviousElementInSelectedContainer();
+        }
+
+        public void Resize(Bound bound)
+        {
+            _uiProvider.Ui.Resize(bound);
         }
     }
 }
