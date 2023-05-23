@@ -18,6 +18,7 @@ using Gift.src.Services.SignalHandler.Key;
 using Gift.src.Services.SignalHandler.Ui;
 using Gift.src.Services.Monitor.ConsoleMonitors;
 using Gift.src.Services.SignalHandler.Bus;
+using Gift.src.Services.SignalHandler.Global;
 
 namespace TestGift.LifeCycle
 {
@@ -33,6 +34,7 @@ namespace TestGift.LifeCycle
         private Mock<IKeySignalHandler> keySignalHandlerMock;
         private Mock<IGiftUiProvider> giftUiProviderMock;
         private Mock<IUISignalHandler> uiSignalHandlerMock;
+        private Mock<IGlobalSignalHandler> globalSignalHandlerMock;
         private Mock<IDisplayManager> displayManagerMock;
 
         public GiftBaseTest()
@@ -47,6 +49,7 @@ namespace TestGift.LifeCycle
             keySignalHandlerMock = new Mock<IKeySignalHandler>();
             giftUiProviderMock = new Mock<IGiftUiProvider>();
             uiSignalHandlerMock = new Mock<IUISignalHandler>();
+            globalSignalHandlerMock = new Mock<IGlobalSignalHandler>();
             displayManagerMock = new Mock<IDisplayManager>();
         }
 
@@ -66,6 +69,7 @@ namespace TestGift.LifeCycle
                            keySignalHandlerMock.Object,
                            giftUiProviderMock.Object,
                            uiSignalHandlerMock.Object,
+                           globalSignalHandlerMock.Object,
                            displayManagerMock.Object);
 
             Assert.Equal(uiMock.Object, giftBase.Ui);
@@ -86,6 +90,7 @@ namespace TestGift.LifeCycle
                            keySignalHandlerMock.Object,
                            giftUiProviderMock.Object,
                            uiSignalHandlerMock.Object,
+                           globalSignalHandlerMock.Object,
                            displayManagerMock.Object);
             giftBase.Initialize(uiMock.Object);
 

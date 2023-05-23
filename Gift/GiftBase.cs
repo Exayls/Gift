@@ -7,6 +7,7 @@ using Gift.KeyInput;
 using Gift.Monitor;
 using Gift.src.Services.Monitor.ConsoleMonitors;
 using Gift.src.Services.SignalHandler.Bus;
+using Gift.src.Services.SignalHandler.Global;
 using Gift.src.Services.SignalHandler.Key;
 using Gift.src.Services.SignalHandler.Ui;
 using Gift.src.UIModel;
@@ -39,10 +40,10 @@ namespace Gift
 
         private readonly IUISignalHandler _uiSignalHandler;
         private readonly IKeySignalHandler _keySignalHandler;
+        private readonly IGlobalSignalHandler _globalSignalHandler;
 
         private readonly IMonitorManager _monitorManager;//truc a faire avec ça. le keyInputHandler est un monitor
         private readonly IKeyInputHandler _keyInputHandler;
-        private TaskCompletionSource<bool> _completionSource;
         public const char FILLINGCHAR = '*';
 
         public GiftBase(IRenderer renderer,
@@ -54,29 +55,31 @@ namespace Gift
                         IKeySignalHandler keySignalHandler,
                         IGiftUiProvider uiProvider,
                         IUISignalHandler uISignalHandler,
+                        IGlobalSignalHandler globalSignalHandler,
                         IDisplayManager displayManager)
         {
             _renderer = renderer;
             _displayer = displayer;
             _uiProvider = uiProvider;
+            _displayManager = displayManager;
 
             _signalBus = queue;
             _keyInputHandler = keyInputHandler;
             _keySignalHandler = keySignalHandler;
-
             _signalBus.Subscribe(_keySignalHandler);
 
-            _displayManager = displayManager;
-            _uiSignalHandler = uISignalHandler;
 
+            _uiSignalHandler = uISignalHandler;
             _signalBus.Subscribe(_uiSignalHandler);
+
+            _globalSignalHandler = globalSignalHandler;
+            _signalBus.Subscribe(_globalSignalHandler);
 
             _monitorManager = monitorManager;
             _monitorManager.Add(consoleSizeMonitor);
 
             _keyInputHandler.StartCheckUserInput();
 
-            _completionSource = new TaskCompletionSource<bool>();
 
         }
 
@@ -95,13 +98,9 @@ namespace Gift
 
         public virtual async Task RunAsync()
         {
-            await _completionSource.Task;
+            await _globalSignalHandler.Completion.Task;
         }
 
-        public void Stop()
-        {
-            _completionSource.SetResult(true);
-        }
         public virtual void Run()
         {
              RunAsync().Wait();
