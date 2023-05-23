@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Gift.Bus;
 using Gift.KeyInput;
 using Gift.Monitor;
-using Gift.SignalHandler;
-using Gift.SignalHandler.KeyInput;
-using Gift.src.Services.Monitor;
+using Gift.src.Services.Monitor.ConsoleMonitors;
+using Gift.src.Services.SignalHandler.Bus;
+using Gift.src.Services.SignalHandler.Global;
+using Gift.src.Services.SignalHandler.Key;
+using Gift.src.Services.SignalHandler.Ui;
+using Gift.src.UIModel;
 using Gift.UI;
 using Gift.UI.Display;
 using Gift.UI.Displayer;
@@ -20,56 +22,88 @@ namespace Gift
 {
     public class GiftBase
     {
-        public GiftUI? Ui { get; set; }
+        public IGiftUI Ui
+        {
+            get
+            {
+                return _uiProvider.Ui;
+            }
+        }
+
+        private readonly ISignalBus _signalBus;
+
         private readonly IRenderer _renderer;
         private readonly IDisplayer _displayer;
-        private ISignalHandler? _uiSignalHandler;
-        private ISignalHandler? _keySignalHandler;
-        private readonly IMonitorManager _monitorManager;
-        private readonly ISignalBus _signalBus;
-        private IKeyInputHandler _keyInputHandler;
-        private IDisplayManager? _displayManager;
-        private IKeyMapper _keyMapper;
+
+        private readonly IGiftUiProvider _uiProvider;
+        private readonly IDisplayManager _displayManager;
+
+        private readonly IUISignalHandler _uiSignalHandler;
+        private readonly IKeySignalHandler _keySignalHandler;
+        private readonly IGlobalSignalHandler _globalSignalHandler;
+
+        private readonly IMonitorManager _monitorManager;//truc a faire avec ça. le keyInputHandler est un monitor
+        private readonly IKeyInputHandler _keyInputHandler;
         public const char FILLINGCHAR = '*';
 
-
-        public GiftBase(IRenderer renderer, IDisplayer displayer, IMonitorManager monitorManager, ISignalBus queue, IKeyMapper keyMapper, IKeyInputHandler keyInputHandler, IConsoleSizeMonitor consoleSizeMonitor)
+        public GiftBase(IRenderer renderer,
+                        IDisplayer displayer,
+                        IMonitorManager monitorManager,
+                        ISignalBus queue,
+                        IKeyInputHandler keyInputHandler,
+                        IConsoleSizeMonitor consoleSizeMonitor,
+                        IKeySignalHandler keySignalHandler,
+                        IGiftUiProvider uiProvider,
+                        IUISignalHandler uISignalHandler,
+                        IGlobalSignalHandler globalSignalHandler,
+                        IDisplayManager displayManager)
         {
             _renderer = renderer;
             _displayer = displayer;
-            _monitorManager = monitorManager;
+            _uiProvider = uiProvider;
+            _displayManager = displayManager;
+
             _signalBus = queue;
-            _keyMapper =keyMapper;
             _keyInputHandler = keyInputHandler;
+            _keySignalHandler = keySignalHandler;
+            _signalBus.Subscribe(_keySignalHandler);
+
+
+            _uiSignalHandler = uISignalHandler;
+            _signalBus.Subscribe(_uiSignalHandler);
+
+            _globalSignalHandler = globalSignalHandler;
+            _signalBus.Subscribe(_globalSignalHandler);
+
+            _monitorManager = monitorManager;
             _monitorManager.Add(consoleSizeMonitor);
+
+            _keyInputHandler.StartCheckUserInput();
+
+
         }
 
-        public virtual void Initialize(GiftUI? ui = null)
+        public virtual void Initialize(IGiftUI? ui = null)
         {
-            this.Ui = ui ?? new GiftUI();
+            if (ui != null)
+            {
+                this._uiProvider.Ui = ui;
+            }
             init();
         }
         private void init()
         {
-            _displayManager = new DisplayManager(_displayer, _renderer, Ui);
-
-            _uiSignalHandler =  new UISignalHandler(_displayManager);
-            _keySignalHandler =  new KeySignalHandler(_signalBus, _keyMapper);
-
-            _signalBus.Subscribe(_uiSignalHandler);
-            _signalBus.Subscribe(_keySignalHandler);
-
-            _keyInputHandler.StartCheckUserInput();
-
             _displayManager.UpdateDisplay();
+        }
 
+        public virtual async Task RunAsync()
+        {
+            await _globalSignalHandler.Completion.Task;
         }
 
         public virtual void Run()
         {
-            while (true)
-            {
-            }
+             RunAsync().Wait();
         }
 
     }

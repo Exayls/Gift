@@ -1,12 +1,13 @@
-﻿using Gift.Monitor;
+﻿using Gift.SignalHandler;
+using Gift.src.Services.Monitor.ConsoleMonitors;
 using Gift.UI;
 using Gift.UI.Display;
 using Gift.UI.DisplayManager;
 using Gift.UI.MetaData;
 
-namespace Gift.SignalHandler
+namespace Gift.src.Services.SignalHandler.Ui
 {
-    public class UISignalHandler : ISignalHandler
+    public class UISignalHandler : IUISignalHandler
     {
         private IDisplayManager _displayManager;
 
@@ -42,25 +43,25 @@ namespace Gift.SignalHandler
 
         private void NextElement()
         {
-            _displayManager.Ui.NextElementInSelectedContainer();
+            _displayManager.NextElementInSelectedContainer();
             _displayManager.UpdateDisplay();
         }
 
         private void PreviousElement()
         {
-            _displayManager.Ui.PreviousElementInSelectedContainer();
+            _displayManager.PreviousElementInSelectedContainer();
             _displayManager.UpdateDisplay();
         }
 
         private void NextContainer()
         {
-            _displayManager.Ui.NextContainer();
+            _displayManager.NextContainer();
             _displayManager.UpdateDisplay();
         }
 
         private void PreviousContainer()
         {
-            _displayManager.Ui.PreviousContainer();
+            _displayManager.PreviousContainer();
             _displayManager.UpdateDisplay();
         }
 
@@ -69,7 +70,7 @@ namespace Gift.SignalHandler
             if (e is ConsoleSizeEventArgs)
             {
                 ConsoleSizeEventArgs eventArgs = (ConsoleSizeEventArgs)e;
-                _displayManager.Ui.Resize(new Bound(eventArgs.ConsoleHeight, eventArgs.ConsoleWidth));
+                _displayManager.Resize(new Bound(eventArgs.ConsoleHeight, eventArgs.ConsoleWidth));
                 _displayManager.UpdateDisplay();
             }
         }
