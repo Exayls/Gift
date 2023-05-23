@@ -36,6 +36,7 @@ namespace TestGift.LifeCycle
         private Mock<IUISignalHandler> uiSignalHandlerMock;
         private Mock<IGlobalSignalHandler> globalSignalHandlerMock;
         private Mock<IDisplayManager> displayManagerMock;
+        private GiftBase giftBase;
 
         public GiftBaseTest()
         {
@@ -51,6 +52,19 @@ namespace TestGift.LifeCycle
             uiSignalHandlerMock = new Mock<IUISignalHandler>();
             globalSignalHandlerMock = new Mock<IGlobalSignalHandler>();
             displayManagerMock = new Mock<IDisplayManager>();
+
+            giftBase = new GiftBase(
+                           rendererMock.Object,
+                           displayerMock.Object,
+                           monitorManagerMock.Object,
+                           queueMock.Object,
+                           keyInputHandlerMock.Object,
+                           consoleSizeMonitorMock.Object,
+                           keySignalHandlerMock.Object,
+                           giftUiProviderMock.Object,
+                           uiSignalHandlerMock.Object,
+                           globalSignalHandlerMock.Object,
+                           displayManagerMock.Object);
         }
 
         [Fact]
@@ -58,20 +72,6 @@ namespace TestGift.LifeCycle
         {
             Mock<IGiftUI> uiMock = new Mock<IGiftUI>();
             giftUiProviderMock.Setup(p => p.Ui).Returns(uiMock.Object);
-
-            var giftBase = new GiftBase(
-                           rendererMock.Object,
-                           displayerMock.Object,
-                           monitorManagerMock.Object,
-                           queueMock.Object,
-                           keyInputHandlerMock.Object,
-                           consoleSizeMonitorMock.Object,
-                           keySignalHandlerMock.Object,
-                           giftUiProviderMock.Object,
-                           uiSignalHandlerMock.Object,
-                           globalSignalHandlerMock.Object,
-                           displayManagerMock.Object);
-
             Assert.Equal(uiMock.Object, giftBase.Ui);
         }
 
@@ -79,21 +79,7 @@ namespace TestGift.LifeCycle
         public void When_initialized_should_set_ui()
         {
             Mock<IGiftUI> uiMock = new Mock<IGiftUI>();
-
-            var giftBase = new GiftBase(
-                           rendererMock.Object,
-                           displayerMock.Object,
-                           monitorManagerMock.Object,
-                           queueMock.Object,
-                           keyInputHandlerMock.Object,
-                           consoleSizeMonitorMock.Object,
-                           keySignalHandlerMock.Object,
-                           giftUiProviderMock.Object,
-                           uiSignalHandlerMock.Object,
-                           globalSignalHandlerMock.Object,
-                           displayManagerMock.Object);
             giftBase.Initialize(uiMock.Object);
-
             giftUiProviderMock.VerifySet(p => p.Ui = uiMock.Object);
         }
     }
