@@ -1,5 +1,5 @@
-﻿using Gift.Monitor;
-using Gift.SignalHandler;
+﻿using Gift.SignalHandler;
+using Gift.src.Services.Monitor.Console;
 using Gift.UI;
 using Gift.UI.Display;
 using Gift.UI.DisplayManager;
