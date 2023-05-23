@@ -12,11 +12,16 @@ namespace TestGift.Builder
 {
     public class GiftUIBuilderTest
     {
+        private GiftUIBuilder builder;
+
+        public GiftUIBuilderTest()
+        {
+            builder = new GiftUIBuilder();
+        }
+
         [Fact]
         public void BuilderNameTest()
         {
-
-            GiftUIBuilder builder = new GiftUIBuilder();
             GiftUI g = builder.Build();
 
             Assert.Equal(20, g.Bound.Height);
@@ -25,9 +30,6 @@ namespace TestGift.Builder
         [Fact]
         public void BuilderPositionTest()
         {
-
-
-            GiftUIBuilder builder = new GiftUIBuilder();
             GiftUI g = builder.WithBound(new Bound(1, 23)).Build();
 
             Assert.Equal(1, g.Bound.Height);
