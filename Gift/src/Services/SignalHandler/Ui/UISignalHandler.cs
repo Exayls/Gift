@@ -1,10 +1,11 @@
 ﻿using Gift.Monitor;
+using Gift.SignalHandler;
 using Gift.UI;
 using Gift.UI.Display;
 using Gift.UI.DisplayManager;
 using Gift.UI.MetaData;
 
-namespace Gift.SignalHandler
+namespace Gift.src.Services.SignalHandler.Ui
 {
     public class UISignalHandler : IUISignalHandler
     {

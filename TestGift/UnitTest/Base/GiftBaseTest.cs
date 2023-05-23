@@ -12,12 +12,12 @@ using Gift.Bus;
 using Gift.Monitor;
 using Gift.UI.Displayer;
 using Xunit;
-using Gift.SignalHandler;
 using Gift.src.UIModel;
 using Gift.src.Extensions;
 using Gift.UI;
 using Gift.UI.DisplayManager;
 using Gift.src.Services.SignalHandler.Key;
+using Gift.src.Services.SignalHandler.Ui;
 
 namespace TestGift.LifeCycle
 {
