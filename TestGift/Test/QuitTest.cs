@@ -1,5 +1,6 @@
 ﻿using Gift;
 using Gift.src.Extensions;
+using Gift.UI;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace TestGift.Test
             var serviceProvider = services.BuildServiceProvider();
             var gift = serviceProvider.GetRequiredService<GiftBase>();
 
-            gift.Initialize();
+            gift.Initialize(new GiftUI());
             gift.Run();
         }
     }

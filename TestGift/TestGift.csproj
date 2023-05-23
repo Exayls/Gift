@@ -33,4 +33,8 @@
     <ProjectReference Include="..\Gift\Gift.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UnitTest\xaml\" />
+  </ItemGroup>
+
 </Project>

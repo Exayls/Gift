@@ -83,12 +83,9 @@ namespace Gift
 
         }
 
-        public virtual void Initialize(IGiftUI? ui = null)
+        public virtual void Initialize(IGiftUI ui)
         {
-            if (ui != null)
-            {
-                this._uiProvider.Ui = ui;
-            }
+            _uiProvider.Ui = ui;
             init();
         }
         private void init()
@@ -103,7 +100,7 @@ namespace Gift
 
         public virtual void Run()
         {
-             RunAsync().Wait();
+            RunAsync().Wait();
         }
 
     }
