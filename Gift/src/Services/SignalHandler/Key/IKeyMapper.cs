@@ -1,4 +1,4 @@
-﻿namespace Gift.SignalHandler.KeyInput
+﻿namespace Gift.src.Services.SignalHandler.Key
 {
     public interface IKeyMapper
     {

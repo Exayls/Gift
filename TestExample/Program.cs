@@ -80,7 +80,7 @@ ui.AddChild(frontElem);
 var services = new ServiceCollection();
 services.AddGiftServices();
 var serviceProvider = services.BuildServiceProvider();
-var gift = serviceProvider.GetService<GiftBase>();
+var gift = serviceProvider.GetRequiredService<GiftBase>();
 
 gift.Initialize(ui);
 gift.Run();

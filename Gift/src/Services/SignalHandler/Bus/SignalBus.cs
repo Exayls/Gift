@@ -1,7 +1,7 @@
 ﻿using Gift.Monitor;
 using Gift.SignalHandler;
 
-namespace Gift.Bus
+namespace Gift.src.Services.SignalHandler.Bus
 {
     public class SignalBus : ISignalBus
     {
@@ -18,6 +18,7 @@ namespace Gift.Bus
                 subscriber.HandleSignal(signal);
             }
         }
+
         public void Subscribe(ISignalHandler subscriber)
         {
             subscribers.Add(subscriber);

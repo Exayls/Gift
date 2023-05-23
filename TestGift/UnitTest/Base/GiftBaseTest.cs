@@ -6,13 +6,19 @@ using System.Text;
 using System.Threading.Tasks;
 using Moq;
 using Gift.UI.Render;
-using Gift.src.Services.Monitor;
 using Gift.KeyInput;
-using Gift.SignalHandler.KeyInput;
-using Gift.Bus;
 using Gift.Monitor;
 using Gift.UI.Displayer;
 using Xunit;
+using Gift.src.UIModel;
+using Gift.src.Extensions;
+using Gift.UI;
+using Gift.UI.DisplayManager;
+using Gift.src.Services.SignalHandler.Key;
+using Gift.src.Services.SignalHandler.Ui;
+using Gift.src.Services.Monitor.ConsoleMonitors;
+using Gift.src.Services.SignalHandler.Bus;
+using Gift.src.Services.SignalHandler.Global;
 
 namespace TestGift.LifeCycle
 {
@@ -25,6 +31,11 @@ namespace TestGift.LifeCycle
         private Mock<IKeyMapper> keyMapperMock;
         private Mock<IKeyInputHandler> keyInputHandlerMock;
         private Mock<IConsoleSizeMonitor> consoleSizeMonitorMock;
+        private Mock<IKeySignalHandler> keySignalHandlerMock;
+        private Mock<IGiftUiProvider> giftUiProviderMock;
+        private Mock<IUISignalHandler> uiSignalHandlerMock;
+        private Mock<IGlobalSignalHandler> globalSignalHandlerMock;
+        private Mock<IDisplayManager> displayManagerMock;
 
         public GiftBaseTest()
         {
@@ -35,39 +46,55 @@ namespace TestGift.LifeCycle
             keyMapperMock = new Mock<IKeyMapper>();
             keyInputHandlerMock = new Mock<IKeyInputHandler>();
             consoleSizeMonitorMock = new Mock<IConsoleSizeMonitor>();
+            keySignalHandlerMock = new Mock<IKeySignalHandler>();
+            giftUiProviderMock = new Mock<IGiftUiProvider>();
+            uiSignalHandlerMock = new Mock<IUISignalHandler>();
+            globalSignalHandlerMock = new Mock<IGlobalSignalHandler>();
+            displayManagerMock = new Mock<IDisplayManager>();
         }
 
         [Fact]
-        public void When_not_initialized_should_not_set_ui()
+        public void should_return_provider_ui()
         {
+            Mock<IGiftUI> uiMock = new Mock<IGiftUI>();
+            giftUiProviderMock.Setup(p => p.Ui).Returns(uiMock.Object);
+
             var giftBase = new GiftBase(
                            rendererMock.Object,
                            displayerMock.Object,
                            monitorManagerMock.Object,
                            queueMock.Object,
-                           keyMapperMock.Object,
                            keyInputHandlerMock.Object,
-                           consoleSizeMonitorMock.Object
-                       );
+                           consoleSizeMonitorMock.Object,
+                           keySignalHandlerMock.Object,
+                           giftUiProviderMock.Object,
+                           uiSignalHandlerMock.Object,
+                           globalSignalHandlerMock.Object,
+                           displayManagerMock.Object);
 
-            Assert.True(giftBase.Ui == null);
+            Assert.Equal(uiMock.Object, giftBase.Ui);
         }
 
         [Fact]
         public void When_initialized_should_set_ui()
         {
+            Mock<IGiftUI> uiMock = new Mock<IGiftUI>();
+
             var giftBase = new GiftBase(
                            rendererMock.Object,
                            displayerMock.Object,
                            monitorManagerMock.Object,
                            queueMock.Object,
-                           keyMapperMock.Object,
                            keyInputHandlerMock.Object,
-                           consoleSizeMonitorMock.Object
-                       );
-            giftBase.Initialize();
+                           consoleSizeMonitorMock.Object,
+                           keySignalHandlerMock.Object,
+                           giftUiProviderMock.Object,
+                           uiSignalHandlerMock.Object,
+                           globalSignalHandlerMock.Object,
+                           displayManagerMock.Object);
+            giftBase.Initialize(uiMock.Object);
 
-            Assert.True(giftBase.Ui != null);
+            giftUiProviderMock.VerifySet(p => p.Ui = uiMock.Object);
         }
     }
 }

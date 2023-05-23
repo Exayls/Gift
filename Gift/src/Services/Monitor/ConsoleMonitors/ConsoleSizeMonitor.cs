@@ -1,11 +1,10 @@
-﻿using Gift.Bus;
-using Gift.SignalHandler;
-using Gift.src.Services.Monitor;
+﻿using Gift.SignalHandler;
+using Gift.src.Services.SignalHandler.Bus;
 using System;
 
-namespace Gift.Monitor
+namespace Gift.src.Services.Monitor.ConsoleMonitors
 {
-    class ConsoleSizeMonitor : IConsoleSizeMonitor
+    public class ConsoleSizeMonitor : IConsoleSizeMonitor
     {
         private int ConsoleWidth;
         private int ConsoleHeight;
