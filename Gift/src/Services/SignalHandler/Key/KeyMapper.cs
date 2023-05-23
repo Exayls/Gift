@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace Gift.SignalHandler.KeyInput
+namespace Gift.src.Services.SignalHandler.Key
 {
     //GPT stuff. No tests!! Don’t touch before tests are there
 

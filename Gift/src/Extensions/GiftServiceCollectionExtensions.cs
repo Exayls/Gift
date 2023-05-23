@@ -2,9 +2,9 @@
 using Gift.KeyInput;
 using Gift.Monitor;
 using Gift.SignalHandler;
-using Gift.SignalHandler.KeyInput;
 using Gift.src.Services.Displayer;
 using Gift.src.Services.Monitor;
+using Gift.src.Services.SignalHandler.Key;
 using Gift.src.UIModel;
 using Gift.UI.Configuration;
 using Gift.UI.Displayer;

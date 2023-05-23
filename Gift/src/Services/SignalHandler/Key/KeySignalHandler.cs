@@ -1,23 +1,21 @@
 ﻿using Gift.Builders;
 using Gift.Bus;
 using Gift.KeyInput;
-using Gift.SignalHandler.KeyInput;
+using Gift.SignalHandler;
 using Gift.UI;
 using Gift.UI.DisplayManager;
 
-namespace Gift.SignalHandler
+namespace Gift.src.Services.SignalHandler.Key
 {
     public class KeySignalHandler : IKeySignalHandler
     {
         private ISignalBus _bus;
-        private IKeyMapper _keyMapper;
         private IList<IKeyMapping> _mappings;
 
         public KeySignalHandler(ISignalBus bus, IKeyMapper keyMapper)
         {
             _bus = bus;
-            _keyMapper = keyMapper;
-            _mappings = _keyMapper.GetMapping();
+            _mappings = keyMapper.GetMapping();
         }
 
         public void HandleSignal(ISignal signal)
