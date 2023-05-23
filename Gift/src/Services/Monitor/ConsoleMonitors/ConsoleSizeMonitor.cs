@@ -2,7 +2,7 @@
 using Gift.SignalHandler;
 using System;
 
-namespace Gift.src.Services.Monitor.Console
+namespace Gift.src.Services.Monitor.ConsoleMonitors
 {
     public class ConsoleSizeMonitor : IConsoleSizeMonitor
     {

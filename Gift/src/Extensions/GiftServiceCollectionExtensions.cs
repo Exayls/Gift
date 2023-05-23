@@ -2,7 +2,7 @@
 using Gift.KeyInput;
 using Gift.Monitor;
 using Gift.src.Services.Displayer;
-using Gift.src.Services.Monitor.Console;
+using Gift.src.Services.Monitor.ConsoleMonitors;
 using Gift.src.Services.SignalHandler.Key;
 using Gift.src.Services.SignalHandler.Ui;
 using Gift.src.UIModel;

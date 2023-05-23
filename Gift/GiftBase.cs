@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Gift.Bus;
 using Gift.KeyInput;
 using Gift.Monitor;
-using Gift.src.Services.Monitor;
+using Gift.src.Services.Monitor.ConsoleMonitors;
 using Gift.src.Services.SignalHandler.Key;
 using Gift.src.Services.SignalHandler.Ui;
 using Gift.src.UIModel;
