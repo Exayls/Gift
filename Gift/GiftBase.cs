@@ -88,6 +88,13 @@ namespace Gift
             _uiProvider.Ui = ui;
             init();
         }
+
+        public virtual void Initialize(string xamlPath)
+        {
+            _uiProvider.Ui = new GiftUI();
+            init();
+        }
+
         private void init()
         {
             _displayManager.UpdateDisplay();
