@@ -13,6 +13,7 @@ namespace Gift.KeyInput
 
         public async void StartCheckUserInput()
         {
+            await Task.Yield();
             while (true)
             {
                 if (Console.KeyAvailable)
@@ -23,7 +24,6 @@ namespace Gift.KeyInput
                     KeyEventArgs keyEventArgs = new KeyEventArgs(keyValue, modifier);
                     _signalBus.PushSignal(new Signal("KeyPressed", keyEventArgs));
                 }
-                await Task.Yield();
             }
         }
     }

@@ -76,6 +76,8 @@ namespace Gift
 
             _keyInputHandler.StartCheckUserInput();
 
+            _completionSource = new TaskCompletionSource<bool>();
+
         }
 
         public virtual void Initialize(IGiftUI? ui = null)
@@ -102,7 +104,6 @@ namespace Gift
         }
         public virtual void Run()
         {
-            _completionSource = new TaskCompletionSource<bool>();
              RunAsync().Wait();
         }
 
