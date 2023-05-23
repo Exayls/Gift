@@ -1,5 +1,5 @@
-﻿using Gift.Bus;
-using Gift.SignalHandler;
+﻿using Gift.SignalHandler;
+using Gift.src.Services.SignalHandler.Bus;
 
 namespace Gift.KeyInput
 {

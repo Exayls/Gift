@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Moq;
 using Gift.UI.Render;
 using Gift.KeyInput;
-using Gift.Bus;
 using Gift.Monitor;
 using Gift.UI.Displayer;
 using Xunit;
@@ -18,6 +17,7 @@ using Gift.UI.DisplayManager;
 using Gift.src.Services.SignalHandler.Key;
 using Gift.src.Services.SignalHandler.Ui;
 using Gift.src.Services.Monitor.ConsoleMonitors;
+using Gift.src.Services.SignalHandler.Bus;
 
 namespace TestGift.LifeCycle
 {

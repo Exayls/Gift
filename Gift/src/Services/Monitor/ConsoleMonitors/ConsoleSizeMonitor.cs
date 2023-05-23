@@ -1,5 +1,5 @@
-﻿using Gift.Bus;
-using Gift.SignalHandler;
+﻿using Gift.SignalHandler;
+using Gift.src.Services.SignalHandler.Bus;
 using System;
 
 namespace Gift.src.Services.Monitor.ConsoleMonitors
