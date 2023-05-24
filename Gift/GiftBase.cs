@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Gift.KeyInput;
 using Gift.Monitor;
+using Gift.src.Services.FileParser;
 using Gift.src.Services.Monitor.ConsoleMonitors;
 using Gift.src.Services.SignalHandler.Bus;
 using Gift.src.Services.SignalHandler.Global;
@@ -44,6 +45,9 @@ namespace Gift
 
         private readonly IMonitorManager _monitorManager;//truc a faire avec ça. le keyInputHandler est un monitor
         private readonly IKeyInputHandler _keyInputHandler;
+
+        private readonly IXMLFileParser _xmlParser;
+
         public const char FILLINGCHAR = '*';
 
         public GiftBase(IRenderer renderer,
@@ -56,6 +60,7 @@ namespace Gift
                         IGiftUiProvider uiProvider,
                         IUISignalHandler uISignalHandler,
                         IGlobalSignalHandler globalSignalHandler,
+                        IXMLFileParser xmlFileParser,
                         IDisplayManager displayManager)
         {
             _renderer = renderer;
@@ -80,6 +85,7 @@ namespace Gift
 
             _keyInputHandler.StartCheckUserInput();
 
+            _xmlParser = xmlFileParser;
 
         }
 
@@ -89,9 +95,9 @@ namespace Gift
             init();
         }
 
-        public virtual void Initialize(string xamlPath)
+        public virtual void Initialize(string xmlPath)
         {
-            _uiProvider.Ui = new GiftUI();
+            _uiProvider.Ui = _xmlParser.ParseUIFile(xmlPath);
             init();
         }
 

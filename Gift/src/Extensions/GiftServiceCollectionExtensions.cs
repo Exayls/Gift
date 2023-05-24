@@ -1,6 +1,7 @@
 ﻿using Gift.KeyInput;
 using Gift.Monitor;
 using Gift.src.Services.Displayer;
+using Gift.src.Services.FileParser;
 using Gift.src.Services.Monitor.ConsoleMonitors;
 using Gift.src.Services.SignalHandler.Bus;
 using Gift.src.Services.SignalHandler.Global;
@@ -39,6 +40,7 @@ namespace Gift.src.Extensions
             services.AddSingleton<IUISignalHandler, UISignalHandler>();
             services.AddSingleton<IKeySignalHandler, KeySignalHandler>();
             services.AddSingleton<IGlobalSignalHandler, GlobalSignalHandler>();
+            services.AddSingleton<IXMLFileParser, XmlFileParser>();
             services.AddSingleton<GiftBase>();
 
             return services;
