@@ -34,7 +34,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="UnitTest\xaml\" />
+    <None Update="ressources\xml\not_supported.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ressources\xml\valid_xml.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

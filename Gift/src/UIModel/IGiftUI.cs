@@ -7,7 +7,7 @@ namespace Gift.UI
     public interface IGiftUI : IContainer
     {
         List<IContainer> SelectableContainers { get; set; }
-        void AddChild(UIElement UIElement);
+        void AddChild(IUIElement UIElement);
         void PreviousElementInSelectedContainer();
         void NextElementInSelectedContainer();
         void Resize(Bound bound);

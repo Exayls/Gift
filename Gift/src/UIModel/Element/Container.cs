@@ -96,5 +96,10 @@ namespace Gift.UI.Element
             }
         }
 
+        public void AddChild(IUIElement uIElement)
+        {
+            Childs.Add(uIElement);
+        }
+
     }
 }

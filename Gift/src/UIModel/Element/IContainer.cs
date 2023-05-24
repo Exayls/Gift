@@ -11,6 +11,7 @@ namespace Gift.UI.Element
         IUIElement? SelectedElement { get; set; }
         bool IsSelectedContainer { get; set; }
 
+        void AddChild(IUIElement uIElement);
         Context GetContextRelativeRenderable(IRenderable renderable, Context context);
         void NextElement();
         void PreviousElement();

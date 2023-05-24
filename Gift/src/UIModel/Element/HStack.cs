@@ -56,11 +56,6 @@ namespace Gift.UI.Element
         {
         }
 
-        public void AddChild(IUIElement uIElement)
-        {
-            Childs.Add(uIElement);
-        }
-
 
         public override Context GetContextRelativeRenderable(IRenderable renderable, Context context)
         {

@@ -48,6 +48,20 @@ namespace Gift.UI
             }
         }
 
+        public GiftUI(Bound bound, IBorder border) : base(new ScreenDisplayFactory(), bound, border)
+        {
+            SelectableContainers = new List<IContainer>();
+        }
+
+        public GiftUI(Bound bound) : this(bound, new NoBorder())
+        {
+        }
+
+        public GiftUI() : base()
+        {
+            SelectableContainers = new List<IContainer>();
+        }
+
         private void SetNewSelectedContainer(IContainer selected)
         {
             _selectedContainer = selected;
@@ -68,23 +82,6 @@ namespace Gift.UI
                     element.IsInSelectedContainer = false;
                 }
             }
-        }
-
-        public GiftUI(Bound bound, IBorder border) : base(new ScreenDisplayFactory(), bound, border)
-        {
-            SelectableContainers = new List<IContainer>();
-        }
-        public GiftUI(Bound bound) : this(bound, new NoBorder())
-        {
-        }
-        public GiftUI() : base()
-        {
-            SelectableContainers = new List<IContainer>();
-        }
-
-        public void AddChild(UIElement UIElement)
-        {
-            Childs.Add(UIElement);
         }
 
         public override Context GetContextRelativeRenderable(IRenderable renderable, Context context)
