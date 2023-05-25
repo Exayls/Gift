@@ -1,7 +1,17 @@
-﻿<?xml version="1.0" encoding="utf-8" ?> 
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <GiftUI>
-    <Vstack>
-        <Label>Hello</Label>
-        <Label>World</Label>
-    </Vstack>
+	<Vstack BorderOption="simple">
+		<Vstack BorderOption="simple">
+			<Label>Hello</Label>
+			<Label>World</Label>
+		</Vstack>
+		<Vstack >
+			<Label>Hello</Label>
+			<Label>World</Label>
+		</Vstack>
+		<Vstack BorderOption="simple">
+			<Label>Hello</Label>
+			<Label>World</Label>
+		</Vstack>
+	</Vstack>
 </GiftUI>

@@ -19,6 +19,7 @@ using Gift.src.Services.SignalHandler.Ui;
 using Gift.src.Services.Monitor.ConsoleMonitors;
 using Gift.src.Services.SignalHandler.Bus;
 using Gift.src.Services.SignalHandler.Global;
+using Gift.src.Services.FileParser;
 
 namespace TestGift.LifeCycle
 {
@@ -36,6 +37,7 @@ namespace TestGift.LifeCycle
         private Mock<IUISignalHandler> uiSignalHandlerMock;
         private Mock<IGlobalSignalHandler> globalSignalHandlerMock;
         private Mock<IDisplayManager> displayManagerMock;
+        private Mock<IXMLFileParser> xmlFileParserMock;
         private GiftBase giftBase;
 
         public GiftBaseTest()
@@ -52,19 +54,22 @@ namespace TestGift.LifeCycle
             uiSignalHandlerMock = new Mock<IUISignalHandler>();
             globalSignalHandlerMock = new Mock<IGlobalSignalHandler>();
             displayManagerMock = new Mock<IDisplayManager>();
+            xmlFileParserMock = new Mock<IXMLFileParser>();
+
 
             giftBase = new GiftBase(
-                           rendererMock.Object,
-                           displayerMock.Object,
-                           monitorManagerMock.Object,
-                           queueMock.Object,
-                           keyInputHandlerMock.Object,
-                           consoleSizeMonitorMock.Object,
-                           keySignalHandlerMock.Object,
-                           giftUiProviderMock.Object,
-                           uiSignalHandlerMock.Object,
-                           globalSignalHandlerMock.Object,
-                           displayManagerMock.Object);
+                           renderer: rendererMock.Object,
+                           displayer: displayerMock.Object,
+                           monitorManager: monitorManagerMock.Object,
+                           queue: queueMock.Object,
+                           keyInputHandler: keyInputHandlerMock.Object,
+                           consoleSizeMonitor: consoleSizeMonitorMock.Object,
+                           keySignalHandler: keySignalHandlerMock.Object,
+                           uiProvider: giftUiProviderMock.Object,
+                           uISignalHandler: uiSignalHandlerMock.Object,
+                           globalSignalHandler: globalSignalHandlerMock.Object,
+                           xmlFileParser: xmlFileParserMock.Object,
+                           displayManager: displayManagerMock.Object);
         }
 
         [Fact]

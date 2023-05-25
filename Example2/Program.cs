@@ -9,10 +9,10 @@ using Microsoft.Extensions.DependencyInjection;
 
 var ui = new GiftUI();
 
-var hstack = new HStackBuilder().WithBorder(new Border(2, BorderChars.GetBorderCharsFromFile("ressources/borderChars/double_border.json"))).Build();
+var hstack = new HStackBuilder().WithBorder(new Border(2, BorderOption.GetBorderCharsFromFile("ressources/borderChars/double_border.json"))).Build();
 ui.AddChild(hstack);
 
-var vstack = new VStackBuilder().WithBorder(new Border(1, BorderChars.GetBorderCharsFromFile("ressources/borderChars/simple_border.json"))).Build();
+var vstack = new VStackBuilder().WithBorder(new Border(1, BorderOption.GetBorderCharsFromFile("ressources/borderChars/simple_border.json"))).Build();
 hstack.AddChild(vstack);
 hstack.AddChild(new LabelBuilder().WithText("test7").Build());
 hstack.AddChild(new LabelBuilder().WithText("test8").Build());
@@ -23,7 +23,7 @@ vstack.AddChild(new LabelBuilder().Build());
 vstack.AddChild(new LabelBuilder().WithText("test2").WithPosition(new Position(1, 58)).Build());
 vstack.AddChild(new LabelBuilder().WithText("test4").Build());
 
-var vstack2 = new VStackBuilder().WithBorder(new Border(1, BorderChars.GetBorderCharsFromFile("ressources/borderChars/simple_border.json"))).Build();
+var vstack2 = new VStackBuilder().WithBorder(new Border(1, BorderOption.GetBorderCharsFromFile("ressources/borderChars/simple_border.json"))).Build();
 vstack.AddChild(vstack2);
 var element1 = new LabelBuilder().WithText("testwithbiggerwidth").Build();
 vstack2.AddChild(element1);

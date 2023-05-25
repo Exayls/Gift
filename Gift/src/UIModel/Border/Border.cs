@@ -34,7 +34,7 @@ namespace Gift.UI.Border
             this.rBorder = rBorder;
             Thickness = thickness;
         }
-        public Border(int thickness, BorderChars borderChars)
+        public Border(int thickness, BorderOption borderChars)
         {
             this.tlBorder = borderChars.tlBorder;
             this.trBorder = borderChars.trBorder;
@@ -46,6 +46,7 @@ namespace Gift.UI.Border
             this.rBorder = borderChars.rBorder;
             Thickness = thickness;
         }
+
 
         public IScreenDisplay GetDisplay(Bound bound)
         {
