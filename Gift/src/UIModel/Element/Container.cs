@@ -42,7 +42,7 @@ namespace Gift.UI.Element
 
         protected readonly IScreenDisplayFactory _screenDisplayFactory;
 
-        public Container(IScreenDisplayFactory screenDisplayFactory, Bound bound, IBorder border) : base(border)
+        public Container(IScreenDisplayFactory screenDisplayFactory, Bound bound, IBorder border, Color? frontColor = null, Color? backColor = null) : base(border)
         {
             Bound = bound;
             Childs = new List<IUIElement>();
@@ -69,8 +69,8 @@ namespace Gift.UI.Element
 
         public override IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuration)
         {
-            Color frontColor = FrontColor ?? configuration.DefaultFrontColor;
-            Color backColor = BackColor ?? configuration.DefaultBackColor;
+            Color frontColor = FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor;
+            Color backColor = BackColor == Color.Default ? configuration.DefaultBackColor : BackColor;
             if (IsSelectedContainer)
             {
                 frontColor = configuration.SelectedContainerFrontColor ?? frontColor;

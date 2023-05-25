@@ -1,0 +1,13 @@
+{
+    "BorderChars":
+    {
+        "TopLeft": "█",
+        "TopRight": "█",
+        "BottomLeft": "█",
+        "BottomRight": "█",
+        "Top": "█",
+        "Bottom": "█",
+        "Left": "█",
+        "Right": "█"
+    }
+}

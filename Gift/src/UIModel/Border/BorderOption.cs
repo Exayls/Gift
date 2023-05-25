@@ -4,9 +4,9 @@ namespace Gift.UI.Border
 {
     public class BorderOption
     {
-        public static BorderOption Default { get {return GetBorderCharsFromFile("ressources/borderchars/simple_border.json"); } }
-        public static BorderOption Simple { get {return GetBorderCharsFromFile("ressources/borderchars/simple_border.json"); } }
-
+        public static BorderOption Default { get { return GetBorderCharsFromFile("ressources/borderchars/simple_border.json"); } }
+        public static BorderOption Simple { get { return GetBorderCharsFromFile("ressources/borderchars/simple_border.json"); } }
+        public static BorderOption Heavy { get { return GetBorderCharsFromFile("ressources/borderchars/heavy_border.json"); } }
         public char tlBorder { get; }
         public char trBorder { get; }
         public char blBorder { get; }

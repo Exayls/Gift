@@ -12,8 +12,8 @@ namespace Gift.UI.Element
         public abstract int Height { get; }
         public abstract int Width { get; }
         public IBorder Border { get; set; }
-        public Color? FrontColor { get; private set; }
-        public Color? BackColor { get; private set; }
+        public Color FrontColor { get; private set; }
+        public Color BackColor { get; private set; }
 
         private bool isSelectedElement;
         public bool IsSelectedElement
@@ -27,7 +27,7 @@ namespace Gift.UI.Element
 
         public bool IsInSelectedContainer { get; set; }
 
-        protected UIElement(IBorder? border = null , Color? frontColor = null, Color? backColor = null)
+        protected UIElement(IBorder? border = null , Color frontColor = Color.Default, Color backColor = Color.Default)
         {
             Border = border?? new NoBorder();
             FrontColor = frontColor;

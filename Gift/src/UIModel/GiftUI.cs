@@ -96,7 +96,7 @@ namespace Gift.UI
 
         public override IScreenDisplay GetDisplayWithoutBorder(Bound bound, IConfiguration configuration)
         {
-            return _screenDisplayFactory.Create(Bound, FrontColor ?? configuration.DefaultFrontColor, BackColor ?? configuration.DefaultBackColor, GiftBase.FILLINGCHAR);
+            return _screenDisplayFactory.Create(Bound, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor, BackColor == Color.Default ? configuration.DefaultBackColor : BackColor, GiftBase.FILLINGCHAR);
         }
 
         public override Position GetRelativePosition(Context context)

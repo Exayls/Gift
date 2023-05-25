@@ -100,11 +100,13 @@ namespace Gift.src.Services.FileParser
                 case "simple":
                     border = new Border(thickness, BorderOption.Simple);
                     break;
+                case "heavy":
+                    border = new Border(thickness, BorderOption.Heavy);
+                    break;
                 default:
                     border = new Border(thickness, BorderOption.GetBorderCharsFromFile(borderOption));
                     break;
             }
-
             return border;
         }
 

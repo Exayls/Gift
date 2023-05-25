@@ -28,7 +28,7 @@ namespace Gift.UI.Element
             }
         }
 
-        public Label(string text, Position? position = null, IBorder? border = null, Color? frontColor = null, Color? backColor = null) : base(border, frontColor, backColor)
+        public Label(string text, Position? position = null, IBorder? border = null, Color frontColor = Color.Default, Color backColor = Color.Default) : base(border, frontColor, backColor)
         {
             Text = text;
             if (position != null)
@@ -61,8 +61,8 @@ namespace Gift.UI.Element
 
         public override IScreenDisplay GetDisplayWithoutBorder(Bound bound, IConfiguration configuration)
         {
-            Color frontColor = FrontColor ?? configuration.DefaultFrontColor;
-            Color backColor = BackColor ?? configuration.DefaultBackColor;
+            Color frontColor = FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor;
+            Color backColor = BackColor == Color.Default ? configuration.DefaultBackColor : BackColor;
             if (IsSelectedElement && IsInSelectedContainer)
             {
                 frontColor = configuration.SelectedElementFrontColor ?? frontColor;
@@ -73,7 +73,7 @@ namespace Gift.UI.Element
 
         public override IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuration)
         {
-            return Border.GetDisplay(bound, FrontColor ?? configuration.DefaultFrontColor, BackColor ?? configuration.DefaultBackColor);
+            return Border.GetDisplay(bound, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor, BackColor == Color.Default ? configuration.DefaultBackColor : BackColor);
         }
     }
 }
