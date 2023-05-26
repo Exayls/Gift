@@ -42,14 +42,14 @@ namespace Gift.UI.Element
 
         protected readonly IScreenDisplayFactory _screenDisplayFactory;
 
-        public Container(IScreenDisplayFactory screenDisplayFactory, Bound bound, IBorder border, Color? frontColor = null, Color? backColor = null) : base(border)
+        public Container(IScreenDisplayFactory screenDisplayFactory, Bound bound, IBorder border, Color frontColor = Color.Default, Color backColor = Color.Default) : base(border, frontColor: frontColor, backColor: backColor)
         {
             Bound = bound;
             Childs = new List<IUIElement>();
             _screenDisplayFactory = screenDisplayFactory;
             SelectableElements = new List<IUIElement>();
         }
-        public Container()
+        public Container() : base()
         {
             if (!Console.IsInputRedirected && !Console.IsOutputRedirected)
             {
