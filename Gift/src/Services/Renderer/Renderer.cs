@@ -22,10 +22,12 @@ namespace Gift.UI.Render
             return screen;
         }
 
-        private void Render(IScreenDisplay screen, IRenderable Renderer, Context context)
+        private void Render(IScreenDisplay screen, IRenderable renderable, Context context)
         {
-            IScreenDisplay display = CreateDisplay(Renderer, context);
-            AddDisplayToSreen(screen, Renderer, context, display);
+            IScreenDisplay border = CreateBorder(renderable, context);
+            IScreenDisplay display = CreateDisplay(renderable, context);
+            AddDisplayToBorder(border, renderable, display);
+            AddDisplayToSreen(screen, renderable, context, border);
         }
 
         private void Render(IScreenDisplay screen, IContainer container, Context context)
@@ -39,20 +41,20 @@ namespace Gift.UI.Render
             AddDisplayToSreen(screen, container, context, border);
         }
 
+        private IScreenDisplay CreateBorder(IRenderable element, Context context)
+        {
+            return element.GetDisplayBorder(context.Bounds, Configuration);
+        }
+
         private IScreenDisplay CreateDisplay(IRenderable container, Context context)
         {
             return container.GetDisplayWithoutBorder(context.Bounds, Configuration);
         }
 
-        private void AddDisplayToBorder(IScreenDisplay screen, IContainer renderable, IScreenDisplay display)
+        private void AddDisplayToBorder(IScreenDisplay screen, IRenderable renderable, IScreenDisplay display)
         {
             Position relativePosition = new Position(renderable.Border.Thickness, renderable.Border.Thickness);
             screen.AddDisplay(display, relativePosition);
-        }
-
-        private IScreenDisplay CreateBorder(IContainer container, Context context)
-        {
-            return container.GetDisplayBorder(context.Bounds, Configuration);
         }
 
         private void AddDisplayToSreen(IScreenDisplay screen, IRenderable renderable, Context context, IScreenDisplay display)

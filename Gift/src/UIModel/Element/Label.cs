@@ -17,14 +17,14 @@ namespace Gift.UI.Element
         {
             get
             {
-                return 1;
+                return 1 + 2 * Border.Thickness;
             }
         }
         public override int Width
         {
             get
             {
-                return Text.Length;
+                return Text.Length + 2 * Border.Thickness;
             }
         }
 
@@ -73,7 +73,7 @@ namespace Gift.UI.Element
 
         public override IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuration)
         {
-            return Border.GetDisplay(bound, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor, BackColor == Color.Default ? configuration.DefaultBackColor : BackColor);
+            return Border.GetDisplay(new Bound(Height,Width), FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor, BackColor == Color.Default ? configuration.DefaultBackColor : BackColor);
         }
     }
 }

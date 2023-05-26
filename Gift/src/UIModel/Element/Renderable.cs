@@ -1,4 +1,5 @@
-﻿using Gift.UI.Configuration;
+﻿using Gift.UI.Border;
+using Gift.UI.Configuration;
 using Gift.UI.Display;
 using Gift.UI.MetaData;
 using System.Text;
@@ -9,6 +10,7 @@ namespace Gift.UI.Element
     {
         int Height { get; }
         int Width { get; }
+        IBorder Border { get; set; }
 
         IScreenDisplay GetDisplayWithoutBorder(Bound bounds, IConfiguration configuration);
         IScreenDisplay GetDisplayBorder(Bound bounds, IConfiguration configuration);

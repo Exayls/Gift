@@ -1,4 +1,5 @@
-﻿using Gift.UI.Element;
+﻿using Gift.UI.Border;
+using Gift.UI.Element;
 using Gift.UI.MetaData;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace Gift.Builders
         private Position? position = null;
         private Color backColor = Color.Default;
         private Color frontColor = Color.Default;
+        private IBorder? border = new NoBorder();
 
         /// <summary>
         /// Get Label instance with "Hello" as default text and (0,0) as default position
@@ -57,14 +59,22 @@ namespace Gift.Builders
             this.position = position;
             return this;
         }
+
+        internal LabelBuilder WithBorder(IBorder border)
+        {
+            this.border = border;
+            return this;
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <returns>instance of Label</returns>
         public Label Build()
         {
-            return new Label(text, position: position,frontColor: this.frontColor, backColor: this.backColor);
+            return new Label(text, position: position,frontColor: this.frontColor, backColor: this.backColor, border:this.border);
         }
+
     }
 
 }

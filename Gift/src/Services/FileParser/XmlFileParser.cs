@@ -75,7 +75,7 @@ namespace Gift.src.Services.FileParser
                     component = new HStackBuilder().WithBorder(border).Build();
                     break;
                 case "Label":
-                    component = new LabelBuilder().WithText(element.InnerText).Build();
+                    component = new LabelBuilder().WithBorder(border).WithText(element.InnerText).Build();
                     break;
                 // Add more cases for other UI components as needed
 

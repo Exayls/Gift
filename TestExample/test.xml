@@ -6,11 +6,11 @@
 			<Label>World</Label>
 		</Vstack>
 		<Vstack >
-			<Label>Hello</Label>
+			<Label BorderOption="simple">Hello</Label>
 			<Label>World</Label>
 		</Vstack>
 		<Vstack BorderOption="simple">
-			<Label>Hello</Label>
+			<Label BorderOption="simple">Hello</Label>
 			<Label>World</Label>
 		</Vstack>
 	</Vstack>
