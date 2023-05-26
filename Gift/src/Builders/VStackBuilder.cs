@@ -15,6 +15,8 @@ namespace Gift.Builders
         private IBorder Border = new NoBorder();
         private Bound Bound = new Bound(0, 0);
         private IScreenDisplayFactory screenDisplayFactory = new ScreenDisplayFactory();
+        private Color backColor = Color.Default;
+        private Color frontColor = Color.Default;
 
         public VStackBuilder WithBorder(IBorder border)
         {
@@ -26,9 +28,27 @@ namespace Gift.Builders
             Bound = bound;
             return this;
         }
+
+        public VStackBuilder WithBackgroundColor(Color color)
+        {
+            this.backColor = color;
+            return this;
+        }
+
+        public VStackBuilder WithForegroundColor(Color color)
+        {
+            this.frontColor = color;
+            return this;
+        }
+
         public VStack Build()
         {
-            return new VStack(Border, screenDisplayFactory, Bound);
+            return new VStack(Border,
+                              screenDisplayFactory,
+                              Bound,
+                              frontColor: frontColor,
+                              backColor: backColor);
         }
+
     }
 }

@@ -2,6 +2,7 @@
 using Gift.UI;
 using Gift.UI.Border;
 using Gift.UI.Element;
+using Gift.UI.MetaData;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,11 +32,7 @@ namespace Gift.src.Services.FileParser
 
             foreach (XmlNode childNode in element.ChildNodes)
             {
-                if (childNode is XmlElement childElement)
-                {
-                    IUIElement childComponent = ParseUIElementRec(childElement);
-                    giftui.AddChild(childComponent);
-                }
+                AddChild(giftui, childNode);
             }
             return giftui;
         }
@@ -65,17 +62,32 @@ namespace Gift.src.Services.FileParser
             IUIElement component;
 
             IBorder border = GetBorder(element);
+            Color foregroundColor = GetForeGroundColor(element);
+            Color backgroundColor = GetBackGroundColor(element);
 
             switch (element.Name)
             {
+                case "GiftUI":
+                    component = new GiftUI();
+                    break;
                 case "Vstack":
-                    component = new VStackBuilder().WithBorder(border).Build();
+                    component = new VStackBuilder().WithBorder(border)
+                        .WithBackgroundColor(backgroundColor)
+                        .WithForegroundColor(foregroundColor)
+                        .Build();
                     break;
                 case "Hstack":
-                    component = new HStackBuilder().WithBorder(border).Build();
+                    component = new HStackBuilder().WithBorder(border)
+                        .WithBackgroundColor(backgroundColor)
+                        .WithForegroundColor(foregroundColor)
+                        .Build();
                     break;
                 case "Label":
-                    component = new LabelBuilder().WithBorder(border).WithText(element.InnerText).Build();
+                    component = new LabelBuilder().WithBorder(border)
+                        .WithText(element.InnerText)
+                        .WithBackgroundColor(backgroundColor)
+                        .WithForegroundColor(foregroundColor)
+                        .Build();
                     break;
                 // Add more cases for other UI components as needed
 
@@ -83,6 +95,20 @@ namespace Gift.src.Services.FileParser
                     throw new NotSupportedException("Unsupported UI component: " + element.Name);
             }
             return component;
+        }
+
+        private static Color GetBackGroundColor(XmlElement element)
+        {
+            Enum.TryParse(element.Attributes.GetNamedItem("backgroundColor")?.Value
+                ?? "Default", true, out Color backgroundColor);
+            return backgroundColor;
+        }
+
+        private static Color GetForeGroundColor(XmlElement element)
+        {
+            Enum.TryParse(element.Attributes.GetNamedItem("foregroundColor")?.Value
+                ?? "Default", true, out Color backgroundColor);
+            return backgroundColor;
         }
 
         private static IBorder GetBorder(XmlElement element)
