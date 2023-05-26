@@ -76,7 +76,10 @@ namespace Gift.UI.Element
                 frontColor = configuration.SelectedContainerFrontColor ?? frontColor;
                 backColor = configuration.SelectedContainerBackColor ?? backColor;
             }
-            IScreenDisplay screenDisplay = Border.GetDisplay(bound, frontColor, backColor);
+
+            IScreenDisplay screenDisplay = Border.GetDisplay(bound,
+                                                             frontColor,
+                                                             backColor);
             return screenDisplay;
         }
 

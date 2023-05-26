@@ -53,9 +53,9 @@ namespace Gift.UI.Element
             int context_x = context.Position.x;
             int relative_y = Disposition.Position.y;
             int relative_x = Disposition.Position.x;
-            int global_y = context_y + relative_y;
-            int global_x = context_x + relative_x;
-            Position position = new Position(global_y, global_x);
+            int position_y = context_y + relative_y;
+            int position_x = context_x + relative_x;
+            Position position = new Position(position_y, position_x);
             return position;
         }
 

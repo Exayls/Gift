@@ -66,20 +66,10 @@ namespace Gift.UI.Element
         public override Context GetContextRelativeRenderable(IRenderable renderable, Context context)
         {
             int ChildContextPosition = GetHeightRenderable(renderable);
-            if (renderable.IsFixed())
-            {
-                return new Context(
-                    new Position(ChildContextPosition
-                               , 0),
-                    new Bound(0, 0));
-            }
-            else
-            {
-                return new Context(
-                    new Position(ChildContextPosition
-                               , 0),
-                    new Bound(renderable.Height, renderable.Width));
-            }
+            return new Context(
+                new Position(ChildContextPosition
+                           , 0),
+                new Bound(renderable.Height, renderable.Width));
         }
 
         private int GetHeightRenderable(IRenderable renderableToFind)
