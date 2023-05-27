@@ -73,8 +73,8 @@ namespace Gift.UI.Element
             Color backColor = BackColor == Color.Default ? configuration.DefaultBackColor : BackColor;
             if (IsSelectedContainer)
             {
-                frontColor = configuration.SelectedContainerFrontColor ?? frontColor;
-                backColor = configuration.SelectedContainerBackColor ?? backColor;
+                frontColor = configuration.SelectedContainerFrontColor == Color.Default ? frontColor: configuration.SelectedContainerFrontColor;
+                backColor = configuration.SelectedContainerBackColor == Color.Default ? backColor: configuration.SelectedContainerBackColor;
             }
 
             IScreenDisplay screenDisplay = Border.GetDisplay(bound,

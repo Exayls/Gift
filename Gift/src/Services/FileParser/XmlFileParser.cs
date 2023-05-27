@@ -89,7 +89,6 @@ namespace Gift.src.Services.FileParser
                         .WithForegroundColor(foregroundColor)
                         .Build();
                     break;
-                // Add more cases for other UI components as needed
 
                 default:
                     throw new NotSupportedException("Unsupported UI component: " + element.Name);

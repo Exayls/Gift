@@ -8,18 +8,18 @@ namespace Gift.UI.Configuration
 
         public Color DefaultBackColor { get; }
 
-        public Color? SelectedContainerFrontColor { get; }
-        public Color? SelectedContainerBackColor { get; }
-        public Color? SelectedElementFrontColor { get; }
-        public Color? SelectedElementBackColor { get; }
+        public Color SelectedContainerFrontColor { get; }
+        public Color SelectedContainerBackColor { get; }
+        public Color SelectedElementFrontColor { get; }
+        public Color SelectedElementBackColor { get; }
 
 
         public Configuration(Color frontColor = Color.White,
                              Color backColor = Color.Black,
-                             Color? selectedElementFrontColor = null,
-                             Color? selectedElementBackColor = Color.Green,
-                             Color? selectedContainerFrontColor = Color.Green,
-                             Color? selectedContainerBackColor = null)
+                             Color selectedElementFrontColor = Color.Default,
+                             Color selectedElementBackColor = Color.Green,
+                             Color selectedContainerFrontColor = Color.Green,
+                             Color selectedContainerBackColor = Color.Default)
         {
             DefaultBackColor = backColor;
             DefaultFrontColor = frontColor;

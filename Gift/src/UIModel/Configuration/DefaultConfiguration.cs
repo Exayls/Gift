@@ -9,10 +9,10 @@ namespace Gift.UI.Configuration
         public Color DefaultBackColor { get { return Color.Black; } }
 
 
-        public Color? SelectedElementFrontColor { get { return null; } }
-        public Color? SelectedElementBackColor { get { return Color.Green; } }
-        public Color? SelectedContainerFrontColor { get { return Color.Green; } }
-        public Color? SelectedContainerBackColor { get { return null; } }
+        public Color SelectedElementFrontColor { get { return Color.Default; } }
+        public Color SelectedElementBackColor { get { return Color.Green; } }
+        public Color SelectedContainerFrontColor { get { return Color.Green; } }
+        public Color SelectedContainerBackColor { get { return Color.Default; } }
 
     }
 }

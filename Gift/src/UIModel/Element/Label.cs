@@ -65,15 +65,15 @@ namespace Gift.UI.Element
             Color backColor = BackColor == Color.Default ? configuration.DefaultBackColor : BackColor;
             if (IsSelectedElement && IsInSelectedContainer)
             {
-                frontColor = configuration.SelectedElementFrontColor ?? frontColor;
-                backColor = configuration.SelectedElementBackColor ?? backColor;
+                frontColor = configuration.SelectedElementFrontColor == Color.Default ? frontColor : configuration.SelectedElementFrontColor;
+                backColor = configuration.SelectedElementBackColor == Color.Default ? backColor : configuration.SelectedElementBackColor;
             }
             return new ScreenDisplay(Text, frontColor, backColor);
         }
 
         public override IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuration)
         {
-            return Border.GetDisplay(new Bound(Height,Width), FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor, BackColor == Color.Default ? configuration.DefaultBackColor : BackColor);
+            return Border.GetDisplay(new Bound(Height, Width), FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor, BackColor == Color.Default ? configuration.DefaultBackColor : BackColor);
         }
     }
 }
