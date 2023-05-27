@@ -83,6 +83,7 @@ namespace Gift
             _monitorManager = monitorManager;
             _monitorManager.Add(consoleSizeMonitor);
 
+            _monitorManager.StartCheckingMonitors();
             _keyInputHandler.StartCheckUserInput();
 
             _xmlParser = xmlFileParser;
@@ -116,5 +117,12 @@ namespace Gift
             RunAsync().Wait();
         }
 
+        public async void InitializeHotReload(string file)
+        {
+            while (true)
+            {
+                await Task.Run(() => Initialize(file));
+            }
+        }
     }
 }

@@ -8,5 +8,5 @@ services.AddGiftServices();
 var serviceProvider = services.BuildServiceProvider();
 var gift = serviceProvider.GetRequiredService<GiftBase>();
 
-gift.Initialize("test.xml");
+gift.InitializeHotReload("test.xml");
 gift.Run();

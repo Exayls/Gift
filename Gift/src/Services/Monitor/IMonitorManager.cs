@@ -4,5 +4,6 @@
     {
         void Add(IMonitor monitor);
         void Remove(IMonitor monitor);
+        void StartCheckingMonitors();
     }
 }

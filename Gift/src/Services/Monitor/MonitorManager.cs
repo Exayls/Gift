@@ -8,13 +8,11 @@ namespace Gift.Monitor
 {
     public class MonitorManager : IMonitorManager
     {
-        private Timer timer;
         public IList<IMonitor> Monitors { get; private set; }
 
         public MonitorManager()
         {
             Monitors = new List<IMonitor>();
-            timer = new Timer(CheckMonitors, null, 0, 100);
         }
         public void Add(IMonitor monitor)
         {
@@ -31,7 +29,15 @@ namespace Gift.Monitor
             }
         }
 
-        private void CheckMonitors(object? state)
+        public async void StartCheckingMonitors()
+        {
+            while (true)
+            {
+                await Task.Run(() => CheckMonitors());
+            }
+        }
+
+        private void CheckMonitors()
         {
             lock (Monitors)
             {

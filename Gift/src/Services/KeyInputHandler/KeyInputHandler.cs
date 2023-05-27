@@ -13,17 +13,21 @@ namespace Gift.KeyInput
 
         public async void StartCheckUserInput()
         {
-            await Task.Yield();
             while (true)
             {
-                if (Console.KeyAvailable)
-                {
-                    ConsoleKeyInfo consoleKeyInfo = Console.ReadKey(true);
-                    ConsoleModifiers modifier = consoleKeyInfo.Modifiers;
-                    ConsoleKey keyValue = consoleKeyInfo.Key;
-                    KeyEventArgs keyEventArgs = new KeyEventArgs(keyValue, modifier);
-                    _signalBus.PushSignal(new Signal("KeyPressed", keyEventArgs));
-                }
+                await Task.Run(() => CheckUserInput());
+            }
+        }
+
+        private void CheckUserInput()
+        {
+            if (Console.KeyAvailable)
+            {
+                ConsoleKeyInfo consoleKeyInfo = Console.ReadKey(true);
+                ConsoleModifiers modifier = consoleKeyInfo.Modifiers;
+                ConsoleKey keyValue = consoleKeyInfo.Key;
+                KeyEventArgs keyEventArgs = new KeyEventArgs(keyValue, modifier);
+                _signalBus.PushSignal(new Signal("KeyPressed", keyEventArgs));
             }
         }
     }

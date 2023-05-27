@@ -20,7 +20,7 @@ namespace Gift.src.Services.SignalHandler.Key
 
         public void HandleSignal(ISignal signal)
         {
-            if (signal.EventArgs is KeyEventArgs)
+            if (signal.EventArgs is KeyEventArgs && signal.Name == "KeyPressed")
             {
                 KeyEventArgs eventsArgs = (KeyEventArgs)signal.EventArgs;
                 PushAllSignalMappedToKey(eventsArgs);
