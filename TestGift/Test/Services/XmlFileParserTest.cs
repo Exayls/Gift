@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace TestGift.Test
+namespace TestGift.Test.Services
 {
     public class XmlFileParserTests
     {

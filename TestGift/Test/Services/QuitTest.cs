@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestGift.Test
+namespace TestGift.Test.Services
 {
     public class QuitTest
     {
