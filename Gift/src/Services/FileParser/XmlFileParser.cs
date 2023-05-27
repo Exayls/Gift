@@ -98,14 +98,14 @@ namespace Gift.src.Services.FileParser
 
         private static Color GetBackGroundColor(XmlElement element)
         {
-            Enum.TryParse(element.Attributes.GetNamedItem("backgroundColor")?.Value
+            Enum.TryParse(element.Attributes.GetNamedItem("backColor")?.Value
                 ?? "Default", true, out Color backgroundColor);
             return backgroundColor;
         }
 
         private static Color GetForeGroundColor(XmlElement element)
         {
-            Enum.TryParse(element.Attributes.GetNamedItem("foregroundColor")?.Value
+            Enum.TryParse(element.Attributes.GetNamedItem("frontColor")?.Value
                 ?? "Default", true, out Color backgroundColor);
             return backgroundColor;
         }
