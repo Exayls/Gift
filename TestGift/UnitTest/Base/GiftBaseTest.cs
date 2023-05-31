@@ -38,6 +38,7 @@ namespace TestGift.LifeCycle
         private Mock<IGlobalSignalHandler> globalSignalHandlerMock;
         private Mock<IDisplayManager> displayManagerMock;
         private Mock<IXMLFileParser> xmlFileParserMock;
+        private Mock<IUIElementRegister> uIElementRegister;
         private GiftBase giftBase;
 
         public GiftBaseTest()
@@ -55,6 +56,7 @@ namespace TestGift.LifeCycle
             globalSignalHandlerMock = new Mock<IGlobalSignalHandler>();
             displayManagerMock = new Mock<IDisplayManager>();
             xmlFileParserMock = new Mock<IXMLFileParser>();
+            uIElementRegister = new Mock<IUIElementRegister>();
 
 
             giftBase = new GiftBase(
@@ -69,6 +71,7 @@ namespace TestGift.LifeCycle
                            uISignalHandler: uiSignalHandlerMock.Object,
                            globalSignalHandler: globalSignalHandlerMock.Object,
                            xmlFileParser: xmlFileParserMock.Object,
+                           elementRegister: uIElementRegister.Object,
                            displayManager: displayManagerMock.Object);
         }
 

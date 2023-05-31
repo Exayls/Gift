@@ -16,7 +16,7 @@ namespace Gift.src.Services.FileParser
             string key = typeName.ToLower();
             if (!_elements.ContainsKey(key))
             {
-                throw new NullReferenceException();
+                throw new NotSupportedException("Unknown component: " + typeName);
             }
             return _elements[key];
         }

@@ -16,6 +16,7 @@ using Gift.UI;
 using Gift.UI.Display;
 using Gift.UI.Displayer;
 using Gift.UI.DisplayManager;
+using Gift.UI.Element;
 using Gift.UI.MetaData;
 using Gift.UI.Render;
 
@@ -47,7 +48,7 @@ namespace Gift
         private readonly IKeyInputHandler _keyInputHandler;
 
         private readonly IXMLFileParser _xmlParser;
-
+        private readonly IUIElementRegister _uielementRegister;
         public const char FILLINGCHAR = '*';
 
         public GiftBase(IRenderer renderer,
@@ -61,7 +62,8 @@ namespace Gift
                         IUISignalHandler uISignalHandler,
                         IGlobalSignalHandler globalSignalHandler,
                         IXMLFileParser xmlFileParser,
-                        IDisplayManager displayManager)
+                        IDisplayManager displayManager,
+                        IUIElementRegister elementRegister)
         {
             _renderer = renderer;
             _displayer = displayer;
@@ -70,6 +72,7 @@ namespace Gift
 
             _signalBus = queue;
             _keyInputHandler = keyInputHandler;
+
             _keySignalHandler = keySignalHandler;
             _signalBus.Subscribe(_keySignalHandler);
 
@@ -88,6 +91,16 @@ namespace Gift
 
             _xmlParser = xmlFileParser;
 
+            _uielementRegister = elementRegister;
+            RegisterUIElements();
+        }
+
+        private void RegisterUIElements()
+        {
+            _uielementRegister.Register("GiftUI", typeof(GiftUI));
+            _uielementRegister.Register("VStack", typeof(VStack));
+            _uielementRegister.Register("HStack", typeof(HStack));
+            _uielementRegister.Register("Label",  typeof(Label));
         }
 
         public virtual void Initialize(IGiftUI ui)

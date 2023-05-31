@@ -1,5 +1,6 @@
 ﻿using Gift.src.Services.FileParser;
 using Gift.UI;
+using Gift.UI.Element;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,15 @@ namespace TestGift.Test.Services
     public class XmlFileParserTests
     {
         private XmlFileParser xmlParser;
+        private IUIElementRegister elementRegister;
 
         public XmlFileParserTests()
         {
-            xmlParser = new XmlFileParser();
+            elementRegister = new UIElementRegister();
+            elementRegister.Register("GiftUI", typeof(GiftUI));
+            elementRegister.Register("Label", typeof(Label));
+            elementRegister.Register("VStack", typeof(VStack));
+            xmlParser = new XmlFileParser(elementRegister);
         }
 
         [Fact]
