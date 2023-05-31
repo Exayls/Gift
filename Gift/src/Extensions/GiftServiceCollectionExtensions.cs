@@ -40,8 +40,10 @@ namespace Gift.src.Extensions
             services.AddSingleton<IUISignalHandler, UISignalHandler>();
             services.AddSingleton<IKeySignalHandler, KeySignalHandler>();
             services.AddSingleton<IGlobalSignalHandler, GlobalSignalHandler>();
+            services.AddSingleton<IUIElementRegister, UIElementRegister>();
             services.AddSingleton<IXMLFileParser, XmlFileParser>();
             services.AddSingleton<GiftBase>();
+
 
             return services;
         }
