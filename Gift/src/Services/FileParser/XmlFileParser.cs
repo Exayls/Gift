@@ -17,6 +17,7 @@ namespace Gift.src.Services.FileParser
     public class XmlFileParser : IXMLFileParser
     {
         private IUIElementRegister _uielementRegister;
+        private IGiftUI? giftUI = null;
 
         public XmlFileParser(IUIElementRegister elementRegister)
         {
@@ -37,7 +38,7 @@ namespace Gift.src.Services.FileParser
         private IGiftUI ParseUIElement(XmlElement element)
         {
             IGiftUI giftui = new GiftUI();
-
+            this.giftUI = giftui;
             foreach (XmlNode childNode in element.ChildNodes)
             {
                 AddChild(giftui, childNode);
@@ -45,12 +46,11 @@ namespace Gift.src.Services.FileParser
             return giftui;
         }
 
-
-        private IUIElement ParseUIElementRec(XmlElement element)
+        private IUIElement ParseUIElementRec(XmlElement element, IContainer parent)
         {
             IUIElement component;
 
-            component = CreateUIElement(element);
+            component = CreateGenericComponent(element, parent);
 
             foreach (XmlNode childNode in element.ChildNodes)
             {
@@ -61,76 +61,61 @@ namespace Gift.src.Services.FileParser
                 }
                 AddChild(container, childNode);
             }
-
             return component;
         }
 
-        private IUIElement CreateUIElement(XmlElement element)
+        private void AddChild(IContainer container, XmlNode childNode)
         {
-            IUIElement component;
-
-            //IBorder border = GetBorder(element);
-            //Color foregroundColor = GetForeGroundColor(element);
-            //Color backgroundColor = GetBackGroundColor(element);
-
-            component = CreateUnknownComponent(element);
-            //switch (element.Name)
-            //{
-            //    case "GiftUI":
-            //        component = new GiftUI();
-            //        break;
-            //    case "Vstack":
-            //        component = new VStackBuilder().WithBorder(border)
-            //            .WithBackgroundColor(backgroundColor)
-            //            .WithForegroundColor(foregroundColor)
-            //            .Build();
-            //        break;
-            //    case "Hstack":
-            //        component = new HStackBuilder().WithBorder(border)
-            //            .WithBackgroundColor(backgroundColor)
-            //            .WithForegroundColor(foregroundColor)
-            //            .Build();
-            //        break;
-            //    case "Label":
-            //        component = new LabelBuilder().WithBorder(border)
-            //            .WithText(element.InnerText)
-            //            .WithBackgroundColor(backgroundColor)
-            //            .WithForegroundColor(foregroundColor)
-            //            .Build();
-            //        break;
-
-            //    default:
-            //        throw new NotSupportedException("Unsupported UI component: " + element.Name);
-            //}
-            return component;
+            if (childNode is XmlElement childElement)
+            {
+                IUIElement childComponent = ParseUIElementRec(childElement, container);
+                container.AddChild(childComponent);
+                SelectElement(childComponent, childElement, container);
+                SelectContainer(childComponent, childElement);
+            }
         }
 
-        private IUIElement CreateUnknownComponent(XmlElement element)
+
+        private IUIElement CreateGenericComponent(XmlElement element, IContainer parent)
         {
             string componentName = element.Name;
             Type componentType = GetTypeByName(componentName);
-
-            if (componentType == null)
-            {
-            }
 
             ConstructorInfo constructor = GetConstructor(componentName, componentType);
 
             IUIElement uiElement = ConstructElementViaConstructor(element, componentName, constructor);
 
-            //SelectContainer(uiElement, element);
-            //SelectElement(uiElement, element);
             return uiElement;
         }
 
         private void SelectContainer(IUIElement uiElement, XmlElement element)
         {
-            if (uiElement is Container container)
+            if (giftUI == null)
             {
-                if(element.GetAttribute("selectableContainer") == "true")
+                return;
+            }
+            if (uiElement is IContainer container)
+            {
+                if (element.GetAttribute("selectableContainer") == "true")
                 {
-                    container.IsInSelectedContainer = true;
+                    giftUI.SelectableContainers.Add(container);
                 }
+                if (element.GetAttribute("selectedContainer") == "true")
+                {
+                    giftUI.SelectedContainer = container;
+                }
+            }
+        }
+
+        private void SelectElement(IUIElement uiElement, XmlElement element, IContainer container)
+        {
+            if (element.GetAttribute("selectableElement") == "true")
+            {
+                container.SelectableElements.Add(uiElement);
+            }
+            if (element.GetAttribute("selectedElement") == "true")
+            {
+                container.SelectedElement = uiElement;
             }
         }
 
@@ -251,15 +236,6 @@ namespace Gift.src.Services.FileParser
                     break;
             }
             return border;
-        }
-
-        private void AddChild(IContainer container, XmlNode childNode)
-        {
-            if (childNode is XmlElement childElement)
-            {
-                IUIElement childComponent = ParseUIElementRec(childElement);
-                container.AddChild(childComponent);
-            }
         }
 
     }
