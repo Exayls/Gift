@@ -122,11 +122,11 @@ namespace Gift.src.Services.FileParser
         private static IUIElement ConstructElementViaConstructor(XmlElement element, string componentName, ConstructorInfo constructor)
         {
             ParameterInfo[] parameters = constructor.GetParameters();
-            object[] args = new object[parameters.Length];
+            object?[] args = new object[parameters.Length];
 
             for (int i = 0; i < parameters.Length; i++)
             {
-                object arg = null;
+                object? arg = null;
 
                 ParameterInfo parameter = parameters[i];
                 Type parameterType = parameter.ParameterType;
