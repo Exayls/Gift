@@ -15,7 +15,8 @@ namespace Gift.UI.Element
         private IUIElement? selectedElement;
         public IUIElement? SelectedElement
         {
-            get => selectedElement; set
+            get => selectedElement;
+            set
             {
                 selectedElement = value;
 
@@ -73,8 +74,8 @@ namespace Gift.UI.Element
             Color backColor = BackColor == Color.Default ? configuration.DefaultBackColor : BackColor;
             if (IsSelectedContainer)
             {
-                frontColor = configuration.SelectedContainerFrontColor == Color.Default ? frontColor: configuration.SelectedContainerFrontColor;
-                backColor = configuration.SelectedContainerBackColor == Color.Default ? backColor: configuration.SelectedContainerBackColor;
+                frontColor = configuration.SelectedContainerFrontColor == Color.Default ? frontColor : configuration.SelectedContainerFrontColor;
+                backColor = configuration.SelectedContainerBackColor == Color.Default ? backColor : configuration.SelectedContainerBackColor;
             }
 
             IScreenDisplay screenDisplay = Border.GetDisplay(bound,
