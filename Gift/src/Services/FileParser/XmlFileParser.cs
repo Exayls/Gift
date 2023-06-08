@@ -191,9 +191,6 @@ namespace Gift.src.Services.FileParser
 
         private Type GetTypeByName(string typeName)
         {
-            //Assembly assembly = Assembly.GetExecutingAssembly();
-            //var a = assembly.GetTypes();
-            //Type? type = assembly.GetType(typeName, false, true);
             Type type = _uielementRegister.GetTypeByName(typeName);
             return type;
         }

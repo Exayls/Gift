@@ -29,6 +29,7 @@ namespace Gift.UI.DisplayManager
             PrintFrame(view);
         }
 
+
         public IScreenDisplay CreateView()
         {
             IScreenDisplay View = _renderer.GetRenderDisplay(_uiProvider.Ui);
