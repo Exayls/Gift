@@ -9,6 +9,7 @@ namespace Gift.UI.Element
     public abstract class Container : UIElement, IContainer
     {
         public Bound Bound { get; protected set; }
+        public int ScrollIndex { get; protected set; }
         public IList<IUIElement> Childs { get; protected set; }
         public List<IUIElement> SelectableElements { get; set; }
 
@@ -98,6 +99,16 @@ namespace Gift.UI.Element
             {
                 SelectedElement = SelectableElements[(SelectableElements.IndexOf(SelectedElement) - 1 + SelectableElements.Count) % SelectableElements.Count];
             }
+        }
+
+        public void ScrollDown()
+        {
+            this.ScrollIndex += 1;
+        }
+
+        public void ScrollUp()
+        {
+            this.ScrollIndex -= 1;
         }
 
         public void AddChild(IUIElement uIElement)
