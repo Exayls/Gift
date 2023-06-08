@@ -67,7 +67,7 @@ namespace Gift.UI.Element
         {
             int ChildContextPosition = GetHeightRenderable(renderable);
             return new Context(
-                new Position(ChildContextPosition
+                new Position(ChildContextPosition - ScrollIndex
                            , 0),
                 new Bound(renderable.Height, renderable.Width));
         }

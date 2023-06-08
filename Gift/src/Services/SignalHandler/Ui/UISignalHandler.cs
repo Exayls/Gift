@@ -36,9 +36,27 @@ namespace Gift.src.Services.SignalHandler.Ui
                 case "Console.Resize":
                     OnSizeChanged(signal.EventArgs);
                     break;
+                case "Ui.ScrollUp":
+                    ScrollUp();
+                    break;
+                case "Ui.ScrollDown":
+                    ScrollDown();
+                    break;
                 default:
                     break;
             }
+        }
+
+        private void ScrollUp()
+        {
+            _displayManager.ScrollUp();
+            _displayManager.UpdateDisplay();
+        }
+
+        private void ScrollDown()
+        {
+            _displayManager.ScrollDown();
+            _displayManager.UpdateDisplay();
         }
 
         private void NextElement()

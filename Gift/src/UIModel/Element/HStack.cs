@@ -69,7 +69,7 @@ namespace Gift.UI.Element
             int ChildContextPosition = GetWidthRenderable(renderable);
             return new Context(
                 new Position(0
-                           , ChildContextPosition),
+                           , ChildContextPosition-ScrollIndex),
                 new Bound(renderable.Height, renderable.Width));
         }
 

@@ -10,10 +10,13 @@ namespace Gift.UI.Element
         List<IUIElement> SelectableElements { get; set; }
         IUIElement? SelectedElement { get; set; }
         bool IsSelectedContainer { get; set; }
+        int ScrollIndex { get; }
 
         void AddChild(IUIElement uIElement);
         Context GetContextRelativeRenderable(IRenderable renderable, Context context);
         void NextElement();
         void PreviousElement();
+        void ScrollDown();
+        void ScrollUp();
     }
 }

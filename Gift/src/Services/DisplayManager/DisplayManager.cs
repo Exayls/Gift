@@ -67,5 +67,15 @@ namespace Gift.UI.DisplayManager
         {
             _uiProvider.Ui.Resize(bound);
         }
+
+        public void ScrollUp()
+        {
+            _uiProvider.Ui.SelectedContainer?.ScrollUp();
+        }
+
+        public void ScrollDown()
+        {
+            _uiProvider.Ui.SelectedContainer?.ScrollDown();
+        }
     }
 }

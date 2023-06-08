@@ -3,5 +3,7 @@
     "s": "Ui.PreviousElementInSelectedContainer",
     "r": "Ui.NextContainer",
     "c": "Ui.PreviousContainer",
+    "b": "Ui.ScrollUp",
+    "a": "Ui.ScrollDown",
     "q": "Global.Quit"
 }

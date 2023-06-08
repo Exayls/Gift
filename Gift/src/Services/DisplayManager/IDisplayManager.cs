@@ -15,6 +15,8 @@ namespace Gift.UI.DisplayManager
         void PreviousContainer();
         void PreviousElementInSelectedContainer();
         void Resize(Bound bound);
+        void ScrollDown();
+        void ScrollUp();
         void UpdateDisplay();
     }
 }
