@@ -368,6 +368,24 @@ namespace TestGift.UnitTest.UI.Element
             Assert.Equal(1, context.Bounds.Width);
         }
 
+        [Fact]
+        public void GetContext_should_return_context_with_minus1_0_position_when_vstack_has_scrollDown()
+        {
+            //arrange
+            _borderMock.Setup(b => b.Thickness).Returns(2);
+            _uiElementMock1.Setup(u => u.IsFixed()).Returns(false);
+            _uiElementMock1.Setup(u => u.Height).Returns(3);
+            _uiElementMock1.Setup(u => u.Width).Returns(1);
+            vstack.AddChild(_uiElementMock1.Object);
+            vstack.ScrollDown();
+            Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
+            //act
+            Context context = vstack.GetContextRelativeRenderable(_uiElementMock1.Object, contextRenderable);
+            //assert
+            Assert.Equal(-1, context.Position.y);
+            Assert.Equal(0, context.Position.x);
+        }
+
         //Height/Width Tests
         [Fact]
         public void Height_should_be_1_when_1_element_height_1_in_it_with_no_border()
@@ -648,8 +666,23 @@ namespace TestGift.UnitTest.UI.Element
             Assert.Equal(2, position.y);
             Assert.Equal(1, position.x);
         }
+
         [Fact]
         public void GetRelativePosition_should_return_4_3_when_parent_at_2_1_and_border_2()
+        {
+            //arrange
+            _borderMock.Setup(b => b.Thickness).Returns(2);
+            vstack.Border = _borderMock.Object;
+            Context contextRenderable = new Context(new Position(2, 1), new Bound(0, 0));
+            //act
+            Position position = vstack.GetRelativePosition(contextRenderable);
+            //assert
+            Assert.Equal(2, position.y);
+            Assert.Equal(1, position.x);
+        }
+
+        [Fact]
+        public void GetRelativePosition_should_return_3_3_when_parent_at_2_1_and_border_2()
         {
             //arrange
             _borderMock.Setup(b => b.Thickness).Returns(2);
