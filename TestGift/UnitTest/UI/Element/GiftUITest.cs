@@ -6,9 +6,6 @@ using Gift.UI.MetaData;
 using Moq;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace TestGift.UnitTest.UI.Element
@@ -19,6 +16,7 @@ namespace TestGift.UnitTest.UI.Element
         private Mock<IBorder> _borderMock;
         private Mock<IScreenDisplayFactory> _ScreenDisplayFactoryMock;
         private GiftUI giftui;
+        private Mock<IContainer> _containerMock;
 
         public GiftUITest()
         {
@@ -26,6 +24,7 @@ namespace TestGift.UnitTest.UI.Element
             _borderMock = new Mock<IBorder>();
             _ScreenDisplayFactoryMock = new Mock<IScreenDisplayFactory>();
             _ScreenDisplayFactoryMock.Setup(s => s.Create(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock1.Object);
+            _containerMock = new Mock<IContainer>();
             giftui = new GiftUI(new Bound(5, 5), _borderMock.Object);
         }
 
@@ -146,30 +145,28 @@ namespace TestGift.UnitTest.UI.Element
         public void NextElementInSelectedContainer_should_call_nextElement_if_selectedContainer_is_not_null()
         {
             //Arrange
-            Mock<IContainer> container1 = new Mock<IContainer>();
-            container1.Setup(c => c.SelectableElements).Returns(new List<IUIElement>());
-            giftui.SelectableContainers.Add(container1.Object);
+            _containerMock.Setup(c => c.SelectableElements).Returns(new List<IUIElement>());
+            giftui.SelectableContainers.Add(_containerMock.Object);
 
-            giftui.SelectedContainer = container1.Object;
+            giftui.SelectedContainer = _containerMock.Object;
             //Act
             giftui.NextElementInSelectedContainer();
             //Assert
-            container1.Verify(c => c.NextElement());
+            _containerMock.Verify(c => c.NextElement());
         }
 
         [Fact]
         public void PreviousElementInSelectedContainer_should_call_nextElement_if_selectedContainer_is_not_null()
         {
             //Arrange
-            Mock<IContainer> container1 = new Mock<IContainer>();
-            container1.Setup(c => c.SelectableElements).Returns(new List<IUIElement>());
-            giftui.SelectableContainers.Add(container1.Object);
+            _containerMock.Setup(c => c.SelectableElements).Returns(new List<IUIElement>());
+            giftui.SelectableContainers.Add(_containerMock.Object);
 
-            giftui.SelectedContainer = container1.Object;
+            giftui.SelectedContainer = _containerMock.Object;
             //Act
             giftui.PreviousElementInSelectedContainer();
             //Assert
-            container1.Verify(c => c.PreviousElement());
+            _containerMock.Verify(c => c.PreviousElement());
         }
     }
 }

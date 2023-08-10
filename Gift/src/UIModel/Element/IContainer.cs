@@ -1,4 +1,4 @@
-﻿using Gift.UI.Display;
+﻿using System.Collections.Generic;
 using Gift.UI.MetaData;
 
 namespace Gift.UI.Element

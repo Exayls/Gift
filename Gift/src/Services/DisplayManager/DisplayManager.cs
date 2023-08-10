@@ -3,11 +3,6 @@ using Gift.UI.Display;
 using Gift.UI.Displayer;
 using Gift.UI.MetaData;
 using Gift.UI.Render;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Gift.UI.DisplayManager
 {
@@ -23,18 +18,19 @@ namespace Gift.UI.DisplayManager
             _uiProvider = ui;
             _renderer = renderer;
         }
+
         public void UpdateDisplay()
         {
             IScreenDisplay view = CreateView();
             PrintFrame(view);
         }
 
-
         public IScreenDisplay CreateView()
         {
             IScreenDisplay View = _renderer.GetRenderDisplay(_uiProvider.Ui);
             return View;
         }
+
         private void PrintFrame(IScreenDisplay? View)
         {
             if (View != null)

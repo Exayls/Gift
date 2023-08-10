@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Gift.KeyInput;
-using Xunit;
+﻿using Xunit;
 
 namespace TestGift.UnitTest.KeyInput
 {
     public class KeyInputTest
     {
-        private KeyInputHandler keyinput;
 
         public KeyInputTest()
         {

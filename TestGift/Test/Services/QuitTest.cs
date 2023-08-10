@@ -2,11 +2,6 @@
 using Gift.src.Extensions;
 using Gift.UI;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestGift.Test.Services
 {

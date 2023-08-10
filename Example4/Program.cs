@@ -1,6 +1,5 @@
 ﻿using Gift;
 using Gift.src.Extensions;
-using Gift.UI.Border;
 using Microsoft.Extensions.DependencyInjection;
 
 var services = new ServiceCollection();

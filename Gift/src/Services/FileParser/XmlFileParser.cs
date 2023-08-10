@@ -1,15 +1,10 @@
-﻿using Gift.Builders;
-using Gift.UI;
+﻿using Gift.UI;
 using Gift.UI.Border;
 using Gift.UI.Display;
 using Gift.UI.Element;
 using Gift.UI.MetaData;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 
 namespace Gift.src.Services.FileParser

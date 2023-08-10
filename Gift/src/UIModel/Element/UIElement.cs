@@ -2,7 +2,6 @@
 using Gift.UI.Configuration;
 using Gift.UI.Display;
 using Gift.UI.MetaData;
-using System.Text;
 
 namespace Gift.UI.Element
 {

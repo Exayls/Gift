@@ -4,7 +4,6 @@ using Gift.src.Extensions;
 using Gift.UI;
 using Gift.UI.Border;
 using Gift.UI.MetaData;
-using Gift.UI.Render;
 using Microsoft.Extensions.DependencyInjection;
 
 var ui = new GiftUI();

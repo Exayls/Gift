@@ -1,4 +1,6 @@
-﻿namespace Gift.KeyInput
+﻿using System;
+
+namespace Gift.KeyInput
 {
     class KeyEventArgs : EventArgs
     {

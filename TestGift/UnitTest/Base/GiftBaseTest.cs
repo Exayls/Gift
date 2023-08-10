@@ -1,9 +1,4 @@
 ﻿using Gift;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Moq;
 using Gift.UI.Render;
 using Gift.KeyInput;
@@ -11,7 +6,6 @@ using Gift.Monitor;
 using Gift.UI.Displayer;
 using Xunit;
 using Gift.src.UIModel;
-using Gift.src.Extensions;
 using Gift.UI;
 using Gift.UI.DisplayManager;
 using Gift.src.Services.SignalHandler.Key;
@@ -86,9 +80,14 @@ namespace TestGift.LifeCycle
         [Fact]
         public void When_initialized_should_set_ui()
         {
-            Mock<IGiftUI> uiMock = new Mock<IGiftUI>();
-            giftBase.Initialize(uiMock.Object);
-            giftUiProviderMock.VerifySet(p => p.Ui = uiMock.Object);
+            GiftUI uiMock = GetGiftUI();
+            giftBase.Initialize(uiMock);
+            giftUiProviderMock.VerifySet(p => p.Ui = uiMock);
+        }
+
+        private static GiftUI GetGiftUI()
+        {
+            return new GiftUI();
         }
     }
 }

@@ -4,13 +4,11 @@ using Gift.UI;
 using Gift.UI.Display;
 using Gift.UI.MetaData;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Gift.UI.Render;
 using Gift.UI.Configuration;
 using Xunit;
+using System.IO;
 
 namespace TestGift.UI
 {

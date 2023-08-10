@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Gift.UI.Border;
+﻿using Gift.UI.Border;
 using Gift.UI.Display;
 using Gift.UI.Element;
 using Gift.UI.MetaData;

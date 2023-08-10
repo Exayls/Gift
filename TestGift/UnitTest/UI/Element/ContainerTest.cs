@@ -3,7 +3,6 @@ using Gift.UI.Display;
 using Gift.UI.Element;
 using Gift.UI.MetaData;
 using Moq;
-using System.Text;
 using Xunit;
 
 namespace TestGift.UnitTest.UI.Element

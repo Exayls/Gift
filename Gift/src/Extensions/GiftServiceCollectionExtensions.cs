@@ -13,11 +13,6 @@ using Gift.UI.Displayer;
 using Gift.UI.DisplayManager;
 using Gift.UI.Render;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Gift.src.Extensions
 {

@@ -3,10 +3,6 @@ using Gift.UI.Display;
 using Gift.UI.MetaData;
 using Moq;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace TestGift.UnitTest.Displayer

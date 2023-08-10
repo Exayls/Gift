@@ -1,6 +1,5 @@
-﻿using Gift.UI.Display;
-using Gift.UI.MetaData;
-using System.Text;
+﻿using System;
+using Gift.UI.Display;
 
 namespace Gift.UI.Displayer
 {
@@ -20,6 +19,5 @@ namespace Gift.UI.Displayer
             Console.SetCursorPosition(0, 0);
             Console.Out.Write(displayString);
         }
-
     }
 }

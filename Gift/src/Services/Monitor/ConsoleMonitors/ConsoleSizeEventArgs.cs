@@ -1,4 +1,6 @@
-﻿namespace Gift.src.Services.Monitor.ConsoleMonitors
+﻿using System;
+
+namespace Gift.src.Services.Monitor.ConsoleMonitors
 {
     public class ConsoleSizeEventArgs : EventArgs
     {

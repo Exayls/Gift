@@ -4,9 +4,9 @@ using Gift.UI.Display;
 using Gift.UI.MetaData;
 using Gift.UI.Render;
 using System.Text;
-using Gift.UI.Render;
 using Gift.UI.Configuration;
 using Xunit;
+using System.IO;
 
 namespace TestGift.UI
 {

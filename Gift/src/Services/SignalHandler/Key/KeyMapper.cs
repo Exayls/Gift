@@ -1,4 +1,7 @@
-﻿using System.Text.Json;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
 
 namespace Gift.src.Services.SignalHandler.Key
 {
@@ -30,6 +33,10 @@ namespace Gift.src.Services.SignalHandler.Key
 
             // Convert the key strings to ConsoleKey and ConsoleModifiers
             List<IKeyMapping> map = new List<IKeyMapping>();
+            if (keyMap == null)
+            {
+                return map;
+            }
             foreach (KeyValuePair<string, string> pair in keyMap)
             {
                 string[] keys = pair.Key.Split('+');

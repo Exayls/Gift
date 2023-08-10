@@ -1,7 +1,6 @@
-﻿using Gift.SignalHandler;
+﻿using System;
+using Gift.SignalHandler;
 using Gift.src.Services.Monitor.ConsoleMonitors;
-using Gift.UI;
-using Gift.UI.Display;
 using Gift.UI.DisplayManager;
 using Gift.UI.MetaData;
 

@@ -1,4 +1,4 @@
-﻿using Gift.Monitor;
+﻿using System.Collections.Generic;
 using Gift.SignalHandler;
 
 namespace Gift.src.Services.SignalHandler.Bus

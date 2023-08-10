@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Gift.KeyInput;
 using Gift.Monitor;
 using Gift.src.Services.FileParser;
@@ -13,11 +9,9 @@ using Gift.src.Services.SignalHandler.Key;
 using Gift.src.Services.SignalHandler.Ui;
 using Gift.src.UIModel;
 using Gift.UI;
-using Gift.UI.Display;
 using Gift.UI.Displayer;
 using Gift.UI.DisplayManager;
 using Gift.UI.Element;
-using Gift.UI.MetaData;
 using Gift.UI.Render;
 
 namespace Gift
@@ -75,7 +69,6 @@ namespace Gift
 
             _keySignalHandler = keySignalHandler;
             _signalBus.Subscribe(_keySignalHandler);
-
 
             _uiSignalHandler = uISignalHandler;
             _signalBus.Subscribe(_uiSignalHandler);

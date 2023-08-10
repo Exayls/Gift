@@ -1,4 +1,6 @@
-﻿namespace Gift.SignalHandler
+﻿using System;
+
+namespace Gift.SignalHandler
 {
     public interface ISignal
     {

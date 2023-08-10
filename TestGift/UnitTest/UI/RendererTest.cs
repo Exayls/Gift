@@ -1,35 +1,24 @@
-﻿using Gift.UI;
-using Gift.UI.Configuration;
-using Gift.UI.Display;
+﻿using Gift.UI.Configuration;
 using Gift.UI.Element;
-using Gift.UI.MetaData;
 using Gift.UI.Render;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestGift.UnitTest.UI
 {
     public class RendererTest
     {
         private Mock<IConfiguration> _confMock;
-        private Mock<IGiftUI> _giftuiMock;
         private Mock<IUIElement> _labelMock;
         private MockRepository _mockFactory;
         private Renderer renderer;
 
-        //public RendererTest()
-        //{
-        //    _confMock = new Mock<IConfiguration>();
-        //    _giftuiMock = new Mock<IGiftUI>();
-        //    _labelMock = new Mock<IUIElement>();
-        //    _mockFactory = new MockRepository(MockBehavior.Default);
-        //    renderer = new Renderer(_confMock.Object);
-        //}
+        public RendererTest()
+        {
+            _confMock = new Mock<IConfiguration>();
+            _labelMock = new Mock<IUIElement>();
+            _mockFactory = new MockRepository(MockBehavior.Default);
+            renderer = new Renderer(_confMock.Object);
+        }
 
         //[Fact]
         //public void GetRenderedBuffer_should_return_empty_text_when_giftui_is_empty()

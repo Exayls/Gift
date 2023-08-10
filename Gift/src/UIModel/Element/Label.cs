@@ -3,8 +3,6 @@ using Gift.UI.Configuration;
 using Gift.UI.Display;
 using Gift.UI.MetaData;
 using Gift.UI.Strategy;
-using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace Gift.UI.Element
 {

@@ -1,4 +1,6 @@
-﻿namespace Gift.src.Services.SignalHandler.Key
+﻿using System;
+
+namespace Gift.src.Services.SignalHandler.Key
 {
     public interface IKeyMapping
     {

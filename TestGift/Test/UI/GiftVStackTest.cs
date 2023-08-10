@@ -8,6 +8,8 @@ using Gift.UI.Element;
 using Gift.UI.MetaData;
 using Gift.UI.Render;
 using Moq;
+using System;
+using System.IO;
 using System.Text;
 using Xunit;
 

@@ -13,7 +13,5 @@ namespace Gift.SignalHandler
             Name = name;
             this.EventArgs = eventArgs;
         }
-
-
     }
 }

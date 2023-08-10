@@ -1,4 +1,5 @@
-﻿using Gift.SignalHandler;
+﻿using System.Threading.Tasks;
+using Gift.SignalHandler;
 
 namespace Gift.src.Services.SignalHandler.Global
 {
