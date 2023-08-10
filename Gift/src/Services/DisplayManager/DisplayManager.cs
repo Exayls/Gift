@@ -14,6 +14,7 @@ namespace Gift.UI.DisplayManager
 
         public DisplayManager(IDisplayer displayer, IRenderer renderer, IGiftUiProvider ui)
         {
+
             _displayer = displayer;
             _uiProvider = ui;
             _renderer = renderer;

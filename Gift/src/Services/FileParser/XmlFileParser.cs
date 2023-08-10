@@ -32,7 +32,7 @@ namespace Gift.src.Services.FileParser
 
         private IGiftUI ParseUIElement(XmlElement element)
         {
-            IGiftUI giftui = new GiftUI();
+            GiftUI giftui = new GiftUI();
             this.giftUI = giftui;
             foreach (XmlNode childNode in element.ChildNodes)
             {
@@ -41,7 +41,7 @@ namespace Gift.src.Services.FileParser
             return giftui;
         }
 
-        private IUIElement ParseUIElementRec(XmlElement element, IContainer parent)
+        private IUIElement ParseUIElementRec(XmlElement element, Container parent)
         {
             IUIElement component;
 
@@ -50,7 +50,7 @@ namespace Gift.src.Services.FileParser
             foreach (XmlNode childNode in element.ChildNodes)
             {
                 if (childNode is not XmlElement) { continue; }
-                if (component is not IContainer container)
+                if (component is not Container container)
                 {
                     throw new Exception("component is not container");
                 }
@@ -59,7 +59,7 @@ namespace Gift.src.Services.FileParser
             return component;
         }
 
-        private void AddChild(IContainer container, XmlNode childNode)
+        private void AddChild(Container container, XmlNode childNode)
         {
             if (childNode is XmlElement childElement)
             {
