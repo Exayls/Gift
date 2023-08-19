@@ -4,8 +4,8 @@ namespace Gift.src.UIModel
 {
     public class GiftUiProvider : IGiftUiProvider
     {
-        private IGiftUI? _ui;
-        public IGiftUI Ui
+        private GiftUI? _ui;
+        public GiftUI Ui
         {
             get
             {

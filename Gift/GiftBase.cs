@@ -18,7 +18,7 @@ namespace Gift
 {
     public class GiftBase
     {
-        public IGiftUI Ui
+        public GiftUI Ui
         {
             get
             {
@@ -96,7 +96,7 @@ namespace Gift
             _uielementRegister.Register("Label",  typeof(Label));
         }
 
-        public virtual void Initialize(IGiftUI ui)
+        public virtual void Initialize(GiftUI ui)
         {
             _uiProvider.Ui = ui;
             init();

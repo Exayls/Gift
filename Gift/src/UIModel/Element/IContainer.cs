@@ -7,12 +7,12 @@ namespace Gift.UI.Element
     {
         Bound Bound { get; }
         IList<IUIElement> Childs { get; }
-        List<IUIElement> SelectableElements { get; set; }
+        IList<IUIElement> SelectableElements { get; set; }
         IUIElement? SelectedElement { get; set; }
         bool IsSelectedContainer { get; set; }
         int ScrollIndex { get; }
 
-        void AddChild(IUIElement uIElement);
+        void AddUnselectableChild(IUIElement uIElement);
         Context GetContextRelativeRenderable(IRenderable renderable, Context context);
         void NextElement();
         void PreviousElement();

@@ -12,7 +12,7 @@ namespace Gift.UI.Element
         public Bound Bound { get; protected set; }
         public int ScrollIndex { get; protected set; }
         public IList<IUIElement> Childs { get; protected set; }
-        public List<IUIElement> SelectableElements { get; set; }
+        public IList<IUIElement> SelectableElements { get; set; }
 
         private IUIElement? selectedElement;
         public IUIElement? SelectedElement
@@ -112,9 +112,19 @@ namespace Gift.UI.Element
             this.ScrollIndex -= 1;
         }
 
-        public void AddChild(IUIElement uIElement)
+        public void AddUnselectableChild(IUIElement uIElement)
         {
             Childs.Add(uIElement);
+        }
+
+        public void AddSelectableChild(IUIElement uIElement)
+        {
+            Childs.Add(uIElement);
+            SelectableElements.Add(uIElement);
+            if (SelectedElement == null)
+            {
+                SelectedElement = uIElement;
+            }
         }
 
     }

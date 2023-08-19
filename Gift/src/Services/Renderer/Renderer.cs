@@ -14,7 +14,7 @@ namespace Gift.UI.Render
             Configuration = configuration;
         }
 
-        public IScreenDisplay GetRenderDisplay(IGiftUI giftUI)
+        public IScreenDisplay GetRenderDisplay(GiftUI giftUI)
         {
             Context context = new Context(new(0, 0), giftUI.Bound);
             IScreenDisplay screen = CreateDisplay(giftUI, context);
@@ -30,7 +30,7 @@ namespace Gift.UI.Render
             AddDisplayToSreen(screen, renderable, context, border);
         }
 
-        private void Render(IScreenDisplay screen, IContainer container, Context context)
+        private void Render(IScreenDisplay screen, Container container, Context context)
         {
             IScreenDisplay border = CreateBorder(container, context);
 
@@ -63,7 +63,7 @@ namespace Gift.UI.Render
             screen.AddDisplay(display, relativePosition);
         }
 
-        private void RenderAllChilds(IScreenDisplay screen, IContainer container, Context context)
+        private void RenderAllChilds(IScreenDisplay screen, Container container, Context context)
         {
             lock (container.Childs)
             {
@@ -74,7 +74,7 @@ namespace Gift.UI.Render
             }
         }
 
-        private void RenderContainerOrElement(IScreenDisplay screen, IContainer container, Context context, IRenderable renderable)
+        private void RenderContainerOrElement(IScreenDisplay screen, Container container, Context context, IRenderable renderable)
         {
             Context renderableContext = container.GetContextRelativeRenderable(renderable, context);
             switch (renderable)

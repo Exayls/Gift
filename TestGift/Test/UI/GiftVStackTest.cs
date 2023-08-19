@@ -59,7 +59,7 @@ namespace TestGift.UI
         {
             GiftUI ui = new GiftUI(bound);
             var vstack = new VStackBuilder().Build();
-            ui.AddChild(vstack);
+            ui.AddUnselectableChild(vstack);
             return ui;
         }
 
@@ -71,8 +71,8 @@ namespace TestGift.UI
             var ui = new GiftUI(new Bound(20, 60));
             var vstack = new VStackBuilder().Build();
             var label = new LabelBuilder().Build();
-            ui.AddChild(vstack);
-            vstack.AddChild(label);
+            ui.AddUnselectableChild(vstack);
+            vstack.AddUnselectableChild(label);
             IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
@@ -98,8 +98,8 @@ namespace TestGift.UI
             var ui = new GiftUI(new Bound(20, 60));
             var vstack = new VStackBuilder().Build();
             var label = new LabelBuilder().Build();
-            ui.AddChild(vstack);
-            vstack.AddChild(label);
+            ui.AddUnselectableChild(vstack);
+            vstack.AddUnselectableChild(label);
             IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
@@ -127,9 +127,9 @@ namespace TestGift.UI
             var vstack = new VStackBuilder().Build();
             var label1 = new LabelBuilder().Build();
             var label2 = new LabelBuilder().WithText("test").Build();
-            ui.AddChild(vstack);
-            vstack.AddChild(label1);
-            vstack.AddChild(label2);
+            ui.AddUnselectableChild(vstack);
+            vstack.AddUnselectableChild(label1);
+            vstack.AddUnselectableChild(label2);
             IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
@@ -162,10 +162,10 @@ namespace TestGift.UI
             var label1 = new LabelBuilder().Build();
             var label2 = new LabelBuilder().WithText("test").Build();
             var label3 = new LabelBuilder().WithText("label numero 3.").Build();
-            ui.AddChild(vstack);
-            vstack.AddChild(label1);
-            vstack.AddChild(label2);
-            vstack.AddChild(label3);
+            ui.AddUnselectableChild(vstack);
+            vstack.AddUnselectableChild(label1);
+            vstack.AddUnselectableChild(label2);
+            vstack.AddUnselectableChild(label3);
             IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
@@ -202,10 +202,10 @@ namespace TestGift.UI
             var label1 = new LabelBuilder().Build();
             var label2 = new LabelBuilder().WithText("test").WithPosition(new Position(4, 8)).Build();
             var label3 = new LabelBuilder().WithText("label numero 3.").Build();
-            ui.AddChild(vstack);
-            vstack.AddChild(label1);
-            vstack.AddChild(label2);
-            vstack.AddChild(label3);
+            ui.AddUnselectableChild(vstack);
+            vstack.AddUnselectableChild(label1);
+            vstack.AddUnselectableChild(label2);
+            vstack.AddUnselectableChild(label3);
             IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
@@ -244,12 +244,12 @@ namespace TestGift.UI
             var label3 = new LabelBuilder().WithText("label numero 3.").Build();
             var label4 = new LabelBuilder().WithText("label numero 4.").Build();
             var label5 = new LabelBuilder().WithText("label numero 5.").Build();
-            ui.AddChild(vstack);
-            vstack.AddChild(label1);
-            vstack.AddChild(label2);
-            vstack.AddChild(label3);
-            vstack.AddChild(label4);
-            vstack.AddChild(label5);
+            ui.AddUnselectableChild(vstack);
+            vstack.AddUnselectableChild(label1);
+            vstack.AddUnselectableChild(label2);
+            vstack.AddUnselectableChild(label3);
+            vstack.AddUnselectableChild(label4);
+            vstack.AddUnselectableChild(label5);
             IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -291,13 +291,13 @@ namespace TestGift.UI
             var label4 = new LabelBuilder().WithText("label numero 4.").Build();
             var label5 = new LabelBuilder().WithText("label numero 5.").Build();
             var label6 = new LabelBuilder().WithText("label numero 6.").Build();
-            ui.AddChild(vstack);
-            vstack.AddChild(label1);
-            vstack.AddChild(label2);
-            vstack.AddChild(label3);
-            vstack.AddChild(label4);
-            vstack.AddChild(label5);
-            vstack.AddChild(label6);
+            ui.AddUnselectableChild(vstack);
+            vstack.AddUnselectableChild(label1);
+            vstack.AddUnselectableChild(label2);
+            vstack.AddUnselectableChild(label3);
+            vstack.AddUnselectableChild(label4);
+            vstack.AddUnselectableChild(label5);
+            vstack.AddUnselectableChild(label6);
             IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();

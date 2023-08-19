@@ -12,13 +12,13 @@ namespace Gift.src.Services.FileParser
     public class XmlFileParser : IXMLFileParser
     {
         private IUIElementRegister _uielementRegister;
-        private IGiftUI? giftUI = null;
+        private GiftUI? giftUI = null;
 
         public XmlFileParser(IUIElementRegister elementRegister)
         {
             _uielementRegister = elementRegister;
         }
-        public IGiftUI ParseUIFile(string filePath)
+        public GiftUI ParseUIFile(string filePath)
         {
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(filePath);
@@ -30,7 +30,7 @@ namespace Gift.src.Services.FileParser
             return ParseUIElement(xmlDoc.DocumentElement);
         }
 
-        private IGiftUI ParseUIElement(XmlElement element)
+        private GiftUI ParseUIElement(XmlElement element)
         {
             GiftUI giftui = new GiftUI();
             this.giftUI = giftui;
@@ -64,14 +64,14 @@ namespace Gift.src.Services.FileParser
             if (childNode is XmlElement childElement)
             {
                 IUIElement childComponent = ParseUIElementRec(childElement, container);
-                container.AddChild(childComponent);
+                container.AddUnselectableChild(childComponent);
                 SelectElement(childComponent, childElement, container);
                 SelectContainer(childComponent, childElement);
             }
         }
 
 
-        private IUIElement CreateGenericComponent(XmlElement element, IContainer parent)
+        private IUIElement CreateGenericComponent(XmlElement element, Container parent)
         {
             string componentName = element.Name;
             Type componentType = GetTypeByName(componentName);
@@ -89,7 +89,7 @@ namespace Gift.src.Services.FileParser
             {
                 return;
             }
-            if (uiElement is IContainer container)
+            if (uiElement is Container container)
             {
                 if (element.GetAttribute("selectableContainer") == "true")
                 {
@@ -102,7 +102,7 @@ namespace Gift.src.Services.FileParser
             }
         }
 
-        private void SelectElement(IUIElement uiElement, XmlElement element, IContainer container)
+        private void SelectElement(IUIElement uiElement, XmlElement element, Container container)
         {
             if (element.GetAttribute("selectableElement") == "true")
             {

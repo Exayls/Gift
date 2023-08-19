@@ -28,7 +28,7 @@ namespace TestGift.Test.Services
             string filePath = "ressources/xml/valid_xml.xml";
 
             // Act
-            IGiftUI result = xmlParser.ParseUIFile(filePath);
+            GiftUI result = xmlParser.ParseUIFile(filePath);
 
             // Assert
             Assert.NotNull(result);

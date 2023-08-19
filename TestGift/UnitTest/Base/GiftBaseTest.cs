@@ -72,9 +72,9 @@ namespace TestGift.LifeCycle
         [Fact]
         public void should_return_provider_ui()
         {
-            Mock<IGiftUI> uiMock = new Mock<IGiftUI>();
-            giftUiProviderMock.Setup(p => p.Ui).Returns(uiMock.Object);
-            Assert.Equal(uiMock.Object, giftBase.Ui);
+            GiftUI giftUI = new GiftUI();
+            giftUiProviderMock.Setup(p => p.Ui).Returns(giftUI);
+            Assert.Equal(giftUI, giftBase.Ui);
         }
 
         [Fact]

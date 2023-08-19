@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace Gift.UI
 {
-    public class GiftUI : Container, IGiftUI
+    public class GiftUI : Container
     {
 
         public override int Height
@@ -20,10 +20,10 @@ namespace Gift.UI
             get { return Bound.Width; }
         }
 
-        public List<IContainer> SelectableContainers { get; set; }
+        public List<Container> SelectableContainers { get; set; }
 
-        private IContainer? _selectedContainer;
-        public IContainer? SelectedContainer
+        private Container? _selectedContainer;
+        public Container? SelectedContainer
         {
             get
             {
@@ -47,7 +47,7 @@ namespace Gift.UI
 
         public GiftUI(Bound bound, IBorder border) : base(new ScreenDisplayFactory(), bound, border)
         {
-            SelectableContainers = new List<IContainer>();
+            SelectableContainers = new List<Container>();
         }
 
         public GiftUI(Bound bound) : this(bound, new NoBorder())
@@ -56,10 +56,10 @@ namespace Gift.UI
 
         public GiftUI() : base()
         {
-            SelectableContainers = new List<IContainer>();
+            SelectableContainers = new List<Container>();
         }
 
-        private void SetNewSelectedContainer(IContainer selected)
+        private void SetNewSelectedContainer(Container selected)
         {
             _selectedContainer = selected;
             selected.IsSelectedContainer = true;
@@ -71,7 +71,7 @@ namespace Gift.UI
 
         private void RemoveOldSelectedContainer()
         {
-            foreach (IContainer container in SelectableContainers)
+            foreach (Container container in SelectableContainers)
             {
                 container.IsSelectedContainer = false;
                 foreach (IUIElement element in container.SelectableElements)

@@ -4,6 +4,6 @@ namespace Gift.src.UIModel
 {
     public interface IGiftUiProvider
     {
-        IGiftUI Ui { get; set; }
+        GiftUI Ui { get; set; }
     }
 }

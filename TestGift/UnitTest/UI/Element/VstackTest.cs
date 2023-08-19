@@ -260,8 +260,8 @@ namespace TestGift.UnitTest.UI.Element
             _uiElementMock2.Setup(u => u.IsFixed()).Returns(false);
             _uiElementMock2.Setup(u => u.Height).Returns(1);
             vstack.Border = _borderMock.Object;
-            vstack.AddChild(_uiElementMock2.Object);
-            vstack.AddChild(_uiElementMock1.Object);
+            vstack.AddUnselectableChild(_uiElementMock2.Object);
+            vstack.AddUnselectableChild(_uiElementMock1.Object);
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
             Context context = vstack.GetContextRelativeRenderable(_uiElementMock1.Object, contextRenderable);
@@ -278,8 +278,8 @@ namespace TestGift.UnitTest.UI.Element
             _uiElementMock2.Setup(u => u.IsFixed()).Returns(false);
             _uiElementMock2.Setup(u => u.Height).Returns(2);
             vstack.Border = _borderMock.Object;
-            vstack.AddChild(_uiElementMock2.Object);
-            vstack.AddChild(_uiElementMock1.Object);
+            vstack.AddUnselectableChild(_uiElementMock2.Object);
+            vstack.AddUnselectableChild(_uiElementMock1.Object);
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
             Context context = vstack.GetContextRelativeRenderable(_uiElementMock1.Object, contextRenderable);
@@ -295,7 +295,7 @@ namespace TestGift.UnitTest.UI.Element
             _uiElementMock1.Setup(u => u.IsFixed()).Returns(false);
             _uiElementMock1.Setup(u => u.Height).Returns(1);
             _uiElementMock1.Setup(u => u.Width).Returns(1);
-            vstack.AddChild(_uiElementMock1.Object);
+            vstack.AddUnselectableChild(_uiElementMock1.Object);
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
             Context context = vstack.GetContextRelativeRenderable(_uiElementMock1.Object, contextRenderable);
@@ -311,7 +311,7 @@ namespace TestGift.UnitTest.UI.Element
             _uiElementMock1.Setup(u => u.IsFixed()).Returns(false);
             _uiElementMock1.Setup(u => u.Height).Returns(1);
             _uiElementMock1.Setup(u => u.Width).Returns(5);
-            vstack.AddChild(_uiElementMock1.Object);
+            vstack.AddUnselectableChild(_uiElementMock1.Object);
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
             Context context = vstack.GetContextRelativeRenderable(_uiElementMock1.Object, contextRenderable);
@@ -327,7 +327,7 @@ namespace TestGift.UnitTest.UI.Element
             _uiElementMock1.Setup(u => u.IsFixed()).Returns(false);
             _uiElementMock1.Setup(u => u.Height).Returns(1);
             _uiElementMock1.Setup(u => u.Width).Returns(3);
-            vstack.AddChild(_uiElementMock1.Object);
+            vstack.AddUnselectableChild(_uiElementMock1.Object);
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
             Context context = vstack.GetContextRelativeRenderable(_uiElementMock1.Object, contextRenderable);
@@ -343,7 +343,7 @@ namespace TestGift.UnitTest.UI.Element
             _uiElementMock1.Setup(u => u.IsFixed()).Returns(false);
             _uiElementMock1.Setup(u => u.Height).Returns(2);
             _uiElementMock1.Setup(u => u.Width).Returns(1);
-            vstack.AddChild(_uiElementMock1.Object);
+            vstack.AddUnselectableChild(_uiElementMock1.Object);
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
             Context context = vstack.GetContextRelativeRenderable(_uiElementMock1.Object, contextRenderable);
@@ -359,7 +359,7 @@ namespace TestGift.UnitTest.UI.Element
             _uiElementMock1.Setup(u => u.IsFixed()).Returns(false);
             _uiElementMock1.Setup(u => u.Height).Returns(3);
             _uiElementMock1.Setup(u => u.Width).Returns(1);
-            vstack.AddChild(_uiElementMock1.Object);
+            vstack.AddUnselectableChild(_uiElementMock1.Object);
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
             Context context = vstack.GetContextRelativeRenderable(_uiElementMock1.Object, contextRenderable);
@@ -376,7 +376,7 @@ namespace TestGift.UnitTest.UI.Element
             _uiElementMock1.Setup(u => u.IsFixed()).Returns(false);
             _uiElementMock1.Setup(u => u.Height).Returns(3);
             _uiElementMock1.Setup(u => u.Width).Returns(1);
-            vstack.AddChild(_uiElementMock1.Object);
+            vstack.AddUnselectableChild(_uiElementMock1.Object);
             vstack.ScrollDown();
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
@@ -394,7 +394,7 @@ namespace TestGift.UnitTest.UI.Element
             _uiElementMock1.Setup(u => u.IsFixed()).Returns(false);
             _uiElementMock1.Setup(u => u.Height).Returns(3);
             _uiElementMock1.Setup(u => u.Width).Returns(1);
-            vstack.AddChild(_uiElementMock1.Object);
+            vstack.AddUnselectableChild(_uiElementMock1.Object);
             vstack.ScrollUp();
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             //act
@@ -413,7 +413,7 @@ namespace TestGift.UnitTest.UI.Element
             vstack.Border = _borderMock.Object;
             _uiElementMock1.Setup(ui => ui.Height).Returns(1);
             //act
-            vstack.AddChild(_uiElementMock1.Object);
+            vstack.AddUnselectableChild(_uiElementMock1.Object);
             //assert
             Assert.Equal(1, vstack.Height);
         }
@@ -426,8 +426,8 @@ namespace TestGift.UnitTest.UI.Element
             _uiElementMock1.Setup(ui => ui.Height).Returns(2);
             _uiElementMock2.Setup(ui => ui.Height).Returns(2);
             //act
-            vstack.AddChild(_uiElementMock1.Object);
-            vstack.AddChild(_uiElementMock2.Object);
+            vstack.AddUnselectableChild(_uiElementMock1.Object);
+            vstack.AddUnselectableChild(_uiElementMock2.Object);
             //assert
             Assert.Equal(4, vstack.Height);
         }
@@ -440,8 +440,8 @@ namespace TestGift.UnitTest.UI.Element
             _uiElementMock1.Setup(ui => ui.Height).Returns(2);
             _uiElementMock2.Setup(ui => ui.Height).Returns(3);
             //act
-            vstack.AddChild(_uiElementMock1.Object);
-            vstack.AddChild(_uiElementMock2.Object);
+            vstack.AddUnselectableChild(_uiElementMock1.Object);
+            vstack.AddUnselectableChild(_uiElementMock2.Object);
             //assert
             Assert.Equal(5, vstack.Height);
         }
@@ -453,7 +453,7 @@ namespace TestGift.UnitTest.UI.Element
             vstack.Border = _borderMock.Object;
             _uiElementMock1.Setup(ui => ui.Height).Returns(1);
             //act
-            vstack.AddChild(_uiElementMock1.Object);
+            vstack.AddUnselectableChild(_uiElementMock1.Object);
             //assert
             Assert.Equal(3, vstack.Height);
         }
@@ -465,7 +465,7 @@ namespace TestGift.UnitTest.UI.Element
             vstack.Border = _borderMock.Object;
             _uiElementMock1.Setup(ui => ui.Height).Returns(2);
             //act
-            vstack.AddChild(_uiElementMock1.Object);
+            vstack.AddUnselectableChild(_uiElementMock1.Object);
             //assert
             Assert.Equal(4, vstack.Height);
         }
@@ -477,7 +477,7 @@ namespace TestGift.UnitTest.UI.Element
             vstack.Border = _borderMock.Object;
             _uiElementMock1.Setup(ui => ui.Height).Returns(4);
             //act
-            vstack.AddChild(_uiElementMock1.Object);
+            vstack.AddUnselectableChild(_uiElementMock1.Object);
             //assert
             Assert.Equal(6, vstack.Height);
         }
@@ -489,7 +489,7 @@ namespace TestGift.UnitTest.UI.Element
             vstack.Border = _borderMock.Object;
             _uiElementMock1.Setup(ui => ui.Height).Returns(1);
             //act
-            vstack.AddChild(_uiElementMock1.Object);
+            vstack.AddUnselectableChild(_uiElementMock1.Object);
             //assert
             Assert.Equal(5, vstack.Height);
         }
@@ -501,7 +501,7 @@ namespace TestGift.UnitTest.UI.Element
             vstack.Border = _borderMock.Object;
             _uiElementMock1.Setup(ui => ui.Height).Returns(2);
             //act
-            vstack.AddChild(_uiElementMock1.Object);
+            vstack.AddUnselectableChild(_uiElementMock1.Object);
             //assert
             Assert.Equal(6, vstack.Height);
         }
@@ -513,7 +513,7 @@ namespace TestGift.UnitTest.UI.Element
             vstack.Border = _borderMock.Object;
             _uiElementMock1.Setup(ui => ui.Height).Returns(3);
             //act
-            vstack.AddChild(_uiElementMock1.Object);
+            vstack.AddUnselectableChild(_uiElementMock1.Object);
             //assert
             Assert.Equal(7, vstack.Height);
         }
@@ -525,7 +525,7 @@ namespace TestGift.UnitTest.UI.Element
             vstack.Border = _borderMock.Object;
             _uiElementMock1.Setup(ui => ui.Height).Returns(1);
             //act
-            vstack.AddChild(_uiElementMock1.Object);
+            vstack.AddUnselectableChild(_uiElementMock1.Object);
             //assert
             Assert.Equal(7, vstack.Height);
         }
@@ -563,7 +563,7 @@ namespace TestGift.UnitTest.UI.Element
             vstack.Border = _borderMock.Object;
             //act
             vstack = new VStack(_borderMock.Object, _ScreenDisplayFactoryMock.Object, new Bound(0, 3));
-            vstack.AddChild(_uiElementMock1.Object);
+            vstack.AddUnselectableChild(_uiElementMock1.Object);
             //assert
             Assert.Equal(3, vstack.Height);
             Assert.Equal(3, vstack.Width);
@@ -577,7 +577,7 @@ namespace TestGift.UnitTest.UI.Element
             vstack.Border = _borderMock.Object;
             //act
             vstack = new VStack(_borderMock.Object, _ScreenDisplayFactoryMock.Object, new Bound(0, 3));
-            vstack.AddChild(_uiElementMock1.Object);
+            vstack.AddUnselectableChild(_uiElementMock1.Object);
             //assert
             Assert.Equal(5, vstack.Height);
             Assert.Equal(3, vstack.Width);
@@ -594,8 +594,8 @@ namespace TestGift.UnitTest.UI.Element
             vstack.Border = _borderMock.Object;
             //act
             vstack = new VStack(_borderMock.Object, _ScreenDisplayFactoryMock.Object, new Bound(0, 0));
-            vstack.AddChild(_uiElementMock1.Object);
-            vstack.AddChild(_uiElementMock2.Object);
+            vstack.AddUnselectableChild(_uiElementMock1.Object);
+            vstack.AddUnselectableChild(_uiElementMock2.Object);
             //assert
             Assert.Equal(4, vstack.Height);
             Assert.Equal(5, vstack.Width);
@@ -612,8 +612,8 @@ namespace TestGift.UnitTest.UI.Element
             vstack.Border = _borderMock.Object;
             //act
             vstack = new VStack(_borderMock.Object, _ScreenDisplayFactoryMock.Object, new Bound(0, 0));
-            vstack.AddChild(_uiElementMock1.Object);
-            vstack.AddChild(_uiElementMock2.Object);
+            vstack.AddUnselectableChild(_uiElementMock1.Object);
+            vstack.AddUnselectableChild(_uiElementMock2.Object);
             //assert
             Assert.Equal(8, vstack.Height);
             Assert.Equal(9, vstack.Width);

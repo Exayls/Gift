@@ -4,6 +4,6 @@ namespace Gift.src.Services.FileParser
 {
     public interface IXMLFileParser
     {
-        IGiftUI ParseUIFile(string filePath);
+        GiftUI ParseUIFile(string filePath);
     }
 }

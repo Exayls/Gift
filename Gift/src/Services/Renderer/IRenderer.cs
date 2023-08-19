@@ -4,6 +4,6 @@ namespace Gift.UI.Render
 {
     public interface IRenderer
     {
-        IScreenDisplay GetRenderDisplay(IGiftUI ui);
+        IScreenDisplay GetRenderDisplay(GiftUI ui);
     }
 }
