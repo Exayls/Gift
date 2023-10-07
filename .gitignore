@@ -402,3 +402,4 @@ FodyWeavers.xsd
 *.vimspector.json
 
 .vimspector.session
+run
