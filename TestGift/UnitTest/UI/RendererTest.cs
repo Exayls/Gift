@@ -1,4 +1,4 @@
-﻿using Gift.UI.Configuration;
+﻿using Gift.UI.Conf;
 using Gift.UI.Element;
 using Gift.UI.Render;
 using Moq;
@@ -8,14 +8,14 @@ namespace TestGift.UnitTest.UI
     public class RendererTest
     {
         private Mock<IConfiguration> _confMock;
-        private Mock<IUIElement> _labelMock;
+        private Mock<UIElement> _labelMock;
         private MockRepository _mockFactory;
         private Renderer renderer;
 
         public RendererTest()
         {
             _confMock = new Mock<IConfiguration>();
-            _labelMock = new Mock<IUIElement>();
+            _labelMock = new Mock<UIElement>();
             _mockFactory = new MockRepository(MockBehavior.Default);
             renderer = new Renderer(_confMock.Object);
         }
@@ -27,7 +27,7 @@ namespace TestGift.UnitTest.UI
         //    var screenDisplay = _mockFactory.Of<IScreenDisplay>()
         //        .Where(s => s.DisplayString == new StringBuilder())
         //        .First();
-        //    _giftuiMock.Setup(m => m.Childs).Returns(new List<IUIElement>());
+        //    _giftuiMock.Setup(m => m.Childs).Returns(new List<UIElement>());
         //    _giftuiMock.Setup(m => m.GetDisplay()).Returns(screenDisplay);
         //    //act
         //    IScreenDisplay actual = renderer.GetRenderDisplay(_giftuiMock.Object);
@@ -43,7 +43,7 @@ namespace TestGift.UnitTest.UI
         //        .Where(s => s.DisplayString == new StringBuilder("hello"))
         //        .First();
         //    //screenDisplay.Setup(s => s.DisplayString).Returns(new StringBuilder("hello"));
-        //    _giftuiMock.Setup(m => m.Childs).Returns(new List<IUIElement>());
+        //    _giftuiMock.Setup(m => m.Childs).Returns(new List<UIElement>());
         //    _giftuiMock.Setup(m => m.GetDisplay()).Returns(screenDisplay);
         //    //act
         //    IScreenDisplay actual = renderer.GetRenderDisplay(_giftuiMock.Object);
@@ -58,7 +58,7 @@ namespace TestGift.UnitTest.UI
         //    var screenDisplay = _mockFactory.Of<IScreenDisplay>()
         //        .Where(s => s.DisplayString == new StringBuilder("hello"))
         //        .First();
-        //    _giftuiMock.Setup(m => m.Childs).Returns(new List<IUIElement>());
+        //    _giftuiMock.Setup(m => m.Childs).Returns(new List<UIElement>());
         //    _giftuiMock.Setup(m => m.GetDisplay()).Returns(screenDisplay);
         //    //act
         //    IScreenDisplay actual = renderer.GetRenderDisplay(_giftuiMock.Object);
@@ -73,7 +73,7 @@ namespace TestGift.UnitTest.UI
         //    var screenDisplay = _mockFactory.Of<IScreenDisplay>()
         //        .Where(s => s.DisplayString == new StringBuilder("hello"))
         //        .First();
-        //    _giftuiMock.Setup(m => m.Childs).Returns(new List<IUIElement>()
+        //    _giftuiMock.Setup(m => m.Childs).Returns(new List<UIElement>()
         //    {
         //        _labelMock.Object
         //    });
@@ -95,7 +95,7 @@ namespace TestGift.UnitTest.UI
         //        .Where(s => s.DisplayString == new StringBuilder(
         //            "hello"))
         //        .First();
-        //    IUIElement element1 = _mockFactory.Of<IUIElement>()
+        //    UIElement element1 = _mockFactory.Of<UIElement>()
         //        .Where(s => s.GetDisplay(It.IsAny<Bound>()) == screenDisplayLabel1)
         //        .First();
         //    //label2
@@ -103,7 +103,7 @@ namespace TestGift.UnitTest.UI
         //        .Where(s => s.DisplayString == new StringBuilder(
         //            "test"))
         //        .First();
-        //    IUIElement element2 = _mockFactory.Of<IUIElement>()
+        //    UIElement element2 = _mockFactory.Of<UIElement>()
         //        .Where(s => s.GetDisplay(It.IsAny<Bound>()) == screenDisplayLabel2)
         //        .First();
         //    //label3
@@ -111,7 +111,7 @@ namespace TestGift.UnitTest.UI
         //        .Where(s => s.DisplayString == new StringBuilder(
         //            "testToLongString"))
         //        .First();
-        //    IUIElement element3 = _mockFactory.Of<IUIElement>()
+        //    UIElement element3 = _mockFactory.Of<UIElement>()
         //        .Where(s => s.GetDisplay(It.IsAny<Bound>()) == screenDisplayLabel3)
         //        .First();
 
@@ -126,7 +126,7 @@ namespace TestGift.UnitTest.UI
         //        .First();
         //    IContainer vstack = _mockFactory.Of<IContainer>()
         //        .Where(s => s.GetDisplay(It.IsAny<Bound>()) == screenDisplayVstack)
-        //        .Where(s => s.Childs == new Collection<IUIElement>()
+        //        .Where(s => s.Childs == new Collection<UIElement>()
         //        {
         //            element1,
         //            element2,
@@ -143,7 +143,7 @@ namespace TestGift.UnitTest.UI
         //            "     \n" +
         //            "     "))
         //        .First();
-        //    _giftuiMock.Setup(m => m.Childs).Returns(new List<IUIElement>()
+        //    _giftuiMock.Setup(m => m.Childs).Returns(new List<UIElement>()
         //    {
         //        vstack
         //    });

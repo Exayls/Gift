@@ -6,7 +6,7 @@ using Gift.UI.MetaData;
 using System;
 using System.Text;
 using Gift.UI.Render;
-using Gift.UI.Configuration;
+using Gift.UI.Conf;
 using Xunit;
 using System.IO;
 

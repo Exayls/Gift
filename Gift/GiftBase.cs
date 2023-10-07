@@ -55,8 +55,8 @@ namespace Gift
                         IGiftUiProvider uiProvider,
                         IUISignalHandler uISignalHandler,
                         IGlobalSignalHandler globalSignalHandler,
-                        IXMLFileParser xmlFileParser,
-                        IDisplayManager displayManager,
+						IDisplayManager displayManager,
+						IXMLFileParser xmlFileParser,
                         IUIElementRegister elementRegister)
         {
             _renderer = renderer;

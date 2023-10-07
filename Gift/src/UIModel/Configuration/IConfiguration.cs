@@ -1,6 +1,6 @@
 ﻿using Gift.UI.MetaData;
 
-namespace Gift.UI.Configuration
+namespace Gift.UI.Conf
 {
     public interface IConfiguration
     {
@@ -10,5 +10,6 @@ namespace Gift.UI.Configuration
         public Color SelectedElementBackColor { get; }
         public Color SelectedContainerFrontColor { get; }
         public Color SelectedContainerBackColor { get; }
+        public char FillingChar { get; }
     }
 }

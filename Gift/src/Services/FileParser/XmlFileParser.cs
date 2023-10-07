@@ -41,9 +41,9 @@ namespace Gift.src.Services.FileParser
             return giftui;
         }
 
-        private IUIElement ParseUIElementRec(XmlElement element, Container parent)
+        private UIElement ParseUIElementRec(XmlElement element, Container parent)
         {
-            IUIElement component;
+            UIElement component;
 
             component = CreateGenericComponent(element, parent);
 
@@ -63,7 +63,7 @@ namespace Gift.src.Services.FileParser
         {
             if (childNode is XmlElement childElement)
             {
-                IUIElement childComponent = ParseUIElementRec(childElement, container);
+                UIElement childComponent = ParseUIElementRec(childElement, container);
                 container.AddUnselectableChild(childComponent);
                 SelectElement(childComponent, childElement, container);
                 SelectContainer(childComponent, childElement);
@@ -71,19 +71,19 @@ namespace Gift.src.Services.FileParser
         }
 
 
-        private IUIElement CreateGenericComponent(XmlElement element, Container parent)
+        private UIElement CreateGenericComponent(XmlElement element, Container parent)
         {
             string componentName = element.Name;
             Type componentType = GetTypeByName(componentName);
 
             ConstructorInfo constructor = GetConstructor(componentName, componentType);
 
-            IUIElement uiElement = ConstructElementViaConstructor(element, componentName, constructor);
+            UIElement uiElement = ConstructElementViaConstructor(element, componentName, constructor);
 
             return uiElement;
         }
 
-        private void SelectContainer(IUIElement uiElement, XmlElement element)
+        private void SelectContainer(UIElement uiElement, XmlElement element)
         {
             if (giftUI == null)
             {
@@ -102,7 +102,7 @@ namespace Gift.src.Services.FileParser
             }
         }
 
-        private void SelectElement(IUIElement uiElement, XmlElement element, Container container)
+        private void SelectElement(UIElement uiElement, XmlElement element, Container container)
         {
             if (element.GetAttribute("selectableElement") == "true")
             {
@@ -114,7 +114,7 @@ namespace Gift.src.Services.FileParser
             }
         }
 
-        private static IUIElement ConstructElementViaConstructor(XmlElement element, string componentName, ConstructorInfo constructor)
+        private static UIElement ConstructElementViaConstructor(XmlElement element, string componentName, ConstructorInfo constructor)
         {
             ParameterInfo[] parameters = constructor.GetParameters();
             object?[] args = new object[parameters.Length];
@@ -164,9 +164,9 @@ namespace Gift.src.Services.FileParser
 
             object componentInstance = constructor.Invoke(args);
 
-            if (componentInstance is not IUIElement uiElement)
+            if (componentInstance is not UIElement uiElement)
             {
-                throw new Exception("Unknown component does not implement IUIElement: " + componentName);
+                throw new Exception("Unknown component does not implement UIElement: " + componentName);
             }
 
             return uiElement;

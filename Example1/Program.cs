@@ -2,7 +2,7 @@
 using Gift.Builders;
 using Gift.src.Services.Displayer;
 using Gift.UI;
-using Gift.UI.Configuration;
+using Gift.UI.Conf;
 using Gift.UI.Displayer;
 using Gift.UI.Element;
 using Gift.UI.MetaData;

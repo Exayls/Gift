@@ -1,10 +1,10 @@
-using Gift;
+﻿using Gift;
 using Gift.UI;
 using Gift.UI.Display;
 using Gift.UI.MetaData;
 using Gift.UI.Render;
 using System.Text;
-using Gift.UI.Configuration;
+using Gift.UI.Conf;
 using Xunit;
 using System.IO;
 

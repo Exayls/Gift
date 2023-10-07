@@ -3,6 +3,7 @@ using Gift.UI.Display;
 using Gift.UI.Element;
 using Gift.UI.MetaData;
 using Moq;
+using TestGift.Mocks;
 using Xunit;
 
 namespace TestGift.UnitTest.UI.Element
@@ -12,9 +13,9 @@ namespace TestGift.UnitTest.UI.Element
 
         private Mock<IScreenDisplay> _screenDisplayMock1;
         private Mock<IScreenDisplay> _screenDisplayMock2;
-        private Mock<IUIElement> _uiElementMock1;
-        private Mock<IUIElement> _uiElementMock2;
-        private Mock<IUIElement> _uiElementMock3;
+        private Mock<UIElement> _uiElementMock1;
+        private Mock<UIElement> _uiElementMock2;
+        private Mock<UIElement> _uiElementMock3;
         private Mock<IBorder> _borderMock;
         private Mock<IScreenDisplayFactory> _ScreenDisplayFactoryMock;
         private VStack vstack;
@@ -23,9 +24,9 @@ namespace TestGift.UnitTest.UI.Element
         {
             _screenDisplayMock1 = new Mock<IScreenDisplay>();
             _screenDisplayMock2 = new Mock<IScreenDisplay>();
-            _uiElementMock1 = new Mock<IUIElement>();
-            _uiElementMock2 = new Mock<IUIElement>();
-            _uiElementMock3 = new Mock<IUIElement>();
+            _uiElementMock1 = new Mock<UIElement>();
+            _uiElementMock2 = new Mock<UIElement>();
+            _uiElementMock3 = new Mock<UIElement>();
             _borderMock = new Mock<IBorder>();
             _ScreenDisplayFactoryMock = new Mock<IScreenDisplayFactory>();
             _ScreenDisplayFactoryMock.Setup(s => s.Create(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock1.Object);
@@ -36,53 +37,71 @@ namespace TestGift.UnitTest.UI.Element
         public void When_NextElement_is_called_should_select_next_element()
         {
             //arrange
-            vstack.SelectableElements.Add(_uiElementMock1.Object);
-            vstack.SelectableElements.Add(_uiElementMock2.Object);
-            vstack.SelectedElement = _uiElementMock1.Object;
+            UIElement element1 = CreateUIElement();
+            vstack.AddSelectableChild(element1);
+
+            UIElement element2 = CreateUIElement();
+            vstack.AddSelectableChild(element2);
+
             //act
             vstack.NextElement();
             //assert
-            Assert.Equal(_uiElementMock2.Object, vstack.SelectedElement);
+            Assert.Equal(element2, vstack.SelectedElement);
         }
+
+        private UIElement CreateUIElement()
+        {
+			return new MockUIElement();
+        }
+
+
         [Fact]
         public void When_NextElement_is_called_and_last_element_is_selected_should_select_first_element()
         {
             //arrange
-            vstack.SelectableElements.Add(_uiElementMock1.Object);
-            vstack.SelectableElements.Add(_uiElementMock2.Object);
-            vstack.SelectedElement = _uiElementMock2.Object;
+            UIElement element1 = CreateUIElement();
+            vstack.AddSelectableChild(element1);
+            UIElement element2 = CreateUIElement();
+            vstack.AddSelectableChild(element2);
+            vstack.SelectedElement = element2;
             //act
             vstack.NextElement();
             //assert
-            Assert.Equal(_uiElementMock1.Object, vstack.SelectedElement);
+            Assert.Equal(element1, vstack.SelectedElement);
         }
 
         [Fact]
         public void When_PreviousElement_is_called_should_select_next_element()
         {
             //arrange
-            vstack.SelectableElements.Add(_uiElementMock1.Object);
-            vstack.SelectableElements.Add(_uiElementMock2.Object);
-            vstack.SelectableElements.Add(_uiElementMock3.Object);
-            vstack.SelectedElement = _uiElementMock3.Object;
+            UIElement element1 = CreateUIElement();
+            vstack.AddSelectableChild(element1);
+            UIElement element2 = CreateUIElement();
+            vstack.AddSelectableChild(element2);
+            UIElement element3 = CreateUIElement();
+            vstack.AddSelectableChild(element3);
+            vstack.SelectedElement = element3;
             //act
             vstack.PreviousElement();
             //assert
-            Assert.Equal(_uiElementMock2.Object, vstack.SelectedElement);
+            Assert.Equal(element2, vstack.SelectedElement);
         }
 
         [Fact]
         public void When_PreviousElement_is_called_and_first_element_is_selected_should_select_last_element()
         {
             //arrange
-            vstack.SelectableElements.Add(_uiElementMock1.Object);
-            vstack.SelectableElements.Add(_uiElementMock2.Object);
-            vstack.SelectableElements.Add(_uiElementMock3.Object);
-            vstack.SelectedElement = _uiElementMock1.Object;
+            UIElement element1 = CreateUIElement();
+            vstack.AddSelectableChild(element1);
+            UIElement element2 = CreateUIElement();
+            vstack.AddSelectableChild(element2);
+            UIElement element3 = CreateUIElement();
+            vstack.AddSelectableChild(element3);
+            vstack.SelectedElement = element1;
             //act
             vstack.PreviousElement();
             //assert
-            Assert.Equal(_uiElementMock3.Object, vstack.SelectedElement);
+            Assert.Equal(element3, vstack.SelectedElement);
         }
     }
 }

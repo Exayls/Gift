@@ -15,7 +15,7 @@ using Gift.src.Services.SignalHandler.Bus;
 using Gift.src.Services.SignalHandler.Global;
 using Gift.src.Services.FileParser;
 
-namespace TestGift.LifeCycle
+namespace TestGift.UnitTest.Base
 {
     public class GiftBaseTest
     {

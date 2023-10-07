@@ -1,5 +1,5 @@
 ﻿using Gift.UI.Border;
-using Gift.UI.Configuration;
+using Gift.UI.Conf;
 using Gift.UI.Display;
 using Gift.UI.MetaData;
 
@@ -17,7 +17,7 @@ namespace Gift.UI.Element
                     return Bound.Height;
                 }
                 int HeightAllChilds = 0;
-                foreach (IUIElement renderable in Childs)
+                foreach (UIElement renderable in Childs)
                 {
                     if (!renderable.IsFixed())
                     {
@@ -36,7 +36,7 @@ namespace Gift.UI.Element
                     return Bound.Width;
                 }
                 int maxWidthChild = 0;
-                foreach (IUIElement renderable in Childs)
+                foreach (UIElement renderable in Childs)
                 {
                     if (!renderable.IsFixed())
                     {
@@ -75,7 +75,7 @@ namespace Gift.UI.Element
         private int GetHeightRenderable(IRenderable renderableToFind)
         {
             int ChildContextPosition = 0;
-            foreach (IUIElement renderable in Childs)
+            foreach (UIElement renderable in Childs)
             {
                 if (!renderable.IsFixed())
                 {

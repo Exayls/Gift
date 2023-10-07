@@ -53,7 +53,7 @@ namespace TestGift.UnitTest.UI.Element
         public void SelectedContainer_should_define_selected_container_as_selected()
         {
             var container = new GiftUI();
-            var uiElement = new Mock<IUIElement>();
+            var uiElement = new Mock<UIElement>();
             //Act
 			//
             giftui.SelectableContainers.Add(container);

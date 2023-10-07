@@ -1,5 +1,5 @@
 ﻿using Gift.UI.Border;
-using Gift.UI.Configuration;
+using Gift.UI.Conf;
 using Gift.UI.Display;
 using Gift.UI.MetaData;
 using System;
@@ -7,22 +7,22 @@ using System.Collections.Generic;
 
 namespace Gift.UI.Element
 {
-    public abstract class Container : UIElement, IContainer
+    public abstract class Container : UIElement
     {
         public Bound Bound { get; protected set; }
         public int ScrollIndex { get; protected set; }
-        public IList<IUIElement> Childs { get; protected set; }
-        public IList<IUIElement> SelectableElements { get; set; }
+        public IList<UIElement> Childs { get; protected set; }
+        public IList<UIElement> SelectableElements { get; protected set; }
 
-        private IUIElement? selectedElement;
-        public IUIElement? SelectedElement
+        private UIElement? selectedElement;
+        public UIElement? SelectedElement
         {
             get => selectedElement;
             set
             {
                 selectedElement = value;
 
-                foreach (IUIElement element in SelectableElements)
+                foreach (UIElement element in SelectableElements)
                 {
                     element.IsSelectedElement = false;
                 }
@@ -48,9 +48,9 @@ namespace Gift.UI.Element
         public Container(IScreenDisplayFactory screenDisplayFactory, Bound bound, IBorder border, Color frontColor = Color.Default, Color backColor = Color.Default) : base(border, frontColor: frontColor, backColor: backColor)
         {
             Bound = bound;
-            Childs = new List<IUIElement>();
+            Childs = new List<UIElement>();
             _screenDisplayFactory = screenDisplayFactory;
-            SelectableElements = new List<IUIElement>();
+            SelectableElements = new List<UIElement>();
         }
         public Container() : base()
         {
@@ -63,9 +63,9 @@ namespace Gift.UI.Element
             {
                 Bound = new Bound(0, 0);
             }
-            Childs = new List<IUIElement>();
+            Childs = new List<UIElement>();
             _screenDisplayFactory = new ScreenDisplayFactory();
-            SelectableElements = new List<IUIElement>();
+            SelectableElements = new List<UIElement>();
         }
 
         public abstract Context GetContextRelativeRenderable(IRenderable renderable, Context context);
@@ -112,12 +112,12 @@ namespace Gift.UI.Element
             this.ScrollIndex -= 1;
         }
 
-        public void AddUnselectableChild(IUIElement uIElement)
+        public void AddUnselectableChild(UIElement uIElement)
         {
             Childs.Add(uIElement);
         }
 
-        public void AddSelectableChild(IUIElement uIElement)
+        public void AddSelectableChild(UIElement uIElement)
         {
             Childs.Add(uIElement);
             SelectableElements.Add(uIElement);

@@ -1,5 +1,5 @@
 ﻿using Gift.UI.Border;
-using Gift.UI.Configuration;
+using Gift.UI.Conf;
 using Gift.UI.Display;
 using Gift.UI.Element;
 using Gift.UI.MetaData;
@@ -63,7 +63,7 @@ namespace Gift.UI
         {
             _selectedContainer = selected;
             selected.IsSelectedContainer = true;
-            foreach (IUIElement element in selected.SelectableElements)
+            foreach (UIElement element in selected.SelectableElements)
             {
                 element.IsInSelectedContainer = true;
             }
@@ -74,7 +74,7 @@ namespace Gift.UI
             foreach (Container container in SelectableContainers)
             {
                 container.IsSelectedContainer = false;
-                foreach (IUIElement element in container.SelectableElements)
+                foreach (UIElement element in container.SelectableElements)
                 {
                     element.IsInSelectedContainer = false;
                 }
@@ -113,6 +113,7 @@ namespace Gift.UI
                 SelectedContainer.NextElement();
             }
         }
+
         public void PreviousElementInSelectedContainer()
         {
             if (SelectedContainer != null)
@@ -120,6 +121,7 @@ namespace Gift.UI
                 SelectedContainer.PreviousElement();
             }
         }
+
         public void NextContainer()
         {
             if (SelectedContainer != null)
@@ -127,6 +129,7 @@ namespace Gift.UI
                 SelectedContainer = SelectableContainers[(SelectableContainers.IndexOf(SelectedContainer) + 1) % SelectableContainers.Count];
             }
         }
+
         public void PreviousContainer()
         {
             if (SelectedContainer != null)

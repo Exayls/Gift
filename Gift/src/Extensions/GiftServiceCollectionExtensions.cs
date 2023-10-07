@@ -8,7 +8,7 @@ using Gift.src.Services.SignalHandler.Global;
 using Gift.src.Services.SignalHandler.Key;
 using Gift.src.Services.SignalHandler.Ui;
 using Gift.src.UIModel;
-using Gift.UI.Configuration;
+using Gift.UI.Conf;
 using Gift.UI.Displayer;
 using Gift.UI.DisplayManager;
 using Gift.UI.Render;

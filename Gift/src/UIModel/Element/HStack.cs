@@ -1,5 +1,5 @@
 ﻿using Gift.UI.Border;
-using Gift.UI.Configuration;
+using Gift.UI.Conf;
 using Gift.UI.Display;
 using Gift.UI.MetaData;
 
@@ -17,7 +17,7 @@ namespace Gift.UI.Element
                     return Bound.Height;
                 }
                 int maxHeightChild = 0;
-                foreach (IUIElement renderable in Childs)
+                foreach (UIElement renderable in Childs)
                 {
                     if (!renderable.IsFixed())
                     {
@@ -37,7 +37,7 @@ namespace Gift.UI.Element
                     return Bound.Width;
                 }
                 int WidthAllChilds = 0;
-                foreach (IUIElement renderable in Childs)
+                foreach (UIElement renderable in Childs)
                 {
                     if (!renderable.IsFixed())
                     {
@@ -76,7 +76,7 @@ namespace Gift.UI.Element
         private int GetWidthRenderable(IRenderable renderableToFind)
         {
             int ChildContextPosition = 0;
-            foreach (IUIElement renderable in Childs)
+            foreach (UIElement renderable in Childs)
             {
                 if (!renderable.IsFixed())
                 {
@@ -105,7 +105,7 @@ namespace Gift.UI.Element
         {
             int thickness = Border.Thickness;
             IScreenDisplay screenDisplay = GetDisplayBorder(bound, new DefaultConfiguration());
-            IScreenDisplay emptyVstackScreen = GetDisplayWithoutBorder(bound, new DefaultConfiguration());
+            IScreenDisplay emptyVstackScreen = GetDisplayWithoutBorder(bound, new Configuration(fillingChar: fillingChar));
             screenDisplay.AddDisplay(emptyVstackScreen, new Position(thickness, thickness));
             return screenDisplay;
         }
@@ -114,7 +114,7 @@ namespace Gift.UI.Element
         {
             int thickness = Border.Thickness;
             Bound boundEmptyVStack = new Bound(bound.Height - 2 * thickness, bound.Width - 2 * thickness);
-            IScreenDisplay emptyVstackScreen = _screenDisplayFactory.Create(boundEmptyVStack, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor, BackColor == Color.Default ? configuration.DefaultBackColor : BackColor, GiftBase.FILLINGCHAR);
+            IScreenDisplay emptyVstackScreen = _screenDisplayFactory.Create(boundEmptyVStack, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor, BackColor == Color.Default ? configuration.DefaultBackColor : BackColor, configuration.FillingChar);
             return emptyVstackScreen;
         }
 

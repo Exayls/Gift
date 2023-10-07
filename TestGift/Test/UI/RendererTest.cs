@@ -1,7 +1,7 @@
 ﻿using Gift.Builders;
 using Gift.UI;
 using Gift.UI.Border;
-using Gift.UI.Configuration;
+using Gift.UI.Conf;
 using Gift.UI.Display;
 using Gift.UI.Element;
 using Gift.UI.MetaData;

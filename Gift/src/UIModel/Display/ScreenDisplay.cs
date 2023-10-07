@@ -1,4 +1,5 @@
 ﻿using Gift.UI.MetaData;
+using System.Linq;
 using System.Text;
 
 namespace Gift.UI.Display
@@ -133,14 +134,32 @@ namespace Gift.UI.Display
 
         public void AddString(string display, Position position)
         {
-            ScreenDisplay tmpScreen = new ScreenDisplay(display,frontColor,backColor);
+            ScreenDisplay tmpScreen = new ScreenDisplay(display, frontColor, backColor);
             AddDisplay(tmpScreen, position);
         }
 
         public void AddChar(char display, Position position)
         {
-            ScreenDisplay tmpScreen = new ScreenDisplay(display.ToString(),frontColor, backColor);
+            ScreenDisplay tmpScreen = new ScreenDisplay(display.ToString(), frontColor, backColor);
             AddDisplay(tmpScreen, position);
+        }
+
+        private bool CheckEquality<T>(T[,] t1, T[,] t2)
+        {
+            var equal =
+                    t1.Rank == t2.Rank &&
+                    Enumerable.Range(0, t1.Rank).All(dimension => t1.GetLength(dimension) == t2.GetLength(dimension)) &&
+                    t1.Cast<double>().SequenceEqual(t2.Cast<double>());
+            return equal;
+        }
+
+        public bool Equals(ScreenDisplay other)
+        {
+            bool sameBackColor = CheckEquality<Color>(other.BackColorMap, this.BackColorMap);
+            bool sameFrontColor = CheckEquality<Color>(other.FrontColorMap, this.FrontColorMap);
+            bool sameChars = CheckEquality<char>(other.DisplayMap, this.DisplayMap);
+			return (sameChars && sameBackColor && sameFrontColor);
+
         }
     }
 }

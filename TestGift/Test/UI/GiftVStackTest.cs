@@ -2,7 +2,7 @@
 using Gift.Builders;
 using Gift.UI;
 using Gift.UI.Border;
-using Gift.UI.Configuration;
+using Gift.UI.Conf;
 using Gift.UI.Display;
 using Gift.UI.Element;
 using Gift.UI.MetaData;
@@ -19,8 +19,8 @@ namespace TestGift.UI
     {
         private Mock<IScreenDisplay> _screenDisplayMock1;
         private Mock<IScreenDisplay> _screenDisplayMock2;
-        private Mock<IUIElement> _uiElementMock1;
-        private Mock<IUIElement> _uiElementMock2;
+        private Mock<UIElement> _uiElementMock1;
+        private Mock<UIElement> _uiElementMock2;
         private Mock<IBorder> _borderMock;
         private Mock<IScreenDisplayFactory> _ScreenDisplayFactoryMock;
         private VStack vstack;
@@ -29,8 +29,8 @@ namespace TestGift.UI
         {
             _screenDisplayMock1 = new Mock<IScreenDisplay>();
             _screenDisplayMock2 = new Mock<IScreenDisplay>();
-            _uiElementMock1 = new Mock<IUIElement>();
-            _uiElementMock2 = new Mock<IUIElement>();
+            _uiElementMock1 = new Mock<UIElement>();
+            _uiElementMock2 = new Mock<UIElement>();
             _borderMock = new Mock<IBorder>();
             _ScreenDisplayFactoryMock = new Mock<IScreenDisplayFactory>();
             _ScreenDisplayFactoryMock.Setup(s => s.Create(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock1.Object);
