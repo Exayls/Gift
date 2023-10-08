@@ -1,8 +1,8 @@
-﻿using Gift.SignalHandler;
-using Gift.src.Services.SignalHandler.Bus;
+﻿using Gift.ApplicationService.services.SignalHandler;
+using Gift.ApplicationService.services.SignalHandler.Bus;
 using System;
 
-namespace Gift.src.Services.Monitor.ConsoleMonitors
+namespace Gift.ApplicationService.services.Monitor.ConsoleMonitors
 {
     public class ConsoleSizeMonitor : IConsoleSizeMonitor
     {

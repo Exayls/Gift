@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Gift.KeyInput;
-using Gift.SignalHandler;
-using Gift.src.Services.SignalHandler.Bus;
+using Gift.ApplicationService.services.KeyInputHandler;
+using Gift.ApplicationService.services.SignalHandler.Bus;
 
-namespace Gift.src.Services.SignalHandler.Key
+namespace Gift.ApplicationService.services.SignalHandler.Key
 {
     public class KeySignalHandler : IKeySignalHandler
     {

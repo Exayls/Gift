@@ -1,11 +1,11 @@
-﻿using Gift.Builders;
+﻿using Gift.ApplicationService.services.Renderer;
+using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Border;
-using Gift.UI;
-using Gift.UI.Conf;
-using Gift.UI.Display;
-using Gift.UI.Element;
-using Gift.UI.MetaData;
-using Gift.UI.Render;
+using Gift.Domain.UIModel.Conf;
+using Gift.Domain.UIModel.Display;
+using Gift.Domain.UIModel.Element;
+using Gift.Domain.UIModel.MetaData;
+using Gift.src.Builders;
 using Xunit;
 
 namespace TestGift.Test.UI

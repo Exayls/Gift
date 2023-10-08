@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Gift.KeyInput
+namespace Gift.ApplicationService.services.KeyInputHandler
 {
     class KeyEventArgs : EventArgs
     {

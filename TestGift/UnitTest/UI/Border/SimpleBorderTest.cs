@@ -1,6 +1,6 @@
 ﻿using Gift.Domain.UIModel.Border;
-using Gift.UI.Display;
-using Gift.UI.MetaData;
+using Gift.Domain.UIModel.Display;
+using Gift.Domain.UIModel.MetaData;
 using Xunit;
 
 namespace TestGift.UnitTest.UI.Border

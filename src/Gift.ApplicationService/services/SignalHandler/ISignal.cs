@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Gift.SignalHandler
+namespace Gift.ApplicationService.services.SignalHandler
 {
     public interface ISignal
     {

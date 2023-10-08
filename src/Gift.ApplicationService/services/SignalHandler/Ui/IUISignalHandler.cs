@@ -1,6 +1,4 @@
-﻿using Gift.SignalHandler;
-
-namespace Gift.src.Services.SignalHandler.Ui
+﻿namespace Gift.ApplicationService.services.SignalHandler.Ui
 {
     public interface IUISignalHandler : ISignalHandler
     {

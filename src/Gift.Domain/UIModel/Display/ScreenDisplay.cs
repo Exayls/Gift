@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 
-namespace Gift.UI.Display
+namespace Gift.Domain.UIModel.Display
 {
     public class ScreenDisplay : IScreenDisplay
     {

@@ -1,14 +1,14 @@
 ﻿using Gift;
-using Gift.Builders;
-using Gift.UI;
-using Gift.UI.Display;
-using Gift.UI.MetaData;
 using System;
 using System.Text;
-using Gift.UI.Render;
-using Gift.UI.Conf;
 using Xunit;
 using System.IO;
+using Gift.Domain.UIModel;
+using Gift.Domain.UIModel.MetaData;
+using Gift.Domain.UIModel.Display;
+using Gift.Domain.UIModel.Conf;
+using Gift.ApplicationService.services.Renderer;
+using Gift.src.Builders;
 
 namespace TestGift.UI
 {

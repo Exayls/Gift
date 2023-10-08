@@ -1,8 +1,8 @@
-﻿using Gift.Domain.UIModel.Border;
-using Gift.UI;
-using Gift.UI.MetaData;
+﻿using Gift.Domain.UIModel;
+using Gift.Domain.UIModel.Border;
+using Gift.Domain.UIModel.MetaData;
 
-namespace Gift.Builders
+namespace Gift.src.Builders
 {
     /// <summary>
     /// Build GiftUI with Bound(20, 60) as default

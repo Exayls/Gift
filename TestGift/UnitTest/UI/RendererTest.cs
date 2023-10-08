@@ -1,6 +1,6 @@
-﻿using Gift.UI.Conf;
-using Gift.UI.Element;
-using Gift.UI.Render;
+﻿using Gift.ApplicationService.services.Renderer;
+using Gift.Domain.UIModel.Conf;
+using Gift.Domain.UIModel.Element;
 using Moq;
 
 namespace TestGift.UnitTest.UI

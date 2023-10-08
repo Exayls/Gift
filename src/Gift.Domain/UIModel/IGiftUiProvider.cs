@@ -1,6 +1,4 @@
-﻿using Gift.UI;
-
-namespace Gift.Domain.UIModel
+﻿namespace Gift.Domain.UIModel
 {
     public interface IGiftUiProvider
     {

@@ -1,4 +1,4 @@
-﻿namespace Gift.Monitor
+﻿namespace Gift.ApplicationService.services.Monitor
 {
     public interface IMonitorManager
     {

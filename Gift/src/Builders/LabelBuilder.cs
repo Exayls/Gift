@@ -2,7 +2,7 @@
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
 
-namespace Gift.Builders
+namespace Gift.src.Builders
 {
     /// <summary>
     /// build Label with "Hello" as default text and (0,0) as default position
@@ -35,12 +35,12 @@ namespace Gift.Builders
 
         public LabelBuilder WithBackgroundColor(Color color)
         {
-            this.backColor = color;
+            backColor = color;
             return this;
         }
         public LabelBuilder WithForegroundColor(Color color)
         {
-            this.frontColor = color;
+            frontColor = color;
             return this;
         }
 
@@ -67,7 +67,7 @@ namespace Gift.Builders
         /// <returns>instance of Label</returns>
         public Label Build()
         {
-            return new Label(text, position: position,frontColor: this.frontColor, backColor: this.backColor, border:this.border);
+            return new Label(text, position: position, frontColor: frontColor, backColor: backColor, border: border);
         }
 
     }

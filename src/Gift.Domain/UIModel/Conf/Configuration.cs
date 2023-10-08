@@ -1,4 +1,6 @@
-﻿namespace Gift.UI.Conf
+﻿using Gift.Domain.UIModel.MetaData;
+
+namespace Gift.Domain.UIModel.Conf
 {
     public class Configuration : IConfiguration
     {

@@ -1,7 +1,7 @@
 ﻿using Gift.Domain.UIModel.Border;
-using Gift.UI.Display;
-using Gift.UI.Element;
-using Gift.UI.MetaData;
+using Gift.Domain.UIModel.Display;
+using Gift.Domain.UIModel.Element;
+using Gift.Domain.UIModel.MetaData;
 using Moq;
 using TestGift.Mocks;
 using Xunit;

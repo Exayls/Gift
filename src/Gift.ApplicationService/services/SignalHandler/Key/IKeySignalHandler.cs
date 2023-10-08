@@ -1,6 +1,4 @@
-﻿using Gift.SignalHandler;
-
-namespace Gift.src.Services.SignalHandler.Key
+﻿namespace Gift.ApplicationService.services.SignalHandler.Key
 {
     public interface IKeySignalHandler : ISignalHandler
     {

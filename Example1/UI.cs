@@ -1,4 +1,4 @@
-﻿using Gift.UI;
+﻿using Gift.Domain.UIModel;
 
 namespace ExempleGift
 {

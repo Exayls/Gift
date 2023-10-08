@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Gift.src.Services.SignalHandler.Key
+namespace Gift.ApplicationService.services.SignalHandler.Key
 {
     public class KeyMapping : IKeyMapping
     {

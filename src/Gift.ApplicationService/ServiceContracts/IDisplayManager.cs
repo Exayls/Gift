@@ -1,6 +1,6 @@
 ﻿using Gift.Domain.UIModel.MetaData;
 
-namespace Gift.UI.Service
+namespace Gift.ApplicationService.ServiceContracts
 {
     public interface IDisplayService
     {

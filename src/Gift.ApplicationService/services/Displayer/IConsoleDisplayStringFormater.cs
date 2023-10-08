@@ -1,6 +1,6 @@
-﻿using Gift.UI.Display;
+﻿using Gift.Domain.UIModel.Display;
 
-namespace Gift.UI.Displayer
+namespace Gift.ApplicationService.services.Displayer
 {
     public interface IConsoleDisplayStringFormater
     {

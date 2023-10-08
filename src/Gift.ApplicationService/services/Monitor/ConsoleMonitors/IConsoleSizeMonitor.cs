@@ -1,6 +1,4 @@
-﻿using Gift.Monitor;
-
-namespace Gift.src.Services.Monitor.ConsoleMonitors
+﻿namespace Gift.ApplicationService.services.Monitor.ConsoleMonitors
 {
     public interface IConsoleSizeMonitor : IMonitor
     {

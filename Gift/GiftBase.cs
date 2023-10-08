@@ -1,17 +1,17 @@
 ﻿using System.Threading.Tasks;
-using Gift.KeyInput;
-using Gift.Monitor;
-using Gift.src.Services.FileParser;
-using Gift.src.Services.Monitor.ConsoleMonitors;
-using Gift.src.Services.SignalHandler.Bus;
-using Gift.src.Services.SignalHandler.Global;
-using Gift.src.Services.SignalHandler.Key;
-using Gift.src.Services.SignalHandler.Ui;
-using Gift.UI.Displayer;
-using Gift.UI.Service;
-using Gift.UI.Element;
-using Gift.UI.Render;
 using Gift.Domain.UIModel;
+using Gift.Domain.UIModel.Element;
+using Gift.ApplicationService.services.SignalHandler.Global;
+using Gift.ApplicationService.services.Monitor.ConsoleMonitors;
+using Gift.ApplicationService.services.SignalHandler.Bus;
+using Gift.ApplicationService.services.Monitor;
+using Gift.ApplicationService.services.FileParser;
+using Gift.ApplicationService.ServiceContracts;
+using Gift.ApplicationService.services.SignalHandler.Ui;
+using Gift.ApplicationService.services.SignalHandler.Key;
+using Gift.ApplicationService.services.Displayer;
+using Gift.ApplicationService.services.Renderer;
+using Gift.ApplicationService.services.KeyInputHandler;
 
 namespace Gift
 {

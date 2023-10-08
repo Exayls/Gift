@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Gift.src.Services.SignalHandler.Key
+namespace Gift.ApplicationService.services.SignalHandler.Key
 {
     public interface IKeyMapper
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Gift.src.Services.FileParser
+namespace Gift.ApplicationService.services.FileParser
 {
     public interface IUIElementRegister
     {

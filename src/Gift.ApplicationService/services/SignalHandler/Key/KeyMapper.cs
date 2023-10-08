@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
-namespace Gift.src.Services.SignalHandler.Key
+namespace Gift.ApplicationService.services.SignalHandler.Key
 {
     //GPT stuff. No tests!! Don’t touch before tests are there
 

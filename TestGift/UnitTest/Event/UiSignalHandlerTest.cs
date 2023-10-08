@@ -1,11 +1,11 @@
-﻿using Gift.SignalHandler;
-using Gift.src.Services.Monitor.ConsoleMonitors;
-using Gift.src.Services.SignalHandler.Ui;
-using Gift.UI.Service;
-using Gift.UI.MetaData;
-using Moq;
+﻿using Moq;
 using System;
 using Xunit;
+using Gift.Domain.UIModel.MetaData;
+using Gift.ApplicationService.ServiceContracts;
+using Gift.ApplicationService.services.SignalHandler;
+using Gift.ApplicationService.services.Monitor.ConsoleMonitors;
+using Gift.ApplicationService.services.SignalHandler.Ui;
 
 namespace TestGift.UnitTest.Event
 {

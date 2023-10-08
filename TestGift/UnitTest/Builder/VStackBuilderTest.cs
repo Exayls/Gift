@@ -1,7 +1,7 @@
-﻿using Gift.Builders;
-using Gift.Domain.UIModel.Border;
-using Gift.UI.Element;
-using Gift.UI.MetaData;
+﻿using Gift.Domain.UIModel.Border;
+using Gift.Domain.UIModel.Element;
+using Gift.Domain.UIModel.MetaData;
+using Gift.src.Builders;
 using Xunit;
 
 namespace TestGift.Builder

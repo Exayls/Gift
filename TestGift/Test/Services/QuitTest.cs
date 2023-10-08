@@ -1,6 +1,6 @@
 ﻿using Gift;
+using Gift.Domain.UIModel;
 using Gift.src.Extensions;
-using Gift.UI;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace TestGift.Test.Services

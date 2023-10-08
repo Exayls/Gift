@@ -1,6 +1,6 @@
-﻿using Gift.Domain.UIModel.MetaData;
-using Gift.src.Services.Displayer;
-using Gift.UI.Display;
+﻿using Gift.ApplicationService.services.Displayer;
+using Gift.Domain.UIModel.Display;
+using Gift.Domain.UIModel.MetaData;
 using Moq;
 using System;
 using Xunit;

@@ -1,6 +1,6 @@
-﻿using Gift.UI.MetaData;
+﻿using Gift.Domain.UIModel.MetaData;
 
-namespace Gift.UI.Display
+namespace Gift.Domain.UIModel.Display
 {
     public class ScreenDisplayFactory : IScreenDisplayFactory
     {

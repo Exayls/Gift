@@ -1,6 +1,6 @@
 ﻿using Gift.Domain.UIModel.MetaData;
 
-namespace Gift.UI.Conf
+namespace Gift.Domain.UIModel.Conf
 {
     public class DefaultConfiguration : IConfiguration
     {

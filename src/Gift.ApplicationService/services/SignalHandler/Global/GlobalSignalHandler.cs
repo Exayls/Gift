@@ -1,11 +1,10 @@
-﻿using Gift.SignalHandler;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
-namespace Gift.src.Services.SignalHandler.Global
+namespace Gift.ApplicationService.services.SignalHandler.Global
 {
     public class GlobalSignalHandler : IGlobalSignalHandler
     {
-        public TaskCompletionSource<bool> Completion { get ; set ; }
+        public TaskCompletionSource<bool> Completion { get; set; }
 
         public GlobalSignalHandler()
         {

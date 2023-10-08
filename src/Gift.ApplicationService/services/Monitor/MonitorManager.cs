@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Gift.Monitor
+namespace Gift.ApplicationService.services.Monitor
 {
     public class MonitorManager : IMonitorManager
     {

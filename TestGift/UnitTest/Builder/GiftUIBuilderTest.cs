@@ -1,6 +1,6 @@
-﻿using Gift.Builders;
-using Gift.UI;
-using Gift.UI.MetaData;
+﻿using Gift.Domain.UIModel;
+using Gift.Domain.UIModel.MetaData;
+using Gift.src.Builders;
 using Xunit;
 
 namespace TestGift.Builder

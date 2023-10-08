@@ -1,9 +1,9 @@
 ﻿using Gift.Domain.UIModel.Border;
-using Gift.UI.Display;
-using Gift.UI.Element;
-using Gift.UI.MetaData;
+using Gift.Domain.UIModel.Display;
+using Gift.Domain.UIModel.Element;
+using Gift.Domain.UIModel.MetaData;
 
-namespace Gift.Builders
+namespace Gift.src.Builders
 {
     public class VStackBuilder
     {
@@ -26,13 +26,13 @@ namespace Gift.Builders
 
         public VStackBuilder WithBackgroundColor(Color color)
         {
-            this.backColor = color;
+            backColor = color;
             return this;
         }
 
         public VStackBuilder WithForegroundColor(Color color)
         {
-            this.frontColor = color;
+            frontColor = color;
             return this;
         }
 

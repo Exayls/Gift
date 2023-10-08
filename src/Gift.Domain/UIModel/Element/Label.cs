@@ -1,8 +1,8 @@
 ﻿using Gift.Domain.UIModel.Border;
+using Gift.Domain.UIModel.Conf;
+using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.DispositionStrategy;
 using Gift.Domain.UIModel.MetaData;
-using Gift.UI.Conf;
-using Gift.UI.Display;
 
 namespace Gift.Domain.UIModel.Element
 {

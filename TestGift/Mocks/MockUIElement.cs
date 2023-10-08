@@ -1,7 +1,7 @@
-﻿using Gift.UI.Conf;
-using Gift.UI.Display;
-using Gift.UI.Element;
-using Gift.UI.MetaData;
+﻿using Gift.Domain.UIModel.Conf;
+using Gift.Domain.UIModel.Display;
+using Gift.Domain.UIModel.Element;
+using Gift.Domain.UIModel.MetaData;
 
 namespace TestGift.Mocks
 {

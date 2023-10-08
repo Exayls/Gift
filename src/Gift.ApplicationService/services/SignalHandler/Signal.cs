@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Gift.SignalHandler
+namespace Gift.ApplicationService.services.SignalHandler
 {
     public class Signal : ISignal
     {
@@ -11,7 +11,7 @@ namespace Gift.SignalHandler
         public Signal(string name, EventArgs eventArgs)
         {
             Name = name;
-            this.EventArgs = eventArgs;
+            EventArgs = eventArgs;
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿using Gift.src.Services.FileParser;
-using Gift.UI;
-using Gift.UI.Element;
+﻿using Gift.ApplicationService.services.FileParser;
+using Gift.Domain.UIModel;
+using Gift.Domain.UIModel.Element;
 using System;
 using System.IO;
 using Xunit;

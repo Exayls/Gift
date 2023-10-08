@@ -1,11 +1,13 @@
 ﻿using Gift.Domain.UIModel;
-using Gift.UI.Display;
-using Gift.UI.Element;
+using Gift.Domain.UIModel.Border;
+using Gift.Domain.UIModel.Display;
+using Gift.Domain.UIModel.Element;
+using Gift.Domain.UIModel.MetaData;
 using System;
 using System.Reflection;
 using System.Xml;
 
-namespace Gift.src.Services.FileParser
+namespace Gift.ApplicationService.services.FileParser
 {
     public class XmlFileParser : IXMLFileParser
     {
@@ -31,7 +33,7 @@ namespace Gift.src.Services.FileParser
         private GiftUI ParseUIElement(XmlElement element)
         {
             GiftUI giftui = new GiftUI();
-            this.giftUI = giftui;
+            giftUI = giftui;
             foreach (XmlNode childNode in element.ChildNodes)
             {
                 AddChild(giftui, childNode);

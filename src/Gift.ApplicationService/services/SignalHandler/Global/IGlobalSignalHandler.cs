@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
-using Gift.SignalHandler;
 
-namespace Gift.src.Services.SignalHandler.Global
+namespace Gift.ApplicationService.services.SignalHandler.Global
 {
     public interface IGlobalSignalHandler : ISignalHandler
     {
