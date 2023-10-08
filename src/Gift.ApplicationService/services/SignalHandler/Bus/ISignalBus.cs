@@ -1,4 +1,4 @@
-﻿namespace Gift.ApplicationService.services.SignalHandler.Bus
+﻿namespace Gift.ApplicationService.Services.SignalHandler.Bus
 {
     public interface ISignalBus
     {

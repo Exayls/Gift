@@ -1,4 +1,4 @@
-﻿using Gift.ApplicationService.services.FileParser;
+﻿using Gift.ApplicationService.Services.FileParser;
 using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Element;
 using System;

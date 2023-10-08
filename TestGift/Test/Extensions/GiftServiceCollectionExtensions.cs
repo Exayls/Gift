@@ -1,16 +1,16 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel;
-using Gift.ApplicationService.services.Displayer;
-using Gift.ApplicationService.services.SignalHandler.Bus;
-using Gift.ApplicationService.services.Monitor.ConsoleMonitors;
-using Gift.ApplicationService.services;
-using Gift.ApplicationService.services.Renderer;
-using Gift.ApplicationService.services.KeyInputHandler;
-using Gift.ApplicationService.services.Monitor;
+using Gift.ApplicationService.Services.Displayer;
+using Gift.ApplicationService.Services.SignalHandler.Bus;
+using Gift.ApplicationService.Services.Monitor.ConsoleMonitors;
+using Gift.ApplicationService.Services;
+using Gift.ApplicationService.Services.Renderer;
+using Gift.ApplicationService.Services.KeyInputHandler;
+using Gift.ApplicationService.Services.Monitor;
 using Gift.ApplicationService.ServiceContracts;
-using Gift.ApplicationService.services.SignalHandler.Ui;
-using Gift.ApplicationService.services.SignalHandler.Key;
+using Gift.ApplicationService.Services.SignalHandler.Ui;
+using Gift.ApplicationService.Services.SignalHandler.Key;
 
 namespace Gift.src.Extensions
 {
@@ -30,9 +30,9 @@ namespace Gift.src.Extensions
             services.AddSingleton<IMonitorManager, MonitorManager>();
             services.AddSingleton<ISignalBus, SignalBus>();
             services.AddSingleton<IGiftUiProvider, GiftUiProvider>();
-            services.AddSingleton<IDisplayService, DisplayService>();
+            services.AddSingleton<IGiftLauncher, GiftLauncher>();
             services.AddSingleton<IUISignalHandler, UISignalHandler>();
-            services.AddSingleton<GiftBase>();
+            services.AddSingleton<GiftLauncher>();
 
             return services;
         }

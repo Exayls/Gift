@@ -1,4 +1,4 @@
-﻿namespace Gift.ApplicationService.services.SignalHandler
+﻿namespace Gift.ApplicationService.Services.SignalHandler
 {
     public interface ISignalHandler
     {

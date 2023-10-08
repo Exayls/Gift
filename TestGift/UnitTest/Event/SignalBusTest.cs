@@ -1,5 +1,5 @@
-﻿using Gift.ApplicationService.services.SignalHandler;
-using Gift.ApplicationService.services.SignalHandler.Bus;
+﻿using Gift.ApplicationService.Services.SignalHandler;
+using Gift.ApplicationService.Services.SignalHandler.Bus;
 using Moq;
 using Xunit;
 

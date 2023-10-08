@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Gift.ApplicationService.services.SignalHandler
+namespace Gift.ApplicationService.Services.SignalHandler
 {
     public class Signal : ISignal
     {

@@ -1,4 +1,4 @@
-﻿namespace Gift.ApplicationService.services.KeyInputHandler
+﻿namespace Gift.ApplicationService.Services.KeyInputHandler
 {
     public interface IKeyInputHandler
     {

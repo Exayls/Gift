@@ -3,9 +3,9 @@ using System;
 using Xunit;
 using Gift.Domain.UIModel.MetaData;
 using Gift.ApplicationService.ServiceContracts;
-using Gift.ApplicationService.services.SignalHandler;
-using Gift.ApplicationService.services.Monitor.ConsoleMonitors;
-using Gift.ApplicationService.services.SignalHandler.Ui;
+using Gift.ApplicationService.Services.SignalHandler;
+using Gift.ApplicationService.Services.Monitor.ConsoleMonitors;
+using Gift.ApplicationService.Services.SignalHandler.Ui;
 
 namespace TestGift.UnitTest.Event
 {

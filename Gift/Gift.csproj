@@ -13,16 +13,16 @@
 
 	<ItemGroup>
 		<None Update="ressources\borderchars\double_border.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToOutputDirectory>always</CopyToOutputDirectory>
 		</None>
 		<None Update="ressources\borderchars\heavy_border.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToOutputDirectory>always</CopyToOutputDirectory>
 		</None>
 		<None Update="ressources\borderchars\simple_border.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToOutputDirectory>always</CopyToOutputDirectory>
 		</None>
 		<None Update="ressources\keyconfig\keymap.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToOutputDirectory>always</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
 

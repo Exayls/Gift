@@ -11,4 +11,19 @@
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<None Update="ressources\borderchars\double_border.json">
+			<CopyToOutputDirectory>always</CopyToOutputDirectory>
+		</None>
+		<None Update="ressources\borderchars\heavy_border.json">
+			<CopyToOutputDirectory>always</CopyToOutputDirectory>
+		</None>
+		<None Update="ressources\borderchars\simple_border.json">
+			<CopyToOutputDirectory>always</CopyToOutputDirectory>
+		</None>
+		<None Update="ressources\keyconfig\keymap.json">
+			<CopyToOutputDirectory>always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
 </Project>

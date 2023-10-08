@@ -6,7 +6,7 @@ using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.MetaData;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Conf;
-using Gift.ApplicationService.services.Renderer;
+using Gift.ApplicationService.Services.Renderer;
 
 namespace TestGift.UI
 {
@@ -22,11 +22,11 @@ namespace TestGift.UI
 
                 IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
                 var expectedBuilder = new StringBuilder();
-                expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, 60));
+                expectedBuilder.Append(new string(GiftLauncher.FILLINGCHAR, 60));
                 for (int i = 1; i < 20; i++)
                 {
                     expectedBuilder.Append('\n');
-                    expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, 60));
+                    expectedBuilder.Append(new string(GiftLauncher.FILLINGCHAR, 60));
                 }
 
                 Assert.Equal(expectedBuilder.ToString(), renderedText.DisplayString.ToString());
@@ -42,11 +42,11 @@ namespace TestGift.UI
 
                 IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
                 var expectedBuilder = new StringBuilder();
-                expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, 15));
+                expectedBuilder.Append(new string(GiftLauncher.FILLINGCHAR, 15));
                 for (int i = 1; i < 10; i++)
                 {
                     expectedBuilder.Append('\n');
-                    expectedBuilder.Append(new string(GiftBase.FILLINGCHAR, 15));
+                    expectedBuilder.Append(new string(GiftLauncher.FILLINGCHAR, 15));
                 }
 
                 Assert.Equal(expectedBuilder.ToString(), renderedText.DisplayString.ToString());

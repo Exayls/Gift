@@ -1,5 +1,5 @@
-﻿using Gift.ApplicationService.services.Displayer;
-using Gift.ApplicationService.services.Renderer;
+﻿using Gift.ApplicationService.Services.Displayer;
+using Gift.ApplicationService.Services.Renderer;
 using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Element;

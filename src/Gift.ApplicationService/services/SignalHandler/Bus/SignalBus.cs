@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Gift.ApplicationService.services.SignalHandler.Bus
+namespace Gift.ApplicationService.Services.SignalHandler.Bus
 {
     public class SignalBus : ISignalBus
     {

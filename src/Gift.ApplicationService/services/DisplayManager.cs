@@ -1,11 +1,11 @@
 ﻿using Gift.ApplicationService.ServiceContracts;
-using Gift.ApplicationService.services.Displayer;
-using Gift.ApplicationService.services.Renderer;
+using Gift.ApplicationService.Services.Displayer;
+using Gift.ApplicationService.Services.Renderer;
 using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.MetaData;
 
-namespace Gift.ApplicationService.services
+namespace Gift.ApplicationService.Services
 {
     public class DisplayService : IDisplayService
     {

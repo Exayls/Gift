@@ -2,7 +2,7 @@
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.MetaData;
 
-namespace Gift.ApplicationService.services.Displayer
+namespace Gift.ApplicationService.Services.Displayer
 {
     public class ConsoleDisplayStringFormater : IConsoleDisplayStringFormater
     {

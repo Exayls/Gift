@@ -1,4 +1,4 @@
-﻿using Gift.Domain.UIModel.MetaData;
+using Gift.Domain.UIModel.MetaData;
 
 namespace Gift.ApplicationService.ServiceContracts
 {

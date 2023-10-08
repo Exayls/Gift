@@ -1,21 +1,21 @@
 ﻿using System.Threading.Tasks;
 using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Element;
-using Gift.ApplicationService.services.SignalHandler.Global;
-using Gift.ApplicationService.services.Monitor.ConsoleMonitors;
-using Gift.ApplicationService.services.SignalHandler.Bus;
-using Gift.ApplicationService.services.Monitor;
-using Gift.ApplicationService.services.FileParser;
+using Gift.ApplicationService.Services.SignalHandler.Global;
+using Gift.ApplicationService.Services.Monitor.ConsoleMonitors;
+using Gift.ApplicationService.Services.SignalHandler.Bus;
+using Gift.ApplicationService.Services.Monitor;
+using Gift.ApplicationService.Services.FileParser;
 using Gift.ApplicationService.ServiceContracts;
-using Gift.ApplicationService.services.SignalHandler.Ui;
-using Gift.ApplicationService.services.SignalHandler.Key;
-using Gift.ApplicationService.services.Displayer;
-using Gift.ApplicationService.services.Renderer;
-using Gift.ApplicationService.services.KeyInputHandler;
+using Gift.ApplicationService.Services.SignalHandler.Ui;
+using Gift.ApplicationService.Services.SignalHandler.Key;
+using Gift.ApplicationService.Services.Displayer;
+using Gift.ApplicationService.Services.Renderer;
+using Gift.ApplicationService.Services.KeyInputHandler;
 
 namespace Gift
 {
-    public class GiftBase
+    public class GiftLauncher:IGiftLauncher
     {
         public GiftUI Ui
         {
@@ -44,7 +44,7 @@ namespace Gift
         private readonly IUIElementRegister _uielementRegister;
         public const char FILLINGCHAR = '*';
 
-        public GiftBase(IRenderer renderer,
+        public GiftLauncher(IRenderer renderer,
                         IDisplayer displayer,
                         IMonitorManager monitorManager,
                         ISignalBus queue,

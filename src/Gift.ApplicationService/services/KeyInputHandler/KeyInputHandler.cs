@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Gift.ApplicationService.services.SignalHandler;
-using Gift.ApplicationService.services.SignalHandler.Bus;
+using Gift.ApplicationService.Services.SignalHandler;
+using Gift.ApplicationService.Services.SignalHandler.Bus;
 
-namespace Gift.ApplicationService.services.KeyInputHandler
+namespace Gift.ApplicationService.Services.KeyInputHandler
 {
     public class KeyInputHandler : IKeyInputHandler
     {

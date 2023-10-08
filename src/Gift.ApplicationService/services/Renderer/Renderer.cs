@@ -4,7 +4,7 @@ using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
 
-namespace Gift.ApplicationService.services.Renderer
+namespace Gift.ApplicationService.Services.Renderer
 {
     public class Renderer : IRenderer
     {

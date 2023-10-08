@@ -1,4 +1,4 @@
-﻿using Gift;
+using Gift.ApplicationService.ServiceContracts;
 using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.MetaData;
@@ -54,6 +54,6 @@ ui.SelectedContainer = vstack2;
 var services = new ServiceCollection();
 services.AddGiftServices();
 var serviceProvider = services.BuildServiceProvider();
-var gift = serviceProvider.GetRequiredService<GiftBase>();
+var gift = serviceProvider.GetRequiredService<IGiftLauncher>();
 gift.Initialize(ui);
 gift.Run();

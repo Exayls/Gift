@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Gift.ApplicationService.services.FileParser
+namespace Gift.ApplicationService.Services.FileParser
 {
     public class UIElementRegister : IUIElementRegister
     {

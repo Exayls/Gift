@@ -1,9 +1,9 @@
 ﻿using System;
 using Gift.Domain.UIModel.MetaData;
 using Gift.ApplicationService.ServiceContracts;
-using Gift.ApplicationService.services.Monitor.ConsoleMonitors;
+using Gift.ApplicationService.Services.Monitor.ConsoleMonitors;
 
-namespace Gift.ApplicationService.services.SignalHandler.Ui
+namespace Gift.ApplicationService.Services.SignalHandler.Ui
 {
     public class UISignalHandler : IUISignalHandler
     {

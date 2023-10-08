@@ -1,6 +1,6 @@
 ﻿using Gift.Domain.UIModel;
 
-namespace Gift.ApplicationService.services.FileParser
+namespace Gift.ApplicationService.Services.FileParser
 {
     public interface IXMLFileParser
     {

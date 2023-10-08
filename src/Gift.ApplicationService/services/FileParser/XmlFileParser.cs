@@ -7,7 +7,7 @@ using System;
 using System.Reflection;
 using System.Xml;
 
-namespace Gift.ApplicationService.services.FileParser
+namespace Gift.ApplicationService.Services.FileParser
 {
     public class XmlFileParser : IXMLFileParser
     {

@@ -1,4 +1,4 @@
-﻿using Gift.ApplicationService.services.Renderer;
+﻿using Gift.ApplicationService.Services.Renderer;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Element;
 using Moq;

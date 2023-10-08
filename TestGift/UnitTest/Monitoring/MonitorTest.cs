@@ -1,4 +1,4 @@
-﻿using Gift.ApplicationService.services.Monitor;
+﻿using Gift.ApplicationService.Services.Monitor;
 using Moq;
 using Xunit;
 

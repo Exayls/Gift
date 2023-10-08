@@ -1,4 +1,4 @@
-﻿using Gift.ApplicationService.services.Displayer;
+﻿using Gift.ApplicationService.Services.Displayer;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.MetaData;
 using Moq;
