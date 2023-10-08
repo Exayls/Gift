@@ -11,7 +11,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\src\Gift.ApplicationService\Gift.ApplicationService.csproj" />
+	  <ProjectReference Include="..\..\Gift.Startup\Gift.Startup.csproj" />
 	</ItemGroup>
 
 </Project>

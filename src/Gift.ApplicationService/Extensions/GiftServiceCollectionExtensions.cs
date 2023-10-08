@@ -7,7 +7,6 @@ using Gift.ApplicationService.Services.Monitor.ConsoleMonitors;
 using Gift.ApplicationService.Services;
 using Gift.ApplicationService.Services.KeyInputHandler;
 using Gift.ApplicationService.Services.Monitor;
-using Gift.ApplicationService.Services.FileParser;
 using Gift.ApplicationService.ServiceContracts;
 using Gift.ApplicationService.Services.SignalHandler.Ui;
 using Gift.ApplicationService.Services.SignalHandler.Key;
@@ -16,7 +15,7 @@ namespace Gift.src.Extensions
 {
     public static class GiftServiceCollectionExtensions
     {
-        public static IServiceCollection AddGiftServices(this IServiceCollection services)
+        public static IServiceCollection AddGiftApplicationServices(this IServiceCollection services)
         {
             services.AddSingleton<IConfiguration, DefaultConfiguration>();
             services.AddSingleton<IDisplayService, DisplayService>();
@@ -30,7 +29,6 @@ namespace Gift.src.Extensions
             services.AddSingleton<IUISignalHandler, UISignalHandler>();
             services.AddSingleton<IKeySignalHandler, KeySignalHandler>();
             services.AddSingleton<IGlobalSignalHandler, GlobalSignalHandler>();
-
 
             return services;
         }

@@ -10,9 +10,9 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
   </ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\..\src\Gift.ApplicationService\Gift.ApplicationService.csproj" />
-	</ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Gift.Startup\Gift.Startup.csproj" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Update="test.xml">
