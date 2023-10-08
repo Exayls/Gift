@@ -1,11 +1,11 @@
 ﻿
 using Gift.Builders;
+using Gift.Domain.UIModel;
+using Gift.Domain.UIModel.Element;
+using Gift.Domain.UIModel.MetaData;
 using Gift.src.Services.Displayer;
-using Gift.UI;
 using Gift.UI.Conf;
 using Gift.UI.Displayer;
-using Gift.UI.Element;
-using Gift.UI.MetaData;
 using Gift.UI.Render;
 
 

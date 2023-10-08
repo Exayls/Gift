@@ -1,6 +1,6 @@
 ﻿using Gift.Builders;
+using Gift.Domain.UIModel.Border;
 using Gift.UI;
-using Gift.UI.Border;
 using Gift.UI.Conf;
 using Gift.UI.Display;
 using Gift.UI.Element;

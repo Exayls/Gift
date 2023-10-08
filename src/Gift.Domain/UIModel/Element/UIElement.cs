@@ -1,0 +1,41 @@
+﻿using Gift.Domain.UIModel.Border;
+using Gift.Domain.UIModel.MetaData;
+using Gift.UI.Conf;
+using Gift.UI.Display;
+
+namespace Gift.Domain.UIModel.Element
+{
+    public abstract class UIElement : IRenderable
+    {
+
+        public abstract int Height { get; }
+        public abstract int Width { get; }
+        public IBorder Border { get; set; }
+        public Color FrontColor { get; private set; }
+        public Color BackColor { get; private set; }
+
+        private bool isSelectedElement;
+        public bool IsSelectedElement
+        {
+            get => isSelectedElement;
+            set
+            {
+                isSelectedElement = value;
+            }
+        }
+
+        public bool IsInSelectedContainer { get; set; }
+
+        protected UIElement(IBorder? border = null , Color frontColor = Color.Default, Color backColor = Color.Default)
+        {
+            Border = border?? new NoBorder();
+            FrontColor = frontColor;
+            BackColor = backColor;
+        }
+
+        public abstract IScreenDisplay GetDisplayWithoutBorder(Bound bounds, IConfiguration configuration);
+        public abstract IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuration);
+        public abstract Position GetRelativePosition(Context context);
+        public abstract bool IsFixed();
+    }
+}

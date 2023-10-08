@@ -7,12 +7,11 @@ using Gift.src.Services.SignalHandler.Bus;
 using Gift.src.Services.SignalHandler.Global;
 using Gift.src.Services.SignalHandler.Key;
 using Gift.src.Services.SignalHandler.Ui;
-using Gift.src.UIModel;
-using Gift.UI;
 using Gift.UI.Displayer;
-using Gift.UI.DisplayManager;
+using Gift.UI.Service;
 using Gift.UI.Element;
 using Gift.UI.Render;
+using Gift.Domain.UIModel;
 
 namespace Gift
 {
@@ -32,14 +31,14 @@ namespace Gift
         private readonly IDisplayer _displayer;
 
         private readonly IGiftUiProvider _uiProvider;
-        private readonly IDisplayManager _displayManager;
+        private readonly IDisplayService _displayManager;
 
         private readonly IUISignalHandler _uiSignalHandler;
         private readonly IKeySignalHandler _keySignalHandler;
         private readonly IGlobalSignalHandler _globalSignalHandler;
 
-        private readonly IMonitorManager _monitorManager;//truc a faire avec ça. le keyInputHandler est un monitor
-        private readonly IKeyInputHandler _keyInputHandler;
+        private readonly IMonitorManager _monitorManager;
+        private readonly IKeyInputHandler _keyInputHandler;//truc a faire avec ça. le keyInputHandler est un monitor
 
         private readonly IXMLFileParser _xmlParser;
         private readonly IUIElementRegister _uielementRegister;
@@ -55,7 +54,7 @@ namespace Gift
                         IGiftUiProvider uiProvider,
                         IUISignalHandler uISignalHandler,
                         IGlobalSignalHandler globalSignalHandler,
-						IDisplayManager displayManager,
+						IDisplayService displayManager,
 						IXMLFileParser xmlFileParser,
                         IUIElementRegister elementRegister)
         {

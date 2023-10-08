@@ -1,11 +1,11 @@
 ﻿using Gift;
 using Gift.Builders;
-using Gift.UI;
-using Gift.UI.Border;
+using Gift.Domain.UIModel;
+using Gift.Domain.UIModel.Border;
+using Gift.Domain.UIModel.MetaData;
 using Gift.UI.Conf;
 using Gift.UI.Display;
 using Gift.UI.Element;
-using Gift.UI.MetaData;
 using Gift.UI.Render;
 using Moq;
 using System;

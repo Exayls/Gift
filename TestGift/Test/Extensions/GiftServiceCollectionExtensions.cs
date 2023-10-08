@@ -8,9 +8,10 @@ using Gift.src.Services.SignalHandler.Ui;
 using Gift.src.UIModel;
 using Gift.UI.Conf;
 using Gift.UI.Displayer;
-using Gift.UI.DisplayManager;
+using Gift.UI.Service;
 using Gift.UI.Render;
 using Microsoft.Extensions.DependencyInjection;
+using Gift.ApplicationService.Service;
 
 namespace Gift.src.Extensions
 {
@@ -20,7 +21,7 @@ namespace Gift.src.Extensions
         {
             services.AddSingleton<IConfiguration, DefaultConfiguration>();
             services.AddSingleton<IRenderer, Renderer>();
-            services.AddSingleton<IDisplayManager, DisplayManager>();
+            services.AddSingleton<IDisplayService, DisplayService>();
             services.AddSingleton<IConsoleDisplayStringFormater, ConsoleDisplayStringFormater>();
             services.AddSingleton<IDisplayer, ConsoleDisplayer>();
             services.AddSingleton<IKeyInputHandler, KeyInputHandler>();
@@ -30,7 +31,7 @@ namespace Gift.src.Extensions
             services.AddSingleton<IMonitorManager, MonitorManager>();
             services.AddSingleton<ISignalBus, SignalBus>();
             services.AddSingleton<IGiftUiProvider, GiftUiProvider>();
-            services.AddSingleton<IDisplayManager, DisplayManager>();
+            services.AddSingleton<IDisplayService, DisplayService>();
             services.AddSingleton<IUISignalHandler, UISignalHandler>();
             services.AddSingleton<GiftBase>();
 

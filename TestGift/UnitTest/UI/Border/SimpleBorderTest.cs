@@ -1,4 +1,4 @@
-﻿using Gift.UI.Border;
+﻿using Gift.Domain.UIModel.Border;
 using Gift.UI.Display;
 using Gift.UI.MetaData;
 using Xunit;

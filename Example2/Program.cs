@@ -1,9 +1,10 @@
 ﻿using Gift;
 using Gift.Builders;
+using Gift.Domain.UIModel;
+using Gift.Domain.UIModel.Border;
+using Gift.Domain.UIModel.MetaData;
+using Gift.src.Builders;
 using Gift.src.Extensions;
-using Gift.UI;
-using Gift.UI.Border;
-using Gift.UI.MetaData;
 using Microsoft.Extensions.DependencyInjection;
 
 var ui = new GiftUI();

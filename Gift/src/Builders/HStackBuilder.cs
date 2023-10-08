@@ -1,9 +1,8 @@
-﻿using Gift.UI.Border;
-using Gift.UI.Display;
+﻿using Gift.UI.Display;
 using Gift.UI.Element;
 using Gift.UI.MetaData;
 
-namespace Gift.Builders
+namespace Gift.src.Builders
 {
     public class HStackBuilder
     {
@@ -26,13 +25,13 @@ namespace Gift.Builders
 
         public HStackBuilder WithBackgroundColor(Color color)
         {
-            this.backColor = color;
+            backColor = color;
             return this;
         }
 
         public HStackBuilder WithForegroundColor(Color color)
         {
-            this.frontColor = color;
+            frontColor = color;
             return this;
         }
 

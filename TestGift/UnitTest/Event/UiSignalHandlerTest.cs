@@ -1,7 +1,7 @@
 ﻿using Gift.SignalHandler;
 using Gift.src.Services.Monitor.ConsoleMonitors;
 using Gift.src.Services.SignalHandler.Ui;
-using Gift.UI.DisplayManager;
+using Gift.UI.Service;
 using Gift.UI.MetaData;
 using Moq;
 using System;
@@ -12,13 +12,13 @@ namespace TestGift.UnitTest.Event
     public class UiSignalHandlerTest
     {
         private ISignalHandler signalHandler;
-        private Mock<IDisplayManager> _mockDisplayManger;
+        private Mock<IDisplayService> _mockDisplayManger;
         private Mock<ISignal> _mockSignal;
         private Mock<EventArgs> _mockEventArgs;
 
         public UiSignalHandlerTest()
         {
-            _mockDisplayManger = new Mock<IDisplayManager>();
+            _mockDisplayManger = new Mock<IDisplayService>();
             _mockSignal = new Mock<ISignal>();
             _mockEventArgs = new Mock<EventArgs>();
             signalHandler = new UISignalHandler(_mockDisplayManger.Object);

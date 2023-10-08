@@ -7,7 +7,7 @@ using Gift.UI.Displayer;
 using Xunit;
 using Gift.src.UIModel;
 using Gift.UI;
-using Gift.UI.DisplayManager;
+using Gift.UI.Service;
 using Gift.src.Services.SignalHandler.Key;
 using Gift.src.Services.SignalHandler.Ui;
 using Gift.src.Services.Monitor.ConsoleMonitors;
@@ -30,7 +30,7 @@ namespace TestGift.UnitTest.Base
         private Mock<IGiftUiProvider> giftUiProviderMock;
         private Mock<IUISignalHandler> uiSignalHandlerMock;
         private Mock<IGlobalSignalHandler> globalSignalHandlerMock;
-        private Mock<IDisplayManager> displayManagerMock;
+        private Mock<IDisplayService> displayManagerMock;
         private Mock<IXMLFileParser> xmlFileParserMock;
         private Mock<IUIElementRegister> uIElementRegister;
         private GiftBase giftBase;
@@ -48,7 +48,7 @@ namespace TestGift.UnitTest.Base
             giftUiProviderMock = new Mock<IGiftUiProvider>();
             uiSignalHandlerMock = new Mock<IUISignalHandler>();
             globalSignalHandlerMock = new Mock<IGlobalSignalHandler>();
-            displayManagerMock = new Mock<IDisplayManager>();
+            displayManagerMock = new Mock<IDisplayService>();
             xmlFileParserMock = new Mock<IXMLFileParser>();
             uIElementRegister = new Mock<IUIElementRegister>();
 

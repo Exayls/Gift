@@ -1,5 +1,5 @@
-﻿using Gift.UI.Display;
-using Gift.UI.MetaData;
+﻿using Gift.Domain.UIModel.MetaData;
+using Gift.UI.Display;
 using Xunit;
 
 namespace TestGift.UI.Display

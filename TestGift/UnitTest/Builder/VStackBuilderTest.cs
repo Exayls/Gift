@@ -1,5 +1,5 @@
 ﻿using Gift.Builders;
-using Gift.UI.Border;
+using Gift.Domain.UIModel.Border;
 using Gift.UI.Element;
 using Gift.UI.MetaData;
 using Xunit;

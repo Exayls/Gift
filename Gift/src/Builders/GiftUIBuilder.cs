@@ -1,5 +1,5 @@
-﻿using Gift.UI;
-using Gift.UI.Border;
+﻿using Gift.Domain.UIModel.Border;
+using Gift.UI;
 using Gift.UI.MetaData;
 
 namespace Gift.Builders
