@@ -7,7 +7,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\src\Gift.ApplicationService\Gift.ApplicationService.csproj" />
+		<ProjectReference Include="..\..\src\Gift.ApplicationService\Gift.ApplicationService.csproj" />
 	</ItemGroup>
 
 </Project>
