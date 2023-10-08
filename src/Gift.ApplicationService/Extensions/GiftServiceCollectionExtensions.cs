@@ -11,7 +11,7 @@ using Gift.ApplicationService.ServiceContracts;
 using Gift.ApplicationService.Services.SignalHandler.Ui;
 using Gift.ApplicationService.Services.SignalHandler.Key;
 
-namespace Gift.src.Extensions
+namespace Gift.ApplicationService.Extensions
 {
     public static class GiftServiceCollectionExtensions
     {

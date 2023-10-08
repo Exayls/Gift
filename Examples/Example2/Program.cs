@@ -3,7 +3,7 @@ using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.MetaData;
 using Gift.src.Builders;
-using Gift.src.Extensions;
+using Gift.Startup.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 
 var ui = new GiftUI();

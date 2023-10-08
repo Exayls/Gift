@@ -1,5 +1,5 @@
 using Gift.ApplicationService.ServiceContracts;
-using Gift.src.Extensions;
+using Gift.Startup.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 
 var services = new ServiceCollection();

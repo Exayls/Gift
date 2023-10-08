@@ -1,10 +1,11 @@
-﻿using Gift.Domain.UIModel;
+﻿using Gift.Domain.ServiceContracts;
+using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
 
-namespace Gift.ApplicationService.Services.Renderer
+namespace Gift.Displayer.Rendering
 {
     public class Renderer : IRenderer
     {

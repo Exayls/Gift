@@ -1,5 +1,5 @@
 using Gift.ApplicationService.ServiceContracts;
-using Gift.src.Extensions;
+using Gift.Startup.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 
 internal class Program
