@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Gift.Domain.ServiceContracts;
+using System;
 using System.Collections.Generic;
 
-namespace Gift.ApplicationService.Services.FileParser
+namespace Gift.XmlUiParser.FileParser
 {
     public class UIElementRegister : IUIElementRegister
     {

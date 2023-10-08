@@ -2,7 +2,7 @@
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
 
-namespace Gift.src.Builders
+namespace Gift.Domain.Builders
 {
     /// <summary>
     /// build Label with "Hello" as default text and (0,0) as default position

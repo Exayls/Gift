@@ -1,4 +1,5 @@
-﻿using Gift.Domain.UIModel;
+﻿using Gift.Domain.ServiceContracts;
+using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
@@ -7,7 +8,7 @@ using System;
 using System.Reflection;
 using System.Xml;
 
-namespace Gift.ApplicationService.Services.FileParser
+namespace Gift.XmlUiParser.FileParser
 {
     public class XmlFileParser : IXMLFileParser
     {

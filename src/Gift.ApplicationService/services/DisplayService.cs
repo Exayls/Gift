@@ -1,6 +1,5 @@
 ﻿using Gift.ApplicationService.ServiceContracts;
-using Gift.ApplicationService.Services.Displayer;
-using Gift.ApplicationService.Services.Renderer;
+using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.MetaData;

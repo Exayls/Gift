@@ -1,6 +1,6 @@
 ﻿using Gift.Domain.UIModel.Display;
 
-namespace Gift.ApplicationService.Services.Displayer
+namespace Gift.Domain.ServiceContracts
 {
     public interface IDisplayer
     {

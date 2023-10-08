@@ -1,5 +1,4 @@
-﻿using Gift;
-using System.Text;
+﻿using System.Text;
 using Xunit;
 using System.IO;
 using Gift.Domain.UIModel;
@@ -7,6 +6,7 @@ using Gift.Domain.UIModel.MetaData;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Conf;
 using Gift.ApplicationService.Services.Renderer;
+using Gift.ApplicationService.Services;
 
 namespace TestGift.UI
 {

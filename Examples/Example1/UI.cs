@@ -1,6 +1,6 @@
 ﻿using Gift.Domain.UIModel;
 
-namespace ExempleGift
+namespace Example1
 {
     internal class UI : GiftUI
     {

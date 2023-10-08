@@ -2,7 +2,7 @@
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.MetaData;
 
-namespace Gift.src.Builders
+namespace Gift.Domain.Builders
 {
     /// <summary>
     /// Build GiftUI with Bound(20, 60) as default

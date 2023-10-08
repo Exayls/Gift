@@ -5,17 +5,15 @@ using Gift.ApplicationService.Services.SignalHandler.Global;
 using Gift.ApplicationService.Services.Monitor.ConsoleMonitors;
 using Gift.ApplicationService.Services.SignalHandler.Bus;
 using Gift.ApplicationService.Services.Monitor;
-using Gift.ApplicationService.Services.FileParser;
 using Gift.ApplicationService.ServiceContracts;
 using Gift.ApplicationService.Services.SignalHandler.Ui;
 using Gift.ApplicationService.Services.SignalHandler.Key;
-using Gift.ApplicationService.Services.Displayer;
-using Gift.ApplicationService.Services.Renderer;
 using Gift.ApplicationService.Services.KeyInputHandler;
+using Gift.Domain.ServiceContracts;
 
-namespace Gift
+namespace Gift.ApplicationService.Services
 {
-    public class GiftLauncher:IGiftLauncher
+    public class GiftLauncher : IGiftLauncher
     {
         public GiftUI Ui
         {
@@ -54,8 +52,8 @@ namespace Gift
                         IGiftUiProvider uiProvider,
                         IUISignalHandler uISignalHandler,
                         IGlobalSignalHandler globalSignalHandler,
-						IDisplayService displayManager,
-						IXMLFileParser xmlFileParser,
+                        IDisplayService displayManager,
+                        IXMLFileParser xmlFileParser,
                         IUIElementRegister elementRegister)
         {
             _renderer = renderer;
@@ -92,7 +90,7 @@ namespace Gift
             _uielementRegister.Register("GiftUI", typeof(GiftUI));
             _uielementRegister.Register("VStack", typeof(VStack));
             _uielementRegister.Register("HStack", typeof(HStack));
-            _uielementRegister.Register("Label",  typeof(Label));
+            _uielementRegister.Register("Label", typeof(Label));
         }
 
         public virtual void Initialize(GiftUI ui)

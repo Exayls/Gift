@@ -1,8 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Gift.ApplicationService.Services.Displayer;
-using Gift.ApplicationService.Services.Renderer;
+using Gift.Displayer.Displayer;
+using Gift.Displayer.Rendering;
+using Gift.Domain.ServiceContracts;
 
-namespace Gift.src.Extensions
+namespace Gift.Displayer.Extensions
 {
     public static class GiftServiceCollectionExtensions
     {

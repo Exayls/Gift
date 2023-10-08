@@ -1,7 +1,8 @@
 ﻿using System;
+using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel.Display;
 
-namespace Gift.ApplicationService.Services.Displayer
+namespace Gift.Displayer.Displayer
 {
     public class ConsoleDisplayer : IDisplayer
     {

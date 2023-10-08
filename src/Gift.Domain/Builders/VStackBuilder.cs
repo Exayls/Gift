@@ -3,7 +3,7 @@ using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
 
-namespace Gift.src.Builders
+namespace Gift.Domain.Builders
 {
     public class VStackBuilder
     {

@@ -1,4 +1,4 @@
-﻿using Gift;
+﻿using Gift.ApplicationService.Services;
 using Gift.ApplicationService.Services.Renderer;
 using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Border;

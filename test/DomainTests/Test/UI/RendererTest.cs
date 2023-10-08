@@ -1,4 +1,4 @@
-﻿using Gift.ApplicationService.Services.Renderer;
+﻿using Gift.Displayer.Rendering;
 using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Conf;

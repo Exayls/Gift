@@ -1,18 +1,16 @@
-﻿using Gift;
-using Moq;
+﻿using Moq;
 using Xunit;
 using Gift.Domain.UIModel;
 using Gift.ApplicationService.Services.SignalHandler.Global;
 using Gift.ApplicationService.Services.Monitor.ConsoleMonitors;
 using Gift.ApplicationService.Services.SignalHandler.Bus;
 using Gift.ApplicationService.Services.Monitor;
-using Gift.ApplicationService.Services.FileParser;
 using Gift.ApplicationService.ServiceContracts;
 using Gift.ApplicationService.Services.SignalHandler.Ui;
 using Gift.ApplicationService.Services.SignalHandler.Key;
-using Gift.ApplicationService.Services.Displayer;
-using Gift.ApplicationService.Services.Renderer;
 using Gift.ApplicationService.Services.KeyInputHandler;
+using Gift.ApplicationService.Services;
+using Gift.Domain.ServiceContracts;
 
 namespace TestGift.UnitTest.Base
 {

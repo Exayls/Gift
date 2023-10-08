@@ -1,7 +1,7 @@
 ﻿using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Display;
 
-namespace Gift.ApplicationService.Services.Renderer
+namespace Gift.Domain.ServiceContracts
 {
     public interface IRenderer
     {

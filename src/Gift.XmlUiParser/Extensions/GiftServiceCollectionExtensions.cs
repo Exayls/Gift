@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Gift.ApplicationService.Services.FileParser;
+using Gift.Domain.ServiceContracts;
+using Gift.XmlUiParser.FileParser;
 
 namespace Gift.XmlUiParser.Extensions
 {
