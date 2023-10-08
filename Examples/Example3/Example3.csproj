@@ -11,7 +11,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\Gift.Startup\Gift.Startup.csproj" />
+	  <ProjectReference Include="..\..\src\Gift.Startup\Gift.Startup.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -1,11 +1,11 @@
 ﻿using Gift.Displayer.Rendering;
+using Gift.Domain.Builders;
 using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
-using Gift.src.Builders;
 using Xunit;
 
 namespace TestGift.Test.UI

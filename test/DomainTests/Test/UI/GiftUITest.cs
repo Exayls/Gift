@@ -5,8 +5,8 @@ using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.MetaData;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Conf;
-using Gift.ApplicationService.Services.Renderer;
 using Gift.ApplicationService.Services;
+using Gift.Displayer.Rendering;
 
 namespace TestGift.UI
 {

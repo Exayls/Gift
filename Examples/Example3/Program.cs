@@ -1,8 +1,8 @@
 using Gift.ApplicationService.ServiceContracts;
+using Gift.Domain.Builders;
 using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.MetaData;
-using Gift.src.Builders;
 using Gift.Startup.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 

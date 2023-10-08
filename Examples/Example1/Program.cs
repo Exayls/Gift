@@ -1,10 +1,10 @@
-﻿using Gift.ApplicationService.Services.Displayer;
-using Gift.ApplicationService.Services.Renderer;
+﻿using Gift.Displayer.Displayer;
+using Gift.Displayer.Rendering;
+using Gift.Domain.Builders;
 using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
-using Gift.src.Builders;
 
 var ui = new GiftUI();
 ui.AddUnselectableChild(new Label("coucou", new Position(2, 58)));

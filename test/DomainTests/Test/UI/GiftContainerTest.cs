@@ -6,9 +6,9 @@ using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.MetaData;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Conf;
-using Gift.ApplicationService.Services.Renderer;
-using Gift.src.Builders;
 using Gift.ApplicationService.Services;
+using Gift.Displayer.Rendering;
+using Gift.Domain.Builders;
 
 namespace TestGift.UI
 {

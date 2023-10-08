@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -7,9 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Gift.ApplicationService\Gift.ApplicationService.csproj" />
-    <ProjectReference Include="..\src\Gift.Displayer\Gift.Displayer.csproj" />
-    <ProjectReference Include="..\src\Gift.XmlUiParser\Gift.XmlUiParser.csproj" />
+    <ProjectReference Include="..\Gift.ApplicationService\Gift.ApplicationService.csproj" />
+    <ProjectReference Include="..\Gift.Displayer\Gift.Displayer.csproj" />
+    <ProjectReference Include="..\Gift.Domain\Gift.Domain.csproj" />
+    <ProjectReference Include="..\Gift.XmlUiParser\Gift.XmlUiParser.csproj" />
+    <ProjectReference Include="..\Gift.ApplicationService\Gift.ApplicationService.csproj" />
+    <ProjectReference Include="..\Gift.Displayer\Gift.Displayer.csproj" />
+    <ProjectReference Include="..\Gift.XmlUiParser\Gift.XmlUiParser.csproj" />
   </ItemGroup>
 
 </Project>
