@@ -1,12 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel;
-using Gift.ApplicationService.Services.Displayer;
 using Gift.ApplicationService.Services.SignalHandler.Bus;
 using Gift.ApplicationService.Services.SignalHandler.Global;
 using Gift.ApplicationService.Services.Monitor.ConsoleMonitors;
 using Gift.ApplicationService.Services;
-using Gift.ApplicationService.Services.Renderer;
 using Gift.ApplicationService.Services.KeyInputHandler;
 using Gift.ApplicationService.Services.Monitor;
 using Gift.ApplicationService.Services.FileParser;
@@ -21,10 +19,7 @@ namespace Gift.src.Extensions
         public static IServiceCollection AddGiftServices(this IServiceCollection services)
         {
             services.AddSingleton<IConfiguration, DefaultConfiguration>();
-            services.AddSingleton<IRenderer, Renderer>();
             services.AddSingleton<IDisplayService, DisplayService>();
-            services.AddSingleton<IConsoleDisplayStringFormater, ConsoleDisplayStringFormater>();
-            services.AddSingleton<IDisplayer, ConsoleDisplayer>();
             services.AddSingleton<IKeyInputHandler, KeyInputHandler>();
             services.AddSingleton<IKeyMapper, KeyMapper>();
             services.AddSingleton<IConsoleSizeMonitor, ConsoleSizeMonitor>();
@@ -35,8 +30,6 @@ namespace Gift.src.Extensions
             services.AddSingleton<IUISignalHandler, UISignalHandler>();
             services.AddSingleton<IKeySignalHandler, KeySignalHandler>();
             services.AddSingleton<IGlobalSignalHandler, GlobalSignalHandler>();
-            services.AddSingleton<IUIElementRegister, UIElementRegister>();
-            services.AddSingleton<IXMLFileParser, XmlFileParser>();
 
 
             return services;

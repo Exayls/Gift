@@ -8,6 +8,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\Gift.ApplicationService\Gift.ApplicationService.csproj" />
+		<ProjectReference Include="..\..\src\Gift.Displayer\Gift.Displayer.csproj" />
 	</ItemGroup>
 
 </Project>

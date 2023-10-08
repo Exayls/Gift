@@ -11,7 +11,7 @@ namespace Gift.ApplicationService.Services.FileParser
 {
     public class XmlFileParser : IXMLFileParser
     {
-        private IUIElementRegister _uielementRegister;
+        private readonly IUIElementRegister _uielementRegister;
         private GiftUI? giftUI = null;
 
         public XmlFileParser(IUIElementRegister elementRegister)
