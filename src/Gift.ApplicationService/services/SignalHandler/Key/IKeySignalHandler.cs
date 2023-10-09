@@ -1,6 +1,6 @@
 ﻿namespace Gift.ApplicationService.Services.SignalHandler.Key
 {
-    public interface IKeySignalHandler : ISignalHandler
+    public interface IKeySignalHandler : ISignalHandlerService
     {
     }
 }

@@ -2,18 +2,16 @@
 using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Element;
 using Gift.ApplicationService.Services.SignalHandler.Global;
-using Gift.ApplicationService.Services.Monitor.ConsoleMonitors;
 using Gift.ApplicationService.Services.SignalHandler.Bus;
-using Gift.ApplicationService.Services.Monitor;
 using Gift.ApplicationService.ServiceContracts;
 using Gift.ApplicationService.Services.SignalHandler.Ui;
 using Gift.ApplicationService.Services.SignalHandler.Key;
-using Gift.ApplicationService.Services.KeyInputHandler;
 using Gift.Domain.ServiceContracts;
+using Gift.ApplicationService.Services.SignalHandler;
 
 namespace Gift.ApplicationService.Services
 {
-    public class GiftLauncher : IGiftLauncher
+    public class GiftLauncherService : IGiftLauncherService
     {
         public GiftUI Ui
         {
@@ -25,28 +23,27 @@ namespace Gift.ApplicationService.Services
 
         private readonly ISignalBus _signalBus;
 
-        private readonly IRenderer _renderer;
-        private readonly IDisplayer _displayer;
-
         private readonly IGiftUiProvider _uiProvider;
-        private readonly IDisplayService _displayManager;
+
 
         private readonly IUISignalHandler _uiSignalHandler;
         private readonly IKeySignalHandler _keySignalHandler;
         private readonly IGlobalSignalHandler _globalSignalHandler;
 
-        private readonly IMonitorManager _monitorManager;
-        private readonly IKeyInputHandler _keyInputHandler;//truc a faire avec ça. le keyInputHandler est un monitor
+        private readonly IDisplayService _displayService;
+        private readonly IMonitorService _monitorService;
 
         private readonly IXMLFileParser _xmlParser;
         private readonly IUIElementRegister _uielementRegister;
+
+        private TaskCompletionSource<bool> completion;
+        private ILifeTimeService _lifeTimeService;
         public const char FILLINGCHAR = '*';
 
-        public GiftLauncher(IRenderer renderer,
-                        IDisplayer displayer,
-                        IMonitorManager monitorManager,
+        public GiftLauncherService(
+                        IMonitorService monitorManager,
                         ISignalBus queue,
-                        IKeyInputHandler keyInputHandler,
+                        IKeyInputMonitor keyInputHandler,
                         IConsoleSizeMonitor consoleSizeMonitor,
                         IKeySignalHandler keySignalHandler,
                         IGiftUiProvider uiProvider,
@@ -54,15 +51,13 @@ namespace Gift.ApplicationService.Services
                         IGlobalSignalHandler globalSignalHandler,
                         IDisplayService displayManager,
                         IXMLFileParser xmlFileParser,
-                        IUIElementRegister elementRegister)
+                        IUIElementRegister elementRegister,
+                        ILifeTimeService lifeTimeService)
         {
-            _renderer = renderer;
-            _displayer = displayer;
             _uiProvider = uiProvider;
-            _displayManager = displayManager;
+            _displayService = displayManager;
 
             _signalBus = queue;
-            _keyInputHandler = keyInputHandler;
 
             _keySignalHandler = keySignalHandler;
             _signalBus.Subscribe(_keySignalHandler);
@@ -73,16 +68,18 @@ namespace Gift.ApplicationService.Services
             _globalSignalHandler = globalSignalHandler;
             _signalBus.Subscribe(_globalSignalHandler);
 
-            _monitorManager = monitorManager;
-            _monitorManager.Add(consoleSizeMonitor);
+            _monitorService = monitorManager;
+            _monitorService.Add(consoleSizeMonitor);
+            _monitorService.Add(keyInputHandler);
 
-            _monitorManager.StartCheckingMonitors();
-            _keyInputHandler.StartCheckUserInput();
+            _monitorService.StartCheckingMonitors();
 
             _xmlParser = xmlFileParser;
 
             _uielementRegister = elementRegister;
             RegisterUIElements();
+
+            _lifeTimeService = lifeTimeService;
         }
 
         private void RegisterUIElements()
@@ -96,36 +93,42 @@ namespace Gift.ApplicationService.Services
         public virtual void Initialize(GiftUI ui)
         {
             _uiProvider.Ui = ui;
-            init();
+            update();
         }
 
         public virtual void Initialize(string xmlPath)
         {
             _uiProvider.Ui = _xmlParser.ParseUIFile(xmlPath);
-            init();
+            update();
         }
 
-        private void init()
+        private void update()
         {
-            _displayManager.UpdateDisplay();
+            _displayService.UpdateDisplay();
         }
-
-        public virtual async Task RunAsync()
-        {
-            await _globalSignalHandler.Completion.Task;
-        }
-
-        public virtual void Run()
-        {
-            RunAsync().Wait();
-        }
-
         public async void InitializeHotReload(string file)
         {
             while (true)
             {
                 await Task.Run(() => Initialize(file));
             }
+        }
+
+
+
+        public void AddSignalHandler(ISignalHandlerService handler)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Run()
+        {
+            _lifeTimeService.Run();
+        }
+
+        public void Stop()
+        {
+            _lifeTimeService.Stop();
         }
     }
 }

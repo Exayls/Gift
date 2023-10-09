@@ -36,7 +36,7 @@ namespace Gift.ApplicationService.Services
         {
             if (View != null)
             {
-                _displayer.display(View);
+                _displayer.Display(View);
             }
         }
 

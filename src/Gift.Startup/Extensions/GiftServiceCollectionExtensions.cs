@@ -2,6 +2,7 @@
 using Gift.XmlUiParser.Extensions;
 using Gift.ApplicationService.Extensions;
 using Gift.Displayer.Extensions;
+using Gift.ConsoleMonitor.Extensions;
 
 namespace Gift.Startup.Extensions
 {
@@ -12,6 +13,8 @@ namespace Gift.Startup.Extensions
             services.AddGiftApplicationServices();
             services.AddGiftDisplayer();
             services.AddGiftXmlParser();
+            services.AddGiftKeyInteraction();
+            services.AddGiftConsoleMonitor();
 
             return services;
         }

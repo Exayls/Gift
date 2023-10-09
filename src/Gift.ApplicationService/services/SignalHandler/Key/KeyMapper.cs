@@ -7,18 +7,6 @@ namespace Gift.ApplicationService.Services.SignalHandler.Key
 {
     //GPT stuff. No tests!! Don’t touch before tests are there
 
-    class KeyMap
-    {
-        public KeyMap()
-        {
-            Map = new List<(string, string)>();
-        }
-        public KeyMap(List<(string, string)> values)
-        {
-            Map = values;
-        }
-        public List<(string, string)> Map { get; set; }
-    }
     public class KeyMapper : IKeyMapper
     {
 

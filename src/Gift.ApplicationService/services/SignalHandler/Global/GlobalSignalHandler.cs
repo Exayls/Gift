@@ -1,13 +1,17 @@
-﻿using System.Threading.Tasks;
+﻿using Gift.ApplicationService.ServiceContracts;
+using System.Threading.Tasks;
 
 namespace Gift.ApplicationService.Services.SignalHandler.Global
 {
     public class GlobalSignalHandler : IGlobalSignalHandler
     {
+        private ILifeTimeService _lifeTimeService;
+
         public TaskCompletionSource<bool> Completion { get; set; }
 
-        public GlobalSignalHandler()
+        public GlobalSignalHandler(ILifeTimeService launcherService)
         {
+            _lifeTimeService = launcherService;
             Completion = new TaskCompletionSource<bool>();
         }
 
@@ -26,7 +30,7 @@ namespace Gift.ApplicationService.Services.SignalHandler.Global
 
         private void QuitApp()
         {
-            Completion.SetResult(true);
+            _lifeTimeService.Stop();
         }
     }
 }

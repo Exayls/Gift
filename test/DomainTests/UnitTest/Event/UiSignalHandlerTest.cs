@@ -4,14 +4,14 @@ using Xunit;
 using Gift.Domain.UIModel.MetaData;
 using Gift.ApplicationService.ServiceContracts;
 using Gift.ApplicationService.Services.SignalHandler;
-using Gift.ApplicationService.Services.Monitor.ConsoleMonitors;
 using Gift.ApplicationService.Services.SignalHandler.Ui;
+using Gift.ApplicationService.Services.Monitor.Console;
 
 namespace TestGift.UnitTest.Event
 {
     public class UiSignalHandlerTest
     {
-        private ISignalHandler signalHandler;
+        private ISignalHandlerService signalHandler;
         private Mock<IDisplayService> _mockDisplayManger;
         private Mock<ISignal> _mockSignal;
         private Mock<EventArgs> _mockEventArgs;

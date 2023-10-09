@@ -1,13 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Gift.ApplicationService.ServiceContracts;
+using Gift.Domain.ServiceContracts;
 
-namespace Gift.ApplicationService.Services.Monitor
+namespace Gift.ApplicationService.Services
 {
-    public class MonitorManager : IMonitorManager
+    public class MonitorService : IMonitorService
     {
         public IList<IMonitor> Monitors { get; private set; }
 
-        public MonitorManager()
+        public MonitorService()
         {
             Monitors = new List<IMonitor>();
         }
@@ -43,6 +45,11 @@ namespace Gift.ApplicationService.Services.Monitor
                     monitor.Check();
                 }
             }
+        }
+
+        public void StopCheckingMonitors()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

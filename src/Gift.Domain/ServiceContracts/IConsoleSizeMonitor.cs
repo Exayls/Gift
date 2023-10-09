@@ -1,4 +1,4 @@
-﻿namespace Gift.ApplicationService.Services.Monitor.ConsoleMonitors
+﻿namespace Gift.Domain.ServiceContracts
 {
     public interface IConsoleSizeMonitor : IMonitor
     {

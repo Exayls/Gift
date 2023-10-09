@@ -13,7 +13,7 @@ namespace Gift.Displayer.Displayer
             _formater = formater;
         }
 
-        public void display(IScreenDisplay screenDisplay)
+        public void Display(IScreenDisplay screenDisplay)
         {
             string displayString = _formater.CreateDislayString(screenDisplay);
 

@@ -8,12 +8,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Gift.ApplicationService\Gift.ApplicationService.csproj" />
+    <ProjectReference Include="..\Gift.ConsoleMonitor\Gift.ConsoleMonitor.csproj" />
     <ProjectReference Include="..\Gift.Displayer\Gift.Displayer.csproj" />
     <ProjectReference Include="..\Gift.Domain\Gift.Domain.csproj" />
     <ProjectReference Include="..\Gift.XmlUiParser\Gift.XmlUiParser.csproj" />
     <ProjectReference Include="..\Gift.ApplicationService\Gift.ApplicationService.csproj" />
     <ProjectReference Include="..\Gift.Displayer\Gift.Displayer.csproj" />
     <ProjectReference Include="..\Gift.XmlUiParser\Gift.XmlUiParser.csproj" />
+    <ProjectReference Include="..\KeyInteraction\KeyInteraction.csproj" />
   </ItemGroup>
 
 </Project>

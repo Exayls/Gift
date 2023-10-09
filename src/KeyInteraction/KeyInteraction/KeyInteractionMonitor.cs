@@ -1,27 +1,19 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using Gift.ApplicationService.Services.Monitor.KeyInteraction;
 using Gift.ApplicationService.Services.SignalHandler;
 using Gift.ApplicationService.Services.SignalHandler.Bus;
+using Gift.Domain.ServiceContracts;
 
-namespace Gift.ApplicationService.Services.KeyInputHandler
+namespace KeyInteraction.KeyInteraction
 {
-    public class KeyInputHandler : IKeyInputHandler
+    public class KeyInteractionMonitor : IKeyInputMonitor
     {
         private ISignalBus _signalBus;
-        public KeyInputHandler(ISignalBus signalBus)
+        public KeyInteractionMonitor(ISignalBus signalBus)
         {
             _signalBus = signalBus;
         }
 
-        public async void StartCheckUserInput()
-        {
-            while (true)
-            {
-                await Task.Run(() => CheckUserInput());
-            }
-        }
-
-        private void CheckUserInput()
+        public void Check()
         {
             if (Console.KeyAvailable)
             {

@@ -1,4 +1,4 @@
-﻿namespace Gift.ApplicationService.Services.Monitor
+﻿namespace Gift.Domain.ServiceContracts
 {
     public interface IMonitor
     {

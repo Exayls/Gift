@@ -1,4 +1,5 @@
-﻿using Gift.ApplicationService.Services.Monitor;
+﻿using Gift.ApplicationService.Services;
+using Gift.Domain.ServiceContracts;
 using Moq;
 using Xunit;
 
@@ -6,11 +7,11 @@ namespace TestGift.UnitTest.Monitoring
 {
     public class MonitorTest
     {
-        private MonitorManager _monitorManager;
+        private MonitorService _monitorManager;
 
         public MonitorTest()
         {
-            _monitorManager = new MonitorManager();
+            _monitorManager = new MonitorService();
         }
 
         [Fact]

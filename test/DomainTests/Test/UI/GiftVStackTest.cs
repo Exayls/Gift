@@ -49,7 +49,7 @@ namespace TestGift.UI
             for (int i = 0; i < ui.Bound.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncher.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
                 expected = expectedBuilder.ToString();
                 Assert.Equal(expected, actual[i]);
             }
@@ -81,7 +81,7 @@ namespace TestGift.UI
             for (int i = 0; i < ui.Bound.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncher.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {
@@ -108,7 +108,7 @@ namespace TestGift.UI
             for (int i = 0; i < ui.Bound.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncher.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {
@@ -138,7 +138,7 @@ namespace TestGift.UI
             for (int i = 0; i < ui.Bound.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncher.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {
@@ -174,7 +174,7 @@ namespace TestGift.UI
             for (int i = 0; i < ui.Bound.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncher.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {
@@ -214,7 +214,7 @@ namespace TestGift.UI
             for (int i = 0; i < ui.Bound.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncher.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {
@@ -257,7 +257,7 @@ namespace TestGift.UI
             for (int i = 0; i < ui.Bound.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncher.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {
@@ -306,7 +306,7 @@ namespace TestGift.UI
             for (int i = 0; i < ui.Bound.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncher.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {

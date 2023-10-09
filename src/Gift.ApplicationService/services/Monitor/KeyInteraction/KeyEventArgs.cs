@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Gift.ApplicationService.Services.KeyInputHandler
+namespace Gift.ApplicationService.Services.Monitor.KeyInteraction
 {
-    class KeyEventArgs : EventArgs
+    public class KeyEventArgs : EventArgs
     {
         public ConsoleKey KeyValue { get; }
         public ConsoleModifiers Modifier { get; }

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Gift.ApplicationService.Services.KeyInputHandler;
+using Gift.ApplicationService.Services.Monitor.KeyInteraction;
 using Gift.ApplicationService.Services.SignalHandler.Bus;
 
 namespace Gift.ApplicationService.Services.SignalHandler.Key

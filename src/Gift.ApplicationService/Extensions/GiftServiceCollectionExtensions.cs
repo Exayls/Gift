@@ -3,10 +3,7 @@ using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel;
 using Gift.ApplicationService.Services.SignalHandler.Bus;
 using Gift.ApplicationService.Services.SignalHandler.Global;
-using Gift.ApplicationService.Services.Monitor.ConsoleMonitors;
 using Gift.ApplicationService.Services;
-using Gift.ApplicationService.Services.KeyInputHandler;
-using Gift.ApplicationService.Services.Monitor;
 using Gift.ApplicationService.ServiceContracts;
 using Gift.ApplicationService.Services.SignalHandler.Ui;
 using Gift.ApplicationService.Services.SignalHandler.Key;
@@ -19,16 +16,15 @@ namespace Gift.ApplicationService.Extensions
         {
             services.AddSingleton<IConfiguration, DefaultConfiguration>();
             services.AddSingleton<IDisplayService, DisplayService>();
-            services.AddSingleton<IKeyInputHandler, KeyInputHandler>();
             services.AddSingleton<IKeyMapper, KeyMapper>();
-            services.AddSingleton<IConsoleSizeMonitor, ConsoleSizeMonitor>();
-            services.AddSingleton<IMonitorManager, MonitorManager>();
+            services.AddSingleton<IMonitorService, MonitorService>();
             services.AddSingleton<ISignalBus, SignalBus>();
             services.AddSingleton<IGiftUiProvider, GiftUiProvider>();
-            services.AddSingleton<IGiftLauncher, GiftLauncher>();
+            services.AddSingleton<IGiftLauncherService, GiftLauncherService>();
             services.AddSingleton<IUISignalHandler, UISignalHandler>();
             services.AddSingleton<IKeySignalHandler, KeySignalHandler>();
             services.AddSingleton<IGlobalSignalHandler, GlobalSignalHandler>();
+            services.AddSingleton<ILifeTimeService, LifeTimeService>();
 
             return services;
         }

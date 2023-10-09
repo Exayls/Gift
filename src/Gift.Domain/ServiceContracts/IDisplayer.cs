@@ -4,6 +4,6 @@ namespace Gift.Domain.ServiceContracts
 {
     public interface IDisplayer
     {
-        void display(IScreenDisplay screenDisplay);
+        void Display(IScreenDisplay screenDisplay);
     }
 }

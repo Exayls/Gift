@@ -1,18 +1,18 @@
 ﻿using System;
 using Gift.Domain.UIModel.MetaData;
 using Gift.ApplicationService.ServiceContracts;
-using Gift.ApplicationService.Services.Monitor.ConsoleMonitors;
+using Gift.ApplicationService.Services.Monitor.Console;
 
 namespace Gift.ApplicationService.Services.SignalHandler.Ui
 {
     public class UISignalHandler : IUISignalHandler
     {
-        private IDisplayService _displayManager;
+        private IDisplayService _displayService;
 
 
         public UISignalHandler(IDisplayService displayManager)
         {
-            _displayManager = displayManager;
+            _displayService = displayManager;
         }
 
         public void HandleSignal(ISignal signal)
@@ -47,38 +47,38 @@ namespace Gift.ApplicationService.Services.SignalHandler.Ui
 
         private void ScrollUp()
         {
-            _displayManager.ScrollUp();
-            _displayManager.UpdateDisplay();
+            _displayService.ScrollUp();
+            _displayService.UpdateDisplay();
         }
 
         private void ScrollDown()
         {
-            _displayManager.ScrollDown();
-            _displayManager.UpdateDisplay();
+            _displayService.ScrollDown();
+            _displayService.UpdateDisplay();
         }
 
         private void NextElement()
         {
-            _displayManager.NextElementInSelectedContainer();
-            _displayManager.UpdateDisplay();
+            _displayService.NextElementInSelectedContainer();
+            _displayService.UpdateDisplay();
         }
 
         private void PreviousElement()
         {
-            _displayManager.PreviousElementInSelectedContainer();
-            _displayManager.UpdateDisplay();
+            _displayService.PreviousElementInSelectedContainer();
+            _displayService.UpdateDisplay();
         }
 
         private void NextContainer()
         {
-            _displayManager.NextContainer();
-            _displayManager.UpdateDisplay();
+            _displayService.NextContainer();
+            _displayService.UpdateDisplay();
         }
 
         private void PreviousContainer()
         {
-            _displayManager.PreviousContainer();
-            _displayManager.UpdateDisplay();
+            _displayService.PreviousContainer();
+            _displayService.UpdateDisplay();
         }
 
         private void OnSizeChanged(EventArgs e)
@@ -86,8 +86,8 @@ namespace Gift.ApplicationService.Services.SignalHandler.Ui
             if (e is ConsoleSizeEventArgs)
             {
                 ConsoleSizeEventArgs eventArgs = (ConsoleSizeEventArgs)e;
-                _displayManager.Resize(new Bound(eventArgs.ConsoleHeight, eventArgs.ConsoleWidth));
-                _displayManager.UpdateDisplay();
+                _displayService.Resize(new Bound(eventArgs.ConsoleHeight, eventArgs.ConsoleWidth));
+                _displayService.UpdateDisplay();
             }
         }
     }

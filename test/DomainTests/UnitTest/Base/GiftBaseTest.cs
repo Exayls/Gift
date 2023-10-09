@@ -2,13 +2,10 @@
 using Xunit;
 using Gift.Domain.UIModel;
 using Gift.ApplicationService.Services.SignalHandler.Global;
-using Gift.ApplicationService.Services.Monitor.ConsoleMonitors;
 using Gift.ApplicationService.Services.SignalHandler.Bus;
-using Gift.ApplicationService.Services.Monitor;
 using Gift.ApplicationService.ServiceContracts;
 using Gift.ApplicationService.Services.SignalHandler.Ui;
 using Gift.ApplicationService.Services.SignalHandler.Key;
-using Gift.ApplicationService.Services.KeyInputHandler;
 using Gift.ApplicationService.Services;
 using Gift.Domain.ServiceContracts;
 
@@ -18,10 +15,10 @@ namespace TestGift.UnitTest.Base
     {
         private Mock<IRenderer> rendererMock;
         private Mock<IDisplayer> displayerMock;
-        private Mock<IMonitorManager> monitorManagerMock;
+        private Mock<IMonitorService> monitorManagerMock;
         private Mock<ISignalBus> queueMock;
         private Mock<IKeyMapper> keyMapperMock;
-        private Mock<IKeyInputHandler> keyInputHandlerMock;
+        private Mock<IKeyInputMonitor> keyInputHandlerMock;
         private Mock<IConsoleSizeMonitor> consoleSizeMonitorMock;
         private Mock<IKeySignalHandler> keySignalHandlerMock;
         private Mock<IGiftUiProvider> giftUiProviderMock;
@@ -30,16 +27,17 @@ namespace TestGift.UnitTest.Base
         private Mock<IDisplayService> displayManagerMock;
         private Mock<IXMLFileParser> xmlFileParserMock;
         private Mock<IUIElementRegister> uIElementRegister;
-        private GiftLauncher giftBase;
+        private Mock<LifeTimeService> lifeTimeService;
+        private GiftLauncherService giftBase;
 
         public GiftBaseTest()
         {
             rendererMock = new Mock<IRenderer>();
             displayerMock = new Mock<IDisplayer>();
-            monitorManagerMock = new Mock<IMonitorManager>();
+            monitorManagerMock = new Mock<IMonitorService>();
             queueMock = new Mock<ISignalBus>();
             keyMapperMock = new Mock<IKeyMapper>();
-            keyInputHandlerMock = new Mock<IKeyInputHandler>();
+            keyInputHandlerMock = new Mock<IKeyInputMonitor>();
             consoleSizeMonitorMock = new Mock<IConsoleSizeMonitor>();
             keySignalHandlerMock = new Mock<IKeySignalHandler>();
             giftUiProviderMock = new Mock<IGiftUiProvider>();
@@ -48,11 +46,10 @@ namespace TestGift.UnitTest.Base
             displayManagerMock = new Mock<IDisplayService>();
             xmlFileParserMock = new Mock<IXMLFileParser>();
             uIElementRegister = new Mock<IUIElementRegister>();
+            lifeTimeService = new Mock<LifeTimeService>();
 
 
-            giftBase = new GiftLauncher(
-                           renderer: rendererMock.Object,
-                           displayer: displayerMock.Object,
+            giftBase = new GiftLauncherService(
                            monitorManager: monitorManagerMock.Object,
                            queue: queueMock.Object,
                            keyInputHandler: keyInputHandlerMock.Object,
@@ -63,7 +60,9 @@ namespace TestGift.UnitTest.Base
                            globalSignalHandler: globalSignalHandlerMock.Object,
                            xmlFileParser: xmlFileParserMock.Object,
                            elementRegister: uIElementRegister.Object,
-                           displayManager: displayManagerMock.Object);
+                           displayManager: displayManagerMock.Object,
+                           lifeTimeService: lifeTimeService.Object
+                           );
         }
 
         [Fact]
