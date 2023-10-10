@@ -54,6 +54,6 @@ ui.SelectedContainer = vstack2;
 var services = new ServiceCollection();
 services.AddGiftServices();
 var serviceProvider = services.BuildServiceProvider();
-var gift = serviceProvider.GetRequiredService<IGiftLauncherService>();
+var gift = serviceProvider.GetRequiredService<IGiftService>();
 gift.Initialize(ui);
 gift.Run();

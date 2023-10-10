@@ -11,7 +11,7 @@ using Gift.ApplicationService.Services.SignalHandler;
 
 namespace Gift.ApplicationService.Services
 {
-    public class GiftLauncherService : IGiftLauncherService
+    public class GiftLauncherService : IGiftService
     {
         public GiftUI Ui
         {
@@ -36,14 +36,14 @@ namespace Gift.ApplicationService.Services
         private readonly IXMLFileParser _xmlParser;
         private readonly IUIElementRegister _uielementRegister;
 
-        private TaskCompletionSource<bool> completion;
-        private ILifeTimeService _lifeTimeService;
+        private readonly ILifeTimeService _lifeTimeService;
+
         public const char FILLINGCHAR = '*';
 
         public GiftLauncherService(
                         IMonitorService monitorManager,
                         ISignalBus queue,
-                        IKeyInputMonitor keyInputHandler,
+                        IKeyInteractionMonitor keyInputHandler,
                         IConsoleSizeMonitor consoleSizeMonitor,
                         IKeySignalHandler keySignalHandler,
                         IGiftUiProvider uiProvider,

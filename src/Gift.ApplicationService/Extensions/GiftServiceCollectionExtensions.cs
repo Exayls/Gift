@@ -20,7 +20,7 @@ namespace Gift.ApplicationService.Extensions
             services.AddSingleton<IMonitorService, MonitorService>();
             services.AddSingleton<ISignalBus, SignalBus>();
             services.AddSingleton<IGiftUiProvider, GiftUiProvider>();
-            services.AddSingleton<IGiftLauncherService, GiftLauncherService>();
+            services.AddSingleton<IGiftService, GiftLauncherService>();
             services.AddSingleton<IUISignalHandler, UISignalHandler>();
             services.AddSingleton<IKeySignalHandler, KeySignalHandler>();
             services.AddSingleton<IGlobalSignalHandler, GlobalSignalHandler>();

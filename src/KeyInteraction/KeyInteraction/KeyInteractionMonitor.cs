@@ -5,7 +5,7 @@ using Gift.Domain.ServiceContracts;
 
 namespace KeyInteraction.KeyInteraction
 {
-    public class KeyInteractionMonitor : IKeyInputMonitor
+    public class KeyInteractionMonitor : IKeyInteractionMonitor
     {
         private ISignalBus _signalBus;
         public KeyInteractionMonitor(ISignalBus signalBus)

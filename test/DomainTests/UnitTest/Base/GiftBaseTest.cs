@@ -18,7 +18,7 @@ namespace TestGift.UnitTest.Base
         private Mock<IMonitorService> monitorManagerMock;
         private Mock<ISignalBus> queueMock;
         private Mock<IKeyMapper> keyMapperMock;
-        private Mock<IKeyInputMonitor> keyInputHandlerMock;
+        private Mock<IKeyInteractionMonitor> keyInputHandlerMock;
         private Mock<IConsoleSizeMonitor> consoleSizeMonitorMock;
         private Mock<IKeySignalHandler> keySignalHandlerMock;
         private Mock<IGiftUiProvider> giftUiProviderMock;
@@ -37,7 +37,7 @@ namespace TestGift.UnitTest.Base
             monitorManagerMock = new Mock<IMonitorService>();
             queueMock = new Mock<ISignalBus>();
             keyMapperMock = new Mock<IKeyMapper>();
-            keyInputHandlerMock = new Mock<IKeyInputMonitor>();
+            keyInputHandlerMock = new Mock<IKeyInteractionMonitor>();
             consoleSizeMonitorMock = new Mock<IConsoleSizeMonitor>();
             keySignalHandlerMock = new Mock<IKeySignalHandler>();
             giftUiProviderMock = new Mock<IGiftUiProvider>();

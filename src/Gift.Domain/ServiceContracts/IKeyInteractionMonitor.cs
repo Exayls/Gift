@@ -1,6 +1,6 @@
 ﻿namespace Gift.Domain.ServiceContracts
 {
-    public interface IKeyInputMonitor : IMonitor
+    public interface IKeyInteractionMonitor : IMonitor
     {
     }
 }

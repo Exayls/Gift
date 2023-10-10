@@ -8,7 +8,7 @@ namespace Gift.Displayer.Extensions
     {
         public static IServiceCollection AddGiftKeyInteraction(this IServiceCollection services)
         {
-            services.AddSingleton<IKeyInputMonitor, KeyInteractionMonitor>();
+            services.AddSingleton<IKeyInteractionMonitor, KeyInteractionMonitor>();
 
             return services;
         }
