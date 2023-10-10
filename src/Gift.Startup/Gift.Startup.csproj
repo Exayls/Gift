@@ -15,7 +15,7 @@
     <ProjectReference Include="..\Gift.ApplicationService\Gift.ApplicationService.csproj" />
     <ProjectReference Include="..\Gift.Displayer\Gift.Displayer.csproj" />
     <ProjectReference Include="..\Gift.XmlUiParser\Gift.XmlUiParser.csproj" />
-    <ProjectReference Include="..\KeyInteraction\KeyInteraction.csproj" />
+    <ProjectReference Include="..\Gift.KeyInteraction\Gift.KeyInteraction.csproj" />
   </ItemGroup>
 
 </Project>
