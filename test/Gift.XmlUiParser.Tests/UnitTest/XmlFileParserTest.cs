@@ -6,7 +6,7 @@ using System;
 using System.IO;
 using Xunit;
 
-namespace TestGift.Test.Services
+namespace Gift.XmlUiParser.Tests.UnitTest
 {
     public class XmlFileParserTests
     {

@@ -18,23 +18,13 @@ namespace TestGift.UI
     public class GiftVStackTest
     {
         private Mock<IScreenDisplay> _screenDisplayMock1;
-        private Mock<IScreenDisplay> _screenDisplayMock2;
-        private Mock<UIElement> _uiElementMock1;
-        private Mock<UIElement> _uiElementMock2;
-        private Mock<IBorder> _borderMock;
         private Mock<IScreenDisplayFactory> _ScreenDisplayFactoryMock;
-        private VStack vstack;
 
         public GiftVStackTest()
         {
             _screenDisplayMock1 = new Mock<IScreenDisplay>();
-            _screenDisplayMock2 = new Mock<IScreenDisplay>();
-            _uiElementMock1 = new Mock<UIElement>();
-            _uiElementMock2 = new Mock<UIElement>();
-            _borderMock = new Mock<IBorder>();
             _ScreenDisplayFactoryMock = new Mock<IScreenDisplayFactory>();
             _ScreenDisplayFactoryMock.Setup(s => s.Create(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock1.Object);
-            vstack = new VStack(_borderMock.Object, _ScreenDisplayFactoryMock.Object);
         }
 
         [Fact]
