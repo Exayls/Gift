@@ -11,7 +11,7 @@ internal class Program
         var serviceProvider = services.BuildServiceProvider();
         var gift = serviceProvider.GetRequiredService<IGiftService>();
 
-        gift.Initialize("test.xml");
+        gift.InitializeHotReload("test.xml");
         gift.Run();
     }
 }

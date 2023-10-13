@@ -106,6 +106,7 @@ namespace Gift.ApplicationService.Services
         {
             _displayService.UpdateDisplay();
         }
+
         public async void InitializeHotReload(string file)
         {
             while (true)
