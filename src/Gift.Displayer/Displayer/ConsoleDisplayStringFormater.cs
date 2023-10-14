@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.MetaData;
 
@@ -8,7 +9,7 @@ namespace Gift.Displayer.Displayer
     {
         public string CreateDislayString(IScreenDisplay screenDisplay)
         {
-            string displayString = "";
+            StringBuilder displayString = new StringBuilder();
 
             char[,] displayMap = screenDisplay.DisplayMap;
             Color[,] frontColorMap = screenDisplay.FrontColorMap;
@@ -28,19 +29,19 @@ namespace Gift.Displayer.Displayer
                     Color currentBackColor = backColorMap[i, j];
 
                     if (oldFrontColor != currentFrontColor)
-                        displayString += currentFrontColor.GetForegroundEscapeCode();
+                        displayString.Append(currentFrontColor.GetForegroundEscapeCode());
 
                     if (oldBackColor != currentBackColor)
-                        displayString += currentBackColor.GetBackgroundEscapeCode();
+                        displayString.Append(currentBackColor.GetBackgroundEscapeCode());
 
-                    displayString += displayMap[i, j];
+                    displayString.Append(displayMap[i, j]);
 
                     oldFrontColor = frontColorMap[i, j];
                     oldBackColor = backColorMap[i, j];
                 }
             }
 
-            return displayString;
+            return displayString.ToString();
         }
     }
 }

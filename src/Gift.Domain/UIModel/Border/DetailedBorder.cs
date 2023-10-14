@@ -3,7 +3,7 @@ using Gift.Domain.UIModel.MetaData;
 
 namespace Gift.Domain.UIModel.Border
 {
-    public class Border : IBorder
+    public class DetailedBorder : IBorder
     {
         private readonly char tlBorder;
         private readonly char trBorder;
@@ -16,7 +16,7 @@ namespace Gift.Domain.UIModel.Border
 
         public int Thickness { get; }
 
-        public Border(int thickness, char tlBorder, char trBorder, char blBorder, char brBorder, 
+        public DetailedBorder(int thickness, char tlBorder, char trBorder, char blBorder, char brBorder, 
             char tBorder, char bBorder, char lBorder, char rBorder)
         {
             this.tlBorder = tlBorder;
@@ -29,7 +29,7 @@ namespace Gift.Domain.UIModel.Border
             this.rBorder = rBorder;
             Thickness = thickness;
         }
-        public Border(int thickness, BorderOption borderChars)
+        public DetailedBorder(int thickness, BorderOption borderChars)
         {
             this.tlBorder = borderChars.tlBorder;
             this.trBorder = borderChars.trBorder;

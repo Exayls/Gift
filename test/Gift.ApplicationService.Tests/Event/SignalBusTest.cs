@@ -3,7 +3,7 @@ using Gift.ApplicationService.Services.SignalHandler.Bus;
 using Moq;
 using Xunit;
 
-namespace TestGift.Test.Event
+namespace Gift.ApplicationService.Tests.Event
 {
     public class SignalBusTest
     {

@@ -12,11 +12,11 @@ namespace Gift.ApplicationService.Services
         private IGiftUiProvider _uiProvider;
         private IRenderer _renderer;
 
-        public DisplayService(IDisplayer displayer, IRenderer renderer, IGiftUiProvider ui)
+        public DisplayService(IDisplayer displayer, IRenderer renderer, IGiftUiProvider uiProvider)
         {
 
             _displayer = displayer;
-            _uiProvider = ui;
+            _uiProvider = uiProvider;
             _renderer = renderer;
         }
 

@@ -4,7 +4,6 @@ using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
-using System;
 using System.Reflection;
 using System.Xml;
 
@@ -219,13 +218,13 @@ namespace Gift.XmlUiParser.FileParser
                     border = new NoBorder();
                     break;
                 case "simple":
-                    border = new Border(thickness, BorderOption.Simple);
+                    border = new DetailedBorder(thickness, BorderOption.Simple);
                     break;
                 case "heavy":
-                    border = new Border(thickness, BorderOption.Heavy);
+                    border = new DetailedBorder(thickness, BorderOption.Heavy);
                     break;
                 default:
-                    border = new Border(thickness, BorderOption.GetBorderCharsFromFile(borderOption));
+                    border = new DetailedBorder(thickness, BorderOption.GetBorderCharsFromFile(borderOption));
                     break;
             }
             return border;

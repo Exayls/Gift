@@ -22,56 +22,41 @@ namespace Gift.ApplicationService.Services
         }
 
         private readonly ISignalBus _signalBus;
-
         private readonly IGiftUiProvider _uiProvider;
-
-
-        private readonly IUISignalHandler _uiSignalHandler;
-        private readonly IKeySignalHandler _keySignalHandler;
-        private readonly IGlobalSignalHandler _globalSignalHandler;
-
         private readonly IDisplayService _displayService;
         private readonly IMonitorService _monitorService;
-
         private readonly IXMLFileParser _xmlParser;
         private readonly IUIElementRegister _uielementRegister;
-
         private readonly ILifeTimeService _lifeTimeService;
 
         public const char FILLINGCHAR = '*';
 
         public GiftLauncherService(
                         IMonitorService monitorManager,
-                        ISignalBus queue,
-                        IKeyInteractionMonitor keyInputHandler,
+                        ISignalBus bus,
+                        IKeyInteractionMonitor keyInputMonitor,
                         IConsoleSizeMonitor consoleSizeMonitor,
                         IKeySignalHandler keySignalHandler,
                         IGiftUiProvider uiProvider,
                         IUISignalHandler uISignalHandler,
                         IGlobalSignalHandler globalSignalHandler,
-                        IDisplayService displayManager,
+                        IDisplayService displayService,
                         IXMLFileParser xmlFileParser,
                         IUIElementRegister elementRegister,
                         ILifeTimeService lifeTimeService)
         {
             _uiProvider = uiProvider;
-            _displayService = displayManager;
+            _displayService = displayService;
 
-            _signalBus = queue;
+            _signalBus = bus;
 
-            _keySignalHandler = keySignalHandler;
-            _signalBus.Subscribe(_keySignalHandler);
-
-            _uiSignalHandler = uISignalHandler;
-            _signalBus.Subscribe(_uiSignalHandler);
-
-            _globalSignalHandler = globalSignalHandler;
-            _signalBus.Subscribe(_globalSignalHandler);
+            _signalBus.Subscribe(keySignalHandler);
+            _signalBus.Subscribe(uISignalHandler);
+            _signalBus.Subscribe(globalSignalHandler);
 
             _monitorService = monitorManager;
             _monitorService.Add(consoleSizeMonitor);
-            _monitorService.Add(keyInputHandler);
-
+            _monitorService.Add(keyInputMonitor);
             _monitorService.StartCheckingMonitors();
 
             _xmlParser = xmlFileParser;
@@ -119,7 +104,7 @@ namespace Gift.ApplicationService.Services
 
         public void AddSignalHandler(ISignalHandlerService handler)
         {
-            throw new System.NotImplementedException();
+            _signalBus.Subscribe(handler);
         }
 
         public void Run()

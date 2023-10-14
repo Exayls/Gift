@@ -2,11 +2,9 @@
 using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Element;
 using Gift.XmlUiParser.FileParser;
-using System;
-using System.IO;
 using Xunit;
 
-namespace Gift.XmlUiParser.Tests.UnitTest
+namespace Gift.XmlUiParser.Tests.XmlParser
 {
     public class XmlFileParserTests
     {

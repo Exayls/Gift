@@ -7,6 +7,11 @@ namespace Gift.ApplicationService.Services
     {
         private TaskCompletionSource<bool> completion;
 
+        public LifeTimeService()
+        {
+            completion = new TaskCompletionSource<bool>();
+        }
+
         public virtual async Task RunAsync()
         {
             await completion.Task;
@@ -14,7 +19,6 @@ namespace Gift.ApplicationService.Services
 
         public virtual void Run()
         {
-            completion = new TaskCompletionSource<bool>();
             RunAsync().Wait();
         }
 

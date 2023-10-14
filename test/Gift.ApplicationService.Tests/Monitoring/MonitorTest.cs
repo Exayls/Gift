@@ -3,7 +3,7 @@ using Gift.Domain.ServiceContracts;
 using Moq;
 using Xunit;
 
-namespace TestGift.UnitTest.Monitoring
+namespace Gift.ApplicationService.Tests.Monitoring
 {
     public class MonitorTest
     {

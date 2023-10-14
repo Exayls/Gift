@@ -3,7 +3,6 @@ using Gift.XmlUiParser.Extensions;
 using Gift.ApplicationService.Extensions;
 using Gift.Displayer.Extensions;
 using Gift.ConsoleMonitor.Extensions;
-using Gift.ApplicationService.ServiceContracts;
 
 namespace Gift.Startup.Extensions
 {

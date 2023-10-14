@@ -1,5 +1,4 @@
-﻿using Moq;
-using Xunit;
+﻿using Xunit;
 using Gift.Domain.UIModel;
 using Gift.ApplicationService.Services.SignalHandler.Global;
 using Gift.ApplicationService.Services.SignalHandler.Bus;
@@ -8,8 +7,9 @@ using Gift.ApplicationService.Services.SignalHandler.Ui;
 using Gift.ApplicationService.Services.SignalHandler.Key;
 using Gift.ApplicationService.Services;
 using Gift.Domain.ServiceContracts;
+using Moq;
 
-namespace TestGift.UnitTest.Base
+namespace Gift.ApplicationService.Tests.Services
 {
     public class GiftBaseTest
     {
@@ -51,8 +51,8 @@ namespace TestGift.UnitTest.Base
 
             giftBase = new GiftLauncherService(
                            monitorManager: monitorManagerMock.Object,
-                           queue: queueMock.Object,
-                           keyInputHandler: keyInputHandlerMock.Object,
+                           bus: queueMock.Object,
+                           keyInputMonitor: keyInputHandlerMock.Object,
                            consoleSizeMonitor: consoleSizeMonitorMock.Object,
                            keySignalHandler: keySignalHandlerMock.Object,
                            uiProvider: giftUiProviderMock.Object,
@@ -60,7 +60,7 @@ namespace TestGift.UnitTest.Base
                            globalSignalHandler: globalSignalHandlerMock.Object,
                            xmlFileParser: xmlFileParserMock.Object,
                            elementRegister: uIElementRegister.Object,
-                           displayManager: displayManagerMock.Object,
+                           displayService: displayManagerMock.Object,
                            lifeTimeService: lifeTimeService.Object
                            );
         }
