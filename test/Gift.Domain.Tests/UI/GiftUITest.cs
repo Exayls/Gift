@@ -7,7 +7,7 @@ using Moq;
 using System;
 using Xunit;
 
-namespace Gift.Domain.Tests.UnitTest.UI
+namespace Gift.Domain.Tests.UI
 {
     public class GiftUITest
     {

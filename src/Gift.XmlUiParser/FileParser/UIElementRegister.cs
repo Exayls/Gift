@@ -1,4 +1,6 @@
-﻿using Gift.Domain.ServiceContracts;
+﻿using System;
+using System.Collections.Generic;
+using Gift.Domain.ServiceContracts;
 
 namespace Gift.XmlUiParser.FileParser
 {

@@ -6,7 +6,7 @@ using Moq;
 using TestGift.Mocks;
 using Xunit;
 
-namespace Gift.Domain.Tests.UnitTest.UI
+namespace Gift.Domain.Tests.UI
 {
     public class HStackTest
     {
@@ -64,7 +64,6 @@ namespace Gift.Domain.Tests.UnitTest.UI
         public void GetDisplay_should_return_screen_when_call_GetDisplay_whith_no_border()
         {
             //arrange
-
             Bound bound = new(2, 4);
             HStack = CreateHstack(bound: bound);
             //act

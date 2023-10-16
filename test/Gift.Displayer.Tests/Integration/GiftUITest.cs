@@ -8,7 +8,7 @@ using Gift.Domain.UIModel.Conf;
 using Gift.ApplicationService.Services;
 using Gift.Displayer.Rendering;
 
-namespace TestGift.UI
+namespace Gift.Displayer.Tests.Integration
 {
     public class GiftUITest
     {

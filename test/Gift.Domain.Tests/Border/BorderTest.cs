@@ -3,7 +3,7 @@ using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.MetaData;
 using Xunit;
 
-namespace Gift.Domain.Tests.UnitTest.Border
+namespace Gift.Domain.Tests.Border
 {
     public class BorderTest
     {

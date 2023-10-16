@@ -10,9 +10,10 @@ using Moq;
 using System;
 using System.IO;
 using System.Text;
+using TestGift;
 using Xunit;
 
-namespace TestGift.UI
+namespace Gift.Displayer.Tests.Integration
 {
     public class GiftVStackTest
     {

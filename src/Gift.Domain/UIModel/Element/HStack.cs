@@ -105,8 +105,8 @@ namespace Gift.Domain.UIModel.Element
         {
             int thickness = Border.Thickness;
             IScreenDisplay screenDisplay = GetDisplayBorder(bound, new DefaultConfiguration());
-            IScreenDisplay emptyVstackScreen = GetDisplayWithoutBorder(bound, new Configuration(fillingChar: fillingChar));
-            screenDisplay.AddDisplay(emptyVstackScreen, new Position(thickness, thickness));
+            IScreenDisplay emptyHstackScreen = GetDisplayWithoutBorder(bound, new Configuration(fillingChar: fillingChar));
+            screenDisplay.AddDisplay(emptyHstackScreen, new Position(thickness, thickness));
             return screenDisplay;
         }
 

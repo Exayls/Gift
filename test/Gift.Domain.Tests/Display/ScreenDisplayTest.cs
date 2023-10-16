@@ -2,7 +2,7 @@
 using Gift.Domain.UIModel.MetaData;
 using Xunit;
 
-namespace Gift.Domain.Tests.UnitTest.Display
+namespace Gift.Domain.Tests.Display
 {
     public class ScreenDisplayTest
     {

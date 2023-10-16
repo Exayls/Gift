@@ -5,6 +5,7 @@ using Gift.ApplicationService.ServiceContracts;
 using Gift.ApplicationService.Services.SignalHandler;
 using Gift.ApplicationService.Services.SignalHandler.Ui;
 using Gift.ApplicationService.Services.Monitor.Console;
+using System;
 
 namespace Gift.ApplicationService.Tests.Event
 {
@@ -41,7 +42,7 @@ namespace Gift.ApplicationService.Tests.Event
         {
             //Arrange
             _mockSignal.Setup(s => s.Name).Returns("Ui.PreviousElementInSelectedContainer");
-            _mockSignal.Setup(s => s.EventArgs).Returns(EventArgs.Empty);
+            _mockSignal.Setup(s => s.EventArgs).Returns(System.EventArgs.Empty);
             //Act
             signalHandler.HandleSignal(_mockSignal.Object);
             //Assert
