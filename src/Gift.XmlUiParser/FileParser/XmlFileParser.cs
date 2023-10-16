@@ -19,6 +19,7 @@ namespace Gift.XmlUiParser.FileParser
         {
             _uielementRegister = elementRegister;
         }
+
         public GiftUI ParseUIFile(string filePath)
         {
             XmlDocument xmlDoc = new XmlDocument();
@@ -45,6 +46,7 @@ namespace Gift.XmlUiParser.FileParser
         private UIElement ParseUIElementRec(XmlElement element, Container parent)
         {
             UIElement component;
+
 
             component = CreateGenericComponent(element, parent);
 
@@ -77,9 +79,9 @@ namespace Gift.XmlUiParser.FileParser
             string componentName = element.Name;
             Type componentType = GetTypeByName(componentName);
 
-            ConstructorInfo constructor = GetConstructor(componentName, componentType);
+            ConstructorInfo[] constructors = GetConstructor(componentName, componentType);
 
-            UIElement uiElement = ConstructElementViaConstructor(element, componentName, constructor);
+            UIElement uiElement = ConstructElementViaConstructor(element, componentName, constructors);
 
             return uiElement;
         }
@@ -115,18 +117,45 @@ namespace Gift.XmlUiParser.FileParser
             }
         }
 
-        private static UIElement ConstructElementViaConstructor(XmlElement element, string componentName, ConstructorInfo constructor)
+        private static UIElement ConstructElementViaConstructor(XmlElement element, string componentName, ConstructorInfo[] constructors)
         {
-            ParameterInfo[] parameters = constructor.GetParameters();
+            ConstructorInfo? biggestConstructor = null;
+            int constructorLength = 0;
+            foreach (var constructor in constructors)
+            {
+                ParameterInfo[] tmpParameters = constructor.GetParameters();
+                if (tmpParameters.Length > constructorLength)
+                {
+                    constructorLength = tmpParameters.Length;
+                    biggestConstructor = constructor;
+                }
+            }
+            if (biggestConstructor is null)
+            {
+                throw new Exception();
+            }
+
+            ParameterInfo[] parameters = biggestConstructor.GetParameters();
             object?[] args = new object[parameters.Length];
 
+            var argsValues = CreateArgs(element, parameters, args);
+            object componentInstance = biggestConstructor.Invoke(argsValues);
+
+            if (componentInstance is not UIElement uiElement)
+            {
+                throw new Exception("Unknown component does not implement UIElement: " + componentName);
+            }
+
+            return uiElement;
+        }
+
+        private static object?[] CreateArgs(XmlElement element, ParameterInfo[] parameters, object?[] args)
+        {
             for (int i = 0; i < parameters.Length; i++)
             {
                 object? arg = null;
-
                 ParameterInfo parameter = parameters[i];
                 Type parameterType = parameter.ParameterType;
-
                 if (parameter.Name == "text")
                 {
                     arg = element.InnerText;
@@ -157,32 +186,22 @@ namespace Gift.XmlUiParser.FileParser
                 else if (parameterType == typeof(string))
                 {
                     arg = element.GetAttribute(parameter.Name ?? "");
-                    arg = (string)arg == "" ? Type.Missing : arg;
+                    // arg = (string)arg == "" ? Type.Missing : arg;
                 }
 
                 args[i] = arg;
             }
-
-            object componentInstance = constructor.Invoke(args);
-
-            if (componentInstance is not UIElement uiElement)
-            {
-                throw new Exception("Unknown component does not implement UIElement: " + componentName);
-            }
-
-            return uiElement;
+            return args;
         }
 
-        private static ConstructorInfo GetConstructor(string componentName, Type componentType)
+        private static ConstructorInfo[] GetConstructor(string componentName, Type componentType)
         {
             ConstructorInfo[] constructors = componentType.GetConstructors();
             if (constructors.Length == 0)
             {
                 throw new Exception("Unknown component does not have any constructors: " + componentName);
             }
-
-            ConstructorInfo constructor = constructors[0];
-            return constructor;
+            return constructors;
         }
 
         private Type GetTypeByName(string typeName)
