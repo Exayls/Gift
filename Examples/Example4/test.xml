@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <GiftUI>
 	<VStack borderOption="simple">
-		<VStack borderOption="simple" frontColor="red" backColor="blue" 
+		<VStack borderOption="simple" frontColor="red" backColor="transparent" 
 				selectableContainer="true" selectedContainer="true">
 
 			<Label selectableElement="true" selectedElement="true">Hello</Label>

@@ -443,7 +443,7 @@ namespace Gift.Domain.Tests.Display
         public void AddDisplay_should_put_color_to_screen_when_add_screen()
         {
             //arrange
-            ScreenDisplay screen = new ScreenDisplay(new Bound(3, 3), emptychar: '@'); ;
+            ScreenDisplay screen = new ScreenDisplay(new Bound(3, 3), emptychar: '@', backColor: Color.Black); ;
             ScreenDisplay screenToAdd = new ScreenDisplay(new Bound(1, 2), backColor: Color.Red, emptychar: '*');
             //act
             screen.AddDisplay(screenToAdd, new Position(1, 0));
@@ -463,7 +463,7 @@ namespace Gift.Domain.Tests.Display
         public void AddDisplay_should_put_color_to_screen_when_add_nested_screen()
         {
             //arrange
-            ScreenDisplay screen = new ScreenDisplay(new Bound(3, 3), emptychar: '@'); ;
+            ScreenDisplay screen = new ScreenDisplay(new Bound(3, 3), emptychar: '@', backColor: Color.Black); ;
             ScreenDisplay screenToAdd = new ScreenDisplay(new Bound(1, 2), backColor: Color.Red, emptychar: '*');
             ScreenDisplay screenToAdd2 = new ScreenDisplay(new Bound(1, 1), backColor: Color.Green, emptychar: '*');
             //act
