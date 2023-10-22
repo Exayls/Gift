@@ -2,7 +2,6 @@
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.MetaData;
-using System;
 using System.Collections.Generic;
 
 namespace Gift.Domain.UIModel.Element
@@ -50,21 +49,6 @@ namespace Gift.Domain.UIModel.Element
             Bound = bound;
             Childs = new List<UIElement>();
             _screenDisplayFactory = screenDisplayFactory;
-            SelectableElements = new List<UIElement>();
-        }
-        public Container() : base()
-        {
-            if (!Console.IsInputRedirected && !Console.IsOutputRedirected)
-            {
-                Bound = new Bound(Console.WindowHeight, Console.WindowWidth);
-
-            }
-            else
-            {
-                Bound = new Bound(0, 0);
-            }
-            Childs = new List<UIElement>();
-            _screenDisplayFactory = new ScreenDisplayFactory();
             SelectableElements = new List<UIElement>();
         }
 
