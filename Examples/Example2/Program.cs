@@ -1,12 +1,11 @@
 using Gift.ApplicationService.ServiceContracts;
 using Gift.Domain.Builders;
-using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.MetaData;
 using Gift.Startup.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 
-var ui = new GiftUI();
+var ui = new GiftUIBuilder().Build();
 
 var hstack = new HStackBuilder().WithBorder(new DetailedBorder(2, BorderOption.GetBorderCharsFromFile("ressources/borderChars/double_border.json"))).Build();
 ui.AddUnselectableChild(hstack);

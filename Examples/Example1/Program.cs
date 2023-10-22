@@ -1,12 +1,11 @@
 ﻿using Gift.Displayer.Displayer;
 using Gift.Displayer.Rendering;
 using Gift.Domain.Builders;
-using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
 
-var ui = new GiftUI();
+var ui = new GiftUIBuilder().Build();
 ui.AddUnselectableChild(new Label("coucou", new Position(2, 58)));
 
 var vstack = new VStackBuilder().Build();

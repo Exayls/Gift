@@ -8,6 +8,7 @@ using Gift.ApplicationService.Services.SignalHandler.Key;
 using Gift.ApplicationService.Services;
 using Gift.Domain.ServiceContracts;
 using Moq;
+using Gift.Domain.Builders;
 
 namespace Gift.ApplicationService.Tests.Services
 {
@@ -68,7 +69,7 @@ namespace Gift.ApplicationService.Tests.Services
         [Fact]
         public void should_return_provider_ui()
         {
-            GiftUI giftUI = new GiftUI();
+            GiftUI giftUI = new GiftUIBuilder().Build();
             giftUiProviderMock.Setup(p => p.Ui).Returns(giftUI);
             Assert.Equal(giftUI, giftBase.Ui);
         }
@@ -83,7 +84,7 @@ namespace Gift.ApplicationService.Tests.Services
 
         private static GiftUI GetGiftUI()
         {
-            return new GiftUI();
+            return new GiftUIBuilder().Build();
         }
     }
 }

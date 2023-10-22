@@ -5,6 +5,7 @@ using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
+using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
 using Moq;
 using System;
@@ -31,6 +32,9 @@ namespace Gift.Displayer.Tests.Integration
         public void TestVStack()
         {
             GiftUI ui = CreateUI(new Bound(20, 60));
+            var vstack = CreateVstack();
+            ui.AddUnselectableChild(vstack);
+
             IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
             string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
 
@@ -45,11 +49,15 @@ namespace Gift.Displayer.Tests.Integration
             }
         }
 
+        private UIElement CreateVstack()
+        {
+            var vstack = new VStackBuilder().Build();
+            return vstack;
+        }
+
         private static GiftUI CreateUI(Bound bound)
         {
-            GiftUI ui = new GiftUI(bound);
-            var vstack = new VStackBuilder().Build();
-            ui.AddUnselectableChild(vstack);
+            GiftUI ui = new GiftUIBuilder().WithBound(bound).Build();
             return ui;
         }
 
@@ -58,7 +66,7 @@ namespace Gift.Displayer.Tests.Integration
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = new GiftUI(new Bound(20, 60));
+            var ui = CreateUI(new Bound(20, 60));
             var vstack = new VStackBuilder().Build();
             var label = new LabelBuilder().Build();
             ui.AddUnselectableChild(vstack);
@@ -85,7 +93,7 @@ namespace Gift.Displayer.Tests.Integration
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = new GiftUI(new Bound(20, 60));
+            var ui = CreateUI(new Bound(20, 60));
             var vstack = new VStackBuilder().Build();
             var label = new LabelBuilder().Build();
             ui.AddUnselectableChild(vstack);
@@ -113,7 +121,7 @@ namespace Gift.Displayer.Tests.Integration
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = new GiftUI(new Bound(20, 60));
+            var ui = CreateUI(new Bound(20, 60));
             var vstack = new VStackBuilder().Build();
             var label1 = new LabelBuilder().Build();
             var label2 = new LabelBuilder().WithText("test").Build();
@@ -147,7 +155,7 @@ namespace Gift.Displayer.Tests.Integration
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = new GiftUI(new Bound(20, 60));
+            var ui = CreateUI(new Bound(20, 60));
             var vstack = new VStackBuilder().Build();
             var label1 = new LabelBuilder().Build();
             var label2 = new LabelBuilder().WithText("test").Build();
@@ -187,7 +195,7 @@ namespace Gift.Displayer.Tests.Integration
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = new GiftUI(new Bound(20, 60));
+            var ui = CreateUI(new Bound(20, 60));
             var vstack = new VStackBuilder().Build();
             var label1 = new LabelBuilder().Build();
             var label2 = new LabelBuilder().WithText("test").WithPosition(new Position(4, 8)).Build();
@@ -227,7 +235,7 @@ namespace Gift.Displayer.Tests.Integration
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = new GiftUI(new Bound(4, 60));
+            var ui = CreateUI(new Bound(4, 60));
             var vstack = new VStackBuilder().Build();
             var label1 = new LabelBuilder().Build();
             var label2 = new LabelBuilder().WithText("test").Build();
@@ -273,7 +281,7 @@ namespace Gift.Displayer.Tests.Integration
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = new GiftUI(new Bound(4, 60));
+            var ui = CreateUI(new Bound(4, 60));
             var vstack = new VStackBuilder().Build();
             var label1 = new LabelBuilder().Build();
             var label2 = new LabelBuilder().WithText("test").Build();

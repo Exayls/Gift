@@ -1,4 +1,5 @@
-﻿using Gift.Domain.UIModel;
+﻿using Gift.Domain.Builders;
+using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
@@ -22,7 +23,7 @@ namespace Gift.Domain.Tests.UI
             _borderMock = new Mock<IBorder>();
             _ScreenDisplayFactoryMock = new Mock<IScreenDisplayFactory>();
             _ScreenDisplayFactoryMock.Setup(s => s.Create(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock1.Object);
-            giftui = new GiftUI(new Bound(5, 5), _borderMock.Object);
+            giftui = new GiftUIBuilder().WithBound(new Bound(5, 5)).WithBorder(_borderMock.Object).Build();
         }
 
         [Fact]
@@ -50,7 +51,7 @@ namespace Gift.Domain.Tests.UI
         [Fact]
         public void SelectedContainer_should_define_selected_container_as_selected()
         {
-            var container = new GiftUI();
+            var container = new GiftUIBuilder().Build();
             var uiElement = new Mock<UIElement>();
             //Act
             //
@@ -79,7 +80,7 @@ namespace Gift.Domain.Tests.UI
         public void NextContainer_should_not_change_container_if_selectedContainer_is_only_selectable()
         {
             //Arrange
-            Container container = new GiftUI();
+            Container container = new GiftUIBuilder().Build();
             giftui.SelectableContainers.Add(container);
             giftui.SelectedContainer = container;
             //Act
@@ -142,8 +143,8 @@ namespace Gift.Domain.Tests.UI
             var container = GetContainer();
             giftui.SelectableContainers.Add(container);
 
-            var e1 = new GiftUI();
-            var e2 = new GiftUI();
+            var e1 = new GiftUIBuilder().Build();
+            var e2 = new GiftUIBuilder().Build();
             container.AddSelectableChild(e1);
             container.AddSelectableChild(e2);
             giftui.SelectableContainers.Add(container);
@@ -156,22 +157,22 @@ namespace Gift.Domain.Tests.UI
 
         private Container GetContainer()
         {
-            return new GiftUI();
+            return new GiftUIBuilder().Build();
         }
 
         private GiftUI GetGiftUI()
         {
-            return new GiftUI();
+            return new GiftUIBuilder().Build();
         }
 
         [Fact]
         public void PreviousElementInSelectedContainer_should_call_previous_Element_if_selectedContainer_is_not_null()
         {
             //Arrange
-            var giftui = new GiftUI();
-            var container = new GiftUI();
-            var e1 = new GiftUI();
-            var e2 = new GiftUI();
+            var giftui = new GiftUIBuilder().Build();
+            var container = new GiftUIBuilder().Build();
+            var e1 = new GiftUIBuilder().Build();
+            var e2 = new GiftUIBuilder().Build();
             container.AddSelectableChild(e1);
             container.AddSelectableChild(e2);
             giftui.SelectableContainers.Add(container);

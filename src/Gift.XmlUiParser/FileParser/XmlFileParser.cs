@@ -1,4 +1,5 @@
-﻿using Gift.Domain.ServiceContracts;
+﻿using Gift.Domain.Builders;
+using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Display;
@@ -34,7 +35,7 @@ namespace Gift.XmlUiParser.FileParser
 
         private GiftUI ParseUIElement(XmlElement element)
         {
-            GiftUI giftui = new GiftUI();
+            GiftUI giftui = new GiftUIBuilder().Build();
             giftUI = giftui;
             foreach (XmlNode childNode in element.ChildNodes)
             {

@@ -17,7 +17,7 @@ namespace TestGift.Builder
         [Fact]
         public void BuilderNameTest()
         {
-            GiftUI g = builder.Build();
+            GiftUI g = builder.WithBound(new Bound(20, 60)).Build();
 
             Assert.Equal(20, g.Bound.Height);
             Assert.Equal(60, g.Bound.Width);
