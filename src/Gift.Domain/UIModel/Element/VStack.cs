@@ -50,13 +50,6 @@ namespace Gift.Domain.UIModel.Element
 
         public VStack(IBorder border,
                       IScreenDisplayFactory screenDisplayFactory,
-                      Color frontColor = Color.Default,
-                      Color backColor = Color.Default) : this(border, screenDisplayFactory, new Bound(0, 0), frontColor: frontColor, backColor: backColor)
-        {
-        }
-
-        public VStack(IBorder border,
-                      IScreenDisplayFactory screenDisplayFactory,
                       Bound bound,
                       Color frontColor = Color.Default,
                       Color backColor = Color.Default) : base(screenDisplayFactory, bound, border, frontColor: frontColor, backColor: backColor)
