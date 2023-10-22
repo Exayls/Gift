@@ -19,7 +19,7 @@ namespace TestGift.UI
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = new GiftUI(new Bound(20, 60));
+            var ui = GetGiftUi(new Bound(20, 60));
             IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
@@ -33,6 +33,12 @@ namespace TestGift.UI
                 Assert.Equal(expected, actual[i]);
             }
         }
+
+        private static GiftUI GetGiftUi(Bound bound)
+        {
+			return new GiftUIBuilder().WithBound(bound).Build();
+        }
+
         [Fact]
         public void CanDisplayTextToPosNeutral()
         {
