@@ -6,7 +6,6 @@ using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
 using Moq;
 using System;
-using TestGift.Mocks;
 using Xunit;
 
 namespace Gift.Domain.Tests.UI

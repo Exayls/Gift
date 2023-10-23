@@ -6,5 +6,6 @@ namespace Gift.Domain.ServiceContracts
     {
         Type GetTypeByName(string typeName);
         void Register(string name, Type type);
+        void Register<T>(string v1, string v2, Func<T,T> value);
     }
 }

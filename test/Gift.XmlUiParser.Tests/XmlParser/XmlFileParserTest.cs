@@ -16,6 +16,11 @@ namespace Gift.XmlUiParser.Tests.XmlParser
         public XmlFileParserTests()
         {
             elementRegister = new UIElementRegister();
+            // elementRegister.Register("GiftUI", typeof(GiftUI));
+            // elementRegister.Register("Label", typeof(Label));
+            // elementRegister.Register("VStack", typeof(VStack));
+            // elementRegister.Register("HStack", typeof(HStack));
+
             elementRegister.Register("GiftUI", typeof(GiftUI));
             elementRegister.Register("Label", typeof(Label));
             elementRegister.Register("VStack", typeof(VStack));
