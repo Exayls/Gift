@@ -50,11 +50,6 @@ namespace Gift.Domain.UIModel
             SelectableContainers = new List<Container>();
         }
 
-        public GiftUI() : base()
-        {
-            SelectableContainers = new List<Container>();
-        }
-
         private void SetNewSelectedContainer(Container selected)
         {
             _selectedContainer = selected;

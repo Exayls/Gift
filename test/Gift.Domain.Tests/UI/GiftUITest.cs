@@ -6,6 +6,7 @@ using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
 using Moq;
 using System;
+using TestGift.Mocks;
 using Xunit;
 
 namespace Gift.Domain.Tests.UI
@@ -44,8 +45,8 @@ namespace Gift.Domain.Tests.UI
         public void SelectedContainer_should_throw_when_setting_container_outside_of_selectable()
         {
 
-            var container = new Mock<Container>();
-            Assert.Throws<InvalidOperationException>(() => giftui.SelectedContainer = container.Object);
+            var container = new VStackBuilder().Build();
+            Assert.Throws<InvalidOperationException>(() => giftui.SelectedContainer = container);
         }
 
         [Fact]
@@ -94,36 +95,36 @@ namespace Gift.Domain.Tests.UI
         public void NextContainer_should_change_container_if_selectedContainer_is_not_only_selectable()
         {
             //Arrange
-            Mock<Container> container1 = new Mock<Container>();
+            var container1 = new VStackBuilder().Build();
 
-            Mock<Container> container2 = new Mock<Container>();
+            var container2 = new VStackBuilder().Build();
 
-            giftui.SelectableContainers.Add(container1.Object);
-            giftui.SelectableContainers.Add(container2.Object);
+            giftui.SelectableContainers.Add(container1);
+            giftui.SelectableContainers.Add(container2);
 
-            giftui.SelectedContainer = container1.Object;
+            giftui.SelectedContainer = container1;
             //Act
             giftui.NextContainer();
             //Assert
-            Assert.Equal(container2.Object, giftui.SelectedContainer);
+            Assert.Equal(container2, giftui.SelectedContainer);
         }
 
         [Fact]
         public void PreviousContainer_should_change_container_if_selectedContainer_is_not_only_selectable()
         {
             //Arrange
-            Mock<Container> container1 = new Mock<Container>();
+            var container1 = new VStackBuilder().Build();
 
-            Mock<Container> container2 = new Mock<Container>();
+            var container2 = new VStackBuilder().Build();
 
-            giftui.SelectableContainers.Add(container1.Object);
-            giftui.SelectableContainers.Add(container2.Object);
+            giftui.SelectableContainers.Add(container1);
+            giftui.SelectableContainers.Add(container2);
 
-            giftui.SelectedContainer = container1.Object;
+            giftui.SelectedContainer = container1;
             //Act
             giftui.PreviousContainer();
             //Assert
-            Assert.Equal(container2.Object, giftui.SelectedContainer);
+            Assert.Equal(container2, giftui.SelectedContainer);
         }
 
         [Fact]
