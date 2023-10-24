@@ -251,5 +251,9 @@ namespace Gift.XmlUiParser.FileParser
             return border;
         }
 
+        public GiftUI ParseUIFileUsingBuilders(string filePath)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

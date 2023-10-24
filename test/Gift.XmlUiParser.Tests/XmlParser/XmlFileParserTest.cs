@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Gift.Domain.Builders;
 using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Element;
@@ -60,5 +61,27 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             // Act & Assert
             Assert.Throws<NotSupportedException>(() => xmlParser.ParseUIFile(filePath));
         }
+
+        [Fact]
+        public void ParseUIFile_With_Builder_register()
+        {
+            // Arrange
+            elementRegister = new UIElementRegister();
+
+            elementRegister.Register<GiftUIBuilder>("GiftUI");
+            elementRegister.Register<LabelBuilder>("Label");
+            elementRegister.Register<VStackBuilder>("VStack");
+            elementRegister.Register<HStackBuilder>("HStack");
+            xmlParser = new XmlFileParser(elementRegister);
+
+			string filePath = "ressources/xml/valid_xml.xml";
+
+            // Act
+            GiftUI result = xmlParser.ParseUIFileUsingBuilders(filePath);
+
+            // Assert
+            Assert.NotNull(result);
+        }
+
     }
 }
