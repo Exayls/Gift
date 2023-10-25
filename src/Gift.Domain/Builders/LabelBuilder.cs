@@ -7,7 +7,7 @@ namespace Gift.Domain.Builders
     /// <summary>
     /// build Label with "Hello" as default text and (0,0) as default position
     /// </summary>
-    public class LabelBuilder
+    public class LabelBuilder : IUIElementBuilder
     {
         private string text = "Hello";
         private Position? position = null;
