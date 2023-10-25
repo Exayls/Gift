@@ -3,6 +3,7 @@ using System.IO;
 using Gift.Domain.Builders;
 using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel;
+using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Element;
 using Gift.XmlUiParser.FileParser;
 using Xunit;
@@ -72,6 +73,10 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             elementRegister.Register<LabelBuilder>("Label");
             elementRegister.Register<VStackBuilder>("VStack");
             elementRegister.Register<HStackBuilder>("HStack");
+
+            elementRegister.Register<HStackBuilder, IBorder>("HStack", "border", (b) => b.WithBorder(new NoBorder()));
+            elementRegister.Register<LabelBuilder>("Label", "text", (b) => b.WithText(""));
+
             xmlParser = new XmlFileParser(elementRegister);
 
 			string filePath = "ressources/xml/valid_xml.xml";
