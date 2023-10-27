@@ -42,9 +42,13 @@ namespace Gift.XmlUiParser.FileParser
         public void Register<T>(string name)
         {
             _elements.Add(name.ToLower(), typeof(T));
+            if (typeof(T) is IUIElementBuilder)
+            {
+				//TODO
+                this.Register<T, IBorder>("HStack", "border", (b, a) => b.WithBorder(a));
+                this.Register<T>("Label", "text", (b, t) => b.WithText(t));
+            }
 
-            this.Register<HStackBuilder, IBorder>("HStack", "border", (b, a) => b.WithBorder(a));
-            this.Register<LabelBuilder>("Label", "text", (b, t) => b.WithText(t));
         }
 
         public void Register<T>(string elementName, string attributeName, Func<T, string, T> BuilderMethod)
