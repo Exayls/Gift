@@ -5,7 +5,7 @@ using Gift.Domain.UIModel.MetaData;
 
 namespace Gift.Domain.Builders
 {
-    public class HStackBuilder : IUIElementBuilder
+    public class HStackBuilder : IUIElementBuilder<HStackBuilder, HStack>
     {
         private IBorder Border = new NoBorder();
         private Bound Bound = new Bound(0, 0);

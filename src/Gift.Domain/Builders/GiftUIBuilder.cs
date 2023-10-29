@@ -8,7 +8,7 @@ namespace Gift.Domain.Builders
     /// <summary>
     /// Build GiftUI with Bound(20, 60) as default
     /// </summary>
-    public class GiftUIBuilder : IUIElementBuilder
+    public class GiftUIBuilder : IUIElementBuilder<GiftUIBuilder, GiftUI>
     {
         private Bound _bound;
         private IBorder _border;
@@ -54,5 +54,6 @@ namespace Gift.Domain.Builders
             _border = border;
             return this;
         }
+
     }
 }

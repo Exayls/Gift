@@ -251,9 +251,50 @@ namespace Gift.XmlUiParser.FileParser
             return border;
         }
 
-        public GiftUI ParseUIFileUsingBuilders(string filePath)
+        public UIElement ParseUIFileUsingBuilders(string filePath)
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(filePath);
+
+            if (xmlDoc.DocumentElement == null)
+            {
+                throw new NullReferenceException();
+            }
+            return ParseUIElementRecBuilders(xmlDoc.DocumentElement, null);
+        }
+
+        private UIElement ParseUIElementRecBuilders(XmlElement element, Container? parent)
+        {
+            UIElement component;
+
+
+            component = CreateGenericComponentBuilders(element);
+
+            foreach (XmlNode childNode in element.ChildNodes)
+            {
+                if (childNode is not XmlElement) { continue; }
+                if (component is not Container container)
+                {
+                    throw new Exception("component is not container");
+                }
+                AddChild(container, childNode);
+            }
+            return component;
+        }
+
+        private UIElement CreateGenericComponentBuilders(XmlElement element)
+        {
+            string componentName = element.Name;
+			var builder = _uielementRegister.GetBuilder(componentName);
+            UIElement uiElement = ConstructElement(element, componentName);
+
+            return uiElement;
+        }
+
+        private UIElement ConstructElement(XmlElement element, string componentName)
         {
             throw new NotImplementedException();
         }
     }
 }
+

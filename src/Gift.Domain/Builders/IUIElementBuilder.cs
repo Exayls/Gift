@@ -2,9 +2,10 @@
 
 namespace Gift.Domain.Builders
 {
-    public interface IUIElementBuilder
+    public interface IUIElementBuilder<TBuilder, TProduct>
+    where TBuilder : IUIElementBuilder<TBuilder, TProduct>
     {
-		public IUIElementBuilder WithText(string text);
-		public IUIElementBuilder WithBorder(IBorder border);
+        public TBuilder WithBorder(IBorder border);
+        public TProduct Build();
     }
 }

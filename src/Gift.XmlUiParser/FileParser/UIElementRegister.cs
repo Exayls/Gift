@@ -2,26 +2,38 @@
 using System.Collections.Generic;
 using Gift.Domain.Builders;
 using Gift.Domain.ServiceContracts;
+using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Border;
+using Gift.Domain.UIModel.Element;
 
 namespace Gift.XmlUiParser.FileParser
 {
     public class UIElementRegister : IUIElementRegister
     {
         private IDictionary<string, Type> _elements;
-        private IDictionary<Tuple<Type, string>, Func<IUIElementBuilder, IUIElementBuilder>> _builderMethods;
+        // private IDictionary<Tuple<Type, string>, Func<IUIElementBuilder, IUIElementBuilder>> _builderMethods;
 
         public UIElementRegister()
         {
             _elements = new Dictionary<string, Type>();
-            _builderMethods = new Dictionary<Tuple<Type, string>, Func<IUIElementBuilder, IUIElementBuilder>>();
+            // _builderMethods = new Dictionary<Tuple<Type, string>, Func<IUIElementBuilder, IUIElementBuilder>>();
 
 
-            this.Register<GiftUIBuilder>("GiftUI");
-            this.Register<LabelBuilder>("Label");
-            this.Register<VStackBuilder>("VStack");
-            this.Register<HStackBuilder>("HStack");
+            this.Register<GiftUIBuilder, GiftUI>("GiftUI");
+            this.Register<LabelBuilder, Label>("Label");
+            this.Register<VStackBuilder, VStack>("VStack");
+            this.Register<HStackBuilder, HStack>("HStack");
 
+        }
+
+        public Type GetBuilder(string typeName)
+        {
+            string key = typeName.ToLower();
+            if (!_elements.ContainsKey(key))
+            {
+                throw new NotSupportedException("Unknown component: " + typeName);
+            }
+            return _elements[key];
         }
 
         public Type GetTypeByName(string typeName)
@@ -39,17 +51,17 @@ namespace Gift.XmlUiParser.FileParser
             _elements.Add(name.ToLower(), type);
         }
 
-        public void Register<T>(string name)
+        public void Register<TBuilder, TProduct>(string name)
+            where TBuilder : IUIElementBuilder<TBuilder, TProduct>
         {
-            _elements.Add(name.ToLower(), typeof(T));
-            if (typeof(T) is IUIElementBuilder)
-            {
-				//TODO
-                this.Register<T, IBorder>("HStack", "border", (b, a) => b.WithBorder(a));
-                this.Register<T>("Label", "text", (b, t) => b.WithText(t));
-            }
+            _elements.Add(name.ToLower(), typeof(TBuilder));
 
+            if (typeof(TBuilder) is IUIElementBuilder<TBuilder, TProduct>)
+            {
+                this.Register<TBuilder, IBorder>(name.ToLower(), "border", (b, a) => b.WithBorder(a));
+            }
         }
+
 
         public void Register<T>(string elementName, string attributeName, Func<T, string, T> BuilderMethod)
         {
@@ -62,5 +74,6 @@ namespace Gift.XmlUiParser.FileParser
             var b = typeof(T2);
             Console.WriteLine(typeof(T1));
         }
+
     }
 }

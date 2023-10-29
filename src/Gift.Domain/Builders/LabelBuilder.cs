@@ -7,7 +7,7 @@ namespace Gift.Domain.Builders
     /// <summary>
     /// build Label with "Hello" as default text and (0,0) as default position
     /// </summary>
-    public class LabelBuilder : IUIElementBuilder
+    public class LabelBuilder : IUIElementBuilder<LabelBuilder, Label>
     {
         private string text = "Hello";
         private Position? position = null;
@@ -55,7 +55,7 @@ namespace Gift.Domain.Builders
             return this;
         }
 
-        internal LabelBuilder WithBorder(IBorder border)
+        public LabelBuilder WithBorder(IBorder border)
         {
             this.border = border;
             return this;
