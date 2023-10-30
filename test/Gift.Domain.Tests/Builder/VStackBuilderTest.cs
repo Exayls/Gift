@@ -24,7 +24,7 @@ namespace TestGift.Builder
 
             NoBorder border = new NoBorder();
             Bound bound = new Bound(0, 0);
-            VStackBuilder builder = new VStackBuilder()
+            IContainerBuilder<VStack> builder = new VStackBuilder()
                 .WithBorder(border)
                 .WithBound(bound);
             VStack v = builder.Build();

@@ -5,7 +5,7 @@ using Gift.Domain.UIModel.MetaData;
 
 namespace Gift.Domain.Builders
 {
-    public class HStackBuilder : IUIElementBuilder<HStackBuilder, HStack>
+    public class HStackBuilder : IContainerBuilder<HStack>
     {
         private IBorder Border = new NoBorder();
         private Bound Bound = new Bound(0, 0);
@@ -13,12 +13,12 @@ namespace Gift.Domain.Builders
         private Color backColor = Color.Default;
         private Color frontColor = Color.Default;
 
-        public HStackBuilder WithBorder(IBorder border)
+        public IContainerBuilder<HStack> WithBorder(IBorder border)
         {
             Border = border;
             return this;
         }
-        public HStackBuilder WithBound(Bound bound)
+        public IContainerBuilder<HStack> WithBound(Bound bound)
         {
             Bound = bound;
             return this;

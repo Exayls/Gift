@@ -2,6 +2,7 @@
 using System.IO;
 using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel;
+using Gift.Domain.UIModel.Element;
 using Gift.XmlUiParser.FileParser;
 using Xunit;
 
@@ -60,14 +61,15 @@ namespace Gift.XmlUiParser.Tests.XmlParser
         public void ParseUIFile_With_Builder_register()
         {
             // Arrange
-            var elementRegister = new UIElementRegister();
+            elementRegister = new UIElementRegister();
 
 
             xmlParser = new XmlFileParser(elementRegister);
 
             string filePath = "ressources/xml/valid_xml.xml";
+
             // Act
-            GiftUI result = (GiftUI)xmlParser.ParseUIFileUsingBuilders(filePath);
+            UIElement result = xmlParser.ParseUIFileUsingBuilders(filePath);
 
             // Assert
             Assert.NotNull(result);

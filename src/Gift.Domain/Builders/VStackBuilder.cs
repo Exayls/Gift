@@ -5,7 +5,7 @@ using Gift.Domain.UIModel.MetaData;
 
 namespace Gift.Domain.Builders
 {
-    public class VStackBuilder : IUIElementBuilder<VStackBuilder, VStack>
+    public class VStackBuilder : IContainerBuilder<VStack>
     {
         private IBorder Border = new NoBorder();
         private Bound Bound = new Bound(0, 0);
@@ -13,12 +13,12 @@ namespace Gift.Domain.Builders
         private Color backColor = Color.Default;
         private Color frontColor = Color.Default;
 
-        public VStackBuilder WithBorder(IBorder border)
+        public IContainerBuilder<VStack> WithBorder(IBorder border)
         {
             Border = border;
             return this;
         }
-        public VStackBuilder WithBound(Bound bound)
+        public IContainerBuilder<VStack> WithBound(Bound bound)
         {
             Bound = bound;
             return this;

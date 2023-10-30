@@ -1,11 +1,9 @@
-﻿using Gift.Domain.UIModel.Border;
+﻿using Gift.Domain.UIModel.Element;
 
 namespace Gift.Domain.Builders
 {
-    public interface IUIElementBuilder<TBuilder, TProduct>
-    where TBuilder : IUIElementBuilder<TBuilder, TProduct>
+    public interface IUIElementBuilder<T> : IBuilder<T>
+           where T : UIElement
     {
-        public TBuilder WithBorder(IBorder border);
-        public TProduct Build();
     }
 }

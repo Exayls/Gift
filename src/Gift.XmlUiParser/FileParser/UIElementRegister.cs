@@ -52,13 +52,13 @@ namespace Gift.XmlUiParser.FileParser
         }
 
         public void Register<TBuilder, TProduct>(string name)
-            where TBuilder : IUIElementBuilder<TBuilder, TProduct>
+            where TBuilder : IBuilder<TProduct>
         {
             _elements.Add(name.ToLower(), typeof(TBuilder));
 
-            if (typeof(TBuilder) is IUIElementBuilder<TBuilder, TProduct>)
+            if (typeof(TBuilder) is IContainerBuilder<Container>)
             {
-                this.Register<TBuilder, IBorder>(name.ToLower(), "border", (b, a) => b.WithBorder(a));
+                this.Register<IContainerBuilder<Container>, IBorder>(name.ToLower(), "border", (b, a) => b.WithBorder(a));
             }
         }
 

@@ -286,14 +286,14 @@ namespace Gift.XmlUiParser.FileParser
         {
             string componentName = element.Name;
 			var builder = _uielementRegister.GetBuilder(componentName);
-            UIElement uiElement = ConstructElement(element, componentName);
+            UIElement uiElement = ConstructElement(element, builder);
 
             return uiElement;
         }
 
-        private UIElement ConstructElement(XmlElement element, string componentName)
+        private UIElement ConstructElement(XmlElement element, Type builder)
         {
-            throw new NotImplementedException();
+			return new Label("");//TODO
         }
     }
 }
