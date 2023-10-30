@@ -49,7 +49,7 @@ namespace Gift.Domain.Builders
             return new GiftUI(_bound, _border);
         }
 
-        public IContainerBuilder<GiftUI> WithBorder(IBorder border)
+        public IUIElementBuilder<GiftUI> WithBorder(IBorder border)
         {
             _border = border;
             return this;

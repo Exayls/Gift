@@ -58,7 +58,11 @@ namespace Gift.XmlUiParser.FileParser
 
             if (typeof(TBuilder) is IContainerBuilder<Container>)
             {
-                this.Register<IContainerBuilder<Container>, IBorder>(name.ToLower(), "border", (b, a) => b.WithBorder(a));
+                //TODO
+            }
+            if (typeof(TBuilder) is IUIElementBuilder<UIElement>)
+            {
+                this.Register<IUIElementBuilder<UIElement>, IBorder>(name.ToLower(), "border", (b, a) => b.WithBorder(a));
             }
         }
 

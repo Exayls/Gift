@@ -55,7 +55,7 @@ namespace Gift.Domain.Builders
             return this;
         }
 
-        public LabelBuilder WithBorder(IBorder border)
+        public IUIElementBuilder<Label> WithBorder(IBorder border)
         {
             this.border = border;
             return this;

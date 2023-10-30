@@ -13,7 +13,7 @@ namespace Gift.Domain.Builders
         private Color backColor = Color.Default;
         private Color frontColor = Color.Default;
 
-        public IContainerBuilder<VStack> WithBorder(IBorder border)
+        public IUIElementBuilder<VStack> WithBorder(IBorder border)
         {
             Border = border;
             return this;
