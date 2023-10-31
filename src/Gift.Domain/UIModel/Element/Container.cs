@@ -44,7 +44,7 @@ namespace Gift.Domain.UIModel.Element
 
         protected readonly IScreenDisplayFactory _screenDisplayFactory;
 
-        public Container(IScreenDisplayFactory screenDisplayFactory, Bound bound, IBorder border, Color frontColor = Color.Default, Color backColor = Color.Default) : base(border, frontColor: frontColor, backColor: backColor)
+        public Container(IScreenDisplayFactory screenDisplayFactory, Bound bound, IBorder border, Color frontColor, Color backColor) : base(border, frontColor: frontColor, backColor: backColor)
         {
             Bound = bound;
             Childs = new List<UIElement>();

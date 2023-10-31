@@ -5,23 +5,18 @@ using Gift.Domain.UIModel.MetaData;
 
 namespace Gift.Domain.Builders
 {
-    /// <summary>
-    /// Build GiftUI with Bound(20, 60) as default
-    /// </summary>
     public class GiftUIBuilder : IContainerBuilder<GiftUI>
     {
         private Bound _bound;
         private IBorder _border;
+        private Color _frontColor = Color.Default;
+		private Color _backColor = Color.Default;
 
-        /// <summary>
-        /// Get GiftUI instance with Bound(20, 60) as default
-        /// </summary>
         public GiftUIBuilder()
         {
             if (!Console.IsInputRedirected && !Console.IsOutputRedirected)
             {
                 _bound = new Bound(Console.WindowHeight, Console.WindowWidth);
-
             }
             else
             {
@@ -29,24 +24,16 @@ namespace Gift.Domain.Builders
             }
             _border = new NoBorder();
         }
-        /// <summary>
-        /// Set Bound parameter for the builder
-        /// </summary>
-        /// <param name="bound"></param>
-        /// <returns>GiftUIBuilder instance</returns>
+
         public IContainerBuilder<GiftUI> WithBound(Bound bound)
         {
             _bound = bound;
             return this;
         }
 
-        /// <summary>
-        /// Get instance of GiftUI
-        /// </summary>
-        /// <returns>GiftUI instance</returns>
         public GiftUI Build()
         {
-            return new GiftUI(_bound, _border);
+            return new GiftUI(_bound, _border, _frontColor, _backColor);
         }
 
         public IUIElementBuilder<GiftUI> WithBorder(IBorder border)
@@ -55,5 +42,16 @@ namespace Gift.Domain.Builders
             return this;
         }
 
+        public IUIElementBuilder<GiftUI> WithBackgroundColor(Color color)
+        {
+			_backColor = color;
+            return this;
+        }
+
+        public IUIElementBuilder<GiftUI> WithForegroundColor(Color color)
+        {
+			_frontColor = color;
+            return this;
+        }
     }
 }

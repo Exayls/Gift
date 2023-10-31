@@ -18,7 +18,7 @@ var vstack2 = new VStackBuilder().WithBound(new Bound(4,9)).WithBorder(new Detai
 vstack.AddUnselectableChild(vstack2);
 vstack.AddUnselectableChild(new LabelBuilder().WithText("test5").Build());
 vstack.AddUnselectableChild(new LabelBuilder().Build());
-vstack.AddUnselectableChild(new LabelBuilder().WithBackgroundColor(Color.Red).WithText("test3").Build());
+vstack.AddUnselectableChild(new LabelBuilder().WithText("test3").WithBackgroundColor(Color.Red).Build());
 vstack.AddUnselectableChild(new LabelBuilder().Build());
 vstack2.AddUnselectableChild(new LabelBuilder().WithText("testwithbiggerwidth").Build());
 vstack2.AddUnselectableChild(new LabelBuilder().Build());

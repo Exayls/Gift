@@ -24,13 +24,13 @@ namespace Gift.Domain.Builders
             return this;
         }
 
-        public HStackBuilder WithBackgroundColor(Color color)
+        public IUIElementBuilder<HStack> WithBackgroundColor(Color color)
         {
             backColor = color;
             return this;
         }
 
-        public HStackBuilder WithForegroundColor(Color color)
+        public IUIElementBuilder<HStack> WithForegroundColor(Color color)
         {
             frontColor = color;
             return this;

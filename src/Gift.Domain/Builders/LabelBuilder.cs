@@ -33,12 +33,12 @@ namespace Gift.Domain.Builders
             return this;
         }
 
-        public LabelBuilder WithBackgroundColor(Color color)
+        public IUIElementBuilder<Label> WithBackgroundColor(Color color)
         {
             backColor = color;
             return this;
         }
-        public LabelBuilder WithForegroundColor(Color color)
+        public IUIElementBuilder<Label> WithForegroundColor(Color color)
         {
             frontColor = color;
             return this;

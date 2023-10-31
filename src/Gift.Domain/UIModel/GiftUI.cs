@@ -45,7 +45,7 @@ namespace Gift.Domain.UIModel
             }
         }
 
-        public GiftUI(Bound bound, IBorder border) : base(new ScreenDisplayFactory(), bound, border)
+        public GiftUI(Bound bound, IBorder border, Color frontColor, Color backColor) : base(new ScreenDisplayFactory(), bound, border, frontColor, backColor)
         {
             SelectableContainers = new List<Container>();
         }

@@ -32,7 +32,7 @@ namespace TestGift.Builder
         public void BuilderBackgroundTest()
         {
 
-            LabelBuilder builder = new LabelBuilder()
+            IBuilder<Label> builder = new LabelBuilder()
                 .WithBackgroundColor(Color.Green)
                 .WithForegroundColor(Color.Red);
             Label l = builder.Build();
