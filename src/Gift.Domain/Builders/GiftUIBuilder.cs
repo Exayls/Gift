@@ -10,7 +10,7 @@ namespace Gift.Domain.Builders
         private Bound _bound;
         private IBorder _border;
         private Color _frontColor = Color.Default;
-		private Color _backColor = Color.Default;
+        private Color _backColor = Color.Default;
 
         public GiftUIBuilder()
         {
@@ -31,14 +31,6 @@ namespace Gift.Domain.Builders
             return this;
         }
 
-        public GiftUI Build()
-        {
-            return new GiftUI(bound: _bound,
-                              border: _border,
-                              frontColor: _frontColor,
-                              backColor: _backColor);
-        }
-
         public IUIElementBuilder<GiftUI> WithBorder(IBorder border)
         {
             _border = border;
@@ -47,14 +39,22 @@ namespace Gift.Domain.Builders
 
         public IUIElementBuilder<GiftUI> WithBackgroundColor(Color color)
         {
-			_backColor = color;
+            _backColor = color;
             return this;
         }
 
         public IUIElementBuilder<GiftUI> WithForegroundColor(Color color)
         {
-			_frontColor = color;
+            _frontColor = color;
             return this;
+        }
+
+        public GiftUI Build()
+        {
+            return new GiftUI(bound: _bound,
+                              border: _border,
+                              frontColor: _frontColor,
+                              backColor: _backColor);
         }
     }
 }
