@@ -33,7 +33,10 @@ namespace Gift.Domain.Builders
 
         public GiftUI Build()
         {
-            return new GiftUI(_bound, _border, _frontColor, _backColor);
+            return new GiftUI(bound: _bound,
+                              border: _border,
+                              frontColor: _frontColor,
+                              backColor: _backColor);
         }
 
         public IUIElementBuilder<GiftUI> WithBorder(IBorder border)
