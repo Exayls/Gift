@@ -24,7 +24,7 @@ namespace TestGift.Builder
 
             NoBorder border = new NoBorder();
             Bound bound = new Bound(0, 0);
-            IBuilder<HStack> builder = new HStackBuilder()
+            HStackBuilder builder = new HStackBuilder()
                 .WithBound(bound)
                 .WithBorder(border);
             HStack h = builder.Build();

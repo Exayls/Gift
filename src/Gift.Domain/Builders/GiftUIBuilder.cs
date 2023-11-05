@@ -1,11 +1,12 @@
 ﻿using System;
 using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Border;
+using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
 
 namespace Gift.Domain.Builders
 {
-    public class GiftUIBuilder : IContainerBuilder<GiftUI>
+    public class GiftUIBuilder : IContainerBuilder
     {
         private Bound _bound;
         private IBorder _border;
@@ -25,25 +26,25 @@ namespace Gift.Domain.Builders
             _border = new NoBorder();
         }
 
-        public IContainerBuilder<GiftUI> WithBound(Bound bound)
+        public GiftUIBuilder WithBound(Bound bound)
         {
             _bound = bound;
             return this;
         }
 
-        public IUIElementBuilder<GiftUI> WithBorder(IBorder border)
+        public GiftUIBuilder WithBorder(IBorder border)
         {
             _border = border;
             return this;
         }
 
-        public IUIElementBuilder<GiftUI> WithBackgroundColor(Color color)
+        public GiftUIBuilder WithBackgroundColor(Color color)
         {
             _backColor = color;
             return this;
         }
 
-        public IUIElementBuilder<GiftUI> WithForegroundColor(Color color)
+        public GiftUIBuilder WithForegroundColor(Color color)
         {
             _frontColor = color;
             return this;
@@ -55,6 +56,36 @@ namespace Gift.Domain.Builders
                               border: _border,
                               frontColor: _frontColor,
                               backColor: _backColor);
+        }
+
+        UIElement IBuilder<UIElement>.Build()
+        {
+			return Build();
+        }
+
+        Container IBuilder<Container>.Build()
+        {
+			return Build();
+        }
+
+        IContainerBuilder IContainerBuilder.WithBound(Bound bound)
+        {
+			return WithBound(bound);
+        }
+
+        IUIElementBuilder IUIElementBuilder.WithBorder(IBorder border)
+        {
+			return WithBorder(border);
+        }
+
+        IUIElementBuilder IUIElementBuilder.WithBackgroundColor(Color color)
+        {
+			return WithBackgroundColor(color);
+        }
+
+        IUIElementBuilder IUIElementBuilder.WithForegroundColor(Color color)
+        {
+			return WithForegroundColor(color);
         }
     }
 }

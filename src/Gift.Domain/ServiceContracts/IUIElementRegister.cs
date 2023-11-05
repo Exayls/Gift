@@ -1,15 +1,24 @@
-﻿using System;
+using System;
 using Gift.Domain.Builders;
+using Gift.Domain.UIModel.Element;
 
 namespace Gift.Domain.ServiceContracts
 {
     public interface IUIElementRegister
     {
         Type GetBuilder(string componentName);
-        Type GetTypeByName(string typeName);
+
+        public Func<IBuilder<UIElement>, object, IBuilder<UIElement>> GetMethod<Builder>(string attribute);
+
         void Register(string name, Type type);
-        void Register<TBuilder>(string elementName, string attributeName, Func<TBuilder, string, TBuilder> builderMethod);
-        void Register<TBuilder, TProduct>(string name) where TBuilder : IBuilder<TProduct>;
-        void Register<T1, T2>(string elementName, string attributeName, Func<T1, T2, T1> BuilderMethod);
+
+        public void Register<TBuilder>(string name)
+            where TBuilder : IUIElementBuilder;
+
+        void Register<TBuilder>(string attributeName, Func<TBuilder, string, TBuilder> builderMethod)
+            where TBuilder : IUIElementBuilder;
+
+        void Register<TBuilder, T2>(string attributeName, Func<TBuilder, T2, TBuilder> BuilderMethod)
+            where TBuilder : IUIElementBuilder;
     }
 }

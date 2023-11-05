@@ -5,7 +5,7 @@ using Gift.Domain.UIModel.MetaData;
 
 namespace Gift.Domain.Builders
 {
-    public class VStackBuilder : IContainerBuilder<VStack>
+    public class VStackBuilder : IContainerBuilder
     {
         private IBorder Border = new NoBorder();
         private Bound Bound = new Bound(0, 0);
@@ -13,24 +13,24 @@ namespace Gift.Domain.Builders
         private Color backColor = Color.Default;
         private Color frontColor = Color.Default;
 
-        public IUIElementBuilder<VStack> WithBorder(IBorder border)
+        public VStackBuilder WithBorder(IBorder border)
         {
             Border = border;
             return this;
         }
-        public IContainerBuilder<VStack> WithBound(Bound bound)
+        public VStackBuilder WithBound(Bound bound)
         {
             Bound = bound;
             return this;
         }
 
-        public IUIElementBuilder<VStack> WithBackgroundColor(Color color)
+        public VStackBuilder WithBackgroundColor(Color color)
         {
             backColor = color;
             return this;
         }
 
-        public IUIElementBuilder<VStack> WithForegroundColor(Color color)
+        public VStackBuilder WithForegroundColor(Color color)
         {
             frontColor = color;
             return this;
@@ -45,5 +45,34 @@ namespace Gift.Domain.Builders
                               backColor: backColor);
         }
 
+        UIElement IBuilder<UIElement>.Build()
+        {
+			return Build();
+        }
+
+        Container IBuilder<Container>.Build()
+        {
+			return Build();
+        }
+
+        IContainerBuilder IContainerBuilder.WithBound(Bound bound)
+        {
+			return WithBound(bound);
+        }
+
+        IUIElementBuilder IUIElementBuilder.WithBorder(IBorder border)
+        {
+			return WithBorder(border);
+        }
+
+        IUIElementBuilder IUIElementBuilder.WithBackgroundColor(Color color)
+        {
+			return WithBackgroundColor(color);
+        }
+
+        IUIElementBuilder IUIElementBuilder.WithForegroundColor(Color color)
+        {
+			return WithForegroundColor(color);
+        }
     }
 }

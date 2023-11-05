@@ -9,7 +9,7 @@ namespace Gift.Domain.UIModel
         {
             get
             {
-                return _ui ?? new GiftUIBuilder().Build();
+                return _ui ?? (GiftUI)new GiftUIBuilder().Build();
             }
             set
             {

@@ -7,7 +7,7 @@ namespace Gift.Domain.Builders
     /// <summary>
     /// build Label with "Hello" as default text and (0,0) as default position
     /// </summary>
-    public class LabelBuilder : IUIElementBuilder<Label>
+    public class LabelBuilder : IUIElementBuilder
     {
         private string text = "Hello";
         private Position? position = null;
@@ -33,12 +33,12 @@ namespace Gift.Domain.Builders
             return this;
         }
 
-        public IUIElementBuilder<Label> WithBackgroundColor(Color color)
+        public LabelBuilder WithBackgroundColor(Color color)
         {
             backColor = color;
             return this;
         }
-        public IUIElementBuilder<Label> WithForegroundColor(Color color)
+        public LabelBuilder WithForegroundColor(Color color)
         {
             frontColor = color;
             return this;
@@ -55,7 +55,7 @@ namespace Gift.Domain.Builders
             return this;
         }
 
-        public IUIElementBuilder<Label> WithBorder(IBorder border)
+        public LabelBuilder WithBorder(IBorder border)
         {
             this.border = border;
             return this;
@@ -70,6 +70,25 @@ namespace Gift.Domain.Builders
             return new Label(text, position: position, frontColor: frontColor, backColor: backColor, border: border);
         }
 
+        UIElement IBuilder<UIElement>.Build()
+        {
+			return Build();
+        }
+
+        IUIElementBuilder IUIElementBuilder.WithBorder(IBorder border)
+        {
+			return WithBorder(border);
+        }
+
+        IUIElementBuilder IUIElementBuilder.WithBackgroundColor(Color color)
+        {
+			return WithBackgroundColor(color);
+        }
+
+        IUIElementBuilder IUIElementBuilder.WithForegroundColor(Color color)
+        {
+			return WithForegroundColor(color);
+        }
     }
 
 }

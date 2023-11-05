@@ -4,11 +4,10 @@ using Gift.Domain.UIModel.MetaData;
 
 namespace Gift.Domain.Builders
 {
-    public interface IUIElementBuilder<T> : IBuilder<T>
-           where T : UIElement
+    public interface IUIElementBuilder : IBuilder<UIElement>
     {
-        public IUIElementBuilder<T> WithBorder(IBorder border);
-        public IUIElementBuilder<T> WithBackgroundColor(Color color);
-        public IUIElementBuilder<T> WithForegroundColor(Color color);
+        public IUIElementBuilder WithBorder(IBorder border);
+        public IUIElementBuilder WithBackgroundColor(Color color);
+        public IUIElementBuilder WithForegroundColor(Color color);
     }
 }

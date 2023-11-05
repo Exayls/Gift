@@ -1,8 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Gift.Domain.Builders;
 using Gift.Domain.ServiceContracts;
-using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Element;
 
@@ -11,18 +10,19 @@ namespace Gift.XmlUiParser.FileParser
     public class UIElementRegister : IUIElementRegister
     {
         private IDictionary<string, Type> _elements;
-        // private IDictionary<Tuple<Type, string>, Func<IUIElementBuilder, IUIElementBuilder>> _builderMethods;
+        private Dictionary<(Type builderType, string attribute), Func<IBuilder<UIElement>, object, IBuilder<UIElement>>> _builderMethods;
+
 
         public UIElementRegister()
         {
             _elements = new Dictionary<string, Type>();
-            // _builderMethods = new Dictionary<Tuple<Type, string>, Func<IUIElementBuilder, IUIElementBuilder>>();
+            _builderMethods = new Dictionary<(Type builderType, string attribute), Func<IBuilder<UIElement>, object, IBuilder<UIElement>>>();
 
 
-            this.Register<GiftUIBuilder, GiftUI>("GiftUI");
-            this.Register<LabelBuilder, Label>("Label");
-            this.Register<VStackBuilder, VStack>("VStack");
-            this.Register<HStackBuilder, HStack>("HStack");
+            this.Register<GiftUIBuilder>("GiftUI");
+            this.Register<LabelBuilder>("Label");
+            this.Register<VStackBuilder>("VStack");
+            this.Register<HStackBuilder>("HStack");
 
         }
 
@@ -36,14 +36,14 @@ namespace Gift.XmlUiParser.FileParser
             return _elements[key];
         }
 
-        public Type GetTypeByName(string typeName)
+        public Func<IBuilder<UIElement>, object, IBuilder<UIElement>> GetMethod<Builder>(string attribute)
         {
-            string key = typeName.ToLower();
-            if (!_elements.ContainsKey(key))
-            {
-                throw new NotSupportedException("Unknown component: " + typeName);
-            }
-            return _elements[key];
+            return _builderMethods[(typeof(Builder), attribute)];
+        }
+
+        public Func<IBuilder<UIElement>, object, IBuilder<UIElement>> GetMethod(Type builder, string attribute)
+        {
+            return _builderMethods[(builder, attribute)];
         }
 
         public void Register(string name, Type type)
@@ -51,33 +51,36 @@ namespace Gift.XmlUiParser.FileParser
             _elements.Add(name.ToLower(), type);
         }
 
-        public void Register<TBuilder, TProduct>(string name)
-            where TBuilder : IBuilder<TProduct>
+        public void Register<TBuilder>(string name)
+            where TBuilder : IUIElementBuilder
         {
             _elements.Add(name.ToLower(), typeof(TBuilder));
 
-            if (typeof(TBuilder) is IContainerBuilder<Container>)
+            if (typeof(TBuilder) is IContainerBuilder)
             {
                 //TODO
             }
-            if (typeof(TBuilder) is IUIElementBuilder<UIElement>)
+            if (typeof(TBuilder) is IUIElementBuilder)
             {
-                this.Register<IUIElementBuilder<UIElement>, IBorder>(name.ToLower(), "border", (b, a) => b.WithBorder(a));
+                this.Register<IUIElementBuilder, IBorder>("border", (b, a) => b.WithBorder(a));
             }
         }
 
 
-        public void Register<T>(string elementName, string attributeName, Func<T, string, T> BuilderMethod)
+        public void Register<T>(string attributeName, Func<T, string, T> builderMethod)
+            where T : IUIElementBuilder
         {
-            throw new NotImplementedException();
+            Register<T, string>(attributeName, builderMethod);
         }
 
-        public void Register<T1, T2>(string elementName, string attributeName, Func<T1, T2, T1> BuilderMethod)
+        public void Register<T1, T2>(string attributeName, Func<T1, T2, T1> builderMethod)
+            where T1 : IUIElementBuilder
         {
-            var a = typeof(T1);
-            var b = typeof(T2);
-            Console.WriteLine(typeof(T1));
+            // _builderMethods.Add((typeof(T1), elementName), builderMethod);
+            _builderMethods.Add(
+                    (typeof(T1), attributeName),
+                    (builder, arg) => builderMethod((T1)builder, (T2)arg)
+                );
         }
-
     }
 }

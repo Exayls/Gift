@@ -3,9 +3,8 @@ using Gift.Domain.UIModel.MetaData;
 
 namespace Gift.Domain.Builders
 {
-    public interface IContainerBuilder<T> : IUIElementBuilder<T>
-           where T : UIElement
+    public interface IContainerBuilder : IUIElementBuilder, IBuilder<Container>
     {
-        public IContainerBuilder<T> WithBound(Bound bound);
+        public IContainerBuilder WithBound(Bound bound);
     }
 }

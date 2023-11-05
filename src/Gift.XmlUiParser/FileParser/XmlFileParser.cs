@@ -207,7 +207,7 @@ namespace Gift.XmlUiParser.FileParser
 
         private Type GetTypeByName(string typeName)
         {
-            Type type = _uielementRegister.GetTypeByName(typeName);
+            Type type = _uielementRegister.GetBuilder(typeName);
             return type;
         }
 
