@@ -275,9 +275,16 @@ namespace Gift.XmlUiParser.FileParser
                 if (childNode is not XmlElement) { continue; }
                 if (component is not Container container)
                 {
-                    throw new Exception("component is not container");
+                    throw new Exception("Only container component can have childs");
                 }
-                AddChild(container, childNode);
+
+                if (childNode is XmlElement childElement)
+                {
+                    UIElement childComponent = ParseUIElementRecBuilders(childElement, container);
+                    container.AddUnselectableChild(childComponent);
+                    SelectElement(childComponent, childElement, container);
+                    SelectContainer(childComponent, childElement);
+                }
             }
             return component;
         }
@@ -285,15 +292,29 @@ namespace Gift.XmlUiParser.FileParser
         private UIElement CreateGenericComponentBuilders(XmlElement element)
         {
             string componentName = element.Name;
-			var builder = _uielementRegister.GetBuilder(componentName);
+            var builder = CreateBuilder(componentName);
             UIElement uiElement = ConstructElement(element, builder);
-
             return uiElement;
         }
 
-        private UIElement ConstructElement(XmlElement element, Type builder)
+        private IBuilder<UIElement> CreateBuilder(string componentName)
         {
-			return new Label("");//TODO
+            var builderType = _uielementRegister.GetBuilder(componentName);
+            var builder = (IBuilder<UIElement>)builderType.GetConstructors()[0].Invoke(new object[] { });
+            return builder;
+        }
+
+        private UIElement ConstructElement(XmlElement element, IBuilder<UIElement> builder)
+        {
+               XmlAttributeCollection attributes = element.Attributes;
+            foreach (XmlAttribute attribute in attributes)
+            {
+                   var attributeName = attribute.Name;
+                   var attributeValue = attribute.InnerText;
+                   var method = _uielementRegister.GetMethod(builder.GetType(), attributeName);
+                   method(builder, attributeValue);
+            }
+               return builder.Build();
         }
     }
 }

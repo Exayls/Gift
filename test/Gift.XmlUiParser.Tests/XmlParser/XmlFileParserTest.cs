@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using Gift.Domain.ServiceContracts;
-using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Element;
 using Gift.XmlUiParser.FileParser;
 using Xunit;
@@ -27,7 +26,7 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             string filePath = "ressources/xml/valid_xml.xml";
 
             // Act
-            GiftUI result = xmlParser.ParseUIFile(filePath);
+            UIElement result = xmlParser.ParseUIFileUsingBuilders(filePath);
 
             // Assert
             Assert.NotNull(result);
@@ -40,7 +39,7 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             string filePath = "ressources/invalid/invalid.xml";
 
             // Act & Assert
-            Assert.Throws<DirectoryNotFoundException>(() => xmlParser.ParseUIFile(filePath));
+            Assert.Throws<DirectoryNotFoundException>(() => xmlParser.ParseUIFileUsingBuilders(filePath));
         }
 
         [Fact]
@@ -50,7 +49,7 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             string filePath = "ressources/xml/not_supported.xml";
 
             // Act & Assert
-            Assert.Throws<NotSupportedException>(() => xmlParser.ParseUIFile(filePath));
+            Assert.Throws<NotSupportedException>(() => xmlParser.ParseUIFileUsingBuilders(filePath));
         }
 
         [Fact]

@@ -6,10 +6,6 @@ namespace Gift.Domain.ServiceContracts
 {
     public interface IUIElementRegister
     {
-        Type GetBuilder(string componentName);
-
-        public Func<IBuilder<UIElement>, object, IBuilder<UIElement>> GetMethod<Builder>(string attribute);
-
         void Register(string name, Type type);
 
         public void Register<TBuilder>(string name)
@@ -20,5 +16,10 @@ namespace Gift.Domain.ServiceContracts
 
         void Register<TBuilder, T2>(string attributeName, Func<TBuilder, T2, TBuilder> BuilderMethod)
             where TBuilder : IUIElementBuilder;
+
+        Type GetBuilder(string componentName);
+        public Func<IBuilder<UIElement>, object, IBuilder<UIElement>> GetMethod<Builder>(string attribute);
+        public Func<IBuilder<UIElement>, object, IBuilder<UIElement>> GetMethod(Type builder, string attribute);
+        public Func<IBuilder<UIElement>, object, IBuilder<UIElement>> GetMethod(string builderName, string attribute);
     }
 }
