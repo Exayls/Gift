@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Gift.Domain.ServiceContracts;
+using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Element;
 using Gift.XmlUiParser.FileParser;
 using Xunit;
@@ -30,6 +31,7 @@ namespace Gift.XmlUiParser.Tests.XmlParser
 
             // Assert
             Assert.NotNull(result);
+            Assert.IsType<GiftUI>(result);
         }
 
         [Fact]
