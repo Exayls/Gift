@@ -4,6 +4,7 @@ using Gift.Domain.Builders;
 using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Element;
+using Gift.Domain.UIModel.MetaData;
 
 namespace Gift.XmlUiParser.FileParser
 {
@@ -46,6 +47,11 @@ namespace Gift.XmlUiParser.FileParser
             return _builderMethods[(builder, attribute)];
         }
 
+        public Func<IBuilder<UIElement>, object, IBuilder<UIElement>> GetMethod(string builderName, string attribute)
+        {
+            return _builderMethods[(_elements[builderName], attribute)];
+        }
+
         public void Register(string name, Type type)
         {
             _elements.Add(name.ToLower(), type);
@@ -58,10 +64,16 @@ namespace Gift.XmlUiParser.FileParser
 
             if (typeof(TBuilder) is IContainerBuilder)
             {
-                //TODO
+                this.Register<IContainerBuilder, Bound>("bound", (b, bd) => b.WithBound(bd));
             }
             if (typeof(TBuilder) is IUIElementBuilder)
             {
+                this.Register<IUIElementBuilder, Color>("backgroundcolor", (b, c) => b.WithBackgroundColor(c));
+                this.Register<IUIElementBuilder, Color>("backcolor", (b, c) => b.WithBackgroundColor(c));
+
+                this.Register<IUIElementBuilder, Color>("frontgroundcolor", (b, c) => b.WithForegroundColor(c));
+                this.Register<IUIElementBuilder, Color>("frontcolor", (b, c) => b.WithForegroundColor(c));
+
                 this.Register<IUIElementBuilder, IBorder>("border", (b, a) => b.WithBorder(a));
             }
         }
