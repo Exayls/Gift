@@ -12,7 +12,7 @@ ui.AddUnselectableChild(vstack);
 vstack.AddUnselectableChild(new LabelBuilder().WithText("coucou").Build());
 vstack.AddUnselectableChild(new LabelBuilder().Build());
 vstack.AddUnselectableChild(new LabelBuilder().Build());
-vstack.AddUnselectableChild(new LabelBuilder().WithText("tieaucit").WithPosition(new Position(1,58)).Build());
+vstack.AddUnselectableChild(new LabelBuilder().WithText("tieaucit").WithPosition(new Position(1, 58)).Build());
 vstack.AddUnselectableChild(new LabelBuilder().Build());
 vstack.AddUnselectableChild(new LabelBuilder().WithText("tieaucit").Build());
 vstack.AddUnselectableChild(new LabelBuilder().Build());

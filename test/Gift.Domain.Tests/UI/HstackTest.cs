@@ -43,9 +43,9 @@ namespace Gift.Domain.Tests.UI
                 bound = new Bound(0, 0);
             }
             return new HStackBuilder()
-				.WithBound(bound)
-				.WithBorder(border)
-				.Build();
+                .WithBound(bound)
+                .WithBorder(border)
+                .Build();
         }
 
         private MockUIElement CreateUIElement(int height = 1, int width = 1, bool isFixed = false)

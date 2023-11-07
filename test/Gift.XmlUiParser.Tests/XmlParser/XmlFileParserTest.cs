@@ -56,7 +56,7 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             string filePath = "ressources/xml/vstack_border.xml";
             // Act
             UIElement result = xmlParser.ParseUIFileUsingBuilders(filePath);
-			// Assert
+            // Assert
             Assert.IsType<VStack>(result);
         }
 

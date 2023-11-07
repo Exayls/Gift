@@ -16,7 +16,7 @@ namespace Gift.Domain.UIModel.Border
 
         public int Thickness { get; }
 
-        public DetailedBorder(int thickness, char tlBorder, char trBorder, char blBorder, char brBorder, 
+        public DetailedBorder(int thickness, char tlBorder, char trBorder, char blBorder, char brBorder,
             char tBorder, char bBorder, char lBorder, char rBorder)
         {
             this.tlBorder = tlBorder;
@@ -48,9 +48,9 @@ namespace Gift.Domain.UIModel.Border
             return GetDisplay(bound, '*');
         }
 
-        public IScreenDisplay GetDisplay(Bound bound, char fillingChar )
+        public IScreenDisplay GetDisplay(Bound bound, char fillingChar)
         {
-            IScreenDisplay screenDisplay = new ScreenDisplay(bound, emptychar:fillingChar);
+            IScreenDisplay screenDisplay = new ScreenDisplay(bound, emptychar: fillingChar);
             AddBorder(screenDisplay);
             return screenDisplay;
         }
@@ -78,25 +78,32 @@ namespace Gift.Domain.UIModel.Border
                     if (TopLeftBorder)
                     {
                         screenDisplay.AddChar(tlBorder, new Position(y, x));
-                    } else if (TopRightBorder)
+                    }
+                    else if (TopRightBorder)
                     {
                         screenDisplay.AddChar(trBorder, new Position(y, x));
-                    } else if (BottomLeftBorder)
+                    }
+                    else if (BottomLeftBorder)
                     {
                         screenDisplay.AddChar(blBorder, new Position(y, x));
-                    } else if (BottomRightBorder)
+                    }
+                    else if (BottomRightBorder)
                     {
                         screenDisplay.AddChar(brBorder, new Position(y, x));
-                    } else if (TopBorder)
+                    }
+                    else if (TopBorder)
                     {
                         screenDisplay.AddChar(tBorder, new Position(y, x));
-                    } else if (BottomBorder)
+                    }
+                    else if (BottomBorder)
                     {
                         screenDisplay.AddChar(bBorder, new Position(y, x));
-                    } else if (LeftBorder)
+                    }
+                    else if (LeftBorder)
                     {
                         screenDisplay.AddChar(lBorder, new Position(y, x));
-                    } else if (RightBorder)
+                    }
+                    else if (RightBorder)
                     {
                         screenDisplay.AddChar(rBorder, new Position(y, x));
                     }
@@ -106,32 +113,32 @@ namespace Gift.Domain.UIModel.Border
 
         private bool IsTopBorder(int x, int y, Bound bound)
         {
-            return (y < Thickness && y<x && y< bound.Width - x-1);
+            return (y < Thickness && y < x && y < bound.Width - x - 1);
         }
 
         private bool IsBottomBorder(int x, int y, Bound bound)
         {
-            return  (y >= bound.Height - Thickness && bound.Height-y-1<x && bound.Height-y-1< bound.Width-x-1);
+            return (y >= bound.Height - Thickness && bound.Height - y - 1 < x && bound.Height - y - 1 < bound.Width - x - 1);
         }
 
         private bool IsLeftBorder(int x, int y, Bound bound)
         {
-            return (x < Thickness && x<y && x< bound.Height-y-1);
+            return (x < Thickness && x < y && x < bound.Height - y - 1);
         }
 
         private bool IsRightBorder(int x, int y, Bound bound)
         {
-            return  x >= bound.Width - Thickness && bound.Width-x-1<y && bound.Width-x-1< bound.Height - y-1;
+            return x >= bound.Width - Thickness && bound.Width - x - 1 < y && bound.Width - x - 1 < bound.Height - y - 1;
         }
 
         private bool IsBottomLeftBorder(int x, int y, Bound bound)
         {
-            return (x < Thickness  && y >= bound.Height - Thickness && x == bound.Height-y-1);
+            return (x < Thickness && y >= bound.Height - Thickness && x == bound.Height - y - 1);
         }
 
         private bool IsBottomRightBorder(int x, int y, Bound bound)
         {
-            return (x >= bound.Width - Thickness && y >= bound.Height - Thickness && bound.Width - x-1 == bound.Height-y-1);
+            return (x >= bound.Width - Thickness && y >= bound.Height - Thickness && bound.Width - x - 1 == bound.Height - y - 1);
         }
 
         private bool IsTopLeftBorder(int x, int y, Bound bound)
@@ -141,7 +148,7 @@ namespace Gift.Domain.UIModel.Border
 
         private bool IsTopRightBorder(int x, int y, Bound bound)
         {
-            return (y < Thickness && x >= bound.Width - Thickness && bound.Width - x-1 == y);
+            return (y < Thickness && x >= bound.Width - Thickness && bound.Width - x - 1 == y);
         }
 
         private bool IsBorder(int x, int y, Bound bound)

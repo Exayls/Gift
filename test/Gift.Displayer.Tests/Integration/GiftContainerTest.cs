@@ -36,7 +36,7 @@ namespace TestGift.UI
 
         private static GiftUI GetGiftUi(Bound bound)
         {
-			return new GiftUIBuilder().WithBound(bound).Build();
+            return new GiftUIBuilder().WithBound(bound).Build();
         }
 
         [Fact]

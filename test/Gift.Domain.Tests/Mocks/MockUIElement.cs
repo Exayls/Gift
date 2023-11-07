@@ -16,7 +16,7 @@ namespace TestGift.Mocks
         {
             Height = height;
             Width = width;
-			_isFixed = isFixed;
+            _isFixed = isFixed;
         }
 
         public MockUIElement()
@@ -40,7 +40,7 @@ namespace TestGift.Mocks
 
         public override bool IsFixed()
         {
-			return _isFixed;
+            return _isFixed;
         }
     }
 }

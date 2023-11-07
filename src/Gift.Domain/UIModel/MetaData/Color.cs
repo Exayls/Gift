@@ -11,7 +11,7 @@
         Cyan,
         White,
         Default,
-		Transparent
+        Transparent
     }
 
     public static class ConsoleColorExExtensions

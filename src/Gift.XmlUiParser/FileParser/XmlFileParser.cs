@@ -16,12 +16,12 @@ namespace Gift.XmlUiParser.FileParser
     {
         private readonly IUIElementRegister _uielementRegister;
         private GiftUI? giftUI = null;
-		private readonly ILogger<IXMLFileParser> _logger;
+        private readonly ILogger<IXMLFileParser> _logger;
 
         public XmlFileParser(IUIElementRegister elementRegister, ILogger<IXMLFileParser> logger)
         {
             _uielementRegister = elementRegister;
-			_logger = logger;
+            _logger = logger;
         }
 
         public GiftUI ParseUIFile(string filePath)
@@ -320,8 +320,8 @@ namespace Gift.XmlUiParser.FileParser
                     method(builder, attributeValue);
                 }
                 catch (Exception e)
-				{
-					_logger.Log();
+                {
+                    _logger.Log();
                 }
             }
             return builder.Build();

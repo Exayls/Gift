@@ -21,12 +21,12 @@ namespace Gift.Domain.UIModel.Border
 
         public IScreenDisplay GetDisplay(Bound bound, char fillingChar)
         {
-            return new ScreenDisplay(bound, emptychar: fillingChar);
+            return new ScreenDisplay(bound, emptychar: fillingChar);
         }
 
         public IScreenDisplay GetDisplay(Bound bound, Color frontColor, Color backColor, char fillingChar = ' ')
         {
-            return new ScreenDisplay(bound,frontColor, backColor, fillingChar);
+            return new ScreenDisplay(bound, frontColor, backColor, fillingChar);
         }
     }
 }

@@ -66,7 +66,7 @@ namespace TestGift.Test.UI
         [Fact]
         public void Can_render_UI_with_elements_out_of_bound()
         {
-            GiftUI ui =CreateGiftUi(new Bound(10, 10), new NoBorder()); 
+            GiftUI ui = CreateGiftUi(new Bound(10, 10), new NoBorder());
 
             VStack vstack = new VStackBuilder().WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile("ressources/borderChars/double_border.json"))).Build();
             vstack.AddUnselectableChild(new LabelBuilder().Build());

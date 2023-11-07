@@ -34,14 +34,14 @@ namespace Gift.Domain.Tests.UI
 
         private VStack CreateVstack(IBorder? border = null, Bound? bound = null)
         {
-			var builder = new VStackBuilder();
+            var builder = new VStackBuilder();
             if (border != null)
             {
-				builder.WithBorder(border);
+                builder.WithBorder(border);
             }
             if (bound != null)
             {
-				builder.WithBound(bound);
+                builder.WithBound(bound);
             }
             return builder.Build();
         }

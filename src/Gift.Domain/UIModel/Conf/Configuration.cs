@@ -20,7 +20,7 @@ namespace Gift.Domain.UIModel.Conf
                              Color selectedElementBackColor = Color.Green,
                              Color selectedContainerFrontColor = Color.Green,
                              Color selectedContainerBackColor = Color.Default,
-							 char fillingChar = ' ')
+                             char fillingChar = ' ')
         {
             DefaultBackColor = backColor;
             DefaultFrontColor = frontColor;
@@ -28,7 +28,7 @@ namespace Gift.Domain.UIModel.Conf
             SelectedContainerBackColor = selectedContainerBackColor;
             SelectedElementFrontColor = selectedElementFrontColor;
             SelectedElementBackColor = selectedElementBackColor;
-			FillingChar = fillingChar;
+            FillingChar = fillingChar;
         }
     }
 }

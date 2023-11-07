@@ -158,7 +158,7 @@ namespace Gift.Domain.UIModel.Display
             bool sameBackColor = CheckEquality<Color>(other.BackColorMap, this.BackColorMap);
             bool sameFrontColor = CheckEquality<Color>(other.FrontColorMap, this.FrontColorMap);
             bool sameChars = CheckEquality<char>(other.DisplayMap, this.DisplayMap);
-			return (sameChars && sameBackColor && sameFrontColor);
+            return (sameChars && sameBackColor && sameFrontColor);
 
         }
     }

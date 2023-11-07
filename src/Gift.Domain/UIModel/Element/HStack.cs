@@ -62,7 +62,7 @@ namespace Gift.Domain.UIModel.Element
             int ChildContextPosition = GetWidthRenderable(renderable);
             return new Context(
                 new Position(0
-                           , ChildContextPosition-ScrollIndex),
+                           , ChildContextPosition - ScrollIndex),
                 new Bound(renderable.Height, renderable.Width));
         }
 
