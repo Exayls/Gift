@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?> 
 <GiftUI>
-    <Vstack>
-        <Label>Hello</Label>
+    <Vstack Height="5" Width="8" FrontColor="blue">
+        <Label Border = "simple">Hello</Label>
         <Label>World</Label>
     </Vstack>
 </GiftUI>

@@ -16,7 +16,6 @@ namespace Gift.XmlUiParser.Tests.XmlParser
         public XmlFileParserTests()
         {
             elementRegister = new UIElementRegister();
-
             xmlParser = new XmlFileParser(elementRegister);
         }
 
@@ -25,10 +24,8 @@ namespace Gift.XmlUiParser.Tests.XmlParser
         {
             // Arrange
             string filePath = "ressources/xml/valid_xml.xml";
-
             // Act
             UIElement result = xmlParser.ParseUIFileUsingBuilders(filePath);
-
             // Assert
             Assert.NotNull(result);
             Assert.IsType<GiftUI>(result);
@@ -39,7 +36,6 @@ namespace Gift.XmlUiParser.Tests.XmlParser
         {
             // Arrange
             string filePath = "ressources/invalid/invalid.xml";
-
             // Act & Assert
             Assert.Throws<DirectoryNotFoundException>(() => xmlParser.ParseUIFileUsingBuilders(filePath));
         }
@@ -49,28 +45,45 @@ namespace Gift.XmlUiParser.Tests.XmlParser
         {
             // Arrange
             string filePath = "ressources/xml/not_supported.xml";
-
             // Act & Assert
             Assert.Throws<NotSupportedException>(() => xmlParser.ParseUIFileUsingBuilders(filePath));
         }
 
         [Fact]
-        public void ParseUIFile_With_Builder_register()
+        public void When_Border_is_set_should_create_element_with_border()
         {
             // Arrange
-            elementRegister = new UIElementRegister();
-
-
-            xmlParser = new XmlFileParser(elementRegister);
-
-            string filePath = "ressources/xml/valid_xml.xml";
-
+            string filePath = "ressources/xml/vstack_border.xml";
             // Act
             UIElement result = xmlParser.ParseUIFileUsingBuilders(filePath);
-
-            // Assert
-            Assert.NotNull(result);
+			// Assert
+            Assert.IsType<VStack>(result);
         }
 
+
+        [Fact]
+        public void When_ParseUIFile_is_called_should_create_all_objects_hierarchically()
+        {
+            // Arrange
+            string filePath = "ressources/xml/valid_xml.xml";
+            // Act
+            UIElement result = xmlParser.ParseUIFileUsingBuilders(filePath);
+            // Assert
+            Assert.IsType<GiftUI>(result);
+            Assert.Collection(((GiftUI)result).Childs,
+                    (child) =>
+                 {
+                     Assert.IsType<VStack>(child);
+
+                     Assert.Collection(((VStack)child).Childs,
+                             (c) =>
+                          {
+                              Assert.IsType<Label>(c);
+                          }, (c) =>
+                          {
+                              Assert.IsType<Label>(c);
+                          });
+                 });
+        }
     }
 }
