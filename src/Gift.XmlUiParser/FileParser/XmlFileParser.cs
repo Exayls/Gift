@@ -5,6 +5,7 @@ using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Reflection;
 using System.Xml;
@@ -15,10 +16,12 @@ namespace Gift.XmlUiParser.FileParser
     {
         private readonly IUIElementRegister _uielementRegister;
         private GiftUI? giftUI = null;
+		private readonly ILogger<IXMLFileParser> _logger;
 
-        public XmlFileParser(IUIElementRegister elementRegister)
+        public XmlFileParser(IUIElementRegister elementRegister, ILogger<IXMLFileParser> logger)
         {
             _uielementRegister = elementRegister;
+			_logger = logger;
         }
 
         public GiftUI ParseUIFile(string filePath)
@@ -306,15 +309,22 @@ namespace Gift.XmlUiParser.FileParser
 
         private UIElement ConstructElement(XmlElement element, IBuilder<UIElement> builder)
         {
-               XmlAttributeCollection attributes = element.Attributes;
+            XmlAttributeCollection attributes = element.Attributes;
             foreach (XmlAttribute attribute in attributes)
             {
-                   var attributeName = attribute.Name;
-                   var attributeValue = attribute.InnerText;
-                   var method = _uielementRegister.GetMethod(builder.GetType(), attributeName);
-                   method(builder, attributeValue);
+                try
+                {
+                    var attributeName = attribute.Name;
+                    var attributeValue = attribute.InnerText;
+                    var method = _uielementRegister.GetMethod(builder.GetType(), attributeName);
+                    method(builder, attributeValue);
+                }
+                catch (Exception e)
+				{
+					_logger.Log();
+                }
             }
-               return builder.Build();
+            return builder.Build();
         }
     }
 }
