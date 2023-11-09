@@ -4,19 +4,26 @@ using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Element;
 using Gift.XmlUiParser.FileParser;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Xunit;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Gift.XmlUiParser.Tests.XmlParser
 {
     public class XmlFileParserTests
     {
+
         private XmlFileParser xmlParser;
         private IUIElementRegister elementRegister;
 
-        public XmlFileParserTests()
+        public XmlFileParserTests(ITestOutputHelper output)
         {
             elementRegister = new UIElementRegister();
-            xmlParser = new XmlFileParser(elementRegister);
+
+			var loggerFactory = new LoggerFactory(new[]{new XunitLoggerProvider(output)});
+			var logger = loggerFactory.CreateLogger<IXMLFileParser>();
+            xmlParser = new XmlFileParser(elementRegister, logger);
         }
 
         [Fact]

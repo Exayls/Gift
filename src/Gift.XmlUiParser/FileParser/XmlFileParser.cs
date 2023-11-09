@@ -312,19 +312,47 @@ namespace Gift.XmlUiParser.FileParser
             XmlAttributeCollection attributes = element.Attributes;
             foreach (XmlAttribute attribute in attributes)
             {
-                try
-                {
-                    var attributeName = attribute.Name;
-                    var attributeValue = attribute.InnerText;
-                    var method = _uielementRegister.GetMethod(builder.GetType(), attributeName);
-                    method(builder, attributeValue);
-                }
-                catch (Exception e)
-                {
-                    _logger.Log();
-                }
+                AddParameterIfPossible(builder, attribute);
             }
             return builder.Build();
+        }
+
+        private void AddParameterIfPossible(IBuilder<UIElement> builder, XmlAttribute attribute)
+        {
+            var attributeName = attribute.Name;
+            var method = GetMethod(builder, attributeName);
+            if (method == null)
+            {
+                return;
+            }
+            var attributeValue = attribute.InnerText;
+            ExecBuilderMethod(builder, method, attributeValue);
+        }
+
+        private IBuilder<UIElement>? ExecBuilderMethod(IBuilder<UIElement> builder, Func<IBuilder<UIElement>, object, IBuilder<UIElement>> method, string attributeValue)
+        {
+            try
+            {
+                return method(builder, attributeValue);
+            }
+            catch (Exception e)
+            {
+                _logger.LogDebug(e, $"Can't execute the method: {method} with parameter: {attributeValue}");
+            }
+            return null;
+        }
+
+        private Func<IBuilder<UIElement>, object, IBuilder<UIElement>>? GetMethod(IBuilder<UIElement> builder, string attributeName)
+        {
+            try
+            {
+                return _uielementRegister.GetMethod(builder.GetType(), attributeName);
+            }
+            catch (Exception e)
+            {
+                _logger.LogDebug(e, $"attributeName {attributeName} is not registered");
+            }
+            return null;
         }
     }
 }
