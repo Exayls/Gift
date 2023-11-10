@@ -62,18 +62,10 @@ namespace Gift.ApplicationService.Services
             _xmlParser = xmlFileParser;
 
             _uielementRegister = elementRegister;
-            RegisterUIElements();
 
             _lifeTimeService = lifeTimeService;
         }
 
-        private void RegisterUIElements()
-        {
-            _uielementRegister.Register("GiftUI", typeof(GiftUI));
-            _uielementRegister.Register("VStack", typeof(VStack));
-            _uielementRegister.Register("HStack", typeof(HStack));
-            _uielementRegister.Register("Label", typeof(Label));
-        }
 
         public virtual void Initialize(GiftUI ui)
         {

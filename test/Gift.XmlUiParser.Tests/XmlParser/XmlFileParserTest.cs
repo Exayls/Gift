@@ -15,14 +15,14 @@ namespace Gift.XmlUiParser.Tests.XmlParser
     {
 
         private XmlFileParser xmlParser;
-        private IUIElementRegister elementRegister;
 
         public XmlFileParserTests(ITestOutputHelper output)
         {
-            elementRegister = new UIElementRegister();
+            var elementRegister = new UIElementRegister();
 
 			var loggerFactory = new LoggerFactory(new[]{new XunitLoggerProvider(output)});
 			var logger = loggerFactory.CreateLogger<IXMLFileParser>();
+
             xmlParser = new XmlFileParser(elementRegister, logger);
         }
 
