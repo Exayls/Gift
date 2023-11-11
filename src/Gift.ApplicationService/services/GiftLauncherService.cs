@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Gift.Domain.UIModel;
-using Gift.Domain.UIModel.Element;
 using Gift.ApplicationService.Services.SignalHandler.Global;
 using Gift.ApplicationService.Services.SignalHandler.Bus;
 using Gift.ApplicationService.ServiceContracts;
