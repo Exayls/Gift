@@ -65,6 +65,8 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             UIElement result = xmlParser.ParseUIFileUsingBuilders(filePath);
             // Assert
             Assert.IsType<VStack>(result);
+            Assert.Equal(5, result.Height);
+            Assert.Equal(8, result.Width);
         }
 
 

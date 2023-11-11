@@ -18,7 +18,7 @@ namespace Gift.Startup.Extensions
             services.AddGiftKeyInteraction();
             services.AddGiftConsoleMonitor();
 
-            if (!services.Any(sd => sd.ServiceType == typeof(ILogger<>)))
+            if (!services.Any(s => s.ServiceType == typeof(ILogger<>)))
             {
                 services.AddLogging(builder =>
                 {
