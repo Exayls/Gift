@@ -3,13 +3,21 @@ using System;
 using Gift.Domain.Builders;
 using Gift.Domain.ServiceContracts;
 using Gift.XmlUiParser.FileParser;
+using Gift.XmlUiParser.Tests.Helper;
 using Moq;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Gift.XmlUiParser.Tests.XmlParser
 {
     public class UIElementRegisterTest
     {
+        private ITestOutputHelper _output;
+
+        public UIElementRegisterTest(ITestOutputHelper output)
+        {
+            _output = output;
+        }
 
         [Fact]
         public void When_GetBuilder_label_should_return_LabelBuilder_Type()
@@ -60,9 +68,9 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             return labelBuilderType.GetConstructors()[0].Invoke(new object[] { });
         }
 
-        private static IUIElementRegister GetElementRegister()
+        private IUIElementRegister GetElementRegister()
         {
-            return new UIElementRegister();
+            return new UIElementRegister(LoggerHelper.GetLogger<IUIElementRegister>(_output));
         }
     }
 }

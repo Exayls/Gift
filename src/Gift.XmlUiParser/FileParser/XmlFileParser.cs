@@ -331,6 +331,8 @@ namespace Gift.XmlUiParser.FileParser
 
         private IBuilder<UIElement>? ExecBuilderMethod(IBuilder<UIElement> builder, Func<IBuilder<UIElement>, object, IBuilder<UIElement>> method, string attributeValue)
         {
+            var a = method.GetType().GenericTypeArguments[1];
+            _logger.LogInformation($"{a}");
             try
             {
                 return method(builder, attributeValue);
@@ -346,6 +348,7 @@ namespace Gift.XmlUiParser.FileParser
         {
             try
             {
+            _logger.LogInformation($"{_uielementRegister}  {attributeName}");
                 return _uielementRegister.GetMethod(builder.GetType(), attributeName);
             }
             catch (Exception e)

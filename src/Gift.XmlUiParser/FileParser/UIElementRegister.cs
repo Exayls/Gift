@@ -5,17 +5,20 @@ using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
+using Microsoft.Extensions.Logging;
 
 namespace Gift.XmlUiParser.FileParser
 {
     public class UIElementRegister : IUIElementRegister
     {
+        private ILogger<IUIElementRegister> _logger;
         private IDictionary<string, Type> _elements;
         private Dictionary<(Type builderType, string attribute), Func<IBuilder<UIElement>, object, IBuilder<UIElement>>> _builderMethods;
 
 
-        public UIElementRegister()
+        public UIElementRegister(ILogger<IUIElementRegister> logger)
         {
+            _logger = logger;
             _elements = new Dictionary<string, Type>();
             _builderMethods = new Dictionary<(Type builderType, string attribute), Func<IBuilder<UIElement>, object, IBuilder<UIElement>>>();
 
@@ -39,17 +42,24 @@ namespace Gift.XmlUiParser.FileParser
 
         public Func<IBuilder<UIElement>, object, IBuilder<UIElement>> GetMethod<Builder>(string attribute)
         {
-            return _builderMethods[(typeof(Builder), attribute)];
+            string key = attribute.ToLower();
+            return _builderMethods[(typeof(Builder), key)];
         }
 
         public Func<IBuilder<UIElement>, object, IBuilder<UIElement>> GetMethod(Type builder, string attribute)
         {
-            return _builderMethods[(builder, attribute)];
+            foreach (var key in _builderMethods.Keys)
+            {
+                _logger.LogTrace($"{key}");
+            }
+            string key = attribute.ToLower();
+            return _builderMethods[(builder, key)];
         }
 
         public Func<IBuilder<UIElement>, object, IBuilder<UIElement>> GetMethod(string builderName, string attribute)
         {
-            return _builderMethods[(_elements[builderName], attribute)];
+            string key = attribute.ToLower();
+            return _builderMethods[(_elements[builderName], key)];
         }
 
         public void Register(string name, Type type)
