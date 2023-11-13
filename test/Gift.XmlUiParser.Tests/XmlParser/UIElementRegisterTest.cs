@@ -2,6 +2,7 @@
 using System;
 using Gift.Domain.Builders;
 using Gift.Domain.ServiceContracts;
+using Gift.Domain.UIModel.Element;
 using Gift.XmlUiParser.FileParser;
 using Gift.XmlUiParser.Tests.Helper;
 using Moq;
@@ -54,7 +55,7 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             var labelBuilder = labelBuilderType.GetConstructors()[0].Invoke(new object[] { });
 
             elementRegister.Register<IUIElementBuilder>("UIElement");
-            elementRegister.Register<IUIElementBuilder>("text", (b, t) => { return b; });
+            elementRegister.Register<IUIElementBuilder>(typeof(Label),"text", (b, t) => { return b; });
 
             // Act
             var method = elementRegister.GetMethod<IUIElementBuilder>("text");

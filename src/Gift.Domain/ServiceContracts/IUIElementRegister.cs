@@ -11,10 +11,10 @@ namespace Gift.Domain.ServiceContracts
         public void Register<TBuilder>(string name)
             where TBuilder : IUIElementBuilder;
 
-        void Register<TBuilder>(string attributeName, Func<TBuilder, string, TBuilder> builderMethod)
+        void Register<TBuilder>(Type builderType, string attributeName, Func<TBuilder, string, TBuilder> builderMethod)
             where TBuilder : IUIElementBuilder;
 
-        void Register<TBuilder, T2>(string attributeName, Func<TBuilder, T2, TBuilder> BuilderMethod)
+        void Register<TBuilder, T2>(Type builderType, string attributeName, Func<TBuilder, T2, TBuilder> BuilderMethod)
             where TBuilder : IUIElementBuilder;
 
         Type GetBuilder(string componentName);

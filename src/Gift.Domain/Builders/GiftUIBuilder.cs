@@ -87,5 +87,12 @@ namespace Gift.Domain.Builders
         {
             return WithForegroundColor(color);
         }
+
+        IContainerBuilder IContainerBuilder.WithBound(string boundStr)
+        {
+			boundStr.Split(new[]{',', ';'})
+			var bound = 
+			return WithBound(bound);
+        }
     }
 }

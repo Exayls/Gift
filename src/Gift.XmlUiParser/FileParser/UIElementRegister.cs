@@ -48,10 +48,6 @@ namespace Gift.XmlUiParser.FileParser
 
         public Func<IBuilder<UIElement>, object, IBuilder<UIElement>> GetMethod(Type builder, string attribute)
         {
-            foreach (var key in _builderMethods.Keys)
-            {
-                _logger.LogTrace($"{key}");
-            }
             string key = attribute.ToLower();
             return _builderMethods[(builder, key)];
         }
@@ -70,37 +66,38 @@ namespace Gift.XmlUiParser.FileParser
         public void Register<TBuilder>(string name)
             where TBuilder : IUIElementBuilder
         {
-            _elements.Add(name.ToLower(), typeof(TBuilder));
+            var buildertype = typeof(TBuilder);
+            _elements.Add(name.ToLower(), buildertype);
 
-            if (typeof(TBuilder) is IContainerBuilder)
+            if (typeof(IContainerBuilder).IsAssignableFrom(buildertype))
             {
-                this.Register<IContainerBuilder, Bound>("bound", (b, bd) => b.WithBound(bd));
+                this.Register<IContainerBuilder>(buildertype, "bound", (b, bd) => b.WithBound(bd));
             }
-            if (typeof(TBuilder) is IUIElementBuilder)
+            if (typeof(IUIElementBuilder).IsAssignableFrom(buildertype))
             {
-                this.Register<IUIElementBuilder, Color>("backgroundcolor", (b, c) => b.WithBackgroundColor(c));
-                this.Register<IUIElementBuilder, Color>("backcolor", (b, c) => b.WithBackgroundColor(c));
+                this.Register<IUIElementBuilder, Color>(buildertype, "backgroundcolor", (b, c) => b.WithBackgroundColor(c));
+                this.Register<IUIElementBuilder, Color>(buildertype, "backcolor", (b, c) => b.WithBackgroundColor(c));
 
-                this.Register<IUIElementBuilder, Color>("frontgroundcolor", (b, c) => b.WithForegroundColor(c));
-                this.Register<IUIElementBuilder, Color>("frontcolor", (b, c) => b.WithForegroundColor(c));
+                this.Register<IUIElementBuilder, Color>(buildertype, "frontgroundcolor", (b, c) => b.WithForegroundColor(c));
+                this.Register<IUIElementBuilder, Color>(buildertype, "frontcolor", (b, c) => b.WithForegroundColor(c));
 
-                this.Register<IUIElementBuilder, IBorder>("border", (b, a) => b.WithBorder(a));
+                this.Register<IUIElementBuilder, IBorder>(buildertype, "border", (b, a) => b.WithBorder(a));
             }
         }
 
 
-        public void Register<T>(string attributeName, Func<T, string, T> builderMethod)
+        public void Register<T>(Type builderType, string attributeName, Func<T, string, T> builderMethod)
             where T : IUIElementBuilder
         {
-            Register<T, string>(attributeName, builderMethod);
+            Register<T, string>(builderType, attributeName, builderMethod);
         }
 
-        public void Register<T1, T2>(string attributeName, Func<T1, T2, T1> builderMethod)
+        public void Register<T1, T2>(Type builderType, string attributeName, Func<T1, T2, T1> builderMethod)
             where T1 : IUIElementBuilder
         {
             // _builderMethods.Add((typeof(T1), elementName), builderMethod);
             _builderMethods.Add(
-                    (typeof(T1), attributeName),
+                    (builderType, attributeName),
                     (builder, arg) => builderMethod((T1)builder, (T2)arg)
                 );
         }

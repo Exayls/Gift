@@ -6,5 +6,6 @@ namespace Gift.Domain.Builders
     public interface IContainerBuilder : IUIElementBuilder, IBuilder<Container>
     {
         public IContainerBuilder WithBound(Bound bound);
+        public IContainerBuilder WithBound(string boundStr);
     }
 }
