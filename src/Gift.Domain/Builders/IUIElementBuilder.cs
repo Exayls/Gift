@@ -7,7 +7,12 @@ namespace Gift.Domain.Builders
     public interface IUIElementBuilder : IBuilder<UIElement>
     {
         public IUIElementBuilder WithBorder(IBorder border);
+        public IUIElementBuilder WithBorder(string borderStr, IBorderMapper mapper);
+
         public IUIElementBuilder WithBackgroundColor(Color color);
+        public IUIElementBuilder WithBackgroundColor(string colorStr, IColorMapper mapper);
+
         public IUIElementBuilder WithForegroundColor(Color color);
+        public IUIElementBuilder WithForegroundColor(string colorStr, IColorMapper mapper);
     }
 }
