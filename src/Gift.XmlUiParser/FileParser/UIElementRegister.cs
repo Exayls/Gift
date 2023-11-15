@@ -75,13 +75,13 @@ namespace Gift.XmlUiParser.FileParser
             }
             if (typeof(IUIElementBuilder).IsAssignableFrom(buildertype))
             {
-                this.Register<IUIElementBuilder, Color>(buildertype, "backgroundcolor", (b, c) => b.WithBackgroundColor(c));
-                this.Register<IUIElementBuilder, Color>(buildertype, "backcolor", (b, c) => b.WithBackgroundColor(c));
+                this.Register<IUIElementBuilder>(buildertype, "backgroundcolor", (b, c) => b.WithBackgroundColor(c));
+                this.Register<IUIElementBuilder>(buildertype, "backcolor", (b, c) => b.WithBackgroundColor(c));
 
-                this.Register<IUIElementBuilder, Color>(buildertype, "frontgroundcolor", (b, c) => b.WithForegroundColor(c));
-                this.Register<IUIElementBuilder, Color>(buildertype, "frontcolor", (b, c) => b.WithForegroundColor(c));
+                this.Register<IUIElementBuilder>(buildertype, "frontgroundcolor", (b, c) => b.WithForegroundColor(c));
+                this.Register<IUIElementBuilder>(buildertype, "frontcolor", (b, c) => b.WithForegroundColor(c));
 
-                this.Register<IUIElementBuilder, IBorder>(buildertype, "border", (b, a) => b.WithBorder(a));
+                this.Register<IUIElementBuilder>(buildertype, "border", (b, a) => b.WithBorder(a));
             }
         }
 
