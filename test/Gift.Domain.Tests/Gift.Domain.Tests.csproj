@@ -29,4 +29,10 @@
 		<ProjectReference Include="..\..\src\Gift.Domain\Gift.Domain.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<None Update="ressources/simple_border.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
 </Project>

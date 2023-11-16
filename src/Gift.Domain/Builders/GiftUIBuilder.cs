@@ -101,5 +101,20 @@ namespace Gift.Domain.Builders
                 throw new ArgumentException($"{boundStr} is not a valid parameter for WithBound, it must be (height,width)", e);
             }
         }
+
+        public IUIElementBuilder WithBorder(string borderStr, IBorderMapper mapper)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IUIElementBuilder WithBackgroundColor(string colorStr, IColorMapper mapper)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IUIElementBuilder WithForegroundColor(string colorStr, IColorMapper mapper)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

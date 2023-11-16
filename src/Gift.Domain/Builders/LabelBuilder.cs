@@ -89,6 +89,21 @@ namespace Gift.Domain.Builders
         {
             return WithForegroundColor(color);
         }
+
+        public IUIElementBuilder WithBorder(string borderStr, IBorderMapper mapper)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IUIElementBuilder WithBackgroundColor(string colorStr, IColorMapper mapper)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IUIElementBuilder WithForegroundColor(string colorStr, IColorMapper mapper)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 
 }

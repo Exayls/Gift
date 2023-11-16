@@ -1,10 +1,12 @@
 ﻿using System;
 using System.IO;
+using Gift.Domain.Builders;
 using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Element;
 using Gift.XmlUiParser.FileParser;
 using Gift.XmlUiParser.Tests.Helper;
+using Moq;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -18,7 +20,9 @@ namespace Gift.XmlUiParser.Tests.XmlParser
 
         public XmlFileParserTests(ITestOutputHelper output)
         {
-            var elementRegister = new UIElementRegister(LoggerHelper.GetLogger<IUIElementRegister>(output));
+            var mockColorMapper = Mock.Of<IColorMapper>();
+            var mockBorderMapper = Mock.Of<IBorderMapper>();
+            var elementRegister = new UIElementRegister(LoggerHelper.GetLogger<IUIElementRegister>(output), mockBorderMapper, mockColorMapper);
 
             xmlParser = new XmlFileParser(elementRegister,
                               LoggerHelper.GetLogger<IXMLFileParser>(output));

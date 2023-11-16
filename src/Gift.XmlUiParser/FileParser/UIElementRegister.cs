@@ -2,22 +2,25 @@ using System;
 using System.Collections.Generic;
 using Gift.Domain.Builders;
 using Gift.Domain.ServiceContracts;
-using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Element;
-using Gift.Domain.UIModel.MetaData;
 using Microsoft.Extensions.Logging;
 
 namespace Gift.XmlUiParser.FileParser
 {
     public class UIElementRegister : IUIElementRegister
     {
-        private ILogger<IUIElementRegister> _logger;
+        private readonly ILogger<IUIElementRegister> _logger;
+        private readonly IBorderMapper _borderMapper;
+        private readonly IColorMapper _colorMapper;
         private IDictionary<string, Type> _elements;
         private Dictionary<(Type builderType, string attribute), Func<IBuilder<UIElement>, object, IBuilder<UIElement>>> _builderMethods;
 
 
-        public UIElementRegister(ILogger<IUIElementRegister> logger)
+        public UIElementRegister(ILogger<IUIElementRegister> logger, IBorderMapper borderMapper, IColorMapper colorMapper)
         {
+            _logger = logger;
+            _borderMapper = borderMapper;
+            _colorMapper = colorMapper;
             _logger = logger;
             _elements = new Dictionary<string, Type>();
             _builderMethods = new Dictionary<(Type builderType, string attribute), Func<IBuilder<UIElement>, object, IBuilder<UIElement>>>();
@@ -75,13 +78,13 @@ namespace Gift.XmlUiParser.FileParser
             }
             if (typeof(IUIElementBuilder).IsAssignableFrom(buildertype))
             {
-                this.Register<IUIElementBuilder>(buildertype, "backgroundcolor", (b, c) => b.WithBackgroundColor(c));
-                this.Register<IUIElementBuilder>(buildertype, "backcolor", (b, c) => b.WithBackgroundColor(c));
+                this.Register<IUIElementBuilder>(buildertype, "backgroundcolor", (b, c) => b.WithBackgroundColor(c, _colorMapper));
+                this.Register<IUIElementBuilder>(buildertype, "backcolor", (b, c) => b.WithBackgroundColor(c, _colorMapper));
 
-                this.Register<IUIElementBuilder>(buildertype, "frontgroundcolor", (b, c) => b.WithForegroundColor(c));
-                this.Register<IUIElementBuilder>(buildertype, "frontcolor", (b, c) => b.WithForegroundColor(c));
+                this.Register<IUIElementBuilder>(buildertype, "frontgroundcolor", (b, c) => b.WithForegroundColor(c, _colorMapper));
+                this.Register<IUIElementBuilder>(buildertype, "frontcolor", (b, c) => b.WithForegroundColor(c, _colorMapper));
 
-                this.Register<IUIElementBuilder>(buildertype, "border", (b, a) => b.WithBorder(a));
+                this.Register<IUIElementBuilder>(buildertype, "border", (b, a) => b.WithBorder(a, _borderMapper));
             }
         }
 
