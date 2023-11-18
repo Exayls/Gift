@@ -11,11 +11,11 @@ namespace Gift.Domain.Builders
             try
             {
                 BorderOption borderOption;
-                if (borderStr == "simple")
+                if (borderStr.ToLower() == "simple")
                 {
                     borderOption = BorderOption.Simple;
                 }
-                else if (borderStr == "heavy")
+                else if (borderStr.ToLower() == "heavy")
                 {
                     borderOption = BorderOption.Heavy;
                 }
