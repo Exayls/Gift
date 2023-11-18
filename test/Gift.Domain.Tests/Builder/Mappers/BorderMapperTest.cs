@@ -39,5 +39,18 @@ namespace TestGift.Builder
              "└─┘";
             Assert.Equal(expectedString, border.GetDisplay(new Bound(3, 3), Color.Default, Color.Default, ' ').DisplayString.ToString());
         }
+
+        [Fact]
+        public void When_having_heavy_should_create_heavy_border()
+        {
+            var borderOption = "heavy";
+            var border = _mapper.ToBorder(borderOption);
+            Assert.Equal(1, border.Thickness);
+            var expectedString =
+             "███\n" +
+             "█ █\n" +
+             "███";
+            Assert.Equal(expectedString, border.GetDisplay(new Bound(3, 3), Color.Default, Color.Default, ' ').DisplayString.ToString());
+        }
     }
 }
