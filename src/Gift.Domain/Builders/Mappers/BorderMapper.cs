@@ -11,7 +11,6 @@ namespace Gift.Domain.Builders
             try
             {
                 BorderOption borderOption;
-                // var splitBound = borderStr.Split(new[] { ',', ';' });
                 if (borderStr == "simple")
                 {
                     borderOption = BorderOption.Simple;

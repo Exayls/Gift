@@ -26,5 +26,18 @@ namespace TestGift.Builder
              "└─┘";
             Assert.Equal(expectedString, border.GetDisplay(new Bound(3, 3), Color.Default, Color.Default, ' ').DisplayString.ToString());
         }
+
+        [Fact]
+        public void When_having_simple_should_create_simple_border()
+        {
+            var borderOption = "simple";
+            var border = _mapper.ToBorder(borderOption);
+            Assert.Equal(1, border.Thickness);
+            var expectedString =
+             "┌─┐\n" +
+             "│ │\n" +
+             "└─┘";
+            Assert.Equal(expectedString, border.GetDisplay(new Bound(3, 3), Color.Default, Color.Default, ' ').DisplayString.ToString());
+        }
     }
 }
