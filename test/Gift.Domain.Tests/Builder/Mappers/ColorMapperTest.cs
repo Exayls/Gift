@@ -14,13 +14,15 @@ namespace TestGift.Builder
             _mapper = new ColorMapper();
         }
 
-        [Fact]
-        public void When_having_color_corresponding_to_define_color_should_return_color()
+        [Theory]
+		[InlineData("blue", Color.Blue)]
+		[InlineData("red", Color.Red)]
+		[InlineData("GREEN", Color.Green)]
+        public void When_having_color_corresponding_to_define_color_should_return_color(string attribute, Color color)
         {
-            var colorAtt = "blue";
-            var color = _mapper.ToColor(colorAtt);
+            var actualColor = _mapper.ToColor(attribute);
 
-            Assert.Equal(Color.Blue, color);
+            Assert.Equal(color, actualColor);
         }
 
     }
