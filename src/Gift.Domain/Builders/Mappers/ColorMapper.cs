@@ -4,7 +4,7 @@ using Gift.Domain.UIModel.MetaData;
 
 namespace TestGift.Builder
 {
-    internal class ColorMapper : IColorMapper
+    public class ColorMapper : IColorMapper
     {
         public Color ToColor(string colorAtt)
         {
