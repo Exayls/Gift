@@ -1,6 +1,6 @@
 using Gift.Domain.UIModel.MetaData;
 
-namespace Gift.Domain.Builders
+namespace Gift.Domain.Builders.Mappers
 {
     public interface IColorMapper
     {

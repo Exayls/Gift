@@ -1,6 +1,7 @@
 
 using System;
 using Gift.Domain.Builders;
+using Gift.Domain.Builders.Mappers;
 using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel.Element;
 using Gift.XmlUiParser.FileParser;

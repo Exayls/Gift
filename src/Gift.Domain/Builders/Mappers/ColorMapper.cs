@@ -1,8 +1,7 @@
 using System;
-using Gift.Domain.Builders;
 using Gift.Domain.UIModel.MetaData;
 
-namespace TestGift.Builder
+namespace Gift.Domain.Builders.Mappers
 {
     public class ColorMapper : IColorMapper
     {

@@ -2,7 +2,7 @@
 using System;
 using Gift.Domain.UIModel.Border;
 
-namespace Gift.Domain.Builders
+namespace Gift.Domain.Builders.Mappers
 {
     public class BorderMapper : IBorderMapper
     {
