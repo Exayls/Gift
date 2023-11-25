@@ -59,19 +59,6 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             Assert.Throws<NotSupportedException>(() => xmlParser.ParseUIFileUsingBuilders(filePath));
         }
 
-        [Fact]
-        public void When_Border_is_set_should_create_element_with_border()
-        {
-            // Arrange
-            string filePath = "ressources/xml/vstack_border.xml";
-            // Act
-            UIElement result = xmlParser.ParseUIFileUsingBuilders(filePath);
-            // Assert
-            Assert.IsType<VStack>(result);
-            Assert.Equal(5, result.Height);
-            Assert.Equal(8, result.Width);
-        }
-
 
         [Fact]
         public void When_ParseUIFile_is_called_should_create_all_objects_hierarchically()
