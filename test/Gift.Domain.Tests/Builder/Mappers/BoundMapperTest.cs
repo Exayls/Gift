@@ -1,5 +1,4 @@
 using Gift.Domain.Builders.Mappers;
-using Gift.Domain.UIModel.MetaData;
 using Xunit;
 
 namespace TestGift.Builder
@@ -13,13 +12,15 @@ namespace TestGift.Builder
             _mapper = new BoundMapper();
         }
 
-        [Fact]
-        public void When_having_path_to_json_border_config_should_create_border()
+        [Theory]
+		[InlineData("5,8", 5, 8)]
+		[InlineData("9;14", 9, 14)]
+		[InlineData("1,3", 1, 3)]
+        public void When_having_str_bound_should_return_bound_with_height_width(string boundStr, int height, int width)
         {
-            var boundStr = "5,8";
             var bound = _mapper.ToBound(boundStr);
-            Assert.Equal(5, bound.Height);
-            Assert.Equal(8, bound.Width);
+            Assert.Equal(height, bound.Height);
+            Assert.Equal(width, bound.Width);
         }
     }
 }

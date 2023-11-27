@@ -95,5 +95,9 @@ namespace Gift.Domain.Builders
         {
             throw new System.NotImplementedException();
         }
+        public IContainerBuilder WithBound(string boundStr, IBoundMapper mapper)
+        {
+			return WithBound(mapper.ToBound(boundStr));
+        }
     }
 }

@@ -74,7 +74,8 @@ namespace Gift.XmlUiParser.Tests.XmlParser
         {
             var mockColorMapper = Mock.Of<IColorMapper>();
             var mockBorderMapper = Mock.Of<IBorderMapper>();
-            return new UIElementRegister(LoggerHelper.GetLogger<IUIElementRegister>(_output), mockBorderMapper, mockColorMapper);
+            var mockBoundMapper = Mock.Of<IBoundMapper>();
+            return new UIElementRegister(LoggerHelper.GetLogger<IUIElementRegister>(_output), mockBorderMapper, mockColorMapper, mockBoundMapper);
         }
     }
 }

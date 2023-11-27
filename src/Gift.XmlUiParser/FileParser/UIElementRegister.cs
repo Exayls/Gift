@@ -12,16 +12,18 @@ namespace Gift.XmlUiParser.FileParser
     {
         private readonly ILogger<IUIElementRegister> _logger;
         private readonly IBorderMapper _borderMapper;
+        private readonly IBoundMapper _boundMapper;
         private readonly IColorMapper _colorMapper;
         private IDictionary<string, Type> _elements;
         private Dictionary<(Type builderType, string attribute), Func<IBuilder<UIElement>, object, IBuilder<UIElement>>> _builderMethods;
 
 
-        public UIElementRegister(ILogger<IUIElementRegister> logger, IBorderMapper borderMapper, IColorMapper colorMapper)
+        public UIElementRegister(ILogger<IUIElementRegister> logger, IBorderMapper borderMapper, IColorMapper colorMapper, IBoundMapper boundMapper)
         {
             _logger = logger;
             _borderMapper = borderMapper;
             _colorMapper = colorMapper;
+            _boundMapper = boundMapper;
             _logger = logger;
             _elements = new Dictionary<string, Type>();
             _builderMethods = new Dictionary<(Type builderType, string attribute), Func<IBuilder<UIElement>, object, IBuilder<UIElement>>>();
@@ -75,7 +77,7 @@ namespace Gift.XmlUiParser.FileParser
 
             if (typeof(IContainerBuilder).IsAssignableFrom(buildertype))
             {
-                this.Register<IContainerBuilder>(buildertype, "bound", (b, bd) => b.WithBound(bd));
+                this.Register<IContainerBuilder>(buildertype, "bound", (b, bd) => b.WithBound(bd, _boundMapper));
             }
             if (typeof(IUIElementBuilder).IsAssignableFrom(buildertype))
             {

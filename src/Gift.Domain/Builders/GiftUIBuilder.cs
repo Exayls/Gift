@@ -89,18 +89,9 @@ namespace Gift.Domain.Builders
             return WithForegroundColor(color);
         }
 
-        IContainerBuilder IContainerBuilder.WithBound(string boundStr)
+        IContainerBuilder IContainerBuilder.WithBound(string boundStr, IBoundMapper mapper)
         {
-            try
-            {
-                var splitBound = boundStr.Split(new[] { ',', ';' });
-                var bound = new Bound(int.Parse(splitBound[0]), int.Parse(splitBound[1]));
-                return WithBound(bound);
-            }
-            catch (Exception e)
-            {
-                throw new ArgumentException($"{boundStr} is not a valid parameter for WithBound, it must be (height,width)", e);
-            }
+			return WithBound(mapper.ToBound(boundStr));
         }
 
         public IUIElementBuilder WithBorder(string borderStr, IBorderMapper mapper)
