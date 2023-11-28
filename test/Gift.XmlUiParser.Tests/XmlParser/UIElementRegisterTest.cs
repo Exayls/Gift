@@ -46,22 +46,21 @@ namespace Gift.XmlUiParser.Tests.XmlParser
 
 
         [Fact]
-        public void When_retrieving_text_method_should_return_WithText_method()
+        public void When_retrieving_text_method_should_return_registered_method()
         {
             //Arrange
-            Mock<IUIElementBuilder> labelBuilderMock = new Mock<IUIElementBuilder>();
 
             var elementRegister = GetElementRegister();
             var labelBuilderType = elementRegister.GetBuilder("label");
-            var labelBuilder = labelBuilderType.GetConstructors()[0].Invoke(new object[] { });
+            var labelBuilder = (IUIElementBuilder) labelBuilderType.GetConstructors()[0].Invoke(new object[] { });
 
             elementRegister.Register<IUIElementBuilder>("UIElement");
-            elementRegister.Register<IUIElementBuilder>(typeof(Label), "text", (b, t) => { return b; });
+            elementRegister.Register<IUIElementBuilder>(typeof(IUIElementBuilder), "test", (b, t) => { return b; });
 
             // Act
-            var method = elementRegister.GetMethod<IUIElementBuilder>("text");
+            var method = elementRegister.GetMethod<IUIElementBuilder>("test");
             // Assert
-            Assert.Equal(labelBuilderMock.Object, method(labelBuilderMock.Object, "hello"));
+            Assert.Equal(typeof(LabelBuilder), method(labelBuilder, "hello").GetType());
         }
 
 
