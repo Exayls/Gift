@@ -34,6 +34,8 @@ namespace Gift.XmlUiParser.FileParser
             this.Register<VStackBuilder>("VStack");
             this.Register<HStackBuilder>("HStack");
 
+            this.Register<LabelBuilder>(typeof(LabelBuilder), "text", (b, text) => b.WithText(text));
+
         }
 
         public Type GetBuilder(string typeName)
