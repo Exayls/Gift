@@ -74,7 +74,7 @@ namespace Gift.ApplicationService.Services
 
         public virtual void Initialize(string xmlPath)
         {
-            _uiProvider.Ui = _xmlParser.ParseUIFile(xmlPath);
+            _uiProvider.Ui = (GiftUI)_xmlParser.ParseUIFileUsingBuilders(xmlPath);
             update();
         }
 
@@ -90,8 +90,6 @@ namespace Gift.ApplicationService.Services
                 await Task.Run(() => Initialize(file));
             }
         }
-
-
 
         public void AddSignalHandler(ISignalHandlerService handler)
         {

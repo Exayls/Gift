@@ -3,6 +3,7 @@ using Gift.XmlUiParser.Extensions;
 using Gift.ApplicationService.Extensions;
 using Gift.Displayer.Extensions;
 using Gift.ConsoleMonitor.Extensions;
+using Gift.Domain.Extensions;
 using Microsoft.Extensions.Logging;
 using System.Linq;
 
@@ -17,6 +18,7 @@ namespace Gift.Startup.Extensions
             services.AddGiftXmlParser();
             services.AddGiftKeyInteraction();
             services.AddGiftConsoleMonitor();
+            services.AddDomainServices();
 
             if (!services.Any(s => s.ServiceType == typeof(ILogger<>)))
             {
