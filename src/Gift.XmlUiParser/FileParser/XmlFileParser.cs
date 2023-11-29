@@ -145,6 +145,7 @@ namespace Gift.XmlUiParser.FileParser
 
         private Func<IBuilder<UIElement>, object, IBuilder<UIElement>>? GetMethod(IBuilder<UIElement> builder, string attributeName)
         {
+                _logger.LogDebug($"attributeNaisaueiteirueiuss not registered");
             try
             {
                 return _uielementRegister.GetMethod(builder.GetType(), attributeName);
