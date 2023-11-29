@@ -7,13 +7,13 @@ namespace Gift.Domain.Builders.Mappers
     {
         public Color ToColor(string colorAtt)
         {
-			Color color;
-			var success = Enum.TryParse<Color>(colorAtt, true, out color);
-			if (!success)
-			{
-				throw new ArgumentException($"Attribute {colorAtt} can't be converted to color");
-			}
-			return color;
+            Color color;
+            var success = Enum.TryParse<Color>(colorAtt, true, out color);
+            if (!success)
+            {
+                throw new ArgumentException($"Attribute {colorAtt} can't be converted to color");
+            }
+            return color;
         }
     }
 }

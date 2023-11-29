@@ -98,7 +98,7 @@ namespace Gift.Domain.Builders
 
         public IContainerBuilder WithBound(string boundStr, IBoundMapper mapper)
         {
-			return WithBound(mapper.ToBound(boundStr));
+            return WithBound(mapper.ToBound(boundStr));
         }
     }
 }

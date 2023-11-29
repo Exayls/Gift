@@ -27,8 +27,7 @@ namespace Gift.Startup.Extensions
             if (!services.Any(s => s.ServiceType == typeof(ILogger<>)))
             {
                 Log.Logger = new LoggerConfiguration()
-                    .WriteTo.Console()
-                    .WriteTo.File($"a.log", rollingInterval: RollingInterval.Day)
+                    .WriteTo.File($"logs/{assemblyName}_.log", rollingInterval: RollingInterval.Day)
                        .MinimumLevel.Debug()
                     .CreateLogger();
 

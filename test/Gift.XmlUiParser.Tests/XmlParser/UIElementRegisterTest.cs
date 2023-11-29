@@ -51,7 +51,7 @@ namespace Gift.XmlUiParser.Tests.XmlParser
 
             var elementRegister = GetElementRegister();
             var labelBuilderType = elementRegister.GetBuilder("label");
-            var labelBuilder = (IUIElementBuilder) labelBuilderType.GetConstructors()[0].Invoke(new object[] { });
+            var labelBuilder = (IUIElementBuilder)labelBuilderType.GetConstructors()[0].Invoke(new object[] { });
 
             elementRegister.Register<IUIElementBuilder>("UIElement");
             elementRegister.Register<IUIElementBuilder>(typeof(IUIElementBuilder), "test", (b, t) => { return b; });

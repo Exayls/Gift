@@ -4,6 +4,6 @@ namespace Gift.Domain.Builders.Mappers
 {
     public interface IBoundMapper
     {
-		Bound ToBound(string boundStr);
+        Bound ToBound(string boundStr);
     }
 }
