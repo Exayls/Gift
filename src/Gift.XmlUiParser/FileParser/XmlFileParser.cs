@@ -1,13 +1,9 @@
 ﻿using Gift.Domain.Builders;
 using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel;
-using Gift.Domain.UIModel.Border;
-using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
-using Gift.Domain.UIModel.MetaData;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Reflection;
 using System.Xml;
 
 namespace Gift.XmlUiParser.FileParser
