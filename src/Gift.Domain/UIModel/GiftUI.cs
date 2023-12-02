@@ -128,5 +128,19 @@ namespace Gift.Domain.UIModel
                 SelectedContainer = SelectableContainers[(SelectableContainers.IndexOf(SelectedContainer) - 1 + SelectableContainers.Count) % SelectableContainers.Count];
             }
         }
+
+        public virtual bool Equals(UIElement uiElement)
+        {
+            if (!(uiElement is GiftUI))
+            {
+                return false;
+            }
+			GiftUI element = (GiftUI) uiElement;
+			if (!this.Bound.Equals(element.Bound))
+			{
+				return false;
+			}
+            return true;
+        }
     }
 }
