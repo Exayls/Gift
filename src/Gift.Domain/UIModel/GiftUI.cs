@@ -129,21 +129,10 @@ namespace Gift.Domain.UIModel
             }
         }
 
-        public bool Equals(UIElement uiElement)
+        public override bool Equals(UIElement uiElement)
         {
-            if (!(uiElement is GiftUI))
-            {
-                return false;
-            }
-            GiftUI element = (GiftUI)uiElement;
-            if (!this.Bound.Equals(element.Bound))
-            {
-                return false;
-            }
-            if (!this.Border.Equals(element.Border)){
-                return false;
-            }
-            return true;
+			if(!(uiElement is GiftUI)) return false;
+			return base.Equals(uiElement);
         }
     }
 }

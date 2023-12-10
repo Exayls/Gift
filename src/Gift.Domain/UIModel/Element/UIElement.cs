@@ -37,5 +37,10 @@ namespace Gift.Domain.UIModel.Element
         public abstract IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuration);
         public abstract Position GetRelativePosition(Context context);
         public abstract bool IsFixed();
+
+		public virtual bool Equals(UIElement uiElement)
+		{
+			return true;
+		}
     }
 }

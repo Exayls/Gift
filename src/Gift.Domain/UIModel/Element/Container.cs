@@ -3,6 +3,7 @@ using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.MetaData;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Gift.Domain.UIModel.Element
 {
@@ -109,6 +110,26 @@ namespace Gift.Domain.UIModel.Element
             {
                 SelectedElement = uIElement;
             }
+        }
+
+        public override bool Equals(UIElement uiElement)
+        {
+			if(!(base.Equals(uiElement))) return false;
+            if (!(uiElement is Container)) return false;
+            Container element = (Container)uiElement;
+            if (!this.Bound.Equals(element.Bound)) return false;
+            if (!this.Border.Equals(element.Border)) return false;
+            if (!this.BackColor.Equals(element.BackColor)) return false;
+            if (!this.FrontColor.Equals(element.FrontColor)) return false;
+            foreach ((UIElement element1, UIElement element2) elementTuple in Childs.Zip(element.Childs))
+            {
+                if (!(elementTuple.element1.Equals(elementTuple.element2))) return false;
+            }
+            foreach ((UIElement element1, UIElement element2) elementTuple in SelectableElements.Zip(element.SelectableElements))
+            {
+                if (!(elementTuple.element1.Equals(elementTuple.element2))) return false;
+            }
+            return true;
         }
 
     }

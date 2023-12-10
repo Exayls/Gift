@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
 using Gift.Domain.Builders.Mappers;
 using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Border;
@@ -13,6 +14,7 @@ namespace Gift.Domain.Builders
         private IBorder _border;
         private Color _frontColor = Color.Default;
         private Color _backColor = Color.Default;
+        private IList<UIElement> selectableElements = new List<UIElement>();
 
         public GiftUIBuilder()
         {
@@ -51,12 +53,24 @@ namespace Gift.Domain.Builders
             return this;
         }
 
+        public GiftUIBuilder WithSelectableElement(UIElement element)
+        {
+            this.selectableElements.Add(element);
+            return this;
+        }
+
         public GiftUI Build()
         {
-            return new GiftUI(bound: _bound,
+            var giftui = new GiftUI(bound: _bound,
                               border: _border,
                               frontColor: _frontColor,
                               backColor: _backColor);
+            foreach (UIElement element in selectableElements)
+            {
+                giftui.AddSelectableChild(element);
+
+            }
+            return giftui;
         }
 
         UIElement IBuilder<UIElement>.Build()
@@ -108,5 +122,6 @@ namespace Gift.Domain.Builders
         {
             throw new NotImplementedException();
         }
+
     }
 }

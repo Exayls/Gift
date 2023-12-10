@@ -42,5 +42,10 @@ namespace TestGift.Mocks
         {
             return _isFixed;
         }
+
+        public override bool Equals(UIElement uiElement)
+        {
+			return false;
+        }
     }
 }

@@ -73,5 +73,14 @@ namespace Gift.Domain.UIModel.Element
         {
             return Border.GetDisplay(new Bound(Height, Width), FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor, BackColor == Color.Default ? configuration.DefaultBackColor : BackColor);
         }
+
+        public override bool Equals(UIElement uiElement)
+        {
+			if(!(base.Equals(uiElement))) return false;
+			if(!(uiElement is Label)) return false;
+			Label element = (Label) uiElement;
+			if(this.Text != element.Text) return false;
+			return true;
+        }
     }
 }
