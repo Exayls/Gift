@@ -129,7 +129,7 @@ namespace Gift.Domain.UIModel
             }
         }
 
-        public virtual bool Equals(UIElement uiElement)
+        public bool Equals(UIElement uiElement)
         {
             if (!(uiElement is GiftUI))
             {
