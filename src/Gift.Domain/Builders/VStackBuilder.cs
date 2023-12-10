@@ -1,4 +1,5 @@
-﻿using Gift.Domain.Builders.Mappers;
+﻿using System.Collections.Generic;
+using Gift.Domain.Builders.Mappers;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
@@ -13,6 +14,7 @@ namespace Gift.Domain.Builders
         private IScreenDisplayFactory screenDisplayFactory = new ScreenDisplayFactory();
         private Color backColor = Color.Default;
         private Color frontColor = Color.Default;
+        private IList<UIElement> selectableElements = new List<UIElement>();
 
         public VStackBuilder WithBorder(IBorder border)
         {
@@ -37,13 +39,24 @@ namespace Gift.Domain.Builders
             return this;
         }
 
+        public VStackBuilder WithSelectableElement(UIElement element)
+        {
+            selectableElements.Add(element);
+            return this;
+        }
+
         public VStack Build()
         {
-            return new VStack(Border,
+            var vstack =  new VStack(Border,
                               screenDisplayFactory,
                               Bound,
                               frontColor: frontColor,
                               backColor: backColor);
+			foreach(UIElement element in selectableElements)
+			{
+				vstack.AddSelectableChild(element);
+			}
+			return vstack;
         }
 
         UIElement IBuilder<UIElement>.Build()
@@ -59,6 +72,11 @@ namespace Gift.Domain.Builders
         IContainerBuilder IContainerBuilder.WithBound(Bound bound)
         {
             return WithBound(bound);
+        }
+
+        IContainerBuilder IContainerBuilder.WithSelectableElement(UIElement element)
+        {
+            return WithSelectableElement(element);
         }
 
         IUIElementBuilder IUIElementBuilder.WithBorder(IBorder border)
@@ -100,5 +118,6 @@ namespace Gift.Domain.Builders
         {
             return WithBound(mapper.ToBound(boundStr));
         }
+
     }
 }

@@ -8,5 +8,6 @@ namespace Gift.Domain.Builders
     {
         public IContainerBuilder WithBound(Bound bound);
         public IContainerBuilder WithBound(string boundStr, IBoundMapper mapper);
+        public IContainerBuilder WithSelectableElement(UIElement element);
     }
 }

@@ -1,9 +1,12 @@
 ﻿using System;
 using System.IO;
+using Gift.Domain.Builders;
 using Gift.Domain.Builders.Mappers;
 using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel;
+using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Element;
+using Gift.Domain.UIModel.MetaData;
 using Gift.XmlUiParser.FileParser;
 using Gift.XmlUiParser.Tests.Helper;
 using Moq;
@@ -69,21 +72,27 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             // Act
             UIElement result = xmlParser.ParseUIFileUsingBuilders(filePath);
             // Assert
-            Assert.IsType<GiftUI>(result);
-            Assert.Collection(((GiftUI)result).Childs,
-                    (child) =>
-                 {
-                     Assert.IsType<VStack>(child);
+               var expected = new GiftUIBuilder()
+                .WithSelectableContainer(
+                           new VStackBuilder()
+                           .WithBound(new Bound(5, 8))
+                           .WithForegroundColor(Color.Blue)
+                           .WithSelectableElement(
+                               new LabelBuilder()
+                               .WithText("Hello")
+                               .WithBorder(new DetailedBorder(1, BorderOption.Simple))
+                               .Build()
+                            )
+                           .WithSelectableElement(
+                               new LabelBuilder()
+                               .WithText("World")
+                               .Build()
+                            )
+                           .Build()
+                           )
+                .Build();
 
-                     Assert.Collection(((VStack)child).Childs,
-                             (c) =>
-                          {
-                              Assert.IsType<Label>(c);
-                          }, (c) =>
-                          {
-                              Assert.IsType<Label>(c);
-                          });
-                 });
+			   Assert.True(expected.Equals(result));
         }
     }
 }

@@ -135,11 +135,11 @@ namespace Gift.Domain.Tests.UI
             var element2 = new GiftUIBuilder()
 				.WithBound(new Bound(0,0))
 				.Build();
-            var element = new GiftUIBuilder()
+            var giftUIComp = new GiftUIBuilder()
                 .WithSelectableElement(element2)
                 .Build();
             //Assert
-            Assert.True(giftUIRef.Equals(element));
+            Assert.True(giftUIRef.Equals(giftUIComp));
         }
 
         [Fact]
@@ -152,14 +152,15 @@ namespace Gift.Domain.Tests.UI
             var giftUIRef = new GiftUIBuilder()
                 .WithSelectableElement(element1)
                 .Build();
+
             var element2 = new GiftUIBuilder()
 				.WithBound(new Bound(0,1))
 				.Build();
-            var element = new GiftUIBuilder()
+            var giftUIComp = new GiftUIBuilder()
                 .WithSelectableElement(element2)
                 .Build();
             //Assert
-            Assert.False(giftUIRef.Equals(element));
+            Assert.False(giftUIRef.Equals(giftUIComp));
         }
 
     }

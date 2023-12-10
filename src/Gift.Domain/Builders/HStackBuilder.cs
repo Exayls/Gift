@@ -61,6 +61,11 @@ namespace Gift.Domain.Builders
             return WithBound(bound);
         }
 
+        public IContainerBuilder WithSelectableElement(UIElement element)
+        {
+			return WithSelectableElement(element);
+        }
+
         IUIElementBuilder IUIElementBuilder.WithBorder(IBorder border)
         {
             return WithBorder(border);
@@ -99,5 +104,6 @@ namespace Gift.Domain.Builders
         {
             return WithBound(mapper.ToBound(boundStr));
         }
+
     }
 }

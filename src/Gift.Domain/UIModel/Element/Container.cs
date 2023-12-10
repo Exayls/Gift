@@ -118,9 +118,6 @@ namespace Gift.Domain.UIModel.Element
             if (!(uiElement is Container)) return false;
             Container element = (Container)uiElement;
             if (!this.Bound.Equals(element.Bound)) return false;
-            if (!this.Border.Equals(element.Border)) return false;
-            if (!this.BackColor.Equals(element.BackColor)) return false;
-            if (!this.FrontColor.Equals(element.FrontColor)) return false;
             foreach ((UIElement element1, UIElement element2) elementTuple in Childs.Zip(element.Childs))
             {
                 if (!(elementTuple.element1.Equals(elementTuple.element2))) return false;

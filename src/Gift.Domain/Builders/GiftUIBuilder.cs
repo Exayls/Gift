@@ -15,6 +15,7 @@ namespace Gift.Domain.Builders
         private Color _frontColor = Color.Default;
         private Color _backColor = Color.Default;
         private IList<UIElement> selectableElements = new List<UIElement>();
+        private IList<Container> selectableContainers = new List<Container>();
 
         public GiftUIBuilder()
         {
@@ -59,6 +60,12 @@ namespace Gift.Domain.Builders
             return this;
         }
 
+        public GiftUIBuilder WithSelectableContainer(Container element)
+        {
+            this.selectableContainers.Add(element);
+            return this;
+        }
+
         public GiftUI Build()
         {
             var giftui = new GiftUI(bound: _bound,
@@ -68,6 +75,11 @@ namespace Gift.Domain.Builders
             foreach (UIElement element in selectableElements)
             {
                 giftui.AddSelectableChild(element);
+
+            }
+            foreach (Container element in selectableContainers)
+            {
+                giftui.SelectableContainers.Add(element);
 
             }
             return giftui;
@@ -86,6 +98,11 @@ namespace Gift.Domain.Builders
         IContainerBuilder IContainerBuilder.WithBound(Bound bound)
         {
             return WithBound(bound);
+        }
+
+        IContainerBuilder IContainerBuilder.WithSelectableElement(UIElement element)
+        {
+			return WithSelectableElement(element);
         }
 
         IUIElementBuilder IUIElementBuilder.WithBorder(IBorder border)
