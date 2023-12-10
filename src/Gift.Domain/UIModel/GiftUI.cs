@@ -135,11 +135,14 @@ namespace Gift.Domain.UIModel
             {
                 return false;
             }
-			GiftUI element = (GiftUI) uiElement;
-			if (!this.Bound.Equals(element.Bound))
-			{
-				return false;
-			}
+            GiftUI element = (GiftUI)uiElement;
+            if (!this.Bound.Equals(element.Bound))
+            {
+                return false;
+            }
+            if (!this.Border.Equals(element.Border)){
+                return false;
+            }
             return true;
         }
     }

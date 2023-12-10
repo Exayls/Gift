@@ -1,6 +1,6 @@
 
 using Gift.Domain.Builders;
-using TestGift.Mocks;
+using Gift.Domain.UIModel.Border;
 using Xunit;
 
 namespace Gift.Domain.Tests.UI
@@ -59,6 +59,35 @@ namespace Gift.Domain.Tests.UI
 				.Build();
 			var element = new GiftUIBuilder()
 				.WithBound(new(3,4))
+				.Build();
+			//Assert
+            Assert.False(giftUIRef.Equals(element));
+        }
+
+
+        [Fact]
+        public void GiftUI_are_not_equals_when_compared_different_border_thickness()
+        {
+            //Arrange
+			var giftUIRef = new GiftUIBuilder()
+				.WithBorder(new SimpleBorder(1, '*'))
+				.Build();
+			var element = new GiftUIBuilder()
+				.WithBorder(new SimpleBorder(2, '*'))
+				.Build();
+			//Assert
+            Assert.False(giftUIRef.Equals(element));
+        }
+
+        [Fact]
+        public void GiftUI_are_not_equals_when_compared_different_border_style()
+        {
+            //Arrange
+			var giftUIRef = new GiftUIBuilder()
+				.WithBorder(new SimpleBorder(1, '*'))
+				.Build();
+			var element = new GiftUIBuilder()
+				.WithBorder(new SimpleBorder(1, 'a'))
 				.Build();
 			//Assert
             Assert.False(giftUIRef.Equals(element));

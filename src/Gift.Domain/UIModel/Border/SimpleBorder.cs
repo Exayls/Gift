@@ -49,5 +49,14 @@ namespace Gift.Domain.UIModel.Border
             return x < Thickness || y < Thickness || x >= bound.Width - Thickness || y >= bound.Height - Thickness;
         }
 
+        public bool Equals(IBorder border)
+        {
+            if (!(border is SimpleBorder)) return false;
+            if (Thickness != border.Thickness) return false;
+			var simpleBorder = (SimpleBorder) border;
+			if (BorderChar != simpleBorder.BorderChar) return false;
+            return true;
+        }
+
     }
 }
