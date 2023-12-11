@@ -114,14 +114,17 @@ namespace Gift.Domain.UIModel.Element
 
         public override bool Equals(UIElement uiElement)
         {
-			if(!(base.Equals(uiElement))) return false;
+            if (!(base.Equals(uiElement))) return false;
             if (!(uiElement is Container)) return false;
             Container element = (Container)uiElement;
-            if (!this.Bound.Equals(element.Bound)) return false;
+            if (!Bound.Equals(element.Bound)) return false;
+
+            if (Childs.Count != element.Childs.Count) return false;
             foreach ((UIElement element1, UIElement element2) elementTuple in Childs.Zip(element.Childs))
             {
                 if (!(elementTuple.element1.Equals(elementTuple.element2))) return false;
             }
+            if (SelectableElements.Count != element.SelectableElements.Count) return false;
             foreach ((UIElement element1, UIElement element2) elementTuple in SelectableElements.Zip(element.SelectableElements))
             {
                 if (!(elementTuple.element1.Equals(elementTuple.element2))) return false;

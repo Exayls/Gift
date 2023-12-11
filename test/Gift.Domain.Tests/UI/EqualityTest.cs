@@ -163,5 +163,43 @@ namespace Gift.Domain.Tests.UI
             Assert.False(giftUIRef.Equals(giftUIComp));
         }
 
+        [Fact]
+        public void GiftUI_are_not_equals_when_having_different_containers()
+        {
+            //Arrange
+            var element1 = new VStackBuilder()
+				.WithBound(new Bound(0,0))
+				.Build();
+            var giftUIRef = new GiftUIBuilder()
+                .WithSelectableContainer(element1)
+                .Build();
+
+            var element2 = new VStackBuilder()
+				.WithBound(new Bound(1,0))
+				.Build();
+            var giftUIComp = new GiftUIBuilder()
+                .WithSelectableContainer(element2)
+                .Build();
+            //Assert
+            Assert.False(giftUIRef.Equals(giftUIComp));
+        }
+
+        [Fact]
+        public void GiftUI_are_not_equals_when_having_different_number_of_containers()
+        {
+            //Arrange
+            var element1 = new VStackBuilder()
+				.WithBound(new Bound(0,0))
+				.Build();
+            var giftUIRef = new GiftUIBuilder()
+                .WithSelectableContainer(element1)
+                .Build();
+
+            var giftUIComp = new GiftUIBuilder()
+                .Build();
+            //Assert
+            Assert.False(giftUIRef.Equals(giftUIComp));
+        }
+
     }
 }

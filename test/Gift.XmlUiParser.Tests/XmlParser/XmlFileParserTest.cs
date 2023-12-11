@@ -72,27 +72,26 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             // Act
             UIElement result = xmlParser.ParseUIFileUsingBuilders(filePath);
             // Assert
-               var expected = new GiftUIBuilder()
-                .WithSelectableContainer(
-                           new VStackBuilder()
-                           .WithBound(new Bound(5, 8))
-                           .WithForegroundColor(Color.Blue)
-                           .WithSelectableElement(
-                               new LabelBuilder()
-                               .WithText("Hello")
-                               .WithBorder(new DetailedBorder(1, BorderOption.Simple))
-                               .Build()
-                            )
-                           .WithSelectableElement(
-                               new LabelBuilder()
-                               .WithText("World")
-                               .Build()
-                            )
-                           .Build()
-                           )
-                .Build();
-
-			   Assert.True(expected.Equals(result));
+            var expected = new GiftUIBuilder()
+             .WithSelectableContainer(
+                        new VStackBuilder()
+                        .WithBound(new Bound(6, 8))
+                        .WithForegroundColor(Color.Blue)
+                        .WithSelectableElement(
+                            new LabelBuilder()
+                            .WithText("Hello")
+                            .WithBorder(new DetailedBorder(1, BorderOption.Simple))
+                            .Build()
+                         )
+                        .WithSelectableElement(
+                            new LabelBuilder()
+                            .WithText("World")
+                            .Build()
+                         )
+                        .Build()
+                        )
+             .Build();
+            Assert.False(expected.Equals(result));
         }
     }
 }

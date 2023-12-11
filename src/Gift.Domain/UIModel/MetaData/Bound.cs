@@ -15,7 +15,7 @@
             {
                 return false;
             }
-			if (!(Width == bound.Width) || !(Height == Height))
+			if (!(Width == bound.Width) || !(Height == bound.Height))
 			{
 				return false;
 			}
