@@ -1,4 +1,5 @@
-﻿using Gift.Domain.Builders.Mappers;
+﻿using System.Globalization;
+using Gift.Domain.Builders.Mappers;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
@@ -8,22 +9,37 @@ namespace Gift.Domain.Builders
 {
     public class HStackBuilder : IContainerBuilder
     {
-        private IBorder Border = new NoBorder();
-        private Bound Bound = new Bound(0, 0);
+        private IBorder _border = new NoBorder();
+        private Bound _bound = new Bound(0, 0);
         private IScreenDisplayFactory screenDisplayFactory = new ScreenDisplayFactory();
         private Color backColor = Color.Default;
         private Color frontColor = Color.Default;
+        private int? _height;
+        private int? _width;
 
         public HStackBuilder WithBorder(IBorder border)
         {
-            Border = border;
+            _border = border;
             return this;
         }
         public HStackBuilder WithBound(Bound bound)
         {
-            Bound = bound;
+            _bound = bound;
             return this;
         }
+
+        public HStackBuilder WithHeight(int height)
+        {
+            _height = height;
+            return this;
+        }
+
+        public HStackBuilder WithWidth(int width)
+        {
+            _width = width;
+            return this;
+        }
+
 
         public HStackBuilder WithBackgroundColor(Color color)
         {
@@ -39,9 +55,10 @@ namespace Gift.Domain.Builders
 
         public HStack Build()
         {
-            return new HStack(Border,
+			var bound = new Bound(_height??_bound.Height, _width??_bound.Width);
+            return new HStack(_border,
                               screenDisplayFactory,
-                              Bound,
+                              bound,
                               frontColor: frontColor,
                               backColor: backColor);
         }
@@ -81,6 +98,16 @@ namespace Gift.Domain.Builders
             return WithForegroundColor(color);
         }
 
+        IContainerBuilder IContainerBuilder.WithHeight(int height)
+        {
+            return WithHeight(height);
+        }
+
+        IContainerBuilder IContainerBuilder.WithWidth(int width)
+        {
+            return WithWidth(width);
+        }
+
         public IContainerBuilder WithBound(string boundStr)
         {
             throw new System.NotImplementedException();
@@ -105,5 +132,14 @@ namespace Gift.Domain.Builders
             return WithBound(mapper.ToBound(boundStr));
         }
 
+        public IContainerBuilder WithHeight(string heightStr)
+        {
+            return WithHeight(int.Parse(heightStr, NumberStyles.Integer));
+        }
+
+        public IContainerBuilder WithWidth(string widthStr)
+        {
+            return WithWidth(int.Parse(widthStr, NumberStyles.Integer));
+        }
     }
 }
