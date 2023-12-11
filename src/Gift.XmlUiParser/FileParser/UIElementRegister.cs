@@ -80,6 +80,8 @@ namespace Gift.XmlUiParser.FileParser
             if (typeof(IContainerBuilder).IsAssignableFrom(buildertype))
             {
                 this.Register<IContainerBuilder>(buildertype, "bound", (b, bd) => b.WithBound(bd, _boundMapper));
+                this.Register<IContainerBuilder>(buildertype, "height", (b, height) => b.WithHeight(height));
+                this.Register<IContainerBuilder>(buildertype, "width", (b, width) => b.WithWidth(width));
             }
             if (typeof(IUIElementBuilder).IsAssignableFrom(buildertype))
             {

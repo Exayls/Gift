@@ -75,7 +75,7 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             var expected = new GiftUIBuilder()
              .WithSelectableContainer(
                         new VStackBuilder()
-                        .WithBound(new Bound(6, 8))
+                        .WithBound(new Bound(5, 8))
                         .WithForegroundColor(Color.Blue)
                         .WithSelectableElement(
                             new LabelBuilder()
@@ -91,7 +91,7 @@ namespace Gift.XmlUiParser.Tests.XmlParser
                         .Build()
                         )
              .Build();
-            Assert.False(expected.Equals(result));
+            Assert.True(expected.Equals(result));
         }
     }
 }

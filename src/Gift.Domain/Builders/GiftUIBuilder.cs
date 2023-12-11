@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using Gift.Domain.Builders.Mappers;
 using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Border;
@@ -16,6 +17,8 @@ namespace Gift.Domain.Builders
         private Color _backColor = Color.Default;
         private IList<UIElement> selectableElements = new List<UIElement>();
         private IList<Container> selectableContainers = new List<Container>();
+        private int? _height = null;
+        private int? _width = null;
 
         public GiftUIBuilder()
         {
@@ -39,6 +42,18 @@ namespace Gift.Domain.Builders
         public GiftUIBuilder WithBorder(IBorder border)
         {
             _border = border;
+            return this;
+        }
+
+        public GiftUIBuilder WithHeight(int height)
+        {
+            _height = height;
+            return this;
+        }
+
+        public GiftUIBuilder WithWidth(int width)
+        {
+            _width = width;
             return this;
         }
 
@@ -68,7 +83,8 @@ namespace Gift.Domain.Builders
 
         public GiftUI Build()
         {
-            var giftui = new GiftUI(bound: _bound,
+			var bound = new Bound(_height??_bound.Height, _width??_bound.Width);
+            var giftui = new GiftUI(bound: bound,
                               border: _border,
                               frontColor: _frontColor,
                               backColor: _backColor);
@@ -102,7 +118,17 @@ namespace Gift.Domain.Builders
 
         IContainerBuilder IContainerBuilder.WithSelectableElement(UIElement element)
         {
-			return WithSelectableElement(element);
+            return WithSelectableElement(element);
+        }
+
+        IContainerBuilder IContainerBuilder.WithHeight(int height)
+        {
+            return WithHeight(height);
+        }
+
+        IContainerBuilder IContainerBuilder.WithWidth(int width)
+        {
+            return WithWidth(width);
         }
 
         IUIElementBuilder IUIElementBuilder.WithBorder(IBorder border)
@@ -120,7 +146,7 @@ namespace Gift.Domain.Builders
             return WithForegroundColor(color);
         }
 
-        IContainerBuilder IContainerBuilder.WithBound(string boundStr, IBoundMapper mapper)
+        public IContainerBuilder WithBound(string boundStr, IBoundMapper mapper)
         {
             return WithBound(mapper.ToBound(boundStr));
         }
@@ -140,5 +166,14 @@ namespace Gift.Domain.Builders
             throw new NotImplementedException();
         }
 
+        public IContainerBuilder WithHeight(string heightStr)
+        {
+            return WithHeight(int.Parse(heightStr, NumberStyles.Integer));
+        }
+
+        public IContainerBuilder WithWidth(string widthStr)
+        {
+            return WithWidth(int.Parse(widthStr, NumberStyles.Integer));
+        }
     }
 }
