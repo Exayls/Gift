@@ -16,6 +16,7 @@ namespace Gift.Domain.Builders
         private Color _frontColor = Color.Default;
         private Color _backColor = Color.Default;
         private IList<UIElement> selectableElements = new List<UIElement>();
+        private IList<UIElement> unSelectableElements = new List<UIElement>();
         private IList<Container> selectableContainers = new List<Container>();
         private int? _height = null;
         private int? _width = null;
@@ -81,6 +82,12 @@ namespace Gift.Domain.Builders
             return this;
         }
 
+        public GiftUIBuilder WithUnSelectableElement(UIElement element)
+        {
+            unSelectableElements.Add(element);
+            return this;
+        }
+
         public GiftUI Build()
         {
 			var bound = new Bound(_height??_bound.Height, _width??_bound.Width);
@@ -88,6 +95,12 @@ namespace Gift.Domain.Builders
                               border: _border,
                               frontColor: _frontColor,
                               backColor: _backColor);
+
+            foreach (UIElement element in unSelectableElements)
+            {
+                giftui.AddUnselectableChild(element);
+
+            }
             foreach (UIElement element in selectableElements)
             {
                 giftui.AddSelectableChild(element);
@@ -119,6 +132,11 @@ namespace Gift.Domain.Builders
         IContainerBuilder IContainerBuilder.WithSelectableElement(UIElement element)
         {
             return WithSelectableElement(element);
+        }
+
+        IContainerBuilder IContainerBuilder.WithUnSelectableElement(UIElement element)
+        {
+			return WithUnSelectableElement(element);
         }
 
         IContainerBuilder IContainerBuilder.WithHeight(int height)

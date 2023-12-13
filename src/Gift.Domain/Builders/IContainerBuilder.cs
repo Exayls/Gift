@@ -16,5 +16,6 @@ namespace Gift.Domain.Builders
         public IContainerBuilder WithWidth(string widthStr);
 
         public IContainerBuilder WithSelectableElement(UIElement element);
+        public IContainerBuilder WithUnSelectableElement(UIElement element);
     }
 }

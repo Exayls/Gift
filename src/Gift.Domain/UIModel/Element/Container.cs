@@ -104,7 +104,10 @@ namespace Gift.Domain.UIModel.Element
 
         public void AddSelectableChild(UIElement uIElement)
         {
-            Childs.Add(uIElement);
+            if (!Childs.Contains(uIElement))
+            {
+                Childs.Add(uIElement);
+            }
             SelectableElements.Add(uIElement);
             if (SelectedElement == null)
             {

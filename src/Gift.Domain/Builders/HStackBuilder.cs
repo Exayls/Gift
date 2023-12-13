@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Collections.Generic;
+using System.Globalization;
 using Gift.Domain.Builders.Mappers;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Display;
@@ -16,6 +17,8 @@ namespace Gift.Domain.Builders
         private Color frontColor = Color.Default;
         private int? _height;
         private int? _width;
+        private IList<UIElement> unSelectableElements = new List<UIElement>();
+        private IList<UIElement> selectableElements = new List<UIElement>();
 
         public HStackBuilder WithBorder(IBorder border)
         {
@@ -53,14 +56,35 @@ namespace Gift.Domain.Builders
             return this;
         }
 
+        public HStackBuilder WithSelectableElement(UIElement element)
+        {
+            selectableElements.Add(element);
+            return this;
+        }
+        public HStackBuilder WithUnSelectableElement(UIElement element)
+        {
+            unSelectableElements.Add(element);
+            return this;
+        }
+
         public HStack Build()
         {
 			var bound = new Bound(_height??_bound.Height, _width??_bound.Width);
-            return new HStack(_border,
+            var hstack = new HStack(_border,
                               screenDisplayFactory,
                               bound,
                               frontColor: frontColor,
                               backColor: backColor);
+
+			foreach(UIElement element in unSelectableElements)
+			{
+				hstack.AddUnselectableChild(element);
+			}
+			foreach(UIElement element in selectableElements)
+			{
+				hstack.AddSelectableChild(element);
+			}
+            return hstack;
         }
 
         UIElement IBuilder<UIElement>.Build()
@@ -78,9 +102,14 @@ namespace Gift.Domain.Builders
             return WithBound(bound);
         }
 
-        public IContainerBuilder WithSelectableElement(UIElement element)
+        IContainerBuilder IContainerBuilder.WithSelectableElement(UIElement element)
         {
 			return WithSelectableElement(element);
+        }
+
+        IContainerBuilder IContainerBuilder.WithUnSelectableElement(UIElement element)
+        {
+			return WithUnSelectableElement(element);
         }
 
         IUIElementBuilder IUIElementBuilder.WithBorder(IBorder border)

@@ -73,17 +73,17 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             UIElement result = xmlParser.ParseUIFileUsingBuilders(filePath);
             // Assert
             var expected = new GiftUIBuilder()
-             .WithSelectableContainer(
+             .WithUnSelectableElement(
                         new VStackBuilder()
                         .WithBound(new Bound(5, 8))
                         .WithForegroundColor(Color.Blue)
-                        .WithSelectableElement(
+                        .WithUnSelectableElement(
                             new LabelBuilder()
                             .WithText("Hello")
                             .WithBorder(new DetailedBorder(1, BorderOption.Simple))
                             .Build()
                          )
-                        .WithSelectableElement(
+                        .WithUnSelectableElement(
                             new LabelBuilder()
                             .WithText("World")
                             .Build()

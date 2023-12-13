@@ -16,6 +16,7 @@ namespace Gift.Domain.Builders
         private Color backColor = Color.Default;
         private Color frontColor = Color.Default;
         private IList<UIElement> selectableElements = new List<UIElement>();
+        private IList<UIElement> unSelectableElements = new List<UIElement>();
         private int? _height;
         private int? _width;
 
@@ -48,6 +49,12 @@ namespace Gift.Domain.Builders
             return this;
         }
 
+        public VStackBuilder WithUnSelectableElement(UIElement element)
+        {
+            unSelectableElements.Add(element);
+            return this;
+        }
+
 
         public VStackBuilder WithHeight(int height)
         {
@@ -70,6 +77,10 @@ namespace Gift.Domain.Builders
                               bound,
                               frontColor: frontColor,
                               backColor: backColor);
+			foreach(UIElement element in unSelectableElements)
+			{
+				vstack.AddUnselectableChild(element);
+			}
 			foreach(UIElement element in selectableElements)
 			{
 				vstack.AddSelectableChild(element);
@@ -95,6 +106,11 @@ namespace Gift.Domain.Builders
         IContainerBuilder IContainerBuilder.WithSelectableElement(UIElement element)
         {
             return WithSelectableElement(element);
+        }
+
+        IContainerBuilder IContainerBuilder.WithUnSelectableElement(UIElement element)
+        {
+			return WithUnSelectableElement(element);
         }
 
         IUIElementBuilder IUIElementBuilder.WithBorder(IBorder border)
