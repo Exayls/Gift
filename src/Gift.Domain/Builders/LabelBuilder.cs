@@ -93,17 +93,17 @@ namespace Gift.Domain.Builders
 
         public IUIElementBuilder WithBorder(string borderStr, IBorderMapper mapper)
         {
-            throw new System.NotImplementedException();
+			return WithBorder(mapper.ToBorder(borderStr));
         }
 
         public IUIElementBuilder WithBackgroundColor(string colorStr, IColorMapper mapper)
         {
-            throw new System.NotImplementedException();
+			return WithBackgroundColor(mapper.ToColor(colorStr));
         }
 
         public IUIElementBuilder WithForegroundColor(string colorStr, IColorMapper mapper)
         {
-            throw new System.NotImplementedException();
+			return WithForegroundColor(mapper.ToColor(colorStr));
         }
     }
 
