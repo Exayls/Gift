@@ -71,8 +71,8 @@ namespace Gift.XmlUiParser.FileParser
         {
             UIElement component;
 
-
             component = CreateGenericComponentBuilders(element);
+			_logger.LogTrace(component.ToString());
 
             foreach (XmlNode childNode in element.ChildNodes)
             {
