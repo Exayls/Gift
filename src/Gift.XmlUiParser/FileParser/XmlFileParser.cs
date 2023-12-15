@@ -71,7 +71,7 @@ namespace Gift.XmlUiParser.FileParser
         {
             UIElement component;
 
-            component = CreateGenericComponentBuilders(element);
+            component = CreateComponent(element);
 			_logger.LogTrace(component.ToString());
 
             foreach (XmlNode childNode in element.ChildNodes)
@@ -79,7 +79,7 @@ namespace Gift.XmlUiParser.FileParser
                 if (childNode is not XmlElement) { continue; }
                 if (component is not Container container)
                 {
-                    throw new Exception("Only container component can have childs");
+                    throw new UncompatibleUIElementException($"component {component} must be container to contain childs");
                 }
 
                 if (childNode is XmlElement childElement)
@@ -93,7 +93,7 @@ namespace Gift.XmlUiParser.FileParser
             return component;
         }
 
-        private UIElement CreateGenericComponentBuilders(XmlElement element)
+        private UIElement CreateComponent(XmlElement element)
         {
             string componentName = element.Name;
             var builder = CreateBuilder(componentName);
