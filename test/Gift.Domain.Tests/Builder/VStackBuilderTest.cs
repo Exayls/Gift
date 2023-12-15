@@ -26,11 +26,13 @@ namespace TestGift.Builder
             Bound bound = new Bound(0, 0);
             VStackBuilder builder = new VStackBuilder()
                 .WithBound(bound)
-                .WithBorder(border);
+                .WithBorder(border)
+                .WithForegroundColor(Color.Blue);
 
             VStack v = builder.Build();
-            Assert.Equal(v.Border, border);
-            Assert.Equal(v.Bound, bound);
+            Assert.True(border.Equals(v.Border));
+            Assert.True(bound.Equals(v.Bound));
+            Assert.Equal(Color.Blue, v.FrontColor);
 
         }
     }
