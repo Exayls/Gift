@@ -72,6 +72,7 @@ namespace Gift.XmlUiParser.Tests.XmlParser
 		public void
 		When_ParseUIFile_is_called_should_create_all_objects_hierarchically()
 		{
+
 			var logger = LoggerHelper.GetLogger<IXMLFileParser>(_output);
 			// Arrange
 			string filePath = "ressources/xml/valid_xml.xml";
@@ -93,10 +94,8 @@ namespace Gift.XmlUiParser.Tests.XmlParser
 								new LabelBuilder().WithText("World").Build())
 							.Build())
 					.Build();
-			logger.LogTrace("aaaaaaaaaaaa");
 			Log(logger, expected);
-			// Log(logger, (GiftUI)result);
-			// logger.LogTrace("bbbbbbbbbbbb", expected, result);
+			Log(logger, (GiftUI)result);
 			Assert.True(expected.Equals(result));
 		}
 
