@@ -26,12 +26,10 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             var mockColorMapper = new ColorMapper();
             var mockBorderMapper = new BorderMapper();
             var mockBoundMapper = new BoundMapper();
-            var elementRegister = new UIElementRegister(
-                LoggerHelper.GetLogger<IUIElementRegister>(output), mockBorderMapper,
-                mockColorMapper, mockBoundMapper);
+            var elementRegister = new UIElementRegister(LoggerHelper.GetLogger<IUIElementRegister>(output),
+                                                        mockBorderMapper, mockColorMapper, mockBoundMapper);
 
-            xmlParser = new XmlFileParser(
-                elementRegister, LoggerHelper.GetLogger<IXMLFileParser>(output));
+            xmlParser = new XmlFileParser(elementRegister, LoggerHelper.GetLogger<IXMLFileParser>(output));
             _output = output;
         }
 
@@ -53,8 +51,7 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             // Arrange
             string filePath = "ressources/invalid/invalid.xml";
             // Act & Assert
-            Assert.Throws<DirectoryNotFoundException>(
-                () => xmlParser.ParseUIFile(filePath));
+            Assert.Throws<DirectoryNotFoundException>(() => xmlParser.ParseUIFile(filePath));
         }
 
         [Fact]
@@ -63,13 +60,11 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             // Arrange
             string filePath = "ressources/xml/not_supported.xml";
             // Act & Assert
-            Assert.Throws<NotSupportedException>(
-                () => xmlParser.ParseUIFile(filePath));
+            Assert.Throws<NotSupportedException>(() => xmlParser.ParseUIFile(filePath));
         }
 
         [Fact]
-        public void
-        When_ParseUIFile_is_called_should_create_all_objects_hierarchically()
+        public void When_ParseUIFile_is_called_should_create_all_objects_hierarchically()
         {
 
             var logger = LoggerHelper.GetLogger<IXMLFileParser>(_output);
@@ -86,11 +81,9 @@ namespace Gift.XmlUiParser.Tests.XmlParser
                             .WithForegroundColor(Color.Blue)
                             .WithUnSelectableElement(new LabelBuilder()
                                                          .WithText("Hello")
-                                                         .WithBorder(new DetailedBorder(
-                                                             1, BorderOption.Simple))
+                                                         .WithBorder(new DetailedBorder(1, BorderOption.Simple))
                                                          .Build())
-                            .WithUnSelectableElement(
-                                new LabelBuilder().WithText("World").Build())
+                            .WithUnSelectableElement(new LabelBuilder().WithText("World").Build())
                             .Build())
                     .Build();
             logger.LogTrace(expected.Childs.Count.ToString());
