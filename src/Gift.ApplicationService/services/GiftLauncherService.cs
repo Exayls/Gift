@@ -74,7 +74,7 @@ namespace Gift.ApplicationService.Services
 
         public virtual void Initialize(string xmlPath)
         {
-            _uiProvider.Ui = (GiftUI)_xmlParser.ParseUIFileUsingBuilders(xmlPath);
+            _uiProvider.Ui = (GiftUI)_xmlParser.ParseUIFile(xmlPath);
             update();
         }
 

@@ -69,21 +69,21 @@ namespace Gift.Domain.Builders
 
         public HStack Build()
         {
-			var bound = new Bound(_height??_bound.Height, _width??_bound.Width);
+            var bound = new Bound(_height ?? _bound.Height, _width ?? _bound.Width);
             var hstack = new HStack(_border,
                               screenDisplayFactory,
                               bound,
                               frontColor: frontColor,
                               backColor: backColor);
 
-			foreach(UIElement element in unSelectableElements)
-			{
-				hstack.AddUnselectableChild(element);
-			}
-			foreach(UIElement element in selectableElements)
-			{
-				hstack.AddSelectableChild(element);
-			}
+            foreach (UIElement element in unSelectableElements)
+            {
+                hstack.AddUnselectableChild(element);
+            }
+            foreach (UIElement element in selectableElements)
+            {
+                hstack.AddSelectableChild(element);
+            }
             return hstack;
         }
 
@@ -104,12 +104,12 @@ namespace Gift.Domain.Builders
 
         IContainerBuilder IContainerBuilder.WithSelectableElement(UIElement element)
         {
-			return WithSelectableElement(element);
+            return WithSelectableElement(element);
         }
 
         IContainerBuilder IContainerBuilder.WithUnSelectableElement(UIElement element)
         {
-			return WithUnSelectableElement(element);
+            return WithUnSelectableElement(element);
         }
 
         IUIElementBuilder IUIElementBuilder.WithBorder(IBorder border)
@@ -139,17 +139,17 @@ namespace Gift.Domain.Builders
 
         public IUIElementBuilder WithBorder(string borderStr, IBorderMapper mapper)
         {
-			return WithBorder(mapper.ToBorder(borderStr));
+            return WithBorder(mapper.ToBorder(borderStr));
         }
 
         public IUIElementBuilder WithBackgroundColor(string colorStr, IColorMapper mapper)
         {
-			return WithBackgroundColor(mapper.ToColor(colorStr));
+            return WithBackgroundColor(mapper.ToColor(colorStr));
         }
 
         public IUIElementBuilder WithForegroundColor(string colorStr, IColorMapper mapper)
         {
-			return WithForegroundColor(mapper.ToColor(colorStr));
+            return WithForegroundColor(mapper.ToColor(colorStr));
         }
         public IContainerBuilder WithBound(string boundStr, IBoundMapper mapper)
         {

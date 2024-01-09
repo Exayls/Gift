@@ -90,7 +90,7 @@ namespace Gift.Domain.Builders
 
         public GiftUI Build()
         {
-			var bound = new Bound(_height??_bound.Height, _width??_bound.Width);
+            var bound = new Bound(_height ?? _bound.Height, _width ?? _bound.Width);
             var giftui = new GiftUI(bound: bound,
                               border: _border,
                               frontColor: _frontColor,
@@ -136,7 +136,7 @@ namespace Gift.Domain.Builders
 
         IContainerBuilder IContainerBuilder.WithUnSelectableElement(UIElement element)
         {
-			return WithUnSelectableElement(element);
+            return WithUnSelectableElement(element);
         }
 
         IContainerBuilder IContainerBuilder.WithHeight(int height)
@@ -171,17 +171,17 @@ namespace Gift.Domain.Builders
 
         public IUIElementBuilder WithBorder(string borderStr, IBorderMapper mapper)
         {
-			return WithBorder(mapper.ToBorder(borderStr));
+            return WithBorder(mapper.ToBorder(borderStr));
         }
 
         public IUIElementBuilder WithBackgroundColor(string colorStr, IColorMapper mapper)
         {
-			return WithBackgroundColor(mapper.ToColor(colorStr));
+            return WithBackgroundColor(mapper.ToColor(colorStr));
         }
 
         public IUIElementBuilder WithForegroundColor(string colorStr, IColorMapper mapper)
         {
-			return WithForegroundColor(mapper.ToColor(colorStr));
+            return WithForegroundColor(mapper.ToColor(colorStr));
         }
 
         public IContainerBuilder WithHeight(string heightStr)

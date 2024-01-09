@@ -160,16 +160,16 @@ namespace Gift.Domain.UIModel.Border
         {
             if (!(border is DetailedBorder)) return false;
             if (Thickness != border.Thickness) return false;
-			var detailedBorder = (DetailedBorder) border;
+            var detailedBorder = (DetailedBorder)border;
 
-            if(tlBorder != detailedBorder.tlBorder) return false;
-            if(trBorder != detailedBorder.trBorder) return false;
-            if(blBorder != detailedBorder.blBorder) return false;
-            if(brBorder != detailedBorder.brBorder) return false;
-            if(tBorder != detailedBorder.tBorder) return false;
-            if(bBorder != detailedBorder.bBorder) return false;
-            if(lBorder != detailedBorder.lBorder) return false;
-            if(rBorder != detailedBorder.rBorder) return false;
+            if (tlBorder != detailedBorder.tlBorder) return false;
+            if (trBorder != detailedBorder.trBorder) return false;
+            if (blBorder != detailedBorder.blBorder) return false;
+            if (brBorder != detailedBorder.brBorder) return false;
+            if (tBorder != detailedBorder.tBorder) return false;
+            if (bBorder != detailedBorder.bBorder) return false;
+            if (lBorder != detailedBorder.lBorder) return false;
+            if (rBorder != detailedBorder.rBorder) return false;
 
             return true;
         }

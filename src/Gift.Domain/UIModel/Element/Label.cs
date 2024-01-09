@@ -76,11 +76,11 @@ namespace Gift.Domain.UIModel.Element
 
         public override bool Equals(UIElement uiElement)
         {
-			if(!(base.Equals(uiElement))) return false;
-			if(!(uiElement is Label)) return false;
-			Label element = (Label) uiElement;
-			if(this.Text != element.Text) return false;
-			return true;
+            if (!(base.Equals(uiElement))) return false;
+            if (!(uiElement is Label)) return false;
+            Label element = (Label)uiElement;
+            if (this.Text != element.Text) return false;
+            return true;
         }
     }
 }

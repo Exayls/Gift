@@ -9,6 +9,6 @@ namespace Gift.Domain.UIModel.Border
 
         public IScreenDisplay GetDisplay(Bound bound, char fillingChar = ' ');
         public IScreenDisplay GetDisplay(Bound bound, Color frontColor, Color backColor, char fillingChar = ' ');
-		public bool Equals(IBorder border);
+        public bool Equals(IBorder border);
     }
 }

@@ -8,153 +8,162 @@ using System.Xml;
 
 namespace Gift.XmlUiParser.FileParser
 {
-	public class XmlFileParser : IXMLFileParser
-	{
-		private readonly IUIElementRegister _uielementRegister;
-		private GiftUI? giftUI = null;
-		private readonly ILogger<IXMLFileParser> _logger;
+    public class XmlFileParser : IXMLFileParser
+    {
+        private readonly IUIElementRegister _uielementRegister;
+        private GiftUI? giftUI = null;
+        private readonly ILogger<IXMLFileParser> _logger;
 
-		public XmlFileParser(IUIElementRegister elementRegister, ILogger<IXMLFileParser> logger)
-		{
-			_uielementRegister = elementRegister;
-			_logger = logger;
-		}
+        public XmlFileParser(IUIElementRegister elementRegister,
+                             ILogger<IXMLFileParser> logger)
+        {
+            _uielementRegister = elementRegister;
+            _logger = logger;
+        }
 
+        private void SelectContainer(UIElement uiElement, XmlElement element)
+        {
+            if (giftUI == null)
+            {
+                return;
+            }
+            if (uiElement is Container container)
+            {
+                if (element.GetAttribute("selectableContainer") == "true")
+                {
+                    giftUI.SelectableContainers.Add(container);
+                }
+                if (element.GetAttribute("selectedContainer") == "true")
+                {
+                    giftUI.SelectedContainer = container;
+                }
+            }
+        }
 
+        private void SelectElement(UIElement uiElement, XmlElement element,
+                                   Container container)
+        {
+            if (element.GetAttribute("selectableElement") == "true")
+            {
+                container.SelectableElements.Add(uiElement);
+            }
+            if (element.GetAttribute("selectedElement") == "true")
+            {
+                container.SelectedElement = uiElement;
+            }
+        }
 
+        public UIElement ParseUIFile(string filePath)
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(filePath);
 
+            if (xmlDoc.DocumentElement == null)
+            {
+                throw new NullReferenceException();
+            }
+            return ParseUIElementRec(xmlDoc.DocumentElement);
+        }
 
-		private void SelectContainer(UIElement uiElement, XmlElement element)
-		{
-			if (giftUI == null)
-			{
-				return;
-			}
-			if (uiElement is Container container)
-			{
-				if (element.GetAttribute("selectableContainer") == "true")
-				{
-					giftUI.SelectableContainers.Add(container);
-				}
-				if (element.GetAttribute("selectedContainer") == "true")
-				{
-					giftUI.SelectedContainer = container;
-				}
-			}
-		}
+        private UIElement ParseUIElementRec(XmlElement element)
+        {
+            IBuilder<UIElement> componentBuilder;
 
-		private void SelectElement(UIElement uiElement, XmlElement element, Container container)
-		{
-			if (element.GetAttribute("selectableElement") == "true")
-			{
-				container.SelectableElements.Add(uiElement);
-			}
-			if (element.GetAttribute("selectedElement") == "true")
-			{
-				container.SelectedElement = uiElement;
-			}
-		}
+            componentBuilder = CreateElementBuilder(element);
+            _logger.LogTrace(componentBuilder.ToString());
 
-		public UIElement ParseUIFileUsingBuilders(string filePath)
-		{
-			XmlDocument xmlDoc = new XmlDocument();
-			xmlDoc.Load(filePath);
+            foreach (XmlNode childNode in element.ChildNodes)
+            {
+                if (childNode is not XmlElement)
+                {
+                    continue;
+                }
+                if (componentBuilder is not Container container)
+                {
+                    throw new UncompatibleUIElementException(
+                        $"component {componentBuilder} must be container to contain childs");
+                }
 
-			if (xmlDoc.DocumentElement == null)
-			{
-				throw new NullReferenceException();
-			}
-			return ParseUIElementRecBuilders(xmlDoc.DocumentElement, null);
-		}
+                if (childNode is XmlElement childElement)
+                {
+                    UIElement childComponent = ParseUIElementRec(childElement);
+                    container.AddUnselectableChild(childComponent);
+                    SelectElement(childComponent, childElement, container);
+                    SelectContainer(childComponent, childElement);
+                }
+            }
+            return componentBuilder.Build();
+        }
 
-		private UIElement ParseUIElementRecBuilders(XmlElement element, Container? parent)
-		{
-			UIElement component;
+        private IBuilder<UIElement> CreateElementBuilder(XmlElement element)
+        {
+            var builder = CreateBuilder(element.Name);
+            IBuilder<UIElement> uiElementBuilder = ConstructElement(element, builder);
+            return uiElementBuilder;
+        }
 
-			component = CreateComponent(element);
-			_logger.LogTrace(component.ToString());
+        private IBuilder<UIElement> CreateBuilder(string componentName)
+        {
+            var builderType = _uielementRegister.GetBuilder(componentName);
+            var builder = (IBuilder<UIElement>)builderType.GetConstructors()[0].Invoke(
+                new object[] { });
+            return builder;
+        }
 
-			foreach (XmlNode childNode in element.ChildNodes)
-			{
-				if (childNode is not XmlElement) { continue; }
-				if (component is not Container container)
-				{
-					throw new UncompatibleUIElementException($"component {component} must be container to contain childs");
-				}
+        private IBuilder<UIElement> ConstructElement(XmlElement element,
+                                                     IBuilder<UIElement> builder)
+        {
+            XmlAttributeCollection attributes = element.Attributes;
+            foreach (XmlAttribute attribute in attributes)
+            {
+                AddParameterIfPossible(builder, attribute);
+            }
+            return builder;
+        }
 
-				if (childNode is XmlElement childElement)
-				{
-					UIElement childComponent = ParseUIElementRecBuilders(childElement, container);
-					container.AddUnselectableChild(childComponent);
-					SelectElement(childComponent, childElement, container);
-					SelectContainer(childComponent, childElement);
-				}
-			}
-			return component;
-		}
+        private void AddParameterIfPossible(IBuilder<UIElement> builder,
+                                            XmlAttribute attribute)
+        {
+            var attributeName = attribute.Name;
+            var method = GetMethod(builder, attributeName);
+            if (method == null)
+            {
+                return;
+            }
+            var attributeValue = attribute.InnerText;
+            ExecBuilderMethod(builder, method, attributeValue);
+        }
 
-		private UIElement CreateComponent(XmlElement element)
-		{
-			string componentName = element.Name;
-			var builder = CreateBuilder(componentName);
-			UIElement uiElement = ConstructElement(element, builder);
-			return uiElement;
-		}
+        private IBuilder<UIElement>? ExecBuilderMethod(
+            IBuilder<UIElement> builder,
+            Func<IBuilder<UIElement>, object, IBuilder<UIElement>> method,
+            string attributeValue)
+        {
+            try
+            {
+                return method(builder, attributeValue);
+            }
+            catch (Exception e)
+            {
+                _logger.LogDebug(
+                    e,
+                    $"Can't execute the method: {method} with parameter: {attributeValue}");
+            }
+            return null;
+        }
 
-		private IBuilder<UIElement> CreateBuilder(string componentName)
-		{
-			var builderType = _uielementRegister.GetBuilder(componentName);
-			var builder = (IBuilder<UIElement>)builderType.GetConstructors()[0].Invoke(new object[] { });
-			return builder;
-		}
-
-		private UIElement ConstructElement(XmlElement element, IBuilder<UIElement> builder)
-		{
-			XmlAttributeCollection attributes = element.Attributes;
-			foreach (XmlAttribute attribute in attributes)
-			{
-				AddParameterIfPossible(builder, attribute);
-			}
-			return builder.Build();
-		}
-
-		private void AddParameterIfPossible(IBuilder<UIElement> builder, XmlAttribute attribute)
-		{
-			var attributeName = attribute.Name;
-			var method = GetMethod(builder, attributeName);
-			if (method == null)
-			{
-				return;
-			}
-			var attributeValue = attribute.InnerText;
-			ExecBuilderMethod(builder, method, attributeValue);
-		}
-
-		private IBuilder<UIElement>? ExecBuilderMethod(IBuilder<UIElement> builder, Func<IBuilder<UIElement>, object, IBuilder<UIElement>> method, string attributeValue)
-		{
-			try
-			{
-				return method(builder, attributeValue);
-			}
-			catch (Exception e)
-			{
-				_logger.LogDebug(e, $"Can't execute the method: {method} with parameter: {attributeValue}");
-			}
-			return null;
-		}
-
-		private Func<IBuilder<UIElement>, object, IBuilder<UIElement>>? GetMethod(IBuilder<UIElement> builder, string attributeName)
-		{
-			try
-			{
-				return _uielementRegister.GetMethod(builder.GetType(), attributeName);
-			}
-			catch (Exception e)
-			{
-				_logger.LogDebug(e, $"attributeName {attributeName} is not registered");
-			}
-			return null;
-		}
-	}
+        private Func<IBuilder<UIElement>, object, IBuilder<UIElement>>? GetMethod(
+            IBuilder<UIElement> builder, string attributeName)
+        {
+            try
+            {
+                return _uielementRegister.GetMethod(builder.GetType(), attributeName);
+            }
+            catch (Exception e)
+            {
+                _logger.LogDebug(e, $"attributeName {attributeName} is not registered");
+            }
+            return null;
+        }
+    }
 }
-

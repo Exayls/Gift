@@ -45,7 +45,7 @@ namespace TestGift.Mocks
 
         public override bool Equals(UIElement uiElement)
         {
-			return false;
+            return false;
         }
     }
 }

@@ -14,21 +14,15 @@ namespace TestGift.Test.UI
     {
         private Renderer renderer;
 
-        public RendererTest()
-        {
-            renderer = new Renderer(new DefaultConfiguration());
-        }
+        public RendererTest() { renderer = new Renderer(new DefaultConfiguration()); }
 
         [Fact]
         public void Can_render_Simple_UI()
         {
             GiftUI ui = CreateGiftUi(new Bound(5, 10), new NoBorder());
             IScreenDisplay rendered = renderer.GetRenderDisplay(ui);
-            const string expected = "**********\n" +
-                                    "**********\n" +
-                                    "**********\n" +
-                                    "**********\n" +
-                                    "**********";
+            const string expected = "**********\n" + "**********\n" + "**********\n" +
+                                    "**********\n" + "**********";
             Assert.Equal(expected, rendered.DisplayString.ToString());
         }
 
@@ -42,10 +36,20 @@ namespace TestGift.Test.UI
         {
             GiftUI ui = CreateGiftUi(new Bound(10, 10), new NoBorder());
 
-            VStack vstack = new VStackBuilder().WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile("ressources/borderChars/double_border.json"))).Build();
+            VStack vstack =
+                new VStackBuilder()
+                    .WithBorder(new DetailedBorder(
+                        1, BorderOption.GetBorderCharsFromFile(
+                               "ressources/borderChars/double_border.json")))
+                    .Build();
             vstack.AddUnselectableChild(new LabelBuilder().Build());
             ui.AddUnselectableChild(vstack);
-            VStack vstack2 = new VStackBuilder().WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile("ressources/borderChars/simple_border.json"))).Build();
+            VStack vstack2 =
+                new VStackBuilder()
+                    .WithBorder(new DetailedBorder(
+                        1, BorderOption.GetBorderCharsFromFile(
+                               "ressources/borderChars/simple_border.json")))
+                    .Build();
             vstack.AddUnselectableChild(vstack2);
             vstack2.AddUnselectableChild(new LabelBuilder().WithText("hey").Build());
             vstack2.AddUnselectableChild(new LabelBuilder().Build());
@@ -68,13 +72,26 @@ namespace TestGift.Test.UI
         {
             GiftUI ui = CreateGiftUi(new Bound(10, 10), new NoBorder());
 
-            VStack vstack = new VStackBuilder().WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile("ressources/borderChars/double_border.json"))).Build();
+            VStack vstack =
+                new VStackBuilder()
+                    .WithBorder(new DetailedBorder(
+                        1, BorderOption.GetBorderCharsFromFile(
+                               "ressources/borderChars/double_border.json")))
+                    .Build();
             vstack.AddUnselectableChild(new LabelBuilder().Build());
             ui.AddUnselectableChild(vstack);
-            VStack vstack2 = new VStackBuilder().WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile("ressources/borderChars/simple_border.json"))).Build();
+            VStack vstack2 =
+                new VStackBuilder()
+                    .WithBorder(new DetailedBorder(
+                        1, BorderOption.GetBorderCharsFromFile(
+                               "ressources/borderChars/simple_border.json")))
+                    .Build();
             vstack.AddUnselectableChild(vstack2);
             vstack2.AddUnselectableChild(new LabelBuilder().WithText("hey").Build());
-            vstack2.AddUnselectableChild(new LabelBuilder().WithText("test6").WithPosition(new Position(-2, 3)).Build());
+            vstack2.AddUnselectableChild(new LabelBuilder()
+                                             .WithText("test6")
+                                             .WithPosition(new Position(-2, 3))
+                                             .Build());
             vstack2.AddUnselectableChild(new LabelBuilder().Build());
             IScreenDisplay rendered = renderer.GetRenderDisplay(ui);
             const string expected = "╔════════╗\n" +

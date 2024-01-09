@@ -15,10 +15,10 @@
             {
                 return false;
             }
-			if (!(Width == bound.Width) || !(Height == bound.Height))
-			{
-				return false;
-			}
+            if (!(Width == bound.Width) || !(Height == bound.Height))
+            {
+                return false;
+            }
             return true;
         }
     }

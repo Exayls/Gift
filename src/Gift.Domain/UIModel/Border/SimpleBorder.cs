@@ -53,8 +53,8 @@ namespace Gift.Domain.UIModel.Border
         {
             if (!(border is SimpleBorder)) return false;
             if (Thickness != border.Thickness) return false;
-			var simpleBorder = (SimpleBorder) border;
-			if (BorderChar != simpleBorder.BorderChar) return false;
+            var simpleBorder = (SimpleBorder)border;
+            if (BorderChar != simpleBorder.BorderChar) return false;
             return true;
         }
 

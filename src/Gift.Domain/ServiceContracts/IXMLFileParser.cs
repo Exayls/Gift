@@ -4,7 +4,7 @@ namespace Gift.Domain.ServiceContracts
 {
     public interface IXMLFileParser
     {
-        UIElement ParseUIFileUsingBuilders(string filePath);
+        UIElement ParseUIFile(string filePath);
 
     }
 }

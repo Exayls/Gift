@@ -133,13 +133,13 @@ namespace Gift.Domain.UIModel
         public override bool Equals(UIElement uiElement)
         {
             if (!(uiElement is GiftUI)) return false;
-               var element = (GiftUI)uiElement;
+            var element = (GiftUI)uiElement;
             if (SelectableContainers.Count != element.SelectableContainers.Count) return false;
             foreach ((Container element1, Container element2) elementTuple in SelectableContainers.Zip(element.SelectableContainers))
             {
                 if (!(elementTuple.element1.Equals(elementTuple.element2))) return false;
             }
-               return base.Equals(uiElement);
+            return base.Equals(uiElement);
         }
     }
 }
