@@ -1,10 +1,13 @@
 ﻿using System;
 using System.IO;
+using Gift.Displayer.Displayer;
+using Gift.Displayer.Rendering;
 using Gift.Domain.Builders;
 using Gift.Domain.Builders.Mappers;
 using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Border;
+using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
 using Gift.XmlUiParser.FileParser;
@@ -21,6 +24,9 @@ namespace Gift.XmlUiParser.Tests.XmlParser
         private XmlFileParser xmlParser;
         private readonly ITestOutputHelper _output;
 
+        private readonly Renderer _renderer;
+        private readonly ConsoleDisplayer _displayer;
+
         public XmlFileParserTests(ITestOutputHelper output)
         {
             var mockColorMapper = new ColorMapper();
@@ -31,6 +37,9 @@ namespace Gift.XmlUiParser.Tests.XmlParser
 
             xmlParser = new XmlFileParser(elementRegister, LoggerHelper.GetLogger<IXMLFileParser>(output));
             _output = output;
+
+			_renderer = new Renderer(new DefaultConfiguration());
+			_displayer = new ConsoleDisplayer(new ConsoleDisplayStringFormater());
         }
 
         [Fact]
@@ -86,6 +95,8 @@ namespace Gift.XmlUiParser.Tests.XmlParser
                             .WithUnSelectableElement(new LabelBuilder().WithText("World").Build())
                             .Build())
                     .Build();
+
+			logger.LogTrace(_renderer.GetRenderDisplay((GiftUI)result).DisplayString.ToString());
             logger.LogTrace(expected.Childs.Count.ToString());
             Log(logger, expected);
             Log(logger, (GiftUI)result);
