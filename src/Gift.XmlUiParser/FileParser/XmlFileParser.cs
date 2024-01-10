@@ -14,8 +14,7 @@ namespace Gift.XmlUiParser.FileParser
         private GiftUI? giftUI = null;
         private readonly ILogger<IXMLFileParser> _logger;
 
-        public XmlFileParser(IUIElementRegister elementRegister,
-                             ILogger<IXMLFileParser> logger)
+        public XmlFileParser(IUIElementRegister elementRegister, ILogger<IXMLFileParser> logger)
         {
             _uielementRegister = elementRegister;
             _logger = logger;
@@ -40,8 +39,7 @@ namespace Gift.XmlUiParser.FileParser
             }
         }
 
-        private void SelectElement(UIElement uiElement, XmlElement element,
-                                   Container container)
+        private void SelectElement(UIElement uiElement, XmlElement element, Container container)
         {
             if (element.GetAttribute("selectableElement") == "true")
             {
@@ -78,7 +76,7 @@ namespace Gift.XmlUiParser.FileParser
                 {
                     continue;
                 }
-                if (componentBuilder is not Container container)
+                if (componentBuilder is not IBuilder<Container> containerBuilder)
                 {
                     throw new UncompatibleUIElementException(
                         $"component {componentBuilder} must be container to contain childs");
@@ -87,6 +85,7 @@ namespace Gift.XmlUiParser.FileParser
                 if (childNode is XmlElement childElement)
                 {
                     UIElement childComponent = ParseUIElementRec(childElement);
+					var container = containerBuilder.Build();
                     container.AddUnselectableChild(childComponent);
                     SelectElement(childComponent, childElement, container);
                     SelectContainer(childComponent, childElement);
@@ -105,13 +104,11 @@ namespace Gift.XmlUiParser.FileParser
         private IBuilder<UIElement> CreateBuilder(string componentName)
         {
             var builderType = _uielementRegister.GetBuilder(componentName);
-            var builder = (IBuilder<UIElement>)builderType.GetConstructors()[0].Invoke(
-                new object[] { });
+            var builder = (IBuilder<UIElement>)builderType.GetConstructors() [0].Invoke(new object[] {});
             return builder;
         }
 
-        private IBuilder<UIElement> ConstructElement(XmlElement element,
-                                                     IBuilder<UIElement> builder)
+        private IBuilder<UIElement> ConstructElement(XmlElement element, IBuilder<UIElement> builder)
         {
             XmlAttributeCollection attributes = element.Attributes;
             foreach (XmlAttribute attribute in attributes)
@@ -121,8 +118,7 @@ namespace Gift.XmlUiParser.FileParser
             return builder;
         }
 
-        private void AddParameterIfPossible(IBuilder<UIElement> builder,
-                                            XmlAttribute attribute)
+        private void AddParameterIfPossible(IBuilder<UIElement> builder, XmlAttribute attribute)
         {
             var attributeName = attribute.Name;
             var method = GetMethod(builder, attributeName);
@@ -134,10 +130,9 @@ namespace Gift.XmlUiParser.FileParser
             ExecBuilderMethod(builder, method, attributeValue);
         }
 
-        private IBuilder<UIElement>? ExecBuilderMethod(
-            IBuilder<UIElement> builder,
-            Func<IBuilder<UIElement>, object, IBuilder<UIElement>> method,
-            string attributeValue)
+        private IBuilder<UIElement>? ExecBuilderMethod(IBuilder<UIElement> builder,
+                                                       Func<IBuilder<UIElement>, object, IBuilder<UIElement>> method,
+                                                       string attributeValue)
         {
             try
             {
@@ -145,15 +140,13 @@ namespace Gift.XmlUiParser.FileParser
             }
             catch (Exception e)
             {
-                _logger.LogDebug(
-                    e,
-                    $"Can't execute the method: {method} with parameter: {attributeValue}");
+                _logger.LogDebug(e, $"Can't execute the method: {method} with parameter: {attributeValue}");
             }
             return null;
         }
 
-        private Func<IBuilder<UIElement>, object, IBuilder<UIElement>>? GetMethod(
-            IBuilder<UIElement> builder, string attributeName)
+        private Func<IBuilder<UIElement>, object, IBuilder<UIElement>>? GetMethod(IBuilder<UIElement> builder,
+                                                                                  string attributeName)
         {
             try
             {
