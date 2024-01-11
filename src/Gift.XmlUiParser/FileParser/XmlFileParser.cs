@@ -70,6 +70,8 @@ namespace Gift.XmlUiParser.FileParser
             componentBuilder = CreateElementBuilder(element);
             _logger.LogTrace(componentBuilder.ToString());
 
+            UIElement uIElement = componentBuilder.Build();
+
             foreach (XmlNode childNode in element.ChildNodes)
             {
                 if (childNode is not XmlElement)
@@ -85,13 +87,14 @@ namespace Gift.XmlUiParser.FileParser
                 if (childNode is XmlElement childElement)
                 {
                     UIElement childComponent = ParseUIElementRec(childElement);
-					var container = containerBuilder.Build();
+                    var container = (Container)uIElement;
                     container.AddUnselectableChild(childComponent);
                     SelectElement(childComponent, childElement, container);
                     SelectContainer(childComponent, childElement);
                 }
             }
-            return componentBuilder.Build();
+
+            return uIElement;
         }
 
         private IBuilder<UIElement> CreateElementBuilder(XmlElement element)
