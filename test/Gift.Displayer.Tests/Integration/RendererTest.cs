@@ -40,7 +40,7 @@ namespace TestGift.Test.UI
                 new VStackBuilder()
                     .WithBorder(new DetailedBorder(
                         1, BorderOption.GetBorderCharsFromFile(
-                               "ressources/borderChars/double_border.json")))
+                               "ressources/borderchars/double_border.json")))
                     .Build();
             vstack.AddUnselectableChild(new LabelBuilder().Build());
             ui.AddUnselectableChild(vstack);
@@ -48,7 +48,7 @@ namespace TestGift.Test.UI
                 new VStackBuilder()
                     .WithBorder(new DetailedBorder(
                         1, BorderOption.GetBorderCharsFromFile(
-                               "ressources/borderChars/simple_border.json")))
+                               "ressources/borderchars/simple_border.json")))
                     .Build();
             vstack.AddUnselectableChild(vstack2);
             vstack2.AddUnselectableChild(new LabelBuilder().WithText("hey").Build());
@@ -76,7 +76,7 @@ namespace TestGift.Test.UI
                 new VStackBuilder()
                     .WithBorder(new DetailedBorder(
                         1, BorderOption.GetBorderCharsFromFile(
-                               "ressources/borderChars/double_border.json")))
+                               "ressources/borderchars/double_border.json")))
                     .Build();
             vstack.AddUnselectableChild(new LabelBuilder().Build());
             ui.AddUnselectableChild(vstack);
@@ -84,7 +84,7 @@ namespace TestGift.Test.UI
                 new VStackBuilder()
                     .WithBorder(new DetailedBorder(
                         1, BorderOption.GetBorderCharsFromFile(
-                               "ressources/borderChars/simple_border.json")))
+                               "ressources/borderchars/simple_border.json")))
                     .Build();
             vstack.AddUnselectableChild(vstack2);
             vstack2.AddUnselectableChild(new LabelBuilder().WithText("hey").Build());
