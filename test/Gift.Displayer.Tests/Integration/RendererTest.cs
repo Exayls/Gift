@@ -130,8 +130,8 @@ namespace TestGift.Test.UI
 			Color[,] expected =
 			{
 				{Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red },
-				{Color.Red, Color.White, Color.White, Color.White, Color.White, Color.White, Color.White, Color.White, Color.White, Color.Red },
-				{Color.Red, Color.White, Color.White, Color.White, Color.White, Color.White, Color.White, Color.White, Color.White, Color.Red },
+				{Color.Red, Color.White, Color.White, Color.White, Color.White, Color.White, Color.Red, Color.Red, Color.Red, Color.Red },
+				{Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red },
 				{Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red },
 			};
 

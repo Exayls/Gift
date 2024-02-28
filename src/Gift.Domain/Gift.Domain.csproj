@@ -12,18 +12,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Update="ressources\borderchars\double_border.json">
+		<Content Include="ressources\borderchars\double_border.json">
 			<CopyToOutputDirectory>always</CopyToOutputDirectory>
-		</None>
-		<None Update="ressources\borderchars\heavy_border.json">
+		</Content>
+		<Content Include="ressources\borderchars\heavy_border.json">
 			<CopyToOutputDirectory>always</CopyToOutputDirectory>
-		</None>
-		<None Update="ressources\borderchars\simple_border.json">
+		</Content>
+		<Content Include="ressources\borderchars\simple_border.json">
 			<CopyToOutputDirectory>always</CopyToOutputDirectory>
-		</None>
-		<None Update="ressources\keyconfig\keymap.json">
+		</Content>
+		<Content Include="ressources\keyconfig\keymap.json">
 			<CopyToOutputDirectory>always</CopyToOutputDirectory>
-		</None>
+		</Content>
 	</ItemGroup>
 
 </Project>
