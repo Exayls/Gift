@@ -98,6 +98,26 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             Assert.True(expected.Equals(result));
         }
 
+
+        [Fact]
+        public void Given_xml_with_container_is_selectable_when_parsing_should_create_selectable_container()
+        {
+
+            var logger = LoggerHelper.GetLogger<IXMLFileParser>(_output);
+            // Arrange
+            string filePath = "ressources/xml/selectable.xml";
+            // Act
+            UIElement result = xmlParser.ParseUIFile(filePath);
+            // Assert
+            var expected =
+                new GiftUIBuilder()
+                    .WithSelectableContainer(
+                        new VStackBuilder()
+                            .Build())
+                    .Build();
+            Assert.True(expected.Equals(result));
+        }
+
         private static void Log(ILogger<IXMLFileParser> logger, GiftUI element)
         {
             logger.LogTrace("{}", element.Childs[0].BackColor);
