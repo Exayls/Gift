@@ -38,8 +38,8 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             xmlParser = new XmlFileParser(elementRegister, LoggerHelper.GetLogger<IXMLFileParser>(output));
             _output = output;
 
-			_renderer = new Renderer(new DefaultConfiguration());
-			_displayer = new ConsoleDisplayer(new ConsoleDisplayStringFormater());
+            _renderer = new Renderer(new DefaultConfiguration());
+            _displayer = new ConsoleDisplayer(new ConsoleDisplayStringFormater());
         }
 
         [Fact]
@@ -95,11 +95,6 @@ namespace Gift.XmlUiParser.Tests.XmlParser
                             .WithUnSelectableElement(new LabelBuilder().WithText("World").Build())
                             .Build())
                     .Build();
-
-			logger.LogTrace(_renderer.GetRenderDisplay((GiftUI)result).DisplayString.ToString());
-            logger.LogTrace(expected.Childs.Count.ToString());
-            Log(logger, expected);
-            Log(logger, (GiftUI)result);
             Assert.True(expected.Equals(result));
         }
 
