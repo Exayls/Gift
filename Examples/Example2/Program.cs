@@ -4,6 +4,7 @@ using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.MetaData;
 using Gift.Startup.Extensions;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog;
 
 var ui = new GiftUIBuilder().Build();
 
@@ -50,6 +51,12 @@ ui.SelectableContainers.Add(vstack2);
 ui.SelectedContainer = vstack2;
 
 var services = new ServiceCollection();
+Log.Logger = new LoggerConfiguration()
+                 .WriteTo.File($"logs/Example4_.log", rollingInterval: RollingInterval.Day)
+                 .MinimumLevel.Information()
+                 .CreateLogger();
+services.AddLogging(builder =>
+                    { builder.AddSerilog(); });
 services.AddGiftServices();
 var serviceProvider = services.BuildServiceProvider();
 var gift = serviceProvider.GetRequiredService<IGiftService>();

@@ -4,6 +4,7 @@ using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.MetaData;
 using Gift.Startup.Extensions;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog;
 
 var ui = new GiftUIBuilder().Build();
 
@@ -28,6 +29,12 @@ vstack2.AddUnselectableChild(new LabelBuilder().WithText("test6").WithPosition(n
 
 
 var services = new ServiceCollection();
+Log.Logger = new LoggerConfiguration()
+                 .WriteTo.File($"logs/Example4_.log", rollingInterval: RollingInterval.Day)
+                 .MinimumLevel.Information()
+                 .CreateLogger();
+services.AddLogging(builder =>
+                    { builder.AddSerilog(); });
 services.AddGiftServices();
 var serviceProvider = services.BuildServiceProvider();
 var gift = serviceProvider.GetRequiredService<IGiftService>();

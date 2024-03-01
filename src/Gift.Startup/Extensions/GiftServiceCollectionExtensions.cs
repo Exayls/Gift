@@ -4,10 +4,6 @@ using Gift.ApplicationService.Extensions;
 using Gift.Displayer.Extensions;
 using Gift.ConsoleMonitor.Extensions;
 using Gift.Domain.Extensions;
-using Microsoft.Extensions.Logging;
-using System.Linq;
-using System.Reflection;
-using Serilog;
 
 namespace Gift.Startup.Extensions
 {
@@ -21,22 +17,6 @@ namespace Gift.Startup.Extensions
             services.AddGiftKeyInteraction();
             services.AddGiftConsoleMonitor();
             services.AddDomainServices();
-
-            var assemblyName = Assembly.GetEntryAssembly()?.GetName().Name ?? "GiftApp";
-
-            if (!services.Any(s => s.ServiceType == typeof(ILogger<>)))
-            {
-                Log.Logger = new LoggerConfiguration()
-                    .WriteTo.File($"logs/{assemblyName}_.log", rollingInterval: RollingInterval.Day)
-                       .MinimumLevel.Debug()
-                    .CreateLogger();
-
-                services.AddLogging(builder =>
-                {
-                    builder.AddSerilog();
-                });
-            }
-
             return services;
         }
     }
