@@ -30,11 +30,11 @@ namespace TestGift.Test.UI
             GiftUI ui = CreateGiftUi(new Bound(5, 10), new NoBorder());
             IScreenDisplay rendered = renderer.GetRenderDisplay(ui);
             // clang-format off
-            const string expected = "**********\n" +
-                                    "**********\n" +
-                                    "**********\n" +
-                                    "**********\n" +
-                                    "**********";
+			const string expected = "**********\n" +
+									"**********\n" +
+									"**********\n" +
+									"**********\n" +
+									"**********";
             // clang-format on
             Assert.Equal(expected, rendered.DisplayString.ToString());
         }
@@ -64,16 +64,16 @@ namespace TestGift.Test.UI
             vstack2.AddUnselectableChild(new LabelBuilder().Build());
             IScreenDisplay rendered = renderer.GetRenderDisplay(ui);
             // clang-format off
-            const string expected = "╔════════╗\n" +
-                                    "║Hello***║\n" +
-                                    "║┌─────┐*║\n" +
-                                    "║│hey**│*║\n" +
-                                    "║│Hello│*║\n" +
-                                    "║└─────┘*║\n" +
-                                    "║********║\n" +
-                                    "║********║\n" +
-                                    "║********║\n" +
-                                    "╚════════╝";
+			const string expected = "╔════════╗\n" +
+									"║Hello***║\n" +
+									"║┌─────┐*║\n" +
+									"║│hey**│*║\n" +
+									"║│Hello│*║\n" +
+									"║└─────┘*║\n" +
+									"║********║\n" +
+									"║********║\n" +
+									"║********║\n" +
+									"╚════════╝";
             // clang-format on
             Assert.Equal(expected, rendered.DisplayString.ToString());
         }
@@ -101,16 +101,16 @@ namespace TestGift.Test.UI
             IScreenDisplay rendered = renderer.GetRenderDisplay(ui);
 
             // clang-format off
-            const string expected = "╔════════╗\n" +
-                                    "║Hello***║\n" +
-                                    "║┌─────┐*║\n" +
-                                    "║│hey**│*║\n" +
-                                    "║│Hello│*║\n" +
-                                    "║└─────┘*║\n" +
-                                    "║********║\n" +
-                                    "║********║\n" +
-                                    "║********║\n" +
-                                    "╚════════╝";
+			const string expected = "╔════════╗\n" +
+									"║Hello***║\n" +
+									"║┌─────┐*║\n" +
+									"║│hey**│*║\n" +
+									"║│Hello│*║\n" +
+									"║└─────┘*║\n" +
+									"║********║\n" +
+									"║********║\n" +
+									"║********║\n" +
+									"╚════════╝";
             // clang-format on
             Assert.Equal(expected, rendered.DisplayString.ToString());
         }
@@ -127,13 +127,13 @@ namespace TestGift.Test.UI
 
             IScreenDisplay rendered = renderer.GetRenderDisplay(ui);
             // clang-format off
-            Color[,] expected =
-            {
-                {Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red },
-                {Color.Red, Color.White, Color.White, Color.White, Color.White, Color.White, Color.Red, Color.Red, Color.Red, Color.Red },
-                {Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red },
-                {Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red },
-            };
+			Color[,] expected =
+			{
+				{Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red },
+				{Color.Red, Color.White, Color.White, Color.White, Color.White, Color.White, Color.Red, Color.Red, Color.Red, Color.Red },
+				{Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red },
+				{Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red },
+			};
 
             // clang-format on
             var logger = LoggerHelper.GetLogger<RendererTest>(_output);
@@ -149,7 +149,6 @@ namespace TestGift.Test.UI
             Assert.Equal(expected, rendered.FrontColorMap);
         }
 
-        [Theory]
         public static void Print2DArray<T>(T[,] matrix, ILogger logger)
         {
             string line = "";
