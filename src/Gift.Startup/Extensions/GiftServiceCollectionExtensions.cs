@@ -17,6 +17,7 @@ namespace Gift.Startup.Extensions
             services.AddGiftKeyInteraction();
             services.AddGiftConsoleMonitor();
             services.AddDomainServices();
+            services.AddLogging();
             return services;
         }
     }
