@@ -42,7 +42,7 @@
 		<None Update="ressources\xml\vstack_border.xml">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Update="ressources\xml\example4.xml">
+		<None Update="ressources\xml\selectable.xml">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
