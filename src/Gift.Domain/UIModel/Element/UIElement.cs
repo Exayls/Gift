@@ -18,8 +18,7 @@ namespace Gift.Domain.UIModel.Element
         public bool IsSelectedElement
         {
             get => isSelectedElement;
-            set
-            {
+            set {
                 isSelectedElement = value;
             }
         }
@@ -40,9 +39,12 @@ namespace Gift.Domain.UIModel.Element
 
         public virtual bool Equals(UIElement element)
         {
-            if (!this.Border.Equals(element.Border)) return false;
-            if (!this.BackColor.Equals(element.BackColor)) return false;
-            if (!this.FrontColor.Equals(element.FrontColor)) return false;
+            if (!this.Border.Equals(element.Border))
+                return false;
+            if (!this.BackColor.Equals(element.BackColor))
+                return false;
+            if (!this.FrontColor.Equals(element.FrontColor))
+                return false;
             return true;
         }
     }

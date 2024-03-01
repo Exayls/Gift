@@ -13,20 +13,20 @@ namespace Gift.Domain.UIModel.Element
 
         public override int Height
         {
-            get
-            {
+            get {
                 return 1 + 2 * Border.Thickness;
             }
         }
         public override int Width
         {
-            get
-            {
+            get {
                 return Text.Length + 2 * Border.Thickness;
             }
         }
 
-        public Label(string text, Position? position = null, IBorder? border = null, Color frontColor = Color.Default, Color backColor = Color.Default) : base(border, frontColor, backColor)
+        public Label(string text, Position? position = null, IBorder? border = null, Color frontColor = Color.Default,
+                     Color backColor = Color.Default)
+            : base(border, frontColor, backColor)
         {
             Text = text;
             if (position != null)
@@ -43,7 +43,6 @@ namespace Gift.Domain.UIModel.Element
         {
             return Disposition is ExplicitDisposition;
         }
-
 
         public override Position GetRelativePosition(Context context)
         {
@@ -63,23 +62,32 @@ namespace Gift.Domain.UIModel.Element
             Color backColor = BackColor == Color.Default ? configuration.DefaultBackColor : BackColor;
             if (IsSelectedElement && IsInSelectedContainer)
             {
-                frontColor = configuration.SelectedElementFrontColor == Color.Default ? frontColor : configuration.SelectedElementFrontColor;
-                backColor = configuration.SelectedElementBackColor == Color.Default ? backColor : configuration.SelectedElementBackColor;
+                frontColor = configuration.SelectedElementFrontColor == Color.Default
+                                 ? frontColor
+                                 : configuration.SelectedElementFrontColor;
+                backColor = configuration.SelectedElementBackColor == Color.Default
+                                ? backColor
+                                : configuration.SelectedElementBackColor;
             }
             return new ScreenDisplay(Text, frontColor, backColor);
         }
 
         public override IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuration)
         {
-            return Border.GetDisplay(new Bound(Height, Width), FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor, BackColor == Color.Default ? configuration.DefaultBackColor : BackColor);
+            return Border.GetDisplay(new Bound(Height, Width),
+                                     FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor,
+                                     BackColor == Color.Default ? configuration.DefaultBackColor : BackColor);
         }
 
         public override bool Equals(UIElement uiElement)
         {
-            if (!(base.Equals(uiElement))) return false;
-            if (!(uiElement is Label)) return false;
+            if (!(base.Equals(uiElement)))
+                return false;
+            if (!(uiElement is Label))
+                return false;
             Label element = (Label)uiElement;
-            if (this.Text != element.Text) return false;
+            if (this.Text != element.Text)
+                return false;
             return true;
         }
     }
