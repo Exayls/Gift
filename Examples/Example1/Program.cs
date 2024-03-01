@@ -8,7 +8,7 @@ var ui = new GiftUIBuilder().Build();
 ui.AddUnselectableChild(new LabelBuilder().WithText("coucou").WithPosition(new Position(2, 58)).Build());
 
 var vstack = new VStackBuilder()
-	.Build();
+    .Build();
 ui.AddUnselectableChild(vstack);
 vstack.AddUnselectableChild(new LabelBuilder().WithText("coucou").Build());
 vstack.AddUnselectableChild(new LabelBuilder().Build());

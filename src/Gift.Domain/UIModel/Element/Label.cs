@@ -13,13 +13,15 @@ namespace Gift.Domain.UIModel.Element
 
         public override int Height
         {
-            get {
+            get
+            {
                 return 1 + 2 * Border.Thickness;
             }
         }
         public override int Width
         {
-            get {
+            get
+            {
                 return Text.Length + 2 * Border.Thickness;
             }
         }

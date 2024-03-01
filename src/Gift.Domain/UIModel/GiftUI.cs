@@ -14,11 +14,15 @@ namespace Gift.Domain.UIModel
 
         public override int Height
         {
-            get { return Bound.Height; }
+            get {
+                return Bound.Height;
+            }
         }
         public override int Width
         {
-            get { return Bound.Width; }
+            get {
+                return Bound.Width;
+            }
         }
 
         public List<Container> SelectableContainers { get; set; }
@@ -26,13 +30,11 @@ namespace Gift.Domain.UIModel
         private Container? _selectedContainer;
         public Container? SelectedContainer
         {
-            get
-            {
+            get {
                 return _selectedContainer;
             }
 
-            set
-            {
+            set {
                 if (value == null)
                 {
                     throw new ArgumentNullException("value");
@@ -46,7 +48,8 @@ namespace Gift.Domain.UIModel
             }
         }
 
-        public GiftUI(Bound bound, IBorder border, Color frontColor, Color backColor) : base(new ScreenDisplayFactory(), bound, border, frontColor, backColor)
+        public GiftUI(Bound bound, IBorder border, Color frontColor, Color backColor, bool isSelectableContainer)
+            : base(new ScreenDisplayFactory(), bound, border, frontColor, backColor, isSelectableContainer)
         {
             SelectableContainers = new List<Container>();
         }
@@ -85,7 +88,9 @@ namespace Gift.Domain.UIModel
 
         public override IScreenDisplay GetDisplayWithoutBorder(Bound bound, IConfiguration configuration)
         {
-            return _screenDisplayFactory.Create(Bound, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor, BackColor == Color.Default ? configuration.DefaultBackColor : BackColor, '*');
+            return _screenDisplayFactory.Create(
+                Bound, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor,
+                BackColor == Color.Default ? configuration.DefaultBackColor : BackColor, '*');
         }
 
         public override Position GetRelativePosition(Context context)
@@ -118,7 +123,8 @@ namespace Gift.Domain.UIModel
         {
             if (SelectedContainer != null)
             {
-                SelectedContainer = SelectableContainers[(SelectableContainers.IndexOf(SelectedContainer) + 1) % SelectableContainers.Count];
+                SelectedContainer = SelectableContainers[(SelectableContainers.IndexOf(SelectedContainer) + 1) %
+                                                         SelectableContainers.Count];
             }
         }
 
@@ -126,18 +132,24 @@ namespace Gift.Domain.UIModel
         {
             if (SelectedContainer != null)
             {
-                SelectedContainer = SelectableContainers[(SelectableContainers.IndexOf(SelectedContainer) - 1 + SelectableContainers.Count) % SelectableContainers.Count];
+                SelectedContainer = SelectableContainers[(SelectableContainers.IndexOf(SelectedContainer) - 1 +
+                                                          SelectableContainers.Count) %
+                                                         SelectableContainers.Count];
             }
         }
 
         public override bool Equals(UIElement uiElement)
         {
-            if (!(uiElement is GiftUI)) return false;
+            if (!(uiElement is GiftUI))
+                return false;
             var element = (GiftUI)uiElement;
-            if (SelectableContainers.Count != element.SelectableContainers.Count) return false;
-            foreach ((Container element1, Container element2) elementTuple in SelectableContainers.Zip(element.SelectableContainers))
+            if (SelectableContainers.Count != element.SelectableContainers.Count)
+                return false;
+            foreach ((Container element1,
+                      Container element2)elementTuple in SelectableContainers.Zip(element.SelectableContainers))
             {
-                if (!(elementTuple.element1.Equals(elementTuple.element2))) return false;
+                if (!(elementTuple.element1.Equals(elementTuple.element2)))
+                    return false;
             }
             return base.Equals(uiElement);
         }

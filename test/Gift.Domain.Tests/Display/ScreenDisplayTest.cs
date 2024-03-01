@@ -34,8 +34,8 @@ namespace Gift.Domain.Tests.Display
             char[,] expectedDisplay = convert_string_to_char(new string[] {
                 // clang-format off
 				 "@@@@@@@@@@",
-				 "******@@@@",
-				 "@@@@@@@@@@"
+                 "******@@@@",
+                 "@@@@@@@@@@"
                 // clang-format on
             });
 

@@ -52,7 +52,8 @@ namespace Gift.Domain.UIModel.Element
                       IScreenDisplayFactory screenDisplayFactory,
                       Bound bound,
                       Color frontColor = Color.Default,
-                      Color backColor = Color.Default) : base(screenDisplayFactory, bound, border, frontColor: frontColor, backColor: backColor)
+                      Color backColor = Color.Default,
+                      bool IsSelectableContainer = false) : base(screenDisplayFactory, bound, border, frontColor: frontColor, backColor: backColor, isSelectableContainer:IsSelectableContainer)
         {
         }
 

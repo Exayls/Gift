@@ -13,6 +13,7 @@ namespace Gift.Domain.UIModel.Element
         public int ScrollIndex { get; protected set; }
         public IList<UIElement> Childs { get; protected set; }
         public IList<UIElement> SelectableElements { get; protected set; }
+        public bool IsSelectableContainer { get; }
 
         private UIElement? selectedElement;
         public UIElement? SelectedElement
@@ -45,12 +46,13 @@ namespace Gift.Domain.UIModel.Element
 
         protected readonly IScreenDisplayFactory _screenDisplayFactory;
 
-        public Container(IScreenDisplayFactory screenDisplayFactory, Bound bound, IBorder border, Color frontColor, Color backColor) : base(border, frontColor: frontColor, backColor: backColor)
+        public Container(IScreenDisplayFactory screenDisplayFactory, Bound bound, IBorder border, Color frontColor, Color backColor, bool isSelectableContainer) : base(border, frontColor: frontColor, backColor: backColor)
         {
             Bound = bound;
             Childs = new List<UIElement>();
             _screenDisplayFactory = screenDisplayFactory;
             SelectableElements = new List<UIElement>();
+			IsSelectableContainer = isSelectableContainer;
         }
 
         public abstract Context GetContextRelativeRenderable(IRenderable renderable, Context context);

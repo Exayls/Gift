@@ -17,5 +17,8 @@ namespace Gift.Domain.Builders
 
         public IContainerBuilder WithSelectableElement(UIElement element);
         public IContainerBuilder WithUnSelectableElement(UIElement element);
+
+        public IContainerBuilder IsSelectableContainer(bool isSelectableContainer);
+        public IContainerBuilder IsSelectableContainer(string isSelectableContainer, IBooleanMapper boolMapper);
     }
 }

@@ -21,6 +21,8 @@ namespace Gift.Domain.Builders
         private int? _height = null;
         private int? _width = null;
 
+        private bool _isSelectableContainer = false;
+
         public GiftUIBuilder()
         {
             if (!Console.IsInputRedirected && !Console.IsOutputRedirected)
@@ -88,28 +90,29 @@ namespace Gift.Domain.Builders
             return this;
         }
 
+        public GiftUIBuilder IsSelectableContainer(bool isSelectableContainer)
+        {
+            _isSelectableContainer = isSelectableContainer;
+            return this;
+        }
+
         public GiftUI Build()
         {
             var bound = new Bound(_height ?? _bound.Height, _width ?? _bound.Width);
-            var giftui = new GiftUI(bound: bound,
-                              border: _border,
-                              frontColor: _frontColor,
-                              backColor: _backColor);
+            var giftui = new GiftUI(bound: bound, border: _border, frontColor: _frontColor, backColor: _backColor,
+                                    isSelectableContainer: _isSelectableContainer);
 
             foreach (UIElement element in unSelectableElements)
             {
                 giftui.AddUnselectableChild(element);
-
             }
             foreach (UIElement element in selectableElements)
             {
                 giftui.AddSelectableChild(element);
-
             }
             foreach (Container element in selectableContainers)
             {
                 giftui.SelectableContainers.Add(element);
-
             }
             return giftui;
         }
@@ -164,6 +167,11 @@ namespace Gift.Domain.Builders
             return WithForegroundColor(color);
         }
 
+        IContainerBuilder IContainerBuilder.IsSelectableContainer(bool isSelectableContainer)
+        {
+            return IsSelectableContainer(isSelectableContainer);
+        }
+
         public IContainerBuilder WithBound(string boundStr, IBoundMapper mapper)
         {
             return WithBound(mapper.ToBound(boundStr));
@@ -192,6 +200,11 @@ namespace Gift.Domain.Builders
         public IContainerBuilder WithWidth(string widthStr)
         {
             return WithWidth(int.Parse(widthStr, NumberStyles.Integer));
+        }
+
+        public IContainerBuilder IsSelectableContainer(string isSelectableContainer, IBooleanMapper boolMapper)
+        {
+            return IsSelectableContainer(boolMapper.ToBool(isSelectableContainer));
         }
     }
 }

@@ -20,6 +20,8 @@ namespace Gift.Domain.Builders
         private IList<UIElement> unSelectableElements = new List<UIElement>();
         private IList<UIElement> selectableElements = new List<UIElement>();
 
+        private bool _isSelectableContainer = false;
+
         public HStackBuilder WithBorder(IBorder border)
         {
             _border = border;
@@ -67,12 +69,19 @@ namespace Gift.Domain.Builders
             return this;
         }
 
+        public HStackBuilder IsSelectableContainer(bool isSelectableContainer)
+        {
+            _isSelectableContainer = isSelectableContainer;
+            return this;
+        }
+
         public HStack Build()
         {
             var bound = new Bound(_height ?? _bound.Height, _width ?? _bound.Width);
             var hstack = new HStack(_border,
                               screenDisplayFactory,
                               bound,
+							  IsSelectableContainer:_isSelectableContainer,
                               frontColor: frontColor,
                               backColor: backColor);
 
@@ -137,6 +146,11 @@ namespace Gift.Domain.Builders
             return WithWidth(width);
         }
 
+        IContainerBuilder IContainerBuilder.IsSelectableContainer(bool isSelectableContainer)
+        {
+            return IsSelectableContainer(isSelectableContainer);
+        }
+
         public IUIElementBuilder WithBorder(string borderStr, IBorderMapper mapper)
         {
             return WithBorder(mapper.ToBorder(borderStr));
@@ -164,6 +178,11 @@ namespace Gift.Domain.Builders
         public IContainerBuilder WithWidth(string widthStr)
         {
             return WithWidth(int.Parse(widthStr, NumberStyles.Integer));
+        }
+
+        public IContainerBuilder IsSelectableContainer(string isSelectableContainer, IBooleanMapper boolMapper)
+        {
+            return IsSelectableContainer(boolMapper.ToBool(isSelectableContainer));
         }
     }
 }

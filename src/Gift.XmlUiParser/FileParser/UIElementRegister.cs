@@ -14,16 +14,18 @@ namespace Gift.XmlUiParser.FileParser
         private readonly IBorderMapper _borderMapper;
         private readonly IBoundMapper _boundMapper;
         private readonly IColorMapper _colorMapper;
+        private readonly IBooleanMapper _booleanMapper;
         private IDictionary<string, Type> _elements;
         private Dictionary<(Type builderType, string attribute), Func<IBuilder<UIElement>, object, IBuilder<UIElement>>> _builderMethods;
 
 
-        public UIElementRegister(ILogger<IUIElementRegister> logger, IBorderMapper borderMapper, IColorMapper colorMapper, IBoundMapper boundMapper)
+        public UIElementRegister(ILogger<IUIElementRegister> logger, IBorderMapper borderMapper, IColorMapper colorMapper, IBoundMapper boundMapper, IBooleanMapper booleanMapper)
         {
             _logger = logger;
             _borderMapper = borderMapper;
             _colorMapper = colorMapper;
             _boundMapper = boundMapper;
+			_booleanMapper = booleanMapper;
             _logger = logger;
             _elements = new Dictionary<string, Type>();
             _builderMethods = new Dictionary<(Type builderType, string attribute), Func<IBuilder<UIElement>, object, IBuilder<UIElement>>>();
@@ -35,7 +37,6 @@ namespace Gift.XmlUiParser.FileParser
             this.Register<HStackBuilder>("HStack");
 
             this.Register<LabelBuilder>(typeof(LabelBuilder), "text", (b, text) => b.WithText(text));
-
         }
 
         public Type GetBuilder(string typeName)
@@ -82,6 +83,7 @@ namespace Gift.XmlUiParser.FileParser
                 this.Register<IContainerBuilder>(buildertype, "bound", (b, bd) => b.WithBound(bd, _boundMapper));
                 this.Register<IContainerBuilder>(buildertype, "height", (b, height) => b.WithHeight(height));
                 this.Register<IContainerBuilder>(buildertype, "width", (b, width) => b.WithWidth(width));
+                this.Register<IContainerBuilder>(buildertype, "selectablecontainer", (b, isSelectableContainer) => b.IsSelectableContainer(isSelectableContainer, _booleanMapper));
             }
             if (typeof(IUIElementBuilder).IsAssignableFrom(buildertype))
             {

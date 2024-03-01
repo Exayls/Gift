@@ -46,9 +46,9 @@ namespace Gift.Domain.UIModel.Element
             }
         }
 
-        public VStack(IBorder border, IScreenDisplayFactory screenDisplayFactory, Bound bound,
+        public VStack(IBorder border, IScreenDisplayFactory screenDisplayFactory, Bound bound, bool isSelectableContainer,
                       Color frontColor = Color.Default, Color backColor = Color.Default)
-            : base(screenDisplayFactory, bound, border, frontColor: frontColor, backColor: backColor)
+            : base(screenDisplayFactory, bound, border, frontColor: frontColor, backColor: backColor, isSelectableContainer: isSelectableContainer)
         {
         }
 

@@ -18,7 +18,8 @@ namespace Gift.Domain.UIModel.Element
         public bool IsSelectedElement
         {
             get => isSelectedElement;
-            set {
+            set
+            {
                 isSelectedElement = value;
             }
         }

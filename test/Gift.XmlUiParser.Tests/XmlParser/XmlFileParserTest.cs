@@ -32,8 +32,9 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             var mockColorMapper = new ColorMapper();
             var mockBorderMapper = new BorderMapper();
             var mockBoundMapper = new BoundMapper();
+            var mockBoolMapper = new BoolMapper();
             var elementRegister = new UIElementRegister(LoggerHelper.GetLogger<IUIElementRegister>(output),
-                                                        mockBorderMapper, mockColorMapper, mockBoundMapper);
+                                                        mockBorderMapper, mockColorMapper, mockBoundMapper, mockBoolMapper);
 
             xmlParser = new XmlFileParser(elementRegister, LoggerHelper.GetLogger<IXMLFileParser>(output));
             _output = output;

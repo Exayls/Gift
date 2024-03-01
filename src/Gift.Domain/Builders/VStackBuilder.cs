@@ -20,6 +20,8 @@ namespace Gift.Domain.Builders
         private int? _height;
         private int? _width;
 
+        private bool _isSelectableContainer = false;
+
         public VStackBuilder WithBorder(IBorder border)
         {
             _border = border;
@@ -55,6 +57,11 @@ namespace Gift.Domain.Builders
             return this;
         }
 
+        public VStackBuilder IsSelectableContainer(bool isSelectableContainer)
+        {
+            _isSelectableContainer = isSelectableContainer;
+            return this;
+        }
 
         public VStackBuilder WithHeight(int height)
         {
@@ -68,15 +75,11 @@ namespace Gift.Domain.Builders
             return this;
         }
 
-
         public VStack Build()
         {
             var bound = new Bound(_height ?? _bound.Height, _width ?? _bound.Width);
-            var vstack = new VStack(_border,
-                              screenDisplayFactory,
-                              bound,
-                              frontColor: frontColor,
-                              backColor: backColor);
+            var vstack = new VStack(_border, screenDisplayFactory, bound, frontColor: frontColor, backColor: backColor,
+                                    isSelectableContainer: _isSelectableContainer);
             foreach (UIElement element in unSelectableElements)
             {
                 vstack.AddUnselectableChild(element);
@@ -138,6 +141,10 @@ namespace Gift.Domain.Builders
             return WithWidth(width);
         }
 
+        IContainerBuilder IContainerBuilder.IsSelectableContainer(bool isSelectableContainer)
+        {
+            return IsSelectableContainer(isSelectableContainer);
+        }
 
         public IUIElementBuilder WithBorder(string borderStr, IBorderMapper mapper)
         {
@@ -169,5 +176,9 @@ namespace Gift.Domain.Builders
             return WithWidth(int.Parse(widthStr, NumberStyles.Integer));
         }
 
+        public IContainerBuilder IsSelectableContainer(string isSelectableContainer, IBooleanMapper boolMapper)
+        {
+            return IsSelectableContainer(boolMapper.ToBool(isSelectableContainer));
+        }
     }
 }
