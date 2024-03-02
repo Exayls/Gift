@@ -11,6 +11,7 @@ namespace Gift.Domain.Extensions
             services.AddSingleton<IBoundMapper, BoundMapper>();
             services.AddSingleton<IBorderMapper, BorderMapper>();
             services.AddSingleton<IColorMapper, ColorMapper>();
+            services.AddSingleton<IBooleanMapper, BoolMapper>();
             return services;
         }
     }

@@ -71,6 +71,10 @@ namespace Gift.XmlUiParser.FileParser
             _logger.LogTrace(componentBuilder.ToString());
 
             UIElement uIElement = componentBuilder.Build();
+            if (uIElement is GiftUI)
+            {
+                giftUI = (GiftUI)uIElement;
+            }
 
             foreach (XmlNode childNode in element.ChildNodes)
             {
@@ -107,7 +111,7 @@ namespace Gift.XmlUiParser.FileParser
         private IBuilder<UIElement> CreateBuilder(string componentName)
         {
             var builderType = _uielementRegister.GetBuilder(componentName);
-            var builder = (IBuilder<UIElement>)builderType.GetConstructors()[0].Invoke(new object[] { });
+            var builder = (IBuilder<UIElement>)builderType.GetConstructors() [0].Invoke(new object[] {});
             return builder;
         }
 
