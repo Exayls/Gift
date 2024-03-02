@@ -2,8 +2,8 @@
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.MetaData;
-using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Gift.Domain.UIModel.Element
 {
@@ -13,6 +13,7 @@ namespace Gift.Domain.UIModel.Element
         public int ScrollIndex { get; protected set; }
         public IList<UIElement> Childs { get; protected set; }
         public IList<UIElement> SelectableElements { get; protected set; }
+        public bool IsSelectableContainer { get; }
 
         private UIElement? selectedElement;
         public UIElement? SelectedElement
@@ -45,27 +46,13 @@ namespace Gift.Domain.UIModel.Element
 
         protected readonly IScreenDisplayFactory _screenDisplayFactory;
 
-        public Container(IScreenDisplayFactory screenDisplayFactory, Bound bound, IBorder border, Color frontColor = Color.Default, Color backColor = Color.Default) : base(border, frontColor: frontColor, backColor: backColor)
+        public Container(IScreenDisplayFactory screenDisplayFactory, Bound bound, IBorder border, Color frontColor, Color backColor, bool isSelectableContainer) : base(border, frontColor: frontColor, backColor: backColor)
         {
             Bound = bound;
             Childs = new List<UIElement>();
             _screenDisplayFactory = screenDisplayFactory;
             SelectableElements = new List<UIElement>();
-        }
-        public Container() : base()
-        {
-            if (!Console.IsInputRedirected && !Console.IsOutputRedirected)
-            {
-                Bound = new Bound(Console.WindowHeight, Console.WindowWidth);
-
-            }
-            else
-            {
-                Bound = new Bound(0, 0);
-            }
-            Childs = new List<UIElement>();
-            _screenDisplayFactory = new ScreenDisplayFactory();
-            SelectableElements = new List<UIElement>();
+			IsSelectableContainer = isSelectableContainer;
         }
 
         public abstract Context GetContextRelativeRenderable(IRenderable renderable, Context context);
@@ -119,12 +106,35 @@ namespace Gift.Domain.UIModel.Element
 
         public void AddSelectableChild(UIElement uIElement)
         {
-            Childs.Add(uIElement);
+            if (!Childs.Contains(uIElement))
+            {
+                Childs.Add(uIElement);
+            }
             SelectableElements.Add(uIElement);
             if (SelectedElement == null)
             {
                 SelectedElement = uIElement;
             }
+        }
+
+        public override bool Equals(UIElement uiElement)
+        {
+            if (!(base.Equals(uiElement))) return false;
+            if (!(uiElement is Container)) return false;
+            Container element = (Container)uiElement;
+            if (!Bound.Equals(element.Bound)) return false;
+
+            if (Childs.Count != element.Childs.Count) return false;
+            foreach ((UIElement element1, UIElement element2) elementTuple in Childs.Zip(element.Childs))
+            {
+                if (!(elementTuple.element1.Equals(elementTuple.element2))) return false;
+            }
+            if (SelectableElements.Count != element.SelectableElements.Count) return false;
+            foreach ((UIElement element1, UIElement element2) elementTuple in SelectableElements.Zip(element.SelectableElements))
+            {
+                if (!(elementTuple.element1.Equals(elementTuple.element2))) return false;
+            }
+            return true;
         }
 
     }

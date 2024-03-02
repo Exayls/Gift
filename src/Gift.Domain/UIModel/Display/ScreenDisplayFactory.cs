@@ -7,7 +7,7 @@ namespace Gift.Domain.UIModel.Display
 
         public IScreenDisplay Create(Bound bound, Color frontColor, Color backColor, char emptyChar)
         {
-            return new ScreenDisplay(bound,frontColor, backColor, emptyChar);
+            return new ScreenDisplay(bound, frontColor, backColor, emptyChar);
         }
     }
 }

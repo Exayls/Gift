@@ -1,4 +1,5 @@
-﻿using Gift.Domain.UIModel.Border;
+﻿using Gift.Domain.Builders;
+using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
@@ -28,20 +29,21 @@ namespace Gift.Domain.Tests.UI
             _borderMock = new Mock<IBorder>();
             _ScreenDisplayFactoryMock = new Mock<IScreenDisplayFactory>();
             _ScreenDisplayFactoryMock.Setup(s => s.Create(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock1.Object);
-            vstack = new VStack(_borderMock.Object, _ScreenDisplayFactoryMock.Object);
+            vstack = new VStackBuilder().WithBorder(_borderMock.Object).Build();
         }
 
         private VStack CreateVstack(IBorder? border = null, Bound? bound = null)
         {
-            if (border == null)
+            var builder = new VStackBuilder();
+            if (border != null)
             {
-                border = new NoBorder();
+                builder.WithBorder(border);
             }
-            if (bound == null)
+            if (bound != null)
             {
-                bound = new Bound(0, 0);
+                builder.WithBound(bound);
             }
-            return new VStack(border, new ScreenDisplayFactory(), bound);
+            return builder.Build();
         }
 
         private MockUIElement CreateUIElement(int height = 0, int width = 0, bool isFixed = false)

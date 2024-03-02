@@ -1,4 +1,5 @@
-﻿using Gift.Domain.UIModel.Border;
+﻿using Gift.Domain.Builders.Mappers;
+using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
 
@@ -7,7 +8,7 @@ namespace Gift.Domain.Builders
     /// <summary>
     /// build Label with "Hello" as default text and (0,0) as default position
     /// </summary>
-    public class LabelBuilder
+    public class LabelBuilder : IUIElementBuilder
     {
         private string text = "Hello";
         private Position? position = null;
@@ -55,7 +56,7 @@ namespace Gift.Domain.Builders
             return this;
         }
 
-        internal LabelBuilder WithBorder(IBorder border)
+        public LabelBuilder WithBorder(IBorder border)
         {
             this.border = border;
             return this;
@@ -70,6 +71,40 @@ namespace Gift.Domain.Builders
             return new Label(text, position: position, frontColor: frontColor, backColor: backColor, border: border);
         }
 
+        UIElement IBuilder<UIElement>.Build()
+        {
+            return Build();
+        }
+
+        IUIElementBuilder IUIElementBuilder.WithBorder(IBorder border)
+        {
+            return WithBorder(border);
+        }
+
+        IUIElementBuilder IUIElementBuilder.WithBackgroundColor(Color color)
+        {
+            return WithBackgroundColor(color);
+        }
+
+        IUIElementBuilder IUIElementBuilder.WithForegroundColor(Color color)
+        {
+            return WithForegroundColor(color);
+        }
+
+        public IUIElementBuilder WithBorder(string borderStr, IBorderMapper mapper)
+        {
+            return WithBorder(mapper.ToBorder(borderStr));
+        }
+
+        public IUIElementBuilder WithBackgroundColor(string colorStr, IColorMapper mapper)
+        {
+            return WithBackgroundColor(mapper.ToColor(colorStr));
+        }
+
+        public IUIElementBuilder WithForegroundColor(string colorStr, IColorMapper mapper)
+        {
+            return WithForegroundColor(mapper.ToColor(colorStr));
+        }
     }
 
 }

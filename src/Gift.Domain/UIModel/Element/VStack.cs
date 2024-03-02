@@ -10,8 +10,7 @@ namespace Gift.Domain.UIModel.Element
 
         public override int Height
         {
-            get
-            {
+            get {
                 if (Bound.Height != 0)
                 {
                     return Bound.Height;
@@ -29,8 +28,7 @@ namespace Gift.Domain.UIModel.Element
         }
         public override int Width
         {
-            get
-            {
+            get {
                 if (Bound.Width != 0)
                 {
                     return Bound.Width;
@@ -48,28 +46,17 @@ namespace Gift.Domain.UIModel.Element
             }
         }
 
-        public VStack(IBorder border,
-                      IScreenDisplayFactory screenDisplayFactory,
-                      Color frontColor = Color.Default,
-                      Color backColor = Color.Default) : this(border, screenDisplayFactory, new Bound(0, 0), frontColor: frontColor, backColor: backColor)
-        {
-        }
-
-        public VStack(IBorder border,
-                      IScreenDisplayFactory screenDisplayFactory,
-                      Bound bound,
-                      Color frontColor = Color.Default,
-                      Color backColor = Color.Default) : base(screenDisplayFactory, bound, border, frontColor: frontColor, backColor: backColor)
+        public VStack(IBorder border, IScreenDisplayFactory screenDisplayFactory, Bound bound, bool isSelectableContainer,
+                      Color frontColor = Color.Default, Color backColor = Color.Default)
+            : base(screenDisplayFactory, bound, border, frontColor: frontColor, backColor: backColor, isSelectableContainer: isSelectableContainer)
         {
         }
 
         public override Context GetContextRelativeRenderable(IRenderable renderable, Context context)
         {
             int ChildContextPosition = GetHeightRenderable(renderable);
-            return new Context(
-                new Position(ChildContextPosition - ScrollIndex
-                           , 0),
-                new Bound(renderable.Height, renderable.Width));
+            return new Context(new Position(ChildContextPosition - ScrollIndex, 0),
+                               new Bound(renderable.Height, renderable.Width));
         }
 
         private int GetHeightRenderable(IRenderable renderableToFind)
@@ -96,15 +83,15 @@ namespace Gift.Domain.UIModel.Element
 
         public override Position GetRelativePosition(Context context)
         {
-            return new Position(context.Position.y,
-                                context.Position.x);
+            return new Position(context.Position.y, context.Position.x);
         }
 
         public IScreenDisplay GetDisplayWithBorder(Bound bound, char fillingChar)
         {
             int thickness = Border.Thickness;
             IScreenDisplay screenDisplay = GetDisplayBorder(bound, new DefaultConfiguration());
-            IScreenDisplay emptyVstackScreen = GetDisplayWithoutBorder(bound, new Configuration(fillingChar: fillingChar));
+            IScreenDisplay emptyVstackScreen =
+                GetDisplayWithoutBorder(bound, new Configuration(fillingChar: fillingChar));
             screenDisplay.AddDisplay(emptyVstackScreen, new Position(thickness, thickness));
             return screenDisplay;
         }
@@ -114,9 +101,18 @@ namespace Gift.Domain.UIModel.Element
             int thickness = Border.Thickness;
 
             Bound boundEmptyVStack = new Bound(bound.Height - 2 * thickness, bound.Width - 2 * thickness);
-            IScreenDisplay emptyVstackScreen = _screenDisplayFactory.Create(boundEmptyVStack, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor, BackColor == Color.Default ? configuration.DefaultBackColor : BackColor, configuration.FillingChar);
+            IScreenDisplay emptyVstackScreen = _screenDisplayFactory.Create(
+                boundEmptyVStack, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor,
+                BackColor == Color.Default ? configuration.DefaultBackColor : BackColor, configuration.FillingChar);
             return emptyVstackScreen;
         }
 
+        public override bool Equals(UIElement uiElement)
+        {
+            if (!(uiElement is VStack))
+                return false;
+            var element = (VStack)uiElement;
+            return base.Equals(uiElement);
+        }
     }
 }

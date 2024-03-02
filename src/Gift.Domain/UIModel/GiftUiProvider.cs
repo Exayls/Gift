@@ -1,4 +1,6 @@
-﻿namespace Gift.Domain.UIModel
+﻿using Gift.Domain.Builders;
+
+namespace Gift.Domain.UIModel
 {
     public class GiftUiProvider : IGiftUiProvider
     {
@@ -7,7 +9,7 @@
         {
             get
             {
-                return _ui ?? new GiftUI();
+                return _ui ?? (GiftUI)new GiftUIBuilder().Build();
             }
             set
             {

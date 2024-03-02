@@ -7,7 +7,7 @@ namespace Gift.Domain.UIModel.DispositionStrategy
     /// </summary>
     public class ExplicitDisposition : IDispositionStrategy
     {
-        public Position Position { get ; private set ; }
+        public Position Position { get; private set; }
 
         public ExplicitDisposition(Position position)
         {

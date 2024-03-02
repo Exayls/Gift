@@ -1,4 +1,5 @@
-﻿using Gift.ApplicationService.Services.Monitor.KeyInteraction;
+﻿using System;
+using Gift.ApplicationService.Services.Monitor.KeyInteraction;
 using Gift.ApplicationService.Services.SignalHandler;
 using Gift.ApplicationService.Services.SignalHandler.Bus;
 using Gift.Domain.ServiceContracts;

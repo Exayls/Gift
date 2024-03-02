@@ -50,16 +50,10 @@ namespace Gift.Domain.UIModel.Element
 
         public HStack(IBorder border,
                       IScreenDisplayFactory screenDisplayFactory,
-                      Color frontColor = Color.Default,
-                      Color backColor = Color.Default) : this(border, screenDisplayFactory, new Bound(0, 0), frontColor: frontColor, backColor: backColor)
-        {
-        }
-
-        public HStack(IBorder border,
-                      IScreenDisplayFactory screenDisplayFactory,
                       Bound bound,
                       Color frontColor = Color.Default,
-                      Color backColor = Color.Default) : base(screenDisplayFactory, bound, border, frontColor: frontColor, backColor: backColor)
+                      Color backColor = Color.Default,
+                      bool IsSelectableContainer = false) : base(screenDisplayFactory, bound, border, frontColor: frontColor, backColor: backColor, isSelectableContainer:IsSelectableContainer)
         {
         }
 
@@ -69,7 +63,7 @@ namespace Gift.Domain.UIModel.Element
             int ChildContextPosition = GetWidthRenderable(renderable);
             return new Context(
                 new Position(0
-                           , ChildContextPosition-ScrollIndex),
+                           , ChildContextPosition - ScrollIndex),
                 new Bound(renderable.Height, renderable.Width));
         }
 

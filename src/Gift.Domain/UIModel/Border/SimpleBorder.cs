@@ -23,7 +23,7 @@ namespace Gift.Domain.UIModel.Border
         }
         public IScreenDisplay GetDisplay(Bound bound, Color frontColor, Color backColor, char fillingChar = ' ')
         {
-            IScreenDisplay screenDisplay = new ScreenDisplay(bound,frontColor,backColor, emptychar: fillingChar);
+            IScreenDisplay screenDisplay = new ScreenDisplay(bound, frontColor, backColor, emptychar: fillingChar);
             AddBorder(screenDisplay);
             return screenDisplay;
         }
@@ -47,6 +47,15 @@ namespace Gift.Domain.UIModel.Border
         private bool IsBorder(int x, int y, Bound bound)
         {
             return x < Thickness || y < Thickness || x >= bound.Width - Thickness || y >= bound.Height - Thickness;
+        }
+
+        public bool Equals(IBorder border)
+        {
+            if (!(border is SimpleBorder)) return false;
+            if (Thickness != border.Thickness) return false;
+            var simpleBorder = (SimpleBorder)border;
+            if (BorderChar != simpleBorder.BorderChar) return false;
+            return true;
         }
 
     }

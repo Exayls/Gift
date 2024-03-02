@@ -5,7 +5,7 @@ namespace Gift.Domain.UIModel.DispositionStrategy
     /// <summary>
     /// Define behavior for disposition
     /// </summary>
-    public interface DispositionStrategy
+    public interface IDispositionStrategy
     {
         public Position Position { get; }
     }

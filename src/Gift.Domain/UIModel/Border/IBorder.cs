@@ -8,6 +8,7 @@ namespace Gift.Domain.UIModel.Border
         int Thickness { get; }
 
         public IScreenDisplay GetDisplay(Bound bound, char fillingChar = ' ');
-        IScreenDisplay GetDisplay(Bound bound, Color frontColor, Color backColor, char fillingChar = ' ');
+        public IScreenDisplay GetDisplay(Bound bound, Color frontColor, Color backColor, char fillingChar = ' ');
+        public bool Equals(IBorder border);
     }
 }

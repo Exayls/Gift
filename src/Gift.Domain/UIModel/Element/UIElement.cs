@@ -26,9 +26,9 @@ namespace Gift.Domain.UIModel.Element
 
         public bool IsInSelectedContainer { get; set; }
 
-        protected UIElement(IBorder? border = null , Color frontColor = Color.Default, Color backColor = Color.Default)
+        protected UIElement(IBorder? border = null, Color frontColor = Color.Default, Color backColor = Color.Default)
         {
-            Border = border?? new NoBorder();
+            Border = border ?? new NoBorder();
             FrontColor = frontColor;
             BackColor = backColor;
         }
@@ -37,5 +37,16 @@ namespace Gift.Domain.UIModel.Element
         public abstract IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuration);
         public abstract Position GetRelativePosition(Context context);
         public abstract bool IsFixed();
+
+        public virtual bool Equals(UIElement element)
+        {
+            if (!this.Border.Equals(element.Border))
+                return false;
+            if (!this.BackColor.Equals(element.BackColor))
+                return false;
+            if (!this.FrontColor.Equals(element.FrontColor))
+                return false;
+            return true;
+        }
     }
 }

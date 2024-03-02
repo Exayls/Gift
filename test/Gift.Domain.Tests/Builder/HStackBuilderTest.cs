@@ -25,12 +25,14 @@ namespace TestGift.Builder
             NoBorder border = new NoBorder();
             Bound bound = new Bound(0, 0);
             HStackBuilder builder = new HStackBuilder()
-                .WithBorder(border)
-                .WithBound(bound);
+                .WithBound(bound)
+                .WithForegroundColor(Color.Blue)
+                .WithBorder(border);
             HStack h = builder.Build();
-            Assert.Equal(h.Border, border);
-            Assert.Equal(h.Bound, bound);
 
+            Assert.True(border.Equals(h.Border));
+            Assert.True(bound.Equals(h.Bound));
+            Assert.Equal(Color.Blue, h.FrontColor);
         }
     }
 }

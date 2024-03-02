@@ -1,9 +1,10 @@
-﻿using Gift.Domain.UIModel;
+﻿using Gift.Domain.UIModel.Element;
 
 namespace Gift.Domain.ServiceContracts
 {
     public interface IXMLFileParser
     {
-        GiftUI ParseUIFile(string filePath);
+        UIElement ParseUIFile(string filePath);
+
     }
 }

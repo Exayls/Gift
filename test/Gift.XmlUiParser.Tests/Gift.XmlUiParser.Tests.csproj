@@ -10,8 +10,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
-		<PackageReference Include="xunit" Version="2.4.2" />
+		<PackageReference Include="MicrosoftExtensions.Logging.Xunit" Version="1.0.0" />
+		<PackageReference Include="moq" Version="4.20.69" />
+		<PackageReference Include="xunit" Version="2.6.1" />
 		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
@@ -24,6 +29,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\Gift.XmlUiParser\Gift.XmlUiParser.csproj" />
+		<ProjectReference Include="..\..\src\Gift.Displayer\Gift.Displayer.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -31,6 +37,12 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<None Update="ressources\xml\valid_xml.xml">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="ressources\xml\vstack_border.xml">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="ressources\xml\selectable.xml">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>

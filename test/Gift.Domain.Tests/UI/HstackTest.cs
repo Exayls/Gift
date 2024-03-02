@@ -1,4 +1,5 @@
-﻿using Gift.Domain.UIModel.Border;
+﻿using Gift.Domain.Builders;
+using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
@@ -28,7 +29,7 @@ namespace Gift.Domain.Tests.UI
             _borderMock = new Mock<IBorder>();
             _ScreenDisplayFactoryMock = new Mock<IScreenDisplayFactory>();
             _ScreenDisplayFactoryMock.Setup(s => s.Create(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock1.Object);
-            HStack = new HStack(_borderMock.Object, _ScreenDisplayFactoryMock.Object);
+            HStack = new HStackBuilder().WithBorder(_borderMock.Object).Build();
         }
 
         private HStack CreateHstack(IBorder? border = null, Bound? bound = null)
@@ -41,7 +42,10 @@ namespace Gift.Domain.Tests.UI
             {
                 bound = new Bound(0, 0);
             }
-            return new HStack(border, new ScreenDisplayFactory(), bound);
+            return new HStackBuilder()
+                .WithBound(bound)
+                .WithBorder(border)
+                .Build();
         }
 
         private MockUIElement CreateUIElement(int height = 1, int width = 1, bool isFixed = false)
@@ -424,7 +428,7 @@ namespace Gift.Domain.Tests.UI
             //arrange
             _uiElementMock1.Setup(ui => ui.Width).Returns(1);
             //act
-            HStack = new HStack(_borderMock.Object, _ScreenDisplayFactoryMock.Object, new Bound(1, 1));
+            HStack = CreateHstack(bound: new Bound(1, 1));
             //assert
             Assert.Equal(1, HStack.Width);
             Assert.Equal(1, HStack.Height);
@@ -435,7 +439,7 @@ namespace Gift.Domain.Tests.UI
             //arrange
             _uiElementMock1.Setup(ui => ui.Width).Returns(1);
             //act
-            HStack = new HStack(_borderMock.Object, _ScreenDisplayFactoryMock.Object, new Bound(2, 3));
+            HStack = CreateHstack(bound: new Bound(2, 3));
             //assert
             Assert.Equal(3, HStack.Width);
             Assert.Equal(2, HStack.Height);

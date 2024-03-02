@@ -17,12 +17,12 @@ namespace Gift.Domain.UIModel.Display
         public char[,] DisplayMap { get; }
 
 
-        public ScreenDisplay(string display, Color frontColor = Color.White, Color backColor = Color.Black) : this(new(1, display.Length), frontColor, backColor, '*')
+        public ScreenDisplay(string display, Color frontColor = Color.White, Color backColor = Color.Transparent) : this(new(1, display.Length), frontColor, backColor, '*')
         {
             DisplayString.Clear().Append(display);
         }
 
-        public ScreenDisplay(Bound bound, Color frontColor = Color.White, Color backColor = Color.Black, char emptychar = '*')
+        public ScreenDisplay(Bound bound, Color frontColor = Color.White, Color backColor = Color.Transparent, char emptychar = '*')
         {
             DisplayString = new StringBuilder();
             TotalBound = bound;
@@ -158,7 +158,7 @@ namespace Gift.Domain.UIModel.Display
             bool sameBackColor = CheckEquality<Color>(other.BackColorMap, this.BackColorMap);
             bool sameFrontColor = CheckEquality<Color>(other.FrontColorMap, this.FrontColorMap);
             bool sameChars = CheckEquality<char>(other.DisplayMap, this.DisplayMap);
-			return (sameChars && sameBackColor && sameFrontColor);
+            return (sameChars && sameBackColor && sameFrontColor);
 
         }
     }

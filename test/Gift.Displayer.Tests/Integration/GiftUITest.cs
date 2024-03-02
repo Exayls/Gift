@@ -7,6 +7,7 @@ using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Conf;
 using Gift.ApplicationService.Services;
 using Gift.Displayer.Rendering;
+using Gift.Domain.Builders;
 
 namespace Gift.Displayer.Tests.Integration
 {
@@ -18,7 +19,7 @@ namespace Gift.Displayer.Tests.Integration
             var output = new StringBuilder();
             using (var writer = new StringWriter(output))
             {
-                var ui = new GiftUI(new Bound(20, 60));
+                var ui = GetGiftUI(new Bound(20, 60));
 
                 IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
                 var expectedBuilder = new StringBuilder();
@@ -32,13 +33,19 @@ namespace Gift.Displayer.Tests.Integration
                 Assert.Equal(expectedBuilder.ToString(), renderedText.DisplayString.ToString());
             }
         }
+
+        private static GiftUI GetGiftUI(Bound bound)
+        {
+            return new GiftUIBuilder().WithBound(bound).Build();
+        }
+
         [Fact]
         public void CanRenderUserInterfaceDifferentSize()
         {
             var output = new StringBuilder();
             using (var writer = new StringWriter(output))
             {
-                var ui = new GiftUI(new Bound(10, 15));
+                var ui = GetGiftUI(new Bound(10, 15));
 
                 IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
                 var expectedBuilder = new StringBuilder();

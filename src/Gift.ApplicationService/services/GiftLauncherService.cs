@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Gift.Domain.UIModel;
-using Gift.Domain.UIModel.Element;
 using Gift.ApplicationService.Services.SignalHandler.Global;
 using Gift.ApplicationService.Services.SignalHandler.Bus;
 using Gift.ApplicationService.ServiceContracts;
@@ -62,18 +61,10 @@ namespace Gift.ApplicationService.Services
             _xmlParser = xmlFileParser;
 
             _uielementRegister = elementRegister;
-            RegisterUIElements();
 
             _lifeTimeService = lifeTimeService;
         }
 
-        private void RegisterUIElements()
-        {
-            _uielementRegister.Register("GiftUI", typeof(GiftUI));
-            _uielementRegister.Register("VStack", typeof(VStack));
-            _uielementRegister.Register("HStack", typeof(HStack));
-            _uielementRegister.Register("Label", typeof(Label));
-        }
 
         public virtual void Initialize(GiftUI ui)
         {
@@ -83,7 +74,7 @@ namespace Gift.ApplicationService.Services
 
         public virtual void Initialize(string xmlPath)
         {
-            _uiProvider.Ui = _xmlParser.ParseUIFile(xmlPath);
+            _uiProvider.Ui = (GiftUI)_xmlParser.ParseUIFile(xmlPath);
             update();
         }
 
@@ -99,8 +90,6 @@ namespace Gift.ApplicationService.Services
                 await Task.Run(() => Initialize(file));
             }
         }
-
-
 
         public void AddSignalHandler(ISignalHandlerService handler)
         {
