@@ -113,6 +113,7 @@ namespace Gift.Domain.Builders
             foreach (Container element in selectableContainers)
             {
                 giftui.SelectableContainers.Add(element);
+                giftui.AddUnselectableChild(element);
             }
             return giftui;
         }
