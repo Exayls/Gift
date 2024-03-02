@@ -3,7 +3,6 @@ using System.Runtime.Serialization;
 
 namespace Gift.XmlUiParser.FileParser
 {
-    [Serializable]
     internal class UncompatibleUIElementException : Exception
     {
         public UncompatibleUIElementException()

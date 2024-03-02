@@ -149,7 +149,7 @@ namespace TestGift.Test.UI
             Assert.Equal(expected, rendered.FrontColorMap);
         }
 
-        public static void Print2DArray<T>(T[,] matrix, ILogger logger)
+        private static void Print2DArray<T>(T[,] matrix, ILogger logger)
         {
             string line = "";
             for (int i = 0; i < matrix.GetLength(0); i++)
