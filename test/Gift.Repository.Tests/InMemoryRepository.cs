@@ -1,3 +1,4 @@
+using Gift.Domain.Builders;
 using Gift.Domain.UIModel.Element;
 
 namespace Gift.Repository.Tests
@@ -8,6 +9,9 @@ namespace Gift.Repository.Tests
 
         public InMemoryRepository()
         {
+			_root = new LabelBuilder()
+				.WithText("no root saved")
+				.Build();
         }
 
         public UIElement GetRoot()
@@ -17,7 +21,7 @@ namespace Gift.Repository.Tests
 
         public void SaveRoot(UIElement root)
         {
-            throw new System.NotImplementedException();
+			_root = root;
         }
     }
 }
