@@ -14,13 +14,15 @@ namespace Gift.Domain.UIModel
 
         public override int Height
         {
-            get {
+            get
+            {
                 return Bound.Height;
             }
         }
         public override int Width
         {
-            get {
+            get
+            {
                 return Bound.Width;
             }
         }
@@ -30,11 +32,13 @@ namespace Gift.Domain.UIModel
         private Container? _selectedContainer;
         public Container? SelectedContainer
         {
-            get {
+            get
+            {
                 return _selectedContainer;
             }
 
-            set {
+            set
+            {
                 if (value == null)
                 {
                     throw new ArgumentNullException("value");
@@ -146,7 +150,7 @@ namespace Gift.Domain.UIModel
             if (SelectableContainers.Count != element.SelectableContainers.Count)
                 return false;
             foreach ((Container element1,
-                      Container element2)elementTuple in SelectableContainers.Zip(element.SelectableContainers))
+                      Container element2) elementTuple in SelectableContainers.Zip(element.SelectableContainers))
             {
                 if (!(elementTuple.element1.Equals(elementTuple.element2)))
                     return false;

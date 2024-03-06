@@ -10,7 +10,8 @@ namespace Gift.Domain.UIModel.Element
 
         public override int Height
         {
-            get {
+            get
+            {
                 if (Bound.Height != 0)
                 {
                     return Bound.Height;
@@ -28,7 +29,8 @@ namespace Gift.Domain.UIModel.Element
         }
         public override int Width
         {
-            get {
+            get
+            {
                 if (Bound.Width != 0)
                 {
                     return Bound.Width;

@@ -111,7 +111,7 @@ namespace Gift.XmlUiParser.FileParser
         private IBuilder<UIElement> CreateBuilder(string componentName)
         {
             var builderType = _uielementRegister.GetBuilder(componentName);
-            var builder = (IBuilder<UIElement>)builderType.GetConstructors() [0].Invoke(new object[] {});
+            var builder = (IBuilder<UIElement>)builderType.GetConstructors()[0].Invoke(new object[] { });
             return builder;
         }
 

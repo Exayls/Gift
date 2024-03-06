@@ -52,7 +52,7 @@ namespace Gift.Domain.UIModel.Element
             Childs = new List<UIElement>();
             _screenDisplayFactory = screenDisplayFactory;
             SelectableElements = new List<UIElement>();
-			IsSelectableContainer = isSelectableContainer;
+            IsSelectableContainer = isSelectableContainer;
         }
 
         public abstract Context GetContextRelativeRenderable(IRenderable renderable, Context context);

@@ -53,7 +53,7 @@ namespace Gift.Domain.UIModel.Element
                       Bound bound,
                       Color frontColor = Color.Default,
                       Color backColor = Color.Default,
-                      bool IsSelectableContainer = false) : base(screenDisplayFactory, bound, border, frontColor: frontColor, backColor: backColor, isSelectableContainer:IsSelectableContainer)
+                      bool IsSelectableContainer = false) : base(screenDisplayFactory, bound, border, frontColor: frontColor, backColor: backColor, isSelectableContainer: IsSelectableContainer)
         {
         }
 

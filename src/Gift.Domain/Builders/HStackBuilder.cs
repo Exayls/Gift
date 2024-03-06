@@ -81,7 +81,7 @@ namespace Gift.Domain.Builders
             var hstack = new HStack(_border,
                               screenDisplayFactory,
                               bound,
-							  IsSelectableContainer:_isSelectableContainer,
+                              IsSelectableContainer: _isSelectableContainer,
                               frontColor: frontColor,
                               backColor: backColor);
 

@@ -25,7 +25,7 @@ namespace Gift.XmlUiParser.FileParser
             _borderMapper = borderMapper;
             _colorMapper = colorMapper;
             _boundMapper = boundMapper;
-			_booleanMapper = booleanMapper;
+            _booleanMapper = booleanMapper;
             _logger = logger;
             _elements = new Dictionary<string, Type>();
             _builderMethods = new Dictionary<(Type builderType, string attribute), Func<IBuilder<UIElement>, object, IBuilder<UIElement>>>();
