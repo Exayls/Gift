@@ -5,8 +5,11 @@ namespace Gift.Repository.Tests
 {
     internal interface IRepository
     {
-        IEnumerable<Container> GetContainers();
-        UIElement GetRoot();
         void SaveRoot(UIElement root);
+        UIElement GetRoot();
+
+        IEnumerable<Container> GetContainers();
+        IEnumerable<Container> GetSelectableContainers();
+
     }
 }

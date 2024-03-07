@@ -93,5 +93,27 @@ namespace Gift.Repository.Tests
                                          container =>
                                          { Assert.Equal(vstack, container); });
         }
+
+        [Fact]
+        public void Given_root_have_selectable_containers_in_hierarchy_when_GetContainer_should_retrieve_them()
+        {
+            IRepository repository = new InMemoryRepository();
+            VStack vstack = new VStackBuilder().IsSelectableContainer(true).Build();
+            HStack hstack = new HStackBuilder().WithUnSelectableElement(vstack).Build();
+            var root = new VStackBuilder()
+                           .WithUnSelectableElement(
+                               hstack)
+						   .IsSelectableContainer(true)
+                           .Build();
+
+            repository.SaveRoot(root);
+            var containers = repository.GetSelectableContainers();
+
+            Assert.Collection<Container>(containers,
+                                         container =>
+                                         { Assert.Equal(root, container); },
+                                         container =>
+                                         { Assert.Equal(vstack, container); });
+        }
     }
 }

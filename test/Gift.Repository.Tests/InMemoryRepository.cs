@@ -43,5 +43,10 @@ namespace Gift.Repository.Tests
             }
             return containers;
         }
+
+        public IEnumerable<Container> GetSelectableContainers()
+        {
+			return GetContainers().Where(container => container.IsSelectableContainer);
+        }
     }
 }
