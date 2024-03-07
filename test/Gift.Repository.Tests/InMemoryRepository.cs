@@ -26,12 +26,22 @@ namespace Gift.Repository.Tests
 
         public IEnumerable<Container> GetContainers()
         {
-            if (_root is Container)
+            var containers = ResearchContainers(_root);
+            return containers.AsEnumerable();
+        }
+
+        private IList<Container> ResearchContainers(UIElement element)
+        {
+            var containers = new List<Container>();
+            if (element is Container)
             {
-                var containers = new List<Container>() { (Container)_root }.AsEnumerable();
-                return containers;
+                containers.Add((Container)element);
+                foreach (UIElement child in ((Container)element).Childs)
+                {
+                    containers.AddRange(ResearchContainers(child));
+                }
             }
-            return Enumerable.Empty<Container>();
+            return containers;
         }
     }
 }
