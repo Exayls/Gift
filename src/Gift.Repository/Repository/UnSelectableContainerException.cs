@@ -1,6 +1,6 @@
 using System;
 
-namespace Gift.Repository.Tests
+namespace Gift.Repository
 {
     [Serializable]
     public class UnSelectableContainerException : Exception

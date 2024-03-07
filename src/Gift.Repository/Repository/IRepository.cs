@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using Gift.Domain.UIModel.Element;
 
-namespace Gift.Repository.Tests
+namespace Gift.Repository
 {
-    internal interface IRepository
+    public interface IRepository
     {
         void SaveRoot(UIElement root);
         UIElement GetRoot();

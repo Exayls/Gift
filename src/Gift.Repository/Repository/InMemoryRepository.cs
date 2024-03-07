@@ -3,7 +3,7 @@ using System.Linq;
 using Gift.Domain.Builders;
 using Gift.Domain.UIModel.Element;
 
-namespace Gift.Repository.Tests
+namespace Gift.Repository
 {
     public class InMemoryRepository : IRepository
     {
