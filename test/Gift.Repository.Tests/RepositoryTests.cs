@@ -56,10 +56,7 @@ namespace Gift.Repository.Tests
         {
             IRepository repository = new InMemoryRepository();
             HStack hstack = new HStackBuilder().Build();
-            var root = new VStackBuilder()
-                           .WithUnSelectableElement(
-                               hstack)
-                           .Build();
+            var root = new VStackBuilder().WithUnSelectableElement(hstack).Build();
 
             repository.SaveRoot(root);
             var containers = repository.GetContainers();
@@ -77,10 +74,7 @@ namespace Gift.Repository.Tests
             IRepository repository = new InMemoryRepository();
             VStack vstack = new VStackBuilder().Build();
             HStack hstack = new HStackBuilder().WithUnSelectableElement(vstack).Build();
-            var root = new VStackBuilder()
-                           .WithUnSelectableElement(
-                               hstack)
-                           .Build();
+            var root = new VStackBuilder().WithUnSelectableElement(hstack).Build();
 
             repository.SaveRoot(root);
             var containers = repository.GetContainers();
@@ -100,11 +94,7 @@ namespace Gift.Repository.Tests
             IRepository repository = new InMemoryRepository();
             VStack vstack = new VStackBuilder().IsSelectableContainer(true).Build();
             HStack hstack = new HStackBuilder().WithUnSelectableElement(vstack).Build();
-            var root = new VStackBuilder()
-                           .WithUnSelectableElement(
-                               hstack)
-						   .IsSelectableContainer(true)
-                           .Build();
+            var root = new VStackBuilder().WithUnSelectableElement(hstack).IsSelectableContainer(true).Build();
 
             repository.SaveRoot(root);
             var containers = repository.GetSelectableContainers();
@@ -114,6 +104,66 @@ namespace Gift.Repository.Tests
                                          { Assert.Equal(root, container); },
                                          container =>
                                          { Assert.Equal(vstack, container); });
+        }
+
+        [Fact]
+        public void Given_root_have_no_selectable_containers_in_hierarchy_when_GetSelectedContainer_should_return_null()
+        {
+            IRepository repository = new InMemoryRepository();
+            var container = repository.GetSelectedContainer();
+
+            Assert.Equal(null, container);
+        }
+
+        [Fact]
+        public void Given_root_have_selectable_containers_in_hierarchy_when_GetSelectedContainer_should_return_first()
+        {
+            IRepository repository = new InMemoryRepository();
+            VStack vstack = new VStackBuilder().IsSelectableContainer(true).Build();
+            HStack hstack = new HStackBuilder().WithUnSelectableElement(vstack).Build();
+            var root = new VStackBuilder().WithUnSelectableElement(hstack).IsSelectableContainer(true).Build();
+
+            repository.SaveRoot(root);
+            var container = repository.GetSelectedContainer();
+
+            Assert.Equal(root, container);
+        }
+
+        [Fact]
+        public void
+        Given_root_have_selectable_containers_in_hierarchy_when_GetSelectedContainer_should_return_selected()
+        {
+            IRepository repository = new InMemoryRepository();
+            VStack vstack = new VStackBuilder().IsSelectableContainer(true).Build();
+            HStack hstack = new HStackBuilder().WithUnSelectableElement(vstack).Build();
+            var root = new VStackBuilder().WithUnSelectableElement(hstack).IsSelectableContainer(true).Build();
+
+            repository.SaveRoot(root);
+            repository.SelectContainer(vstack);
+            var container = repository.GetSelectedContainer();
+
+            Assert.Equal(vstack, container);
+        }
+
+        [Fact]
+        public void Given_container_is_not_selectable_when_SelectContainer_should_throw()
+        {
+            IRepository repository = new InMemoryRepository();
+            var root = new VStackBuilder().IsSelectableContainer(false).Build();
+            repository.SaveRoot(root);
+
+			Assert.Throws<UnSelectableContainerException>(() => repository.SelectContainer(root));
+        }
+
+        [Fact]
+        public void Given_container_is_not_in_root_when_SelectContainer_should_throw()
+        {
+            IRepository repository = new InMemoryRepository();
+            var root = new VStackBuilder().IsSelectableContainer(true).Build();
+            repository.SaveRoot(root);
+			var container = new VStackBuilder().IsSelectableContainer(true).Build();
+
+			Assert.Throws<ElementNotInHierarchyException>(() => repository.SelectContainer(root));
         }
     }
 }

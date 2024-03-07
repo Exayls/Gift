@@ -11,5 +11,7 @@ namespace Gift.Repository.Tests
         IEnumerable<Container> GetContainers();
         IEnumerable<Container> GetSelectableContainers();
 
+        void SelectContainer(Container container);
+        Container? GetSelectedContainer();
     }
 }

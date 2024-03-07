@@ -8,6 +8,7 @@ namespace Gift.Repository.Tests
     public class InMemoryRepository : IRepository
     {
         private UIElement _root;
+        private Container? _selectedContainer;
 
         public InMemoryRepository()
         {
@@ -47,6 +48,29 @@ namespace Gift.Repository.Tests
         public IEnumerable<Container> GetSelectableContainers()
         {
 			return GetContainers().Where(container => container.IsSelectableContainer);
+        }
+
+        public Container? GetSelectedContainer()
+        {
+			if(_selectedContainer != null){
+				return _selectedContainer;
+			}
+            IEnumerable<Container> selectableContainers = GetSelectableContainers();
+            if (selectableContainers.Any()){
+				return selectableContainers.First();
+			}
+			return null;
+        }
+
+        public void SelectContainer(Container container)
+        {
+			if(!container.IsSelectableContainer){
+				throw new UnSelectableContainerException($"container {container} is not selectable");
+			}
+			if(! GetSelectableContainers().Contains(container)){
+				throw new ElementNotInHierarchyException($"container {container} is not part of root");
+			}
+			_selectedContainer = container;
         }
     }
 }
