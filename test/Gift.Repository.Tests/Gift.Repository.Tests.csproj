@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Gift.Domain\Gift.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Gift.Repository\Gift.Repository.csproj" />
   </ItemGroup>
 
 </Project>
