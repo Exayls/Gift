@@ -67,6 +67,8 @@ namespace Gift.Repository
 			if(!container.IsSelectableContainer){
 				throw new UnSelectableContainerException($"container {container} is not selectable");
 			}
+			var a = GetSelectableContainers();
+			var b = a.Contains(container);
 			if(! GetSelectableContainers().Contains(container)){
 				throw new ElementNotInHierarchyException($"container {container} is not part of root");
 			}

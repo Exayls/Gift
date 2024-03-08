@@ -9,7 +9,6 @@ namespace Gift.Domain.Tests.UI
     public class EqualityTest
     {
 
-
         public EqualityTest()
         {
         }
@@ -24,7 +23,7 @@ namespace Gift.Domain.Tests.UI
             var element = new GiftUIBuilder()
                 .Build();
             //Assert
-            Assert.True(giftUIRef.Equals(element));
+            Assert.True(giftUIRef.IsSimilarTo(element));
         }
 
         [Fact]
@@ -36,7 +35,7 @@ namespace Gift.Domain.Tests.UI
             var element = new LabelBuilder()
                 .Build();
             //Assert
-            Assert.False(giftUIRef.Equals(element));
+            Assert.False(giftUIRef.IsSimilarTo(element));
         }
 
         [Fact]
@@ -48,7 +47,7 @@ namespace Gift.Domain.Tests.UI
             var element = new VStackBuilder()
                 .Build();
             //Assert
-            Assert.False(giftUIRef.Equals(element));
+            Assert.False(giftUIRef.IsSimilarTo(element));
         }
 
         [Fact]
@@ -62,7 +61,7 @@ namespace Gift.Domain.Tests.UI
                 .WithBound(new(3, 4))
                 .Build();
             //Assert
-            Assert.False(giftUIRef.Equals(element));
+            Assert.False(giftUIRef.IsSimilarTo(element));
         }
 
 
@@ -77,7 +76,7 @@ namespace Gift.Domain.Tests.UI
                 .WithBorder(new SimpleBorder(2, '*'))
                 .Build();
             //Assert
-            Assert.False(giftUIRef.Equals(element));
+            Assert.False(giftUIRef.IsSimilarTo(element));
         }
 
         [Fact]
@@ -91,7 +90,7 @@ namespace Gift.Domain.Tests.UI
                 .WithBorder(new SimpleBorder(1, 'a'))
                 .Build();
             //Assert
-            Assert.False(giftUIRef.Equals(element));
+            Assert.False(giftUIRef.IsSimilarTo(element));
         }
 
         [Fact]
@@ -105,7 +104,7 @@ namespace Gift.Domain.Tests.UI
                 .WithBackgroundColor(Color.Red)
                 .Build();
             //Assert
-            Assert.False(giftUIRef.Equals(element));
+            Assert.False(giftUIRef.IsSimilarTo(element));
         }
 
         [Fact]
@@ -119,7 +118,7 @@ namespace Gift.Domain.Tests.UI
                 .WithForegroundColor(Color.Red)
                 .Build();
             //Assert
-            Assert.False(giftUIRef.Equals(element));
+            Assert.False(giftUIRef.IsSimilarTo(element));
         }
 
         [Fact]
@@ -139,7 +138,7 @@ namespace Gift.Domain.Tests.UI
                 .WithSelectableElement(element2)
                 .Build();
             //Assert
-            Assert.True(giftUIRef.Equals(giftUIComp));
+            Assert.True(giftUIRef.IsSimilarTo(giftUIComp));
         }
 
         [Fact]
@@ -160,7 +159,7 @@ namespace Gift.Domain.Tests.UI
                 .WithSelectableElement(element2)
                 .Build();
             //Assert
-            Assert.False(giftUIRef.Equals(giftUIComp));
+            Assert.False(giftUIRef.IsSimilarTo(giftUIComp));
         }
 
         [Fact]
@@ -181,7 +180,7 @@ namespace Gift.Domain.Tests.UI
                 .WithSelectableContainer(element2)
                 .Build();
             //Assert
-            Assert.False(giftUIRef.Equals(giftUIComp));
+            Assert.False(giftUIRef.IsSimilarTo(giftUIComp));
         }
 
         [Fact]
@@ -198,7 +197,7 @@ namespace Gift.Domain.Tests.UI
             var giftUIComp = new GiftUIBuilder()
                 .Build();
             //Assert
-            Assert.False(giftUIRef.Equals(giftUIComp));
+            Assert.False(giftUIRef.IsSimilarTo(giftUIComp));
         }
 
     }

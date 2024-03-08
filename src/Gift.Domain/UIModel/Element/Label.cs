@@ -81,9 +81,9 @@ namespace Gift.Domain.UIModel.Element
                                      BackColor == Color.Default ? configuration.DefaultBackColor : BackColor);
         }
 
-        public override bool Equals(UIElement uiElement)
+        public override bool IsSimilarTo(UIElement uiElement)
         {
-            if (!(base.Equals(uiElement)))
+            if (!(base.IsSimilarTo(uiElement)))
                 return false;
             if (!(uiElement is Label))
                 return false;

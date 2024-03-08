@@ -29,7 +29,7 @@ namespace Gift.Domain.UIModel.Border
             return new ScreenDisplay(bound, frontColor, backColor, fillingChar);
         }
 
-        public bool Equals(IBorder border)
+        public bool IsSimilarTo(IBorder border)
         {
             if (!(border is NoBorder)) return false;
             return true;

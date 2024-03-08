@@ -43,7 +43,7 @@ namespace TestGift.Mocks
             return _isFixed;
         }
 
-        public override bool Equals(UIElement uiElement)
+        public override bool IsSimilarTo(UIElement uiElement)
         {
             return false;
         }

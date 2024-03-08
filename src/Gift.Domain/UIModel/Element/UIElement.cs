@@ -38,9 +38,9 @@ namespace Gift.Domain.UIModel.Element
         public abstract Position GetRelativePosition(Context context);
         public abstract bool IsFixed();
 
-        public virtual bool Equals(UIElement element)
+        public virtual bool IsSimilarTo(UIElement element)
         {
-            if (!this.Border.Equals(element.Border))
+            if (!this.Border.IsSimilarTo(element.Border))
                 return false;
             if (!this.BackColor.Equals(element.BackColor))
                 return false;

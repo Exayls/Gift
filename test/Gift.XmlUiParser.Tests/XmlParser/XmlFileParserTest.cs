@@ -96,7 +96,7 @@ namespace Gift.XmlUiParser.Tests.XmlParser
                             .WithUnSelectableElement(new LabelBuilder().WithText("World").Build())
                             .Build())
                     .Build();
-            Assert.True(expected.Equals(result));
+            Assert.True(expected.IsSimilarTo(result));
         }
 
 
@@ -116,7 +116,7 @@ namespace Gift.XmlUiParser.Tests.XmlParser
                         new VStackBuilder()
                             .Build())
                     .Build();
-            Assert.True(expected.Equals(result));
+            Assert.True(expected.IsSimilarTo(result));
         }
 
         private static void Log(ILogger<IXMLFileParser> logger, GiftUI element)

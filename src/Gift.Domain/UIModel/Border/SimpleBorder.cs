@@ -8,7 +8,6 @@ namespace Gift.Domain.UIModel.Border
         public char BorderChar { get; }
         public int Thickness { get; }
 
-
         public SimpleBorder(int thickness, char borderChar)
         {
             BorderChar = borderChar;
@@ -27,7 +26,6 @@ namespace Gift.Domain.UIModel.Border
             AddBorder(screenDisplay);
             return screenDisplay;
         }
-
 
         private void AddBorder(IScreenDisplay screenDisplay)
         {
@@ -49,14 +47,16 @@ namespace Gift.Domain.UIModel.Border
             return x < Thickness || y < Thickness || x >= bound.Width - Thickness || y >= bound.Height - Thickness;
         }
 
-        public bool Equals(IBorder border)
+        public bool IsSimilarTo(IBorder border)
         {
-            if (!(border is SimpleBorder)) return false;
-            if (Thickness != border.Thickness) return false;
+            if (!(border is SimpleBorder))
+                return false;
+            if (Thickness != border.Thickness)
+                return false;
             var simpleBorder = (SimpleBorder)border;
-            if (BorderChar != simpleBorder.BorderChar) return false;
+            if (BorderChar != simpleBorder.BorderChar)
+                return false;
             return true;
         }
-
     }
 }

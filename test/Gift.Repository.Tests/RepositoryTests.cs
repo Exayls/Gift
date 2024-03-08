@@ -1,7 +1,6 @@
 using Xunit;
 using Gift.Domain.Builders;
 using Gift.Domain.UIModel.Element;
-using Gift.Repository;
 
 namespace Gift.Repository.Tests
 {
@@ -153,7 +152,7 @@ namespace Gift.Repository.Tests
             var root = new VStackBuilder().IsSelectableContainer(false).Build();
             repository.SaveRoot(root);
 
-			Assert.Throws<UnSelectableContainerException>(() => repository.SelectContainer(root));
+            Assert.Throws<UnSelectableContainerException>(() => repository.SelectContainer(root));
         }
 
         [Fact]
@@ -162,9 +161,9 @@ namespace Gift.Repository.Tests
             IRepository repository = new InMemoryRepository();
             var root = new VStackBuilder().IsSelectableContainer(true).Build();
             repository.SaveRoot(root);
-			var container = new VStackBuilder().IsSelectableContainer(true).Build();
+            var container = new VStackBuilder().IsSelectableContainer(true).Build();
 
-			Assert.Throws<ElementNotInHierarchyException>(() => repository.SelectContainer(root));
+            Assert.Throws<ElementNotInHierarchyException>(() => repository.SelectContainer(container));
         }
     }
 }

@@ -109,12 +109,12 @@ namespace Gift.Domain.UIModel.Element
             return emptyVstackScreen;
         }
 
-        public override bool Equals(UIElement uiElement)
+        public override bool IsSimilarTo(UIElement uiElement)
         {
             if (!(uiElement is VStack))
                 return false;
             var element = (VStack)uiElement;
-            return base.Equals(uiElement);
+            return base.IsSimilarTo(uiElement);
         }
     }
 }

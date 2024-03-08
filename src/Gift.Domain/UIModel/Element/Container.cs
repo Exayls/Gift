@@ -122,9 +122,9 @@ namespace Gift.Domain.UIModel.Element
             }
         }
 
-        public override bool Equals(UIElement uiElement)
+        public override bool IsSimilarTo(UIElement uiElement)
         {
-            if (!(base.Equals(uiElement)))
+            if (!(base.IsSimilarTo(uiElement)))
                 return false;
             if (!(uiElement is Container))
                 return false;
@@ -136,7 +136,7 @@ namespace Gift.Domain.UIModel.Element
                 return false;
             foreach ((UIElement element1, UIElement element2)elementTuple in Childs.Zip(element.Childs))
             {
-                if (!(elementTuple.element1.Equals(elementTuple.element2)))
+                if (!(elementTuple.element1.IsSimilarTo(elementTuple.element2)))
                     return false;
             }
             if (SelectableElements.Count != element.SelectableElements.Count)
@@ -144,7 +144,7 @@ namespace Gift.Domain.UIModel.Element
             foreach ((UIElement element1,
                       UIElement element2)elementTuple in SelectableElements.Zip(element.SelectableElements))
             {
-                if (!(elementTuple.element1.Equals(elementTuple.element2)))
+                if (!(elementTuple.element1.IsSimilarTo(elementTuple.element2)))
                     return false;
             }
             return true;

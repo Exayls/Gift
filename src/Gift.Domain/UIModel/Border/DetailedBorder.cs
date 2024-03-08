@@ -16,8 +16,8 @@ namespace Gift.Domain.UIModel.Border
 
         public int Thickness { get; }
 
-        public DetailedBorder(int thickness, char tlBorder, char trBorder, char blBorder, char brBorder,
-            char tBorder, char bBorder, char lBorder, char rBorder)
+        public DetailedBorder(int thickness, char tlBorder, char trBorder, char blBorder, char brBorder, char tBorder,
+                              char bBorder, char lBorder, char rBorder)
         {
             this.tlBorder = tlBorder;
             this.trBorder = trBorder;
@@ -41,7 +41,6 @@ namespace Gift.Domain.UIModel.Border
             this.rBorder = borderChars.rBorder;
             Thickness = thickness;
         }
-
 
         public IScreenDisplay GetDisplay(Bound bound)
         {
@@ -118,7 +117,8 @@ namespace Gift.Domain.UIModel.Border
 
         private bool IsBottomBorder(int x, int y, Bound bound)
         {
-            return (y >= bound.Height - Thickness && bound.Height - y - 1 < x && bound.Height - y - 1 < bound.Width - x - 1);
+            return (y >= bound.Height - Thickness && bound.Height - y - 1 < x &&
+                    bound.Height - y - 1 < bound.Width - x - 1);
         }
 
         private bool IsLeftBorder(int x, int y, Bound bound)
@@ -128,7 +128,8 @@ namespace Gift.Domain.UIModel.Border
 
         private bool IsRightBorder(int x, int y, Bound bound)
         {
-            return x >= bound.Width - Thickness && bound.Width - x - 1 < y && bound.Width - x - 1 < bound.Height - y - 1;
+            return x >= bound.Width - Thickness && bound.Width - x - 1 < y &&
+                   bound.Width - x - 1 < bound.Height - y - 1;
         }
 
         private bool IsBottomLeftBorder(int x, int y, Bound bound)
@@ -138,7 +139,8 @@ namespace Gift.Domain.UIModel.Border
 
         private bool IsBottomRightBorder(int x, int y, Bound bound)
         {
-            return (x >= bound.Width - Thickness && y >= bound.Height - Thickness && bound.Width - x - 1 == bound.Height - y - 1);
+            return (x >= bound.Width - Thickness && y >= bound.Height - Thickness &&
+                    bound.Width - x - 1 == bound.Height - y - 1);
         }
 
         private bool IsTopLeftBorder(int x, int y, Bound bound)
@@ -156,20 +158,30 @@ namespace Gift.Domain.UIModel.Border
             return x < Thickness || y < Thickness || x >= bound.Width - Thickness || y >= bound.Height - Thickness;
         }
 
-        public bool Equals(IBorder border)
+        public bool IsSimilarTo(IBorder border)
         {
-            if (!(border is DetailedBorder)) return false;
-            if (Thickness != border.Thickness) return false;
+            if (!(border is DetailedBorder))
+                return false;
+            if (Thickness != border.Thickness)
+                return false;
             var detailedBorder = (DetailedBorder)border;
 
-            if (tlBorder != detailedBorder.tlBorder) return false;
-            if (trBorder != detailedBorder.trBorder) return false;
-            if (blBorder != detailedBorder.blBorder) return false;
-            if (brBorder != detailedBorder.brBorder) return false;
-            if (tBorder != detailedBorder.tBorder) return false;
-            if (bBorder != detailedBorder.bBorder) return false;
-            if (lBorder != detailedBorder.lBorder) return false;
-            if (rBorder != detailedBorder.rBorder) return false;
+            if (tlBorder != detailedBorder.tlBorder)
+                return false;
+            if (trBorder != detailedBorder.trBorder)
+                return false;
+            if (blBorder != detailedBorder.blBorder)
+                return false;
+            if (brBorder != detailedBorder.brBorder)
+                return false;
+            if (tBorder != detailedBorder.tBorder)
+                return false;
+            if (bBorder != detailedBorder.bBorder)
+                return false;
+            if (lBorder != detailedBorder.lBorder)
+                return false;
+            if (rBorder != detailedBorder.rBorder)
+                return false;
 
             return true;
         }
