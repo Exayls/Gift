@@ -7,7 +7,7 @@ using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
 
-namespace Gift.Domain.Builders
+namespace Gift.Domain.Builders.UIModel
 {
     public class GiftUIBuilder : IContainerBuilder
     {

@@ -2,7 +2,7 @@ using Gift.Domain.Builders.Mappers;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
 
-namespace Gift.Domain.Builders
+namespace Gift.Domain.Builders.UIModel
 {
     public interface IContainerBuilder : IUIElementBuilder, IBuilder<Container>
     {
