@@ -22,21 +22,21 @@ namespace Gift.XmlUiParser.FileParser
 
         private void SelectContainer(UIElement uiElement, XmlElement element)
         {
-            if (giftUI == null)
-            {
-                return;
-            }
-            if (uiElement is Container container)
-            {
-                if (element.GetAttribute("selectableContainer") == "true")
-                {
-                    giftUI.SelectableContainers.Add(container);
-                }
-                if (element.GetAttribute("selectedContainer") == "true")
-                {
-                    giftUI.SelectedContainer = container;
-                }
-            }
+            // if (giftUI == null)
+            // {
+            //     return;
+            // }
+            // if (uiElement is Container container)
+            // {
+            //     if (element.GetAttribute("selectableContainer") == "true")
+            //     {
+            //         giftUI.SelectableContainers.Add(container);
+            //     }
+            //     if (element.GetAttribute("selectedContainer") == "true")
+            //     {
+            //         giftUI.SelectedContainer = container;
+            //     }
+            // }
         }
 
         private void SelectElement(UIElement uiElement, XmlElement element, Container container)

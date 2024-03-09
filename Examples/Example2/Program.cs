@@ -29,6 +29,7 @@ vstack.AddUnselectableChild(new LabelBuilder().WithText("test2").WithPosition(ne
 vstack.AddUnselectableChild(new LabelBuilder().WithText("test4").Build());
 
 var vstack2 = new VStackBuilder()
+                  .IsSelectableContainer(true)
                   .WithBorder(new DetailedBorder(
                       1, BorderOption.GetBorderCharsFromFile("ressources/borderchars/simple_border.json")))
                   .Build();
@@ -47,8 +48,6 @@ vstack.AddUnselectableChild(new LabelBuilder().Build());
 vstack.AddUnselectableChild(new LabelBuilder().WithText("test3").Build());
 vstack.AddUnselectableChild(new LabelBuilder().Build());
 
-ui.SelectableContainers.Add(vstack2);
-ui.SelectedContainer = vstack2;
 
 var services = new ServiceCollection();
 Log.Logger = new LoggerConfiguration()

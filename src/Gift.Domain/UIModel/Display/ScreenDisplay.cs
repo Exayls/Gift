@@ -16,13 +16,14 @@ namespace Gift.Domain.UIModel.Display
         public StringBuilder DisplayString { get; }
         public char[,] DisplayMap { get; }
 
-
-        public ScreenDisplay(string display, Color frontColor = Color.White, Color backColor = Color.Transparent) : this(new(1, display.Length), frontColor, backColor, '*')
+        public ScreenDisplay(string display, Color frontColor = Color.White, Color backColor = Color.Transparent)
+            : this(new(1, display.Length), frontColor, backColor, '*')
         {
             DisplayString.Clear().Append(display);
         }
 
-        public ScreenDisplay(Bound bound, Color frontColor = Color.White, Color backColor = Color.Transparent, char emptychar = '*')
+        public ScreenDisplay(Bound bound, Color frontColor = Color.White, Color backColor = Color.Transparent,
+                             char emptychar = '*')
         {
             DisplayString = new StringBuilder();
             TotalBound = bound;
@@ -75,9 +76,8 @@ namespace Gift.Domain.UIModel.Display
         {
             for (int i = 0; i < display.TotalBound.Height; i++)
             {
-                bool ShouldAddLine = globalPosition.x <= TotalBound.Width
-                    && globalPosition.y + i + 1 <= TotalBound.Height
-                    && globalPosition.y + i >= 0;
+                bool ShouldAddLine = globalPosition.x <= TotalBound.Width &&
+                                     globalPosition.y + i + 1 <= TotalBound.Height && globalPosition.y + i >= 0;
                 if (ShouldAddLine)
                 {
                     AddLineToDisplay(display, globalPosition, i);
@@ -107,10 +107,12 @@ namespace Gift.Domain.UIModel.Display
             DisplayString.Insert(indexLineToReplace, stringToInsert);
 
             FillColorMapAtPosition(display, position, i, indexLineToReplace, indexWidthToReplace, lenghtToReplace);
-            FillDisplayMapAtPosition(position, i, indexLineToReplace, indexWidthToReplace, lenghtToReplace, stringToInsert);
+            FillDisplayMapAtPosition(position, i, indexLineToReplace, indexWidthToReplace, lenghtToReplace,
+                                     stringToInsert);
         }
 
-        private void FillColorMapAtPosition(IScreenDisplay display, Position position, int i, int indexLineToReplace, int indexWidthToReplace, int lenghtToReplace)
+        private void FillColorMapAtPosition(IScreenDisplay display, Position position, int i, int indexLineToReplace,
+                                            int indexWidthToReplace, int lenghtToReplace)
         {
             for (int j = 0; j < lenghtToReplace; j++)
             {
@@ -119,7 +121,8 @@ namespace Gift.Domain.UIModel.Display
             }
         }
 
-        private void FillDisplayMapAtPosition(Position position, int i, int indexLineToReplace, int indexWidthToReplace, int lenghtToReplace, string stringToInsert)
+        private void FillDisplayMapAtPosition(Position position, int i, int indexLineToReplace, int indexWidthToReplace,
+                                              int lenghtToReplace, string stringToInsert)
         {
             for (int j = 0; j < lenghtToReplace; j++)
             {
@@ -147,9 +150,9 @@ namespace Gift.Domain.UIModel.Display
         private bool CheckEquality<T>(T[,] t1, T[,] t2)
         {
             var equal =
-                    t1.Rank == t2.Rank &&
-                    Enumerable.Range(0, t1.Rank).All(dimension => t1.GetLength(dimension) == t2.GetLength(dimension)) &&
-                    t1.Cast<double>().SequenceEqual(t2.Cast<double>());
+                t1.Rank == t2.Rank &&
+                Enumerable.Range(0, t1.Rank).All(dimension => t1.GetLength(dimension) == t2.GetLength(dimension)) &&
+                t1.Cast<double>().SequenceEqual(t2.Cast<double>());
             return equal;
         }
 
@@ -159,7 +162,6 @@ namespace Gift.Domain.UIModel.Display
             bool sameFrontColor = CheckEquality<Color>(other.FrontColorMap, this.FrontColorMap);
             bool sameChars = CheckEquality<char>(other.DisplayMap, this.DisplayMap);
             return (sameChars && sameBackColor && sameFrontColor);
-
         }
     }
 }

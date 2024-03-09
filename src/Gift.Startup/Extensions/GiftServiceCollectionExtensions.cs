@@ -3,6 +3,7 @@ using Gift.XmlUiParser.Extensions;
 using Gift.ApplicationService.Extensions;
 using Gift.Displayer.Extensions;
 using Gift.ConsoleMonitor.Extensions;
+using Gift.Repository.Extensions;
 using Gift.Domain.Extensions;
 
 namespace Gift.Startup.Extensions
@@ -16,6 +17,7 @@ namespace Gift.Startup.Extensions
             services.AddGiftXmlParser();
             services.AddGiftKeyInteraction();
             services.AddGiftConsoleMonitor();
+            services.AddGiftRepository();
             services.AddDomainServices();
             services.AddLogging();
             return services;

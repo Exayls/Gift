@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Gift.Domain.UIModel.Element;
 
-namespace Gift.Repository
+namespace Gift.Domain.ServiceContracts
 {
     public interface IRepository
     {

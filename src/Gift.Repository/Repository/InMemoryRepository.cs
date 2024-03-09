@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Gift.Domain.Builders;
+using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel.Element;
 
 namespace Gift.Repository
