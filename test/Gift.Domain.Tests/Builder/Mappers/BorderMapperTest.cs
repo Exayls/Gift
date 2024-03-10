@@ -1,4 +1,7 @@
 using Gift.Domain.Builders.Mappers;
+using Gift.Domain.Builders.UIModel.Display;
+using Gift.Domain.UIModel.Border;
+using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.MetaData;
 using Xunit;
 
@@ -19,11 +22,21 @@ namespace TestGift.Builder
             var borderFile = "ressources/simple_border.json";
             var border = _mapper.ToBorder(borderFile);
             Assert.Equal(1, border.Thickness);
-            var expectedString =
-             "┌─┐\n" +
-             "│ │\n" +
-             "└─┘";
-            Assert.Equal(expectedString, border.GetDisplay(new Bound(3, 3), Color.Default, Color.Default, ' ').DisplayString.ToString());
+            var expectedString = "┌─┐\n" + "│ │\n" + "└─┘";
+            var screen = new ScreenDisplayBuilder()
+                             .WithFrontColor(Color.Default)
+                             .WithBackColor(Color.Default)
+                             .WithChar(' ')
+                             .WithBound(new Bound(3, 3));
+            Assert.Equal(expectedString, border.GetDisplay(screen).DisplayString.ToString());
+        }
+
+        private IScreenDisplay GetDisplay(Bound bound, Color frcol, Color bckcol, char ch, IBorder border)
+        {
+
+            var screen =
+                new ScreenDisplayBuilder().WithFrontColor(frcol).WithBackColor(bckcol).WithChar(ch).WithBound(bound);
+            return border.GetDisplay(screen);
         }
 
         [Fact]
@@ -32,11 +45,10 @@ namespace TestGift.Builder
             var borderOption = "simple";
             var border = _mapper.ToBorder(borderOption);
             Assert.Equal(1, border.Thickness);
-            var expectedString =
-             "┌─┐\n" +
-             "│ │\n" +
-             "└─┘";
-            Assert.Equal(expectedString, border.GetDisplay(new Bound(3, 3), Color.Default, Color.Default, ' ').DisplayString.ToString());
+            var expectedString = "┌─┐\n" + "│ │\n" + "└─┘";
+            Assert.Equal(
+                expectedString,
+                GetDisplay(new Bound(3, 3), Color.Default, Color.Default, ' ', border).DisplayString.ToString());
         }
 
         [Fact]
@@ -45,11 +57,10 @@ namespace TestGift.Builder
             var borderOption = "heavy";
             var border = _mapper.ToBorder(borderOption);
             Assert.Equal(1, border.Thickness);
-            var expectedString =
-             "███\n" +
-             "█ █\n" +
-             "███";
-            Assert.Equal(expectedString, border.GetDisplay(new Bound(3, 3), Color.Default, Color.Default, ' ').DisplayString.ToString());
+            var expectedString = "███\n" + "█ █\n" + "███";
+            Assert.Equal(
+                expectedString,
+                GetDisplay(new Bound(3, 3), Color.Default, Color.Default, ' ', border).DisplayString.ToString());
         }
     }
 }

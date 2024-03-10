@@ -1,4 +1,5 @@
-﻿using Gift.Domain.UIModel.Border;
+﻿using Gift.Domain.Builders.UIModel.Display;
+using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.MetaData;
 using Xunit;
@@ -19,7 +20,8 @@ namespace Gift.Domain.Tests.Border
         public void GetDisplay_should_return_border_with_thickness_1_when_border_thickness_equal_1_1()
         {
             //act
-            IScreenDisplay display = _border.GetDisplay(new Bound(2, 2));
+			var screen = new ScreenDisplayBuilder().WithChar(' ').WithBound(new Bound(2,2));
+            IScreenDisplay display = _border.GetDisplay(screen);
             //assert
             const string expected = "╔╗\n" +
                                     "╚╝";
@@ -28,8 +30,9 @@ namespace Gift.Domain.Tests.Border
         [Fact]
         public void GetDisplay_should_return_border_with_thickness_1_when_border_thickness_equal_1_2()
         {
+			var screen = new ScreenDisplayBuilder().WithChar(' ').WithBound(new Bound(4,4));
             //act
-            IScreenDisplay display = _border.GetDisplay(new Bound(4, 4), ' ');
+            IScreenDisplay display = _border.GetDisplay(screen);
             //assert
             const string expected = "╔══╗\n" +
                                     "║  ║\n" +
@@ -42,8 +45,9 @@ namespace Gift.Domain.Tests.Border
         {
             //arrange
             _border = new DetailedBorder(1, '┌', '┐', '└', '┘', '─', '─', '│', '│');
+			var screen = new ScreenDisplayBuilder().WithChar('*').WithBound(new Bound(4,4));
             //act
-            IScreenDisplay display = _border.GetDisplay(new Bound(4, 4), '*');
+            IScreenDisplay display = _border.GetDisplay(screen);
             //assert
             const string expected = "┌──┐\n" +
                                     "│**│\n" +
@@ -56,8 +60,9 @@ namespace Gift.Domain.Tests.Border
         {
             //arrange
             _border = new DetailedBorder(2, BorderOption.GetBorderCharsFromFile("ressources/borderchars/simple_border.json"));
+			var screen = new ScreenDisplayBuilder().WithChar(' ').WithBound(new Bound(6,6));
             //act
-            IScreenDisplay display = _border.GetDisplay(new Bound(6, 6), ' ');
+            IScreenDisplay display = _border.GetDisplay(screen);
             //assert
             const string expected = "┌────┐\n" +
                                     "│┌──┐│\n" +
@@ -72,8 +77,9 @@ namespace Gift.Domain.Tests.Border
         {
             //arrange
             _border = new DetailedBorder(2, BorderOption.GetBorderCharsFromFile("ressources/borderchars/simple_border.json"));
+			var screen = new ScreenDisplayBuilder().WithChar(' ').WithBound(new Bound(8,8));
             //act
-            IScreenDisplay display = _border.GetDisplay(new Bound(8, 8), ' ');
+            IScreenDisplay display = _border.GetDisplay(screen);
             //assert
             const string expected = "┌──────┐\n" +
                                     "│┌────┐│\n" +
@@ -90,8 +96,9 @@ namespace Gift.Domain.Tests.Border
         {
             //arrange
             _border = new DetailedBorder(3, BorderOption.GetBorderCharsFromFile("ressources/borderchars/simple_border.json"));
+			var screen = new ScreenDisplayBuilder().WithChar(' ').WithBound(new Bound(8,8));
             //act
-            IScreenDisplay display = _border.GetDisplay(new Bound(8, 8), ' ');
+            IScreenDisplay display = _border.GetDisplay(screen);
             //assert
             const string expected = "┌──────┐\n" +
                                     "│┌────┐│\n" +
@@ -108,8 +115,9 @@ namespace Gift.Domain.Tests.Border
         {
             //arrange
             _border = new DetailedBorder(3, BorderOption.GetBorderCharsFromFile("ressources/borderchars/simple_border.json"));
+			var screen = new ScreenDisplayBuilder().WithChar(' ').WithBound(new Bound(12,8));
             //act
-            IScreenDisplay display = _border.GetDisplay(new Bound(12, 8), ' ');
+            IScreenDisplay display = _border.GetDisplay(screen);
             //assert
             const string expected = "┌──────┐\n" +
                                     "│┌────┐│\n" +
@@ -130,8 +138,9 @@ namespace Gift.Domain.Tests.Border
         {
             //arrange
             _border = new DetailedBorder(3, BorderOption.GetBorderCharsFromFile("ressources/borderchars/simple_border.json"));
+			var screen = new ScreenDisplayBuilder().WithChar(' ').WithBound(new Bound(8,12));
             //act
-            IScreenDisplay display = _border.GetDisplay(new Bound(8, 12), ' ');
+            IScreenDisplay display = _border.GetDisplay(screen);
             //assert
             const string expected = "┌──────────┐\n" +
                                     "│┌────────┐│\n" +

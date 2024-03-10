@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
-using Gift.Domain.Builders;
 using Gift.Domain.Builders.Mappers;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
 
-namespace Gift.Domain.BuildersUIModel
+namespace Gift.Domain.Builders.UIModel
 {
     public class VStackBuilder : IContainerBuilder
     {

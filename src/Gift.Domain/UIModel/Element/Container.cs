@@ -1,4 +1,5 @@
-﻿using Gift.Domain.UIModel.Border;
+﻿using Gift.Domain.Builders.UIModel.Display;
+using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.MetaData;
@@ -59,6 +60,7 @@ namespace Gift.Domain.UIModel.Element
 
         public override IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuration)
         {
+			var screenDisplayBuilder = new ScreenDisplayBuilder();
             Color frontColor = FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor;
             Color backColor = BackColor == Color.Default ? configuration.DefaultBackColor : BackColor;
             if (IsSelectedContainer)
@@ -70,8 +72,8 @@ namespace Gift.Domain.UIModel.Element
                                 ? backColor
                                 : configuration.SelectedContainerBackColor;
             }
-
-            IScreenDisplay screenDisplay = Border.GetDisplay(bound, frontColor, backColor);
+			screenDisplayBuilder.WithFrontColor(frontColor).WithBackColor(backColor).WithBound(bound);
+            IScreenDisplay screenDisplay = Border.GetDisplay(screenDisplayBuilder);
             return screenDisplay;
         }
 

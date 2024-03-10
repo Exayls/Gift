@@ -1,5 +1,4 @@
-﻿using Xunit;
-using Gift.Domain.UIModel;
+﻿using Gift.Domain.UIModel;
 using Gift.ApplicationService.Services.SignalHandler.Global;
 using Gift.ApplicationService.Services.SignalHandler.Bus;
 using Gift.ApplicationService.ServiceContracts;
@@ -8,7 +7,6 @@ using Gift.ApplicationService.Services.SignalHandler.Key;
 using Gift.ApplicationService.Services;
 using Gift.Domain.ServiceContracts;
 using Moq;
-using Gift.Domain.Builders;
 
 namespace Gift.ApplicationService.Tests.Services
 {

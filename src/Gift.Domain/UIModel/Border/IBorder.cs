@@ -1,5 +1,5 @@
-﻿using Gift.Domain.UIModel.Display;
-using Gift.Domain.UIModel.MetaData;
+﻿using Gift.Domain.Builders.UIModel.Display;
+using Gift.Domain.UIModel.Display;
 
 namespace Gift.Domain.UIModel.Border
 {
@@ -7,8 +7,7 @@ namespace Gift.Domain.UIModel.Border
     {
         int Thickness { get; }
 
-        public IScreenDisplay GetDisplay(Bound bound, char fillingChar = ' ');
-        public IScreenDisplay GetDisplay(Bound bound, Color frontColor, Color backColor, char fillingChar = ' ');
+        public IScreenDisplay GetDisplay(ScreenDisplayBuilder screenDisplayBuilder);
         public bool IsSimilarTo(IBorder border);
     }
 }

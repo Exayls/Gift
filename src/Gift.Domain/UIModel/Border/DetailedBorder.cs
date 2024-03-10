@@ -1,4 +1,5 @@
-﻿using Gift.Domain.UIModel.Display;
+﻿using Gift.Domain.Builders.UIModel.Display;
+using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.MetaData;
 
 namespace Gift.Domain.UIModel.Border
@@ -40,24 +41,6 @@ namespace Gift.Domain.UIModel.Border
             this.lBorder = borderChars.lBorder;
             this.rBorder = borderChars.rBorder;
             Thickness = thickness;
-        }
-
-        public IScreenDisplay GetDisplay(Bound bound)
-        {
-            return GetDisplay(bound, '*');
-        }
-
-        public IScreenDisplay GetDisplay(Bound bound, char fillingChar)
-        {
-            IScreenDisplay screenDisplay = new ScreenDisplay(bound, emptychar: fillingChar);
-            AddBorder(screenDisplay);
-            return screenDisplay;
-        }
-        public IScreenDisplay GetDisplay(Bound bound, Color frontColor, Color backColor, char fillingChar = ' ')
-        {
-            IScreenDisplay screenDisplay = new ScreenDisplay(bound, frontColor, backColor, fillingChar);
-            AddBorder(screenDisplay);
-            return screenDisplay;
         }
 
         private void AddBorder(IScreenDisplay screenDisplay)
@@ -184,6 +167,13 @@ namespace Gift.Domain.UIModel.Border
                 return false;
 
             return true;
+        }
+
+        public IScreenDisplay GetDisplay(ScreenDisplayBuilder screenDisplayBuilder)
+        {
+            IScreenDisplay screenDisplay = screenDisplayBuilder.Build();
+            AddBorder(screenDisplay);
+            return screenDisplay;
         }
     }
 }

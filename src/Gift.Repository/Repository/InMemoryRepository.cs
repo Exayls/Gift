@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Gift.Domain.Builders;
+using Gift.Domain.Builders.UIModel;
 using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel.Element;
 

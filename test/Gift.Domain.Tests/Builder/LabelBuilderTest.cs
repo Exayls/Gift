@@ -1,4 +1,4 @@
-﻿using Gift.Domain.Builders;
+﻿using Gift.Domain.Builders.UIModel;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
 using Xunit;

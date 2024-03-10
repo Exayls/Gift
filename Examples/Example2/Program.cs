@@ -1,5 +1,5 @@
 using Gift.ApplicationService.ServiceContracts;
-using Gift.Domain.Builders;
+using Gift.Domain.Builders.UIModel;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.MetaData;
 using Gift.Startup.Extensions;
@@ -47,7 +47,6 @@ vstack.AddUnselectableChild(new LabelBuilder().WithText("test5").Build());
 vstack.AddUnselectableChild(new LabelBuilder().Build());
 vstack.AddUnselectableChild(new LabelBuilder().WithText("test3").Build());
 vstack.AddUnselectableChild(new LabelBuilder().Build());
-
 
 var services = new ServiceCollection();
 Log.Logger = new LoggerConfiguration()

@@ -1,12 +1,12 @@
-﻿using Gift.Domain.Builders;
-using Gift.Domain.UIModel;
-using Gift.Domain.UIModel.Border;
-using Gift.Domain.UIModel.Display;
-using Gift.Domain.UIModel.Element;
-using Gift.Domain.UIModel.MetaData;
-using Moq;
-using System;
-using Xunit;
+﻿// using Gift.Domain.Builders;
+// using Gift.Domain.UIModel;
+// using Gift.Domain.UIModel.Border;
+// using Gift.Domain.UIModel.Display;
+// using Gift.Domain.UIModel.Element;
+// using Gift.Domain.UIModel.MetaData;
+// using Moq;
+// using System;
+// using Xunit;
 
 namespace Gift.Domain.Tests.UI
 {

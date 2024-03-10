@@ -7,7 +7,7 @@ using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Conf;
 using Gift.ApplicationService.Services;
 using Gift.Displayer.Rendering;
-using Gift.Domain.Builders;
+using Gift.Domain.Builders.UIModel;
 
 namespace Gift.Displayer.Tests.Integration
 {

@@ -1,4 +1,4 @@
-﻿using Gift.Domain.Builders;
+﻿using Gift.Domain.Builders.UIModel;
 
 namespace Gift.Domain.UIModel
 {

@@ -1,7 +1,7 @@
 using Xunit;
-using Gift.Domain.Builders;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.ServiceContracts;
+using Gift.Domain.Builders.UIModel;
 
 namespace Gift.Repository.Tests
 {

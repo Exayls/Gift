@@ -1,4 +1,5 @@
-﻿using Gift.Domain.UIModel.Border;
+﻿using Gift.Domain.Builders.UIModel.Display;
+using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.DispositionStrategy;
@@ -76,9 +77,11 @@ namespace Gift.Domain.UIModel.Element
 
         public override IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuration)
         {
-            return Border.GetDisplay(new Bound(Height, Width),
-                                     FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor,
-                                     BackColor == Color.Default ? configuration.DefaultBackColor : BackColor);
+			var screen = new ScreenDisplayBuilder()
+				.WithFrontColor(FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor)
+				.WithBackColor(BackColor == Color.Default ? configuration.DefaultBackColor : BackColor)
+				.WithBound(new Bound(Height, Width));
+            return Border.GetDisplay(screen);
         }
 
         public override bool IsSimilarTo(UIElement uiElement)

@@ -2,8 +2,8 @@
 using System.IO;
 using Gift.Displayer.Displayer;
 using Gift.Displayer.Rendering;
-using Gift.Domain.Builders;
 using Gift.Domain.Builders.Mappers;
+using Gift.Domain.Builders.UIModel;
 using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Border;
