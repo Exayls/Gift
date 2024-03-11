@@ -80,7 +80,8 @@ namespace Gift.Domain.Builders.UIModel
 
         public GiftUIBuilder WithSelectableContainer(Container element)
         {
-            this.selectableContainers.Add(element);
+            // this.selectableContainers.Add(element);
+            unSelectableElements.Add(element);
             return this;
         }
 
