@@ -1,5 +1,4 @@
-﻿using System;
-using Gift.Domain.Builders.UIModel.Display;
+﻿using Gift.Domain.Builders.UIModel.Display;
 using Gift.Domain.UIModel.Display;
 
 namespace Gift.Domain.UIModel.Border

@@ -6,9 +6,25 @@ namespace Gift.Domain.UIModel.Border
 {
     public class BorderOption
     {
-        public static BorderOption Default { get { return GetBorderCharsFromFile("ressources/borderchars/simple_border.json"); } }
-        public static BorderOption Simple { get { return GetBorderCharsFromFile("ressources/borderchars/simple_border.json"); } }
-        public static BorderOption Heavy { get { return GetBorderCharsFromFile("ressources/borderchars/heavy_border.json"); } }
+
+        public static BorderOption Default
+        {
+            get {
+                return GetBorderCharsFromFile("ressources/borderchars/simple_border.json");
+            }
+        }
+        public static BorderOption Simple
+        {
+            get {
+                return GetBorderCharsFromFile("ressources/borderchars/simple_border.json");
+            }
+        }
+        public static BorderOption Heavy
+        {
+            get {
+                return GetBorderCharsFromFile("ressources/borderchars/heavy_border.json");
+            }
+        }
         public char tlBorder { get; }
         public char trBorder { get; }
         public char blBorder { get; }
@@ -18,8 +34,8 @@ namespace Gift.Domain.UIModel.Border
         public char lBorder { get; }
         public char rBorder { get; }
 
-        public BorderOption(char ulBorder, char urBorder, char dlBorder, char drBorder,
-            char uBorder, char dBorder, char lBorder, char rBorder)
+        public BorderOption(char ulBorder, char urBorder, char dlBorder, char drBorder, char uBorder, char dBorder,
+                            char lBorder, char rBorder)
         {
             this.tlBorder = ulBorder;
             this.trBorder = urBorder;
@@ -30,6 +46,12 @@ namespace Gift.Domain.UIModel.Border
             this.lBorder = lBorder;
             this.rBorder = rBorder;
         }
+
+        public BorderOption(char borderChar):this(borderChar, borderChar, borderChar, borderChar, borderChar,
+                                                  borderChar, borderChar, borderChar)
+        {
+        }
+
         public static BorderOption GetBorderCharsFromFile(string file)
         {
             string json = File.ReadAllText(file);
@@ -46,6 +68,5 @@ namespace Gift.Domain.UIModel.Border
 
             return new BorderOption(topLeft, topRight, bottomLeft, bottomRight, top, bottom, left, right);
         }
-
     }
 }

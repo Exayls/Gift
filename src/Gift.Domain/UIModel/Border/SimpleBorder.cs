@@ -1,6 +1,5 @@
 ﻿using Gift.Domain.Builders.UIModel.Display;
 using Gift.Domain.UIModel.Display;
-using Gift.Domain.UIModel.MetaData;
 
 namespace Gift.Domain.UIModel.Border
 {
@@ -13,26 +12,6 @@ namespace Gift.Domain.UIModel.Border
         {
             BorderChar = borderChar;
             Thickness = thickness;
-        }
-
-        private void AddBorder(IScreenDisplay screenDisplay)
-        {
-            for (int y = 0; y < screenDisplay.TotalBound.Height; y++)
-            {
-                for (int x = 0; x < screenDisplay.TotalBound.Width; x++)
-                {
-                    bool isborder = IsBorder(x, y, screenDisplay.TotalBound);
-                    if (isborder)
-                    {
-                        screenDisplay.AddChar(BorderChar, new Position(y, x));
-                    }
-                }
-            }
-        }
-
-        private bool IsBorder(int x, int y, Bound bound)
-        {
-            return x < Thickness || y < Thickness || x >= bound.Width - Thickness || y >= bound.Height - Thickness;
         }
 
         public bool IsSimilarTo(IBorder border)
@@ -50,7 +29,8 @@ namespace Gift.Domain.UIModel.Border
         public IScreenDisplay GetDisplay(ScreenDisplayBuilder screenDisplayBuilder)
         {
 			var screen = screenDisplayBuilder.Build();
-            AddBorder(screen);
+            // AddBorder(screen);
+			screen.AddBorder(Thickness, new BorderOption(BorderChar));
             return screen;
         }
     }
