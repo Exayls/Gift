@@ -1,4 +1,5 @@
-﻿using Gift.Domain.UIModel.MetaData;
+﻿using Gift.Domain.UIModel.Border;
+using Gift.Domain.UIModel.MetaData;
 using System.Linq;
 using System.Text;
 
@@ -162,6 +163,105 @@ namespace Gift.Domain.UIModel.Display
             bool sameFrontColor = CheckEquality<Color>(other.FrontColorMap, this.FrontColorMap);
             bool sameChars = CheckEquality<char>(other.DisplayMap, this.DisplayMap);
             return (sameChars && sameBackColor && sameFrontColor);
+        }
+
+
+        public void AddBorder(int thickness, BorderOption borderChars)
+        {
+            for (int y = 0; y < TotalBound.Height; y++)
+            {
+                for (int x = 0; x < TotalBound.Width; x++)
+                {
+                    bool TopLeftBorder = IsTopLeftBorder(x, y, thickness);
+                    bool TopRightBorder = IsTopRightBorder(x, y, thickness);
+                    bool BottomLeftBorder = IsBottomLeftBorder(x, y, thickness);
+                    bool BottomRightBorder = IsBottomRightBorder(x, y, thickness);
+                    bool TopBorder = IsTopBorder(x, y, thickness);
+                    bool BottomBorder = IsBottomBorder(x, y, thickness);
+                    bool LeftBorder = IsLeftBorder(x, y, thickness);
+                    bool RightBorder = IsRightBorder(x, y, thickness);
+                    if (TopLeftBorder)
+                    {
+                        AddChar(borderChars.tlBorder, new Position(y, x));
+                    }
+                    else if (TopRightBorder)
+                    {
+                        AddChar(borderChars.trBorder, new Position(y, x));
+                    }
+                    else if (BottomLeftBorder)
+                    {
+                        AddChar(borderChars.blBorder, new Position(y, x));
+                    }
+                    else if (BottomRightBorder)
+                    {
+                        AddChar(borderChars.brBorder, new Position(y, x));
+                    }
+                    else if (TopBorder)
+                    {
+                        AddChar(borderChars.tBorder, new Position(y, x));
+                    }
+                    else if (BottomBorder)
+                    {
+                        AddChar(borderChars.bBorder, new Position(y, x));
+                    }
+                    else if (LeftBorder)
+                    {
+                        AddChar(borderChars.lBorder, new Position(y, x));
+                    }
+                    else if (RightBorder)
+                    {
+                        AddChar(borderChars.rBorder, new Position(y, x));
+                    }
+                }
+            }
+        }
+
+        private bool IsTopBorder(int x, int y, int thickness)
+        {
+            return (y < thickness && y < x && y < TotalBound.Width - x - 1);
+        }
+
+        private bool IsBottomBorder(int x, int y, int thickness)
+        {
+            return (y >= TotalBound.Height - thickness && TotalBound.Height - y - 1 < x &&
+                    TotalBound.Height - y - 1 < TotalBound.Width - x - 1);
+        }
+
+        private bool IsLeftBorder(int x, int y, int thickness)
+        {
+            return (x < thickness && x < y && x < TotalBound.Height - y - 1);
+        }
+
+        private bool IsRightBorder(int x, int y, int thickness)
+        {
+            return x >= TotalBound.Width - thickness && TotalBound.Width - x - 1 < y &&
+                   TotalBound.Width - x - 1 < TotalBound.Height - y - 1;
+        }
+
+        private bool IsBottomLeftBorder(int x, int y, int thickness)
+        {
+            return (x < thickness && y >= TotalBound.Height - thickness && x == TotalBound.Height - y - 1);
+        }
+
+        private bool IsBottomRightBorder(int x, int y, int thickness)
+        {
+            return (x >= TotalBound.Width - thickness && y >= TotalBound.Height - thickness &&
+                    TotalBound.Width - x - 1 == TotalBound.Height - y - 1);
+        }
+
+        private bool IsTopLeftBorder(int x, int y, int thickness)
+        {
+            return (x < thickness && y < thickness && x == y);
+        }
+
+        private bool IsTopRightBorder(int x, int y, int thickness)
+        {
+            return (y < thickness && x >= TotalBound.Width - thickness && TotalBound.Width - x - 1 == y);
+        }
+
+        private bool IsBorder(int x, int y, int thickness)
+        {
+            return x < thickness || y < thickness || x >= TotalBound.Width - thickness || y >= TotalBound.Height - thickness;
         }
     }
 }

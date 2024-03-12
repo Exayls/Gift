@@ -1,4 +1,5 @@
-﻿using Gift.Domain.UIModel.MetaData;
+﻿using Gift.Domain.UIModel.Border;
+using Gift.Domain.UIModel.MetaData;
 using System.Text;
 
 namespace Gift.Domain.UIModel.Display
@@ -12,6 +13,7 @@ namespace Gift.Domain.UIModel.Display
         char[,] DisplayMap { get; }
 
         void AddDisplay(IScreenDisplay display, Position globalPosition);
+        void AddBorder(int thickness, BorderOption borderChars);
         void AddString(string display, Position position);
         void AddChar(char display, Position position);
         string GetLine(int i);
