@@ -9,11 +9,13 @@ namespace Gift.Displayer.Rendering
 {
     public class Renderer : IRenderer
     {
-        public IConfiguration Configuration { get; }
+        private readonly IConfiguration _configuration;
+        private readonly IRepository _repository;
 
-        public Renderer(IConfiguration configuration)
+        public Renderer(IConfiguration configuration, IRepository repository)
         {
-            Configuration = configuration;
+            _configuration = configuration;
+			_repository = repository;
         }
 
         public IScreenDisplay GetRenderDisplay(GiftUI giftUI)
@@ -45,12 +47,12 @@ namespace Gift.Displayer.Rendering
 
         private IScreenDisplay CreateBorder(IRenderable element, Context context)
         {
-            return element.GetDisplayBorder(context.Bounds, Configuration);
+            return element.GetDisplayBorder(context.Bounds, _configuration);
         }
 
         private IScreenDisplay CreateDisplay(IRenderable container, Context context)
         {
-            return container.GetDisplayWithoutBorder(context.Bounds, Configuration);
+            return container.GetDisplayWithoutBorder(context.Bounds, _configuration);
         }
 
         private void AddDisplayToBorder(IScreenDisplay screen, IRenderable renderable, IScreenDisplay display)
