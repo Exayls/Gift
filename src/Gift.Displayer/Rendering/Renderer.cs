@@ -10,12 +10,12 @@ namespace Gift.Displayer.Rendering
     public class Renderer : IRenderer
     {
         private readonly IConfiguration _configuration;
-        private readonly IRepository _repository;
+        private readonly IColorResolver _colorResolver;
 
-        public Renderer(IConfiguration configuration, IRepository repository)
+        public Renderer(IConfiguration configuration, IColorResolver colorResolver)
         {
             _configuration = configuration;
-			_repository = repository;
+            _colorResolver = colorResolver;
         }
 
         public IScreenDisplay GetRenderDisplay(GiftUI giftUI)
@@ -47,7 +47,7 @@ namespace Gift.Displayer.Rendering
 
         private IScreenDisplay CreateBorder(IRenderable element, Context context)
         {
-            return element.GetDisplayBorder(context.Bounds, _configuration);
+            return element.GetDisplayBorder(context.Bounds, _configuration, _colorResolver);
         }
 
         private IScreenDisplay CreateDisplay(IRenderable container, Context context)

@@ -39,7 +39,7 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             xmlParser = new XmlFileParser(elementRegister, LoggerHelper.GetLogger<IXMLFileParser>(output));
             _output = output;
 
-            _renderer = new Renderer(new DefaultConfiguration());
+            _renderer = new Renderer(new DefaultConfiguration(), new ColorResolver());
             _displayer = new ConsoleDisplayer(new ConsoleDisplayStringFormater());
         }
 

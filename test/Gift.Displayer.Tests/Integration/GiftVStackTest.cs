@@ -35,7 +35,7 @@ namespace Gift.Displayer.Tests.Integration
             var vstack = CreateVstack();
             ui.AddUnselectableChild(vstack);
 
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver()).GetRenderDisplay(ui);
             string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
 
             var expectedBuilder = new StringBuilder();
@@ -71,7 +71,7 @@ namespace Gift.Displayer.Tests.Integration
             var label = new LabelBuilder().Build();
             ui.AddUnselectableChild(vstack);
             vstack.AddUnselectableChild(label);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -98,7 +98,7 @@ namespace Gift.Displayer.Tests.Integration
             var label = new LabelBuilder().Build();
             ui.AddUnselectableChild(vstack);
             vstack.AddUnselectableChild(label);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -128,7 +128,7 @@ namespace Gift.Displayer.Tests.Integration
             ui.AddUnselectableChild(vstack);
             vstack.AddUnselectableChild(label1);
             vstack.AddUnselectableChild(label2);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -164,7 +164,7 @@ namespace Gift.Displayer.Tests.Integration
             vstack.AddUnselectableChild(label1);
             vstack.AddUnselectableChild(label2);
             vstack.AddUnselectableChild(label3);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -204,7 +204,7 @@ namespace Gift.Displayer.Tests.Integration
             vstack.AddUnselectableChild(label1);
             vstack.AddUnselectableChild(label2);
             vstack.AddUnselectableChild(label3);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -248,7 +248,7 @@ namespace Gift.Displayer.Tests.Integration
             vstack.AddUnselectableChild(label3);
             vstack.AddUnselectableChild(label4);
             vstack.AddUnselectableChild(label5);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver()).GetRenderDisplay(ui);
             var expectedBuilder = new StringBuilder();
             string expected = "";
             string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
@@ -296,7 +296,7 @@ namespace Gift.Displayer.Tests.Integration
             vstack.AddUnselectableChild(label4);
             vstack.AddUnselectableChild(label5);
             vstack.AddUnselectableChild(label6);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver()).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";

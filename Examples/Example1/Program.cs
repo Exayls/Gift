@@ -18,7 +18,7 @@ vstack.AddUnselectableChild(new LabelBuilder().WithText("tieaucit").Build());
 vstack.AddUnselectableChild(new LabelBuilder().Build());
 
 new ConsoleDisplayer(new ConsoleDisplayStringFormater())
-    .Display(new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui));
+    .Display(new Renderer(new DefaultConfiguration(),  new Gift.Displayer.Rendering.ColorResolver()).GetRenderDisplay(ui));
 
 // var gift = new GiftBase();
 // gift.initialize();

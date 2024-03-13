@@ -21,7 +21,7 @@ namespace Gift.Displayer.Tests.Integration
             {
                 var ui = GetGiftUI(new Bound(20, 60));
 
-                IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
+                IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver()).GetRenderDisplay(ui);
                 var expectedBuilder = new StringBuilder();
                 expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, 60));
                 for (int i = 1; i < 20; i++)
@@ -47,7 +47,7 @@ namespace Gift.Displayer.Tests.Integration
             {
                 var ui = GetGiftUI(new Bound(10, 15));
 
-                IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
+                IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver()).GetRenderDisplay(ui);
                 var expectedBuilder = new StringBuilder();
                 expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, 15));
                 for (int i = 1; i < 10; i++)

@@ -20,7 +20,7 @@ namespace TestGift.Test.UI
 
         public RendererTest(ITestOutputHelper output)
         {
-            renderer = new Renderer(new DefaultConfiguration());
+            renderer = new Renderer(new DefaultConfiguration(), new ColorResolver());
             _output = output;
         }
 

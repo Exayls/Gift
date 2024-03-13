@@ -1,4 +1,5 @@
-﻿using Gift.Domain.UIModel.Border;
+﻿using Gift.Domain.ServiceContracts;
+using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.MetaData;
@@ -34,7 +35,7 @@ namespace Gift.Domain.UIModel.Element
         }
 
         public abstract IScreenDisplay GetDisplayWithoutBorder(Bound bounds, IConfiguration configuration);
-        public abstract IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuration);
+        public abstract IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuratione, IColorResolver colorResolver);
         public abstract Position GetRelativePosition(Context context);
         public abstract bool IsFixed();
 
