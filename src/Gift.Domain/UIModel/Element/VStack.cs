@@ -1,4 +1,5 @@
-﻿using Gift.Domain.UIModel.Border;
+﻿using Gift.Domain.ServiceContracts;
+using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.MetaData;
@@ -54,14 +55,14 @@ namespace Gift.Domain.UIModel.Element
         {
         }
 
-        public override Context GetContextRelativeRenderable(IRenderable renderable, Context context)
+        public override Context GetContextRelativeRenderable(Renderable renderable, Context context)
         {
             int ChildContextPosition = GetHeightRenderable(renderable);
             return new Context(new Position(ChildContextPosition - ScrollIndex, 0),
                                new Bound(renderable.Height, renderable.Width));
         }
 
-        private int GetHeightRenderable(IRenderable renderableToFind)
+        private int GetHeightRenderable(Renderable renderableToFind)
         {
             int ChildContextPosition = 0;
             foreach (UIElement renderable in Childs)
@@ -98,6 +99,17 @@ namespace Gift.Domain.UIModel.Element
             return screenDisplay;
         }
 
+        public override IScreenDisplay GetDisplayWithoutBorder(Bound bound, IConfiguration configuration, IColorResolver colorResolver)
+        {
+            int thickness = Border.Thickness;
+
+            Bound boundEmptyVStack = new Bound(bound.Height - 2 * thickness, bound.Width - 2 * thickness);
+            IScreenDisplay emptyVstackScreen = _screenDisplayFactory.Create(
+                boundEmptyVStack, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor,
+                BackColor == Color.Default ? configuration.DefaultBackColor : BackColor, configuration.FillingChar);
+            return emptyVstackScreen;
+        }
+
         public override IScreenDisplay GetDisplayWithoutBorder(Bound bound, IConfiguration configuration)
         {
             int thickness = Border.Thickness;
@@ -116,5 +128,6 @@ namespace Gift.Domain.UIModel.Element
             var element = (VStack)uiElement;
             return base.IsSimilarTo(uiElement);
         }
+
     }
 }

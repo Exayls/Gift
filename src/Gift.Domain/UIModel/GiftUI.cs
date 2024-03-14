@@ -1,4 +1,5 @@
-﻿using Gift.Domain.UIModel.Border;
+﻿using Gift.Domain.ServiceContracts;
+using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
@@ -80,7 +81,7 @@ namespace Gift.Domain.UIModel
             }
         }
 
-        public override Context GetContextRelativeRenderable(IRenderable renderable, Context context)
+        public override Context GetContextRelativeRenderable(Renderable renderable, Context context)
         {
             return context;
         }
@@ -156,6 +157,11 @@ namespace Gift.Domain.UIModel
                     return false;
             }
             return base.IsSimilarTo(uiElement);
+        }
+
+        public override IScreenDisplay GetDisplayWithoutBorder(Bound bounds, IConfiguration configuration, IColorResolver colorResolver)
+        {
+            throw new NotImplementedException();
         }
     }
 }

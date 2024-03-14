@@ -1,4 +1,5 @@
 ﻿using Gift.Domain.Builders.UIModel.Display;
+using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
@@ -94,6 +95,16 @@ namespace Gift.Domain.UIModel.Element
             if (this.Text != element.Text)
                 return false;
             return true;
+        }
+
+        public override IScreenDisplay GetDisplayWithoutBorder(Bound bounds, IConfiguration configuration, IColorResolver colorResolver)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuratione, IColorResolver colorResolver)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

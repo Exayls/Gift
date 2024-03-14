@@ -1,4 +1,5 @@
-﻿using Gift.Domain.UIModel.Conf;
+﻿using Gift.Domain.ServiceContracts;
+using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
@@ -46,6 +47,16 @@ namespace TestGift.Mocks
         public override bool IsSimilarTo(UIElement uiElement)
         {
             return false;
+        }
+
+        public override IScreenDisplay GetDisplayWithoutBorder(Bound bounds, IConfiguration configuration, IColorResolver colorResolver)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuratione, IColorResolver colorResolver)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

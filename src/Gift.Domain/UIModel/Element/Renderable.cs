@@ -6,7 +6,7 @@ using Gift.Domain.UIModel.MetaData;
 
 namespace Gift.Domain.UIModel.Element
 {
-    public interface IRenderable
+    public interface Renderable
     {
         int Height { get; }
         int Width { get; }
@@ -14,6 +14,7 @@ namespace Gift.Domain.UIModel.Element
 
         IScreenDisplay GetDisplayWithoutBorder(Bound bounds, IConfiguration configuration);
         IScreenDisplay GetDisplayBorder(Bound bounds, IConfiguration configuration, IColorResolver _colorResolver);
+        IScreenDisplay GetDisplayBorder(Bound bounds, IConfiguration configuration);
         Position GetRelativePosition(Context context);
         bool IsFixed();
     }

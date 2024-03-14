@@ -1,4 +1,5 @@
 ﻿using Gift.Domain.Builders.UIModel.Display;
+using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
@@ -56,7 +57,17 @@ namespace Gift.Domain.UIModel.Element
             IsSelectableContainer = isSelectableContainer;
         }
 
-        public abstract Context GetContextRelativeRenderable(IRenderable renderable, Context context);
+        public abstract Context GetContextRelativeRenderable(Renderable renderable, Context context);
+
+        public override IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuration, IColorResolver colorResolver)
+        {
+			var screenDisplayBuilder = new ScreenDisplayBuilder();
+			Color frontColor = colorResolver.GetFrontColor(this, configuration);
+			Color backColor = colorResolver.GetBackColor(this, configuration);
+			screenDisplayBuilder.WithFrontColor(frontColor).WithBackColor(backColor).WithBound(bound);
+            IScreenDisplay screenDisplay = Border.GetDisplay(screenDisplayBuilder);
+            return screenDisplay;
+        }
 
         public override IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuration)
         {

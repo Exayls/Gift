@@ -8,6 +8,7 @@ using Gift.Domain.UIModel.Conf;
 using Gift.ApplicationService.Services;
 using Gift.Displayer.Rendering;
 using Gift.Domain.Builders.UIModel;
+using Gift.Repository;
 
 namespace Gift.Displayer.Tests.Integration
 {
@@ -19,9 +20,11 @@ namespace Gift.Displayer.Tests.Integration
             var output = new StringBuilder();
             using (var writer = new StringWriter(output))
             {
+                var repo = new InMemoryRepository();
                 var ui = GetGiftUI(new Bound(20, 60));
-
-                IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver()).GetRenderDisplay(ui);
+                repo.SaveRoot(ui);
+                IScreenDisplay renderedText =
+                    new Renderer(new DefaultConfiguration(), new ColorResolver(repo)).GetRenderDisplay(ui);
                 var expectedBuilder = new StringBuilder();
                 expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, 60));
                 for (int i = 1; i < 20; i++)
@@ -47,7 +50,10 @@ namespace Gift.Displayer.Tests.Integration
             {
                 var ui = GetGiftUI(new Bound(10, 15));
 
-                IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver()).GetRenderDisplay(ui);
+                var repo = new InMemoryRepository();
+                repo.SaveRoot(ui);
+                IScreenDisplay renderedText =
+                    new Renderer(new DefaultConfiguration(), new ColorResolver(repo)).GetRenderDisplay(ui);
                 var expectedBuilder = new StringBuilder();
                 expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, 15));
                 for (int i = 1; i < 10; i++)

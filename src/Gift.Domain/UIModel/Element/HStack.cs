@@ -1,4 +1,5 @@
-﻿using Gift.Domain.UIModel.Border;
+﻿using Gift.Domain.ServiceContracts;
+using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.MetaData;
@@ -58,7 +59,7 @@ namespace Gift.Domain.UIModel.Element
         }
 
 
-        public override Context GetContextRelativeRenderable(IRenderable renderable, Context context)
+        public override Context GetContextRelativeRenderable(Renderable renderable, Context context)
         {
             int ChildContextPosition = GetWidthRenderable(renderable);
             return new Context(
@@ -67,7 +68,7 @@ namespace Gift.Domain.UIModel.Element
                 new Bound(renderable.Height, renderable.Width));
         }
 
-        private int GetWidthRenderable(IRenderable renderableToFind)
+        private int GetWidthRenderable(Renderable renderableToFind)
         {
             int ChildContextPosition = 0;
             foreach (UIElement renderable in Childs)
@@ -112,5 +113,9 @@ namespace Gift.Domain.UIModel.Element
             return emptyVstackScreen;
         }
 
+        public override IScreenDisplay GetDisplayWithoutBorder(Bound bounds, IConfiguration configuration, IColorResolver colorResolver)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

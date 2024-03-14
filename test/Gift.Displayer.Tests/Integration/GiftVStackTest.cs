@@ -1,12 +1,14 @@
 ﻿using Gift.ApplicationService.Services;
 using Gift.Displayer.Rendering;
 using Gift.Domain.Builders.UIModel;
+using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
+using Gift.Repository;
 using Moq;
 using System;
 using System.IO;
@@ -35,7 +37,9 @@ namespace Gift.Displayer.Tests.Integration
             var vstack = CreateVstack();
             ui.AddUnselectableChild(vstack);
 
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver()).GetRenderDisplay(ui);
+            IRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
             string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
 
             var expectedBuilder = new StringBuilder();
@@ -71,7 +75,9 @@ namespace Gift.Displayer.Tests.Integration
             var label = new LabelBuilder().Build();
             ui.AddUnselectableChild(vstack);
             vstack.AddUnselectableChild(label);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver()).GetRenderDisplay(ui);
+            IRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -98,7 +104,9 @@ namespace Gift.Displayer.Tests.Integration
             var label = new LabelBuilder().Build();
             ui.AddUnselectableChild(vstack);
             vstack.AddUnselectableChild(label);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver()).GetRenderDisplay(ui);
+            IRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -128,7 +136,9 @@ namespace Gift.Displayer.Tests.Integration
             ui.AddUnselectableChild(vstack);
             vstack.AddUnselectableChild(label1);
             vstack.AddUnselectableChild(label2);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver()).GetRenderDisplay(ui);
+            IRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -164,7 +174,9 @@ namespace Gift.Displayer.Tests.Integration
             vstack.AddUnselectableChild(label1);
             vstack.AddUnselectableChild(label2);
             vstack.AddUnselectableChild(label3);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver()).GetRenderDisplay(ui);
+            IRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -204,7 +216,9 @@ namespace Gift.Displayer.Tests.Integration
             vstack.AddUnselectableChild(label1);
             vstack.AddUnselectableChild(label2);
             vstack.AddUnselectableChild(label3);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver()).GetRenderDisplay(ui);
+            IRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -248,7 +262,9 @@ namespace Gift.Displayer.Tests.Integration
             vstack.AddUnselectableChild(label3);
             vstack.AddUnselectableChild(label4);
             vstack.AddUnselectableChild(label5);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver()).GetRenderDisplay(ui);
+            IRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
             var expectedBuilder = new StringBuilder();
             string expected = "";
             string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
@@ -296,7 +312,9 @@ namespace Gift.Displayer.Tests.Integration
             vstack.AddUnselectableChild(label4);
             vstack.AddUnselectableChild(label5);
             vstack.AddUnselectableChild(label6);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver()).GetRenderDisplay(ui);
+            IRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";

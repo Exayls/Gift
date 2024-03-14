@@ -9,6 +9,7 @@ using Gift.Domain.UIModel.Conf;
 using Gift.ApplicationService.Services;
 using Gift.Displayer.Rendering;
 using Gift.Domain.Builders.UIModel;
+using Gift.Repository;
 
 namespace TestGift.UI
 {
@@ -20,7 +21,9 @@ namespace TestGift.UI
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
             var ui = GetGiftUi(new Bound(20, 60));
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver()).GetRenderDisplay(ui);
+            InMemoryRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -47,7 +50,9 @@ namespace TestGift.UI
             var ui = GetGiftUi(new Bound(20, 60));
             var element = new LabelBuilder().Build();
             ui.AddUnselectableChild(element);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver()).GetRenderDisplay(ui);
+            InMemoryRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -73,7 +78,9 @@ namespace TestGift.UI
             var position = new Position(0, 30);
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.AddUnselectableChild(element);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver()).GetRenderDisplay(ui);
+            InMemoryRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -99,7 +106,9 @@ namespace TestGift.UI
             var position = new Position(0, 10);
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.AddUnselectableChild(element);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver()).GetRenderDisplay(ui);
+            InMemoryRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -125,7 +134,9 @@ namespace TestGift.UI
             var position = new Position(0, 10);
             var element = new LabelBuilder().WithText("test").WithPosition(position).Build();
             ui.AddUnselectableChild(element);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver()).GetRenderDisplay(ui);
+            InMemoryRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -151,7 +162,9 @@ namespace TestGift.UI
             var position = new Position(0, 1000);
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.AddUnselectableChild(element);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver()).GetRenderDisplay(ui);
+            InMemoryRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -173,7 +186,9 @@ namespace TestGift.UI
             var position = new Position(0, 58);
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.AddUnselectableChild(element);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver()).GetRenderDisplay(ui);
+            InMemoryRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -199,7 +214,9 @@ namespace TestGift.UI
             var position = new Position(0, 58);
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.AddUnselectableChild(element);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver()).GetRenderDisplay(ui);
+            InMemoryRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -226,7 +243,9 @@ namespace TestGift.UI
             var position = new Position(2, 10);
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.AddUnselectableChild(element);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver()).GetRenderDisplay(ui);
+            InMemoryRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -253,7 +272,9 @@ namespace TestGift.UI
             var position = new Position(1, 10);
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.AddUnselectableChild(element);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver()).GetRenderDisplay(ui);
+            InMemoryRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -280,7 +301,9 @@ namespace TestGift.UI
             var position = new Position(1, 10);
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.AddUnselectableChild(element);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver()).GetRenderDisplay(ui);
+            InMemoryRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";

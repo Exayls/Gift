@@ -2,6 +2,7 @@
 using Gift.Displayer.Displayer;
 using Gift.Displayer.Rendering;
 using Gift.Domain.ServiceContracts;
+using Gift.Domain.UIModel.MetaData;
 
 namespace Gift.Displayer.Extensions
 {

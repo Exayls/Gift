@@ -6,6 +6,7 @@ using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
+using Gift.Repository;
 using Gift.XmlUiParser.Tests.Helper;
 using Microsoft.Extensions.Logging;
 using Xunit;
@@ -20,7 +21,7 @@ namespace TestGift.Test.UI
 
         public RendererTest(ITestOutputHelper output)
         {
-            renderer = new Renderer(new DefaultConfiguration(), new ColorResolver());
+            renderer = new Renderer(new DefaultConfiguration(), new ColorResolver(new InMemoryRepository()));
             _output = output;
         }
 

@@ -26,7 +26,7 @@ namespace Gift.Displayer.Rendering
             return screen;
         }
 
-        private void Render(IScreenDisplay screen, IRenderable renderable, Context context)
+        private void Render(IScreenDisplay screen, Renderable renderable, Context context)
         {
             IScreenDisplay border = CreateBorder(renderable, context);
             IScreenDisplay display = CreateDisplay(renderable, context);
@@ -45,23 +45,23 @@ namespace Gift.Displayer.Rendering
             AddDisplayToSreen(screen, container, context, border);
         }
 
-        private IScreenDisplay CreateBorder(IRenderable element, Context context)
+        private IScreenDisplay CreateBorder(Renderable element, Context context)
         {
             return element.GetDisplayBorder(context.Bounds, _configuration, _colorResolver);
         }
 
-        private IScreenDisplay CreateDisplay(IRenderable container, Context context)
+        private IScreenDisplay CreateDisplay(Renderable container, Context context)
         {
             return container.GetDisplayWithoutBorder(context.Bounds, _configuration);
         }
 
-        private void AddDisplayToBorder(IScreenDisplay screen, IRenderable renderable, IScreenDisplay display)
+        private void AddDisplayToBorder(IScreenDisplay screen, Renderable renderable, IScreenDisplay display)
         {
             Position relativePosition = new Position(renderable.Border.Thickness, renderable.Border.Thickness);
             screen.AddDisplay(display, relativePosition);
         }
 
-        private void AddDisplayToSreen(IScreenDisplay screen, IRenderable renderable, Context context, IScreenDisplay display)
+        private void AddDisplayToSreen(IScreenDisplay screen, Renderable renderable, Context context, IScreenDisplay display)
         {
             Position relativePosition = renderable.GetRelativePosition(context);
             screen.AddDisplay(display, relativePosition);
@@ -71,14 +71,14 @@ namespace Gift.Displayer.Rendering
         {
             lock (container.Childs)
             {
-                foreach (IRenderable renderable in container.Childs)
+                foreach (Renderable renderable in container.Childs)
                 {
                     RenderContainerOrElement(screen, container, context, renderable);
                 }
             }
         }
 
-        private void RenderContainerOrElement(IScreenDisplay screen, Container container, Context context, IRenderable renderable)
+        private void RenderContainerOrElement(IScreenDisplay screen, Container container, Context context, Renderable renderable)
         {
             Context renderableContext = container.GetContextRelativeRenderable(renderable, context);
             switch (renderable)
