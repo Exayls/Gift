@@ -1,3 +1,4 @@
+using System;
 using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Element;
@@ -18,9 +19,11 @@ namespace Gift.Domain.UIModel.MetaData
             Color frontColor = element.FrontColor == Color.Default ? configuration.DefaultFrontColor : element.FrontColor;
             if (IsSelectedContainer(element))
             {
-                frontColor = configuration.SelectedContainerFrontColor == Color.Default
-                                 ? frontColor
-                                 : configuration.SelectedContainerFrontColor;
+                frontColor = configuration.SelectedContainerFrontColor;
+            }
+            if (IsSelectedElement(element))
+            {
+                frontColor = configuration.SelectedElementFrontColor;
             }
             return frontColor;
         }
@@ -30,9 +33,11 @@ namespace Gift.Domain.UIModel.MetaData
             Color backColor = element.BackColor == Color.Default ? configuration.DefaultBackColor : element.BackColor;
             if (IsSelectedContainer(element))
             {
-                backColor = configuration.SelectedContainerBackColor == Color.Default
-                                ? backColor
-                                : configuration.SelectedContainerBackColor;
+                backColor = configuration.SelectedContainerBackColor;
+            }
+            if (IsSelectedElement(element))
+            {
+                backColor = configuration.SelectedElementBackColor;
             }
             return backColor;
         }
@@ -43,7 +48,12 @@ namespace Gift.Domain.UIModel.MetaData
             {
                 return _repository.GetSelectedContainer() == element;
             }
-			return false;
+            return false;
+        }
+
+        private bool IsSelectedElement(UIElement element)
+        {
+			return element.IsSelectedElement;
         }
     }
 }

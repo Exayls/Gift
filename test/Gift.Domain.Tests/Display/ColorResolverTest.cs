@@ -50,5 +50,68 @@ namespace Gift.Domain.Tests.Display
             // Assert
             Assert.Equal(Color.White, color);
         }
+
+        [Fact]
+        public void GetBackColor_should_be_Transparent()
+        {
+            // Arrange
+            Container container = new VStackBuilder().Build();
+            Mock.Get<IRepository>(_repository)
+                .Setup(r => r.GetSelectedContainer())
+                .Returns<Container?>(null);
+            var colorResolver = new ColorResolver(_repository);
+
+            // Act
+            Color color = colorResolver.GetBackColor(container, new DefaultConfiguration());
+
+            // Assert
+            Assert.Equal(Color.Transparent, color);
+        }
+
+        [Fact]
+        public void Given_element_is_not_selected_GetBackColor_should_be_Transparent()
+        {
+            // Arrange
+            Label label = new LabelBuilder().Build();
+            Mock.Get<IRepository>(_repository);
+            var colorResolver = new ColorResolver(_repository);
+
+            // Act
+            Color color = colorResolver.GetBackColor(label, new DefaultConfiguration());
+
+            // Assert
+            Assert.Equal(Color.Transparent, color);
+        }
+
+        [Fact]
+        public void Given_element_is_not_selected_GetFrontColor_should_be_White()
+        {
+            // Arrange
+            Label label = new LabelBuilder().Build();
+            Mock.Get<IRepository>(_repository);
+            var colorResolver = new ColorResolver(_repository);
+
+            // Act
+            Color color = colorResolver.GetFrontColor(label, new DefaultConfiguration());
+
+            // Assert
+            Assert.Equal(Color.White, color);
+        }
+
+        [Fact]
+        public void Given_element_is_selected_and_not_in_selectedContainer_GetBackColor_should_be_Transparent()
+        {
+            // Arrange
+            Label label = new LabelBuilder().Build();
+            Mock.Get<IRepository>(_repository)
+				.Setup(r => r.GetSelectedContainer()).Returns<Container?>(null);
+            var colorResolver = new ColorResolver(_repository);
+
+            // Act
+            Color color = colorResolver.GetBackColor(label, new DefaultConfiguration());
+
+            // Assert
+            Assert.Equal(Color.Transparent, color);
+        }
     }
 }
