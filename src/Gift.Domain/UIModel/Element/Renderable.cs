@@ -12,8 +12,8 @@ namespace Gift.Domain.UIModel.Element
         int Width { get; }
         IBorder Border { get; set; }
 
-        IScreenDisplay GetDisplayWithoutBorder(Bound bounds, IConfiguration configuration);
         IScreenDisplay GetDisplayBorder(Bound bounds, IConfiguration configuration, IColorResolver _colorResolver);
+        IScreenDisplay GetDisplayWithoutBorder(Bound bounds, IConfiguration configuration, IColorResolver colorResolver);
         Position GetRelativePosition(Context context);
         bool IsFixed();
     }

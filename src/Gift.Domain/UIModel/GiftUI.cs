@@ -91,13 +91,6 @@ namespace Gift.Domain.UIModel
             return false;
         }
 
-        public override IScreenDisplay GetDisplayWithoutBorder(Bound bound, IConfiguration configuration)
-        {
-            return _screenDisplayFactory.Create(
-                Bound, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor,
-                BackColor == Color.Default ? configuration.DefaultBackColor : BackColor, '*');
-        }
-
         public override Position GetRelativePosition(Context context)
         {
             return context.Position;
@@ -161,7 +154,16 @@ namespace Gift.Domain.UIModel
 
         public override IScreenDisplay GetDisplayWithoutBorder(Bound bounds, IConfiguration configuration, IColorResolver colorResolver)
         {
-            throw new NotImplementedException();
+            return _screenDisplayFactory.Create(
+                Bound, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor,
+                BackColor == Color.Default ? configuration.DefaultBackColor : BackColor, '*');
         }
+        public override IScreenDisplay GetDisplayWithoutBorder(Bound bound, IConfiguration configuration)
+        {
+            return _screenDisplayFactory.Create(
+                Bound, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor,
+                BackColor == Color.Default ? configuration.DefaultBackColor : BackColor, '*');
+        }
+
     }
 }

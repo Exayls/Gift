@@ -1,4 +1,3 @@
-using System;
 using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Element;

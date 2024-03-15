@@ -52,7 +52,7 @@ namespace Gift.Displayer.Rendering
 
         private IScreenDisplay CreateDisplay(Renderable container, Context context)
         {
-            return container.GetDisplayWithoutBorder(context.Bounds, _configuration);
+            return container.GetDisplayWithoutBorder(context.Bounds, _configuration, _colorResolver);
         }
 
         private void AddDisplayToBorder(IScreenDisplay screen, Renderable renderable, IScreenDisplay display)
