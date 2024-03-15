@@ -99,12 +99,19 @@ namespace Gift.Domain.UIModel.Element
 
         public override IScreenDisplay GetDisplayWithoutBorder(Bound bounds, IConfiguration configuration, IColorResolver colorResolver)
         {
-            throw new System.NotImplementedException();
+            Color frontColor = colorResolver.GetFrontColor(this, configuration);
+            Color backColor = colorResolver.GetBackColor(this, configuration);
+            return new ScreenDisplay(Text, frontColor, backColor);
         }
 
-        public override IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuratione, IColorResolver colorResolver)
+        public override IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuration, IColorResolver colorResolver)
         {
-            throw new System.NotImplementedException();
+			var screen = new ScreenDisplayBuilder()
+				.WithFrontColor(colorResolver.GetFrontColor(this, configuration))
+				.WithBackColor(colorResolver.GetBackColor(this, configuration))
+				.WithBound(new Bound(Height, Width));
+            return Border.GetDisplay(screen);
+
         }
     }
 }

@@ -113,9 +113,15 @@ namespace Gift.Domain.UIModel.Element
             return emptyVstackScreen;
         }
 
-        public override IScreenDisplay GetDisplayWithoutBorder(Bound bounds, IConfiguration configuration, IColorResolver colorResolver)
+        public override IScreenDisplay GetDisplayWithoutBorder(Bound bound, IConfiguration configuration, IColorResolver colorResolver)
         {
-            throw new System.NotImplementedException();
+            int thickness = Border.Thickness;
+
+            Bound boundEmptyVStack = new Bound(bound.Height - 2 * thickness, bound.Width - 2 * thickness);
+            IScreenDisplay emptyVstackScreen = _screenDisplayFactory.Create(
+                boundEmptyVStack, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor,
+                BackColor == Color.Default ? configuration.DefaultBackColor : BackColor, configuration.FillingChar);
+            return emptyVstackScreen;
         }
     }
 }

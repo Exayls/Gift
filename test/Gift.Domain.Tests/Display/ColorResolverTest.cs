@@ -99,10 +99,14 @@ namespace Gift.Domain.Tests.Display
         }
 
         [Fact]
-        public void Given_element_is_selected_and_not_in_selectedContainer_GetBackColor_should_be_Transparent()
+        public void Given_element_is_selected_GetBackColor_should_be_Green()
         {
             // Arrange
+			
             Label label = new LabelBuilder().Build();
+			VStack vstack = new VStackBuilder()
+				.WithSelectableElement(label)
+				.Build();
             Mock.Get<IRepository>(_repository)
 				.Setup(r => r.GetSelectedContainer()).Returns<Container?>(null);
             var colorResolver = new ColorResolver(_repository);
@@ -111,7 +115,7 @@ namespace Gift.Domain.Tests.Display
             Color color = colorResolver.GetBackColor(label, new DefaultConfiguration());
 
             // Assert
-            Assert.Equal(Color.Transparent, color);
+            Assert.Equal(Color.Green, color);
         }
     }
 }
