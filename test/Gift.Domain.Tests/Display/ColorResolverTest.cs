@@ -16,8 +16,9 @@ namespace Gift.Domain.Tests.Display
         {
             _repository = Mock.Of<IRepository>();
         }
+
         [Fact]
-        public void Given_container_is_selected_GetFrontColor_should_be_selected()
+        public void Given_container_is_selected_GetFrontColor_should_be_Green()
         {
             // Arrange
             Container selectedContainer = new VStackBuilder().Build();
@@ -31,6 +32,23 @@ namespace Gift.Domain.Tests.Display
 
             // Assert
             Assert.Equal(Color.Green, color);
+        }
+
+        [Fact]
+        public void Given_container_is_not_selected_GetFrontColor_should_be_White()
+        {
+            // Arrange
+            Container container = new VStackBuilder().Build();
+            Mock.Get<IRepository>(_repository)
+                .Setup(r => r.GetSelectedContainer())
+                .Returns<Container?>(null);
+            var colorResolver = new ColorResolver(_repository);
+
+            // Act
+            Color color = colorResolver.GetFrontColor(container, new DefaultConfiguration());
+
+            // Assert
+            Assert.Equal(Color.White, color);
         }
     }
 }

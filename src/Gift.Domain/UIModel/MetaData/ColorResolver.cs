@@ -13,10 +13,10 @@ namespace Gift.Domain.UIModel.MetaData
             _repository = repository;
         }
 
-        public Color GetFrontColor(Container container, IConfiguration configuration)
+        public Color GetFrontColor(UIElement element, IConfiguration configuration)
         {
-            Color frontColor = container.FrontColor == Color.Default ? configuration.DefaultFrontColor : container.FrontColor;
-            if (IsSelectedContainer(container))
+            Color frontColor = element.FrontColor == Color.Default ? configuration.DefaultFrontColor : element.FrontColor;
+            if (IsSelectedContainer(element))
             {
                 frontColor = configuration.SelectedContainerFrontColor == Color.Default
                                  ? frontColor
@@ -25,10 +25,10 @@ namespace Gift.Domain.UIModel.MetaData
             return frontColor;
         }
 
-        public Color GetBackColor(Container container, IConfiguration configuration)
+        public Color GetBackColor(UIElement element, IConfiguration configuration)
         {
-            Color backColor = container.BackColor == Color.Default ? configuration.DefaultBackColor : container.BackColor;
-            if (IsSelectedContainer(container))
+            Color backColor = element.BackColor == Color.Default ? configuration.DefaultBackColor : element.BackColor;
+            if (IsSelectedContainer(element))
             {
                 backColor = configuration.SelectedContainerBackColor == Color.Default
                                 ? backColor
@@ -37,9 +37,13 @@ namespace Gift.Domain.UIModel.MetaData
             return backColor;
         }
 
-        private bool IsSelectedContainer(Container container)
+        private bool IsSelectedContainer(UIElement element)
         {
-            return _repository.GetSelectedContainer() == container;
+            if (element is Container)
+            {
+                return _repository.GetSelectedContainer() == element;
+            }
+			return false;
         }
     }
 }

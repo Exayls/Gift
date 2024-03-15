@@ -6,7 +6,7 @@ namespace Gift.Domain.ServiceContracts
 {
     public interface IColorResolver
     {
-        Color GetBackColor(Container container, IConfiguration configuration);
-        Color GetFrontColor(Container container, IConfiguration configuration);
+        Color GetBackColor(UIElement container, IConfiguration configuration);
+        Color GetFrontColor(UIElement container, IConfiguration configuration);
     }
 }
