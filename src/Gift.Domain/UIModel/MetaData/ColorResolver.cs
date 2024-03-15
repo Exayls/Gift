@@ -8,11 +8,12 @@ namespace Gift.Domain.UIModel.MetaData
     {
         private readonly IRepository _repository;
 
-        public ColorResolver(IRepository repository){
-			_repository = repository;
-		}
+        public ColorResolver(IRepository repository)
+        {
+            _repository = repository;
+        }
 
-        public Color GetBackColor(Container container, IConfiguration configuration)
+        public Color GetFrontColor(Container container, IConfiguration configuration)
         {
             Color frontColor = container.FrontColor == Color.Default ? configuration.DefaultFrontColor : container.FrontColor;
             if (IsSelectedContainer(container))
@@ -24,7 +25,7 @@ namespace Gift.Domain.UIModel.MetaData
             return frontColor;
         }
 
-        public Color GetFrontColor(Container container, IConfiguration configuration)
+        public Color GetBackColor(Container container, IConfiguration configuration)
         {
             Color backColor = container.BackColor == Color.Default ? configuration.DefaultBackColor : container.BackColor;
             if (IsSelectedContainer(container))
@@ -38,7 +39,7 @@ namespace Gift.Domain.UIModel.MetaData
 
         private bool IsSelectedContainer(Container container)
         {
-			return _repository.GetSelectedContainer() == container;
+            return _repository.GetSelectedContainer() == container;
         }
     }
 }
