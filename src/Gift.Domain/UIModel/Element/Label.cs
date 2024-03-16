@@ -60,31 +60,6 @@ namespace Gift.Domain.UIModel.Element
             return position;
         }
 
-        public override IScreenDisplay GetDisplayWithoutBorder(Bound bound, IConfiguration configuration)
-        {
-            Color frontColor = FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor;
-            Color backColor = BackColor == Color.Default ? configuration.DefaultBackColor : BackColor;
-            if (IsSelectedElement && IsInSelectedContainer)
-            {
-                frontColor = configuration.SelectedElementFrontColor == Color.Default
-                                 ? frontColor
-                                 : configuration.SelectedElementFrontColor;
-                backColor = configuration.SelectedElementBackColor == Color.Default
-                                ? backColor
-                                : configuration.SelectedElementBackColor;
-            }
-            return new ScreenDisplay(Text, frontColor, backColor);
-        }
-
-        public override IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuration)
-        {
-			var screen = new ScreenDisplayBuilder()
-				.WithFrontColor(FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor)
-				.WithBackColor(BackColor == Color.Default ? configuration.DefaultBackColor : BackColor)
-				.WithBound(new Bound(Height, Width));
-            return Border.GetDisplay(screen);
-        }
-
         public override bool IsSimilarTo(UIElement uiElement)
         {
             if (!(base.IsSimilarTo(uiElement)))

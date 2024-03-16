@@ -1,4 +1,5 @@
 ﻿using Gift.Domain.Builders.UIModel;
+using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
@@ -19,9 +20,11 @@ namespace Gift.Domain.Tests.UI
         private Mock<IBorder> _borderMock;
         private Mock<IScreenDisplayFactory> _ScreenDisplayFactoryMock;
         private VStack vstack;
+        private readonly IRepository _repository;
 
         public VstackTest()
         {
+			_repository = Mock.Of<IRepository>();
             _screenDisplayMock1 = new Mock<IScreenDisplay>();
             _screenDisplayMock2 = new Mock<IScreenDisplay>();
             _uiElementMock1 = new Mock<UIElement>();
@@ -60,7 +63,7 @@ namespace Gift.Domain.Tests.UI
 
         private IScreenDisplay GetScreenDisplay(VStack vstack, char charFill = '*')
         {
-            return vstack.GetDisplayWithBorder(new(vstack.Height, vstack.Width), charFill);
+            return vstack.GetDisplayWithBorder(new(vstack.Height, vstack.Width), charFill, new ColorResolver(_repository));
         }
 
         // GetDisplay tests

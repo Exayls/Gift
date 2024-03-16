@@ -24,16 +24,6 @@ namespace TestGift.Mocks
         {
         }
 
-        public override IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuration)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override IScreenDisplay GetDisplayWithoutBorder(Bound bounds, IConfiguration configuration)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public override Position GetRelativePosition(Context context)
         {
             throw new System.NotImplementedException();

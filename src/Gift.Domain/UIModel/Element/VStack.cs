@@ -11,8 +11,7 @@ namespace Gift.Domain.UIModel.Element
 
         public override int Height
         {
-            get
-            {
+            get {
                 if (Bound.Height != 0)
                 {
                     return Bound.Height;
@@ -30,8 +29,7 @@ namespace Gift.Domain.UIModel.Element
         }
         public override int Width
         {
-            get
-            {
+            get {
                 if (Bound.Width != 0)
                 {
                     return Bound.Width;
@@ -89,12 +87,12 @@ namespace Gift.Domain.UIModel.Element
             return new Position(context.Position.y, context.Position.x);
         }
 
-        public IScreenDisplay GetDisplayWithBorder(Bound bound, char fillingChar)
+        public IScreenDisplay GetDisplayWithBorder(Bound bound, char fillingChar, ColorResolver colorResolver)
         {
             int thickness = Border.Thickness;
-            IScreenDisplay screenDisplay = GetDisplayBorder(bound, new DefaultConfiguration());
+            IScreenDisplay screenDisplay = GetDisplayBorder(bound, new DefaultConfiguration(), colorResolver);
             IScreenDisplay emptyVstackScreen =
-                GetDisplayWithoutBorder(bound, new Configuration(fillingChar: fillingChar));
+                GetDisplayWithoutBorder(bound, new Configuration(fillingChar: fillingChar), colorResolver);
             screenDisplay.AddDisplay(emptyVstackScreen, new Position(thickness, thickness));
             return screenDisplay;
         }
@@ -110,16 +108,6 @@ namespace Gift.Domain.UIModel.Element
             return emptyVstackScreen;
         }
 
-        public override IScreenDisplay GetDisplayWithoutBorder(Bound bound, IConfiguration configuration)
-        {
-            int thickness = Border.Thickness;
-
-            Bound boundEmptyVStack = new Bound(bound.Height - 2 * thickness, bound.Width - 2 * thickness);
-            IScreenDisplay emptyVstackScreen = _screenDisplayFactory.Create(
-                boundEmptyVStack, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor,
-                BackColor == Color.Default ? configuration.DefaultBackColor : BackColor, configuration.FillingChar);
-            return emptyVstackScreen;
-        }
 
         public override bool IsSimilarTo(UIElement uiElement)
         {
@@ -128,6 +116,5 @@ namespace Gift.Domain.UIModel.Element
             var element = (VStack)uiElement;
             return base.IsSimilarTo(uiElement);
         }
-
     }
 }

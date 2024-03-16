@@ -96,22 +96,15 @@ namespace Gift.Domain.UIModel.Element
                                 context.Position.x);
         }
 
-        public IScreenDisplay GetDisplayWithBorder(Bound bound, char fillingChar)
+        public IScreenDisplay GetDisplayWithBorder(Bound bound, char fillingChar, ColorResolver colorResolver)
         {
             int thickness = Border.Thickness;
-            IScreenDisplay screenDisplay = GetDisplayBorder(bound, new DefaultConfiguration());
-            IScreenDisplay emptyHstackScreen = GetDisplayWithoutBorder(bound, new Configuration(fillingChar: fillingChar));
+            IScreenDisplay screenDisplay = GetDisplayBorder(bound, new DefaultConfiguration(), colorResolver);
+            IScreenDisplay emptyHstackScreen = GetDisplayWithoutBorder(bound, new Configuration(fillingChar: fillingChar), colorResolver);
             screenDisplay.AddDisplay(emptyHstackScreen, new Position(thickness, thickness));
             return screenDisplay;
         }
 
-        public override IScreenDisplay GetDisplayWithoutBorder(Bound bound, IConfiguration configuration)
-        {
-            int thickness = Border.Thickness;
-            Bound boundEmptyVStack = new Bound(bound.Height - 2 * thickness, bound.Width - 2 * thickness);
-            IScreenDisplay emptyVstackScreen = _screenDisplayFactory.Create(boundEmptyVStack, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor, BackColor == Color.Default ? configuration.DefaultBackColor : BackColor, configuration.FillingChar);
-            return emptyVstackScreen;
-        }
 
         public override IScreenDisplay GetDisplayWithoutBorder(Bound bound, IConfiguration configuration, IColorResolver colorResolver)
         {

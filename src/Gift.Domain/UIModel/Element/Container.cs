@@ -69,24 +69,6 @@ namespace Gift.Domain.UIModel.Element
             return screenDisplay;
         }
 
-        public override IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuration)
-        {
-			var screenDisplayBuilder = new ScreenDisplayBuilder();
-            Color frontColor = FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor;
-            Color backColor = BackColor == Color.Default ? configuration.DefaultBackColor : BackColor;
-            if (IsSelectedContainer)
-            {
-                frontColor = configuration.SelectedContainerFrontColor == Color.Default
-                                 ? frontColor
-                                 : configuration.SelectedContainerFrontColor;
-                backColor = configuration.SelectedContainerBackColor == Color.Default
-                                ? backColor
-                                : configuration.SelectedContainerBackColor;
-            }
-			screenDisplayBuilder.WithFrontColor(frontColor).WithBackColor(backColor).WithBound(bound);
-            IScreenDisplay screenDisplay = Border.GetDisplay(screenDisplayBuilder);
-            return screenDisplay;
-        }
 
         public void NextElement()
         {

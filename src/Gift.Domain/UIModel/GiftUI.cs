@@ -158,12 +158,6 @@ namespace Gift.Domain.UIModel
                 Bound, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor,
                 BackColor == Color.Default ? configuration.DefaultBackColor : BackColor, '*');
         }
-        public override IScreenDisplay GetDisplayWithoutBorder(Bound bound, IConfiguration configuration)
-        {
-            return _screenDisplayFactory.Create(
-                Bound, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor,
-                BackColor == Color.Default ? configuration.DefaultBackColor : BackColor, '*');
-        }
 
     }
 }

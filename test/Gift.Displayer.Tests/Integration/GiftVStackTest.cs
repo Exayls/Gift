@@ -350,8 +350,9 @@ namespace Gift.Displayer.Tests.Integration
             var vstack = new VStackBuilder().
                 WithBorder(new NoBorder()).
                 Build();
+			var repository = Mock.Of<IRepository>();
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new Bound(2, 4), '*');
+            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new Bound(2, 4), '*', new ColorResolver(repository));
             //assert
             const string expected = "****\n" +
                                     "****";
@@ -365,8 +366,9 @@ namespace Gift.Displayer.Tests.Integration
             var vstack = new VStackBuilder().
                 WithBorder(new SimpleBorder(1, '-')).
                 Build();
+            IRepository repository = new InMemoryRepository();
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new Bound(3, 4), '*');
+            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new Bound(3, 4), '*', new ColorResolver(repository));
             //assert
             const string expected = "----\n" +
                                     "-**-\n" +
@@ -381,8 +383,9 @@ namespace Gift.Displayer.Tests.Integration
             var vstack = new VStackBuilder().
                 WithBorder(new SimpleBorder(1, 'i')).
                 Build();
+            IRepository repository = new InMemoryRepository();
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(3, 4), '*');
+            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(3, 4), '*', new ColorResolver(repository));
             //assert
             const string expected = "iiii\n" +
                                     "i**i\n" +
@@ -397,8 +400,9 @@ namespace Gift.Displayer.Tests.Integration
             var vstack = new VStackBuilder().
                 WithBorder(new SimpleBorder(1, '-')).
                 Build();
+            IRepository repository = new InMemoryRepository();
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(5, 5), '*');
+            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(5, 5), '*', new ColorResolver(repository));
             //assert
             const string expected = "-----\n" +
                                     "-***-\n" +
@@ -415,8 +419,9 @@ namespace Gift.Displayer.Tests.Integration
             var vstack = new VStackBuilder().
                 WithBorder(new SimpleBorder(1, '-')).
                 Build();
+            IRepository repository = new InMemoryRepository();
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(3, 6), '*');
+            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(3, 6), '*', new ColorResolver(repository));
             //assert
             const string expected = "------\n" +
                                     "-****-\n" +
@@ -431,8 +436,9 @@ namespace Gift.Displayer.Tests.Integration
             var vstack = new VStackBuilder().
                 WithBorder(new SimpleBorder(2, '-')).
                 Build();
+            IRepository repository = new InMemoryRepository();
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(5, 5), '*');
+            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(5, 5), '*', new ColorResolver(repository));
             //assert
             const string expected = "-----\n" +
                                     "-----\n" +
@@ -449,8 +455,9 @@ namespace Gift.Displayer.Tests.Integration
             var vstack = new VStackBuilder().
                 WithBorder(new SimpleBorder(2, '-')).
                 Build();
+            IRepository repository = new InMemoryRepository();
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(6, 7), '*');
+            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(6, 7), '*', new ColorResolver(repository));
             //assert
             const string expected = "-------\n" +
                                     "-------\n" +
@@ -468,8 +475,9 @@ namespace Gift.Displayer.Tests.Integration
             var vstack = new VStackBuilder().
                 WithBorder(new SimpleBorder(3, '-')).
                 Build();
+            IRepository repository = new InMemoryRepository();
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(7, 7), '*');
+            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(7, 7), '*', new ColorResolver(repository));
             //assert
             const string expected = "-------\n" +
                                     "-------\n" +
@@ -488,8 +496,9 @@ namespace Gift.Displayer.Tests.Integration
             var vstack = new VStackBuilder().
                 WithBorder(new SimpleBorder(3, '-')).
                 Build();
+            IRepository repository = new InMemoryRepository();
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(7, 7), '*');
+            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(7, 7), '*', new ColorResolver(repository));
             //assert
             const string expected = "-------\n" +
                                     "-------\n" +
