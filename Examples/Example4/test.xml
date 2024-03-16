@@ -1,20 +1,22 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<GiftUI>
-	<VStack borderOption="simple">
-		<VStack border="simple" frontColor="red" backColor="transparent" 
-				selectableContainer="true" selectedContainer="true">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE xml>
 
-			<Label selectableElement="true" Text="Hello"/>
-			<Label selectableElement="true" Text="World"/>
+<GiftUI>
+	<VStack border="simple">
+		<VStack border="simple" frontColor="red" backColor="transparent"
+			selectableContainer="true" selectedContainer="true">
+
+			<Label selectableElement="true" Text="Hello" />
+			<Label selectableElement="true" Text="World" />
 		</VStack>
 		<VStack selectableContainer="true">
-			<Label selectableElement="true" selectedElement="true" border="simple" Text="Hello"/>
-			<Label Text="World"/>
+			<Label selectableElement="true" selectedElement="true" border="simple" Text="Hello" />
+			<Label Text="World" />
 		</VStack>
 		<VStack border="simple"
-				selectableContainer="true" selectedContainer="true">
-			<Label selectableElement="true" selectedElement="true" border="simple" Text="Hello"/>
-			<Label selectableElement="true" Text="World"/>
+			selectableContainer="true" selectedContainer="true">
+			<Label selectableElement="true" selectedElement="true" border="simple" Text="Hello" />
+			<Label selectableElement="true" Text="World" />
 		</VStack>
 	</VStack>
 </GiftUI>
