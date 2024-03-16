@@ -15,7 +15,7 @@
 		</VStack>
 		<VStack border="simple"
 			selectableContainer="true" selectedContainer="true">
-			<Label selectableElement="true" selectedElement="true" border="simple" Text="Hello" />
+			<Label selectableElement="true" selectedElement="true" Text="Hello" />
 			<Label selectableElement="true" Text="World" />
 		</VStack>
 	</VStack>
