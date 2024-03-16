@@ -105,7 +105,7 @@ namespace Gift.Domain.Builders.UIModel
 
             foreach (UIElement element in unSelectableElements)
             {
-                giftui.AddUnselectableChild(element);
+                giftui.Add(element);
             }
             foreach (UIElement element in selectableElements)
             {
@@ -114,7 +114,7 @@ namespace Gift.Domain.Builders.UIModel
             foreach (Container element in selectableContainers)
             {
                 giftui.SelectableContainers.Add(element);
-                giftui.AddUnselectableChild(element);
+                giftui.Add(element);
             }
             return giftui;
         }

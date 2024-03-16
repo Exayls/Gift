@@ -99,7 +99,7 @@ namespace Gift.Domain.UIModel.Element
             this.ScrollIndex -= 1;
         }
 
-        public void AddUnselectableChild(UIElement uIElement)
+        public void Add(UIElement uIElement)
         {
             Childs.Add(uIElement);
         }

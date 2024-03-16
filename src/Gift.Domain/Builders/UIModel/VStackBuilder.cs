@@ -82,7 +82,7 @@ namespace Gift.Domain.Builders.UIModel
                                     isSelectableContainer: _isSelectableContainer);
             foreach (UIElement element in unSelectableElements)
             {
-                vstack.AddUnselectableChild(element);
+                vstack.Add(element);
             }
             foreach (UIElement element in selectableElements)
             {

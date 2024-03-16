@@ -221,8 +221,8 @@ namespace Gift.Domain.Tests.UI
             UIElement uielement1 = CreateUIElement(width: 1);
             UIElement uielement2 = CreateUIElement();
             HStack = CreateHstack(border: new SimpleBorder(2, 'a'));
-            HStack.AddUnselectableChild(uielement1);
-            HStack.AddUnselectableChild(uielement2);
+            HStack.Add(uielement1);
+            HStack.Add(uielement2);
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             // act
             Context context = HStack.GetContextRelativeRenderable(uielement2, contextRenderable);
@@ -239,8 +239,8 @@ namespace Gift.Domain.Tests.UI
             UIElement uielement1 = CreateUIElement(width: 2);
             UIElement uielement2 = CreateUIElement();
             HStack = CreateHstack(border: new SimpleBorder(2, 'a'));
-            HStack.AddUnselectableChild(uielement1);
-            HStack.AddUnselectableChild(uielement2);
+            HStack.Add(uielement1);
+            HStack.Add(uielement2);
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             // act
             Context context = HStack.GetContextRelativeRenderable(uielement2, contextRenderable);
@@ -256,8 +256,8 @@ namespace Gift.Domain.Tests.UI
             UIElement uielement1 = CreateUIElement(width: 1, height: 1);
             UIElement uielement2 = CreateUIElement();
             HStack = CreateHstack(border: new SimpleBorder(2, 'a'));
-            HStack.AddUnselectableChild(uielement1);
-            HStack.AddUnselectableChild(uielement2);
+            HStack.Add(uielement1);
+            HStack.Add(uielement2);
             Context contextRenderable = new Context(new Position(0, 0), new Bound(5, 5));
             // act
             Context context = HStack.GetContextRelativeRenderable(uielement2, contextRenderable);
@@ -275,7 +275,7 @@ namespace Gift.Domain.Tests.UI
             HStack = CreateHstack();
             UIElement uielement1 = CreateUIElement(width: 1);
             // act
-            HStack.AddUnselectableChild(uielement1);
+            HStack.Add(uielement1);
             // assert
             Assert.Equal(1, HStack.Width);
         }
@@ -288,8 +288,8 @@ namespace Gift.Domain.Tests.UI
             UIElement uielement1 = CreateUIElement(width: 2);
             UIElement uielement2 = CreateUIElement(width: 2);
             // act
-            HStack.AddUnselectableChild(uielement1);
-            HStack.AddUnselectableChild(uielement2);
+            HStack.Add(uielement1);
+            HStack.Add(uielement2);
             // assert
             Assert.Equal(4, HStack.Width);
         }
@@ -302,8 +302,8 @@ namespace Gift.Domain.Tests.UI
             UIElement uielement1 = CreateUIElement(width: 2);
             UIElement uielement2 = CreateUIElement(width: 3);
             // act
-            HStack.AddUnselectableChild(uielement1);
-            HStack.AddUnselectableChild(uielement2);
+            HStack.Add(uielement1);
+            HStack.Add(uielement2);
             // assert
             Assert.Equal(5, HStack.Width);
         }
@@ -315,7 +315,7 @@ namespace Gift.Domain.Tests.UI
             HStack = CreateHstack(new SimpleBorder(1, 'a'));
             UIElement uielement1 = CreateUIElement(width: 1);
             // act
-            HStack.AddUnselectableChild(uielement1);
+            HStack.Add(uielement1);
             // assert
             Assert.Equal(3, HStack.Width);
         }
@@ -327,7 +327,7 @@ namespace Gift.Domain.Tests.UI
             HStack = CreateHstack(new SimpleBorder(1, 'a'));
             UIElement uielement1 = CreateUIElement(width: 2);
             // act
-            HStack.AddUnselectableChild(uielement1);
+            HStack.Add(uielement1);
             // assert
             Assert.Equal(4, HStack.Width);
         }
@@ -339,7 +339,7 @@ namespace Gift.Domain.Tests.UI
             HStack = CreateHstack(new SimpleBorder(1, 'a'));
             UIElement uielement1 = CreateUIElement(width: 4);
             // act
-            HStack.AddUnselectableChild(uielement1);
+            HStack.Add(uielement1);
             // assert
             Assert.Equal(6, HStack.Width);
         }
@@ -351,7 +351,7 @@ namespace Gift.Domain.Tests.UI
             HStack = CreateHstack(new SimpleBorder(2, 'a'));
             UIElement uielement1 = CreateUIElement(width: 1);
             // act
-            HStack.AddUnselectableChild(uielement1);
+            HStack.Add(uielement1);
             // assert
             Assert.Equal(5, HStack.Width);
         }
@@ -363,7 +363,7 @@ namespace Gift.Domain.Tests.UI
             HStack = CreateHstack(border: new SimpleBorder(2, 'a'));
             MockUIElement uIElement = CreateUIElement(width: 2);
             // act
-            HStack.AddUnselectableChild(uIElement);
+            HStack.Add(uIElement);
             // assert
             Assert.Equal(6, HStack.Width);
         }
@@ -374,7 +374,7 @@ namespace Gift.Domain.Tests.UI
             HStack = CreateHstack(border: new SimpleBorder(2, 'a'));
             MockUIElement uIElement = CreateUIElement(width: 3);
             // act
-            HStack.AddUnselectableChild(uIElement);
+            HStack.Add(uIElement);
             // assert
             Assert.Equal(7, HStack.Width);
         }
@@ -386,7 +386,7 @@ namespace Gift.Domain.Tests.UI
             HStack = CreateHstack(border: new SimpleBorder(3, 'a'));
             MockUIElement uIElement = CreateUIElement(width: 1);
             // act
-            HStack.AddUnselectableChild(uIElement);
+            HStack.Add(uIElement);
             // assert
             Assert.Equal(7, HStack.Width);
         }
@@ -420,7 +420,7 @@ namespace Gift.Domain.Tests.UI
             UIElement uielement1 = CreateUIElement(width: 3, height: 1);
             HStack = CreateHstack(bound: new Bound(0, 3));
             // act
-            HStack.AddUnselectableChild(uielement1);
+            HStack.Add(uielement1);
             // assert
             Assert.Equal(3, HStack.Width);
             Assert.Equal(1, HStack.Height);
@@ -432,7 +432,7 @@ namespace Gift.Domain.Tests.UI
             UIElement uielement1 = CreateUIElement(width: 5);
             HStack = CreateHstack(bound: new Bound(3, 0));
             // act
-            HStack.AddUnselectableChild(uielement1);
+            HStack.Add(uielement1);
             // assert
             Assert.Equal(5, HStack.Width);
             Assert.Equal(3, HStack.Height);
@@ -446,8 +446,8 @@ namespace Gift.Domain.Tests.UI
             UIElement uielement2 = CreateUIElement(width: 3, height: 5);
             HStack = CreateHstack();
             // act
-            HStack.AddUnselectableChild(uielement1);
-            HStack.AddUnselectableChild(uielement2);
+            HStack.Add(uielement1);
+            HStack.Add(uielement2);
             // assert
             Assert.Equal(4, HStack.Width);
             Assert.Equal(5, HStack.Height);
@@ -461,8 +461,8 @@ namespace Gift.Domain.Tests.UI
             UIElement uielement2 = CreateUIElement(width: 3, height: 5);
             HStack = CreateHstack(new SimpleBorder(2, '*'));
             // act
-            HStack.AddUnselectableChild(uielement1);
-            HStack.AddUnselectableChild(uielement2);
+            HStack.Add(uielement1);
+            HStack.Add(uielement2);
             // assert
             Assert.Equal(8, HStack.Width);
             Assert.Equal(9, HStack.Height);

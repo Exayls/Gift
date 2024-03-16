@@ -92,7 +92,7 @@ namespace Gift.XmlUiParser.FileParser
                 {
                     UIElement childComponent = ParseUIElementRec(childElement);
                     var container = (Container)uIElement;
-                    container.AddUnselectableChild(childComponent);
+                    container.Add(childComponent);
                     SelectElement(childComponent, childElement, container);
                     SelectContainer(childComponent, childElement);
                 }

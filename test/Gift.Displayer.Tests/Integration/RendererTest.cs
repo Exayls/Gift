@@ -54,15 +54,15 @@ namespace TestGift.Test.UI
                                 .WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile(
                                                                       "ressources/borderchars/double_border.json")))
                                 .Build();
-            vstack.AddUnselectableChild(new LabelBuilder().Build());
-            ui.AddUnselectableChild(vstack);
+            vstack.Add(new LabelBuilder().Build());
+            ui.Add(vstack);
             VStack vstack2 = new VStackBuilder()
                                  .WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile(
                                                                        "ressources/borderchars/simple_border.json")))
                                  .Build();
-            vstack.AddUnselectableChild(vstack2);
-            vstack2.AddUnselectableChild(new LabelBuilder().WithText("hey").Build());
-            vstack2.AddUnselectableChild(new LabelBuilder().Build());
+            vstack.Add(vstack2);
+            vstack2.Add(new LabelBuilder().WithText("hey").Build());
+            vstack2.Add(new LabelBuilder().Build());
             IScreenDisplay rendered = renderer.GetRenderDisplay(ui);
             // clang-format off
             const string expected = "╔════════╗\n" +
@@ -88,17 +88,17 @@ namespace TestGift.Test.UI
                                 .WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile(
                                                                       "ressources/borderchars/double_border.json")))
                                 .Build();
-            vstack.AddUnselectableChild(new LabelBuilder().Build());
-            ui.AddUnselectableChild(vstack);
+            vstack.Add(new LabelBuilder().Build());
+            ui.Add(vstack);
             VStack vstack2 = new VStackBuilder()
                                  .WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile(
                                                                        "ressources/borderchars/simple_border.json")))
                                  .Build();
-            vstack.AddUnselectableChild(vstack2);
-            vstack2.AddUnselectableChild(new LabelBuilder().WithText("hey").Build());
-            vstack2.AddUnselectableChild(
+            vstack.Add(vstack2);
+            vstack2.Add(new LabelBuilder().WithText("hey").Build());
+            vstack2.Add(
                 new LabelBuilder().WithText("test6").WithPosition(new Position(-2, 3)).Build());
-            vstack2.AddUnselectableChild(new LabelBuilder().Build());
+            vstack2.Add(new LabelBuilder().Build());
             IScreenDisplay rendered = renderer.GetRenderDisplay(ui);
 
             // clang-format off
@@ -123,8 +123,8 @@ namespace TestGift.Test.UI
 
             VStack vstack =
                 new VStackBuilder().WithBorder(new SimpleBorder(1, '-')).WithForegroundColor(Color.Red).Build();
-            vstack.AddUnselectableChild(new LabelBuilder().Build());
-            ui.AddUnselectableChild(vstack);
+            vstack.Add(new LabelBuilder().Build());
+            ui.Add(vstack);
 
             IScreenDisplay rendered = renderer.GetRenderDisplay(ui);
             // clang-format off

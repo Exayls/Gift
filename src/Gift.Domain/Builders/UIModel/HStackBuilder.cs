@@ -87,7 +87,7 @@ namespace Gift.Domain.Builders.UIModel
 
             foreach (UIElement element in unSelectableElements)
             {
-                hstack.AddUnselectableChild(element);
+                hstack.Add(element);
             }
             foreach (UIElement element in selectableElements)
             {
