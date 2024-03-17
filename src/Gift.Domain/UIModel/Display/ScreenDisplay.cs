@@ -7,14 +7,15 @@ namespace Gift.Domain.UIModel.Display
 {
     public class ScreenDisplay : IScreenDisplay
     {
+        public Color[,] FrontColorMap { get; }
+        public Color[,] BackColorMap { get; }
+        public StringBuilder DisplayString { get; }
+
         private Color frontColor;
         private Color backColor;
 
-        public Color[,] FrontColorMap { get; }
-        public Color[,] BackColorMap { get; }
 
         public Bound TotalBound { get; }
-        public StringBuilder DisplayString { get; }
         public char[,] DisplayMap { get; }
 
         public ScreenDisplay(string display, Color frontColor = Color.White, Color backColor = Color.Transparent)

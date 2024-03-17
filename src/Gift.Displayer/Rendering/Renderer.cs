@@ -21,7 +21,9 @@ namespace Gift.Displayer.Rendering
         public IScreenDisplay GetRenderDisplay(GiftUI giftUI)
         {
             Context context = new Context(new(0, 0), giftUI.Bound);
+            IScreenDisplay border = CreateBorder(giftUI, context);
             IScreenDisplay screen = CreateDisplay(giftUI, context);
+            AddDisplayToBorder(border, giftUI, screen);
             Render(screen, giftUI, context);
             return screen;
         }
