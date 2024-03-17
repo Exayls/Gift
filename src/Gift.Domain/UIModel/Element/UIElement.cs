@@ -34,8 +34,8 @@ namespace Gift.Domain.UIModel.Element
             BackColor = backColor;
         }
 
-        public abstract IScreenDisplay GetDisplayWithoutBorder(Bound bounds, IConfiguration configuration, IColorResolver colorResolver);
-        public abstract IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuratione, IColorResolver colorResolver);
+        public abstract IScreenDisplay GetDisplayWithoutBorder(IConfiguration configuration, IColorResolver colorResolver);
+        public abstract IScreenDisplay GetDisplayBorder(IConfiguration configuratione, IColorResolver colorResolver);
         public abstract Position GetRelativePosition(Context context);
         public abstract bool IsFixed();
 

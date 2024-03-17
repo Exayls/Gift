@@ -61,7 +61,7 @@ namespace Gift.Domain.Tests.UI
         private IScreenDisplay GetScreenDisplay(HStack hstack, char charFill = '*')
         {
             IRepository repository = Mock.Of<IRepository>();
-            return hstack.GetDisplayWithBorder(new(hstack.Height, hstack.Width), charFill, new ColorResolver(repository));
+            return hstack.GetDisplayWithBorder(charFill, new ColorResolver(repository));
         }
 
         // GetDisplay tests

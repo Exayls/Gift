@@ -59,12 +59,12 @@ namespace Gift.Domain.UIModel.Element
 
         public abstract Context GetContextRelativeRenderable(Renderable renderable, Context context);
 
-        public override IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuration, IColorResolver colorResolver)
+        public override IScreenDisplay GetDisplayBorder(IConfiguration configuration, IColorResolver colorResolver)
         {
 			var screenDisplayBuilder = new ScreenDisplayBuilder();
 			Color frontColor = colorResolver.GetFrontColor(this, configuration);
 			Color backColor = colorResolver.GetBackColor(this, configuration);
-			screenDisplayBuilder.WithFrontColor(frontColor).WithBackColor(backColor).WithBound(bound);
+			screenDisplayBuilder.WithFrontColor(frontColor).WithBackColor(backColor).WithBound(new(Height, Width));
             IScreenDisplay screenDisplay = Border.GetDisplay(screenDisplayBuilder);
             return screenDisplay;
         }
