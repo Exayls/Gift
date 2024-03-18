@@ -82,7 +82,7 @@ namespace Gift.Displayer.Rendering
 
         private void RenderContainerOrElement(IScreenDisplay screen, Container container, Context context, Renderable renderable)
         {
-            Context renderableContext = container.GetContextRelativeRenderable(renderable, context);
+            Context renderableContext = container.GetContext(renderable, context);
             switch (renderable)
             {
                 case Container containerToRender:

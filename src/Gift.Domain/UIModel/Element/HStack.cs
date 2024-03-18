@@ -51,7 +51,7 @@ namespace Gift.Domain.UIModel.Element
 
         public HStack(IBorder border,
                       IScreenDisplayFactory screenDisplayFactory,
-                      Bound bound,
+                      Size bound,
                       Color frontColor = Color.Default,
                       Color backColor = Color.Default,
                       bool IsSelectableContainer = false) : base(screenDisplayFactory, bound, border, frontColor: frontColor, backColor: backColor, isSelectableContainer: IsSelectableContainer)
@@ -59,13 +59,13 @@ namespace Gift.Domain.UIModel.Element
         }
 
 
-        public override Context GetContextRelativeRenderable(Renderable renderable, Context context)
+        public override Context GetContext(Renderable renderable, Context context)
         {
             int ChildContextPosition = GetWidthRenderable(renderable);
             return new Context(
                 new Position(0
                            , ChildContextPosition - ScrollIndex),
-                new Bound(renderable.Height, renderable.Width));
+                new Size(renderable.Height, renderable.Width));
         }
 
         private int GetWidthRenderable(Renderable renderableToFind)
@@ -110,7 +110,7 @@ namespace Gift.Domain.UIModel.Element
         {
             int thickness = Border.Thickness;
 
-            Bound boundEmptyVStack = new Bound(Height - 2 * thickness, Width - 2 * thickness);
+            Size boundEmptyVStack = new Size(Height - 2 * thickness, Width - 2 * thickness);
             IScreenDisplay emptyVstackScreen = _screenDisplayFactory.Create(
                 boundEmptyVStack, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor,
                 BackColor == Color.Default ? configuration.DefaultBackColor : BackColor, configuration.FillingChar);

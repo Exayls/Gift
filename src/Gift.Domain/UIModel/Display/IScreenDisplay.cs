@@ -7,7 +7,7 @@ namespace Gift.Domain.UIModel.Display
     public interface IScreenDisplay
     {
         StringBuilder DisplayString { get; }
-        Bound TotalBound { get; }
+        Size TotalBound { get; }
         Color[,] FrontColorMap { get; }
         Color[,] BackColorMap { get; }
         char[,] DisplayMap { get; }

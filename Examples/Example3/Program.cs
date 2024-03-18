@@ -15,7 +15,7 @@ vstack.Add(new LabelBuilder().Build());
 vstack.Add(new LabelBuilder().Build());
 vstack.Add(new LabelBuilder().WithText("test2").WithPosition(new Position(1, 58)).Build());
 vstack.Add(new LabelBuilder().WithText("test4").Build());
-var vstack2 = new VStackBuilder().WithBound(new Bound(4, 9)).WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile("ressources/borderchars/simple_border.json"))).Build();
+var vstack2 = new VStackBuilder().WithBound(new Size(4, 9)).WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile("ressources/borderchars/simple_border.json"))).Build();
 vstack.Add(vstack2);
 vstack.Add(new LabelBuilder().WithText("test5").Build());
 vstack.Add(new LabelBuilder().Build());

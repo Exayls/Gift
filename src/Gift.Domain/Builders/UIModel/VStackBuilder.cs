@@ -11,7 +11,7 @@ namespace Gift.Domain.Builders.UIModel
     public class VStackBuilder : IContainerBuilder
     {
         private IBorder _border = new NoBorder();
-        private Bound _bound = new Bound(0, 0);
+        private Size _bound = new Size(0, 0);
         private IScreenDisplayFactory screenDisplayFactory = new ScreenDisplayFactory();
         private Color backColor = Color.Default;
         private Color frontColor = Color.Default;
@@ -27,7 +27,7 @@ namespace Gift.Domain.Builders.UIModel
             _border = border;
             return this;
         }
-        public VStackBuilder WithBound(Bound bound)
+        public VStackBuilder WithBound(Size bound)
         {
             _bound = bound;
             return this;
@@ -77,7 +77,7 @@ namespace Gift.Domain.Builders.UIModel
 
         public VStack Build()
         {
-            var bound = new Bound(_height ?? _bound.Height, _width ?? _bound.Width);
+            var bound = new Size(_height ?? _bound.Height, _width ?? _bound.Width);
             var vstack = new VStack(_border, screenDisplayFactory, bound, frontColor: frontColor, backColor: backColor,
                                     isSelectableContainer: _isSelectableContainer);
             foreach (UIElement element in unSelectableElements)
@@ -101,7 +101,7 @@ namespace Gift.Domain.Builders.UIModel
             return Build();
         }
 
-        IContainerBuilder IContainerBuilder.WithBound(Bound bound)
+        IContainerBuilder IContainerBuilder.WithBound(Size bound)
         {
             return WithBound(bound);
         }

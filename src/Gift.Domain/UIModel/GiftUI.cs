@@ -53,7 +53,7 @@ namespace Gift.Domain.UIModel
             }
         }
 
-        public GiftUI(Bound bound, IBorder border, Color frontColor, Color backColor, bool isSelectableContainer)
+        public GiftUI(Size bound, IBorder border, Color frontColor, Color backColor, bool isSelectableContainer)
             : base(new ScreenDisplayFactory(), bound, border, frontColor, backColor, isSelectableContainer)
         {
             SelectableContainers = new List<Container>();
@@ -81,7 +81,7 @@ namespace Gift.Domain.UIModel
             }
         }
 
-        public override Context GetContextRelativeRenderable(Renderable renderable, Context context)
+        public override Context GetContext(Renderable renderable, Context context)
         {
             return context;
         }
@@ -96,7 +96,7 @@ namespace Gift.Domain.UIModel
             return context.Position;
         }
 
-        public void Resize(Bound bound)
+        public void Resize(Size bound)
         {
             this.Bound = bound;
         }

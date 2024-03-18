@@ -11,7 +11,7 @@ namespace Gift.Domain.Builders.UIModel
 {
     public class GiftUIBuilder : IContainerBuilder
     {
-        private Bound _bound;
+        private Size _bound;
         private IBorder _border;
         private Color _frontColor = Color.Default;
         private Color _backColor = Color.Default;
@@ -27,16 +27,16 @@ namespace Gift.Domain.Builders.UIModel
         {
             if (!Console.IsInputRedirected && !Console.IsOutputRedirected)
             {
-                _bound = new Bound(Console.WindowHeight, Console.WindowWidth);
+                _bound = new Size(Console.WindowHeight, Console.WindowWidth);
             }
             else
             {
-                _bound = new Bound(0, 0);
+                _bound = new Size(0, 0);
             }
             _border = new NoBorder();
         }
 
-        public GiftUIBuilder WithBound(Bound bound)
+        public GiftUIBuilder WithBound(Size bound)
         {
             _bound = bound;
             return this;
@@ -99,7 +99,7 @@ namespace Gift.Domain.Builders.UIModel
 
         public GiftUI Build()
         {
-            var bound = new Bound(_height ?? _bound.Height, _width ?? _bound.Width);
+            var bound = new Size(_height ?? _bound.Height, _width ?? _bound.Width);
             var giftui = new GiftUI(bound: bound, border: _border, frontColor: _frontColor, backColor: _backColor,
                                     isSelectableContainer: _isSelectableContainer);
 
@@ -129,7 +129,7 @@ namespace Gift.Domain.Builders.UIModel
             return Build();
         }
 
-        IContainerBuilder IContainerBuilder.WithBound(Bound bound)
+        IContainerBuilder IContainerBuilder.WithBound(Size bound)
         {
             return WithBound(bound);
         }

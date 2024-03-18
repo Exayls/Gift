@@ -61,7 +61,7 @@ namespace Gift.ApplicationService.Tests.Event
             //Act
             signalHandler.HandleSignal(_mockSignal.Object);
             //Assert
-            _mockDisplayManger.Verify(dm => dm.Resize(It.IsAny<Bound>()));
+            _mockDisplayManger.Verify(dm => dm.Resize(It.IsAny<Size>()));
             _mockDisplayManger.Verify(dm => dm.UpdateDisplay());
         }
 

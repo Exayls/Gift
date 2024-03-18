@@ -126,13 +126,13 @@ namespace Gift.Domain.Tests.UI
         {
             //Arrange
             var element1 = new GiftUIBuilder()
-                .WithBound(new Bound(0, 0))
+                .WithBound(new Size(0, 0))
                 .Build();
             var giftUIRef = new GiftUIBuilder()
                 .WithSelectableElement(element1)
                 .Build();
             var element2 = new GiftUIBuilder()
-                .WithBound(new Bound(0, 0))
+                .WithBound(new Size(0, 0))
                 .Build();
             var giftUIComp = new GiftUIBuilder()
                 .WithSelectableElement(element2)
@@ -146,14 +146,14 @@ namespace Gift.Domain.Tests.UI
         {
             //Arrange
             var element1 = new GiftUIBuilder()
-                .WithBound(new Bound(0, 0))
+                .WithBound(new Size(0, 0))
                 .Build();
             var giftUIRef = new GiftUIBuilder()
                 .WithSelectableElement(element1)
                 .Build();
 
             var element2 = new GiftUIBuilder()
-                .WithBound(new Bound(0, 1))
+                .WithBound(new Size(0, 1))
                 .Build();
             var giftUIComp = new GiftUIBuilder()
                 .WithSelectableElement(element2)
@@ -167,14 +167,14 @@ namespace Gift.Domain.Tests.UI
         {
             //Arrange
             var element1 = new VStackBuilder()
-                .WithBound(new Bound(0, 0))
+                .WithBound(new Size(0, 0))
                 .Build();
             var giftUIRef = new GiftUIBuilder()
                 .WithSelectableContainer(element1)
                 .Build();
 
             var element2 = new VStackBuilder()
-                .WithBound(new Bound(1, 0))
+                .WithBound(new Size(1, 0))
                 .Build();
             var giftUIComp = new GiftUIBuilder()
                 .WithSelectableContainer(element2)
@@ -188,7 +188,7 @@ namespace Gift.Domain.Tests.UI
         {
             //Arrange
             var element1 = new VStackBuilder()
-                .WithBound(new Bound(0, 0))
+                .WithBound(new Size(0, 0))
                 .Build();
             var giftUIRef = new GiftUIBuilder()
                 .WithSelectableContainer(element1)

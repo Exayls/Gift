@@ -47,17 +47,17 @@ namespace Gift.Domain.UIModel.Element
             }
         }
 
-        public VStack(IBorder border, IScreenDisplayFactory screenDisplayFactory, Bound bound, bool isSelectableContainer,
+        public VStack(IBorder border, IScreenDisplayFactory screenDisplayFactory, Size bound, bool isSelectableContainer,
                       Color frontColor = Color.Default, Color backColor = Color.Default)
             : base(screenDisplayFactory, bound, border, frontColor: frontColor, backColor: backColor, isSelectableContainer: isSelectableContainer)
         {
         }
 
-        public override Context GetContextRelativeRenderable(Renderable renderable, Context context)
+        public override Context GetContext(Renderable renderable, Context context)
         {
             int ChildContextPosition = GetHeightRenderable(renderable);
             return new Context(new Position(ChildContextPosition - ScrollIndex, 0),
-                               new Bound(renderable.Height, renderable.Width));
+                               new Size(renderable.Height, renderable.Width));
         }
 
         private int GetHeightRenderable(Renderable renderableToFind)
@@ -87,7 +87,7 @@ namespace Gift.Domain.UIModel.Element
             return new Position(context.Position.y, context.Position.x);
         }
 
-        public IScreenDisplay GetDisplayWithBorder(Bound bound, char fillingChar, ColorResolver colorResolver)
+        public IScreenDisplay GetDisplayWithBorder(Size bound, char fillingChar, ColorResolver colorResolver)
         {
             int thickness = Border.Thickness;
             IScreenDisplay screenDisplay = GetDisplayBorder(new DefaultConfiguration(), colorResolver);
@@ -101,7 +101,7 @@ namespace Gift.Domain.UIModel.Element
         {
             int thickness = Border.Thickness;
 
-            Bound boundEmptyVStack = new Bound(Height - 2 * thickness,Width - 2 * thickness);
+            Size boundEmptyVStack = new Size(Height - 2 * thickness,Width - 2 * thickness);
             IScreenDisplay emptyVstackScreen = _screenDisplayFactory.Create(
                 boundEmptyVStack, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor,
                 BackColor == Color.Default ? configuration.DefaultBackColor : BackColor, configuration.FillingChar);

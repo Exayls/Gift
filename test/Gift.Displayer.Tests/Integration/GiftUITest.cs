@@ -21,7 +21,7 @@ namespace Gift.Displayer.Tests.Integration
             using (var writer = new StringWriter(output))
             {
                 var repo = new InMemoryRepository();
-                var ui = GetGiftUI(new Bound(20, 60));
+                var ui = GetGiftUI(new Size(20, 60));
                 repo.SaveRoot(ui);
                 IScreenDisplay renderedText =
                     new Renderer(new DefaultConfiguration(), new ColorResolver(repo)).GetRenderDisplay(ui);
@@ -37,7 +37,7 @@ namespace Gift.Displayer.Tests.Integration
             }
         }
 
-        private static GiftUI GetGiftUI(Bound bound)
+        private static GiftUI GetGiftUI(Size bound)
         {
             return new GiftUIBuilder().WithBound(bound).Build();
         }
@@ -48,7 +48,7 @@ namespace Gift.Displayer.Tests.Integration
             var output = new StringBuilder();
             using (var writer = new StringWriter(output))
             {
-                var ui = GetGiftUI(new Bound(10, 15));
+                var ui = GetGiftUI(new Size(10, 15));
 
                 var repo = new InMemoryRepository();
                 repo.SaveRoot(ui);

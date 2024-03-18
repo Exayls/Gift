@@ -18,7 +18,7 @@ namespace Gift.Domain.Tests.Border
         public void GetDisplay_should_return_border_with_thickness_1_when_border_thickness_equal_1_1()
         {
             //act
-            Bound bound = new Bound(2, 2);
+            Size bound = new Size(2, 2);
 			var screen = new ScreenDisplayBuilder().WithBound(bound);
             IScreenDisplay display = SimpleBorder.GetDisplay(screen);
             //assert
@@ -29,7 +29,7 @@ namespace Gift.Domain.Tests.Border
         [Fact]
         public void GetDisplay_should_return_border_with_thickness_1_when_border_thickness_equal_1_2()
         {
-            Bound bound = new Bound(4, 4);
+            Size bound = new Size(4, 4);
 			var screen = new ScreenDisplayBuilder().WithBound(bound).WithChar(' ');
             //act
             IScreenDisplay display = SimpleBorder.GetDisplay(screen);
@@ -45,7 +45,7 @@ namespace Gift.Domain.Tests.Border
         {
             //arrange
             SimpleBorder = new SimpleBorder(1, '»');
-            Bound bound = new Bound(4, 4);
+            Size bound = new Size(4, 4);
 			var screen = new ScreenDisplayBuilder().WithBound(bound).WithChar(' ');
             //act
             IScreenDisplay display = SimpleBorder.GetDisplay(screen);
@@ -61,7 +61,7 @@ namespace Gift.Domain.Tests.Border
         {
             //arrange
             SimpleBorder = new SimpleBorder(2, '»');
-            Bound bound = new Bound(6, 6);
+            Size bound = new Size(6, 6);
 			var screen = new ScreenDisplayBuilder().WithBound(bound).WithChar(' ');
             //act
             IScreenDisplay display = SimpleBorder.GetDisplay(screen);
@@ -79,7 +79,7 @@ namespace Gift.Domain.Tests.Border
         {
             //arrange
             SimpleBorder = new SimpleBorder(2, '»');
-            Bound bound = new Bound(8, 8);
+            Size bound = new Size(8, 8);
 			var screen = new ScreenDisplayBuilder().WithBound(bound).WithChar(' ');
             //act
             IScreenDisplay display = SimpleBorder.GetDisplay(screen);
@@ -99,7 +99,7 @@ namespace Gift.Domain.Tests.Border
         {
             //arrange
             SimpleBorder = new SimpleBorder(3, '»');
-            Bound bound = new Bound(8, 8);
+            Size bound = new Size(8, 8);
 			var screen = new ScreenDisplayBuilder().WithBound(bound).WithChar(' ');
             //act
             IScreenDisplay display = SimpleBorder.GetDisplay(screen);

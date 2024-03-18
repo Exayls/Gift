@@ -5,12 +5,12 @@ namespace Gift.Domain.Builders.Mappers
 {
     public class BoundMapper : IBoundMapper
     {
-        public Bound ToBound(string boundStr)
+        public Size ToBound(string boundStr)
         {
             try
             {
                 var splitBound = boundStr.Split(new[] { ',', ';' });
-                var bound = new Bound(int.Parse(splitBound[0]), int.Parse(splitBound[1]));
+                var bound = new Size(int.Parse(splitBound[0]), int.Parse(splitBound[1]));
                 return bound;
             }
             catch (Exception e)

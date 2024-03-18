@@ -15,7 +15,7 @@ namespace Gift.Domain.UIModel.Display
         private Color backColor;
 
 
-        public Bound TotalBound { get; }
+        public Size TotalBound { get; }
         public char[,] DisplayMap { get; }
 
         public ScreenDisplay(string display, Color frontColor = Color.White, Color backColor = Color.Transparent)
@@ -24,7 +24,7 @@ namespace Gift.Domain.UIModel.Display
             DisplayString.Clear().Append(display);
         }
 
-        public ScreenDisplay(Bound bound, Color frontColor = Color.White, Color backColor = Color.Transparent,
+        public ScreenDisplay(Size bound, Color frontColor = Color.White, Color backColor = Color.Transparent,
                              char emptychar = '*')
         {
             DisplayString = new StringBuilder();

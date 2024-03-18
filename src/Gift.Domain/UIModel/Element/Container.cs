@@ -11,7 +11,7 @@ namespace Gift.Domain.UIModel.Element
 {
     public abstract class Container : UIElement
     {
-        public Bound Bound { get; protected set; }
+        public Size Bound { get; protected set; }
         public int ScrollIndex { get; protected set; }
         public IList<UIElement> Childs { get; protected set; }
         public IList<UIElement> SelectableElements { get; protected set; }
@@ -46,7 +46,7 @@ namespace Gift.Domain.UIModel.Element
 
         protected readonly IScreenDisplayFactory _screenDisplayFactory;
 
-        public Container(IScreenDisplayFactory screenDisplayFactory, Bound bound, IBorder border, Color frontColor,
+        public Container(IScreenDisplayFactory screenDisplayFactory, Size bound, IBorder border, Color frontColor,
                          Color backColor, bool isSelectableContainer)
             : base(border, frontColor: frontColor, backColor: backColor)
         {
@@ -57,7 +57,7 @@ namespace Gift.Domain.UIModel.Element
             IsSelectableContainer = isSelectableContainer;
         }
 
-        public abstract Context GetContextRelativeRenderable(Renderable renderable, Context context);
+        public abstract Context GetContext(Renderable renderable, Context context);
 
         public override IScreenDisplay GetDisplayBorder(IConfiguration configuration, IColorResolver colorResolver)
         {

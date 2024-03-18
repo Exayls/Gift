@@ -23,7 +23,7 @@ namespace TestGift.Builder
         {
 
             NoBorder border = new NoBorder();
-            Bound bound = new Bound(0, 0);
+            Size bound = new Size(0, 0);
             VStackBuilder builder = new VStackBuilder()
                 .WithBound(bound)
                 .WithBorder(border)

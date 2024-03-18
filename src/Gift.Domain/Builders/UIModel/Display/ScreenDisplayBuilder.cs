@@ -8,9 +8,9 @@ namespace Gift.Domain.Builders.UIModel.Display
         private char _char = '*';
         private Color _backColor = Color.Default;
         private Color _frontColor = Color.Default;
-        private Bound _bound = new Bound(0, 0);
+        private Size _bound = new Size(0, 0);
 
-        public ScreenDisplayBuilder WithBound(Bound bound)
+        public ScreenDisplayBuilder WithBound(Size bound)
         {
             _bound = bound;
 			return this;

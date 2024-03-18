@@ -27,11 +27,11 @@ namespace TestGift.Builder
                              .WithFrontColor(Color.Default)
                              .WithBackColor(Color.Default)
                              .WithChar(' ')
-                             .WithBound(new Bound(3, 3));
+                             .WithBound(new Size(3, 3));
             Assert.Equal(expectedString, border.GetDisplay(screen).DisplayString.ToString());
         }
 
-        private IScreenDisplay GetDisplay(Bound bound, Color frcol, Color bckcol, char ch, IBorder border)
+        private IScreenDisplay GetDisplay(Size bound, Color frcol, Color bckcol, char ch, IBorder border)
         {
 
             var screen =
@@ -48,7 +48,7 @@ namespace TestGift.Builder
             var expectedString = "┌─┐\n" + "│ │\n" + "└─┘";
             Assert.Equal(
                 expectedString,
-                GetDisplay(new Bound(3, 3), Color.Default, Color.Default, ' ', border).DisplayString.ToString());
+                GetDisplay(new Size(3, 3), Color.Default, Color.Default, ' ', border).DisplayString.ToString());
         }
 
         [Fact]
@@ -60,7 +60,7 @@ namespace TestGift.Builder
             var expectedString = "███\n" + "█ █\n" + "███";
             Assert.Equal(
                 expectedString,
-                GetDisplay(new Bound(3, 3), Color.Default, Color.Default, ' ', border).DisplayString.ToString());
+                GetDisplay(new Size(3, 3), Color.Default, Color.Default, ' ', border).DisplayString.ToString());
         }
     }
 }

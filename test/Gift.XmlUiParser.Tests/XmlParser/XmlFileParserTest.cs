@@ -83,7 +83,7 @@ namespace Gift.XmlUiParser.Tests.XmlParser
                 new GiftUIBuilder()
                     .WithUnSelectableElement(
                         new VStackBuilder()
-                            .WithBound(new Bound(5, 8))
+                            .WithBound(new Size(5, 8))
                             .WithForegroundColor(Color.Blue)
                             .WithUnSelectableElement(new LabelBuilder()
                                                          .WithText("Hello")

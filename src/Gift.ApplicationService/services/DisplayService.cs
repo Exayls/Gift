@@ -82,7 +82,7 @@ namespace Gift.ApplicationService.Services
             _uiProvider.Ui.PreviousElementInSelectedContainer();
         }
 
-        public void Resize(Bound bound)
+        public void Resize(Size bound)
         {
             _uiProvider.Ui.Resize(bound);
         }

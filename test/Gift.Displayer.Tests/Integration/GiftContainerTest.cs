@@ -20,7 +20,7 @@ namespace TestGift.UI
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = GetGiftUi(new Bound(20, 60));
+            var ui = GetGiftUi(new Size(20, 60));
             InMemoryRepository repository = new InMemoryRepository();
 			repository.SaveRoot(ui);
             IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
@@ -37,7 +37,7 @@ namespace TestGift.UI
             }
         }
 
-        private static GiftUI GetGiftUi(Bound bound)
+        private static GiftUI GetGiftUi(Size bound)
         {
             return new GiftUIBuilder().WithBound(bound).Build();
         }
@@ -47,7 +47,7 @@ namespace TestGift.UI
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = GetGiftUi(new Bound(20, 60));
+            var ui = GetGiftUi(new Size(20, 60));
             var element = new LabelBuilder().Build();
             ui.Add(element);
             InMemoryRepository repository = new InMemoryRepository();
@@ -74,7 +74,7 @@ namespace TestGift.UI
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = GetGiftUi(new Bound(20, 60));
+            var ui = GetGiftUi(new Size(20, 60));
             var position = new Position(0, 30);
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.Add(element);
@@ -102,7 +102,7 @@ namespace TestGift.UI
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = GetGiftUi(new Bound(20, 60));
+            var ui = GetGiftUi(new Size(20, 60));
             var position = new Position(0, 10);
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.Add(element);
@@ -130,7 +130,7 @@ namespace TestGift.UI
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = GetGiftUi(new Bound(20, 60));
+            var ui = GetGiftUi(new Size(20, 60));
             var position = new Position(0, 10);
             var element = new LabelBuilder().WithText("test").WithPosition(position).Build();
             ui.Add(element);
@@ -158,7 +158,7 @@ namespace TestGift.UI
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = GetGiftUi(new Bound(20, 60));
+            var ui = GetGiftUi(new Size(20, 60));
             var position = new Position(0, 1000);
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.Add(element);
@@ -182,7 +182,7 @@ namespace TestGift.UI
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = GetGiftUi(new Bound(20, 60));
+            var ui = GetGiftUi(new Size(20, 60));
             var position = new Position(0, 58);
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.Add(element);
@@ -210,7 +210,7 @@ namespace TestGift.UI
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = GetGiftUi(new Bound(10, 80));
+            var ui = GetGiftUi(new Size(10, 80));
             var position = new Position(0, 58);
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.Add(element);
@@ -239,7 +239,7 @@ namespace TestGift.UI
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = GetGiftUi(new Bound(4, 16));
+            var ui = GetGiftUi(new Size(4, 16));
             var position = new Position(2, 10);
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.Add(element);
@@ -268,7 +268,7 @@ namespace TestGift.UI
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = GetGiftUi(new Bound(4, 16));
+            var ui = GetGiftUi(new Size(4, 16));
             var position = new Position(1, 10);
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.Add(element);
@@ -297,7 +297,7 @@ namespace TestGift.UI
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = GetGiftUi(new Bound(4, 32));
+            var ui = GetGiftUi(new Size(4, 32));
             var position = new Position(1, 10);
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.Add(element);

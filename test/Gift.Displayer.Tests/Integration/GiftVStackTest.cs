@@ -27,13 +27,13 @@ namespace Gift.Displayer.Tests.Integration
         {
             _screenDisplayMock1 = new Mock<IScreenDisplay>();
             _ScreenDisplayFactoryMock = new Mock<IScreenDisplayFactory>();
-            _ScreenDisplayFactoryMock.Setup(s => s.Create(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock1.Object);
+            _ScreenDisplayFactoryMock.Setup(s => s.Create(It.IsAny<Size>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock1.Object);
         }
 
         [Fact]
         public void TestVStack()
         {
-            GiftUI ui = CreateUI(new Bound(20, 60));
+            GiftUI ui = CreateUI(new Size(20, 60));
             var vstack = CreateVstack();
             ui.Add(vstack);
 
@@ -59,7 +59,7 @@ namespace Gift.Displayer.Tests.Integration
             return vstack;
         }
 
-        private static GiftUI CreateUI(Bound bound)
+        private static GiftUI CreateUI(Size bound)
         {
             GiftUI ui = new GiftUIBuilder().WithBound(bound).Build();
             return ui;
@@ -70,7 +70,7 @@ namespace Gift.Displayer.Tests.Integration
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = CreateUI(new Bound(20, 60));
+            var ui = CreateUI(new Size(20, 60));
             var vstack = new VStackBuilder().Build();
             var label = new LabelBuilder().Build();
             ui.Add(vstack);
@@ -99,7 +99,7 @@ namespace Gift.Displayer.Tests.Integration
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = CreateUI(new Bound(20, 60));
+            var ui = CreateUI(new Size(20, 60));
             var vstack = new VStackBuilder().Build();
             var label = new LabelBuilder().Build();
             ui.Add(vstack);
@@ -129,7 +129,7 @@ namespace Gift.Displayer.Tests.Integration
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = CreateUI(new Bound(20, 60));
+            var ui = CreateUI(new Size(20, 60));
             var vstack = new VStackBuilder().Build();
             var label1 = new LabelBuilder().Build();
             var label2 = new LabelBuilder().WithText("test").Build();
@@ -165,7 +165,7 @@ namespace Gift.Displayer.Tests.Integration
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = CreateUI(new Bound(20, 60));
+            var ui = CreateUI(new Size(20, 60));
             var vstack = new VStackBuilder().Build();
             var label1 = new LabelBuilder().Build();
             var label2 = new LabelBuilder().WithText("test").Build();
@@ -207,7 +207,7 @@ namespace Gift.Displayer.Tests.Integration
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = CreateUI(new Bound(20, 60));
+            var ui = CreateUI(new Size(20, 60));
             var vstack = new VStackBuilder().Build();
             var label1 = new LabelBuilder().Build();
             var label2 = new LabelBuilder().WithText("test").WithPosition(new Position(4, 8)).Build();
@@ -249,7 +249,7 @@ namespace Gift.Displayer.Tests.Integration
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = CreateUI(new Bound(4, 60));
+            var ui = CreateUI(new Size(4, 60));
             var vstack = new VStackBuilder().Build();
             var label1 = new LabelBuilder().Build();
             var label2 = new LabelBuilder().WithText("test").Build();
@@ -297,7 +297,7 @@ namespace Gift.Displayer.Tests.Integration
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = CreateUI(new Bound(4, 60));
+            var ui = CreateUI(new Size(4, 60));
             var vstack = new VStackBuilder().Build();
             var label1 = new LabelBuilder().Build();
             var label2 = new LabelBuilder().WithText("test").Build();
@@ -352,7 +352,7 @@ namespace Gift.Displayer.Tests.Integration
                 Build();
 			var repository = Mock.Of<IRepository>();
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new Bound(2, 4), '*', new ColorResolver(repository));
+            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new Size(2, 4), '*', new ColorResolver(repository));
             //assert
             const string expected = "****\n" +
                                     "****";
@@ -368,7 +368,7 @@ namespace Gift.Displayer.Tests.Integration
                 Build();
             IRepository repository = new InMemoryRepository();
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new Bound(3, 4), '*', new ColorResolver(repository));
+            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new Size(3, 4), '*', new ColorResolver(repository));
             //assert
             const string expected = "----\n" +
                                     "-**-\n" +

@@ -28,7 +28,7 @@ namespace TestGift.Test.UI
         [Fact]
         public void Can_render_Simple_UI()
         {
-            GiftUI ui = CreateGiftUi(new Bound(5, 10), new NoBorder());
+            GiftUI ui = CreateGiftUi(new Size(5, 10), new NoBorder());
             IScreenDisplay rendered = renderer.GetRenderDisplay(ui);
             // clang-format off
             const string expected = "**********\n" +
@@ -40,7 +40,7 @@ namespace TestGift.Test.UI
             Assert.Equal(expected, rendered.DisplayString.ToString());
         }
 
-        private static GiftUI CreateGiftUi(Bound bound, IBorder border)
+        private static GiftUI CreateGiftUi(Size bound, IBorder border)
         {
             return new GiftUIBuilder().WithBound(bound).WithBorder(border).Build();
         }
@@ -48,7 +48,7 @@ namespace TestGift.Test.UI
         [Fact]
         public void Can_render_UI_with_elements()
         {
-            GiftUI ui = CreateGiftUi(new Bound(10, 10), new NoBorder());
+            GiftUI ui = CreateGiftUi(new Size(10, 10), new NoBorder());
 
             VStack vstack = new VStackBuilder()
                                 .WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile(
@@ -82,7 +82,7 @@ namespace TestGift.Test.UI
         [Fact]
         public void Can_render_UI_with_elements_out_of_bound()
         {
-            GiftUI ui = CreateGiftUi(new Bound(10, 10), new NoBorder());
+            GiftUI ui = CreateGiftUi(new Size(10, 10), new NoBorder());
 
             VStack vstack = new VStackBuilder()
                                 .WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile(
@@ -119,7 +119,7 @@ namespace TestGift.Test.UI
         [Fact]
         public void Can_render_color_of_border()
         {
-            GiftUI ui = CreateGiftUi(new Bound(4, 10), new NoBorder());
+            GiftUI ui = CreateGiftUi(new Size(4, 10), new NoBorder());
 
             VStack vstack =
                 new VStackBuilder().WithBorder(new SimpleBorder(1, '-')).WithForegroundColor(Color.Red).Build();

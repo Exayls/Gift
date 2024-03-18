@@ -4,6 +4,6 @@ namespace Gift.Domain.UIModel.Display
 {
     public interface IScreenDisplayFactory
     {
-        IScreenDisplay Create(Bound boundEmptyVStack, Color frontColor = Color.White, Color backColor = Color.Black, char fillingChar = '*');
+        IScreenDisplay Create(Size boundEmptyVStack, Color frontColor = Color.White, Color backColor = Color.Black, char fillingChar = '*');
     }
 }

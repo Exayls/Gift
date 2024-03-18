@@ -29,7 +29,7 @@ namespace TestGift.UnitTest.Displayer
         public void Should_return_string_based_on_screenDisplay()
         {
             Mock<IScreenDisplay> screenDisplay = new Mock<IScreenDisplay>();
-            screenDisplay.Setup(s => s.TotalBound).Returns(new Bound(2, 2));
+            screenDisplay.Setup(s => s.TotalBound).Returns(new Size(2, 2));
             screenDisplay.Setup(s => s.DisplayMap).Returns(new char[,]
             {
                 { '1', '2' },
