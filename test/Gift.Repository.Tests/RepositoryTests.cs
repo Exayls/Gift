@@ -2,19 +2,38 @@ using Xunit;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.ServiceContracts;
 using Gift.Domain.Builders.UIModel;
+using System.Collections.Generic;
 
 namespace Gift.Repository.Tests
 {
     public class RepositoryTests
     {
+
+#region root
+        private static UIElement GetRoot(IRepository repository)
+        {
+            return repository.GetRoot();
+        }
+
+        private static void SaveRoot(IRepository repository, VStack root)
+        {
+            repository.SaveRoot(root);
+        }
+
         [Fact]
         public void When_saving_root_should_be_able_to_retrieve_it()
         {
             IRepository repository = new InMemoryRepository();
             var root = new VStackBuilder().Build();
-            repository.SaveRoot(root);
-            var result = repository.GetRoot();
+            SaveRoot(repository, root);
+            var result = GetRoot(repository);
             Assert.Equal(root, result);
+        }
+#endregion
+#region containers
+        private static IEnumerable<Container> GetContainers(IRepository repository)
+        {
+            return repository.GetContainers();
         }
 
         [Fact]
@@ -24,10 +43,11 @@ namespace Gift.Repository.Tests
             IRepository repository = new InMemoryRepository();
             var root = new VStackBuilder().IsSelectableContainer(true).Build();
             repository.SaveRoot(root);
-            var containers = repository.GetContainers();
+			SaveRoot(repository, root);
+            var containers = GetContainers(repository);
 
             Assert.Collection<Container>(containers, container =>
-                                                     { Assert.Equal(root, container); });
+            { Assert.Equal(root, container); });
         }
 
         [Fact]
@@ -35,7 +55,7 @@ namespace Gift.Repository.Tests
         Given_root_have_0_container_as_its_root_and_no_other_when_GetContainer_should_return_empty_collection()
         {
             IRepository repository = new InMemoryRepository();
-            var containers = repository.GetContainers();
+            var containers = GetContainers(repository);
 
             Assert.Empty(containers);
         }
@@ -46,7 +66,7 @@ namespace Gift.Repository.Tests
             IRepository repository = new InMemoryRepository();
             var root = new VStackBuilder().Build();
             repository.SaveRoot(root);
-            var containers = repository.GetContainers();
+            var containers = GetContainers(repository);
 
             Assert.Collection<Container>(containers, container =>
                                                      { Assert.Equal(root, container); });
@@ -60,7 +80,7 @@ namespace Gift.Repository.Tests
             var root = new VStackBuilder().WithUnSelectableElement(hstack).Build();
 
             repository.SaveRoot(root);
-            var containers = repository.GetContainers();
+            var containers = GetContainers(repository);
 
             Assert.Collection<Container>(containers,
                                          container =>
@@ -78,7 +98,7 @@ namespace Gift.Repository.Tests
             var root = new VStackBuilder().WithUnSelectableElement(hstack).Build();
 
             repository.SaveRoot(root);
-            var containers = repository.GetContainers();
+            var containers = GetContainers(repository);
 
             Assert.Collection<Container>(containers,
                                          container =>
@@ -88,6 +108,7 @@ namespace Gift.Repository.Tests
                                          container =>
                                          { Assert.Equal(vstack, container); });
         }
+#endregion
 
         [Fact]
         public void Given_root_have_selectable_containers_in_hierarchy_when_GetContainer_should_retrieve_them()
