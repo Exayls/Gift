@@ -58,7 +58,6 @@ namespace Gift.ApplicationService.Services
                                                      selectableContainers.Count];
                 _repository.SelectContainer(container);
             }
-            _uiProvider.Ui.NextContainer();
         }
 
         public void PreviousContainer()
@@ -70,8 +69,8 @@ namespace Gift.ApplicationService.Services
                 var container = selectableContainers[(selectableContainers.IndexOf(selectedContainer) - 1 +
                                                           selectableContainers.Count) %
                                                          selectableContainers.Count];
+                _repository.SelectContainer(container);
             }
-            _uiProvider.Ui.PreviousContainer();
         }
 
         public void NextElementInSelectedContainer()
