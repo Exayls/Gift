@@ -1,10 +1,10 @@
-﻿using Gift.Domain.UIModel;
-using Gift.Domain.UIModel.Display;
+﻿using Gift.Domain.UIModel.Display;
+using Gift.Domain.UIModel.Element;
 
 namespace Gift.Domain.ServiceContracts
 {
     public interface IRenderer
     {
-        IScreenDisplay GetRenderDisplay(GiftUI ui);
+        IScreenDisplay GetRenderDisplay(UIElement ui);
     }
 }

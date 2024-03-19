@@ -36,7 +36,7 @@ namespace Gift.Domain.UIModel.Element
 
         public abstract IScreenDisplay GetDisplayWithoutBorder(IConfiguration configuration, IColorResolver colorResolver);
         public abstract IScreenDisplay GetDisplayBorder(IConfiguration configuratione, IColorResolver colorResolver);
-        public abstract Position GetRelativePosition(Context context);
+        public abstract Position GetRelativePosition(Position position);
         public abstract bool IsFixed();
 
         public virtual bool IsSimilarTo(UIElement element)

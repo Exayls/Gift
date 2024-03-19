@@ -24,7 +24,7 @@ namespace TestGift.Mocks
         {
         }
 
-        public override Position GetRelativePosition(Context context)
+        public override Position GetRelativePosition(Position position)
         {
             throw new System.NotImplementedException();
         }

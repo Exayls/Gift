@@ -57,7 +57,7 @@ namespace Gift.Domain.UIModel.Element
             IsSelectableContainer = isSelectableContainer;
         }
 
-        public abstract Context GetContext(Renderable renderable, Context context);
+        public abstract Position GetContext(Renderable renderable, Position position);
 
         public override IScreenDisplay GetDisplayBorder(IConfiguration configuration, IColorResolver colorResolver)
         {

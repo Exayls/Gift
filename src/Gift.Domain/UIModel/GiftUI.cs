@@ -81,9 +81,9 @@ namespace Gift.Domain.UIModel
             }
         }
 
-        public override Context GetContext(Renderable renderable, Context context)
+        public override Position GetContext(Renderable renderable, Position position)
         {
-            return context;
+            return position;
         }
 
         public override bool IsFixed()
@@ -91,9 +91,9 @@ namespace Gift.Domain.UIModel
             return false;
         }
 
-        public override Position GetRelativePosition(Context context)
+        public override Position GetRelativePosition(Position position)
         {
-            return context.Position;
+            return position;
         }
 
         public void Resize(Size bound)

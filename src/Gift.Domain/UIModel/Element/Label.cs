@@ -48,16 +48,16 @@ namespace Gift.Domain.UIModel.Element
             return Disposition is ExplicitDisposition;
         }
 
-        public override Position GetRelativePosition(Context context)
+        public override Position GetRelativePosition(Position position)
         {
-            int context_y = context.Position.y;
-            int context_x = context.Position.x;
+            int context_y = position.y;
+            int context_x = position.x;
             int relative_y = Disposition.Position.y;
             int relative_x = Disposition.Position.x;
             int position_y = context_y + relative_y;
             int position_x = context_x + relative_x;
-            Position position = new Position(position_y, position_x);
-            return position;
+            Position finalPosition = new Position(position_y, position_x);
+            return finalPosition;
         }
 
         public override bool IsSimilarTo(UIElement uiElement)

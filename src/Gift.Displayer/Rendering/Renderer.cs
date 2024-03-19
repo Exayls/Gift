@@ -1,5 +1,4 @@
 ﻿using Gift.Domain.ServiceContracts;
-using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
@@ -18,41 +17,40 @@ namespace Gift.Displayer.Rendering
             _colorResolver = colorResolver;
         }
 
-        public IScreenDisplay GetRenderDisplay(GiftUI giftUI)
+        public IScreenDisplay GetRenderDisplay(UIElement giftUI)
         {
-            Context context = new Context(new(0, 0), giftUI.Bound);
-            IScreenDisplay border = CreateBorder(giftUI, context);
-            IScreenDisplay screen = CreateDisplay(giftUI, context);
+            Position position = new Position(0, 0);
+            IScreenDisplay border = CreateBorder(giftUI);
+            IScreenDisplay screen = CreateDisplay(giftUI);
             AddDisplayToBorder(border, giftUI, screen);
-            Render(screen, giftUI, context);
+            Render(screen, giftUI, position);
             return screen;
         }
 
-        private void Render(IScreenDisplay screen, Renderable renderable, Context context)
+        private void Render(IScreenDisplay screen, Renderable renderable, Position position)
         {
-            IScreenDisplay border = CreateBorder(renderable, context);
-            IScreenDisplay display = CreateDisplay(renderable, context);
+            IScreenDisplay border = CreateBorder(renderable);
+            IScreenDisplay display = CreateDisplay(renderable);
             AddDisplayToBorder(border, renderable, display);
-            AddDisplayToSreen(screen, renderable, context, border);
+            AddDisplayToScreen(screen, renderable, position, border);
         }
 
-        private void Render(IScreenDisplay screen, Container container, Context context)
+        private void Render(IScreenDisplay screen, Container container, Position context)
         {
-            IScreenDisplay border = CreateBorder(container, context);
-
-            IScreenDisplay display = CreateDisplay(container, context);
+            IScreenDisplay border = CreateBorder(container);
+            IScreenDisplay display = CreateDisplay(container);
             RenderAllChilds(display, container, context);
             AddDisplayToBorder(border, container, display);
 
-            AddDisplayToSreen(screen, container, context, border);
+            AddDisplayToScreen(screen, container, context, border);
         }
 
-        private IScreenDisplay CreateBorder(Renderable element, Context context)
+        private IScreenDisplay CreateBorder(Renderable element)
         {
             return element.GetDisplayBorder(_configuration, _colorResolver);
         }
 
-        private IScreenDisplay CreateDisplay(Renderable container, Context context)
+        private IScreenDisplay CreateDisplay(Renderable container)
         {
             return container.GetDisplayWithoutBorder(_configuration, _colorResolver);
         }
@@ -63,13 +61,13 @@ namespace Gift.Displayer.Rendering
             screen.AddDisplay(display, relativePosition);
         }
 
-        private void AddDisplayToSreen(IScreenDisplay screen, Renderable renderable, Context context, IScreenDisplay display)
+        private void AddDisplayToScreen(IScreenDisplay screen, Renderable renderable, Position position, IScreenDisplay display)
         {
-            Position relativePosition = renderable.GetRelativePosition(context);
+            Position relativePosition = renderable.GetRelativePosition(position);
             screen.AddDisplay(display, relativePosition);
         }
 
-        private void RenderAllChilds(IScreenDisplay screen, Container container, Context context)
+        private void RenderAllChilds(IScreenDisplay screen, Container container, Position context)
         {
             lock (container.Childs)
             {
@@ -80,19 +78,18 @@ namespace Gift.Displayer.Rendering
             }
         }
 
-        private void RenderContainerOrElement(IScreenDisplay screen, Container container, Context context, Renderable renderable)
+        private void RenderContainerOrElement(IScreenDisplay screen, Container container, Position context, Renderable renderable)
         {
-            Context renderableContext = container.GetContext(renderable, context);
+            Position renderableContext = container.GetContext(renderable, context);
             switch (renderable)
             {
-                case Container containerToRender:
-                    Render(screen, containerToRender, renderableContext);
-                    break;
-                default:
-                    Render(screen, renderable, renderableContext);
-                    break;
+            case Container containerToRender:
+                Render(screen, containerToRender, renderableContext);
+                break;
+            default:
+                Render(screen, renderable, renderableContext);
+                break;
             }
         }
-
     }
 }

@@ -53,11 +53,10 @@ namespace Gift.Domain.UIModel.Element
         {
         }
 
-        public override Context GetContext(Renderable renderable, Context context)
+        public override Position GetContext(Renderable renderable, Position position)
         {
             int ChildContextPosition = GetHeightRenderable(renderable);
-            return new Context(new Position(ChildContextPosition - ScrollIndex, 0),
-                               new Size(renderable.Height, renderable.Width));
+            return new Position(ChildContextPosition - ScrollIndex, 0);
         }
 
         private int GetHeightRenderable(Renderable renderableToFind)
@@ -82,9 +81,9 @@ namespace Gift.Domain.UIModel.Element
             return false;
         }
 
-        public override Position GetRelativePosition(Context context)
+        public override Position GetRelativePosition(Position position)
         {
-            return new Position(context.Position.y, context.Position.x);
+            return position;
         }
 
         public IScreenDisplay GetDisplayWithBorder(Size bound, char fillingChar, ColorResolver colorResolver)
