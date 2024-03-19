@@ -44,10 +44,10 @@ namespace Gift.Displayer.Tests.Integration
 
             var expectedBuilder = new StringBuilder();
             string expected;
-            for (int i = 0; i < ui.Bound.Height; i++)
+            for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 Assert.Equal(expected, actual[i]);
             }
@@ -82,10 +82,10 @@ namespace Gift.Displayer.Tests.Integration
             var expectedBuilder = new StringBuilder();
             string expected = "";
             string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
-            for (int i = 0; i < ui.Bound.Height; i++)
+            for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {
@@ -111,10 +111,10 @@ namespace Gift.Displayer.Tests.Integration
             var expectedBuilder = new StringBuilder();
             string expected = "";
             string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
-            for (int i = 0; i < ui.Bound.Height; i++)
+            for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {
@@ -143,10 +143,10 @@ namespace Gift.Displayer.Tests.Integration
             var expectedBuilder = new StringBuilder();
             string expected = "";
             string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
-            for (int i = 0; i < ui.Bound.Height; i++)
+            for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {
@@ -181,10 +181,10 @@ namespace Gift.Displayer.Tests.Integration
             var expectedBuilder = new StringBuilder();
             string expected = "";
             string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
-            for (int i = 0; i < ui.Bound.Height; i++)
+            for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {
@@ -223,10 +223,10 @@ namespace Gift.Displayer.Tests.Integration
             var expectedBuilder = new StringBuilder();
             string expected = "";
             string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
-            for (int i = 0; i < ui.Bound.Height; i++)
+            for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {
@@ -268,10 +268,10 @@ namespace Gift.Displayer.Tests.Integration
             var expectedBuilder = new StringBuilder();
             string expected = "";
             string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
-            for (int i = 0; i < ui.Bound.Height; i++)
+            for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {
@@ -319,10 +319,10 @@ namespace Gift.Displayer.Tests.Integration
             var expectedBuilder = new StringBuilder();
             string expected = "";
             string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
-            for (int i = 0; i < ui.Bound.Height; i++)
+            for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {

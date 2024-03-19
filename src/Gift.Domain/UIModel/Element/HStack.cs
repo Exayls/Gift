@@ -13,9 +13,9 @@ namespace Gift.Domain.UIModel.Element
         {
             get
             {
-                if (Bound.Height != 0)
+                if (Size.Height != 0)
                 {
-                    return Bound.Height;
+                    return Size.Height;
                 }
                 int maxHeightChild = 0;
                 foreach (UIElement renderable in Childs)
@@ -33,9 +33,9 @@ namespace Gift.Domain.UIModel.Element
         {
             get
             {
-                if (Bound.Width != 0)
+                if (Size.Width != 0)
                 {
-                    return Bound.Width;
+                    return Size.Width;
                 }
                 int WidthAllChilds = 0;
                 foreach (UIElement renderable in Childs)

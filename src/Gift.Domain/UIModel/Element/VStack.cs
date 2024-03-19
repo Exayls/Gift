@@ -12,9 +12,9 @@ namespace Gift.Domain.UIModel.Element
         public override int Height
         {
             get {
-                if (Bound.Height != 0)
+                if (Size.Height != 0)
                 {
-                    return Bound.Height;
+                    return Size.Height;
                 }
                 int HeightAllChilds = 0;
                 foreach (UIElement renderable in Childs)
@@ -30,9 +30,9 @@ namespace Gift.Domain.UIModel.Element
         public override int Width
         {
             get {
-                if (Bound.Width != 0)
+                if (Size.Width != 0)
                 {
-                    return Bound.Width;
+                    return Size.Width;
                 }
                 int maxWidthChild = 0;
                 foreach (UIElement renderable in Childs)

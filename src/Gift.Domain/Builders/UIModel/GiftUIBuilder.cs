@@ -100,7 +100,7 @@ namespace Gift.Domain.Builders.UIModel
         public GiftUI Build()
         {
             var bound = new Size(_height ?? _bound.Height, _width ?? _bound.Width);
-            var giftui = new GiftUI(bound: bound, border: _border, frontColor: _frontColor, backColor: _backColor,
+            var giftui = new GiftUI(size: bound, border: _border, frontColor: _frontColor, backColor: _backColor,
                                     isSelectableContainer: _isSelectableContainer);
 
             foreach (UIElement element in unSelectableElements)

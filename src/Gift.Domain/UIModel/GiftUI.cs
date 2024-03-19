@@ -17,14 +17,14 @@ namespace Gift.Domain.UIModel
         {
             get
             {
-                return Bound.Height;
+                return Size.Height;
             }
         }
         public override int Width
         {
             get
             {
-                return Bound.Width;
+                return Size.Width;
             }
         }
 
@@ -53,8 +53,8 @@ namespace Gift.Domain.UIModel
             }
         }
 
-        public GiftUI(Size bound, IBorder border, Color frontColor, Color backColor, bool isSelectableContainer)
-            : base(new ScreenDisplayFactory(), bound, border, frontColor, backColor, isSelectableContainer)
+        public GiftUI(Size size, IBorder border, Color frontColor, Color backColor, bool isSelectableContainer)
+            : base(new ScreenDisplayFactory(), size, border, frontColor, backColor, isSelectableContainer)
         {
             SelectableContainers = new List<Container>();
         }
@@ -98,7 +98,7 @@ namespace Gift.Domain.UIModel
 
         public void Resize(Size bound)
         {
-            this.Bound = bound;
+            this.Size = bound;
         }
 
         public void NextElementInSelectedContainer()
@@ -155,7 +155,7 @@ namespace Gift.Domain.UIModel
         public override IScreenDisplay GetDisplayWithoutBorder(IConfiguration configuration, IColorResolver colorResolver)
         {
             return _screenDisplayFactory.Create(
-                Bound, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor,
+                Size, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor,
                 BackColor == Color.Default ? configuration.DefaultBackColor : BackColor, '*');
         }
 

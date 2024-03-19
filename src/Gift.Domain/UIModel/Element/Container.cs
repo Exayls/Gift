@@ -11,7 +11,7 @@ namespace Gift.Domain.UIModel.Element
 {
     public abstract class Container : UIElement
     {
-        public Size Bound { get; protected set; }
+        public Size Size { get; protected set; }
         public int ScrollIndex { get; protected set; }
         public IList<UIElement> Childs { get; protected set; }
         public IList<UIElement> SelectableElements { get; protected set; }
@@ -50,7 +50,7 @@ namespace Gift.Domain.UIModel.Element
                          Color backColor, bool isSelectableContainer)
             : base(border, frontColor: frontColor, backColor: backColor)
         {
-            Bound = bound;
+            Size = bound;
             Childs = new List<UIElement>();
             _screenDisplayFactory = screenDisplayFactory;
             SelectableElements = new List<UIElement>();
@@ -124,7 +124,7 @@ namespace Gift.Domain.UIModel.Element
             if (!(uiElement is Container))
                 return false;
             Container element = (Container)uiElement;
-            if (!Bound.Equals(element.Bound))
+            if (!Size.Equals(element.Size))
                 return false;
 
             if (Childs.Count != element.Childs.Count)

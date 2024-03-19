@@ -23,7 +23,7 @@ namespace Gift.Displayer.Rendering
             IScreenDisplay border = CreateBorder(giftUI);
             IScreenDisplay screen = CreateDisplay(giftUI);
             AddDisplayToBorder(border, giftUI, screen);
-            Render(screen, giftUI, position);
+            RenderContainerOrElement(screen, position, giftUI);
             return screen;
         }
 
@@ -88,6 +88,18 @@ namespace Gift.Displayer.Rendering
                 break;
             default:
                 Render(screen, renderable, renderableContext);
+                break;
+            }
+        }
+        private void RenderContainerOrElement(IScreenDisplay screen, Position context, Renderable renderable)
+        {
+            switch (renderable)
+            {
+            case Container containerToRender:
+                Render(screen, containerToRender, new(0,0));
+                break;
+            default:
+                Render(screen, renderable, new(0,0));
                 break;
             }
         }

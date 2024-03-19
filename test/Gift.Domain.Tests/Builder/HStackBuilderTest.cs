@@ -31,7 +31,7 @@ namespace TestGift.Builder
             HStack h = builder.Build();
 
             Assert.True(border.IsSimilarTo(h.Border));
-            Assert.True(bound.Equals(h.Bound));
+            Assert.True(bound.Equals(h.Size));
             Assert.Equal(Color.Blue, h.FrontColor);
         }
     }
