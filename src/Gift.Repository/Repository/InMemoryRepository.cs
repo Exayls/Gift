@@ -48,32 +48,36 @@ namespace Gift.Repository
 
         public IEnumerable<Container> GetSelectableContainers()
         {
-			return GetContainers().Where(container => container.IsSelectableContainer);
+            return GetContainers().Where(container => container.IsSelectableContainer);
         }
 
         public Container? GetSelectedContainer()
         {
-			if(_selectedContainer != null){
-				return _selectedContainer;
-			}
+            if (_selectedContainer != null)
+            {
+                return _selectedContainer;
+            }
             IEnumerable<Container> selectableContainers = GetSelectableContainers();
-            if (selectableContainers.Any()){
-				return selectableContainers.First();
-			}
-			return null;
+            if (selectableContainers.Any())
+            {
+                return selectableContainers.First();
+            }
+            return null;
         }
 
         public void SelectContainer(Container container)
         {
-			if(!container.IsSelectableContainer){
-				throw new UnSelectableContainerException($"container {container} is not selectable");
-			}
-			var a = GetSelectableContainers();
-			var b = a.Contains(container);
-			if(! GetSelectableContainers().Contains(container)){
-				throw new ElementNotInHierarchyException($"container {container} is not part of root");
-			}
-			_selectedContainer = container;
+            if (!container.IsSelectableContainer)
+            {
+                throw new UnSelectableContainerException($"container {container} is not selectable");
+            }
+            var a = GetSelectableContainers();
+            var b = a.Contains(container);
+            if (!GetSelectableContainers().Contains(container))
+            {
+                throw new ElementNotInHierarchyException($"container {container} is not part of root");
+            }
+            _selectedContainer = container;
         }
     }
 }
