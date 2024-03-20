@@ -214,7 +214,7 @@ namespace Gift.Displayer.Tests.Integration
             var label3 = new LabelBuilder().WithText("label numero 3.").Build();
             ui.Add(vstack);
             vstack.Add(label1);
-            vstack.Add(label2);
+            ui.Add(label2);
             vstack.Add(label3);
             IRepository repository = new InMemoryRepository();
 			repository.SaveRoot(ui);

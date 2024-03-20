@@ -205,12 +205,12 @@ namespace Gift.Domain.Tests.UI
             // arrange
             UIElement uielement = CreateUIElement();
             HStack = CreateHstack(border: new SimpleBorder(0, 'a'));
-            Context contextRenderable = new Context(new Position(0, 0), new Size(0, 0));
+            Position contextRenderable = new Position(0, 0);
             // act
-            Context context = HStack.GetContext(uielement, contextRenderable);
+            Position context = HStack.GetContext(uielement, contextRenderable);
             // assert
-            Assert.Equal(0, context.Position.y);
-            Assert.Equal(0, context.Position.x);
+            Assert.Equal(0, context.y);
+            Assert.Equal(0, context.x);
         }
 
         [Fact]
@@ -223,12 +223,12 @@ namespace Gift.Domain.Tests.UI
             HStack = CreateHstack(border: new SimpleBorder(2, 'a'));
             HStack.Add(uielement1);
             HStack.Add(uielement2);
-            Context contextRenderable = new Context(new Position(0, 0), new Size(5, 5));
+            Position contextRenderable = new Position(0, 0);
             // act
-            Context context = HStack.GetContext(uielement2, contextRenderable);
+            Position context = HStack.GetContext(uielement2, contextRenderable);
             // assert
-            Assert.Equal(0, context.Position.y);
-            Assert.Equal(1, context.Position.x);
+            Assert.Equal(0, context.y);
+            Assert.Equal(1, context.x);
         }
 
         [Fact]
@@ -241,29 +241,12 @@ namespace Gift.Domain.Tests.UI
             HStack = CreateHstack(border: new SimpleBorder(2, 'a'));
             HStack.Add(uielement1);
             HStack.Add(uielement2);
-            Context contextRenderable = new Context(new Position(0, 0), new Size(5, 5));
+            Position contextRenderable = new Position(0, 0);
             // act
-            Context context = HStack.GetContext(uielement2, contextRenderable);
+            Position context = HStack.GetContext(uielement2, contextRenderable);
             // assert
-            Assert.Equal(0, context.Position.y);
-            Assert.Equal(2, context.Position.x);
-        }
-
-        [Fact]
-        public void GetContext_should_return_context_with_1_1_bound_when_HStack_has_child_with_height_of_1_and_width_1()
-        {
-            // arrange
-            UIElement uielement1 = CreateUIElement(width: 1, height: 1);
-            UIElement uielement2 = CreateUIElement();
-            HStack = CreateHstack(border: new SimpleBorder(2, 'a'));
-            HStack.Add(uielement1);
-            HStack.Add(uielement2);
-            Context contextRenderable = new Context(new Position(0, 0), new Size(5, 5));
-            // act
-            Context context = HStack.GetContext(uielement2, contextRenderable);
-            // assert
-            Assert.Equal(1, context.Bounds.Width);
-            Assert.Equal(1, context.Bounds.Height);
+            Assert.Equal(0, context.y);
+            Assert.Equal(2, context.x);
         }
 
         // Height/Width Tests
@@ -474,7 +457,7 @@ namespace Gift.Domain.Tests.UI
             // arrange
             _borderMock.Setup(b => b.Thickness).Returns(0);
             HStack.Border = _borderMock.Object;
-            Context contextRenderable = new Context(new Position(0, 0), new Size(0, 0));
+            Position contextRenderable = new Position(0, 0);
             // act
             Position position = HStack.GetRelativePosition(contextRenderable);
             // assert
@@ -487,7 +470,7 @@ namespace Gift.Domain.Tests.UI
             // arrange
             _borderMock.Setup(b => b.Thickness).Returns(0);
             HStack.Border = _borderMock.Object;
-            Context contextRenderable = new Context(new Position(2, 1), new Size(0, 0));
+            Position contextRenderable = new Position(2, 1);
             // act
             Position position = HStack.GetRelativePosition(contextRenderable);
             // assert
@@ -500,7 +483,7 @@ namespace Gift.Domain.Tests.UI
             // arrange
             _borderMock.Setup(b => b.Thickness).Returns(0);
             HStack.Border = _borderMock.Object;
-            Context contextRenderable = new Context(new Position(3, 2), new Size(0, 0));
+            Position contextRenderable = new Position(3, 2);
             // act
             Position position = HStack.GetRelativePosition(contextRenderable);
             // assert
@@ -513,7 +496,7 @@ namespace Gift.Domain.Tests.UI
             // arrange
             _borderMock.Setup(b => b.Thickness).Returns(1);
             HStack.Border = _borderMock.Object;
-            Context contextRenderable = new Context(new Position(1, 1), new Size(0, 0));
+            Position contextRenderable = new Position(1, 1);
             // act
             Position position = HStack.GetRelativePosition(contextRenderable);
             // assert
@@ -526,7 +509,7 @@ namespace Gift.Domain.Tests.UI
             // arrange
             _borderMock.Setup(b => b.Thickness).Returns(1);
             HStack.Border = _borderMock.Object;
-            Context contextRenderable = new Context(new Position(2, 1), new Size(0, 0));
+            Position contextRenderable = new Position(2, 1);
             // act
             Position position = HStack.GetRelativePosition(contextRenderable);
             // assert
@@ -539,7 +522,7 @@ namespace Gift.Domain.Tests.UI
             // arrange
             _borderMock.Setup(b => b.Thickness).Returns(2);
             HStack.Border = _borderMock.Object;
-            Context contextRenderable = new Context(new Position(2, 1), new Size(0, 0));
+            Position contextRenderable = new Position(2, 1);
             // act
             Position position = HStack.GetRelativePosition(contextRenderable);
             // assert
