@@ -86,7 +86,7 @@ namespace Gift.Domain.UIModel.Element
             return position;
         }
 
-        public IScreenDisplay GetDisplayWithBorder(Size bound, char fillingChar, ColorResolver colorResolver)
+        public IScreenDisplay GetDisplayWithBorder(char fillingChar, ColorResolver colorResolver)
         {
             int thickness = Border.Thickness;
             IScreenDisplay screenDisplay = GetDisplayBorder(new DefaultConfiguration(), colorResolver);
