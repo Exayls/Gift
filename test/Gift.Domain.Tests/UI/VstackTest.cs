@@ -63,7 +63,7 @@ namespace Gift.Domain.Tests.UI
 
         private IScreenDisplay GetScreenDisplay(VStack vstack, char charFill = '*')
         {
-            return vstack.GetDisplayWithBorder(new(vstack.Height, vstack.Width), charFill, new ColorResolver(_repository));
+            return vstack.GetDisplayWithBorder(charFill, new ColorResolver(_repository));
         }
 
         // GetDisplay tests

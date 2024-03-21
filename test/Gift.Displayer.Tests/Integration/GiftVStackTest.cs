@@ -218,6 +218,7 @@ namespace Gift.Displayer.Tests.Integration
             vstack.Add(label3);
             IRepository repository = new InMemoryRepository();
 			repository.SaveRoot(ui);
+
             IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();

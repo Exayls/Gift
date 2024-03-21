@@ -53,12 +53,14 @@ namespace TestGift.Test.UI
             VStack vstack = new VStackBuilder()
                                 .WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile(
                                                                       "ressources/borderchars/double_border.json")))
+								.WithBound(new(-1,-1))
                                 .Build();
             vstack.Add(new LabelBuilder().Build());
             ui.Add(vstack);
             VStack vstack2 = new VStackBuilder()
                                  .WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile(
                                                                        "ressources/borderchars/simple_border.json")))
+								.WithBound(new(-1,-1))
                                  .Build();
             vstack.Add(vstack2);
             vstack2.Add(new LabelBuilder().WithText("hey").Build());
@@ -87,6 +89,7 @@ namespace TestGift.Test.UI
             VStack vstack = new VStackBuilder()
                                 .WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile(
                                                                       "ressources/borderchars/double_border.json")))
+								.WithBound(new(-1,-1))
                                 .Build();
             vstack.Add(new LabelBuilder().Build());
             ui.Add(vstack);
