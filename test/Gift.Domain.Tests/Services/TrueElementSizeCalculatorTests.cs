@@ -1,5 +1,6 @@
 ﻿using Gift.Domain.Builders.UIModel;
 using Gift.Domain.Services;
+using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.MetaData;
 using Xunit;
 
@@ -14,6 +15,34 @@ namespace Gift.Domain.Tests.Services
 			var sizeCalculator = new TrueElementSizeCalculator();
             var size = sizeCalculator.GetTrueSize(element);
 			Assert.True(size.Equals(new Size(1,5)));
+        }
+
+        [Fact]
+        public void When_compute_size_of_vstack_bound_0_0_that_take_4_7_size_should_return_4_7()
+        {
+            var element = new VStackBuilder()
+				.WithBound(new(0,0))
+				.WithUnSelectableElement(new LabelBuilder().WithText("hello").Build())
+				.WithUnSelectableElement(new LabelBuilder().WithText("he").Build())
+				.WithBorder(new SimpleBorder(1, 'a'))
+				.Build();
+			var sizeCalculator = new TrueElementSizeCalculator();
+            var size = sizeCalculator.GetTrueSize(element);
+			Assert.True(size.Equals(new Size(4,7)));
+        }
+
+        [Fact]
+        public void When_compute_size_of_vstack_bound_2_3_should_return_2_3()
+        {
+            var element = new VStackBuilder()
+				.WithBound(new(2,3))
+				.WithUnSelectableElement(new LabelBuilder().WithText("hello").Build())
+				.WithUnSelectableElement(new LabelBuilder().WithText("he").Build())
+				.WithBorder(new SimpleBorder(1, 'a'))
+				.Build();
+			var sizeCalculator = new TrueElementSizeCalculator();
+            var size = sizeCalculator.GetTrueSize(element);
+			Assert.True(size.Equals(new Size(2,3)));
         }
 
     }

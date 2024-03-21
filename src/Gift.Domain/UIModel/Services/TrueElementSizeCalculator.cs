@@ -8,7 +8,7 @@ namespace Gift.Domain.Services
     {
         public Size GetTrueSize(Container element)
         {
-            return new Size(0, 0);
+			return new Size(element.Height, element.Width);
 
         }
         public Size GetTrueSize(UIElement element)
