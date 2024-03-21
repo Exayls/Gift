@@ -47,8 +47,8 @@ namespace Gift.Domain.UIModel.Element
             }
         }
 
-        public VStack(IBorder border, IScreenDisplayFactory screenDisplayFactory, Size bound, bool isSelectableContainer,
-                      Color frontColor = Color.Default, Color backColor = Color.Default)
+
+        public VStack(IBorder border, IScreenDisplayFactory screenDisplayFactory, Size bound, bool isSelectableContainer, Color frontColor = Color.Default, Color backColor = Color.Default)
             : base(screenDisplayFactory, bound, border, frontColor: frontColor, backColor: backColor, isSelectableContainer: isSelectableContainer)
         {
         }
@@ -100,13 +100,12 @@ namespace Gift.Domain.UIModel.Element
         {
             int thickness = Border.Thickness;
 
-            Size boundEmptyVStack = new Size(Height - 2 * thickness,Width - 2 * thickness);
+            Size boundEmptyVStack = new Size(Height - 2 * thickness, Width - 2 * thickness);
             IScreenDisplay emptyVstackScreen = _screenDisplayFactory.Create(
                 boundEmptyVStack, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor,
                 BackColor == Color.Default ? configuration.DefaultBackColor : BackColor, configuration.FillingChar);
             return emptyVstackScreen;
         }
-
 
         public override bool IsSimilarTo(UIElement uiElement)
         {
