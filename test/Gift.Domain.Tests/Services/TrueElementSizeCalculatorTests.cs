@@ -45,5 +45,21 @@ namespace Gift.Domain.Tests.Services
 			Assert.True(size.Equals(new Size(2,3)));
         }
 
+        [Fact]
+        public void When_compute_size_of_vstack_bound_negative_should_return_parent_size()
+        {
+            var element = new VStackBuilder()
+				.WithBound(new(-1,-1))
+				.Build();
+            var parent = new VStackBuilder()
+				.WithBound(new(4,5))
+				.WithUnSelectableElement(element)
+				.WithBorder(new SimpleBorder(1, 'a'))
+				.Build();
+
+			var sizeCalculator = new TrueElementSizeCalculator();
+            var size = sizeCalculator.GetTrueSize(element);
+			Assert.True(size.Equals(new Size(2,3)));
+		}
     }
 }
