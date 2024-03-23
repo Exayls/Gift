@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Gift.Domain.Builders.UIModel;
@@ -78,6 +79,33 @@ namespace Gift.Repository
                 throw new ElementNotInHierarchyException($"container {container} is not part of root");
             }
             _selectedContainer = container;
+        }
+
+        public Container? GetParent(Container element)
+        {
+            Func<UIElement, bool> selectParent = (currentElement) =>
+            {
+                if (currentElement is Container container)
+                {
+                    if (container.Childs.Contains(element))
+                        return true;
+                }
+                return false;
+            };
+
+            return (Container?)SelectFirst(_root, selectParent);
+        }
+
+        private UIElement? SelectFirst(UIElement element, Func<UIElement, bool> func)
+        {
+            if(func(element)){
+				return element;
+			}
+			if(element is Container container)
+			foreach(var child in container.Childs){
+				return SelectFirst(child, func);
+			}
+			return null;
         }
     }
 }

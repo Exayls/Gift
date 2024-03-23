@@ -9,7 +9,7 @@ namespace Gift.Repository.Tests
     public class RepositoryTests
     {
 
-#region root
+#region root tests
         private static UIElement GetRoot(IRepository repository)
         {
             return repository.GetRoot();
@@ -30,7 +30,8 @@ namespace Gift.Repository.Tests
             Assert.Equal(root, result);
         }
 #endregion
-#region containers
+
+#region containers tests
         private static IEnumerable<Container> GetContainers(IRepository repository)
         {
             return repository.GetContainers();
@@ -110,6 +111,7 @@ namespace Gift.Repository.Tests
         }
 #endregion
 
+#region selectable container tests
         [Fact]
         public void Given_root_have_selectable_containers_in_hierarchy_when_GetContainer_should_retrieve_them()
         {
@@ -187,5 +189,39 @@ namespace Gift.Repository.Tests
 
             Assert.Throws<ElementNotInHierarchyException>(() => repository.SelectContainer(container));
         }
+#endregion
+
+#region getParent tests
+
+        [Fact]
+        public void Given_element_is_root_GetParent_should_return_null()
+        {
+			//Arrange
+            IRepository repository = new InMemoryRepository();
+            var root = new VStackBuilder().Build();
+            SaveRoot(repository, root);
+			//Act
+            var container = repository.GetParent(root);
+			//Assert
+			Assert.Null(container);
+        }
+
+        [Fact]
+        public void Given_element_is_root_GetParent_should_return_parent()
+        {
+			//Arrange
+            IRepository repository = new InMemoryRepository();
+
+            VStack vstack = new VStackBuilder().IsSelectableContainer(true).Build();
+            HStack hstack = new HStackBuilder().WithUnSelectableElement(vstack).Build();
+            var root = new VStackBuilder().WithUnSelectableElement(hstack).IsSelectableContainer(true).Build();
+
+            SaveRoot(repository, root);
+			//Act
+            var container = repository.GetParent(vstack);
+			//Assert
+			Assert.Equal(hstack, container);
+        }
+#endregion
     }
 }
