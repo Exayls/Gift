@@ -13,5 +13,6 @@ namespace Gift.Domain.ServiceContracts
 
         void SelectContainer(Container container);
         Container? GetSelectedContainer();
+        Container? GetParent(Container element);
     }
 }
