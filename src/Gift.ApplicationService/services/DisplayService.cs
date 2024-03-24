@@ -34,8 +34,7 @@ namespace Gift.ApplicationService.Services
 
         public IScreenDisplay CreateView()
         {
-            GiftUI ui = (GiftUI)_repository.GetRoot();
-            // GiftUI ui = _uiProvider.Ui;
+            UIElement ui = _repository.GetRoot();
             IScreenDisplay View = _renderer.GetRenderDisplay(ui);
             return View;
         }

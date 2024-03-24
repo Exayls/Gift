@@ -7,6 +7,7 @@ using Gift.ApplicationService.Services.SignalHandler.Ui;
 using Gift.ApplicationService.Services.SignalHandler.Key;
 using Gift.Domain.ServiceContracts;
 using Gift.ApplicationService.Services.SignalHandler;
+using Gift.Domain.UIModel.Element;
 
 namespace Gift.ApplicationService.Services
 {
@@ -61,17 +62,15 @@ namespace Gift.ApplicationService.Services
         }
 
 
-        public virtual void Initialize(GiftUI ui)
+        public virtual void Initialize(UIElement ui)
         {
 			_repository.SaveRoot(ui);
-            _uiProvider.Ui = ui;
             update();
         }
 
         public virtual void Initialize(string xmlPath)
         {
 			_repository.SaveRoot(_xmlParser.ParseUIFile(xmlPath));
-            _uiProvider.Ui = (GiftUI)_xmlParser.ParseUIFile(xmlPath);
             update();
         }
 

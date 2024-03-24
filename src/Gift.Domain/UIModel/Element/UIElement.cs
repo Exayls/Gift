@@ -1,5 +1,4 @@
-﻿using System;
-using Gift.Domain.ServiceContracts;
+﻿using Gift.Domain.ServiceContracts;
 using Gift.Domain.Services;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Conf;

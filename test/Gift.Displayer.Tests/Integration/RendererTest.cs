@@ -92,6 +92,33 @@ namespace TestGift.Test.UI
         }
 
         [Fact]
+        public void Can_render_UI_with_root_border()
+        {
+
+            VStack vstack = new VStackBuilder()
+                                .WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile(
+                                                                      "ressources/borderchars/double_border.json")))
+                                .WithBound(new(4, 4))
+                                .Build();
+            vstack.Add(new LabelBuilder().WithText("b").Build());
+            VStack vstack2 = new VStackBuilder()
+                                 .WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile(
+                                                                       "ressources/borderchars/simple_border.json")))
+                                 .Build();
+            InMemoryRepository repository = new InMemoryRepository();
+            var renderer = GetRenderer(repository);
+            repository.SaveRoot(vstack);
+            IScreenDisplay rendered = renderer.GetRenderDisplay(vstack);
+            // clang-format off
+            const string expected = "╔══╗\n" +
+                                    "║b*║\n" +
+                                    "║**║\n" +
+                                    "╚══╝";
+            // clang-format on
+            Assert.Equal(expected, rendered.DisplayString.ToString());
+        }
+
+        [Fact]
         public void Can_render_UI_with_elements_out_of_bound()
         {
             GiftUI ui = CreateGiftUi(new Size(10, 10), new NoBorder());

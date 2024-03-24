@@ -4,7 +4,6 @@ using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.MetaData;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -65,7 +64,8 @@ namespace Gift.Domain.UIModel.Element
 			var screenDisplayBuilder = new ScreenDisplayBuilder();
 			Color frontColor = colorResolver.GetFrontColor(this, configuration);
 			Color backColor = colorResolver.GetBackColor(this, configuration);
-			screenDisplayBuilder.WithFrontColor(frontColor).WithBackColor(backColor).WithBound(sizeCalculator.GetTrueSize(this));
+            Size trueSize = sizeCalculator.GetTrueSize(this);
+            screenDisplayBuilder.WithFrontColor(frontColor).WithBackColor(backColor).WithBound(trueSize);
             IScreenDisplay screenDisplay = Border.GetDisplay(screenDisplayBuilder);
             return screenDisplay;
         }

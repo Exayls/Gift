@@ -19,13 +19,13 @@ namespace Gift.Displayer.Rendering
             _sizeCalculator = sizeCalculator;
         }
 
-        public IScreenDisplay GetRenderDisplay(UIElement giftUI)
+        public IScreenDisplay GetRenderDisplay(UIElement element)
         {
             Position position = new Position(0, 0);
-            IScreenDisplay border = CreateBorder(giftUI);
-            IScreenDisplay screen = CreateDisplay(giftUI);
-            AddDisplayToBorder(border, giftUI, screen);
-            RenderContainerOrElement(screen, position, giftUI);
+            IScreenDisplay screen = CreateBorder(element);
+            IScreenDisplay display = CreateDisplay(element);
+            AddDisplayToBorder(screen, element, display);
+            RenderContainerOrElement(screen, position, element);
             return screen;
         }
 
