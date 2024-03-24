@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Gift.Domain.UIModel;
 using Gift.ApplicationService.Services.SignalHandler.Global;
 using Gift.ApplicationService.Services.SignalHandler.Bus;
 using Gift.ApplicationService.ServiceContracts;
@@ -14,7 +13,6 @@ namespace Gift.ApplicationService.Services
     public class GiftLauncherService : IGiftService
     {
         private readonly ISignalBus _signalBus;
-        private readonly IGiftUiProvider _uiProvider;
         private readonly IRepository _repository;
         private readonly IDisplayService _displayService;
         private readonly IMonitorService _monitorService;
@@ -30,7 +28,6 @@ namespace Gift.ApplicationService.Services
                         IKeyInteractionMonitor keyInputMonitor,
                         IConsoleSizeMonitor consoleSizeMonitor,
                         IKeySignalHandler keySignalHandler,
-                        IGiftUiProvider uiProvider,
                         IUISignalHandler uISignalHandler,
                         IGlobalSignalHandler globalSignalHandler,
                         IDisplayService displayService,
@@ -39,7 +36,6 @@ namespace Gift.ApplicationService.Services
                         ILifeTimeService lifeTimeService,
                         IRepository repository)
         {
-            _uiProvider = uiProvider;
             _repository = repository;
             _displayService = displayService;
 

@@ -2,7 +2,6 @@
 using System.Linq;
 using Gift.ApplicationService.ServiceContracts;
 using Gift.Domain.ServiceContracts;
-using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
@@ -12,16 +11,14 @@ namespace Gift.ApplicationService.Services
     public class DisplayService : IDisplayService
     {
         private IDisplayer _displayer;
-        private IGiftUiProvider _uiProvider;
         private IRepository _repository;
         private IRenderer _renderer;
 
-        public DisplayService(IDisplayer displayer, IRenderer renderer, IGiftUiProvider uiProvider,
+        public DisplayService(IDisplayer displayer, IRenderer renderer,
                               IRepository repository)
         {
 
             _displayer = displayer;
-            _uiProvider = uiProvider;
             _repository = repository;
             _renderer = renderer;
         }

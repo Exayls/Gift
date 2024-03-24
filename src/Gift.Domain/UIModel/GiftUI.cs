@@ -96,10 +96,6 @@ namespace Gift.Domain.UIModel
             return position;
         }
 
-        public void Resize(Size bound)
-        {
-            this.Size = bound;
-        }
 
         public void NextElementInSelectedContainer()
         {
