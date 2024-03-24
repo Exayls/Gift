@@ -18,12 +18,10 @@ namespace TestGift.Test.UI
 {
     public class RendererTest
     {
-        private Renderer renderer;
         private readonly ITestOutputHelper _output;
 
         public RendererTest(ITestOutputHelper output)
         {
-            renderer = GetRenderer(new InMemoryRepository());
             _output = output;
         }
 
@@ -35,8 +33,11 @@ namespace TestGift.Test.UI
         [Fact]
         public void Can_render_Simple_UI()
         {
+            InMemoryRepository repository = new InMemoryRepository();
+            var renderer = GetRenderer(repository);
             GiftUI ui = CreateGiftUi(new Size(5, 10), new NoBorder());
             IScreenDisplay rendered = renderer.GetRenderDisplay(ui);
+            repository.SaveRoot(ui);
             // clang-format off
             const string expected = "**********\n" +
                                     "**********\n" +
@@ -60,18 +61,20 @@ namespace TestGift.Test.UI
             VStack vstack = new VStackBuilder()
                                 .WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile(
                                                                       "ressources/borderchars/double_border.json")))
-								.WithBound(new(-1,-1))
+                                .WithBound(new(-1, -1))
                                 .Build();
             vstack.Add(new LabelBuilder().Build());
             ui.Add(vstack);
             VStack vstack2 = new VStackBuilder()
                                  .WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile(
                                                                        "ressources/borderchars/simple_border.json")))
-								.WithBound(new(-1,-1))
                                  .Build();
             vstack.Add(vstack2);
             vstack2.Add(new LabelBuilder().WithText("hey").Build());
             vstack2.Add(new LabelBuilder().Build());
+            InMemoryRepository repository = new InMemoryRepository();
+            var renderer = GetRenderer(repository);
+            repository.SaveRoot(ui);
             IScreenDisplay rendered = renderer.GetRenderDisplay(ui);
             // clang-format off
             const string expected = "╔════════╗\n" +
@@ -96,7 +99,7 @@ namespace TestGift.Test.UI
             VStack vstack = new VStackBuilder()
                                 .WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile(
                                                                       "ressources/borderchars/double_border.json")))
-								.WithBound(new(-1,-1))
+                                .WithBound(new(-1, -1))
                                 .Build();
             vstack.Add(new LabelBuilder().Build());
             ui.Add(vstack);
@@ -109,6 +112,9 @@ namespace TestGift.Test.UI
             vstack2.Add(
                 new LabelBuilder().WithText("test6").WithPosition(new Position(-2, 3)).Build());
             vstack2.Add(new LabelBuilder().Build());
+            InMemoryRepository repository = new InMemoryRepository();
+            var renderer = GetRenderer(repository);
+            repository.SaveRoot(ui);
             IScreenDisplay rendered = renderer.GetRenderDisplay(ui);
 
             // clang-format off
@@ -132,10 +138,17 @@ namespace TestGift.Test.UI
             GiftUI ui = CreateGiftUi(new Size(4, 10), new NoBorder());
 
             VStack vstack =
-                new VStackBuilder().WithBorder(new SimpleBorder(1, '-')).WithForegroundColor(Color.Red).Build();
+                new VStackBuilder()
+                    .WithBorder(new SimpleBorder(1, '-'))
+                    .WithForegroundColor(Color.Red)
+                    .WithBound(new(-1, -1))
+                    .Build();
             vstack.Add(new LabelBuilder().Build());
             ui.Add(vstack);
 
+            InMemoryRepository repository = new InMemoryRepository();
+            var renderer = GetRenderer(repository);
+            repository.SaveRoot(ui);
             IScreenDisplay rendered = renderer.GetRenderDisplay(ui);
             // clang-format off
             Color[,] expected =

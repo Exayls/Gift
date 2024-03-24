@@ -38,7 +38,7 @@ namespace Gift.Domain.Services
 
         private Size GetClosestParentSize(Container element)
         {
-            var parent = _repository.GetParent(element);
+            Container? parent = _repository.GetParent(element);
             if (parent is null)
             {
                 return new Size(Console.WindowHeight, Console.WindowWidth);

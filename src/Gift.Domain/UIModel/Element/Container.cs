@@ -64,7 +64,7 @@ namespace Gift.Domain.UIModel.Element
 			var screenDisplayBuilder = new ScreenDisplayBuilder();
 			Color frontColor = colorResolver.GetFrontColor(this, configuration);
 			Color backColor = colorResolver.GetBackColor(this, configuration);
-			screenDisplayBuilder.WithFrontColor(frontColor).WithBackColor(backColor).WithBound(new(Height, Width));
+			screenDisplayBuilder.WithFrontColor(frontColor).WithBackColor(backColor).WithBound(sizeCalculator.GetTrueSize(this));
             IScreenDisplay screenDisplay = Border.GetDisplay(screenDisplayBuilder);
             return screenDisplay;
         }
