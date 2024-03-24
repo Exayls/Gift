@@ -1,4 +1,5 @@
-﻿using Gift.Domain.UIModel.Border;
+﻿using Gift.Domain.ServiceContracts;
+using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
@@ -14,14 +15,16 @@ namespace Gift.Domain.UIModel
 
         public override int Height
         {
-            get {
-                return Bound.Height;
+            get
+            {
+                return Size.Height;
             }
         }
         public override int Width
         {
-            get {
-                return Bound.Width;
+            get
+            {
+                return Size.Width;
             }
         }
 
@@ -30,11 +33,13 @@ namespace Gift.Domain.UIModel
         private Container? _selectedContainer;
         public Container? SelectedContainer
         {
-            get {
+            get
+            {
                 return _selectedContainer;
             }
 
-            set {
+            set
+            {
                 if (value == null)
                 {
                     throw new ArgumentNullException("value");
@@ -48,8 +53,8 @@ namespace Gift.Domain.UIModel
             }
         }
 
-        public GiftUI(Bound bound, IBorder border, Color frontColor, Color backColor, bool isSelectableContainer)
-            : base(new ScreenDisplayFactory(), bound, border, frontColor, backColor, isSelectableContainer)
+        public GiftUI(Size size, IBorder border, Color frontColor, Color backColor, bool isSelectableContainer)
+            : base(new ScreenDisplayFactory(), size, border, frontColor, backColor, isSelectableContainer)
         {
             SelectableContainers = new List<Container>();
         }
@@ -76,9 +81,9 @@ namespace Gift.Domain.UIModel
             }
         }
 
-        public override Context GetContextRelativeRenderable(IRenderable renderable, Context context)
+        public override Position GetContext(Renderable renderable, Position position)
         {
-            return context;
+            return position;
         }
 
         public override bool IsFixed()
@@ -86,22 +91,11 @@ namespace Gift.Domain.UIModel
             return false;
         }
 
-        public override IScreenDisplay GetDisplayWithoutBorder(Bound bound, IConfiguration configuration)
+        public override Position GetRelativePosition(Position position)
         {
-            return _screenDisplayFactory.Create(
-                Bound, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor,
-                BackColor == Color.Default ? configuration.DefaultBackColor : BackColor, '*');
+            return position;
         }
 
-        public override Position GetRelativePosition(Context context)
-        {
-            return context.Position;
-        }
-
-        public void Resize(Bound bound)
-        {
-            this.Bound = bound;
-        }
 
         public void NextElementInSelectedContainer()
         {
@@ -138,7 +132,7 @@ namespace Gift.Domain.UIModel
             }
         }
 
-        public override bool Equals(UIElement uiElement)
+        public override bool IsSimilarTo(UIElement uiElement)
         {
             if (!(uiElement is GiftUI))
                 return false;
@@ -146,12 +140,20 @@ namespace Gift.Domain.UIModel
             if (SelectableContainers.Count != element.SelectableContainers.Count)
                 return false;
             foreach ((Container element1,
-                      Container element2)elementTuple in SelectableContainers.Zip(element.SelectableContainers))
+                      Container element2) elementTuple in SelectableContainers.Zip(element.SelectableContainers))
             {
-                if (!(elementTuple.element1.Equals(elementTuple.element2)))
+                if (!(elementTuple.element1.IsSimilarTo(elementTuple.element2)))
                     return false;
             }
-            return base.Equals(uiElement);
+            return base.IsSimilarTo(uiElement);
         }
+
+        public override IScreenDisplay GetDisplayWithoutBorder(IConfiguration configuration, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator)
+        {
+            return _screenDisplayFactory.Create(
+                Size, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor,
+                BackColor == Color.Default ? configuration.DefaultBackColor : BackColor, '*');
+        }
+
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Gift.Domain.UIModel;
 using Gift.ApplicationService.Services.SignalHandler.Global;
 using Gift.ApplicationService.Services.SignalHandler.Bus;
 using Gift.ApplicationService.ServiceContracts;
@@ -7,21 +6,14 @@ using Gift.ApplicationService.Services.SignalHandler.Ui;
 using Gift.ApplicationService.Services.SignalHandler.Key;
 using Gift.Domain.ServiceContracts;
 using Gift.ApplicationService.Services.SignalHandler;
+using Gift.Domain.UIModel.Element;
 
 namespace Gift.ApplicationService.Services
 {
     public class GiftLauncherService : IGiftService
     {
-        public GiftUI Ui
-        {
-            get
-            {
-                return _uiProvider.Ui;
-            }
-        }
-
         private readonly ISignalBus _signalBus;
-        private readonly IGiftUiProvider _uiProvider;
+        private readonly IRepository _repository;
         private readonly IDisplayService _displayService;
         private readonly IMonitorService _monitorService;
         private readonly IXMLFileParser _xmlParser;
@@ -36,15 +28,15 @@ namespace Gift.ApplicationService.Services
                         IKeyInteractionMonitor keyInputMonitor,
                         IConsoleSizeMonitor consoleSizeMonitor,
                         IKeySignalHandler keySignalHandler,
-                        IGiftUiProvider uiProvider,
                         IUISignalHandler uISignalHandler,
                         IGlobalSignalHandler globalSignalHandler,
                         IDisplayService displayService,
                         IXMLFileParser xmlFileParser,
                         IUIElementRegister elementRegister,
-                        ILifeTimeService lifeTimeService)
+                        ILifeTimeService lifeTimeService,
+                        IRepository repository)
         {
-            _uiProvider = uiProvider;
+            _repository = repository;
             _displayService = displayService;
 
             _signalBus = bus;
@@ -66,15 +58,15 @@ namespace Gift.ApplicationService.Services
         }
 
 
-        public virtual void Initialize(GiftUI ui)
+        public virtual void Initialize(UIElement ui)
         {
-            _uiProvider.Ui = ui;
+			_repository.SaveRoot(ui);
             update();
         }
 
         public virtual void Initialize(string xmlPath)
         {
-            _uiProvider.Ui = (GiftUI)_xmlParser.ParseUIFile(xmlPath);
+			_repository.SaveRoot(_xmlParser.ParseUIFile(xmlPath));
             update();
         }
 

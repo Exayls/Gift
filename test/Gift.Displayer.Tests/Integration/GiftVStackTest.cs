@@ -1,12 +1,15 @@
 ﻿using Gift.ApplicationService.Services;
 using Gift.Displayer.Rendering;
-using Gift.Domain.Builders;
+using Gift.Domain.Builders.UIModel;
+using Gift.Domain.ServiceContracts;
+using Gift.Domain.Services;
 using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
+using Gift.Repository;
 using Moq;
 using System;
 using System.IO;
@@ -25,25 +28,33 @@ namespace Gift.Displayer.Tests.Integration
         {
             _screenDisplayMock1 = new Mock<IScreenDisplay>();
             _ScreenDisplayFactoryMock = new Mock<IScreenDisplayFactory>();
-            _ScreenDisplayFactoryMock.Setup(s => s.Create(It.IsAny<Bound>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock1.Object);
+            _ScreenDisplayFactoryMock.Setup(s => s.Create(It.IsAny<Size>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock1.Object);
+        }
+
+        private static Renderer GetRenderer(IRepository repository)
+        {
+            return new Renderer(new DefaultConfiguration(), new ColorResolver(repository), new TrueElementSizeCalculator(repository));
         }
 
         [Fact]
         public void TestVStack()
         {
-            GiftUI ui = CreateUI(new Bound(20, 60));
+            GiftUI ui = CreateUI(new Size(20, 60));
             var vstack = CreateVstack();
-            ui.AddUnselectableChild(vstack);
+            ui.Add(vstack);
 
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
+            IRepository repository = new InMemoryRepository();
+            repository.SaveRoot(ui);
+            Renderer renderer = GetRenderer(repository);
+            IScreenDisplay renderedText = renderer.GetRenderDisplay(ui);
             string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
 
             var expectedBuilder = new StringBuilder();
             string expected;
-            for (int i = 0; i < ui.Bound.Height; i++)
+            for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 Assert.Equal(expected, actual[i]);
             }
@@ -55,7 +66,7 @@ namespace Gift.Displayer.Tests.Integration
             return vstack;
         }
 
-        private static GiftUI CreateUI(Bound bound)
+        private static GiftUI CreateUI(Size bound)
         {
             GiftUI ui = new GiftUIBuilder().WithBound(bound).Build();
             return ui;
@@ -66,20 +77,22 @@ namespace Gift.Displayer.Tests.Integration
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = CreateUI(new Bound(20, 60));
+            var ui = CreateUI(new Size(20, 60));
             var vstack = new VStackBuilder().Build();
             var label = new LabelBuilder().Build();
-            ui.AddUnselectableChild(vstack);
-            vstack.AddUnselectableChild(label);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
+            ui.Add(vstack);
+            vstack.Add(label);
+            IRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
             string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
-            for (int i = 0; i < ui.Bound.Height; i++)
+            for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {
@@ -93,20 +106,22 @@ namespace Gift.Displayer.Tests.Integration
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = CreateUI(new Bound(20, 60));
+            var ui = CreateUI(new Size(20, 60));
             var vstack = new VStackBuilder().Build();
             var label = new LabelBuilder().Build();
-            ui.AddUnselectableChild(vstack);
-            vstack.AddUnselectableChild(label);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
+            ui.Add(vstack);
+            vstack.Add(label);
+            IRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
             string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
-            for (int i = 0; i < ui.Bound.Height; i++)
+            for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {
@@ -121,22 +136,24 @@ namespace Gift.Displayer.Tests.Integration
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = CreateUI(new Bound(20, 60));
+            var ui = CreateUI(new Size(20, 60));
             var vstack = new VStackBuilder().Build();
             var label1 = new LabelBuilder().Build();
             var label2 = new LabelBuilder().WithText("test").Build();
-            ui.AddUnselectableChild(vstack);
-            vstack.AddUnselectableChild(label1);
-            vstack.AddUnselectableChild(label2);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
+            ui.Add(vstack);
+            vstack.Add(label1);
+            vstack.Add(label2);
+            IRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
             string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
-            for (int i = 0; i < ui.Bound.Height; i++)
+            for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {
@@ -155,24 +172,26 @@ namespace Gift.Displayer.Tests.Integration
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = CreateUI(new Bound(20, 60));
+            var ui = CreateUI(new Size(20, 60));
             var vstack = new VStackBuilder().Build();
             var label1 = new LabelBuilder().Build();
             var label2 = new LabelBuilder().WithText("test").Build();
             var label3 = new LabelBuilder().WithText("label numero 3.").Build();
-            ui.AddUnselectableChild(vstack);
-            vstack.AddUnselectableChild(label1);
-            vstack.AddUnselectableChild(label2);
-            vstack.AddUnselectableChild(label3);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
+            ui.Add(vstack);
+            vstack.Add(label1);
+            vstack.Add(label2);
+            vstack.Add(label3);
+            IRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
             string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
-            for (int i = 0; i < ui.Bound.Height; i++)
+            for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {
@@ -195,24 +214,27 @@ namespace Gift.Displayer.Tests.Integration
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = CreateUI(new Bound(20, 60));
+            var ui = CreateUI(new Size(20, 60));
             var vstack = new VStackBuilder().Build();
             var label1 = new LabelBuilder().Build();
             var label2 = new LabelBuilder().WithText("test").WithPosition(new Position(4, 8)).Build();
             var label3 = new LabelBuilder().WithText("label numero 3.").Build();
-            ui.AddUnselectableChild(vstack);
-            vstack.AddUnselectableChild(label1);
-            vstack.AddUnselectableChild(label2);
-            vstack.AddUnselectableChild(label3);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
+            ui.Add(vstack);
+            vstack.Add(label1);
+            ui.Add(label2);
+            vstack.Add(label3);
+            IRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
             string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
-            for (int i = 0; i < ui.Bound.Height; i++)
+            for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {
@@ -235,27 +257,29 @@ namespace Gift.Displayer.Tests.Integration
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = CreateUI(new Bound(4, 60));
+            var ui = CreateUI(new Size(4, 60));
             var vstack = new VStackBuilder().Build();
             var label1 = new LabelBuilder().Build();
             var label2 = new LabelBuilder().WithText("test").Build();
             var label3 = new LabelBuilder().WithText("label numero 3.").Build();
             var label4 = new LabelBuilder().WithText("label numero 4.").Build();
             var label5 = new LabelBuilder().WithText("label numero 5.").Build();
-            ui.AddUnselectableChild(vstack);
-            vstack.AddUnselectableChild(label1);
-            vstack.AddUnselectableChild(label2);
-            vstack.AddUnselectableChild(label3);
-            vstack.AddUnselectableChild(label4);
-            vstack.AddUnselectableChild(label5);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
+            ui.Add(vstack);
+            vstack.Add(label1);
+            vstack.Add(label2);
+            vstack.Add(label3);
+            vstack.Add(label4);
+            vstack.Add(label5);
+            IRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
             var expectedBuilder = new StringBuilder();
             string expected = "";
             string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
-            for (int i = 0; i < ui.Bound.Height; i++)
+            for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {
@@ -281,7 +305,7 @@ namespace Gift.Displayer.Tests.Integration
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = CreateUI(new Bound(4, 60));
+            var ui = CreateUI(new Size(4, 60));
             var vstack = new VStackBuilder().Build();
             var label1 = new LabelBuilder().Build();
             var label2 = new LabelBuilder().WithText("test").Build();
@@ -289,22 +313,24 @@ namespace Gift.Displayer.Tests.Integration
             var label4 = new LabelBuilder().WithText("label numero 4.").Build();
             var label5 = new LabelBuilder().WithText("label numero 5.").Build();
             var label6 = new LabelBuilder().WithText("label numero 6.").Build();
-            ui.AddUnselectableChild(vstack);
-            vstack.AddUnselectableChild(label1);
-            vstack.AddUnselectableChild(label2);
-            vstack.AddUnselectableChild(label3);
-            vstack.AddUnselectableChild(label4);
-            vstack.AddUnselectableChild(label5);
-            vstack.AddUnselectableChild(label6);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
+            ui.Add(vstack);
+            vstack.Add(label1);
+            vstack.Add(label2);
+            vstack.Add(label3);
+            vstack.Add(label4);
+            vstack.Add(label5);
+            vstack.Add(label6);
+            IRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
             string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
-            for (int i = 0; i < ui.Bound.Height; i++)
+            for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {
@@ -326,29 +352,38 @@ namespace Gift.Displayer.Tests.Integration
             }
         }
 
+        private static IScreenDisplay GetDisplay(UIElement element, IRepository repository)
+        {
+            return element.GetDisplayWithBorder('*', new ColorResolver(repository), new TrueElementSizeCalculator(repository));
+        }
+
         [Fact]
         public void GetDisplay_should_return_screen_when_call_GetDisplay_whithout_border()
         {
-            var vstack = new VStackBuilder().
-                WithBorder(new NoBorder()).
-                Build();
-            //act
-            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new Bound(2, 4), '*');
-            //assert
+            var vstack = new VStackBuilder()
+                .WithUnSelectableElement(new LabelBuilder().WithText("****").Build())
+                .WithUnSelectableElement(new LabelBuilder().WithText("*").Build())
+                .WithBorder(new NoBorder())
+                .Build();
+            var repository = Mock.Of<IRepository>();
+            IScreenDisplay screenDisplay = GetDisplay(vstack, repository);            //assert
             const string expected = "****\n" +
                                     "****";
             Assert.Equal(expected, screenDisplay.DisplayString.ToString());
         }
 
+
         [Fact]
         public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border1()
         {
             //arrange
-            var vstack = new VStackBuilder().
-                WithBorder(new SimpleBorder(1, '-')).
-                Build();
+            var vstack = new VStackBuilder()
+				.WithUnSelectableElement(new LabelBuilder().WithText("**").Build())
+                .WithBorder(new SimpleBorder(1, '-'))
+                .Build();
+            IRepository repository = new InMemoryRepository();
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new Bound(3, 4), '*');
+            IScreenDisplay screenDisplay = GetDisplay(vstack, repository);            //assert
             //assert
             const string expected = "----\n" +
                                     "-**-\n" +
@@ -360,11 +395,13 @@ namespace Gift.Displayer.Tests.Integration
         public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border3()
         {
             //arrange
-            var vstack = new VStackBuilder().
-                WithBorder(new SimpleBorder(1, 'i')).
-                Build();
+            var vstack = new VStackBuilder()
+				.WithUnSelectableElement(new LabelBuilder().WithText("**").Build())
+                .WithBorder(new SimpleBorder(1, 'i'))
+                .Build();
+            IRepository repository = new InMemoryRepository();
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(3, 4), '*');
+            IScreenDisplay screenDisplay = GetDisplay(vstack, repository);            //assert
             //assert
             const string expected = "iiii\n" +
                                     "i**i\n" +
@@ -376,11 +413,15 @@ namespace Gift.Displayer.Tests.Integration
         public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border4()
         {
             //arrange
-            var vstack = new VStackBuilder().
-                WithBorder(new SimpleBorder(1, '-')).
-                Build();
+            var vstack = new VStackBuilder()
+				.WithUnSelectableElement(new LabelBuilder().WithText("***").Build())
+				.WithUnSelectableElement(new LabelBuilder().WithText("*").Build())
+				.WithUnSelectableElement(new LabelBuilder().WithText("***").Build())
+                .WithBorder(new SimpleBorder(1, '-'))
+                .Build();
+            IRepository repository = new InMemoryRepository();
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(5, 5), '*');
+            IScreenDisplay screenDisplay = GetDisplay(vstack, repository);            //assert
             //assert
             const string expected = "-----\n" +
                                     "-***-\n" +
@@ -394,11 +435,13 @@ namespace Gift.Displayer.Tests.Integration
         public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border5()
         {
             //arrange
-            var vstack = new VStackBuilder().
-                WithBorder(new SimpleBorder(1, '-')).
-                Build();
+            var vstack = new VStackBuilder()
+				.WithUnSelectableElement(new LabelBuilder().WithText("aaaa").Build())
+                .WithBorder(new SimpleBorder(1, '-'))
+                .Build();
+            IRepository repository = new InMemoryRepository();
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(3, 6), '*');
+            IScreenDisplay screenDisplay = GetDisplay(vstack, repository);            //assert
             //assert
             const string expected = "------\n" +
                                     "-****-\n" +
@@ -406,33 +449,19 @@ namespace Gift.Displayer.Tests.Integration
             Assert.Equal(expected, screenDisplay.DisplayString.ToString());
         }
 
-        [Fact]
-        public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border_thickness1()
-        {
-            //arrange
-            var vstack = new VStackBuilder().
-                WithBorder(new SimpleBorder(2, '-')).
-                Build();
-            //act
-            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(5, 5), '*');
-            //assert
-            const string expected = "-----\n" +
-                                    "-----\n" +
-                                    "--*--\n" +
-                                    "-----\n" +
-                                    "-----";
-            Assert.Equal(expected, screenDisplay.DisplayString.ToString());
-        }
 
         [Fact]
         public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border_thickness2()
         {
             //arrange
-            var vstack = new VStackBuilder().
-                WithBorder(new SimpleBorder(2, '-')).
-                Build();
+            var vstack = new VStackBuilder()
+				.WithUnSelectableElement(new LabelBuilder().WithText("***").Build())
+				.WithUnSelectableElement(new LabelBuilder().WithText("***").Build())
+                .WithBorder(new SimpleBorder(2, '-'))
+                .Build();
+            IRepository repository = new InMemoryRepository();
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(6, 7), '*');
+            IScreenDisplay screenDisplay = GetDisplay(vstack, repository);            //assert
             //assert
             const string expected = "-------\n" +
                                     "-------\n" +
@@ -447,31 +476,13 @@ namespace Gift.Displayer.Tests.Integration
         public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border_thickness3()
         {
             //arrange
-            var vstack = new VStackBuilder().
-                WithBorder(new SimpleBorder(3, '-')).
-                Build();
+            var vstack = new VStackBuilder()
+				.WithUnSelectableElement(new LabelBuilder().WithText("a").Build())
+                .WithBorder(new SimpleBorder(3, '-'))
+                .Build();
+            IRepository repository = new InMemoryRepository();
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(7, 7), '*');
-            //assert
-            const string expected = "-------\n" +
-                                    "-------\n" +
-                                    "-------\n" +
-                                    "---*---\n" +
-                                    "-------\n" +
-                                    "-------\n" +
-                                    "-------";
-            Assert.Equal(expected, screenDisplay.DisplayString.ToString());
-        }
-
-        [Fact]
-        public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border_thickness4()
-        {
-            //arrange
-            var vstack = new VStackBuilder().
-                WithBorder(new SimpleBorder(3, '-')).
-                Build();
-            //act
-            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder(new(7, 7), '*');
+            IScreenDisplay screenDisplay = GetDisplay(vstack, repository);            //assert
             //assert
             const string expected = "-------\n" +
                                     "-------\n" +

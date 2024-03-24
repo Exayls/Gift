@@ -5,7 +5,7 @@ namespace Gift.Domain.Builders.Mappers
     {
         public bool ToBool(string str)
         {
-			return str.ToLower().Equals("true")?true:false;
+            return str.ToLower().Equals("true") ? true : false;
         }
     }
 }

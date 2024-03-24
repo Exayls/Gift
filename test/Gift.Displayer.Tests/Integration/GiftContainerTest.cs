@@ -8,33 +8,44 @@ using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Conf;
 using Gift.ApplicationService.Services;
 using Gift.Displayer.Rendering;
-using Gift.Domain.Builders;
+using Gift.Domain.Builders.UIModel;
+using Gift.Repository;
+using Gift.Domain.ServiceContracts;
+using Gift.Domain.Services;
 
 namespace TestGift.UI
 {
     public class GiftContainerTest
     {
+
+        private static Renderer GetRenderer(IRepository repository)
+        {
+            return new Renderer(new DefaultConfiguration(), new ColorResolver(repository), new TrueElementSizeCalculator(repository));
+        }
+
         [Fact]
         public void CanDisplayContainer()
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = GetGiftUi(new Bound(20, 60));
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
+            var ui = GetGiftUi(new Size(20, 60));
+            InMemoryRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
             string[] actual = renderedText.DisplayString.ToString().Split('\n') ?? Array.Empty<string>();
-            for (int i = 0; i < ui.Bound.Height; i++)
+            for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 Assert.Equal(expected, actual[i]);
             }
         }
 
-        private static GiftUI GetGiftUi(Bound bound)
+        private static GiftUI GetGiftUi(Size bound)
         {
             return new GiftUIBuilder().WithBound(bound).Build();
         }
@@ -44,18 +55,20 @@ namespace TestGift.UI
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = GetGiftUi(new Bound(20, 60));
+            var ui = GetGiftUi(new Size(20, 60));
             var element = new LabelBuilder().Build();
-            ui.AddUnselectableChild(element);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
+            ui.Add(element);
+            InMemoryRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
             string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
-            for (int i = 0; i < ui.Bound.Height; i++)
+            for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {
@@ -69,19 +82,21 @@ namespace TestGift.UI
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = GetGiftUi(new Bound(20, 60));
+            var ui = GetGiftUi(new Size(20, 60));
             var position = new Position(0, 30);
             var element = new LabelBuilder().WithPosition(position).Build();
-            ui.AddUnselectableChild(element);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
+            ui.Add(element);
+            InMemoryRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
             string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
-            for (int i = 0; i < ui.Bound.Height; i++)
+            for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {
@@ -95,19 +110,21 @@ namespace TestGift.UI
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = GetGiftUi(new Bound(20, 60));
+            var ui = GetGiftUi(new Size(20, 60));
             var position = new Position(0, 10);
             var element = new LabelBuilder().WithPosition(position).Build();
-            ui.AddUnselectableChild(element);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
+            ui.Add(element);
+            InMemoryRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
             string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
-            for (int i = 0; i < ui.Bound.Height; i++)
+            for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {
@@ -121,19 +138,21 @@ namespace TestGift.UI
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = GetGiftUi(new Bound(20, 60));
+            var ui = GetGiftUi(new Size(20, 60));
             var position = new Position(0, 10);
             var element = new LabelBuilder().WithText("test").WithPosition(position).Build();
-            ui.AddUnselectableChild(element);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
+            ui.Add(element);
+            InMemoryRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
             string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
-            for (int i = 0; i < ui.Bound.Height; i++)
+            for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {
@@ -147,19 +166,21 @@ namespace TestGift.UI
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = GetGiftUi(new Bound(20, 60));
+            var ui = GetGiftUi(new Size(20, 60));
             var position = new Position(0, 1000);
             var element = new LabelBuilder().WithPosition(position).Build();
-            ui.AddUnselectableChild(element);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
+            ui.Add(element);
+            InMemoryRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
             string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
-            for (int i = 0; i < ui.Bound.Height; i++)
+            for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 Assert.Equal(expected, actual[i]);
             }
@@ -169,19 +190,21 @@ namespace TestGift.UI
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = GetGiftUi(new Bound(20, 60));
+            var ui = GetGiftUi(new Size(20, 60));
             var position = new Position(0, 58);
             var element = new LabelBuilder().WithPosition(position).Build();
-            ui.AddUnselectableChild(element);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
+            ui.Add(element);
+            InMemoryRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
             string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
-            for (int i = 0; i < ui.Bound.Height; i++)
+            for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {
@@ -195,19 +218,21 @@ namespace TestGift.UI
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = GetGiftUi(new Bound(10, 80));
+            var ui = GetGiftUi(new Size(10, 80));
             var position = new Position(0, 58);
             var element = new LabelBuilder().WithPosition(position).Build();
-            ui.AddUnselectableChild(element);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
+            ui.Add(element);
+            InMemoryRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
             string[] actual = renderedText.DisplayString.ToString().Split('\n') ?? Array.Empty<string>();
-            for (int i = 0; i < ui.Bound.Height; i++)
+            for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {
@@ -222,19 +247,21 @@ namespace TestGift.UI
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = GetGiftUi(new Bound(4, 16));
+            var ui = GetGiftUi(new Size(4, 16));
             var position = new Position(2, 10);
             var element = new LabelBuilder().WithPosition(position).Build();
-            ui.AddUnselectableChild(element);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
+            ui.Add(element);
+            InMemoryRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
             string[] actual = renderedText.DisplayString.ToString().Split('\n') ?? Array.Empty<string>();
-            for (int i = 0; i < ui.Bound.Height; i++)
+            for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 2)
                 {
@@ -249,19 +276,21 @@ namespace TestGift.UI
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = GetGiftUi(new Bound(4, 16));
+            var ui = GetGiftUi(new Size(4, 16));
             var position = new Position(1, 10);
             var element = new LabelBuilder().WithPosition(position).Build();
-            ui.AddUnselectableChild(element);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
+            ui.Add(element);
+            InMemoryRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
             string[] actual = renderedText.DisplayString.ToString().Split('\n') ?? Array.Empty<string>();
-            for (int i = 0; i < ui.Bound.Height; i++)
+            for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 1)
                 {
@@ -276,19 +305,21 @@ namespace TestGift.UI
         {
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
-            var ui = GetGiftUi(new Bound(4, 32));
+            var ui = GetGiftUi(new Size(4, 32));
             var position = new Position(1, 10);
             var element = new LabelBuilder().WithPosition(position).Build();
-            ui.AddUnselectableChild(element);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration()).GetRenderDisplay(ui);
+            ui.Add(element);
+            InMemoryRepository repository = new InMemoryRepository();
+			repository.SaveRoot(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
             string[] actual = renderedText.DisplayString.ToString().Split('\n') ?? Array.Empty<string>();
-            for (int i = 0; i < ui.Bound.Height; i++)
+            for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Bound.Width));
+                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 1)
                 {

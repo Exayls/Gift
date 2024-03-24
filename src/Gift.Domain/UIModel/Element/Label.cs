@@ -1,4 +1,6 @@
-﻿using Gift.Domain.UIModel.Border;
+﻿using Gift.Domain.Builders.UIModel.Display;
+using Gift.Domain.ServiceContracts;
+using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.DispositionStrategy;
@@ -46,44 +48,21 @@ namespace Gift.Domain.UIModel.Element
             return Disposition is ExplicitDisposition;
         }
 
-        public override Position GetRelativePosition(Context context)
+        public override Position GetRelativePosition(Position position)
         {
-            int context_y = context.Position.y;
-            int context_x = context.Position.x;
+            int context_y = position.y;
+            int context_x = position.x;
             int relative_y = Disposition.Position.y;
             int relative_x = Disposition.Position.x;
             int position_y = context_y + relative_y;
             int position_x = context_x + relative_x;
-            Position position = new Position(position_y, position_x);
-            return position;
+            Position finalPosition = new Position(position_y, position_x);
+            return finalPosition;
         }
 
-        public override IScreenDisplay GetDisplayWithoutBorder(Bound bound, IConfiguration configuration)
+        public override bool IsSimilarTo(UIElement uiElement)
         {
-            Color frontColor = FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor;
-            Color backColor = BackColor == Color.Default ? configuration.DefaultBackColor : BackColor;
-            if (IsSelectedElement && IsInSelectedContainer)
-            {
-                frontColor = configuration.SelectedElementFrontColor == Color.Default
-                                 ? frontColor
-                                 : configuration.SelectedElementFrontColor;
-                backColor = configuration.SelectedElementBackColor == Color.Default
-                                ? backColor
-                                : configuration.SelectedElementBackColor;
-            }
-            return new ScreenDisplay(Text, frontColor, backColor);
-        }
-
-        public override IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuration)
-        {
-            return Border.GetDisplay(new Bound(Height, Width),
-                                     FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor,
-                                     BackColor == Color.Default ? configuration.DefaultBackColor : BackColor);
-        }
-
-        public override bool Equals(UIElement uiElement)
-        {
-            if (!(base.Equals(uiElement)))
+            if (!(base.IsSimilarTo(uiElement)))
                 return false;
             if (!(uiElement is Label))
                 return false;
@@ -91,6 +70,23 @@ namespace Gift.Domain.UIModel.Element
             if (this.Text != element.Text)
                 return false;
             return true;
+        }
+
+        public override IScreenDisplay GetDisplayWithoutBorder(IConfiguration configuration, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator)
+        {
+            Color frontColor = colorResolver.GetFrontColor(this, configuration);
+            Color backColor = colorResolver.GetBackColor(this, configuration);
+            return new ScreenDisplay(Text, frontColor, backColor);
+        }
+
+        public override IScreenDisplay GetDisplayBorder(IConfiguration configuration, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator)
+        {
+			var screen = new ScreenDisplayBuilder()
+				.WithFrontColor(colorResolver.GetFrontColor(this, configuration))
+				.WithBackColor(colorResolver.GetBackColor(this, configuration))
+				.WithBound(sizeCalculator.GetTrueSize(this));
+            return Border.GetDisplay(screen);
+
         }
     }
 }

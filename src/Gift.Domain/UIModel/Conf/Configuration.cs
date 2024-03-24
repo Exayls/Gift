@@ -16,10 +16,10 @@ namespace Gift.Domain.UIModel.Conf
 
         public Configuration(Color frontColor = Color.White,
                              Color backColor = Color.Black,
-                             Color selectedElementFrontColor = Color.Default,
+                             Color selectedElementFrontColor = Color.White,
                              Color selectedElementBackColor = Color.Green,
                              Color selectedContainerFrontColor = Color.Green,
-                             Color selectedContainerBackColor = Color.Default,
+                             Color selectedContainerBackColor = Color.Transparent,
                              char fillingChar = ' ')
         {
             DefaultBackColor = backColor;

@@ -6,94 +6,89 @@ using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
 
-namespace Gift.Domain.Builders
+namespace Gift.Domain.Builders.UIModel
 {
-    public class HStackBuilder : IContainerBuilder
+    public class VStackBuilder : IContainerBuilder
     {
         private IBorder _border = new NoBorder();
-        private Bound _bound = new Bound(0, 0);
+        private Size _bound = new Size(0, 0);
         private IScreenDisplayFactory screenDisplayFactory = new ScreenDisplayFactory();
         private Color backColor = Color.Default;
         private Color frontColor = Color.Default;
+        private IList<UIElement> selectableElements = new List<UIElement>();
+        private IList<UIElement> unSelectableElements = new List<UIElement>();
         private int? _height;
         private int? _width;
-        private IList<UIElement> unSelectableElements = new List<UIElement>();
-        private IList<UIElement> selectableElements = new List<UIElement>();
 
         private bool _isSelectableContainer = false;
 
-        public HStackBuilder WithBorder(IBorder border)
+        public VStackBuilder WithBorder(IBorder border)
         {
             _border = border;
             return this;
         }
-        public HStackBuilder WithBound(Bound bound)
+        public VStackBuilder WithBound(Size bound)
         {
             _bound = bound;
             return this;
         }
 
-        public HStackBuilder WithHeight(int height)
-        {
-            _height = height;
-            return this;
-        }
-
-        public HStackBuilder WithWidth(int width)
-        {
-            _width = width;
-            return this;
-        }
-
-
-        public HStackBuilder WithBackgroundColor(Color color)
+        public VStackBuilder WithBackgroundColor(Color color)
         {
             backColor = color;
             return this;
         }
 
-        public HStackBuilder WithForegroundColor(Color color)
+        public VStackBuilder WithForegroundColor(Color color)
         {
             frontColor = color;
             return this;
         }
 
-        public HStackBuilder WithSelectableElement(UIElement element)
+        public VStackBuilder WithSelectableElement(UIElement element)
         {
             selectableElements.Add(element);
             return this;
         }
-        public HStackBuilder WithUnSelectableElement(UIElement element)
+
+        public VStackBuilder WithUnSelectableElement(UIElement element)
         {
             unSelectableElements.Add(element);
             return this;
         }
 
-        public HStackBuilder IsSelectableContainer(bool isSelectableContainer)
+        public VStackBuilder IsSelectableContainer(bool isSelectableContainer)
         {
             _isSelectableContainer = isSelectableContainer;
             return this;
         }
 
-        public HStack Build()
+        public VStackBuilder WithHeight(int height)
         {
-            var bound = new Bound(_height ?? _bound.Height, _width ?? _bound.Width);
-            var hstack = new HStack(_border,
-                              screenDisplayFactory,
-                              bound,
-							  IsSelectableContainer:_isSelectableContainer,
-                              frontColor: frontColor,
-                              backColor: backColor);
+            _height = height;
+            return this;
+        }
 
+        public VStackBuilder WithWidth(int width)
+        {
+            _width = width;
+            return this;
+        }
+
+        public VStack Build()
+        {
+            var bound = new Size(_height ?? _bound.Height, _width ?? _bound.Width);
+            var vstack = new VStack(_border, screenDisplayFactory, bound, frontColor: frontColor, backColor: backColor,
+                                    isSelectableContainer: _isSelectableContainer);
             foreach (UIElement element in unSelectableElements)
             {
-                hstack.AddUnselectableChild(element);
+                vstack.Add(element);
             }
             foreach (UIElement element in selectableElements)
             {
-                hstack.AddSelectableChild(element);
+                vstack.AddSelectableChild(element);
             }
-            return hstack;
+            return vstack;
         }
 
         UIElement IBuilder<UIElement>.Build()
@@ -106,7 +101,7 @@ namespace Gift.Domain.Builders
             return Build();
         }
 
-        IContainerBuilder IContainerBuilder.WithBound(Bound bound)
+        IContainerBuilder IContainerBuilder.WithBound(Size bound)
         {
             return WithBound(bound);
         }
@@ -165,6 +160,7 @@ namespace Gift.Domain.Builders
         {
             return WithForegroundColor(mapper.ToColor(colorStr));
         }
+
         public IContainerBuilder WithBound(string boundStr, IBoundMapper mapper)
         {
             return WithBound(mapper.ToBound(boundStr));

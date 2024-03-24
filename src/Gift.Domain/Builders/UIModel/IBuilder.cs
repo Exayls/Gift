@@ -1,4 +1,4 @@
-﻿namespace Gift.Domain.Builders
+﻿namespace Gift.Domain.Builders.UIModel
 {
     public interface IBuilder<TProduct>
     {

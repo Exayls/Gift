@@ -1,4 +1,4 @@
-﻿using Gift.Domain.Builders;
+﻿using Gift.Domain.Builders.UIModel;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
@@ -23,15 +23,15 @@ namespace TestGift.Builder
         {
 
             NoBorder border = new NoBorder();
-            Bound bound = new Bound(0, 0);
+            Size bound = new Size(0, 0);
             VStackBuilder builder = new VStackBuilder()
                 .WithBound(bound)
                 .WithBorder(border)
                 .WithForegroundColor(Color.Blue);
 
             VStack v = builder.Build();
-            Assert.True(border.Equals(v.Border));
-            Assert.True(bound.Equals(v.Bound));
+            Assert.True(border.IsSimilarTo(v.Border));
+            Assert.True(bound.Equals(v.Size));
             Assert.Equal(Color.Blue, v.FrontColor);
 
         }

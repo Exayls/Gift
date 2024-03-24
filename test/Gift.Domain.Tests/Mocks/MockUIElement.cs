@@ -1,4 +1,5 @@
-﻿using Gift.Domain.UIModel.Conf;
+﻿using Gift.Domain.ServiceContracts;
+using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
@@ -23,17 +24,7 @@ namespace TestGift.Mocks
         {
         }
 
-        public override IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuration)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override IScreenDisplay GetDisplayWithoutBorder(Bound bounds, IConfiguration configuration)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override Position GetRelativePosition(Context context)
+        public override Position GetRelativePosition(Position position)
         {
             throw new System.NotImplementedException();
         }
@@ -43,9 +34,19 @@ namespace TestGift.Mocks
             return _isFixed;
         }
 
-        public override bool Equals(UIElement uiElement)
+        public override bool IsSimilarTo(UIElement uiElement)
         {
             return false;
+        }
+
+        public override IScreenDisplay GetDisplayWithoutBorder(IConfiguration configuration, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override IScreenDisplay GetDisplayBorder(IConfiguration configuratione, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

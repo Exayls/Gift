@@ -1,5 +1,5 @@
 using System;
-using Gift.Domain.Builders;
+using Gift.Domain.Builders.UIModel;
 using Gift.Domain.UIModel.Element;
 
 namespace Gift.Domain.ServiceContracts

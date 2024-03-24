@@ -1,4 +1,4 @@
-﻿using Gift.Domain.Builders;
+﻿using Gift.Domain.Builders.UIModel;
 using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Element;
@@ -22,21 +22,21 @@ namespace Gift.XmlUiParser.FileParser
 
         private void SelectContainer(UIElement uiElement, XmlElement element)
         {
-            if (giftUI == null)
-            {
-                return;
-            }
-            if (uiElement is Container container)
-            {
-                if (element.GetAttribute("selectableContainer") == "true")
-                {
-                    giftUI.SelectableContainers.Add(container);
-                }
-                if (element.GetAttribute("selectedContainer") == "true")
-                {
-                    giftUI.SelectedContainer = container;
-                }
-            }
+            // if (giftUI == null)
+            // {
+            //     return;
+            // }
+            // if (uiElement is Container container)
+            // {
+            //     if (element.GetAttribute("selectableContainer") == "true")
+            //     {
+            //         giftUI.SelectableContainers.Add(container);
+            //     }
+            //     if (element.GetAttribute("selectedContainer") == "true")
+            //     {
+            //         giftUI.SelectedContainer = container;
+            //     }
+            // }
         }
 
         private void SelectElement(UIElement uiElement, XmlElement element, Container container)
@@ -92,7 +92,7 @@ namespace Gift.XmlUiParser.FileParser
                 {
                     UIElement childComponent = ParseUIElementRec(childElement);
                     var container = (Container)uIElement;
-                    container.AddUnselectableChild(childComponent);
+                    container.Add(childComponent);
                     SelectElement(childComponent, childElement, container);
                     SelectContainer(childComponent, childElement);
                 }
@@ -111,7 +111,7 @@ namespace Gift.XmlUiParser.FileParser
         private IBuilder<UIElement> CreateBuilder(string componentName)
         {
             var builderType = _uielementRegister.GetBuilder(componentName);
-            var builder = (IBuilder<UIElement>)builderType.GetConstructors() [0].Invoke(new object[] {});
+            var builder = (IBuilder<UIElement>)builderType.GetConstructors()[0].Invoke(new object[] { });
             return builder;
         }
 

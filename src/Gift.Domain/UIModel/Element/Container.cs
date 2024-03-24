@@ -1,4 +1,6 @@
-﻿using Gift.Domain.UIModel.Border;
+﻿using Gift.Domain.Builders.UIModel.Display;
+using Gift.Domain.ServiceContracts;
+using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.MetaData;
@@ -9,7 +11,7 @@ namespace Gift.Domain.UIModel.Element
 {
     public abstract class Container : UIElement
     {
-        public Bound Bound { get; protected set; }
+        public Size Size { get; protected set; }
         public int ScrollIndex { get; protected set; }
         public IList<UIElement> Childs { get; protected set; }
         public IList<UIElement> SelectableElements { get; protected set; }
@@ -19,8 +21,7 @@ namespace Gift.Domain.UIModel.Element
         public UIElement? SelectedElement
         {
             get => selectedElement;
-            set
-            {
+            set {
                 selectedElement = value;
 
                 foreach (UIElement element in SelectableElements)
@@ -38,46 +39,44 @@ namespace Gift.Domain.UIModel.Element
         public bool IsSelectedContainer
         {
             get => isSelectedContainer;
-            set
-            {
+            set {
                 isSelectedContainer = value;
             }
         }
 
         protected readonly IScreenDisplayFactory _screenDisplayFactory;
 
-        public Container(IScreenDisplayFactory screenDisplayFactory, Bound bound, IBorder border, Color frontColor, Color backColor, bool isSelectableContainer) : base(border, frontColor: frontColor, backColor: backColor)
+        public Container(IScreenDisplayFactory screenDisplayFactory, Size bound, IBorder border, Color frontColor,
+                         Color backColor, bool isSelectableContainer)
+            : base(border, frontColor: frontColor, backColor: backColor)
         {
-            Bound = bound;
+            Size = bound;
             Childs = new List<UIElement>();
             _screenDisplayFactory = screenDisplayFactory;
             SelectableElements = new List<UIElement>();
-			IsSelectableContainer = isSelectableContainer;
+            IsSelectableContainer = isSelectableContainer;
         }
 
-        public abstract Context GetContextRelativeRenderable(IRenderable renderable, Context context);
+        public abstract Position GetContext(Renderable renderable, Position position);
 
-        public override IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuration)
+        public override IScreenDisplay GetDisplayBorder(IConfiguration configuration, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator)
         {
-            Color frontColor = FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor;
-            Color backColor = BackColor == Color.Default ? configuration.DefaultBackColor : BackColor;
-            if (IsSelectedContainer)
-            {
-                frontColor = configuration.SelectedContainerFrontColor == Color.Default ? frontColor : configuration.SelectedContainerFrontColor;
-                backColor = configuration.SelectedContainerBackColor == Color.Default ? backColor : configuration.SelectedContainerBackColor;
-            }
-
-            IScreenDisplay screenDisplay = Border.GetDisplay(bound,
-                                                             frontColor,
-                                                             backColor);
+			var screenDisplayBuilder = new ScreenDisplayBuilder();
+			Color frontColor = colorResolver.GetFrontColor(this, configuration);
+			Color backColor = colorResolver.GetBackColor(this, configuration);
+            Size trueSize = sizeCalculator.GetTrueSize(this);
+            screenDisplayBuilder.WithFrontColor(frontColor).WithBackColor(backColor).WithBound(trueSize);
+            IScreenDisplay screenDisplay = Border.GetDisplay(screenDisplayBuilder);
             return screenDisplay;
         }
+
 
         public void NextElement()
         {
             if (SelectedElement != null)
             {
-                SelectedElement = SelectableElements[(SelectableElements.IndexOf(SelectedElement) + 1) % SelectableElements.Count];
+                SelectedElement =
+                    SelectableElements[(SelectableElements.IndexOf(SelectedElement) + 1) % SelectableElements.Count];
             }
         }
 
@@ -85,7 +84,9 @@ namespace Gift.Domain.UIModel.Element
         {
             if (SelectedElement != null)
             {
-                SelectedElement = SelectableElements[(SelectableElements.IndexOf(SelectedElement) - 1 + SelectableElements.Count) % SelectableElements.Count];
+                SelectedElement =
+                    SelectableElements[(SelectableElements.IndexOf(SelectedElement) - 1 + SelectableElements.Count) %
+                                       SelectableElements.Count];
             }
         }
 
@@ -99,7 +100,7 @@ namespace Gift.Domain.UIModel.Element
             this.ScrollIndex -= 1;
         }
 
-        public void AddUnselectableChild(UIElement uIElement)
+        public void Add(UIElement uIElement)
         {
             Childs.Add(uIElement);
         }
@@ -117,25 +118,37 @@ namespace Gift.Domain.UIModel.Element
             }
         }
 
-        public override bool Equals(UIElement uiElement)
+        public override bool IsSimilarTo(UIElement uiElement)
         {
-            if (!(base.Equals(uiElement))) return false;
-            if (!(uiElement is Container)) return false;
+            if (!(base.IsSimilarTo(uiElement)))
+                return false;
+            if (!(uiElement is Container))
+                return false;
             Container element = (Container)uiElement;
-            if (!Bound.Equals(element.Bound)) return false;
+            if (!Size.Equals(element.Size))
+                return false;
 
-            if (Childs.Count != element.Childs.Count) return false;
-            foreach ((UIElement element1, UIElement element2) elementTuple in Childs.Zip(element.Childs))
+            if (Childs.Count != element.Childs.Count)
+                return false;
+            foreach ((UIElement element1, UIElement element2)elementTuple in Childs.Zip(element.Childs))
             {
-                if (!(elementTuple.element1.Equals(elementTuple.element2))) return false;
+                if (!(elementTuple.element1.IsSimilarTo(elementTuple.element2)))
+                    return false;
             }
-            if (SelectableElements.Count != element.SelectableElements.Count) return false;
-            foreach ((UIElement element1, UIElement element2) elementTuple in SelectableElements.Zip(element.SelectableElements))
+            if (SelectableElements.Count != element.SelectableElements.Count)
+                return false;
+            foreach ((UIElement element1,
+                      UIElement element2)elementTuple in SelectableElements.Zip(element.SelectableElements))
             {
-                if (!(elementTuple.element1.Equals(elementTuple.element2))) return false;
+                if (!(elementTuple.element1.IsSimilarTo(elementTuple.element2)))
+                    return false;
             }
             return true;
         }
 
+        public void Resize(Size bound)
+        {
+			Size = bound;
+        }
     }
 }

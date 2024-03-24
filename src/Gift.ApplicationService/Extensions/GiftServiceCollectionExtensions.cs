@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Gift.Domain.UIModel.Conf;
-using Gift.Domain.UIModel;
 using Gift.ApplicationService.Services.SignalHandler.Bus;
 using Gift.ApplicationService.Services.SignalHandler.Global;
 using Gift.ApplicationService.Services;
@@ -19,7 +18,6 @@ namespace Gift.ApplicationService.Extensions
             services.AddSingleton<IKeyMapper, KeyMapper>();
             services.AddSingleton<IMonitorService, MonitorService>();
             services.AddSingleton<ISignalBus, SignalBus>();
-            services.AddSingleton<IGiftUiProvider, GiftUiProvider>();
             services.AddSingleton<IGiftService, GiftLauncherService>();
             services.AddSingleton<IUISignalHandler, UISignalHandler>();
             services.AddSingleton<IKeySignalHandler, KeySignalHandler>();

@@ -1,7 +1,7 @@
 
 using System;
-using Gift.Domain.Builders;
 using Gift.Domain.Builders.Mappers;
+using Gift.Domain.Builders.UIModel;
 using Gift.Domain.ServiceContracts;
 using Gift.XmlUiParser.FileParser;
 using Gift.XmlUiParser.Tests.Helper;

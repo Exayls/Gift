@@ -1,4 +1,5 @@
-﻿using Gift.Domain.UIModel.Border;
+﻿using Gift.Domain.Builders.UIModel.Display;
+using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.MetaData;
 using Xunit;
@@ -17,7 +18,9 @@ namespace Gift.Domain.Tests.Border
         public void GetDisplay_should_return_border_with_thickness_1_when_border_thickness_equal_1_1()
         {
             //act
-            IScreenDisplay display = SimpleBorder.GetDisplay(new Bound(2, 2));
+            Size bound = new Size(2, 2);
+			var screen = new ScreenDisplayBuilder().WithBound(bound);
+            IScreenDisplay display = SimpleBorder.GetDisplay(screen);
             //assert
             const string expected = "//\n" +
                                     "//";
@@ -26,8 +29,10 @@ namespace Gift.Domain.Tests.Border
         [Fact]
         public void GetDisplay_should_return_border_with_thickness_1_when_border_thickness_equal_1_2()
         {
+            Size bound = new Size(4, 4);
+			var screen = new ScreenDisplayBuilder().WithBound(bound).WithChar(' ');
             //act
-            IScreenDisplay display = SimpleBorder.GetDisplay(new Bound(4, 4), ' ');
+            IScreenDisplay display = SimpleBorder.GetDisplay(screen);
             //assert
             const string expected = "////\n" +
                                     "/  /\n" +
@@ -40,8 +45,10 @@ namespace Gift.Domain.Tests.Border
         {
             //arrange
             SimpleBorder = new SimpleBorder(1, '»');
+            Size bound = new Size(4, 4);
+			var screen = new ScreenDisplayBuilder().WithBound(bound).WithChar(' ');
             //act
-            IScreenDisplay display = SimpleBorder.GetDisplay(new Bound(4, 4), ' ');
+            IScreenDisplay display = SimpleBorder.GetDisplay(screen);
             //assert
             const string expected = "»»»»\n" +
                                     "»  »\n" +
@@ -54,8 +61,10 @@ namespace Gift.Domain.Tests.Border
         {
             //arrange
             SimpleBorder = new SimpleBorder(2, '»');
+            Size bound = new Size(6, 6);
+			var screen = new ScreenDisplayBuilder().WithBound(bound).WithChar(' ');
             //act
-            IScreenDisplay display = SimpleBorder.GetDisplay(new Bound(6, 6), ' ');
+            IScreenDisplay display = SimpleBorder.GetDisplay(screen);
             //assert
             const string expected = "»»»»»»\n" +
                                     "»»»»»»\n" +
@@ -70,8 +79,10 @@ namespace Gift.Domain.Tests.Border
         {
             //arrange
             SimpleBorder = new SimpleBorder(2, '»');
+            Size bound = new Size(8, 8);
+			var screen = new ScreenDisplayBuilder().WithBound(bound).WithChar(' ');
             //act
-            IScreenDisplay display = SimpleBorder.GetDisplay(new Bound(8, 8), ' ');
+            IScreenDisplay display = SimpleBorder.GetDisplay(screen);
             //assert
             const string expected = "»»»»»»»»\n" +
                                     "»»»»»»»»\n" +
@@ -88,8 +99,10 @@ namespace Gift.Domain.Tests.Border
         {
             //arrange
             SimpleBorder = new SimpleBorder(3, '»');
+            Size bound = new Size(8, 8);
+			var screen = new ScreenDisplayBuilder().WithBound(bound).WithChar(' ');
             //act
-            IScreenDisplay display = SimpleBorder.GetDisplay(new Bound(8, 8), ' ');
+            IScreenDisplay display = SimpleBorder.GetDisplay(screen);
             //assert
             const string expected = "»»»»»»»»\n" +
                                     "»»»»»»»»\n" +

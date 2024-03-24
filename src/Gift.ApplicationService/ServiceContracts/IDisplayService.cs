@@ -8,7 +8,7 @@ namespace Gift.ApplicationService.ServiceContracts
         void NextElementInSelectedContainer();
         void PreviousContainer();
         void PreviousElementInSelectedContainer();
-        void Resize(Bound bound);
+        void Resize(Size bound);
         void ScrollDown();
         void ScrollUp();
         void UpdateDisplay();

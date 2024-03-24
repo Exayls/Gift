@@ -39,6 +39,10 @@ namespace Gift.Displayer.Displayer
                     oldFrontColor = frontColorMap[i, j];
                     oldBackColor = backColorMap[i, j];
                 }
+                if (i < displayMap.GetLength(0)-1)
+                {
+                    displayString.Append("\n");
+                }
             }
 
             return displayString.ToString();

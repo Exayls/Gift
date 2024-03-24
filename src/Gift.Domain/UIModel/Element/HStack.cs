@@ -1,4 +1,5 @@
-﻿using Gift.Domain.UIModel.Border;
+﻿using Gift.Domain.ServiceContracts;
+using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.MetaData;
@@ -12,9 +13,9 @@ namespace Gift.Domain.UIModel.Element
         {
             get
             {
-                if (Bound.Height != 0)
+                if (Size.Height != 0)
                 {
-                    return Bound.Height;
+                    return Size.Height;
                 }
                 int maxHeightChild = 0;
                 foreach (UIElement renderable in Childs)
@@ -32,9 +33,9 @@ namespace Gift.Domain.UIModel.Element
         {
             get
             {
-                if (Bound.Width != 0)
+                if (Size.Width != 0)
                 {
-                    return Bound.Width;
+                    return Size.Width;
                 }
                 int WidthAllChilds = 0;
                 foreach (UIElement renderable in Childs)
@@ -50,24 +51,21 @@ namespace Gift.Domain.UIModel.Element
 
         public HStack(IBorder border,
                       IScreenDisplayFactory screenDisplayFactory,
-                      Bound bound,
+                      Size bound,
                       Color frontColor = Color.Default,
                       Color backColor = Color.Default,
-                      bool IsSelectableContainer = false) : base(screenDisplayFactory, bound, border, frontColor: frontColor, backColor: backColor, isSelectableContainer:IsSelectableContainer)
+                      bool IsSelectableContainer = false) : base(screenDisplayFactory, bound, border, frontColor: frontColor, backColor: backColor, isSelectableContainer: IsSelectableContainer)
         {
         }
 
 
-        public override Context GetContextRelativeRenderable(IRenderable renderable, Context context)
+        public override Position GetContext(Renderable renderable, Position position)
         {
             int ChildContextPosition = GetWidthRenderable(renderable);
-            return new Context(
-                new Position(0
-                           , ChildContextPosition - ScrollIndex),
-                new Bound(renderable.Height, renderable.Width));
+            return new Position(0, ChildContextPosition - ScrollIndex);
         }
 
-        private int GetWidthRenderable(IRenderable renderableToFind)
+        private int GetWidthRenderable(Renderable renderableToFind)
         {
             int ChildContextPosition = 0;
             foreach (UIElement renderable in Childs)
@@ -89,28 +87,22 @@ namespace Gift.Domain.UIModel.Element
             return false;
         }
 
-        public override Position GetRelativePosition(Context context)
+        public override Position GetRelativePosition(Position position)
         {
-            return new Position(context.Position.y,
-                                context.Position.x);
+            return new Position(position.y,
+                                position.x);
         }
 
-        public IScreenDisplay GetDisplayWithBorder(Bound bound, char fillingChar)
-        {
-            int thickness = Border.Thickness;
-            IScreenDisplay screenDisplay = GetDisplayBorder(bound, new DefaultConfiguration());
-            IScreenDisplay emptyHstackScreen = GetDisplayWithoutBorder(bound, new Configuration(fillingChar: fillingChar));
-            screenDisplay.AddDisplay(emptyHstackScreen, new Position(thickness, thickness));
-            return screenDisplay;
-        }
 
-        public override IScreenDisplay GetDisplayWithoutBorder(Bound bound, IConfiguration configuration)
+        public override IScreenDisplay GetDisplayWithoutBorder(IConfiguration configuration, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator)
         {
             int thickness = Border.Thickness;
-            Bound boundEmptyVStack = new Bound(bound.Height - 2 * thickness, bound.Width - 2 * thickness);
-            IScreenDisplay emptyVstackScreen = _screenDisplayFactory.Create(boundEmptyVStack, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor, BackColor == Color.Default ? configuration.DefaultBackColor : BackColor, configuration.FillingChar);
+			var fullSize = sizeCalculator.GetTrueSize(this);
+            Size boundEmptyVStack = new Size(fullSize.Height - 2 * thickness, fullSize.Width - 2 * thickness);
+            IScreenDisplay emptyVstackScreen = _screenDisplayFactory.Create(
+                boundEmptyVStack, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor,
+                BackColor == Color.Default ? configuration.DefaultBackColor : BackColor, configuration.FillingChar);
             return emptyVstackScreen;
         }
-
     }
 }

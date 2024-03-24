@@ -1,11 +1,13 @@
-﻿using Gift.Domain.UIModel.Border;
+﻿using Gift.Domain.ServiceContracts;
+using Gift.Domain.Services;
+using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.MetaData;
 
 namespace Gift.Domain.UIModel.Element
 {
-    public abstract class UIElement : IRenderable
+    public abstract class UIElement : Renderable
     {
 
         public abstract int Height { get; }
@@ -33,14 +35,24 @@ namespace Gift.Domain.UIModel.Element
             BackColor = backColor;
         }
 
-        public abstract IScreenDisplay GetDisplayWithoutBorder(Bound bounds, IConfiguration configuration);
-        public abstract IScreenDisplay GetDisplayBorder(Bound bound, IConfiguration configuration);
-        public abstract Position GetRelativePosition(Context context);
+        public abstract IScreenDisplay GetDisplayWithoutBorder(IConfiguration configuration, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator);
+        public abstract IScreenDisplay GetDisplayBorder(IConfiguration configuratione, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator);
+        public abstract Position GetRelativePosition(Position position);
         public abstract bool IsFixed();
 
-        public virtual bool Equals(UIElement element)
+        public IScreenDisplay GetDisplayWithBorder(char fillingChar, ColorResolver colorResolver, IElementSizeCalculator sizeCalculator)
         {
-            if (!this.Border.Equals(element.Border))
+            int thickness = Border.Thickness;
+            IScreenDisplay screenDisplay = GetDisplayBorder(new DefaultConfiguration(), colorResolver, sizeCalculator);
+            IScreenDisplay emptyHstackScreen = GetDisplayWithoutBorder(new Configuration(fillingChar: fillingChar), colorResolver, sizeCalculator);
+            screenDisplay.AddDisplay(emptyHstackScreen, new Position(thickness, thickness));
+            return screenDisplay;
+        }
+
+
+        public virtual bool IsSimilarTo(UIElement element)
+        {
+            if (!this.Border.IsSimilarTo(element.Border))
                 return false;
             if (!this.BackColor.Equals(element.BackColor))
                 return false;
@@ -48,5 +60,6 @@ namespace Gift.Domain.UIModel.Element
                 return false;
             return true;
         }
+
     }
 }

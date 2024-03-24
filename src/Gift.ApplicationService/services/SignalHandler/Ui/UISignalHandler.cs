@@ -86,7 +86,7 @@ namespace Gift.ApplicationService.Services.SignalHandler.Ui
             if (e is ConsoleSizeEventArgs)
             {
                 ConsoleSizeEventArgs eventArgs = (ConsoleSizeEventArgs)e;
-                _displayService.Resize(new Bound(eventArgs.ConsoleHeight, eventArgs.ConsoleWidth));
+                _displayService.Resize(new Size(eventArgs.ConsoleHeight, eventArgs.ConsoleWidth));
                 _displayService.UpdateDisplay();
             }
         }

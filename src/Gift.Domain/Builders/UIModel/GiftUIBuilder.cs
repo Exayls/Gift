@@ -1,94 +1,122 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using System.Globalization;
 using Gift.Domain.Builders.Mappers;
+using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Border;
-using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
 
-namespace Gift.Domain.Builders
+namespace Gift.Domain.Builders.UIModel
 {
-    public class VStackBuilder : IContainerBuilder
+    public class GiftUIBuilder : IContainerBuilder
     {
-        private IBorder _border = new NoBorder();
-        private Bound _bound = new Bound(0, 0);
-        private IScreenDisplayFactory screenDisplayFactory = new ScreenDisplayFactory();
-        private Color backColor = Color.Default;
-        private Color frontColor = Color.Default;
+        private Size _bound;
+        private IBorder _border;
+        private Color _frontColor = Color.Default;
+        private Color _backColor = Color.Default;
         private IList<UIElement> selectableElements = new List<UIElement>();
         private IList<UIElement> unSelectableElements = new List<UIElement>();
-        private int? _height;
-        private int? _width;
+        private IList<Container> selectableContainers = new List<Container>();
+        private int? _height = null;
+        private int? _width = null;
 
         private bool _isSelectableContainer = false;
 
-        public VStackBuilder WithBorder(IBorder border)
+        public GiftUIBuilder()
         {
-            _border = border;
-            return this;
+            if (!Console.IsInputRedirected && !Console.IsOutputRedirected)
+            {
+                _bound = new Size(Console.WindowHeight, Console.WindowWidth);
+            }
+            else
+            {
+                _bound = new Size(0, 0);
+            }
+            _border = new NoBorder();
         }
-        public VStackBuilder WithBound(Bound bound)
+
+        public GiftUIBuilder WithBound(Size bound)
         {
             _bound = bound;
             return this;
         }
 
-        public VStackBuilder WithBackgroundColor(Color color)
+        public GiftUIBuilder WithBorder(IBorder border)
         {
-            backColor = color;
+            _border = border;
             return this;
         }
 
-        public VStackBuilder WithForegroundColor(Color color)
-        {
-            frontColor = color;
-            return this;
-        }
-
-        public VStackBuilder WithSelectableElement(UIElement element)
-        {
-            selectableElements.Add(element);
-            return this;
-        }
-
-        public VStackBuilder WithUnSelectableElement(UIElement element)
-        {
-            unSelectableElements.Add(element);
-            return this;
-        }
-
-        public VStackBuilder IsSelectableContainer(bool isSelectableContainer)
-        {
-            _isSelectableContainer = isSelectableContainer;
-            return this;
-        }
-
-        public VStackBuilder WithHeight(int height)
+        public GiftUIBuilder WithHeight(int height)
         {
             _height = height;
             return this;
         }
 
-        public VStackBuilder WithWidth(int width)
+        public GiftUIBuilder WithWidth(int width)
         {
             _width = width;
             return this;
         }
 
-        public VStack Build()
+        public GiftUIBuilder WithBackgroundColor(Color color)
         {
-            var bound = new Bound(_height ?? _bound.Height, _width ?? _bound.Width);
-            var vstack = new VStack(_border, screenDisplayFactory, bound, frontColor: frontColor, backColor: backColor,
+            _backColor = color;
+            return this;
+        }
+
+        public GiftUIBuilder WithForegroundColor(Color color)
+        {
+            _frontColor = color;
+            return this;
+        }
+
+        public GiftUIBuilder WithSelectableElement(UIElement element)
+        {
+            this.selectableElements.Add(element);
+            return this;
+        }
+
+        public GiftUIBuilder WithSelectableContainer(Container element)
+        {
+            // this.selectableContainers.Add(element);
+            unSelectableElements.Add(element);
+            return this;
+        }
+
+        public GiftUIBuilder WithUnSelectableElement(UIElement element)
+        {
+            unSelectableElements.Add(element);
+            return this;
+        }
+
+        public GiftUIBuilder IsSelectableContainer(bool isSelectableContainer)
+        {
+            _isSelectableContainer = isSelectableContainer;
+            return this;
+        }
+
+        public GiftUI Build()
+        {
+            var bound = new Size(_height ?? _bound.Height, _width ?? _bound.Width);
+            var giftui = new GiftUI(size: bound, border: _border, frontColor: _frontColor, backColor: _backColor,
                                     isSelectableContainer: _isSelectableContainer);
+
             foreach (UIElement element in unSelectableElements)
             {
-                vstack.AddUnselectableChild(element);
+                giftui.Add(element);
             }
             foreach (UIElement element in selectableElements)
             {
-                vstack.AddSelectableChild(element);
+                giftui.AddSelectableChild(element);
             }
-            return vstack;
+            foreach (Container element in selectableContainers)
+            {
+                giftui.SelectableContainers.Add(element);
+                giftui.Add(element);
+            }
+            return giftui;
         }
 
         UIElement IBuilder<UIElement>.Build()
@@ -101,7 +129,7 @@ namespace Gift.Domain.Builders
             return Build();
         }
 
-        IContainerBuilder IContainerBuilder.WithBound(Bound bound)
+        IContainerBuilder IContainerBuilder.WithBound(Size bound)
         {
             return WithBound(bound);
         }
@@ -114,6 +142,16 @@ namespace Gift.Domain.Builders
         IContainerBuilder IContainerBuilder.WithUnSelectableElement(UIElement element)
         {
             return WithUnSelectableElement(element);
+        }
+
+        IContainerBuilder IContainerBuilder.WithHeight(int height)
+        {
+            return WithHeight(height);
+        }
+
+        IContainerBuilder IContainerBuilder.WithWidth(int width)
+        {
+            return WithWidth(width);
         }
 
         IUIElementBuilder IUIElementBuilder.WithBorder(IBorder border)
@@ -131,19 +169,14 @@ namespace Gift.Domain.Builders
             return WithForegroundColor(color);
         }
 
-        IContainerBuilder IContainerBuilder.WithHeight(int height)
-        {
-            return WithHeight(height);
-        }
-
-        IContainerBuilder IContainerBuilder.WithWidth(int width)
-        {
-            return WithWidth(width);
-        }
-
         IContainerBuilder IContainerBuilder.IsSelectableContainer(bool isSelectableContainer)
         {
             return IsSelectableContainer(isSelectableContainer);
+        }
+
+        public IContainerBuilder WithBound(string boundStr, IBoundMapper mapper)
+        {
+            return WithBound(mapper.ToBound(boundStr));
         }
 
         public IUIElementBuilder WithBorder(string borderStr, IBorderMapper mapper)
@@ -159,11 +192,6 @@ namespace Gift.Domain.Builders
         public IUIElementBuilder WithForegroundColor(string colorStr, IColorMapper mapper)
         {
             return WithForegroundColor(mapper.ToColor(colorStr));
-        }
-
-        public IContainerBuilder WithBound(string boundStr, IBoundMapper mapper)
-        {
-            return WithBound(mapper.ToBound(boundStr));
         }
 
         public IContainerBuilder WithHeight(string heightStr)
