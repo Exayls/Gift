@@ -4,6 +4,7 @@ using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.MetaData;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -143,6 +144,11 @@ namespace Gift.Domain.UIModel.Element
                     return false;
             }
             return true;
+        }
+
+        public void Resize(Size bound)
+        {
+			Size = bound;
         }
     }
 }

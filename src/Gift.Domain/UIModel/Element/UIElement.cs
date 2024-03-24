@@ -1,4 +1,5 @@
-﻿using Gift.Domain.ServiceContracts;
+﻿using System;
+using Gift.Domain.ServiceContracts;
 using Gift.Domain.Services;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Conf;
@@ -60,5 +61,6 @@ namespace Gift.Domain.UIModel.Element
                 return false;
             return true;
         }
+
     }
 }

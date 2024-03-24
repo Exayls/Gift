@@ -4,6 +4,7 @@ using System.Linq;
 using Gift.Domain.Builders.UIModel;
 using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel.Element;
+using Gift.Domain.UIModel.MetaData;
 
 namespace Gift.Repository
 {

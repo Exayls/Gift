@@ -67,35 +67,40 @@ namespace Gift.ApplicationService.Services
             {
                 List<Container> selectableContainers = _repository.GetSelectableContainers().ToList();
                 var container = selectableContainers[(selectableContainers.IndexOf(selectedContainer) - 1 +
-                                                          selectableContainers.Count) %
-                                                         selectableContainers.Count];
+                                                      selectableContainers.Count) %
+                                                     selectableContainers.Count];
                 _repository.SelectContainer(container);
             }
         }
 
         public void NextElementInSelectedContainer()
         {
-            _uiProvider.Ui.NextElementInSelectedContainer();
+			_repository.GetSelectedContainer()?.NextElement();
         }
 
         public void PreviousElementInSelectedContainer()
         {
-            _uiProvider.Ui.PreviousElementInSelectedContainer();
+			_repository.GetSelectedContainer()?.PreviousElement();
         }
 
         public void Resize(Size bound)
         {
-            _uiProvider.Ui.Resize(bound);
+            var root = _repository.GetRoot();
+            if (root is Container)
+            {
+				var container = (Container)root;
+                container.Resize(bound);
+            }
         }
 
         public void ScrollUp()
         {
-            _uiProvider.Ui.SelectedContainer?.ScrollUp();
+			_repository.GetSelectedContainer()?.ScrollUp();
         }
 
         public void ScrollDown()
         {
-            _uiProvider.Ui.SelectedContainer?.ScrollDown();
+			_repository.GetSelectedContainer()?.ScrollDown();
         }
     }
 }
