@@ -1,8 +1,9 @@
 using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Element;
+using Gift.Domain.UIModel.MetaData;
 
-namespace Gift.Domain.UIModel.MetaData
+namespace Gift.Domain.Services
 {
     public class ColorResolver : IColorResolver
     {

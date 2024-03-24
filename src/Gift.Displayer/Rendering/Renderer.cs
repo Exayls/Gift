@@ -10,11 +10,13 @@ namespace Gift.Displayer.Rendering
     {
         private readonly IConfiguration _configuration;
         private readonly IColorResolver _colorResolver;
+        private readonly IElementSizeCalculator _sizeCalculator;
 
-        public Renderer(IConfiguration configuration, IColorResolver colorResolver)
+        public Renderer(IConfiguration configuration, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator)
         {
             _configuration = configuration;
             _colorResolver = colorResolver;
+            _sizeCalculator = sizeCalculator;
         }
 
         public IScreenDisplay GetRenderDisplay(UIElement giftUI)
@@ -47,12 +49,12 @@ namespace Gift.Displayer.Rendering
 
         private IScreenDisplay CreateBorder(Renderable element)
         {
-            return element.GetDisplayBorder(_configuration, _colorResolver);
+            return element.GetDisplayBorder(_configuration, _colorResolver, _sizeCalculator);
         }
 
         private IScreenDisplay CreateDisplay(Renderable container)
         {
-            return container.GetDisplayWithoutBorder(_configuration, _colorResolver);
+            return container.GetDisplayWithoutBorder(_configuration, _colorResolver, _sizeCalculator);
         }
 
         private void AddDisplayToBorder(IScreenDisplay screen, Renderable renderable, IScreenDisplay display)
@@ -96,10 +98,10 @@ namespace Gift.Displayer.Rendering
             switch (renderable)
             {
             case Container containerToRender:
-                Render(screen, containerToRender, new(0,0));
+                Render(screen, containerToRender, new(0, 0));
                 break;
             default:
-                Render(screen, renderable, new(0,0));
+                Render(screen, renderable, new(0, 0));
                 break;
             }
         }

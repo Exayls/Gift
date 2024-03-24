@@ -86,17 +86,7 @@ namespace Gift.Domain.UIModel.Element
             return position;
         }
 
-        public IScreenDisplay GetDisplayWithBorder(char fillingChar, ColorResolver colorResolver)
-        {
-            int thickness = Border.Thickness;
-            IScreenDisplay screenDisplay = GetDisplayBorder(new DefaultConfiguration(), colorResolver);
-            IScreenDisplay emptyVstackScreen =
-                GetDisplayWithoutBorder(new Configuration(fillingChar: fillingChar), colorResolver);
-            screenDisplay.AddDisplay(emptyVstackScreen, new Position(thickness, thickness));
-            return screenDisplay;
-        }
-
-        public override IScreenDisplay GetDisplayWithoutBorder(IConfiguration configuration, IColorResolver colorResolver)
+        public override IScreenDisplay GetDisplayWithoutBorder(IConfiguration configuration, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator)
         {
             int thickness = Border.Thickness;
 

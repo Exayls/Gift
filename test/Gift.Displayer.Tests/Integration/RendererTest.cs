@@ -1,5 +1,7 @@
 ﻿using Gift.Displayer.Rendering;
 using Gift.Domain.Builders.UIModel;
+using Gift.Domain.ServiceContracts;
+using Gift.Domain.Services;
 using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Conf;
@@ -21,8 +23,13 @@ namespace TestGift.Test.UI
 
         public RendererTest(ITestOutputHelper output)
         {
-            renderer = new Renderer(new DefaultConfiguration(), new ColorResolver(new InMemoryRepository()));
+            renderer = GetRenderer(new InMemoryRepository());
             _output = output;
+        }
+
+        private static Renderer GetRenderer(IRepository repository)
+        {
+            return new Renderer(new DefaultConfiguration(), new ColorResolver(repository), new TrueElementSizeCalculator(repository));
         }
 
         [Fact]

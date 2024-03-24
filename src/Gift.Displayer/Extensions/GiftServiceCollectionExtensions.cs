@@ -2,7 +2,6 @@
 using Gift.Displayer.Displayer;
 using Gift.Displayer.Rendering;
 using Gift.Domain.ServiceContracts;
-using Gift.Domain.UIModel.MetaData;
 
 namespace Gift.Displayer.Extensions
 {
@@ -13,7 +12,6 @@ namespace Gift.Displayer.Extensions
             services.AddSingleton<IConsoleDisplayStringFormater, ConsoleDisplayStringFormater>();
             services.AddSingleton<IDisplayer, ConsoleDisplayer>();
             services.AddSingleton<IRenderer, Renderer>();
-            services.AddSingleton<IColorResolver, ColorResolver>();
 
             return services;
         }

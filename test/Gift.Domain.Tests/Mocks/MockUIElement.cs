@@ -39,12 +39,12 @@ namespace TestGift.Mocks
             return false;
         }
 
-        public override IScreenDisplay GetDisplayWithoutBorder(IConfiguration configuration, IColorResolver colorResolver)
+        public override IScreenDisplay GetDisplayWithoutBorder(IConfiguration configuration, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator)
         {
             throw new System.NotImplementedException();
         }
 
-        public override IScreenDisplay GetDisplayBorder(IConfiguration configuratione, IColorResolver colorResolver)
+        public override IScreenDisplay GetDisplayBorder(IConfiguration configuratione, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator)
         {
             throw new System.NotImplementedException();
         }

@@ -9,11 +9,19 @@ using Gift.ApplicationService.Services;
 using Gift.Displayer.Rendering;
 using Gift.Domain.Builders.UIModel;
 using Gift.Repository;
+using Gift.Domain.Services;
+using Gift.Domain.ServiceContracts;
 
 namespace Gift.Displayer.Tests.Integration
 {
     public class GiftUITest
     {
+
+        private static Renderer GetRenderer(IRepository repository)
+        {
+            return new Renderer(new DefaultConfiguration(), new ColorResolver(repository), new TrueElementSizeCalculator(repository));
+        }
+
         [Fact]
         public void CanRenderUserInterface()
         {
@@ -24,7 +32,7 @@ namespace Gift.Displayer.Tests.Integration
                 var ui = GetGiftUI(new Size(20, 60));
                 repo.SaveRoot(ui);
                 IScreenDisplay renderedText =
-                    new Renderer(new DefaultConfiguration(), new ColorResolver(repo)).GetRenderDisplay(ui);
+                    GetRenderer(repo).GetRenderDisplay(ui);
                 var expectedBuilder = new StringBuilder();
                 expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, 60));
                 for (int i = 1; i < 20; i++)
@@ -53,7 +61,7 @@ namespace Gift.Displayer.Tests.Integration
                 var repo = new InMemoryRepository();
                 repo.SaveRoot(ui);
                 IScreenDisplay renderedText =
-                    new Renderer(new DefaultConfiguration(), new ColorResolver(repo)).GetRenderDisplay(ui);
+                    GetRenderer(repo).GetRenderDisplay(ui);
                 var expectedBuilder = new StringBuilder();
                 expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, 15));
                 for (int i = 1; i < 10; i++)

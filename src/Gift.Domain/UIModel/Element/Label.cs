@@ -72,14 +72,14 @@ namespace Gift.Domain.UIModel.Element
             return true;
         }
 
-        public override IScreenDisplay GetDisplayWithoutBorder(IConfiguration configuration, IColorResolver colorResolver)
+        public override IScreenDisplay GetDisplayWithoutBorder(IConfiguration configuration, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator)
         {
             Color frontColor = colorResolver.GetFrontColor(this, configuration);
             Color backColor = colorResolver.GetBackColor(this, configuration);
             return new ScreenDisplay(Text, frontColor, backColor);
         }
 
-        public override IScreenDisplay GetDisplayBorder(IConfiguration configuration, IColorResolver colorResolver)
+        public override IScreenDisplay GetDisplayBorder(IConfiguration configuration, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator)
         {
 			var screen = new ScreenDisplayBuilder()
 				.WithFrontColor(colorResolver.GetFrontColor(this, configuration))

@@ -1,5 +1,6 @@
 ﻿using Gift.Domain.Builders.UIModel;
 using Gift.Domain.ServiceContracts;
+using Gift.Domain.Services;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
@@ -61,7 +62,7 @@ namespace Gift.Domain.Tests.UI
         private IScreenDisplay GetScreenDisplay(HStack hstack, char charFill = '*')
         {
             IRepository repository = Mock.Of<IRepository>();
-            return hstack.GetDisplayWithBorder(charFill, new ColorResolver(repository));
+            return hstack.GetDisplayWithBorder(charFill, new ColorResolver(repository), new TrueElementSizeCalculator(repository));
         }
 
         // GetDisplay tests

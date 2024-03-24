@@ -10,11 +10,19 @@ using Gift.ApplicationService.Services;
 using Gift.Displayer.Rendering;
 using Gift.Domain.Builders.UIModel;
 using Gift.Repository;
+using Gift.Domain.ServiceContracts;
+using Gift.Domain.Services;
 
 namespace TestGift.UI
 {
     public class GiftContainerTest
     {
+
+        private static Renderer GetRenderer(IRepository repository)
+        {
+            return new Renderer(new DefaultConfiguration(), new ColorResolver(repository), new TrueElementSizeCalculator(repository));
+        }
+
         [Fact]
         public void CanDisplayContainer()
         {
@@ -23,7 +31,7 @@ namespace TestGift.UI
             var ui = GetGiftUi(new Size(20, 60));
             InMemoryRepository repository = new InMemoryRepository();
 			repository.SaveRoot(ui);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -52,7 +60,7 @@ namespace TestGift.UI
             ui.Add(element);
             InMemoryRepository repository = new InMemoryRepository();
 			repository.SaveRoot(ui);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -80,7 +88,7 @@ namespace TestGift.UI
             ui.Add(element);
             InMemoryRepository repository = new InMemoryRepository();
 			repository.SaveRoot(ui);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -108,7 +116,7 @@ namespace TestGift.UI
             ui.Add(element);
             InMemoryRepository repository = new InMemoryRepository();
 			repository.SaveRoot(ui);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -136,7 +144,7 @@ namespace TestGift.UI
             ui.Add(element);
             InMemoryRepository repository = new InMemoryRepository();
 			repository.SaveRoot(ui);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -164,7 +172,7 @@ namespace TestGift.UI
             ui.Add(element);
             InMemoryRepository repository = new InMemoryRepository();
 			repository.SaveRoot(ui);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -188,7 +196,7 @@ namespace TestGift.UI
             ui.Add(element);
             InMemoryRepository repository = new InMemoryRepository();
 			repository.SaveRoot(ui);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -216,7 +224,7 @@ namespace TestGift.UI
             ui.Add(element);
             InMemoryRepository repository = new InMemoryRepository();
 			repository.SaveRoot(ui);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -245,7 +253,7 @@ namespace TestGift.UI
             ui.Add(element);
             InMemoryRepository repository = new InMemoryRepository();
 			repository.SaveRoot(ui);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -274,7 +282,7 @@ namespace TestGift.UI
             ui.Add(element);
             InMemoryRepository repository = new InMemoryRepository();
 			repository.SaveRoot(ui);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -303,7 +311,7 @@ namespace TestGift.UI
             ui.Add(element);
             InMemoryRepository repository = new InMemoryRepository();
 			repository.SaveRoot(ui);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";

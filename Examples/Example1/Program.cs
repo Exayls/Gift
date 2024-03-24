@@ -1,6 +1,7 @@
 ﻿using Gift.Displayer.Displayer;
 using Gift.Displayer.Rendering;
 using Gift.Domain.Builders.UIModel;
+using Gift.Domain.Services;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.MetaData;
 using Gift.Repository;
@@ -20,7 +21,7 @@ vstack.Add(new LabelBuilder().Build());
 var repo = new InMemoryRepository();
 repo.SaveRoot(ui);
 new ConsoleDisplayer(new ConsoleDisplayStringFormater())
-    .Display(new Renderer(new DefaultConfiguration(),  new ColorResolver(repo)).GetRenderDisplay(ui));
+    .Display(new Renderer(new DefaultConfiguration(),  new ColorResolver(repo), new TrueElementSizeCalculator(repo)).GetRenderDisplay(ui));
 
 // var gift = new GiftBase();
 // gift.initialize();

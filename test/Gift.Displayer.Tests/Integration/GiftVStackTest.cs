@@ -2,6 +2,7 @@
 using Gift.Displayer.Rendering;
 using Gift.Domain.Builders.UIModel;
 using Gift.Domain.ServiceContracts;
+using Gift.Domain.Services;
 using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Conf;
@@ -30,6 +31,11 @@ namespace Gift.Displayer.Tests.Integration
             _ScreenDisplayFactoryMock.Setup(s => s.Create(It.IsAny<Size>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock1.Object);
         }
 
+        private static Renderer GetRenderer(IRepository repository)
+        {
+            return new Renderer(new DefaultConfiguration(), new ColorResolver(repository), new TrueElementSizeCalculator(repository));
+        }
+
         [Fact]
         public void TestVStack()
         {
@@ -38,8 +44,9 @@ namespace Gift.Displayer.Tests.Integration
             ui.Add(vstack);
 
             IRepository repository = new InMemoryRepository();
-			repository.SaveRoot(ui);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
+            repository.SaveRoot(ui);
+            Renderer renderer = GetRenderer(repository);
+            IScreenDisplay renderedText = renderer.GetRenderDisplay(ui);
             string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
 
             var expectedBuilder = new StringBuilder();
@@ -77,7 +84,7 @@ namespace Gift.Displayer.Tests.Integration
             vstack.Add(label);
             IRepository repository = new InMemoryRepository();
 			repository.SaveRoot(ui);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -106,7 +113,7 @@ namespace Gift.Displayer.Tests.Integration
             vstack.Add(label);
             IRepository repository = new InMemoryRepository();
 			repository.SaveRoot(ui);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -138,7 +145,7 @@ namespace Gift.Displayer.Tests.Integration
             vstack.Add(label2);
             IRepository repository = new InMemoryRepository();
 			repository.SaveRoot(ui);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -176,7 +183,7 @@ namespace Gift.Displayer.Tests.Integration
             vstack.Add(label3);
             IRepository repository = new InMemoryRepository();
 			repository.SaveRoot(ui);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -219,7 +226,7 @@ namespace Gift.Displayer.Tests.Integration
             IRepository repository = new InMemoryRepository();
 			repository.SaveRoot(ui);
 
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -265,7 +272,7 @@ namespace Gift.Displayer.Tests.Integration
             vstack.Add(label5);
             IRepository repository = new InMemoryRepository();
 			repository.SaveRoot(ui);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
             var expectedBuilder = new StringBuilder();
             string expected = "";
             string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
@@ -315,7 +322,7 @@ namespace Gift.Displayer.Tests.Integration
             vstack.Add(label6);
             IRepository repository = new InMemoryRepository();
 			repository.SaveRoot(ui);
-            IScreenDisplay renderedText = new Renderer(new DefaultConfiguration(), new ColorResolver(repository)).GetRenderDisplay(ui);
+            IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -345,22 +352,26 @@ namespace Gift.Displayer.Tests.Integration
             }
         }
 
+        private static IScreenDisplay GetDisplay(UIElement element, IRepository repository)
+        {
+            return element.GetDisplayWithBorder('*', new ColorResolver(repository), new TrueElementSizeCalculator(repository));
+        }
+
         [Fact]
         public void GetDisplay_should_return_screen_when_call_GetDisplay_whithout_border()
         {
             var vstack = new VStackBuilder()
-				.WithUnSelectableElement(new LabelBuilder().WithText("****").Build())
-				.WithUnSelectableElement(new LabelBuilder().WithText("*").Build())
+                .WithUnSelectableElement(new LabelBuilder().WithText("****").Build())
+                .WithUnSelectableElement(new LabelBuilder().WithText("*").Build())
                 .WithBorder(new NoBorder())
                 .Build();
-			var repository = Mock.Of<IRepository>();
-            //act
-            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder('*', new ColorResolver(repository));
-            //assert
+            var repository = Mock.Of<IRepository>();
+            IScreenDisplay screenDisplay = GetDisplay(vstack, repository);            //assert
             const string expected = "****\n" +
                                     "****";
             Assert.Equal(expected, screenDisplay.DisplayString.ToString());
         }
+
 
         [Fact]
         public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border1()
@@ -372,7 +383,7 @@ namespace Gift.Displayer.Tests.Integration
                 .Build();
             IRepository repository = new InMemoryRepository();
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder('*', new ColorResolver(repository));
+            IScreenDisplay screenDisplay = GetDisplay(vstack, repository);            //assert
             //assert
             const string expected = "----\n" +
                                     "-**-\n" +
@@ -390,7 +401,7 @@ namespace Gift.Displayer.Tests.Integration
                 .Build();
             IRepository repository = new InMemoryRepository();
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder('*', new ColorResolver(repository));
+            IScreenDisplay screenDisplay = GetDisplay(vstack, repository);            //assert
             //assert
             const string expected = "iiii\n" +
                                     "i**i\n" +
@@ -410,7 +421,7 @@ namespace Gift.Displayer.Tests.Integration
                 .Build();
             IRepository repository = new InMemoryRepository();
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder('*', new ColorResolver(repository));
+            IScreenDisplay screenDisplay = GetDisplay(vstack, repository);            //assert
             //assert
             const string expected = "-----\n" +
                                     "-***-\n" +
@@ -430,7 +441,7 @@ namespace Gift.Displayer.Tests.Integration
                 .Build();
             IRepository repository = new InMemoryRepository();
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder('*', new ColorResolver(repository));
+            IScreenDisplay screenDisplay = GetDisplay(vstack, repository);            //assert
             //assert
             const string expected = "------\n" +
                                     "-****-\n" +
@@ -450,7 +461,7 @@ namespace Gift.Displayer.Tests.Integration
                 .Build();
             IRepository repository = new InMemoryRepository();
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder('*', new ColorResolver(repository));
+            IScreenDisplay screenDisplay = GetDisplay(vstack, repository);            //assert
             //assert
             const string expected = "-------\n" +
                                     "-------\n" +
@@ -471,7 +482,7 @@ namespace Gift.Displayer.Tests.Integration
                 .Build();
             IRepository repository = new InMemoryRepository();
             //act
-            IScreenDisplay screenDisplay = vstack.GetDisplayWithBorder('*', new ColorResolver(repository));
+            IScreenDisplay screenDisplay = GetDisplay(vstack, repository);            //assert
             //assert
             const string expected = "-------\n" +
                                     "-------\n" +

@@ -152,7 +152,7 @@ namespace Gift.Domain.UIModel
             return base.IsSimilarTo(uiElement);
         }
 
-        public override IScreenDisplay GetDisplayWithoutBorder(IConfiguration configuration, IColorResolver colorResolver)
+        public override IScreenDisplay GetDisplayWithoutBorder(IConfiguration configuration, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator)
         {
             return _screenDisplayFactory.Create(
                 Size, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor,

@@ -59,7 +59,7 @@ namespace Gift.Domain.UIModel.Element
 
         public abstract Position GetContext(Renderable renderable, Position position);
 
-        public override IScreenDisplay GetDisplayBorder(IConfiguration configuration, IColorResolver colorResolver)
+        public override IScreenDisplay GetDisplayBorder(IConfiguration configuration, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator)
         {
 			var screenDisplayBuilder = new ScreenDisplayBuilder();
 			Color frontColor = colorResolver.GetFrontColor(this, configuration);
