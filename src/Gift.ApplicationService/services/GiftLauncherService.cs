@@ -7,6 +7,8 @@ using Gift.ApplicationService.Services.SignalHandler.Key;
 using Gift.Domain.ServiceContracts;
 using Gift.ApplicationService.Services.SignalHandler;
 using Gift.Domain.UIModel.Element;
+using System.Xml;
+using System.Threading;
 
 namespace Gift.ApplicationService.Services
 {
@@ -23,18 +25,18 @@ namespace Gift.ApplicationService.Services
         public const char FILLINGCHAR = '*';
 
         public GiftLauncherService(
-                        IMonitorService monitorManager,
-                        ISignalBus bus,
-                        IKeyInteractionMonitor keyInputMonitor,
-                        IConsoleSizeMonitor consoleSizeMonitor,
-                        IKeySignalHandler keySignalHandler,
-                        IUISignalHandler uISignalHandler,
-                        IGlobalSignalHandler globalSignalHandler,
-                        IDisplayService displayService,
-                        IXMLFileParser xmlFileParser,
-                        IUIElementRegister elementRegister,
-                        ILifeTimeService lifeTimeService,
-                        IRepository repository)
+            IMonitorService monitorManager,
+            ISignalBus bus,
+            IKeyInteractionMonitor keyInputMonitor,
+            IConsoleSizeMonitor consoleSizeMonitor,
+            IKeySignalHandler keySignalHandler,
+            IUISignalHandler uISignalHandler,
+            IGlobalSignalHandler globalSignalHandler,
+            IDisplayService displayService,
+            IXMLFileParser xmlFileParser,
+            IUIElementRegister elementRegister,
+            ILifeTimeService lifeTimeService,
+            IRepository repository)
         {
             _repository = repository;
             _displayService = displayService;
@@ -57,16 +59,15 @@ namespace Gift.ApplicationService.Services
             _lifeTimeService = lifeTimeService;
         }
 
-
         public virtual void Initialize(UIElement ui)
         {
-			_repository.SaveRoot(ui);
+            _repository.SaveRoot(ui);
             update();
         }
 
         public virtual void Initialize(string xmlPath)
         {
-			_repository.SaveRoot(_xmlParser.ParseUIFile(xmlPath));
+            _repository.SaveRoot(_xmlParser.ParseUIFile(xmlPath));
             update();
         }
 
@@ -79,7 +80,15 @@ namespace Gift.ApplicationService.Services
         {
             while (true)
             {
-                await Task.Run(() => Initialize(file));
+                try
+                {
+                    await Task.Run(() => Initialize(file));
+                }
+                catch (XmlException)
+                {
+                    Thread.Sleep(100);
+                }
+                Thread.Sleep(20);
             }
         }
 
