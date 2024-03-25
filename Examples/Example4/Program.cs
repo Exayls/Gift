@@ -8,7 +8,7 @@ services.AddGiftServices();
 
 Log.Logger = new LoggerConfiguration()
                  .WriteTo.File($"logs/Example4_.log", rollingInterval: RollingInterval.Day)
-                 .MinimumLevel.Information()
+                 .MinimumLevel.Debug()
                  .CreateLogger();
 services.AddLogging(builder =>
                     { builder.AddSerilog(); });
