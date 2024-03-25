@@ -17,6 +17,7 @@ namespace Gift.Displayer.Displayer
         {
             string displayString = _formater.CreateDislayString(screenDisplay);
 
+			Console.CursorVisible = false;
             Console.SetCursorPosition(0, 0);
             Console.Out.Write(displayString);
         }
