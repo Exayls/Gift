@@ -61,15 +61,14 @@ namespace Gift.Domain.UIModel.Element
 
         public override IScreenDisplay GetDisplayBorder(IConfiguration configuration, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator)
         {
-			var screenDisplayBuilder = new ScreenDisplayBuilder();
-			Color frontColor = colorResolver.GetFrontColor(this, configuration);
-			Color backColor = colorResolver.GetBackColor(this, configuration);
+            var screenDisplayBuilder = new ScreenDisplayBuilder();
+            Color frontColor = colorResolver.GetFrontColor(this, configuration);
+            Color backColor = colorResolver.GetBackColor(this, configuration);
             Size trueSize = sizeCalculator.GetTrueSize(this);
             screenDisplayBuilder.WithFrontColor(frontColor).WithBackColor(backColor).WithBound(trueSize);
             IScreenDisplay screenDisplay = Border.GetDisplay(screenDisplayBuilder);
             return screenDisplay;
         }
-
 
         public void NextElement()
         {
@@ -111,7 +110,10 @@ namespace Gift.Domain.UIModel.Element
             {
                 Childs.Add(uIElement);
             }
-            SelectableElements.Add(uIElement);
+            if (!SelectableElements.Contains(uIElement))
+            {
+                SelectableElements.Add(uIElement);
+            }
             if (SelectedElement == null)
             {
                 SelectedElement = uIElement;
@@ -148,7 +150,7 @@ namespace Gift.Domain.UIModel.Element
 
         public void Resize(Size bound)
         {
-			Size = bound;
+            Size = bound;
         }
     }
 }
