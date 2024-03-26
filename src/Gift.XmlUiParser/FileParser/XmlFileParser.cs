@@ -81,7 +81,6 @@ namespace Gift.XmlUiParser.FileParser
                     {
                         container.Add(childComponent);
                     }
-                    // SelectElement(childComponent, childElement, container);
                 }
             }
 
