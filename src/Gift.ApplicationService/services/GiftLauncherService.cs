@@ -88,7 +88,10 @@ namespace Gift.ApplicationService.Services
                 catch (XmlException)
                 {
                     Thread.Sleep(100);
-                }
+                }catch(Exception)
+				{
+
+				}
                 Thread.Sleep(20);
             }
         }
