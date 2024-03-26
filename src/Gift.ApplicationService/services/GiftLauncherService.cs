@@ -9,6 +9,7 @@ using Gift.ApplicationService.Services.SignalHandler;
 using Gift.Domain.UIModel.Element;
 using System.Xml;
 using System.Threading;
+using System;
 
 namespace Gift.ApplicationService.Services
 {

@@ -18,12 +18,9 @@ namespace Gift.Displayer.Displayer
 
         public void Display(IScreenDisplay screenDisplay)
         {
-			Console.CursorVisible = false;
-
             string displayString = _formater.CreateDislayString(screenDisplay);
             Console.SetCursorPosition(0, 0);
             Console.Out.Write(displayString);
-			Console.CursorVisible = true;
         }
     }
 }

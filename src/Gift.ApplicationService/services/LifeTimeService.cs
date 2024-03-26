@@ -1,4 +1,5 @@
 ﻿using Gift.ApplicationService.ServiceContracts;
+using System;
 using System.Threading.Tasks;
 
 namespace Gift.ApplicationService.Services
@@ -19,11 +20,13 @@ namespace Gift.ApplicationService.Services
 
         public virtual void Run()
         {
+            Console.CursorVisible = false;
             RunAsync().Wait();
         }
 
         public void Stop()
         {
+            Console.CursorVisible = true;
             completion.SetResult(true);
         }
     }
