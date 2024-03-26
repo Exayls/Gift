@@ -10,8 +10,8 @@ internal class Program
         var services = new ServiceCollection();
         services.AddGiftServices();
         Log.Logger = new LoggerConfiguration()
-                         .WriteTo.File($"logs/Example4_.log", rollingInterval: RollingInterval.Day)
-                         .MinimumLevel.Information()
+                         .WriteTo.File($"logs/HotReloadExample.log", rollingInterval: RollingInterval.Day)
+                         .MinimumLevel.Debug()
                          .CreateLogger();
         services.AddLogging(builder =>
                             { builder.AddSerilog(); });
