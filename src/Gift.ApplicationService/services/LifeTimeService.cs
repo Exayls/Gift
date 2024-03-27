@@ -21,6 +21,7 @@ namespace Gift.ApplicationService.Services
         public virtual void Run()
         {
             Console.CursorVisible = false;
+			Console.Clear();
             RunAsync().Wait();
         }
 
