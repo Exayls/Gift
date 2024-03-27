@@ -1,7 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8" ?> 
-<GiftUI>
-    <Vstack Height="5" Width="8" FrontColor="blue">
+﻿<Vstack Height="20" Width="20" Border="simple">
+    <Hstack Height="5" Width="8" backcolor="blue" border = "simple">
         <Label Border = "simple">Hello</Label>
         <Label>World</Label>
-    </Vstack>
-</GiftUI>
+    </Hstack>
+    <Hstack  backcolor="blue" border = "simple">
+        <Label>Hello</Label>
+        <Label>World</Label>
+    </Hstack>
+</Vstack>
