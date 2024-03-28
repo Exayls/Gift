@@ -1,10 +1,10 @@
 ﻿<Vstack Height="20" Width="20" Border="simple">
-    <Hstack Height="5" Width="8" backcolor="blue" border = "simple">
-        <Label Border = "simple">Hello</Label>
-        <Label>World</Label>
-    </Hstack>
-    <Hstack  backcolor="blue" border = "simple">
-        <Label>Hello</Label>
-        <Label>World</Label>
-    </Hstack>
+	<Hstack Height="5" Width="8" backcolor="blue" border="simple">
+		<Label Border="simple" Text="Hello" />
+		<Label Border="simple" Text="World" />
+	</Hstack>
+	<Hstack backcolor="blue" border="simple">
+		<Label Text="Hello" />
+		<Label Text="World" />
+	</Hstack>
 </Vstack>
