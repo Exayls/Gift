@@ -10,6 +10,7 @@ using Gift.Domain.UIModel.Element;
 using System.Xml;
 using System.Threading;
 using System;
+using Microsoft.Extensions.Logging;
 
 namespace Gift.ApplicationService.Services
 {
@@ -22,10 +23,11 @@ namespace Gift.ApplicationService.Services
         private readonly IXMLFileParser _xmlParser;
         private readonly IUIElementRegister _uielementRegister;
         private readonly ILifeTimeService _lifeTimeService;
-
+        private readonly ILogger<IGiftService> _logger;
         public const char FILLINGCHAR = '*';
 
         public GiftLauncherService(
+            ILogger<IGiftService> logger,
             IMonitorService monitorManager,
             ISignalBus bus,
             IKeyInteractionMonitor keyInputMonitor,
@@ -39,6 +41,8 @@ namespace Gift.ApplicationService.Services
             ILifeTimeService lifeTimeService,
             IRepository repository)
         {
+			_logger = logger;
+
             _repository = repository;
             _displayService = displayService;
 
@@ -77,21 +81,29 @@ namespace Gift.ApplicationService.Services
             _displayService.UpdateDisplay();
         }
 
-        public async void InitializeHotReload(string file)
+        public async void InitializeHotReload(string xmlPath)
         {
             while (true)
             {
                 try
                 {
-                    await Task.Run(() => Initialize(file));
+                    await Task.Run(() =>
+                                   {
+                                       var root = _xmlParser.ParseUIFile(xmlPath);
+									   if (!root.IsSimilarTo(_repository.GetRoot()) )
+                                       {
+                                           _repository.SaveRoot(root);
+                                           update();
+                                       }
+                                   });
                 }
                 catch (XmlException)
                 {
                     Thread.Sleep(100);
-                }catch(Exception)
-				{
-
-				}
+                }
+                catch (Exception)
+                {
+                }
                 Thread.Sleep(20);
             }
         }
