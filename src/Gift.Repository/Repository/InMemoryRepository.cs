@@ -54,7 +54,7 @@ namespace Gift.Repository
 
         public Container? GetSelectedContainer()
         {
-            if (_selectedContainer != null)
+            if (_selectedContainer != null && GetSelectableContainers().Contains(_selectedContainer))
             {
                 return _selectedContainer;
             }

@@ -25,7 +25,7 @@ namespace Gift.ApplicationService.Services
             _displayer = displayer;
             _repository = repository;
             _renderer = renderer;
-			_logger = logger;
+            _logger = logger;
         }
 
         public void UpdateDisplay()
@@ -58,7 +58,7 @@ namespace Gift.ApplicationService.Services
                 var container = selectableContainers[(selectableContainers.IndexOf(selectedContainer) + 1) %
                                                      selectableContainers.Count];
                 _repository.SelectContainer(container);
-				_logger.LogDebug($"select container {container}");
+                _logger.LogDebug($"select container {container}");
             }
         }
 
@@ -72,7 +72,7 @@ namespace Gift.ApplicationService.Services
                                                       selectableContainers.Count) %
                                                      selectableContainers.Count];
                 _repository.SelectContainer(container);
-				_logger.LogDebug($"select container {container}");
+                _logger.LogDebug($"select container {container}");
             }
         }
 
