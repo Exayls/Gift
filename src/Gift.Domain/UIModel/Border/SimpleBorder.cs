@@ -28,9 +28,9 @@ namespace Gift.Domain.UIModel.Border
 
         public IScreenDisplay GetDisplay(ScreenDisplayBuilder screenDisplayBuilder)
         {
-			var screen = screenDisplayBuilder.Build();
+            var screen = screenDisplayBuilder.Build();
             // AddBorder(screen);
-			screen.AddBorder(Thickness, new BorderOption(BorderChar));
+            screen.AddBorder(Thickness, new BorderOption(BorderChar));
             return screen;
         }
     }

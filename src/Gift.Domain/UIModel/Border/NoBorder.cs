@@ -23,7 +23,7 @@ namespace Gift.Domain.UIModel.Border
 
         public IScreenDisplay GetDisplay(ScreenDisplayBuilder screenDisplayBuilder)
         {
-			return screenDisplayBuilder.Build();
+            return screenDisplayBuilder.Build();
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Gift.Domain.Tests.Border
         public void GetDisplay_should_return_border_with_thickness_1_when_border_thickness_equal_1_1()
         {
             //act
-			var screen = new ScreenDisplayBuilder().WithChar(' ').WithBound(new Size(2,2));
+            var screen = new ScreenDisplayBuilder().WithChar(' ').WithBound(new Size(2, 2));
             IScreenDisplay display = _border.GetDisplay(screen);
             //assert
             const string expected = "╔╗\n" +
@@ -30,7 +30,7 @@ namespace Gift.Domain.Tests.Border
         [Fact]
         public void GetDisplay_should_return_border_with_thickness_1_when_border_thickness_equal_1_2()
         {
-			var screen = new ScreenDisplayBuilder().WithChar(' ').WithBound(new Size(4,4));
+            var screen = new ScreenDisplayBuilder().WithChar(' ').WithBound(new Size(4, 4));
             //act
             IScreenDisplay display = _border.GetDisplay(screen);
             //assert
@@ -45,7 +45,7 @@ namespace Gift.Domain.Tests.Border
         {
             //arrange
             _border = new DetailedBorder(1, '┌', '┐', '└', '┘', '─', '─', '│', '│');
-			var screen = new ScreenDisplayBuilder().WithChar('*').WithBound(new Size(4,4));
+            var screen = new ScreenDisplayBuilder().WithChar('*').WithBound(new Size(4, 4));
             //act
             IScreenDisplay display = _border.GetDisplay(screen);
             //assert
@@ -60,7 +60,7 @@ namespace Gift.Domain.Tests.Border
         {
             //arrange
             _border = new DetailedBorder(2, BorderOption.GetBorderCharsFromFile("ressources/borderchars/simple_border.json"));
-			var screen = new ScreenDisplayBuilder().WithChar(' ').WithBound(new Size(6,6));
+            var screen = new ScreenDisplayBuilder().WithChar(' ').WithBound(new Size(6, 6));
             //act
             IScreenDisplay display = _border.GetDisplay(screen);
             //assert
@@ -77,7 +77,7 @@ namespace Gift.Domain.Tests.Border
         {
             //arrange
             _border = new DetailedBorder(2, BorderOption.GetBorderCharsFromFile("ressources/borderchars/simple_border.json"));
-			var screen = new ScreenDisplayBuilder().WithChar(' ').WithBound(new Size(8,8));
+            var screen = new ScreenDisplayBuilder().WithChar(' ').WithBound(new Size(8, 8));
             //act
             IScreenDisplay display = _border.GetDisplay(screen);
             //assert
@@ -96,7 +96,7 @@ namespace Gift.Domain.Tests.Border
         {
             //arrange
             _border = new DetailedBorder(3, BorderOption.GetBorderCharsFromFile("ressources/borderchars/simple_border.json"));
-			var screen = new ScreenDisplayBuilder().WithChar(' ').WithBound(new Size(8,8));
+            var screen = new ScreenDisplayBuilder().WithChar(' ').WithBound(new Size(8, 8));
             //act
             IScreenDisplay display = _border.GetDisplay(screen);
             //assert
@@ -115,7 +115,7 @@ namespace Gift.Domain.Tests.Border
         {
             //arrange
             _border = new DetailedBorder(3, BorderOption.GetBorderCharsFromFile("ressources/borderchars/simple_border.json"));
-			var screen = new ScreenDisplayBuilder().WithChar(' ').WithBound(new Size(12,8));
+            var screen = new ScreenDisplayBuilder().WithChar(' ').WithBound(new Size(12, 8));
             //act
             IScreenDisplay display = _border.GetDisplay(screen);
             //assert
@@ -138,7 +138,7 @@ namespace Gift.Domain.Tests.Border
         {
             //arrange
             _border = new DetailedBorder(3, BorderOption.GetBorderCharsFromFile("ressources/borderchars/simple_border.json"));
-			var screen = new ScreenDisplayBuilder().WithChar(' ').WithBound(new Size(8,12));
+            var screen = new ScreenDisplayBuilder().WithChar(' ').WithBound(new Size(8, 12));
             //act
             IScreenDisplay display = _border.GetDisplay(screen);
             //assert

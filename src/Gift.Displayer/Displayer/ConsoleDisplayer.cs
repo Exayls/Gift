@@ -13,7 +13,7 @@ namespace Gift.Displayer.Displayer
         public ConsoleDisplayer(IConsoleDisplayStringFormater formater, ILogger<IDisplayer> logger)
         {
             _formater = formater;
-			_logger = logger;
+            _logger = logger;
         }
 
         public void Display(IScreenDisplay screenDisplay)

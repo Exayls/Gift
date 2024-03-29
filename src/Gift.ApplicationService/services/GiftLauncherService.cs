@@ -41,7 +41,7 @@ namespace Gift.ApplicationService.Services
             ILifeTimeService lifeTimeService,
             IRepository repository)
         {
-			_logger = logger;
+            _logger = logger;
 
             _repository = repository;
             _displayService = displayService;
@@ -90,7 +90,7 @@ namespace Gift.ApplicationService.Services
                     await Task.Run(() =>
                                    {
                                        var root = _xmlParser.ParseUIFile(xmlPath);
-									   if (!root.IsSimilarTo(_repository.GetRoot()) )
+                                       if (!root.IsSimilarTo(_repository.GetRoot()))
                                        {
                                            _repository.SaveRoot(root);
                                            update();

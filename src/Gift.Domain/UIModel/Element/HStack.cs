@@ -97,7 +97,7 @@ namespace Gift.Domain.UIModel.Element
         public override IScreenDisplay GetDisplayWithoutBorder(IConfiguration configuration, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator)
         {
             int thickness = Border.Thickness;
-			var fullSize = sizeCalculator.GetTrueSize(this);
+            var fullSize = sizeCalculator.GetTrueSize(this);
             Size boundEmptyVStack = new Size(fullSize.Height - 2 * thickness, fullSize.Width - 2 * thickness);
             IScreenDisplay emptyVstackScreen = _screenDisplayFactory.Create(
                 boundEmptyVStack, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor,

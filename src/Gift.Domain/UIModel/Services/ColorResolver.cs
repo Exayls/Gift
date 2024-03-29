@@ -53,7 +53,7 @@ namespace Gift.Domain.Services
 
         private bool IsSelectedElement(UIElement element)
         {
-			return element.IsSelectedElement;
+            return element.IsSelectedElement;
         }
     }
 }

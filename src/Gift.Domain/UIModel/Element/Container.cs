@@ -21,7 +21,8 @@ namespace Gift.Domain.UIModel.Element
         public UIElement? SelectedElement
         {
             get => selectedElement;
-            set {
+            set
+            {
                 selectedElement = value;
 
                 foreach (UIElement element in SelectableElements)
@@ -39,7 +40,8 @@ namespace Gift.Domain.UIModel.Element
         public bool IsSelectedContainer
         {
             get => isSelectedContainer;
-            set {
+            set
+            {
                 isSelectedContainer = value;
             }
         }
@@ -132,7 +134,7 @@ namespace Gift.Domain.UIModel.Element
 
             if (Childs.Count != element.Childs.Count)
                 return false;
-            foreach ((UIElement element1, UIElement element2)elementTuple in Childs.Zip(element.Childs))
+            foreach ((UIElement element1, UIElement element2) elementTuple in Childs.Zip(element.Childs))
             {
                 if (!(elementTuple.element1.IsSimilarTo(elementTuple.element2)))
                     return false;
@@ -140,7 +142,7 @@ namespace Gift.Domain.UIModel.Element
             if (SelectableElements.Count != element.SelectableElements.Count)
                 return false;
             foreach ((UIElement element1,
-                      UIElement element2)elementTuple in SelectableElements.Zip(element.SelectableElements))
+                      UIElement element2) elementTuple in SelectableElements.Zip(element.SelectableElements))
             {
                 if (!(elementTuple.element1.IsSimilarTo(elementTuple.element2)))
                     return false;

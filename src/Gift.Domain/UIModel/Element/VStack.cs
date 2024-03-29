@@ -11,7 +11,8 @@ namespace Gift.Domain.UIModel.Element
 
         public override int Height
         {
-            get {
+            get
+            {
                 if (Size.Height != 0)
                 {
                     return Size.Height;
@@ -29,7 +30,8 @@ namespace Gift.Domain.UIModel.Element
         }
         public override int Width
         {
-            get {
+            get
+            {
                 if (Size.Width != 0)
                 {
                     return Size.Width;
@@ -90,7 +92,7 @@ namespace Gift.Domain.UIModel.Element
         {
             int thickness = Border.Thickness;
 
-			var fullSize = sizeCalculator.GetTrueSize(this);
+            var fullSize = sizeCalculator.GetTrueSize(this);
             Size boundEmptyVStack = new Size(fullSize.Height - 2 * thickness, fullSize.Width - 2 * thickness);
             IScreenDisplay emptyVstackScreen = _screenDisplayFactory.Create(
                 boundEmptyVStack, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor,

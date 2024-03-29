@@ -103,13 +103,13 @@ namespace Gift.Domain.Tests.Display
         public void Given_element_is_selected_GetBackColor_should_be_Green()
         {
             // Arrange
-			
+
             Label label = new LabelBuilder().Build();
-			VStack vstack = new VStackBuilder()
-				.WithSelectableElement(label)
-				.Build();
+            VStack vstack = new VStackBuilder()
+                .WithSelectableElement(label)
+                .Build();
             Mock.Get<IRepository>(_repository)
-				.Setup(r => r.GetSelectedContainer()).Returns<Container?>(null);
+                .Setup(r => r.GetSelectedContainer()).Returns<Container?>(null);
             var colorResolver = new ColorResolver(_repository);
 
             // Act
