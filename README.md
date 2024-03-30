@@ -1,16 +1,17 @@
 # Gift
 
-GIFT: GIFT Implements Friendly TUI
-GIFT: GIFT Is Fully Terminal
-GIFT: GIFT Inspires Functional TUI
-GIFT: GIFT Introduces Friendly TUI
-GIFT: GIFT Intuitive Framework for TUI
+G.I.F.T.: GIFT Is Fully Terminal
 
-# Utilisation
+![resit](assets/example.mp4)
 
+# Utilization
+
+```cs
 var gift = serviceProvider.GetRequiredService<IGiftService>();
 gift.Initialize("ui.xml");
 gift.Run();
+
+```
 
 It works by sending signals to the application by using instances of Monitor:
 Example
@@ -25,10 +26,12 @@ one way to send a signal is by using the keyboard input, a config file for keys 
 
 Example with config file and signal name with handler
 
-you can create your own component by implementing UIElement or Container.
+You can create your own component by implementing UIElement or Container.
 
 # Color
+There are colors
 
 # Bounds
 
 # 
+In hotreload when changing selected container in TestExample, reload with no selected container
