@@ -2,7 +2,7 @@
 
 G.I.F.T.: GIFT Is Fully Terminal
 
-![resit](assets/example.mp4)
+![resit](assets/example.gif)
 
 # Utilization
 
@@ -12,6 +12,10 @@ gift.Initialize("ui.xml");
 gift.Run();
 
 ```
+| vstack | test |
+|--------|------|
+| vstack | e    |
+| vstack | iett |
 
 It works by sending signals to the application by using instances of Monitor:
 Example
@@ -34,4 +38,3 @@ There are colors
 # Bounds
 
 # 
-In hotreload when changing selected container in TestExample, reload with no selected container
