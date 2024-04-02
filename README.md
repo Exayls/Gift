@@ -12,10 +12,6 @@ gift.Initialize("ui.xml");
 gift.Run();
 
 ```
-| vstack | test |
-|--------|------|
-| vstack | e    |
-| vstack | iett |
 
 It works by sending signals to the application by using instances of Monitor:
 Example
@@ -35,6 +31,11 @@ You can create your own component by implementing UIElement or Container.
 # Color
 There are colors
 
-# Bounds
+# Size
+A container can have size 
+If the height or width is positive, then the container will take the place of the rectangle define by its height and width.
+If the height or width is equal to 0, the side of the rectangle will be the exact size needed to display its content.
+If the height or width is negative, then the side of the rectangle will be the size of its parent container, or the whole terminal if no parent has a defined size.
+
 
 # 
