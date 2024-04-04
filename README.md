@@ -28,9 +28,6 @@ Example with config file and signal name with handler
 
 You can create your own component by implementing UIElement or Container.
 
-# Color
-There are colors
-
 # Size
 A container can have size 
 If the height or width is positive, then the container will take the place of the rectangle define by its height and width.
