@@ -11,7 +11,8 @@ namespace Gift.Domain.UIModel.Element
 
         public override int Height
         {
-            get {
+            get
+            {
                 if (Size.Height != 0)
                 {
                     return Size.Height;
@@ -30,7 +31,8 @@ namespace Gift.Domain.UIModel.Element
         }
         public override int Width
         {
-            get {
+            get
+            {
                 if (Size.Width != 0)
                 {
                     return Size.Width;
@@ -40,9 +42,10 @@ namespace Gift.Domain.UIModel.Element
                 {
                     if (!renderable.IsFixed())
                     {
-                        WidthAllChilds += renderable.Width;
+                        WidthAllChilds += renderable.Width + 1;
                     }
                 }
+                WidthAllChilds -= 1;
                 return Border.Thickness * 2 + WidthAllChilds;
             }
         }
@@ -74,7 +77,7 @@ namespace Gift.Domain.UIModel.Element
                     {
                         return ChildContextPosition;
                     }
-                    ChildContextPosition += renderable.Width;
+                    ChildContextPosition += renderable.Width + 1;
                 }
             }
             return 0;

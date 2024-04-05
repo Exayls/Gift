@@ -85,24 +85,24 @@ namespace Gift.Displayer.Rendering
             Position renderableContext = container.GetContext(renderable, context);
             switch (renderable)
             {
-                case Container containerToRender:
-                    Render(screen, containerToRender, renderableContext);
-                    break;
-                default:
-                    Render(screen, renderable, renderableContext);
-                    break;
+            case Container containerToRender:
+                Render(screen, containerToRender, renderableContext);
+                break;
+            default:
+                Render(screen, renderable, renderableContext);
+                break;
             }
         }
         private void RenderContainerOrElement(IScreenDisplay screen, Position context, Renderable renderable)
         {
             switch (renderable)
             {
-                case Container containerToRender:
-                    Render(screen, containerToRender, new(0, 0));
-                    break;
-                default:
-                    Render(screen, renderable, new(0, 0));
-                    break;
+            case Container containerToRender:
+                Render(screen, containerToRender, new(0, 0));
+                break;
+            default:
+                Render(screen, renderable, new(0, 0));
+                break;
             }
         }
     }
