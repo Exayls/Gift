@@ -11,8 +11,7 @@ namespace Gift.Domain.UIModel.Element
 
         public override int Height
         {
-            get
-            {
+            get {
                 if (Size.Height != 0)
                 {
                     return Size.Height;
@@ -31,8 +30,7 @@ namespace Gift.Domain.UIModel.Element
         }
         public override int Width
         {
-            get
-            {
+            get {
                 if (Size.Width != 0)
                 {
                     return Size.Width;
@@ -54,10 +52,10 @@ namespace Gift.Domain.UIModel.Element
                       Size bound,
                       Color frontColor = Color.Default,
                       Color backColor = Color.Default,
-                      bool IsSelectableContainer = false) : base(screenDisplayFactory, bound, border, frontColor: frontColor, backColor: backColor, isSelectableContainer: IsSelectableContainer)
+                      bool IsSelectableContainer = false)
+            : base(screenDisplayFactory, bound, border, frontColor: frontColor, backColor: backColor, isSelectableContainer: IsSelectableContainer)
         {
         }
-
 
         public override Position GetContext(Renderable renderable, Position position)
         {
@@ -92,7 +90,6 @@ namespace Gift.Domain.UIModel.Element
             return new Position(position.y,
                                 position.x);
         }
-
 
         public override IScreenDisplay GetDisplayWithoutBorder(IConfiguration configuration, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator)
         {

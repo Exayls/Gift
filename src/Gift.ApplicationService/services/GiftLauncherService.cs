@@ -8,7 +8,6 @@ using Gift.Domain.ServiceContracts;
 using Gift.ApplicationService.Services.SignalHandler;
 using Gift.Domain.UIModel.Element;
 using System.Xml;
-using System.Threading;
 using System;
 using Microsoft.Extensions.Logging;
 
@@ -99,12 +98,12 @@ namespace Gift.ApplicationService.Services
                 }
                 catch (XmlException)
                 {
-                    Thread.Sleep(100);
+                    await Task.Delay(100);
                 }
                 catch (Exception)
                 {
                 }
-                Thread.Sleep(20);
+                await Task.Delay(20);
             }
         }
 
