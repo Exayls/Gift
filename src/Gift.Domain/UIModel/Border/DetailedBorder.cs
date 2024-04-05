@@ -12,12 +12,12 @@ namespace Gift.Domain.UIModel.Border
         public DetailedBorder(int thickness, char tlBorder, char trBorder, char blBorder, char brBorder, char tBorder,
                               char bBorder, char lBorder, char rBorder)
         {
-			_borderChars = new BorderOption(tlBorder, trBorder, blBorder, brBorder, tBorder, bBorder, lBorder, rBorder);
+            _borderChars = new BorderOption(tlBorder, trBorder, blBorder, brBorder, tBorder, bBorder, lBorder, rBorder);
             Thickness = thickness;
         }
         public DetailedBorder(int thickness, BorderOption borderChars)
         {
-			_borderChars = borderChars;
+            _borderChars = borderChars;
             Thickness = thickness;
         }
 
@@ -59,7 +59,7 @@ namespace Gift.Domain.UIModel.Border
 
         private void AddBorder(IScreenDisplay screenDisplay)
         {
-			screenDisplay.AddBorder(Thickness, _borderChars);
+            screenDisplay.AddBorder(Thickness, _borderChars);
         }
     }
 }

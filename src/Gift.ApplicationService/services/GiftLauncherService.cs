@@ -7,6 +7,9 @@ using Gift.ApplicationService.Services.SignalHandler.Key;
 using Gift.Domain.ServiceContracts;
 using Gift.ApplicationService.Services.SignalHandler;
 using Gift.Domain.UIModel.Element;
+using System.Xml;
+using System;
+using Microsoft.Extensions.Logging;
 
 namespace Gift.ApplicationService.Services
 {
@@ -19,23 +22,26 @@ namespace Gift.ApplicationService.Services
         private readonly IXMLFileParser _xmlParser;
         private readonly IUIElementRegister _uielementRegister;
         private readonly ILifeTimeService _lifeTimeService;
-
+        private readonly ILogger<IGiftService> _logger;
         public const char FILLINGCHAR = '*';
 
         public GiftLauncherService(
-                        IMonitorService monitorManager,
-                        ISignalBus bus,
-                        IKeyInteractionMonitor keyInputMonitor,
-                        IConsoleSizeMonitor consoleSizeMonitor,
-                        IKeySignalHandler keySignalHandler,
-                        IUISignalHandler uISignalHandler,
-                        IGlobalSignalHandler globalSignalHandler,
-                        IDisplayService displayService,
-                        IXMLFileParser xmlFileParser,
-                        IUIElementRegister elementRegister,
-                        ILifeTimeService lifeTimeService,
-                        IRepository repository)
+            ILogger<IGiftService> logger,
+            IMonitorService monitorManager,
+            ISignalBus bus,
+            IKeyInteractionMonitor keyInputMonitor,
+            IConsoleSizeMonitor consoleSizeMonitor,
+            IKeySignalHandler keySignalHandler,
+            IUISignalHandler uISignalHandler,
+            IGlobalSignalHandler globalSignalHandler,
+            IDisplayService displayService,
+            IXMLFileParser xmlFileParser,
+            IUIElementRegister elementRegister,
+            ILifeTimeService lifeTimeService,
+            IRepository repository)
         {
+            _logger = logger;
+
             _repository = repository;
             _displayService = displayService;
 
@@ -57,16 +63,15 @@ namespace Gift.ApplicationService.Services
             _lifeTimeService = lifeTimeService;
         }
 
-
         public virtual void Initialize(UIElement ui)
         {
-			_repository.SaveRoot(ui);
+            _repository.SaveRoot(ui);
             update();
         }
 
         public virtual void Initialize(string xmlPath)
         {
-			_repository.SaveRoot(_xmlParser.ParseUIFile(xmlPath));
+            _repository.SaveRoot(_xmlParser.ParseUIFile(xmlPath));
             update();
         }
 
@@ -75,18 +80,43 @@ namespace Gift.ApplicationService.Services
             _displayService.UpdateDisplay();
         }
 
-        public async void InitializeHotReload(string file)
+        public async void InitializeHotReload(string xmlPath)
         {
             while (true)
             {
-                await Task.Run(() => Initialize(file));
+                try
+                {
+                    await Task.Run(() =>
+                                   {
+                                       var root = _xmlParser.ParseUIFile(xmlPath);
+                                       if (!root.IsSimilarTo(_repository.GetRoot()))
+                                       {
+                                           _repository.SaveRoot(root);
+                                           update();
+                                       }
+                                   });
+                }
+                catch (XmlException)
+                {
+                    await Task.Delay(100);
+                }
+                catch (Exception)
+                {
+                }
+                await Task.Delay(20);
             }
         }
 
-        public void AddSignalHandler(ISignalHandlerService handler)
+        public void AddSignalHandler(ISignalHandler handler)
         {
             _signalBus.Subscribe(handler);
         }
+
+        public void AddMonitor(IMonitor keyInputMonitor)
+        {
+            _monitorService.Add(keyInputMonitor);
+        }
+
 
         public void Run()
         {

@@ -54,7 +54,7 @@ namespace Gift.Repository
 
         public Container? GetSelectedContainer()
         {
-            if (_selectedContainer != null)
+            if (_selectedContainer != null && GetSelectableContainers().Contains(_selectedContainer))
             {
                 return _selectedContainer;
             }
@@ -98,14 +98,16 @@ namespace Gift.Repository
 
         private UIElement? SelectFirst(UIElement element, Func<UIElement, bool> func)
         {
-            if(func(element)){
-				return element;
-			}
-			if(element is Container container)
-			foreach(var child in container.Childs){
-				return SelectFirst(child, func);
-			}
-			return null;
+            if (func(element))
+            {
+                return element;
+            }
+            if (element is Container container)
+                foreach (var child in container.Childs)
+                {
+                    return SelectFirst(child, func);
+                }
+            return null;
         }
     }
 }

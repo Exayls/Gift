@@ -13,25 +13,25 @@ namespace Gift.Domain.Builders.UIModel.Display
         public ScreenDisplayBuilder WithBound(Size bound)
         {
             _bound = bound;
-			return this;
+            return this;
         }
 
         public ScreenDisplayBuilder WithFrontColor(Color color)
         {
             _frontColor = color;
-			return this;
+            return this;
         }
 
         public ScreenDisplayBuilder WithBackColor(Color color)
         {
             _backColor = color;
-			return this;
+            return this;
         }
 
         public ScreenDisplayBuilder WithChar(char filling)
         {
             _char = filling;
-			return this;
+            return this;
         }
 
         public ScreenDisplay Build()

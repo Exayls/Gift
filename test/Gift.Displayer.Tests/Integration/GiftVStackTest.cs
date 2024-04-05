@@ -83,7 +83,7 @@ namespace Gift.Displayer.Tests.Integration
             ui.Add(vstack);
             vstack.Add(label);
             IRepository repository = new InMemoryRepository();
-			repository.SaveRoot(ui);
+            repository.SaveRoot(ui);
             IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
@@ -112,7 +112,7 @@ namespace Gift.Displayer.Tests.Integration
             ui.Add(vstack);
             vstack.Add(label);
             IRepository repository = new InMemoryRepository();
-			repository.SaveRoot(ui);
+            repository.SaveRoot(ui);
             IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
@@ -144,7 +144,7 @@ namespace Gift.Displayer.Tests.Integration
             vstack.Add(label1);
             vstack.Add(label2);
             IRepository repository = new InMemoryRepository();
-			repository.SaveRoot(ui);
+            repository.SaveRoot(ui);
             IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
@@ -182,7 +182,7 @@ namespace Gift.Displayer.Tests.Integration
             vstack.Add(label2);
             vstack.Add(label3);
             IRepository repository = new InMemoryRepository();
-			repository.SaveRoot(ui);
+            repository.SaveRoot(ui);
             IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
@@ -224,7 +224,7 @@ namespace Gift.Displayer.Tests.Integration
             ui.Add(label2);
             vstack.Add(label3);
             IRepository repository = new InMemoryRepository();
-			repository.SaveRoot(ui);
+            repository.SaveRoot(ui);
 
             IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
@@ -271,7 +271,7 @@ namespace Gift.Displayer.Tests.Integration
             vstack.Add(label4);
             vstack.Add(label5);
             IRepository repository = new InMemoryRepository();
-			repository.SaveRoot(ui);
+            repository.SaveRoot(ui);
             IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
             var expectedBuilder = new StringBuilder();
             string expected = "";
@@ -321,7 +321,7 @@ namespace Gift.Displayer.Tests.Integration
             vstack.Add(label5);
             vstack.Add(label6);
             IRepository repository = new InMemoryRepository();
-			repository.SaveRoot(ui);
+            repository.SaveRoot(ui);
             IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
@@ -378,7 +378,7 @@ namespace Gift.Displayer.Tests.Integration
         {
             //arrange
             var vstack = new VStackBuilder()
-				.WithUnSelectableElement(new LabelBuilder().WithText("**").Build())
+                .WithUnSelectableElement(new LabelBuilder().WithText("**").Build())
                 .WithBorder(new SimpleBorder(1, '-'))
                 .Build();
             IRepository repository = new InMemoryRepository();
@@ -396,7 +396,7 @@ namespace Gift.Displayer.Tests.Integration
         {
             //arrange
             var vstack = new VStackBuilder()
-				.WithUnSelectableElement(new LabelBuilder().WithText("**").Build())
+                .WithUnSelectableElement(new LabelBuilder().WithText("**").Build())
                 .WithBorder(new SimpleBorder(1, 'i'))
                 .Build();
             IRepository repository = new InMemoryRepository();
@@ -414,9 +414,9 @@ namespace Gift.Displayer.Tests.Integration
         {
             //arrange
             var vstack = new VStackBuilder()
-				.WithUnSelectableElement(new LabelBuilder().WithText("***").Build())
-				.WithUnSelectableElement(new LabelBuilder().WithText("*").Build())
-				.WithUnSelectableElement(new LabelBuilder().WithText("***").Build())
+                .WithUnSelectableElement(new LabelBuilder().WithText("***").Build())
+                .WithUnSelectableElement(new LabelBuilder().WithText("*").Build())
+                .WithUnSelectableElement(new LabelBuilder().WithText("***").Build())
                 .WithBorder(new SimpleBorder(1, '-'))
                 .Build();
             IRepository repository = new InMemoryRepository();
@@ -436,7 +436,7 @@ namespace Gift.Displayer.Tests.Integration
         {
             //arrange
             var vstack = new VStackBuilder()
-				.WithUnSelectableElement(new LabelBuilder().WithText("aaaa").Build())
+                .WithUnSelectableElement(new LabelBuilder().WithText("aaaa").Build())
                 .WithBorder(new SimpleBorder(1, '-'))
                 .Build();
             IRepository repository = new InMemoryRepository();
@@ -455,8 +455,8 @@ namespace Gift.Displayer.Tests.Integration
         {
             //arrange
             var vstack = new VStackBuilder()
-				.WithUnSelectableElement(new LabelBuilder().WithText("***").Build())
-				.WithUnSelectableElement(new LabelBuilder().WithText("***").Build())
+                .WithUnSelectableElement(new LabelBuilder().WithText("***").Build())
+                .WithUnSelectableElement(new LabelBuilder().WithText("***").Build())
                 .WithBorder(new SimpleBorder(2, '-'))
                 .Build();
             IRepository repository = new InMemoryRepository();
@@ -477,7 +477,7 @@ namespace Gift.Displayer.Tests.Integration
         {
             //arrange
             var vstack = new VStackBuilder()
-				.WithUnSelectableElement(new LabelBuilder().WithText("a").Build())
+                .WithUnSelectableElement(new LabelBuilder().WithText("a").Build())
                 .WithBorder(new SimpleBorder(3, '-'))
                 .Build();
             IRepository repository = new InMemoryRepository();

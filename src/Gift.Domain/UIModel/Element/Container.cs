@@ -21,7 +21,8 @@ namespace Gift.Domain.UIModel.Element
         public UIElement? SelectedElement
         {
             get => selectedElement;
-            set {
+            set
+            {
                 selectedElement = value;
 
                 foreach (UIElement element in SelectableElements)
@@ -39,7 +40,8 @@ namespace Gift.Domain.UIModel.Element
         public bool IsSelectedContainer
         {
             get => isSelectedContainer;
-            set {
+            set
+            {
                 isSelectedContainer = value;
             }
         }
@@ -61,15 +63,14 @@ namespace Gift.Domain.UIModel.Element
 
         public override IScreenDisplay GetDisplayBorder(IConfiguration configuration, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator)
         {
-			var screenDisplayBuilder = new ScreenDisplayBuilder();
-			Color frontColor = colorResolver.GetFrontColor(this, configuration);
-			Color backColor = colorResolver.GetBackColor(this, configuration);
+            var screenDisplayBuilder = new ScreenDisplayBuilder();
+            Color frontColor = colorResolver.GetFrontColor(this, configuration);
+            Color backColor = colorResolver.GetBackColor(this, configuration);
             Size trueSize = sizeCalculator.GetTrueSize(this);
             screenDisplayBuilder.WithFrontColor(frontColor).WithBackColor(backColor).WithBound(trueSize);
             IScreenDisplay screenDisplay = Border.GetDisplay(screenDisplayBuilder);
             return screenDisplay;
         }
-
 
         public void NextElement()
         {
@@ -111,7 +112,10 @@ namespace Gift.Domain.UIModel.Element
             {
                 Childs.Add(uIElement);
             }
-            SelectableElements.Add(uIElement);
+            if (!SelectableElements.Contains(uIElement))
+            {
+                SelectableElements.Add(uIElement);
+            }
             if (SelectedElement == null)
             {
                 SelectedElement = uIElement;
@@ -130,7 +134,7 @@ namespace Gift.Domain.UIModel.Element
 
             if (Childs.Count != element.Childs.Count)
                 return false;
-            foreach ((UIElement element1, UIElement element2)elementTuple in Childs.Zip(element.Childs))
+            foreach ((UIElement element1, UIElement element2) elementTuple in Childs.Zip(element.Childs))
             {
                 if (!(elementTuple.element1.IsSimilarTo(elementTuple.element2)))
                     return false;
@@ -138,7 +142,7 @@ namespace Gift.Domain.UIModel.Element
             if (SelectableElements.Count != element.SelectableElements.Count)
                 return false;
             foreach ((UIElement element1,
-                      UIElement element2)elementTuple in SelectableElements.Zip(element.SelectableElements))
+                      UIElement element2) elementTuple in SelectableElements.Zip(element.SelectableElements))
             {
                 if (!(elementTuple.element1.IsSimilarTo(elementTuple.element2)))
                     return false;
@@ -148,7 +152,7 @@ namespace Gift.Domain.UIModel.Element
 
         public void Resize(Size bound)
         {
-			Size = bound;
+            Size = bound;
         }
     }
 }

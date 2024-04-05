@@ -5,22 +5,27 @@ using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
+using Microsoft.Extensions.Logging;
 
 namespace Gift.ApplicationService.Services
 {
     public class DisplayService : IDisplayService
     {
-        private IDisplayer _displayer;
-        private IRepository _repository;
-        private IRenderer _renderer;
+        private readonly IDisplayer _displayer;
+        private readonly IRepository _repository;
+        private readonly IRenderer _renderer;
+        private readonly ILogger<IDisplayService> _logger;
 
-        public DisplayService(IDisplayer displayer, IRenderer renderer,
-                              IRepository repository)
+        public DisplayService(IDisplayer displayer,
+                              IRenderer renderer,
+                              IRepository repository,
+                              ILogger<IDisplayService> logger)
         {
 
             _displayer = displayer;
             _repository = repository;
             _renderer = renderer;
+            _logger = logger;
         }
 
         public void UpdateDisplay()
@@ -53,6 +58,7 @@ namespace Gift.ApplicationService.Services
                 var container = selectableContainers[(selectableContainers.IndexOf(selectedContainer) + 1) %
                                                      selectableContainers.Count];
                 _repository.SelectContainer(container);
+                _logger.LogDebug($"select container {container}");
             }
         }
 
@@ -66,17 +72,18 @@ namespace Gift.ApplicationService.Services
                                                       selectableContainers.Count) %
                                                      selectableContainers.Count];
                 _repository.SelectContainer(container);
+                _logger.LogDebug($"select container {container}");
             }
         }
 
         public void NextElementInSelectedContainer()
         {
-			_repository.GetSelectedContainer()?.NextElement();
+            _repository.GetSelectedContainer()?.NextElement();
         }
 
         public void PreviousElementInSelectedContainer()
         {
-			_repository.GetSelectedContainer()?.PreviousElement();
+            _repository.GetSelectedContainer()?.PreviousElement();
         }
 
         public void Resize(Size bound)
@@ -84,19 +91,19 @@ namespace Gift.ApplicationService.Services
             var root = _repository.GetRoot();
             if (root is Container)
             {
-				var container = (Container)root;
+                var container = (Container)root;
                 container.Resize(bound);
             }
         }
 
         public void ScrollUp()
         {
-			_repository.GetSelectedContainer()?.ScrollUp();
+            _repository.GetSelectedContainer()?.ScrollUp();
         }
 
         public void ScrollDown()
         {
-			_repository.GetSelectedContainer()?.ScrollDown();
+            _repository.GetSelectedContainer()?.ScrollDown();
         }
     }
 }

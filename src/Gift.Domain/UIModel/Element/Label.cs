@@ -81,10 +81,10 @@ namespace Gift.Domain.UIModel.Element
 
         public override IScreenDisplay GetDisplayBorder(IConfiguration configuration, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator)
         {
-			var screen = new ScreenDisplayBuilder()
-				.WithFrontColor(colorResolver.GetFrontColor(this, configuration))
-				.WithBackColor(colorResolver.GetBackColor(this, configuration))
-				.WithBound(sizeCalculator.GetTrueSize(this));
+            var screen = new ScreenDisplayBuilder()
+                .WithFrontColor(colorResolver.GetFrontColor(this, configuration))
+                .WithBackColor(colorResolver.GetBackColor(this, configuration))
+                .WithBound(sizeCalculator.GetTrueSize(this));
             return Border.GetDisplay(screen);
 
         }

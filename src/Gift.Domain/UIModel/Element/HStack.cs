@@ -42,9 +42,10 @@ namespace Gift.Domain.UIModel.Element
                 {
                     if (!renderable.IsFixed())
                     {
-                        WidthAllChilds += renderable.Width;
+                        WidthAllChilds += renderable.Width + 1;
                     }
                 }
+                WidthAllChilds -= 1;
                 return Border.Thickness * 2 + WidthAllChilds;
             }
         }
@@ -54,10 +55,10 @@ namespace Gift.Domain.UIModel.Element
                       Size bound,
                       Color frontColor = Color.Default,
                       Color backColor = Color.Default,
-                      bool IsSelectableContainer = false) : base(screenDisplayFactory, bound, border, frontColor: frontColor, backColor: backColor, isSelectableContainer: IsSelectableContainer)
+                      bool IsSelectableContainer = false)
+            : base(screenDisplayFactory, bound, border, frontColor: frontColor, backColor: backColor, isSelectableContainer: IsSelectableContainer)
         {
         }
-
 
         public override Position GetContext(Renderable renderable, Position position)
         {
@@ -76,7 +77,7 @@ namespace Gift.Domain.UIModel.Element
                     {
                         return ChildContextPosition;
                     }
-                    ChildContextPosition += renderable.Width;
+                    ChildContextPosition += renderable.Width + 1;
                 }
             }
             return 0;
@@ -93,11 +94,10 @@ namespace Gift.Domain.UIModel.Element
                                 position.x);
         }
 
-
         public override IScreenDisplay GetDisplayWithoutBorder(IConfiguration configuration, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator)
         {
             int thickness = Border.Thickness;
-			var fullSize = sizeCalculator.GetTrueSize(this);
+            var fullSize = sizeCalculator.GetTrueSize(this);
             Size boundEmptyVStack = new Size(fullSize.Height - 2 * thickness, fullSize.Width - 2 * thickness);
             IScreenDisplay emptyVstackScreen = _screenDisplayFactory.Create(
                 boundEmptyVStack, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor,

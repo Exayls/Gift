@@ -6,6 +6,7 @@ using Gift.ApplicationService.Services.SignalHandler.Key;
 using Gift.ApplicationService.Services;
 using Gift.Domain.ServiceContracts;
 using Moq;
+using Microsoft.Extensions.Logging;
 
 namespace Gift.ApplicationService.Tests.Services
 {
@@ -30,6 +31,7 @@ namespace Gift.ApplicationService.Tests.Services
 
         public GiftBaseTest()
         {
+            var logger = Mock.Of<ILogger<IGiftService>>();
             rendererMock = new Mock<IRenderer>();
             displayerMock = new Mock<IDisplayer>();
             monitorManagerMock = new Mock<IMonitorService>();
@@ -47,6 +49,7 @@ namespace Gift.ApplicationService.Tests.Services
             repository = new Mock<IRepository>();
 
             giftBase = new GiftLauncherService(
+                logger: logger,
                 monitorManager: monitorManagerMock.Object, bus: queueMock.Object,
                 keyInputMonitor: keyInputHandlerMock.Object, consoleSizeMonitor: consoleSizeMonitorMock.Object,
                 keySignalHandler: keySignalHandlerMock.Object,

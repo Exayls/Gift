@@ -20,25 +20,6 @@ namespace Gift.XmlUiParser.FileParser
             _logger = logger;
         }
 
-        private void SelectContainer(UIElement uiElement, XmlElement element)
-        {
-            // if (giftUI == null)
-            // {
-            //     return;
-            // }
-            // if (uiElement is Container container)
-            // {
-            //     if (element.GetAttribute("selectableContainer") == "true")
-            //     {
-            //         giftUI.SelectableContainers.Add(container);
-            //     }
-            //     if (element.GetAttribute("selectedContainer") == "true")
-            //     {
-            //         giftUI.SelectedContainer = container;
-            //     }
-            // }
-        }
-
         private void SelectElement(UIElement uiElement, XmlElement element, Container container)
         {
             if (element.GetAttribute("selectableElement") == "true")
@@ -92,9 +73,14 @@ namespace Gift.XmlUiParser.FileParser
                 {
                     UIElement childComponent = ParseUIElementRec(childElement);
                     var container = (Container)uIElement;
-                    container.Add(childComponent);
-                    SelectElement(childComponent, childElement, container);
-                    SelectContainer(childComponent, childElement);
+                    if (container.IsSelectableContainer)
+                    {
+                        container.AddSelectableChild(childComponent);
+                    }
+                    else
+                    {
+                        container.Add(childComponent);
+                    }
                 }
             }
 

@@ -3,18 +3,18 @@
 
 <VStack border="simple"  Height="-1" Width="-1">
 	<VStack border="simple" frontColor="red" backColor="transparent"
-		selectableContainer="true" selectedContainer="true">
+		selectableContainer="true">
 
-		<Label selectableElement="true" Text="Hello" />
-		<Label selectableElement="true" Text="World" />
+		<Label Text="Hello" />
+		<Label Text="World" />
 	</VStack>
 	<VStack selectableContainer="true">
-		<Label selectableElement="true" selectedElement="true" border="simple" Text="Hello" />
+		<Label border="simple" Text="Hello" />
 		<Label Text="World" />
 	</VStack>
 	<VStack border="simple"
-		selectableContainer="true" selectedContainer="true">
-		<Label selectableElement="true" selectedElement="true" Text="Hello" />
-		<Label selectableElement="true" Text="World" />
+		selectableContainer="true" >
+		<Label Text="Hello" />
+		<Label Text="World" />
 	</VStack>
 </VStack>

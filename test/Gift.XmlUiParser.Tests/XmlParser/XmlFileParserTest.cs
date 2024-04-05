@@ -35,8 +35,9 @@ namespace Gift.XmlUiParser.Tests.XmlParser
 
             xmlParser = new XmlFileParser(elementRegister, LoggerHelper.GetLogger<IXMLFileParser>(output));
             _output = output;
+            var logger = LoggerHelper.GetLogger<IDisplayer>(_output);
 
-            _displayer = new ConsoleDisplayer(new ConsoleDisplayStringFormater());
+            _displayer = new ConsoleDisplayer(new ConsoleDisplayStringFormater(), logger);
         }
 
         [Fact]

@@ -30,7 +30,7 @@ namespace TestGift.UI
             using var writer = new StringWriter(output);
             var ui = GetGiftUi(new Size(20, 60));
             InMemoryRepository repository = new InMemoryRepository();
-			repository.SaveRoot(ui);
+            repository.SaveRoot(ui);
             IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
@@ -59,7 +59,7 @@ namespace TestGift.UI
             var element = new LabelBuilder().Build();
             ui.Add(element);
             InMemoryRepository repository = new InMemoryRepository();
-			repository.SaveRoot(ui);
+            repository.SaveRoot(ui);
             IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
@@ -87,7 +87,7 @@ namespace TestGift.UI
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.Add(element);
             InMemoryRepository repository = new InMemoryRepository();
-			repository.SaveRoot(ui);
+            repository.SaveRoot(ui);
             IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
@@ -115,7 +115,7 @@ namespace TestGift.UI
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.Add(element);
             InMemoryRepository repository = new InMemoryRepository();
-			repository.SaveRoot(ui);
+            repository.SaveRoot(ui);
             IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
@@ -143,7 +143,7 @@ namespace TestGift.UI
             var element = new LabelBuilder().WithText("test").WithPosition(position).Build();
             ui.Add(element);
             InMemoryRepository repository = new InMemoryRepository();
-			repository.SaveRoot(ui);
+            repository.SaveRoot(ui);
             IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
@@ -171,7 +171,7 @@ namespace TestGift.UI
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.Add(element);
             InMemoryRepository repository = new InMemoryRepository();
-			repository.SaveRoot(ui);
+            repository.SaveRoot(ui);
             IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
@@ -195,7 +195,7 @@ namespace TestGift.UI
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.Add(element);
             InMemoryRepository repository = new InMemoryRepository();
-			repository.SaveRoot(ui);
+            repository.SaveRoot(ui);
             IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
@@ -223,7 +223,7 @@ namespace TestGift.UI
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.Add(element);
             InMemoryRepository repository = new InMemoryRepository();
-			repository.SaveRoot(ui);
+            repository.SaveRoot(ui);
             IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
@@ -252,7 +252,7 @@ namespace TestGift.UI
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.Add(element);
             InMemoryRepository repository = new InMemoryRepository();
-			repository.SaveRoot(ui);
+            repository.SaveRoot(ui);
             IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
@@ -281,7 +281,7 @@ namespace TestGift.UI
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.Add(element);
             InMemoryRepository repository = new InMemoryRepository();
-			repository.SaveRoot(ui);
+            repository.SaveRoot(ui);
             IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
@@ -310,7 +310,7 @@ namespace TestGift.UI
             var element = new LabelBuilder().WithPosition(position).Build();
             ui.Add(element);
             InMemoryRepository repository = new InMemoryRepository();
-			repository.SaveRoot(ui);
+            repository.SaveRoot(ui);
             IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();

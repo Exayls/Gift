@@ -7,7 +7,7 @@ namespace Gift.ApplicationService.ServiceContracts
     {
         void Initialize(string filename);
         void Initialize(UIElement giftui);
-        void AddSignalHandler(ISignalHandlerService handler);
+        void AddSignalHandler(ISignalHandler handler);
         void InitializeHotReload(string file);
         void Run();
         void Stop();

@@ -11,7 +11,7 @@ namespace Gift.ApplicationService.Tests.Event
 {
     public class UiSignalHandlerTest
     {
-        private ISignalHandlerService signalHandler;
+        private ISignalHandler signalHandler;
         private Mock<IDisplayService> _mockDisplayManger;
         private Mock<ISignal> _mockSignal;
         private Mock<EventArgs> _mockEventArgs;
