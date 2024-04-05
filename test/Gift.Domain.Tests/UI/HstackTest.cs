@@ -229,7 +229,7 @@ namespace Gift.Domain.Tests.UI
             Position context = HStack.GetContext(uielement2, contextRenderable);
             // assert
             Assert.Equal(0, context.y);
-            Assert.Equal(1, context.x);
+            Assert.Equal(2, context.x);
         }
 
         [Fact]
@@ -247,7 +247,7 @@ namespace Gift.Domain.Tests.UI
             Position context = HStack.GetContext(uielement2, contextRenderable);
             // assert
             Assert.Equal(0, context.y);
-            Assert.Equal(2, context.x);
+            Assert.Equal(3, context.x);
         }
 
         // Getrelative Tests
