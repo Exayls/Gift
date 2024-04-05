@@ -4,21 +4,21 @@ namespace Gift.ApplicationService.Services.SignalHandler.Bus
 {
     public class SignalBus : ISignalBus
     {
-        private IList<ISignalHandlerService> subscribers;
+        private IList<ISignalHandler> subscribers;
         public SignalBus()
         {
-            subscribers = new List<ISignalHandlerService>();
+            subscribers = new List<ISignalHandler>();
         }
 
         public void PushSignal(ISignal signal)
         {
-            foreach (ISignalHandlerService subscriber in subscribers)
+            foreach (ISignalHandler subscriber in subscribers)
             {
                 subscriber.HandleSignal(signal);
             }
         }
 
-        public void Subscribe(ISignalHandlerService subscriber)
+        public void Subscribe(ISignalHandler subscriber)
         {
             subscribers.Add(subscriber);
         }

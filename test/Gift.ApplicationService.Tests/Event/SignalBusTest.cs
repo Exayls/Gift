@@ -9,13 +9,13 @@ namespace Gift.ApplicationService.Tests.Event
     {
         ISignalBus bus;
         Mock<ISignal> _mockSignal;
-        private Mock<ISignalHandlerService> _mockSubscriber;
+        private Mock<ISignalHandler> _mockSubscriber;
 
         public SignalBusTest()
         {
             bus = new SignalBus();
             _mockSignal = new Mock<ISignal>();
-            _mockSubscriber = new Mock<ISignalHandlerService>();
+            _mockSubscriber = new Mock<ISignalHandler>();
         }
 
         [Fact]

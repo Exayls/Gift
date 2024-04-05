@@ -3,6 +3,6 @@
     public interface ISignalBus
     {
         void PushSignal(ISignal signal);
-        void Subscribe(ISignalHandlerService signalmanager);
+        void Subscribe(ISignalHandler signalmanager);
     }
 }

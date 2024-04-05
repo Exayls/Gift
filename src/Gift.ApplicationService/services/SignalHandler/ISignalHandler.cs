@@ -1,6 +1,6 @@
 ﻿namespace Gift.ApplicationService.Services.SignalHandler
 {
-    public interface ISignalHandlerService
+    public interface ISignalHandler
     {
         void HandleSignal(ISignal signal);
     }

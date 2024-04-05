@@ -107,10 +107,16 @@ namespace Gift.ApplicationService.Services
             }
         }
 
-        public void AddSignalHandler(ISignalHandlerService handler)
+        public void AddSignalHandler(ISignalHandler handler)
         {
             _signalBus.Subscribe(handler);
         }
+
+        public void AddMonitor(IMonitor keyInputMonitor)
+        {
+            _monitorService.Add(keyInputMonitor);
+        }
+
 
         public void Run()
         {
