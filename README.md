@@ -5,26 +5,49 @@ G.I.F.T.: GIFT Is Fully Terminal
 ![resit](assets/example.gif)
 
 # Utilization
+You can setup a simple application by instanciating IGiftService after adding gifts services.
 
 ```cs
+var services = new ServiceCollection();
+services.AddGiftServices();
+var serviceProvider = services.BuildServiceProvider();
 var gift = serviceProvider.GetRequiredService<IGiftService>();
 gift.Initialize("ui.xml");
 gift.Run();
 
 ```
+# Xml
+the xml file should look like this where every tag is a new object to render:
 
-It works by sending signals to the application by using instances of Monitor:
-Example
+```xml
+<VStack border="simple"  Size="-1,-1">
+	<VStack border="simple" frontColor="red" backColor="transparent" selectableContainer="true">
+		<Label Text="Hello" />
+		<Label Text="World" />
+	</VStack>
+	<Hstack>
+		<Label border="simple" Text="Hello" />
+		<Label Text="World" />
+	</Hstack>
+</VStack>
+```
+# Components
+All components have attributes that you can add to their xml that will change their behavior.
+These attributes that can be used like this:
+```xml
+<Label backColor="red"/>
+```
+some are commons for all elements:
+- backcolor
+- frontcolor
+- border
 
-then a SignalHandler can be registered and can use the signal to perform actions on the user interface:
-Example
-
-the actions possible on the user interface are accessible through the services:
-List service and method
-
-one way to send a signal is by using the keyboard input, a config file for keys input is accessible and can be modified to add any signal:
-
-Example with config file and signal name with handler
+## Containers(Vstack, Hstack)
+Some attributes are common for all containers:
+- size
+- height
+- width
+- selectablecontainer
 
 You can create your own component by implementing UIElement or Container.
 
@@ -34,5 +57,35 @@ If the height or width is positive, then the container will take the place of th
 If the height or width is equal to 0, the side of the rectangle will be the exact size needed to display its content.
 If the height or width is negative, then the side of the rectangle will be the size of its parent container, or the whole terminal if no parent has a defined size.
 
+# Event handling
 
-# 
+The lib can receive signal with a name like in the example below:
+
+```json
+{
+    "j": "Ui.NextElementInSelectedContainer",
+    "k": "Ui.PreviousElementInSelectedContainer",
+    "l": "Ui.NextContainer",
+    "h": "Ui.PreviousContainer",
+    "q": "Global.Quit"
+}
+
+```
+Any signal emited by a key pressed or any other input can be intercepted and handled by a ISignalHandlerService
+
+you can add a signal handler by using:
+```cs
+gift.AddSignalHandler(mySignalHandler);
+
+```
+or
+
+```cs
+var signalBus = serviceProvider.GetRequiredService<ISignalBus>();
+signalBus.AddSignalHandler(mySignalHandler);
+
+```
+
+
+
+
