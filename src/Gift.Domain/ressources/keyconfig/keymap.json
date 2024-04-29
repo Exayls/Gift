@@ -1,9 +1,7 @@
 {
-    "t": "Ui.NextElementInSelectedContainer",
-    "s": "Ui.PreviousElementInSelectedContainer",
-    "r": "Ui.NextContainer",
-    "c": "Ui.PreviousContainer",
-    "b": "Ui.ScrollUp",
-    "a": "Ui.ScrollDown",
+    "j": "Ui.NextElementInSelectedContainer",
+    "k": "Ui.PreviousElementInSelectedContainer",
+    "h": "Ui.NextContainer",
+    "l": "Ui.PreviousContainer",
     "q": "Global.Quit"
 }
