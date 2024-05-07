@@ -120,11 +120,14 @@ namespace Gift.ApplicationService.Services
 
         public void Run()
         {
+            Console.CursorVisible = false;
+            Console.Clear();
             _lifeTimeService.Run();
         }
 
         public void Stop()
         {
+            Console.CursorVisible = true;
             _lifeTimeService.Stop();
         }
     }

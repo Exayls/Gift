@@ -1,16 +1,19 @@
 ﻿using Gift.ApplicationService.ServiceContracts;
 using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Hosting;
 
 namespace Gift.ApplicationService.Services
 {
     public class LifeTimeService : ILifeTimeService
     {
         private TaskCompletionSource<bool> completion;
+        private readonly IHostApplicationLifetime _lifeTime;
 
-        public LifeTimeService()
+        public LifeTimeService(IHostApplicationLifetime lifeTime)
         {
             completion = new TaskCompletionSource<bool>();
+			_lifeTime = lifeTime;
         }
 
         public virtual async Task RunAsync()
@@ -21,14 +24,12 @@ namespace Gift.ApplicationService.Services
         public virtual void Run()
         {
             Console.CursorVisible = false;
-            Console.Clear();
-            RunAsync().Wait();
         }
 
         public void Stop()
         {
             Console.CursorVisible = true;
-            completion.SetResult(true);
+			_lifeTime.StopApplication();
         }
     }
 }
