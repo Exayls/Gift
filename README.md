@@ -1,10 +1,13 @@
 # Gift
 
-G.I.F.T.: GIFT Is Fully Terminal
+G.I.F.T.: GIFT Is Fully terminal
+
+Gift is a Terminal User Interface library that try to provide a simple way of building simple application without needing to create complex user interface.
+
 
 ![resit](assets/example.gif)
 
-# Utilization
+# Usage
 You can setup a simple application by instanciating IGiftService after adding gifts services.
 
 ```cs
