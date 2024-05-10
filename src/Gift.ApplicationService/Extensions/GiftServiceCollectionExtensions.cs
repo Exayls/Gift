@@ -22,7 +22,6 @@ namespace Gift.ApplicationService.Extensions
             services.AddSingleton<IUISignalHandler, UISignalHandler>();
             services.AddSingleton<IKeySignalHandler, KeySignalHandler>();
             services.AddSingleton<IGlobalSignalHandler, GlobalSignalHandler>();
-            services.AddSingleton<ILifeTimeService, LifeTimeService>();
 
             return services;
         }

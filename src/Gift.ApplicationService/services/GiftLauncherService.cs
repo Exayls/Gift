@@ -10,6 +10,7 @@ using Gift.Domain.UIModel.Element;
 using System.Xml;
 using System;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Hosting;
 
 namespace Gift.ApplicationService.Services
 {
@@ -21,7 +22,7 @@ namespace Gift.ApplicationService.Services
         private readonly IMonitorService _monitorService;
         private readonly IXMLFileParser _xmlParser;
         private readonly IUIElementRegister _uielementRegister;
-        private readonly ILifeTimeService _lifeTimeService;
+        private readonly IHostApplicationLifetime _lifeTimeService;
         private readonly ILogger<IGiftService> _logger;
         public const char FILLINGCHAR = '*';
 
@@ -37,7 +38,7 @@ namespace Gift.ApplicationService.Services
             IDisplayService displayService,
             IXMLFileParser xmlFileParser,
             IUIElementRegister elementRegister,
-            ILifeTimeService lifeTimeService,
+            IHostApplicationLifetime lifeTimeService,
             IRepository repository)
         {
             _logger = logger;
@@ -122,13 +123,11 @@ namespace Gift.ApplicationService.Services
         {
             Console.CursorVisible = false;
             Console.Clear();
-            _lifeTimeService.Run();
         }
 
         public void Stop()
         {
             Console.CursorVisible = true;
-            _lifeTimeService.Stop();
         }
     }
 }

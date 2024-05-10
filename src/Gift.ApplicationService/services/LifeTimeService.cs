@@ -23,7 +23,6 @@ namespace Gift.ApplicationService.Services
 
         public virtual void Run()
         {
-            Console.CursorVisible = false;
         }
 
         public void Stop()

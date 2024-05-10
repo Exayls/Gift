@@ -1,18 +1,14 @@
-﻿using Gift.ApplicationService.ServiceContracts;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.Hosting;
 
 namespace Gift.ApplicationService.Services.SignalHandler.Global
 {
     public class GlobalSignalHandler : IGlobalSignalHandler
     {
-        private ILifeTimeService _lifeTimeService;
+        private IHostApplicationLifetime _lifeTimeService;
 
-        public TaskCompletionSource<bool> Completion { get; set; }
-
-        public GlobalSignalHandler(ILifeTimeService launcherService)
+        public GlobalSignalHandler(IHostApplicationLifetime lifeTime)
         {
-            _lifeTimeService = launcherService;
-            Completion = new TaskCompletionSource<bool>();
+            _lifeTimeService = lifeTime;
         }
 
 
@@ -30,7 +26,7 @@ namespace Gift.ApplicationService.Services.SignalHandler.Global
 
         private void QuitApp()
         {
-            _lifeTimeService.Stop();
+            _lifeTimeService.StopApplication();
         }
     }
 }
