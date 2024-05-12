@@ -8,15 +8,29 @@ Gift is a Terminal User Interface library that try to provide a simple way of bu
 ![resit](assets/example.gif)
 
 # Usage
-You can setup a simple application by instanciating IGiftService after adding gifts services.
+You can setup a simple application by instanciating a GiftHost and running it.
 
 ```cs
-var services = new ServiceCollection();
-services.AddGiftServices();
-var serviceProvider = services.BuildServiceProvider();
-var gift = serviceProvider.GetRequiredService<IGiftService>();
-gift.Initialize("ui.xml");
-gift.Run();
+using Microsoft.Extensions.Hosting;
+using Serilog;
+
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        Log.Logger = new LoggerConfiguration()
+                         .WriteTo.File($"logs/app_.log", rollingInterval: RollingInterval.Day)
+                         .MinimumLevel.Debug()
+                         .CreateLogger();
+
+		var hostBuilder = new GiftHostBuilder("test.xml");
+		hostBuilder.ConfigureLogging(builder =>
+                            { builder.AddSerilog(); });
+		var host = hostBuilder.Build();
+		host.Run();
+    }
+}
+
 
 ```
 # Xml
