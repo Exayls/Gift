@@ -11,6 +11,8 @@ Gift is a Terminal User Interface library that try to provide a simple way of bu
 You can set up a simple application by instantiating a GiftHost and running it.
 
 ```cs
+
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 
@@ -18,23 +20,57 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        Log.Logger = new LoggerConfiguration()
-                         .WriteTo.File($"logs/app_.log", rollingInterval: RollingInterval.Day)
-                         .MinimumLevel.Debug()
-                         .CreateLogger();
 
-		var hostBuilder = new GiftHostBuilder("test.xml");
-		hostBuilder.ConfigureLogging(builder =>
-                            { builder.AddSerilog(); });
-		var host = hostBuilder.Build();
-		host.Run();
+        var hostBuilder = new GiftHostBuilder("test.xml");
+        hostBuilder.ConfigureAppConfiguration(
+            (hostContext, builder) =>
+            {
+                builder.AddJsonFile("appsettings.json");
+            });
+        hostBuilder.ConfigureLogging(
+            builder =>
+            {
+                var configuration = new ConfigurationBuilder()
+                                        .AddJsonFile("appsettings.json")
+                                        .Build();
+
+                var logger = new LoggerConfiguration()
+                                 .WriteTo.File($"logs/app_.log", rollingInterval: RollingInterval.Day)
+                                 .ReadFrom.Configuration(configuration)
+                                 .CreateLogger();
+
+                builder.AddSerilog(logger);
+            });
+        var host = hostBuilder.Build();
+        host.Run();
     }
 }
 
 
 ```
+appsettings.json:
+
+```
+{
+	"GiftFile": "test.xml",
+
+	"Serilog": {
+		"Using":	[ "Serilog.Sinks.File" ],
+		"MinimumLevel": 
+		{
+			"default" : "Debug",
+			"Override": {
+				"Microsoft": "Warning",
+				"System": "Warning"
+			}
+		}
+	}
+}
+
+```
 # Xml
-The Xml file should look like this where every tag is a new object to render:
+The Xml file should define every components in the window to render:
+
 
 ```xml
 <VStack border="simple"  Size="-1,-1">
@@ -48,12 +84,15 @@ The Xml file should look like this where every tag is a new object to render:
 	</Hstack>
 </VStack>
 ```
+
 # Components
 All components have attributes that you can add to their Xml that will change their behavior.
 These attributes that can be used like this:
+
 ```xml
 <Label backColor="red"/>
 ```
+
 some are commons for all elements:
 - backcolor
 - frontcolor

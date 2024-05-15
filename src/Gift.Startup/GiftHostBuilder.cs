@@ -36,7 +36,6 @@ public class GiftHostBuilder : IHostBuilder
                 services.AddGiftServices();
 				services.AddHostedService<GiftWorker>();
             });
-        Console.WriteLine("test2");
         return _hostBuilder.Build();
     }
 
@@ -47,10 +46,8 @@ public class GiftHostBuilder : IHostBuilder
 
         public GiftWorker(IGiftService giftService, IConfiguration appConf)
         {
-            Console.WriteLine("test1");
             _giftService = giftService;
             _xml = appConf.GetValue<string>("GiftFile");
-            Console.WriteLine(_xml);
         }
 
         public Task StartAsync(CancellationToken cancellationToken)

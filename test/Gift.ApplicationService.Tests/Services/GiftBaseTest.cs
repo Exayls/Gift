@@ -7,6 +7,7 @@ using Gift.ApplicationService.Services;
 using Gift.Domain.ServiceContracts;
 using Moq;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Hosting;
 
 namespace Gift.ApplicationService.Tests.Services
 {
@@ -25,7 +26,7 @@ namespace Gift.ApplicationService.Tests.Services
         private readonly Mock<IDisplayService> displayManagerMock;
         private readonly Mock<IXMLFileParser> xmlFileParserMock;
         private readonly Mock<IUIElementRegister> uIElementRegister;
-        private readonly Mock<LifeTimeService> lifeTimeService;
+        private readonly Mock<IHostApplicationLifetime> lifeTimeService;
         private readonly Mock<IRepository> repository;
         private readonly GiftLauncherService giftBase;
 
@@ -45,7 +46,7 @@ namespace Gift.ApplicationService.Tests.Services
             displayManagerMock = new Mock<IDisplayService>();
             xmlFileParserMock = new Mock<IXMLFileParser>();
             uIElementRegister = new Mock<IUIElementRegister>();
-            lifeTimeService = new Mock<LifeTimeService>();
+            lifeTimeService = new Mock<IHostApplicationLifetime>();
             repository = new Mock<IRepository>();
 
             giftBase = new GiftLauncherService(
