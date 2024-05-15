@@ -8,7 +8,7 @@ Gift is a Terminal User Interface library that try to provide a simple way of bu
 ![resit](assets/example.gif)
 
 # Usage
-You can setup a simple application by instanciating a GiftHost and running it.
+You can set up a simple application by instantiating a GiftHost and running it.
 
 ```cs
 using Microsoft.Extensions.Hosting;
@@ -34,7 +34,7 @@ internal class Program
 
 ```
 # Xml
-the xml file should look like this where every tag is a new object to render:
+The Xml file should look like this where every tag is a new object to render:
 
 ```xml
 <VStack border="simple"  Size="-1,-1">
@@ -49,7 +49,7 @@ the xml file should look like this where every tag is a new object to render:
 </VStack>
 ```
 # Components
-All components have attributes that you can add to their xml that will change their behavior.
+All components have attributes that you can add to their Xml that will change their behavior.
 These attributes that can be used like this:
 ```xml
 <Label backColor="red"/>
@@ -88,7 +88,7 @@ The lib can receive signal with a name like in the example below:
 }
 
 ```
-Any signal emited by a key pressed or any other input can be intercepted and handled by a ISignalHandlerService
+Any signal emitted by a key pressed. Or any other input can be intercepted and handled by a ISignalHandlerService
 
 you can add a signal handler by using:
 ```cs
