@@ -46,14 +46,8 @@ namespace Gift.ApplicationService.Services
             _displayService = displayService;
 
             _signalBus = bus;
-            // AddSignalHandler(keySignalHandler);
-            // AddSignalHandler(uISignalHandler);
-            // AddSignalHandler(globalSignalHandler);
 
             _monitorService = monitorManager;
-            // _monitorService.Add(consoleSizeMonitor);
-            // _monitorService.Add(keyInputMonitor);
-
             _monitorService.StartCheckingMonitors();
 
             _xmlParser = xmlFileParser;

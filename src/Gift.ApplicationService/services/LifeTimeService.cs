@@ -13,7 +13,7 @@ namespace Gift.ApplicationService.Services
         public LifeTimeService(IHostApplicationLifetime lifeTime)
         {
             completion = new TaskCompletionSource<bool>();
-			_lifeTime = lifeTime;
+            _lifeTime = lifeTime;
         }
 
         public virtual async Task RunAsync()
@@ -28,7 +28,7 @@ namespace Gift.ApplicationService.Services
         public void Stop()
         {
             Console.CursorVisible = true;
-			_lifeTime.StopApplication();
+            _lifeTime.StopApplication();
         }
     }
 }
