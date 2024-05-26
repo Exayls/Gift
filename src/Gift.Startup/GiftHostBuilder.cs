@@ -1,31 +1,27 @@
-
-
-using System.Threading;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Gift.Startup.Extensions;
 using Gift.ApplicationService.ServiceContracts;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using System;
+using System.Threading;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Gift.ApplicationService.Services.SignalHandler;
+using Gift.Domain.ServiceContracts;
+using Gift.ApplicationService.Services.SignalHandler.Key;
 
 public class GiftHostBuilder : IHostBuilder
 {
     private readonly IHostBuilder _hostBuilder;
-    private string? _xmlFile;
 
     public IDictionary<object, object> Properties => _hostBuilder.Properties;
 
-    public GiftHostBuilder(string xml)
+    public GiftHostBuilder()
     {
         _hostBuilder = new HostBuilder();
-    }
-
-    public GiftHostBuilder WithXMl(string xml)
-    {
-        _xmlFile = xml;
-        return this;
     }
 
     public IHost Build()
@@ -34,7 +30,7 @@ public class GiftHostBuilder : IHostBuilder
             services =>
             {
                 services.AddGiftServices();
-				services.AddHostedService<GiftWorker>();
+                services.AddHostedService<GiftWorker>();
             });
         return _hostBuilder.Build();
     }
@@ -43,18 +39,35 @@ public class GiftHostBuilder : IHostBuilder
     {
         private readonly IGiftService _giftService;
         private readonly string? _xml;
+        private readonly ILogger<GiftWorker> _logger;
+        private readonly IEnumerable<ISignalHandler> _signalHandlers;
+        private readonly IEnumerable<IMonitor> _monitors;
 
-        public GiftWorker(IGiftService giftService, IConfiguration appConf)
+        public GiftWorker(IGiftService giftService, IConfiguration appConf, ILogger<GiftWorker> logger, IEnumerable<ISignalHandler> signalHandlers, IEnumerable<IMonitor> monitors)
         {
             _giftService = giftService;
             _xml = appConf.GetValue<string>("GiftFile");
+            _logger = logger;
+            _signalHandlers = signalHandlers;
+            _monitors = monitors;
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
+            _logger.LogTrace($"{_signalHandlers.Count()}");
             if (_xml is not null)
             {
                 _giftService.Initialize(_xml);
+            }
+            foreach (ISignalHandler sh in _signalHandlers)
+            {
+                _logger.LogTrace($"{sh}");
+                _giftService.AddSignalHandler(sh);
+            }
+            foreach (IMonitor m in _monitors)
+            {
+                _logger.LogInformation($"{m}");
+                _giftService.AddMonitor(m);
             }
             _giftService.Run();
             return Task.CompletedTask;

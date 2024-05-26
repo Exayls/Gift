@@ -10,6 +10,8 @@ namespace Gift.Displayer.Extensions
         {
             services.AddSingleton<IKeyInteractionMonitor, KeyInteractionMonitor>();
 
+            services.AddSingleton<IMonitor>(provider => provider.GetRequiredService<IKeyInteractionMonitor>());
+
             return services;
         }
     }

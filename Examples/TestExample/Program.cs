@@ -7,22 +7,20 @@ internal class Program
     private static void Main(string[] args)
     {
 
-        var hostBuilder = new GiftHostBuilder("test.xml");
+        var hostBuilder = new GiftHostBuilder();
+
         hostBuilder.ConfigureAppConfiguration(
             (hostContext, builder) =>
             {
                 builder.AddJsonFile("appsettings.json");
             });
-        hostBuilder.ConfigureLogging(
-            builder =>
-            {
-                var configuration = new ConfigurationBuilder()
-                                        .AddJsonFile("appsettings.json")
-                                        .Build();
 
+			hostBuilder.ConfigureLogging(
+            (hostContext, builder) =>
+            {
                 var logger = new LoggerConfiguration()
                                  .WriteTo.File($"logs/app_.log", rollingInterval: RollingInterval.Day)
-                                 .ReadFrom.Configuration(configuration)
+                                 .ReadFrom.Configuration(hostContext.Configuration)
                                  .CreateLogger();
 
                 builder.AddSerilog(logger);

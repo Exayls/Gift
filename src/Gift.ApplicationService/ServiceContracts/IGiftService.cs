@@ -1,4 +1,5 @@
 using Gift.ApplicationService.Services.SignalHandler;
+using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel.Element;
 
 namespace Gift.ApplicationService.ServiceContracts
@@ -7,8 +8,11 @@ namespace Gift.ApplicationService.ServiceContracts
     {
         void Initialize(string filename);
         void Initialize(UIElement giftui);
-        void AddSignalHandler(ISignalHandler handler);
         void InitializeHotReload(string file);
+
+        void AddSignalHandler(ISignalHandler handler);
+        void AddMonitor(IMonitor handler);
+
         void Run();
         void Stop();
     }

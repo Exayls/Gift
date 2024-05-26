@@ -10,6 +10,9 @@ namespace Gift.ConsoleMonitor.Extensions
         {
             services.AddSingleton<IConsoleSizeMonitor, ConsoleSizeMonitor>();
 
+            services.AddSingleton<IMonitor>(provider => provider.GetRequiredService<IConsoleSizeMonitor>());
+
+
             return services;
         }
     }

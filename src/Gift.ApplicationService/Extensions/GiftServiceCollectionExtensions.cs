@@ -6,6 +6,7 @@ using Gift.ApplicationService.Services;
 using Gift.ApplicationService.ServiceContracts;
 using Gift.ApplicationService.Services.SignalHandler.Ui;
 using Gift.ApplicationService.Services.SignalHandler.Key;
+using Gift.ApplicationService.Services.SignalHandler;
 
 namespace Gift.ApplicationService.Extensions
 {
@@ -13,15 +14,23 @@ namespace Gift.ApplicationService.Extensions
     {
         public static IServiceCollection AddGiftApplicationServices(this IServiceCollection services)
         {
+            services.AddSingleton<IGiftService, GiftLauncherService>();
+
             services.AddSingleton<IConfiguration, DefaultConfiguration>();
             services.AddSingleton<IDisplayService, DisplayService>();
+
             services.AddSingleton<IKeyMapper, KeyMapper>();
             services.AddSingleton<IMonitorService, MonitorService>();
+
             services.AddSingleton<ISignalBus, SignalBus>();
-            services.AddSingleton<IGiftService, GiftLauncherService>();
+
             services.AddSingleton<IUISignalHandler, UISignalHandler>();
             services.AddSingleton<IKeySignalHandler, KeySignalHandler>();
             services.AddSingleton<IGlobalSignalHandler, GlobalSignalHandler>();
+
+            services.AddSingleton<ISignalHandler>(provider => provider.GetRequiredService<IUISignalHandler>());
+            services.AddSingleton<ISignalHandler>(provider => provider.GetRequiredService<IKeySignalHandler>());
+            services.AddSingleton<ISignalHandler>(provider => provider.GetRequiredService<IGlobalSignalHandler>());
 
             return services;
         }

@@ -42,19 +42,18 @@ namespace Gift.ApplicationService.Services
             IRepository repository)
         {
             _logger = logger;
-
             _repository = repository;
             _displayService = displayService;
 
             _signalBus = bus;
-
-            _signalBus.Subscribe(keySignalHandler);
-            _signalBus.Subscribe(uISignalHandler);
-            _signalBus.Subscribe(globalSignalHandler);
+            // AddSignalHandler(keySignalHandler);
+            // AddSignalHandler(uISignalHandler);
+            // AddSignalHandler(globalSignalHandler);
 
             _monitorService = monitorManager;
-            _monitorService.Add(consoleSizeMonitor);
-            _monitorService.Add(keyInputMonitor);
+            // _monitorService.Add(consoleSizeMonitor);
+            // _monitorService.Add(keyInputMonitor);
+
             _monitorService.StartCheckingMonitors();
 
             _xmlParser = xmlFileParser;
@@ -116,7 +115,6 @@ namespace Gift.ApplicationService.Services
         {
             _monitorService.Add(keyInputMonitor);
         }
-
 
         public void Run()
         {
