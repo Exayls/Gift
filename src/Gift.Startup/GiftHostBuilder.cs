@@ -53,19 +53,20 @@ public class GiftHostBuilder : IHostBuilder
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            _logger.LogTrace($"{_signalHandlers.Count()}");
             if (_xml is not null)
             {
                 _giftService.Initialize(_xml);
             }
+            _logger.LogTrace($"There is {_signalHandlers.Count()} signalHandlers:");
             foreach (ISignalHandler sh in _signalHandlers)
             {
                 _logger.LogTrace($"{sh}");
                 _giftService.AddSignalHandler(sh);
             }
+            _logger.LogTrace($"There is {_monitors.Count()} monitors:");
             foreach (IMonitor m in _monitors)
             {
-                _logger.LogInformation($"{m}");
+                _logger.LogTrace($"{m}");
                 _giftService.AddMonitor(m);
             }
             _giftService.Run();

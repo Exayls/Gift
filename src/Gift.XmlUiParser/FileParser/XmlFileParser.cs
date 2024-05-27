@@ -49,7 +49,7 @@ namespace Gift.XmlUiParser.FileParser
             IBuilder<UIElement> componentBuilder;
 
             componentBuilder = CreateElementBuilder(element);
-            _logger.LogTrace(componentBuilder.ToString());
+            _logger.LogTrace($"element {componentBuilder} created");
 
             UIElement uIElement = componentBuilder.Build();
             if (uIElement is GiftUI)

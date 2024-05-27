@@ -361,30 +361,29 @@ namespace Gift.Displayer.Tests.Integration
         public void GetDisplay_should_return_screen_when_call_GetDisplay_whithout_border()
         {
             var vstack = new VStackBuilder()
-                .WithUnSelectableElement(new LabelBuilder().WithText("****").Build())
-                .WithUnSelectableElement(new LabelBuilder().WithText("*").Build())
-                .WithBorder(new NoBorder())
-                .Build();
+                             .WithUnSelectableElement(new LabelBuilder().WithText("****").Build())
+                             .WithUnSelectableElement(new LabelBuilder().WithText("*").Build())
+                             .WithBorder(new NoBorder())
+                             .Build();
             var repository = Mock.Of<IRepository>();
-            IScreenDisplay screenDisplay = GetDisplay(vstack, repository);            //assert
+            IScreenDisplay screenDisplay = GetDisplay(vstack, repository); // assert
             const string expected = "****\n" +
                                     "****";
             Assert.Equal(expected, screenDisplay.DisplayString.ToString());
         }
 
-
         [Fact]
         public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border1()
         {
-            //arrange
+            // arrange
             var vstack = new VStackBuilder()
-                .WithUnSelectableElement(new LabelBuilder().WithText("**").Build())
-                .WithBorder(new SimpleBorder(1, '-'))
-                .Build();
+                             .WithUnSelectableElement(new LabelBuilder().WithText("**").Build())
+                             .WithBorder(new SimpleBorder(1, '-'))
+                             .Build();
             IRepository repository = new InMemoryRepository();
-            //act
-            IScreenDisplay screenDisplay = GetDisplay(vstack, repository);            //assert
-            //assert
+            // act
+            IScreenDisplay screenDisplay = GetDisplay(vstack, repository); // assert
+            // assert
             const string expected = "----\n" +
                                     "-**-\n" +
                                     "----";
@@ -394,15 +393,15 @@ namespace Gift.Displayer.Tests.Integration
         [Fact]
         public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border3()
         {
-            //arrange
+            // arrange
             var vstack = new VStackBuilder()
-                .WithUnSelectableElement(new LabelBuilder().WithText("**").Build())
-                .WithBorder(new SimpleBorder(1, 'i'))
-                .Build();
+                             .WithUnSelectableElement(new LabelBuilder().WithText("**").Build())
+                             .WithBorder(new SimpleBorder(1, 'i'))
+                             .Build();
             IRepository repository = new InMemoryRepository();
-            //act
-            IScreenDisplay screenDisplay = GetDisplay(vstack, repository);            //assert
-            //assert
+            // act
+            IScreenDisplay screenDisplay = GetDisplay(vstack, repository); // assert
+            // assert
             const string expected = "iiii\n" +
                                     "i**i\n" +
                                     "iiii";
@@ -412,17 +411,17 @@ namespace Gift.Displayer.Tests.Integration
         [Fact]
         public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border4()
         {
-            //arrange
+            // arrange
             var vstack = new VStackBuilder()
-                .WithUnSelectableElement(new LabelBuilder().WithText("***").Build())
-                .WithUnSelectableElement(new LabelBuilder().WithText("*").Build())
-                .WithUnSelectableElement(new LabelBuilder().WithText("***").Build())
-                .WithBorder(new SimpleBorder(1, '-'))
-                .Build();
+                             .WithUnSelectableElement(new LabelBuilder().WithText("***").Build())
+                             .WithUnSelectableElement(new LabelBuilder().WithText("*").Build())
+                             .WithUnSelectableElement(new LabelBuilder().WithText("***").Build())
+                             .WithBorder(new SimpleBorder(1, '-'))
+                             .Build();
             IRepository repository = new InMemoryRepository();
-            //act
-            IScreenDisplay screenDisplay = GetDisplay(vstack, repository);            //assert
-            //assert
+            // act
+            IScreenDisplay screenDisplay = GetDisplay(vstack, repository); // assert
+            // assert
             const string expected = "-----\n" +
                                     "-***-\n" +
                                     "-***-\n" +
@@ -434,35 +433,34 @@ namespace Gift.Displayer.Tests.Integration
         [Fact]
         public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border5()
         {
-            //arrange
+            // arrange
             var vstack = new VStackBuilder()
-                .WithUnSelectableElement(new LabelBuilder().WithText("aaaa").Build())
-                .WithBorder(new SimpleBorder(1, '-'))
-                .Build();
+                             .WithUnSelectableElement(new LabelBuilder().WithText("aaaa").Build())
+                             .WithBorder(new SimpleBorder(1, '-'))
+                             .Build();
             IRepository repository = new InMemoryRepository();
-            //act
-            IScreenDisplay screenDisplay = GetDisplay(vstack, repository);            //assert
-            //assert
+            // act
+            IScreenDisplay screenDisplay = GetDisplay(vstack, repository); // assert
+            // assert
             const string expected = "------\n" +
                                     "-****-\n" +
                                     "------";
             Assert.Equal(expected, screenDisplay.DisplayString.ToString());
         }
 
-
         [Fact]
         public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border_thickness2()
         {
-            //arrange
+            // arrange
             var vstack = new VStackBuilder()
-                .WithUnSelectableElement(new LabelBuilder().WithText("***").Build())
-                .WithUnSelectableElement(new LabelBuilder().WithText("***").Build())
-                .WithBorder(new SimpleBorder(2, '-'))
-                .Build();
+                             .WithUnSelectableElement(new LabelBuilder().WithText("***").Build())
+                             .WithUnSelectableElement(new LabelBuilder().WithText("***").Build())
+                             .WithBorder(new SimpleBorder(2, '-'))
+                             .Build();
             IRepository repository = new InMemoryRepository();
-            //act
-            IScreenDisplay screenDisplay = GetDisplay(vstack, repository);            //assert
-            //assert
+            // act
+            IScreenDisplay screenDisplay = GetDisplay(vstack, repository); // assert
+            // assert
             const string expected = "-------\n" +
                                     "-------\n" +
                                     "--***--\n" +
@@ -475,15 +473,15 @@ namespace Gift.Displayer.Tests.Integration
         [Fact]
         public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border_thickness3()
         {
-            //arrange
+            // arrange
             var vstack = new VStackBuilder()
-                .WithUnSelectableElement(new LabelBuilder().WithText("a").Build())
-                .WithBorder(new SimpleBorder(3, '-'))
-                .Build();
+                             .WithUnSelectableElement(new LabelBuilder().WithText("a").Build())
+                             .WithBorder(new SimpleBorder(3, '-'))
+                             .Build();
             IRepository repository = new InMemoryRepository();
-            //act
-            IScreenDisplay screenDisplay = GetDisplay(vstack, repository);            //assert
-            //assert
+            // act
+            IScreenDisplay screenDisplay = GetDisplay(vstack, repository); // assert
+            // assert
             const string expected = "-------\n" +
                                     "-------\n" +
                                     "-------\n" +

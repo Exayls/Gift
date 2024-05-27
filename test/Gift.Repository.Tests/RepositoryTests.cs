@@ -9,7 +9,7 @@ namespace Gift.Repository.Tests
     public class RepositoryTests
     {
 
-        #region root tests
+#region root tests
         private static UIElement GetRoot(IRepository repository)
         {
             return repository.GetRoot();
@@ -29,9 +29,9 @@ namespace Gift.Repository.Tests
             var result = GetRoot(repository);
             Assert.Equal(root, result);
         }
-        #endregion
+#endregion
 
-        #region containers tests
+#region containers tests
         private static IEnumerable<Container> GetContainers(IRepository repository)
         {
             return repository.GetContainers();
@@ -48,7 +48,7 @@ namespace Gift.Repository.Tests
             var containers = GetContainers(repository);
 
             Assert.Collection<Container>(containers, container =>
-            { Assert.Equal(root, container); });
+                                                     { Assert.Equal(root, container); });
         }
 
         [Fact]
@@ -109,9 +109,9 @@ namespace Gift.Repository.Tests
                                          container =>
                                          { Assert.Equal(vstack, container); });
         }
-        #endregion
+#endregion
 
-        #region selectable container tests
+#region selectable container tests
         [Fact]
         public void Given_root_have_selectable_containers_in_hierarchy_when_GetContainer_should_retrieve_them()
         {
@@ -189,27 +189,27 @@ namespace Gift.Repository.Tests
 
             Assert.Throws<ElementNotInHierarchyException>(() => repository.SelectContainer(container));
         }
-        #endregion
+#endregion
 
-        #region getParent tests
+#region getParent tests
 
         [Fact]
         public void Given_element_is_root_GetParent_should_return_null()
         {
-            //Arrange
+            // Arrange
             IRepository repository = new InMemoryRepository();
             var root = new VStackBuilder().Build();
             SaveRoot(repository, root);
-            //Act
+            // Act
             var container = repository.GetParent(root);
-            //Assert
+            // Assert
             Assert.Null(container);
         }
 
         [Fact]
         public void Given_element_is_root_GetParent_should_return_parent()
         {
-            //Arrange
+            // Arrange
             IRepository repository = new InMemoryRepository();
 
             VStack vstack = new VStackBuilder().IsSelectableContainer(true).Build();
@@ -217,11 +217,11 @@ namespace Gift.Repository.Tests
             var root = new VStackBuilder().WithUnSelectableElement(hstack).IsSelectableContainer(true).Build();
 
             SaveRoot(repository, root);
-            //Act
+            // Act
             var container = repository.GetParent(vstack);
-            //Assert
+            // Assert
             Assert.Equal(hstack, container);
         }
-        #endregion
+#endregion
     }
 }
