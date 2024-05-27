@@ -16,15 +16,15 @@ internal class Program
             });
 
         hostBuilder.ConfigureLogging(
-        (hostContext, builder) =>
-        {
-            var logger = new LoggerConfiguration()
-                             .WriteTo.File($"logs/app_.log", rollingInterval: RollingInterval.Day)
-                             .ReadFrom.Configuration(hostContext.Configuration)
-                             .CreateLogger();
+            (hostContext, builder) =>
+            {
+                var logger = new LoggerConfiguration()
+                                 .WriteTo.File($"logs/app_.log", rollingInterval: RollingInterval.Day)
+                                 .ReadFrom.Configuration(hostContext.Configuration)
+                                 .CreateLogger();
 
-            builder.AddSerilog(logger);
-        });
+                builder.AddSerilog(logger);
+            });
         var host = hostBuilder.Build();
         host.Run();
     }

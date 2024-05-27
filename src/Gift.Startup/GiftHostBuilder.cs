@@ -11,7 +11,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Gift.ApplicationService.Services.SignalHandler;
 using Gift.Domain.ServiceContracts;
-using Gift.ApplicationService.Services.SignalHandler.Key;
 
 public class GiftHostBuilder : IHostBuilder
 {
