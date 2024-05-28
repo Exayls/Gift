@@ -3,7 +3,6 @@ using Gift.Displayer.Rendering;
 using Gift.Domain.Builders.UIModel;
 using Gift.Domain.ServiceContracts;
 using Gift.Domain.Services;
-using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
@@ -39,7 +38,7 @@ namespace Gift.Displayer.Tests.Integration
         [Fact]
         public void TestVStack()
         {
-            GiftUI ui = CreateUI(new Size(20, 60));
+            var ui = CreateUI(new Size(20, 60));
             var vstack = CreateVstack();
             ui.Add(vstack);
 
@@ -66,9 +65,9 @@ namespace Gift.Displayer.Tests.Integration
             return vstack;
         }
 
-        private static GiftUI CreateUI(Size bound)
+        private static Container CreateUI(Size bound)
         {
-            GiftUI ui = new GiftUIBuilder().WithBound(bound).Build();
+            var ui = new VStackBuilder().WithBound(bound).Build();
             return ui;
         }
 

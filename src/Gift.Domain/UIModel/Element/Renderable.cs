@@ -11,6 +11,7 @@ namespace Gift.Domain.UIModel.Element
         int Height { get; }
         int Width { get; }
         IBorder Border { get; set; }
+        string Id { get; }
 
         IScreenDisplay GetDisplayBorder(IConfiguration configuration, IColorResolver _colorResolver, IElementSizeCalculator sizeCalculator);
         IScreenDisplay GetDisplayWithoutBorder(IConfiguration configuration, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator);

@@ -81,7 +81,7 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             UIElement result = xmlParser.ParseUIFile(filePath);
             // Assert
             var expected =
-                new GiftUIBuilder()
+                new VStackBuilder()
                     .WithUnSelectableElement(
                         new VStackBuilder()
                             .WithBound(new Size(5, 8))
@@ -96,7 +96,6 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             Assert.True(expected.IsSimilarTo(result));
         }
 
-
         [Fact]
         public void Given_xml_with_container_is_selectable_when_parsing_should_create_selectable_container()
         {
@@ -108,9 +107,10 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             UIElement result = xmlParser.ParseUIFile(filePath);
             // Assert
             var expected =
-                new GiftUIBuilder()
-                    .WithSelectableContainer(
+                new VStackBuilder()
+                    .WithUnSelectableElement(
                         new VStackBuilder()
+                            .IsSelectableContainer(true)
                             .Build())
                     .Build();
             Assert.True(expected.IsSimilarTo(result));

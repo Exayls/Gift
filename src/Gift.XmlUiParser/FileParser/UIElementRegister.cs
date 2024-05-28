@@ -32,7 +32,6 @@ namespace Gift.XmlUiParser.FileParser
             _builderMethods = new Dictionary<(Type builderType, string attribute),
                                              Func<IBuilder<UIElement>, object, IBuilder<UIElement>>>();
 
-            this.Register<GiftUIBuilder>("GiftUI");
             this.Register<LabelBuilder>("Label");
             this.Register<VStackBuilder>("VStack");
             this.Register<HStackBuilder>("HStack");
@@ -101,6 +100,8 @@ namespace Gift.XmlUiParser.FileParser
                                                  (b, c) => b.WithForegroundColor(c, _colorMapper));
 
                 this.Register<IUIElementBuilder>(buildertype, "border", (b, a) => b.WithBorder(a, _borderMapper));
+
+                this.Register<IUIElementBuilder>(buildertype, "id", (b, id) => b.WithId(id));
             }
         }
 

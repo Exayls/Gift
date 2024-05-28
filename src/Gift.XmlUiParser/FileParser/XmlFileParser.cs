@@ -11,7 +11,6 @@ namespace Gift.XmlUiParser.FileParser
     public class XmlFileParser : IXMLFileParser
     {
         private readonly IUIElementRegister _uielementRegister;
-        private GiftUI? giftUI = null;
         private readonly ILogger<IXMLFileParser> _logger;
 
         public XmlFileParser(IUIElementRegister elementRegister, ILogger<IXMLFileParser> logger)
@@ -52,10 +51,6 @@ namespace Gift.XmlUiParser.FileParser
             _logger.LogTrace($"element {componentBuilder} created");
 
             UIElement uIElement = componentBuilder.Build();
-            if (uIElement is GiftUI)
-            {
-                giftUI = (GiftUI)uIElement;
-            }
 
             foreach (XmlNode childNode in element.ChildNodes)
             {

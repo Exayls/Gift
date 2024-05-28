@@ -1,4 +1,5 @@
 ﻿using Gift.Domain.ServiceContracts;
+using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
@@ -14,14 +15,11 @@ namespace TestGift.Mocks
         private bool _isFixed;
 
         public MockUIElement(int height, int width, bool isFixed = false)
+            : base(border: null, backColor: Color.Default, frontColor: Color.Default, id: "id")
         {
             Height = height;
             Width = width;
             _isFixed = isFixed;
-        }
-
-        public MockUIElement()
-        {
         }
 
         public override Position GetRelativePosition(Position position)

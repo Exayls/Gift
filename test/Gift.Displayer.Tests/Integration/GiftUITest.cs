@@ -1,7 +1,6 @@
 ﻿using System.Text;
 using Xunit;
 using System.IO;
-using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.MetaData;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Conf;
@@ -11,6 +10,7 @@ using Gift.Domain.Builders.UIModel;
 using Gift.Repository;
 using Gift.Domain.Services;
 using Gift.Domain.ServiceContracts;
+using Gift.Domain.UIModel.Element;
 
 namespace Gift.Displayer.Tests.Integration
 {
@@ -45,9 +45,9 @@ namespace Gift.Displayer.Tests.Integration
             }
         }
 
-        private static GiftUI GetGiftUI(Size bound)
+        private static Container GetGiftUI(Size bound)
         {
-            return new GiftUIBuilder().WithBound(bound).Build();
+            return new VStackBuilder().WithBound(bound).Build();
         }
 
         [Fact]

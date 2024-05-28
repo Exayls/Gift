@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using Gift.Domain.Builders.Mappers;
 using Gift.Domain.UIModel.Border;
@@ -19,6 +20,7 @@ namespace Gift.Domain.Builders.UIModel
         private IList<UIElement> unSelectableElements = new List<UIElement>();
         private int? _height;
         private int? _width;
+        private string _id = Guid.NewGuid().ToString();
 
         private bool _isSelectableContainer = false;
 
@@ -57,6 +59,12 @@ namespace Gift.Domain.Builders.UIModel
             return this;
         }
 
+        private IUIElementBuilder WithId(string id)
+        {
+			_id = id;
+            return this;
+        }
+
         public VStackBuilder IsSelectableContainer(bool isSelectableContainer)
         {
             _isSelectableContainer = isSelectableContainer;
@@ -79,7 +87,7 @@ namespace Gift.Domain.Builders.UIModel
         {
             var bound = new Size(_height ?? _bound.Height, _width ?? _bound.Width);
             var vstack = new VStack(_border, screenDisplayFactory, bound, frontColor: frontColor, backColor: backColor,
-                                    isSelectableContainer: _isSelectableContainer);
+                                    isSelectableContainer: _isSelectableContainer, id: _id);
             foreach (UIElement element in unSelectableElements)
             {
                 vstack.Add(element);
@@ -129,6 +137,11 @@ namespace Gift.Domain.Builders.UIModel
         IUIElementBuilder IUIElementBuilder.WithForegroundColor(Color color)
         {
             return WithForegroundColor(color);
+        }
+
+        IUIElementBuilder IUIElementBuilder.WithId(string id)
+        {
+            return WithId(id);
         }
 
         IContainerBuilder IContainerBuilder.WithHeight(int height)

@@ -15,5 +15,7 @@ namespace Gift.Domain.Builders.UIModel
 
         public IUIElementBuilder WithForegroundColor(Color color);
         public IUIElementBuilder WithForegroundColor(string colorStr, IColorMapper mapper);
+
+        public IUIElementBuilder WithId(string id);
     }
 }

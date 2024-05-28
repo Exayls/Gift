@@ -53,10 +53,11 @@ namespace Gift.Domain.UIModel.Element
         public HStack(IBorder border,
                       IScreenDisplayFactory screenDisplayFactory,
                       Size bound,
-                      Color frontColor = Color.Default,
-                      Color backColor = Color.Default,
-                      bool IsSelectableContainer = false)
-            : base(screenDisplayFactory, bound, border, frontColor: frontColor, backColor: backColor, isSelectableContainer: IsSelectableContainer)
+                      Color frontColor,
+                      Color backColor,
+                      bool IsSelectableContainer,
+					  string id)
+            : base(screenDisplayFactory, bound, border, frontColor: frontColor, backColor: backColor, isSelectableContainer: IsSelectableContainer, id)
         {
         }
 

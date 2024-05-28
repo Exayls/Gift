@@ -49,8 +49,8 @@ namespace Gift.Domain.UIModel.Element
         protected readonly IScreenDisplayFactory _screenDisplayFactory;
 
         public Container(IScreenDisplayFactory screenDisplayFactory, Size bound, IBorder border, Color frontColor,
-                         Color backColor, bool isSelectableContainer)
-            : base(border, frontColor: frontColor, backColor: backColor)
+                         Color backColor, bool isSelectableContainer, string id)
+            : base(border, frontColor: frontColor, backColor: backColor, id:id)
         {
             Size = bound;
             Childs = new List<UIElement>();

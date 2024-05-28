@@ -6,7 +6,7 @@ using Gift.Startup.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 
-var ui = new GiftUIBuilder().Build();
+var ui = new VStackBuilder().Build();
 
 var vstack = new VStackBuilder().WithBorder(new DetailedBorder(2, BorderOption.GetBorderCharsFromFile("ressources/borderchars/double_border.json"))).Build();
 ui.Add(vstack);
