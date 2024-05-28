@@ -42,7 +42,7 @@ namespace Gift.Domain.Tests.UI
         public void VStack_are_not_equals_when_compared_to_vstack()
         {
             //Arrange
-            var giftUIRef = new VStackBuilder()
+            var giftUIRef = new HStackBuilder()
                 .Build();
             var element = new VStackBuilder()
                 .Build();

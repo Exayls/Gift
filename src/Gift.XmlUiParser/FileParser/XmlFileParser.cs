@@ -1,6 +1,5 @@
 ﻿using Gift.Domain.Builders.UIModel;
 using Gift.Domain.ServiceContracts;
-using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Element;
 using Microsoft.Extensions.Logging;
 using System;

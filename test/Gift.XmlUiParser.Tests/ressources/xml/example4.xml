@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<GiftUI>
+<VStack>
 	<VStack borderOption="simple">
 		<VStack border="simple" frontColor="red" backColor="transparent" 
 				selectableContainer="true" selectedContainer="true">
@@ -17,4 +17,4 @@
 			<Label selectableElement="true" Text="World"/>
 		</VStack>
 	</VStack>
-</GiftUI>
+</VStack>

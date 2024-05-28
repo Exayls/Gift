@@ -4,7 +4,6 @@ using Gift.Displayer.Displayer;
 using Gift.Domain.Builders.Mappers;
 using Gift.Domain.Builders.UIModel;
 using Gift.Domain.ServiceContracts;
-using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
@@ -49,7 +48,7 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             UIElement result = xmlParser.ParseUIFile(filePath);
             // Assert
             Assert.NotNull(result);
-            Assert.IsType<GiftUI>(result);
+            Assert.IsType<VStack>(result);
         }
 
         [Fact]
@@ -116,7 +115,7 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             Assert.True(expected.IsSimilarTo(result));
         }
 
-        private static void Log(ILogger<IXMLFileParser> logger, GiftUI element)
+        private static void Log(ILogger<IXMLFileParser> logger, VStack element)
         {
             logger.LogTrace("{}", element.Childs[0].BackColor);
         }
