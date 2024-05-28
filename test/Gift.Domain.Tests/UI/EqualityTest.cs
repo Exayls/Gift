@@ -1,6 +1,7 @@
 
 using Gift.Domain.Builders.UIModel;
 using Gift.Domain.UIModel.Border;
+using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
 using Xunit;
 
@@ -42,7 +43,7 @@ namespace Gift.Domain.Tests.UI
         public void VStack_are_not_equals_when_compared_to_vstack()
         {
             //Arrange
-            var giftUIRef = new HStackBuilder()
+            HStack giftUIRef = new HStackBuilder()
                 .Build();
             var element = new VStackBuilder()
                 .Build();

@@ -105,5 +105,13 @@ namespace Gift.Domain.UIModel.Element
                 BackColor == Color.Default ? configuration.DefaultBackColor : BackColor, configuration.FillingChar);
             return emptyVstackScreen;
         }
+
+        public override bool IsSimilarTo(UIElement uiElement)
+        {
+            if (!(uiElement is HStack))
+                return false;
+            var element = (HStack)uiElement;
+            return base.IsSimilarTo(uiElement);
+        }
     }
 }
