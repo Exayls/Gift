@@ -78,7 +78,7 @@ namespace Gift.Domain.Builders.UIModel
             return this;
         }
 
-        private IUIElementBuilder WithId(string id)
+        public HStackBuilder WithId(string id)
         {
             _id = id;
             return this;

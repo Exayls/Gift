@@ -59,7 +59,7 @@ namespace Gift.Domain.Builders.UIModel
             return this;
         }
 
-        private IUIElementBuilder WithId(string id)
+        public VStackBuilder WithId(string id)
         {
 			_id = id;
             return this;
@@ -193,5 +193,6 @@ namespace Gift.Domain.Builders.UIModel
         {
             return IsSelectableContainer(boolMapper.ToBool(isSelectableContainer));
         }
+
     }
 }

@@ -47,7 +47,7 @@ namespace Gift.Domain.Builders.UIModel
             return this;
         }
 
-        private IUIElementBuilder WithId(string id)
+        public LabelBuilder WithId(string id)
         {
             _id = id;
             return this;
