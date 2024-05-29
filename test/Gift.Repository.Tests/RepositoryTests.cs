@@ -223,5 +223,41 @@ namespace Gift.Repository.Tests
             Assert.Equal(hstack, container);
         }
 #endregion
+
+
+#region getFromId tests
+
+        [Fact]
+        public void Given_element_has_good_id_GetId_should_return_element()
+        {
+            // Arrange
+            IRepository repository = new InMemoryRepository();
+
+            VStack vstack = new VStackBuilder().WithId("a").Build();
+            var root = new VStackBuilder().WithUnSelectableElement(vstack).Build();
+
+            SaveRoot(repository, root);
+            // Act
+            var element = repository.getFromId("a");
+            // Assert
+            Assert.Equal(vstack, element);
+        }
+
+        [Fact]
+        public void Given_element_has_bad_id_GetId_should_return_element()
+        {
+            // Arrange
+            IRepository repository = new InMemoryRepository();
+
+            VStack vstack = new VStackBuilder().WithId("b").Build();
+            var root = new VStackBuilder().WithUnSelectableElement(vstack).Build();
+
+            SaveRoot(repository, root);
+            // Act
+            var element = repository.getFromId("a");
+            // Assert
+            Assert.NotEqual(vstack, element);
+        }
+#endregion
     }
 }

@@ -109,5 +109,12 @@ namespace Gift.Repository
                 }
             return null;
         }
+
+        public UIElement? getFromId(string v)
+        {
+            Func<UIElement, bool> selectId = (currentElement) => currentElement.Id == v;
+
+            return (UIElement?)SelectFirst(_root, selectId);
+        }
     }
 }
