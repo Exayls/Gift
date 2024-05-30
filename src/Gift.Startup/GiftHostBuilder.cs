@@ -38,6 +38,7 @@ public class GiftHostBuilder : IHostBuilder
     {
         private readonly IGiftService _giftService;
         private readonly string? _xml;
+        private readonly bool _hotReload;
         private readonly ILogger<GiftWorker> _logger;
         private readonly IEnumerable<ISignalHandler> _signalHandlers;
         private readonly IEnumerable<IMonitor> _monitors;
@@ -46,7 +47,9 @@ public class GiftHostBuilder : IHostBuilder
         {
             _giftService = giftService;
             _xml = appConf.GetValue<string>("GiftFile");
+            _hotReload = appConf.GetValue<bool>("HotReloading");
             _logger = logger;
+            _logger.LogDebug($"{_hotReload}");
             _signalHandlers = signalHandlers;
             _monitors = monitors;
         }
@@ -55,7 +58,14 @@ public class GiftHostBuilder : IHostBuilder
         {
             if (_xml is not null)
             {
-                _giftService.Initialize(_xml);
+                if (_hotReload == false)
+                {
+                    _giftService.Initialize(_xml);
+                }
+                else
+                {
+                    _giftService.InitializeHotReload(_xml);
+                }
             }
             _logger.LogTrace($"There is {_signalHandlers.Count()} signalHandlers:");
             foreach (ISignalHandler sh in _signalHandlers)
