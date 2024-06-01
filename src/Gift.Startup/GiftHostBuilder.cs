@@ -58,13 +58,13 @@ public class GiftHostBuilder : IHostBuilder
         {
             if (_xml is not null)
             {
-                if (_hotReload == false)
+                if (_hotReload == true)
                 {
-                    _giftService.Initialize(_xml);
+                    _giftService.InitializeHotReload(_xml);
                 }
                 else
                 {
-                    _giftService.InitializeHotReload(_xml);
+                    _giftService.Initialize(_xml);
                 }
             }
             _logger.LogTrace($"There is {_signalHandlers.Count()} signalHandlers:");
