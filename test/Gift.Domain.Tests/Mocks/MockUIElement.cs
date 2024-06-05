@@ -31,7 +31,7 @@ namespace TestGift.Mocks
             throw new System.NotImplementedException();
         }
 
-        public override bool IsFixed()
+        public override bool HasNoSize()
         {
             return _isFixed;
         }

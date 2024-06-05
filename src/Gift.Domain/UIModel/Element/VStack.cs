@@ -20,7 +20,7 @@ namespace Gift.Domain.UIModel.Element
                 int HeightAllChilds = 0;
                 foreach (UIElement renderable in Childs)
                 {
-                    if (!renderable.IsFixed())
+                    if (!renderable.HasNoSize())
                     {
                         HeightAllChilds += renderable.Height;
                     }
@@ -39,7 +39,7 @@ namespace Gift.Domain.UIModel.Element
                 int maxWidthChild = 0;
                 foreach (UIElement renderable in Childs)
                 {
-                    if (!renderable.IsFixed())
+                    if (!renderable.HasNoSize())
                     {
                         if (maxWidthChild < renderable.Width)
                             maxWidthChild = renderable.Width;
@@ -66,7 +66,7 @@ namespace Gift.Domain.UIModel.Element
             int ChildContextPosition = 0;
             foreach (UIElement renderable in Childs)
             {
-                if (!renderable.IsFixed())
+                if (!renderable.HasNoSize())
                 {
                     if (renderable == renderableToFind)
                     {
@@ -78,7 +78,7 @@ namespace Gift.Domain.UIModel.Element
             return 0;
         }
 
-        public override bool IsFixed()
+        public override bool HasNoSize()
         {
             return false;
         }

@@ -40,7 +40,7 @@ namespace Gift.Domain.UIModel.Element
         public abstract IScreenDisplay GetDisplayWithoutBorder(IConfiguration configuration, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator);
         public abstract IScreenDisplay GetDisplayBorder(IConfiguration configuratione, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator);
         public abstract Position GetRelativePosition(Position position);
-        public abstract bool IsFixed();
+        public abstract bool HasNoSize();
 
         public IScreenDisplay GetDisplayWithBorder(char fillingChar, ColorResolver colorResolver, IElementSizeCalculator sizeCalculator)
         {

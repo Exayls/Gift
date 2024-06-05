@@ -41,7 +41,7 @@ namespace Gift.Domain.UIModel.Element
             }
         }
 
-        public override bool IsFixed()
+        public override bool HasNoSize()
         {
             return Disposition is ExplicitDisposition;
         }
