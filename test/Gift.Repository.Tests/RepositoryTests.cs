@@ -224,7 +224,6 @@ namespace Gift.Repository.Tests
         }
 #endregion
 
-
 #region getFromId tests
 
         [Fact]
