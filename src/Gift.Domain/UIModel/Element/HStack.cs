@@ -99,13 +99,15 @@ namespace Gift.Domain.UIModel.Element
         {
             int thickness = Border.Thickness;
             var fullSize = sizeCalculator.GetTrueSize(this);
+            Color frontColor = colorResolver.GetFrontColor(this, configuration);
+            Color backColor = colorResolver.GetBackColor(this, configuration);
             Size sizeInVStack = new Size(fullSize.Height - 2 * thickness, fullSize.Width - 2 * thickness);
 
             IScreenDisplay emptyVstackScreen = 
 				new ScreenDisplayBuilder()
 				.WithBound(sizeInVStack)
-				.WithBackColor(BackColor == Color.Default ? configuration.DefaultBackColor : BackColor)
-				.WithFrontColor(FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor)
+				.WithBackColor(backColor)
+				.WithFrontColor(frontColor)
 				.WithChar(configuration.FillingChar)
 				.Build();
             return emptyVstackScreen;
