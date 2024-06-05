@@ -115,6 +115,17 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             Assert.True(expected.IsSimilarTo(result));
         }
 
+        [Fact]
+        public void Given_xml_with_id_element_should_have_id()
+        {
+
+            string filePath = "ressources/xml/id.xml";
+            // Act
+            UIElement result = xmlParser.ParseUIFile(filePath);
+            // Assert
+            Assert.True(result.Id == "bbb");
+        }
+
         private static void Log(ILogger<IXMLFileParser> logger, VStack element)
         {
             logger.LogTrace("{}", element.Childs[0].BackColor);
