@@ -13,7 +13,6 @@ namespace Gift.Domain.Builders.UIModel
     {
         private IBorder _border = new NoBorder();
         private Size _bound = new Size(0, 0);
-        private IScreenDisplayFactory screenDisplayFactory = new ScreenDisplayFactory();
         private Color backColor = Color.Default;
         private Color frontColor = Color.Default;
         private IList<UIElement> selectableElements = new List<UIElement>();
@@ -86,7 +85,7 @@ namespace Gift.Domain.Builders.UIModel
         public VStack Build()
         {
             var bound = new Size(_height ?? _bound.Height, _width ?? _bound.Width);
-            var vstack = new VStack(_border, screenDisplayFactory, bound, frontColor: frontColor, backColor: backColor,
+            var vstack = new VStack(_border, bound, frontColor: frontColor, backColor: backColor,
                                     isSelectableContainer: _isSelectableContainer, id: _id);
             foreach (UIElement element in unSelectableElements)
             {

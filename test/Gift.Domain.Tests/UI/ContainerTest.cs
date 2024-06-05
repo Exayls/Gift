@@ -12,13 +12,11 @@ namespace Gift.Domain.Tests.UI
     {
 
         private Mock<IBorder> _borderMock;
-        private Mock<IScreenDisplayFactory> _ScreenDisplayFactoryMock;
         private VStack vstack;
 
         public ContainerTest()
         {
             _borderMock = new Mock<IBorder>();
-            _ScreenDisplayFactoryMock = new Mock<IScreenDisplayFactory>();
             vstack = new VStackBuilder().WithBorder(_borderMock.Object).Build();
         }
 

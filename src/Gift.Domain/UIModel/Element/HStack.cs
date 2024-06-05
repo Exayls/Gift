@@ -1,4 +1,5 @@
-﻿using Gift.Domain.ServiceContracts;
+﻿using Gift.Domain.Builders.UIModel.Display;
+using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
@@ -51,13 +52,12 @@ namespace Gift.Domain.UIModel.Element
         }
 
         public HStack(IBorder border,
-                      IScreenDisplayFactory screenDisplayFactory,
                       Size bound,
                       Color frontColor,
                       Color backColor,
                       bool IsSelectableContainer,
 					  string id)
-            : base(screenDisplayFactory, bound, border, frontColor: frontColor, backColor: backColor, isSelectableContainer: IsSelectableContainer, id)
+            : base(bound, border, frontColor: frontColor, backColor: backColor, isSelectableContainer: IsSelectableContainer, id)
         {
         }
 
@@ -99,10 +99,15 @@ namespace Gift.Domain.UIModel.Element
         {
             int thickness = Border.Thickness;
             var fullSize = sizeCalculator.GetTrueSize(this);
-            Size boundEmptyVStack = new Size(fullSize.Height - 2 * thickness, fullSize.Width - 2 * thickness);
-            IScreenDisplay emptyVstackScreen = _screenDisplayFactory.Create(
-                boundEmptyVStack, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor,
-                BackColor == Color.Default ? configuration.DefaultBackColor : BackColor, configuration.FillingChar);
+            Size sizeInVStack = new Size(fullSize.Height - 2 * thickness, fullSize.Width - 2 * thickness);
+
+            IScreenDisplay emptyVstackScreen = 
+				new ScreenDisplayBuilder()
+				.WithBound(sizeInVStack)
+				.WithBackColor(BackColor == Color.Default ? configuration.DefaultBackColor : BackColor)
+				.WithFrontColor(FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor)
+				.WithChar(configuration.FillingChar)
+				.Build();
             return emptyVstackScreen;
         }
 

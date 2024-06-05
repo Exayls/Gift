@@ -13,7 +13,6 @@ namespace Gift.Domain.Builders.UIModel
     {
         private IBorder _border = new NoBorder();
         private Size _bound = new Size(0, 0);
-        private IScreenDisplayFactory screenDisplayFactory = new ScreenDisplayFactory();
         private Color backColor = Color.Default;
         private Color frontColor = Color.Default;
         private int? _height;
@@ -89,7 +88,6 @@ namespace Gift.Domain.Builders.UIModel
         {
             var bound = new Size(_height ?? _bound.Height, _width ?? _bound.Width);
             var hstack = new HStack(_border,
-                              screenDisplayFactory,
                               bound,
                               IsSelectableContainer: _isSelectableContainer,
                               frontColor: frontColor,

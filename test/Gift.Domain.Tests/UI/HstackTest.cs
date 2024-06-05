@@ -19,7 +19,6 @@ namespace Gift.Domain.Tests.UI
         private Mock<UIElement> _uiElementMock1;
         private Mock<UIElement> _uiElementMock2;
         private Mock<IBorder> _borderMock;
-        private Mock<IScreenDisplayFactory> _ScreenDisplayFactoryMock;
         private HStack HStack;
 
         public HStackTest()
@@ -29,10 +28,6 @@ namespace Gift.Domain.Tests.UI
             _uiElementMock1 = new Mock<UIElement>();
             _uiElementMock2 = new Mock<UIElement>();
             _borderMock = new Mock<IBorder>();
-            _ScreenDisplayFactoryMock = new Mock<IScreenDisplayFactory>();
-            _ScreenDisplayFactoryMock
-                .Setup(s => s.Create(It.IsAny<Size>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>()))
-                .Returns(_screenDisplayMock1.Object);
             HStack = new HStackBuilder().WithBorder(_borderMock.Object).Build();
         }
 

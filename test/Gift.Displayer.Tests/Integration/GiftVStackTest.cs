@@ -21,13 +21,10 @@ namespace Gift.Displayer.Tests.Integration
     public class GiftVStackTest
     {
         private Mock<IScreenDisplay> _screenDisplayMock1;
-        private Mock<IScreenDisplayFactory> _ScreenDisplayFactoryMock;
 
         public GiftVStackTest()
         {
             _screenDisplayMock1 = new Mock<IScreenDisplay>();
-            _ScreenDisplayFactoryMock = new Mock<IScreenDisplayFactory>();
-            _ScreenDisplayFactoryMock.Setup(s => s.Create(It.IsAny<Size>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>())).Returns(_screenDisplayMock1.Object);
         }
 
         private static Renderer GetRenderer(IRepository repository)
