@@ -78,12 +78,22 @@ namespace Gift.ApplicationService.Services
 
         public void NextElementInSelectedContainer()
         {
-            _repository.GetSelectedContainer()?.NextElement();
+            var selectedContainer = _repository.GetSelectedContainer();
+			if(selectedContainer is null){
+				_logger.LogDebug("NextElement: No selected container");
+				return;
+			}
+			selectedContainer.NextElement();
         }
 
         public void PreviousElementInSelectedContainer()
         {
-            _repository.GetSelectedContainer()?.PreviousElement();
+            var selectedContainer = _repository.GetSelectedContainer();
+			if(selectedContainer is null){
+				_logger.LogDebug("PreviousElement: No selected container");
+				return;
+			}
+			selectedContainer.PreviousElement();
         }
 
         public void Resize(Size bound)
