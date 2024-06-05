@@ -49,7 +49,6 @@ public class GiftHostBuilder : IHostBuilder
             _xml = appConf.GetValue<string>("GiftFile");
             _hotReload = appConf.GetValue<bool>("HotReloading");
             _logger = logger;
-            _logger.LogDebug($"{_hotReload}");
             _signalHandlers = signalHandlers;
             _monitors = monitors;
         }
@@ -139,4 +138,5 @@ public class GiftHostBuilder : IHostBuilder
     IHostBuilder IHostBuilder.UseServiceProviderFactory<TContainerBuilder>(Func<HostBuilderContext, IServiceProviderFactory<TContainerBuilder>> factory) => UseServiceProviderFactory<TContainerBuilder>(factory);
 
     IHostBuilder IHostBuilder.ConfigureContainer<TContainerBuilder>(Action<HostBuilderContext, TContainerBuilder> configureDelegate) => ConfigureContainer<TContainerBuilder>(configureDelegate);
+
 }
