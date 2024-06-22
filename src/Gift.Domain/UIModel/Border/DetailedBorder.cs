@@ -30,21 +30,21 @@ namespace Gift.Domain.UIModel.Border
                 return false;
             var detailedBorder = (DetailedBorder)border;
 
-            if (_borderChars.tlBorder != detailedBorder._borderChars.tlBorder)
+            if (_borderChars.TlBorder != detailedBorder._borderChars.TlBorder)
                 return false;
-            if (_borderChars.trBorder != detailedBorder._borderChars.trBorder)
+            if (_borderChars.TrBorder != detailedBorder._borderChars.TrBorder)
                 return false;
-            if (_borderChars.blBorder != detailedBorder._borderChars.blBorder)
+            if (_borderChars.BlBorder != detailedBorder._borderChars.BlBorder)
                 return false;
-            if (_borderChars.brBorder != detailedBorder._borderChars.brBorder)
+            if (_borderChars.BrBorder != detailedBorder._borderChars.BrBorder)
                 return false;
-            if (_borderChars.tBorder != detailedBorder._borderChars.tBorder)
+            if (_borderChars.TBorder != detailedBorder._borderChars.TBorder)
                 return false;
-            if (_borderChars.bBorder != detailedBorder._borderChars.bBorder)
+            if (_borderChars.BBorder != detailedBorder._borderChars.BBorder)
                 return false;
-            if (_borderChars.lBorder != detailedBorder._borderChars.lBorder)
+            if (_borderChars.LBorder != detailedBorder._borderChars.LBorder)
                 return false;
-            if (_borderChars.rBorder != detailedBorder._borderChars.rBorder)
+            if (_borderChars.RBorder != detailedBorder._borderChars.RBorder)
                 return false;
 
             return true;

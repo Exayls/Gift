@@ -1,3 +1,4 @@
+using Xunit;
 namespace Gift.Integration.Test;
 
 public class UnitTest1

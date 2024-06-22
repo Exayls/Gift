@@ -183,35 +183,35 @@ namespace Gift.Domain.UIModel.Display
                     bool RightBorder = IsRightBorder(x, y, thickness);
                     if (TopLeftBorder)
                     {
-                        AddChar(borderChars.tlBorder, new Position(y, x));
+                        AddChar(borderChars.TlBorder, new Position(y, x));
                     }
                     else if (TopRightBorder)
                     {
-                        AddChar(borderChars.trBorder, new Position(y, x));
+                        AddChar(borderChars.TrBorder, new Position(y, x));
                     }
                     else if (BottomLeftBorder)
                     {
-                        AddChar(borderChars.blBorder, new Position(y, x));
+                        AddChar(borderChars.BlBorder, new Position(y, x));
                     }
                     else if (BottomRightBorder)
                     {
-                        AddChar(borderChars.brBorder, new Position(y, x));
+                        AddChar(borderChars.BrBorder, new Position(y, x));
                     }
                     else if (TopBorder)
                     {
-                        AddChar(borderChars.tBorder, new Position(y, x));
+                        AddChar(borderChars.TBorder, new Position(y, x));
                     }
                     else if (BottomBorder)
                     {
-                        AddChar(borderChars.bBorder, new Position(y, x));
+                        AddChar(borderChars.BBorder, new Position(y, x));
                     }
                     else if (LeftBorder)
                     {
-                        AddChar(borderChars.lBorder, new Position(y, x));
+                        AddChar(borderChars.LBorder, new Position(y, x));
                     }
                     else if (RightBorder)
                     {
-                        AddChar(borderChars.rBorder, new Position(y, x));
+                        AddChar(borderChars.RBorder, new Position(y, x));
                     }
                 }
             }

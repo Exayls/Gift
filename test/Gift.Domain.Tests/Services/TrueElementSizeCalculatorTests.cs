@@ -15,7 +15,7 @@ namespace Gift.Domain.Tests.Services
         {
             var repository = Mock.Of<IRepository>();
             var element = new LabelBuilder().WithText("hello").Build();
-            var sizeCalculator = new TrueElementSizeCalculator(repository);
+            TrueElementSizeCalculator sizeCalculator = new TrueElementSizeCalculator(repository);
             var size = sizeCalculator.GetTrueSize(element);
             Assert.True(size.Equals(new Size(1, 5)));
         }
@@ -25,11 +25,11 @@ namespace Gift.Domain.Tests.Services
         {
             var repository = Mock.Of<IRepository>();
             var element = new VStackBuilder()
-                .WithBound(new(0, 0))
-                .WithUnSelectableElement(new LabelBuilder().WithText("hello").Build())
-                .WithUnSelectableElement(new LabelBuilder().WithText("he").Build())
-                .WithBorder(new SimpleBorder(1, 'a'))
-                .Build();
+                              .WithBound(new(0, 0))
+                              .WithUnSelectableElement(new LabelBuilder().WithText("hello").Build())
+                              .WithUnSelectableElement(new LabelBuilder().WithText("he").Build())
+                              .WithBorder(new SimpleBorder(1, 'a'))
+                              .Build();
             var sizeCalculator = new TrueElementSizeCalculator(repository);
             var size = sizeCalculator.GetTrueSize(element);
             Assert.True(size.Equals(new Size(4, 7)));
@@ -40,11 +40,11 @@ namespace Gift.Domain.Tests.Services
         {
             var repository = Mock.Of<IRepository>();
             var element = new VStackBuilder()
-                .WithBound(new(2, 3))
-                .WithUnSelectableElement(new LabelBuilder().WithText("hello").Build())
-                .WithUnSelectableElement(new LabelBuilder().WithText("he").Build())
-                .WithBorder(new SimpleBorder(1, 'a'))
-                .Build();
+                              .WithBound(new(2, 3))
+                              .WithUnSelectableElement(new LabelBuilder().WithText("hello").Build())
+                              .WithUnSelectableElement(new LabelBuilder().WithText("he").Build())
+                              .WithBorder(new SimpleBorder(1, 'a'))
+                              .Build();
             var sizeCalculator = new TrueElementSizeCalculator(repository);
             var size = sizeCalculator.GetTrueSize(element);
             Assert.True(size.Equals(new Size(2, 3)));
@@ -55,13 +55,13 @@ namespace Gift.Domain.Tests.Services
         {
             var repository = Mock.Of<IRepository>();
             var element = new VStackBuilder()
-                .WithBound(new(-1, -1))
-                .Build();
+                              .WithBound(new(-1, -1))
+                              .Build();
             var parent = new VStackBuilder()
-                .WithBound(new(4, 5))
-                .WithUnSelectableElement(element)
-                .WithBorder(new SimpleBorder(1, 'a'))
-                .Build();
+                             .WithBound(new(4, 5))
+                             .WithUnSelectableElement(element)
+                             .WithBorder(new SimpleBorder(1, 'a'))
+                             .Build();
 
             Mock.Get<IRepository>(repository).Setup(r => r.GetParent(element)).Returns(parent);
 

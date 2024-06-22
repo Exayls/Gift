@@ -7,51 +7,35 @@ namespace Gift.Domain.UIModel.Border
     public class BorderOption
     {
 
-        public static BorderOption Default
-        {
-            get
-            {
-                return GetBorderCharsFromFile("ressources/borderchars/simple_border.json");
-            }
-        }
-        public static BorderOption Simple
-        {
-            get
-            {
-                return GetBorderCharsFromFile("ressources/borderchars/simple_border.json");
-            }
-        }
-        public static BorderOption Heavy
-        {
-            get
-            {
-                return GetBorderCharsFromFile("ressources/borderchars/heavy_border.json");
-            }
-        }
-        public char tlBorder { get; }
-        public char trBorder { get; }
-        public char blBorder { get; }
-        public char brBorder { get; }
-        public char tBorder { get; }
-        public char bBorder { get; }
-        public char lBorder { get; }
-        public char rBorder { get; }
+        public static BorderOption Default => GetBorderCharsFromFile("ressources/borderchars/simple_border.json");
+        public static BorderOption Simple => GetBorderCharsFromFile("ressources/borderchars/simple_border.json");
+        public static BorderOption Heavy => GetBorderCharsFromFile("ressources/borderchars/heavy_border.json");
+
+        public char TlBorder { get; }
+        public char TrBorder { get; }
+        public char BlBorder { get; }
+        public char BrBorder { get; }
+        public char TBorder { get; }
+        public char BBorder { get; }
+        public char LBorder { get; }
+        public char RBorder { get; }
 
         public BorderOption(char ulBorder, char urBorder, char dlBorder, char drBorder, char uBorder, char dBorder,
                             char lBorder, char rBorder)
         {
-            this.tlBorder = ulBorder;
-            this.trBorder = urBorder;
-            this.blBorder = dlBorder;
-            this.brBorder = drBorder;
-            this.tBorder = uBorder;
-            this.bBorder = dBorder;
-            this.lBorder = lBorder;
-            this.rBorder = rBorder;
+            TlBorder = ulBorder;
+            TrBorder = urBorder;
+            BlBorder = dlBorder;
+            BrBorder = drBorder;
+            TBorder = uBorder;
+            BBorder = dBorder;
+            LBorder = lBorder;
+            RBorder = rBorder;
         }
 
-        public BorderOption(char borderChar) : this(borderChar, borderChar, borderChar, borderChar, borderChar,
-                                                  borderChar, borderChar, borderChar)
+        public BorderOption(char borderChar)
+            : this(borderChar, borderChar, borderChar, borderChar, borderChar,
+                   borderChar, borderChar, borderChar)
         {
         }
 

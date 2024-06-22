@@ -46,7 +46,7 @@ namespace TestGift.UnitTest.Displayer
             });
 
             string displayString = formater.CreateDislayString(screenDisplay.Object);
-            Assert.Equal("\u001b[34m\u001b[45m1\u001b[32m\u001b[40m2\n\u001b[37m\u001b[41m3\u001b[33m\u001b[46m4", displayString);
+            Assert.Equal("\u001b[45m\u001b[34m1\u001b[40m\u001b[32m2\n\u001b[41m\u001b[37m3\u001b[46m\u001b[33m4", displayString);
         }
     }
 }
