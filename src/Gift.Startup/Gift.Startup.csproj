@@ -11,12 +11,9 @@
 		<ProjectReference Include="..\Gift.ConsoleMonitor\Gift.ConsoleMonitor.csproj" />
 		<ProjectReference Include="..\Gift.Displayer\Gift.Displayer.csproj" />
 		<ProjectReference Include="..\Gift.Domain\Gift.Domain.csproj" />
-		<ProjectReference Include="..\Gift.XmlUiParser\Gift.XmlUiParser.csproj" />
-		<ProjectReference Include="..\Gift.ApplicationService\Gift.ApplicationService.csproj" />
-		<ProjectReference Include="..\Gift.Displayer\Gift.Displayer.csproj" />
-		<ProjectReference Include="..\Gift.XmlUiParser\Gift.XmlUiParser.csproj" />
 		<ProjectReference Include="..\Gift.KeyInteraction\Gift.KeyInteraction.csproj" />
 		<ProjectReference Include="..\Gift.Repository\Gift.Repository.csproj" />
+		<ProjectReference Include="..\Gift.XmlUiParser\Gift.XmlUiParser.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
