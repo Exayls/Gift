@@ -1,9 +1,9 @@
 ﻿using Gift.Domain.Builders.UIModel;
 using Gift.Domain.ServiceContracts;
-using Gift.Domain.Services;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
+using Gift.Domain.UIModel.Services;
 using Moq;
 using Xunit;
 
@@ -23,7 +23,7 @@ namespace Gift.Domain.Tests.Display
         {
             // Arrange
             Container selectedContainer = new VStackBuilder().Build();
-            Mock.Get<IRepository>(_repository)
+            Mock.Get(_repository)
                 .Setup(r => r.GetSelectedContainer())
                 .Returns(selectedContainer);
             var colorResolver = new ColorResolver(_repository);
@@ -40,7 +40,7 @@ namespace Gift.Domain.Tests.Display
         {
             // Arrange
             Container container = new VStackBuilder().Build();
-            Mock.Get<IRepository>(_repository)
+            Mock.Get(_repository)
                 .Setup(r => r.GetSelectedContainer())
                 .Returns<Container?>(null);
             var colorResolver = new ColorResolver(_repository);
@@ -57,7 +57,7 @@ namespace Gift.Domain.Tests.Display
         {
             // Arrange
             Container container = new VStackBuilder().Build();
-            Mock.Get<IRepository>(_repository)
+            Mock.Get(_repository)
                 .Setup(r => r.GetSelectedContainer())
                 .Returns<Container?>(null);
             var colorResolver = new ColorResolver(_repository);
@@ -74,7 +74,7 @@ namespace Gift.Domain.Tests.Display
         {
             // Arrange
             Label label = new LabelBuilder().Build();
-            Mock.Get<IRepository>(_repository);
+            Mock.Get(_repository);
             var colorResolver = new ColorResolver(_repository);
 
             // Act
@@ -89,7 +89,7 @@ namespace Gift.Domain.Tests.Display
         {
             // Arrange
             Label label = new LabelBuilder().Build();
-            Mock.Get<IRepository>(_repository);
+            Mock.Get(_repository);
             var colorResolver = new ColorResolver(_repository);
 
             // Act
@@ -108,7 +108,7 @@ namespace Gift.Domain.Tests.Display
             VStack vstack = new VStackBuilder()
                 .WithSelectableElement(label)
                 .Build();
-            Mock.Get<IRepository>(_repository)
+            Mock.Get(_repository)
                 .Setup(r => r.GetSelectedContainer()).Returns<Container?>(null);
             var colorResolver = new ColorResolver(_repository);
 

@@ -4,14 +4,14 @@ using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
 
-namespace TestGift.Mocks
+namespace Gift.Domain.Tests.Mocks
 {
     public class MockUIElement : UIElement
     {
         public override int Height { get; }
         public override int Width { get; }
 
-        private bool _isFixed;
+        private readonly bool _isFixed;
 
         public MockUIElement(int height, int width, bool isFixed = false)
             : base(border: null, backColor: Color.Default, frontColor: Color.Default, id: "id")

@@ -5,11 +5,11 @@ using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.MetaData;
 using Xunit;
 
-namespace TestGift.Builder
+namespace Gift.Domain.Tests.Builder.Mappers
 {
     public class BorderMapperTest
     {
-        private readonly IBorderMapper _mapper;
+        private readonly BorderMapper _mapper;
 
         public BorderMapperTest()
         {
@@ -31,7 +31,7 @@ namespace TestGift.Builder
             Assert.Equal(expectedString, border.GetDisplay(screen).DisplayString.ToString());
         }
 
-        private IScreenDisplay GetDisplay(Size bound, Color frcol, Color bckcol, char ch, IBorder border)
+        private static IScreenDisplay GetDisplay(Size bound, Color frcol, Color bckcol, char ch, IBorder border)
         {
 
             var screen =

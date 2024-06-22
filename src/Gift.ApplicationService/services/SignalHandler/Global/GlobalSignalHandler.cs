@@ -4,7 +4,7 @@ namespace Gift.ApplicationService.Services.SignalHandler.Global
 {
     public class GlobalSignalHandler : IGlobalSignalHandler
     {
-        private IHostApplicationLifetime _lifeTimeService;
+        private readonly IHostApplicationLifetime _lifeTimeService;
 
         public GlobalSignalHandler(IHostApplicationLifetime lifeTime)
         {

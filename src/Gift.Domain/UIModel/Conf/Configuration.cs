@@ -11,6 +11,7 @@ namespace Gift.Domain.UIModel.Conf
         public Color SelectedContainerBackColor { get; }
 
         public Color SelectedElementFrontColor { get; }
+
         public Color SelectedElementBackColor { get; }
         public char FillingChar { get; }
 

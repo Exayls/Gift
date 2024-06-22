@@ -1,16 +1,11 @@
-﻿using System.Threading.Tasks;
-using Gift.ApplicationService.Services.SignalHandler.Global;
-using Gift.ApplicationService.Services.SignalHandler.Bus;
+﻿using Gift.ApplicationService.Services.SignalHandler.Bus;
 using Gift.ApplicationService.ServiceContracts;
-using Gift.ApplicationService.Services.SignalHandler.Ui;
-using Gift.ApplicationService.Services.SignalHandler.Key;
 using Gift.Domain.ServiceContracts;
 using Gift.ApplicationService.Services.SignalHandler;
 using Gift.Domain.UIModel.Element;
 using System.Xml;
 using System;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Hosting;
+using System.Threading.Tasks;
 
 namespace Gift.ApplicationService.Services
 {
@@ -21,27 +16,15 @@ namespace Gift.ApplicationService.Services
         private readonly IDisplayService _displayService;
         private readonly IMonitorService _monitorService;
         private readonly IXMLFileParser _xmlParser;
-        private readonly IUIElementRegister _uielementRegister;
-        private readonly IHostApplicationLifetime _lifeTimeService;
-        private readonly ILogger<IGiftService> _logger;
         public const char FILLINGCHAR = '*';
 
         public GiftLauncherService(
-            ILogger<IGiftService> logger,
             IMonitorService monitorManager,
             ISignalBus bus,
-            IKeyInteractionMonitor keyInputMonitor,
-            IConsoleSizeMonitor consoleSizeMonitor,
-            IKeySignalHandler keySignalHandler,
-            IUISignalHandler uISignalHandler,
-            IGlobalSignalHandler globalSignalHandler,
             IDisplayService displayService,
             IXMLFileParser xmlFileParser,
-            IUIElementRegister elementRegister,
-            IHostApplicationLifetime lifeTimeService,
             IRepository repository)
         {
-            _logger = logger;
             _repository = repository;
             _displayService = displayService;
 
@@ -52,15 +35,13 @@ namespace Gift.ApplicationService.Services
 
             _xmlParser = xmlFileParser;
 
-            _uielementRegister = elementRegister;
 
-            _lifeTimeService = lifeTimeService;
         }
 
         public virtual void Initialize(UIElement ui)
         {
             _repository.SaveRoot(ui);
-            update();
+            Update();
         }
 
         public virtual void Initialize(string xmlPath)
@@ -68,7 +49,7 @@ namespace Gift.ApplicationService.Services
             _repository.SaveRoot(_xmlParser.ParseUIFile(xmlPath));
         }
 
-        private void update()
+        private void Update()
         {
             _displayService.UpdateDisplay();
         }
@@ -85,7 +66,7 @@ namespace Gift.ApplicationService.Services
                                        if (!root.IsSimilarTo(_repository.GetRoot()))
                                        {
                                            _repository.SaveRoot(root);
-                                           update();
+                                           Update();
                                        }
                                    });
                 }
@@ -114,7 +95,7 @@ namespace Gift.ApplicationService.Services
         {
             Console.CursorVisible = false;
             Console.Clear();
-            update();
+            Update();
         }
 
         public void Stop()

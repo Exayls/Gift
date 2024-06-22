@@ -26,7 +26,7 @@ namespace Gift.Domain.UIModel.Element
                         HeightAllChilds += renderable.Height;
                     }
                 }
-                return Border.Thickness * 2 + HeightAllChilds;
+                return (Border.Thickness * 2) + HeightAllChilds;
             }
         }
         public override int Width
@@ -46,23 +46,23 @@ namespace Gift.Domain.UIModel.Element
                             maxWidthChild = renderable.Width;
                     }
                 }
-                return Border.Thickness * 2 + maxWidthChild;
+                return (Border.Thickness * 2) + maxWidthChild;
             }
         }
 
 
         public VStack(IBorder border, Size bound, bool isSelectableContainer, Color frontColor, Color backColor, string id)
-            : base(bound, border, frontColor: frontColor, backColor: backColor, isSelectableContainer: isSelectableContainer, id:id)
+            : base(bound, border, frontColor: frontColor, backColor: backColor, isSelectableContainer: isSelectableContainer, id: id)
         {
         }
 
-        public override Position GetContext(Renderable renderable, Position position)
+        public override Position GetContext(IRenderable renderable, Position position)
         {
             int ChildContextPosition = GetHeightRenderable(renderable);
             return new Position(ChildContextPosition - ScrollIndex, 0);
         }
 
-        private int GetHeightRenderable(Renderable renderableToFind)
+        private int GetHeightRenderable(IRenderable renderableToFind)
         {
             int ChildContextPosition = 0;
             foreach (UIElement renderable in Childs)
@@ -96,24 +96,23 @@ namespace Gift.Domain.UIModel.Element
             var fullSize = sizeCalculator.GetTrueSize(this);
             Color frontColor = colorResolver.GetFrontColor(this, configuration);
             Color backColor = colorResolver.GetBackColor(this, configuration);
-            Size sizeInVStack = new Size(fullSize.Height - 2 * thickness, fullSize.Width - 2 * thickness);
+            Size sizeInVStack = new Size(fullSize.Height - (2 * thickness), fullSize.Width - (2 * thickness));
 
-            IScreenDisplay emptyVstackScreen = 
-				new ScreenDisplayBuilder()
-				.WithBound(sizeInVStack)
-				.WithBackColor(backColor)
-				.WithFrontColor(frontColor)
-				.WithChar(configuration.FillingChar)
-				.Build();
+            IScreenDisplay emptyVstackScreen =
+                new ScreenDisplayBuilder()
+                .WithBound(sizeInVStack)
+                .WithBackColor(backColor)
+                .WithFrontColor(frontColor)
+                .WithChar(configuration.FillingChar)
+                .Build();
             return emptyVstackScreen;
         }
 
-        public override bool IsSimilarTo(UIElement uiElement)
+        public override bool IsSimilarTo(UIElement element)
         {
-            if (!(uiElement is VStack))
+            if (element is not VStack)
                 return false;
-            var element = (VStack)uiElement;
-            return base.IsSimilarTo(uiElement);
+            return base.IsSimilarTo(element);
         }
     }
 }

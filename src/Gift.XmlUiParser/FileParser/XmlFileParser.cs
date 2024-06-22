@@ -18,18 +18,6 @@ namespace Gift.XmlUiParser.FileParser
             _logger = logger;
         }
 
-        private void SelectElement(UIElement uiElement, XmlElement element, Container container)
-        {
-            if (element.GetAttribute("selectableElement") == "true")
-            {
-                container.SelectableElements.Add(uiElement);
-            }
-            if (element.GetAttribute("selectedElement") == "true")
-            {
-                container.SelectedElement = uiElement;
-            }
-        }
-
         public UIElement ParseUIFile(string filePath)
         {
             XmlDocument xmlDoc = new XmlDocument();
@@ -37,7 +25,7 @@ namespace Gift.XmlUiParser.FileParser
 
             if (xmlDoc.DocumentElement == null)
             {
-                throw new NullReferenceException();
+                throw new XmlException();
             }
             return ParseUIElementRec(xmlDoc.DocumentElement);
         }
@@ -47,7 +35,7 @@ namespace Gift.XmlUiParser.FileParser
             IBuilder<UIElement> componentBuilder;
 
             componentBuilder = CreateElementBuilder(element);
-            _logger.LogTrace($"element {componentBuilder} created");
+            _logger.LogTrace("element {ComponentBuilder} created", componentBuilder);
 
             UIElement uIElement = componentBuilder.Build();
 
@@ -91,7 +79,7 @@ namespace Gift.XmlUiParser.FileParser
         private IBuilder<UIElement> CreateBuilder(string componentName)
         {
             var builderType = _uielementRegister.GetBuilder(componentName);
-            var builder = (IBuilder<UIElement>)builderType.GetConstructors()[0].Invoke(new object[] { });
+            var builder = (IBuilder<UIElement>)builderType.GetConstructors()[0].Invoke([]);
             return builder;
         }
 
@@ -127,7 +115,7 @@ namespace Gift.XmlUiParser.FileParser
             }
             catch (Exception e)
             {
-                _logger.LogDebug(e, $"Can't execute the method: {method} with parameter: {attributeValue}");
+                _logger.LogDebug(e, "Can't execute the method: {Method} with parameter: {AttributeValue}", method, attributeValue);
             }
             return null;
         }
@@ -141,7 +129,7 @@ namespace Gift.XmlUiParser.FileParser
             }
             catch (Exception e)
             {
-                _logger.LogDebug(e, $"attributeName {attributeName} is not registered");
+                _logger.LogDebug(e, "attributeName {AttributeName} is not registered", attributeName);
             }
             return null;
         }

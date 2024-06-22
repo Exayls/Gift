@@ -16,8 +16,8 @@ namespace Gift.Domain.Builders.UIModel
         private Color frontColor = Color.Default;
         private int? _height;
         private int? _width;
-        private IList<UIElement> unSelectableElements = new List<UIElement>();
-        private IList<UIElement> selectableElements = new List<UIElement>();
+        private readonly List<UIElement> _unSelectableElements = [];
+        private readonly List<UIElement> _selectableElementss = [];
 
         private bool _isSelectableContainer = false;
 
@@ -61,12 +61,12 @@ namespace Gift.Domain.Builders.UIModel
 
         public HStackBuilder WithSelectableElement(UIElement element)
         {
-            selectableElements.Add(element);
+            _selectableElementss.Add(element);
             return this;
         }
         public HStackBuilder WithUnSelectableElement(UIElement element)
         {
-            unSelectableElements.Add(element);
+            _unSelectableElements.Add(element);
             return this;
         }
 
@@ -91,13 +91,13 @@ namespace Gift.Domain.Builders.UIModel
                               IsSelectableContainer: _isSelectableContainer,
                               frontColor: frontColor,
                               backColor: backColor,
-							  id: _id);
+                              id: _id);
 
-            foreach (UIElement element in unSelectableElements)
+            foreach (UIElement element in _unSelectableElements)
             {
                 hstack.Add(element);
             }
-            foreach (UIElement element in selectableElements)
+            foreach (UIElement element in _selectableElementss)
             {
                 hstack.AddSelectableChild(element);
             }
@@ -186,12 +186,12 @@ namespace Gift.Domain.Builders.UIModel
 
         public IContainerBuilder WithHeight(string heightStr)
         {
-            return WithHeight(int.Parse(heightStr, NumberStyles.Integer));
+            return WithHeight(int.Parse(heightStr, NumberStyles.Integer, CultureInfo.InvariantCulture.NumberFormat));
         }
 
         public IContainerBuilder WithWidth(string widthStr)
         {
-            return WithWidth(int.Parse(widthStr, NumberStyles.Integer));
+            return WithWidth(int.Parse(widthStr, NumberStyles.Integer, CultureInfo.InvariantCulture.NumberFormat));
         }
 
         public IContainerBuilder IsSelectableContainer(string isSelectableContainer, IBooleanMapper boolMapper)

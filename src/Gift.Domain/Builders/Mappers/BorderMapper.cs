@@ -11,11 +11,11 @@ namespace Gift.Domain.Builders.Mappers
             try
             {
                 BorderOption borderOption;
-                if (borderStr.ToLower() == "simple")
+                if (borderStr.Equals("simple", StringComparison.OrdinalIgnoreCase))
                 {
                     borderOption = BorderOption.Simple;
                 }
-                else if (borderStr.ToLower() == "heavy")
+                else if (borderStr.Equals("heavy", StringComparison.OrdinalIgnoreCase))
                 {
                     borderOption = BorderOption.Heavy;
                 }

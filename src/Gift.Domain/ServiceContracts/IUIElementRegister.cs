@@ -18,7 +18,7 @@ namespace Gift.Domain.ServiceContracts
             where TBuilder : IUIElementBuilder;
 
         Type GetBuilder(string componentName);
-        public Func<IBuilder<UIElement>, object, IBuilder<UIElement>> GetMethod<Builder>(string attribute);
+        public Func<IBuilder<UIElement>, object, IBuilder<UIElement>> GetMethod<TBuilder>(string attribute);
         public Func<IBuilder<UIElement>, object, IBuilder<UIElement>> GetMethod(Type builder, string attribute);
         public Func<IBuilder<UIElement>, object, IBuilder<UIElement>> GetMethod(string builderName, string attribute);
     }

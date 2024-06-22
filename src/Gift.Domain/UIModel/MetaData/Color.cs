@@ -28,9 +28,15 @@
         public static string GetBackgroundEscapeCode(this Color color)
         {
             if (color == Color.Transparent)
+            {
                 return "\u001b[0m";
+            }
+
             if (color == Color.Default)
+            {
                 return "";
+            }
+
             return $"\u001b[{(int)color + 40}m";
         }
     }

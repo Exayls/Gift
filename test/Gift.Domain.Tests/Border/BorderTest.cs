@@ -8,7 +8,7 @@ namespace Gift.Domain.Tests.Border
 {
     public class BorderTest
     {
-        private BorderOption borderchars;
+        private readonly BorderOption borderchars;
         private DetailedBorder _border;
 
         public BorderTest()

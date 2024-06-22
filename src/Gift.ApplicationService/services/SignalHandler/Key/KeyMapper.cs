@@ -20,7 +20,7 @@ namespace Gift.ApplicationService.Services.SignalHandler.Key
 
 
             // Convert the key strings to ConsoleKey and ConsoleModifiers
-            List<IKeyMapping> map = new List<IKeyMapping>();
+            List<IKeyMapping> map = [];
             if (keyMap == null)
             {
                 return map;
@@ -28,7 +28,7 @@ namespace Gift.ApplicationService.Services.SignalHandler.Key
             foreach (KeyValuePair<string, string> pair in keyMap)
             {
                 string[] keys = pair.Key.Split('+');
-                ConsoleKey key = (ConsoleKey)Enum.Parse(typeof(ConsoleKey), keys[keys.Length - 1], true);
+                ConsoleKey key = (ConsoleKey)Enum.Parse(typeof(ConsoleKey), keys[^1], true);
                 ConsoleModifiers modifiers = 0;
                 for (int i = 0; i < keys.Length - 1; i++)
                 {

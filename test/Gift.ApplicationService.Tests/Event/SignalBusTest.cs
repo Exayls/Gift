@@ -7,9 +7,9 @@ namespace Gift.ApplicationService.Tests.Event
 {
     public class SignalBusTest
     {
-        ISignalBus bus;
-        Mock<ISignal> _mockSignal;
-        private Mock<ISignalHandler> _mockSubscriber;
+        private readonly SignalBus bus;
+        private readonly Mock<ISignal> _mockSignal;
+        private readonly Mock<ISignalHandler> _mockSubscriber;
 
         public SignalBusTest()
         {

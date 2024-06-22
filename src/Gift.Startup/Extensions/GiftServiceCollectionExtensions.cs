@@ -5,6 +5,7 @@ using Gift.Displayer.Extensions;
 using Gift.ConsoleMonitor.Extensions;
 using Gift.Repository.Extensions;
 using Gift.Domain.Extensions;
+using Gift.KeyInteraction.Extensions;
 
 namespace Gift.Startup.Extensions
 {

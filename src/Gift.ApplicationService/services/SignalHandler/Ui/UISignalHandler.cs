@@ -7,7 +7,7 @@ namespace Gift.ApplicationService.Services.SignalHandler.Ui
 {
     public class UISignalHandler : IUISignalHandler
     {
-        private IDisplayService _displayService;
+        private readonly IDisplayService _displayService;
 
 
         public UISignalHandler(IDisplayService displayManager)
@@ -83,9 +83,8 @@ namespace Gift.ApplicationService.Services.SignalHandler.Ui
 
         private void OnSizeChanged(EventArgs e)
         {
-            if (e is ConsoleSizeEventArgs)
+            if (e is ConsoleSizeEventArgs eventArgs)
             {
-                ConsoleSizeEventArgs eventArgs = (ConsoleSizeEventArgs)e;
                 _displayService.Resize(new Size(eventArgs.ConsoleHeight, eventArgs.ConsoleWidth));
                 _displayService.UpdateDisplay();
             }

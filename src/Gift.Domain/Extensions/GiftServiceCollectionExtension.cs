@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Gift.Domain.Builders.Mappers;
 using Gift.Domain.ServiceContracts;
-using Gift.Domain.Services;
+using Gift.Domain.UIModel.Services;
 
 namespace Gift.Domain.Extensions
 {

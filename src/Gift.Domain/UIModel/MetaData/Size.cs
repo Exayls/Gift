@@ -11,10 +11,6 @@
         }
         public bool Equals(Size bound)
         {
-            if (!(bound is Size))
-            {
-                return false;
-            }
             if (!(Width == bound.Width) || !(Height == bound.Height))
             {
                 return false;

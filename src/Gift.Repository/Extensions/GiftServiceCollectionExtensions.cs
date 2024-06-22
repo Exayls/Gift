@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Gift.Domain.ServiceContracts;
+using Gift.Repository.Repository;
 
 namespace Gift.Repository.Extensions
 {

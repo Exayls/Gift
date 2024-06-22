@@ -18,6 +18,7 @@ namespace Gift.Displayer.Displayer
 
         public void Display(IScreenDisplay screenDisplay)
         {
+            _logger.LogDebug("display new frame");
             string displayString = _formater.CreateDislayString(screenDisplay);
             Console.SetCursorPosition(0, 0);
             Console.Out.Write(displayString);

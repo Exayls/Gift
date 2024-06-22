@@ -5,7 +5,7 @@ using Gift.Domain.Builders.UIModel;
 using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel.Element;
 
-namespace Gift.Repository
+namespace Gift.Repository.Repository
 {
     public class InMemoryRepository : IRepository
     {
@@ -33,13 +33,13 @@ namespace Gift.Repository
             return containers.AsEnumerable();
         }
 
-        private IList<Container> ResearchContainers(UIElement element)
+        private static List<Container> ResearchContainers(UIElement element)
         {
             var containers = new List<Container>();
-            if (element is Container)
+            if (element is Container container)
             {
-                containers.Add((Container)element);
-                foreach (UIElement child in ((Container)element).Childs)
+                containers.Add(container);
+                foreach (UIElement child in container.Childs)
                 {
                     containers.AddRange(ResearchContainers(child));
                 }
@@ -72,8 +72,6 @@ namespace Gift.Repository
             {
                 throw new UnSelectableContainerException($"container {container} is not selectable");
             }
-            var a = GetSelectableContainers();
-            var b = a.Contains(container);
             if (!GetSelectableContainers().Contains(container))
             {
                 throw new ElementNotInHierarchyException($"container {container} is not part of root");
@@ -83,7 +81,7 @@ namespace Gift.Repository
 
         public Container? GetParent(Container element)
         {
-            Func<UIElement, bool> selectParent = (currentElement) =>
+            bool selectParent(UIElement currentElement)
             {
                 if (currentElement is Container container)
                 {
@@ -91,12 +89,12 @@ namespace Gift.Repository
                         return true;
                 }
                 return false;
-            };
+            }
 
             return (Container?)SelectFirst(_root, selectParent);
         }
 
-        private UIElement? SelectFirst(UIElement element, Func<UIElement, bool> func)
+        private static UIElement? SelectFirst(UIElement element, Func<UIElement, bool> func)
         {
             if (func(element))
             {
@@ -110,11 +108,14 @@ namespace Gift.Repository
             return null;
         }
 
-        public UIElement? getFromId(string v)
+        public UIElement? GetFromId(string v)
         {
-            Func<UIElement, bool> selectId = (currentElement) => currentElement.Id == v;
+            bool selectId(UIElement currentElement)
+            {
+                return currentElement.Id == v;
+            }
 
-            return (UIElement?)SelectFirst(_root, selectId);
+            return SelectFirst(_root, selectId);
         }
     }
 }

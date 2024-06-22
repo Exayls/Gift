@@ -4,7 +4,7 @@ using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
 using Xunit;
 
-namespace TestGift.Builder
+namespace Gift.Domain.Tests.Builder
 {
     public class VStackBuilderTest
     {

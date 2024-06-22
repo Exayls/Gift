@@ -2,29 +2,25 @@
 using Gift.Displayer.Rendering;
 using Gift.Domain.Builders.UIModel;
 using Gift.Domain.ServiceContracts;
-using Gift.Domain.Services;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
-using Gift.Repository;
+using Gift.Domain.UIModel.Services;
+using Gift.Repository.Repository;
 using Moq;
-using System;
 using System.IO;
 using System.Text;
-using TestGift;
 using Xunit;
 
 namespace Gift.Displayer.Tests.Integration
 {
     public class GiftVStackTest
     {
-        private Mock<IScreenDisplay> _screenDisplayMock1;
 
         public GiftVStackTest()
         {
-            _screenDisplayMock1 = new Mock<IScreenDisplay>();
         }
 
         private static Renderer GetRenderer(IRepository repository)
@@ -39,11 +35,11 @@ namespace Gift.Displayer.Tests.Integration
             var vstack = CreateVstack();
             ui.Add(vstack);
 
-            IRepository repository = new InMemoryRepository();
+            InMemoryRepository repository = new InMemoryRepository();
             repository.SaveRoot(ui);
             Renderer renderer = GetRenderer(repository);
             IScreenDisplay renderedText = renderer.GetRenderDisplay(ui);
-            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
+            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? [];
 
             var expectedBuilder = new StringBuilder();
             string expected;
@@ -56,13 +52,13 @@ namespace Gift.Displayer.Tests.Integration
             }
         }
 
-        private UIElement CreateVstack()
+        private static VStack CreateVstack()
         {
             var vstack = new VStackBuilder().Build();
             return vstack;
         }
 
-        private static Container CreateUI(Size bound)
+        private static VStack CreateUI(Size bound)
         {
             var ui = new VStackBuilder().WithBound(bound).Build();
             return ui;
@@ -78,13 +74,13 @@ namespace Gift.Displayer.Tests.Integration
             var label = new LabelBuilder().Build();
             ui.Add(vstack);
             vstack.Add(label);
-            IRepository repository = new InMemoryRepository();
+            InMemoryRepository repository = new InMemoryRepository();
             repository.SaveRoot(ui);
             IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
+            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? [];
             for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -107,13 +103,13 @@ namespace Gift.Displayer.Tests.Integration
             var label = new LabelBuilder().Build();
             ui.Add(vstack);
             vstack.Add(label);
-            IRepository repository = new InMemoryRepository();
+            InMemoryRepository repository = new InMemoryRepository();
             repository.SaveRoot(ui);
             IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
+            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? [];
             for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -139,13 +135,13 @@ namespace Gift.Displayer.Tests.Integration
             ui.Add(vstack);
             vstack.Add(label1);
             vstack.Add(label2);
-            IRepository repository = new InMemoryRepository();
+            InMemoryRepository repository = new InMemoryRepository();
             repository.SaveRoot(ui);
             IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
+            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? [];
             for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -177,13 +173,13 @@ namespace Gift.Displayer.Tests.Integration
             vstack.Add(label1);
             vstack.Add(label2);
             vstack.Add(label3);
-            IRepository repository = new InMemoryRepository();
+            InMemoryRepository repository = new InMemoryRepository();
             repository.SaveRoot(ui);
             IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
+            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? [];
             for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -219,14 +215,14 @@ namespace Gift.Displayer.Tests.Integration
             vstack.Add(label1);
             ui.Add(label2);
             vstack.Add(label3);
-            IRepository repository = new InMemoryRepository();
+            InMemoryRepository repository = new InMemoryRepository();
             repository.SaveRoot(ui);
 
             IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
+            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? [];
             for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -266,12 +262,12 @@ namespace Gift.Displayer.Tests.Integration
             vstack.Add(label3);
             vstack.Add(label4);
             vstack.Add(label5);
-            IRepository repository = new InMemoryRepository();
+            InMemoryRepository repository = new InMemoryRepository();
             repository.SaveRoot(ui);
             IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
+            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? [];
             for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -316,13 +312,13 @@ namespace Gift.Displayer.Tests.Integration
             vstack.Add(label4);
             vstack.Add(label5);
             vstack.Add(label6);
-            IRepository repository = new InMemoryRepository();
+            InMemoryRepository repository = new InMemoryRepository();
             repository.SaveRoot(ui);
             IScreenDisplay renderedText = GetRenderer(repository).GetRenderDisplay(ui);
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
+            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? [];
             for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();

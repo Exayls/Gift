@@ -1,4 +1,4 @@
-﻿namespace TestGift
+﻿namespace Gift.Displayer.Tests
 {
     public class TestHelper
     {

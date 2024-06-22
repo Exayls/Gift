@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Gift.Domain.ServiceContracts;
-using KeyInteraction.KeyInteraction;
+using Gift.KeyInteraction.KeyInteraction;
 
-namespace Gift.Displayer.Extensions
+namespace Gift.KeyInteraction.Extensions
 {
     public static class GiftServiceCollectionExtensions
     {

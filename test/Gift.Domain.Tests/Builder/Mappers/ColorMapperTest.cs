@@ -2,11 +2,11 @@ using Gift.Domain.Builders.Mappers;
 using Gift.Domain.UIModel.MetaData;
 using Xunit;
 
-namespace TestGift.Builder
+namespace Gift.Domain.Tests.Builder.Mappers
 {
     public class ColorMapperTest
     {
-        private readonly IColorMapper _mapper;
+        private readonly ColorMapper _mapper;
 
         public ColorMapperTest()
         {

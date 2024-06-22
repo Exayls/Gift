@@ -3,7 +3,7 @@ using Gift.Domain.UIModel.MetaData;
 using Gift.Domain.ServiceContracts;
 using System;
 
-namespace Gift.Domain.Services
+namespace Gift.Domain.UIModel.Services
 {
     public class TrueElementSizeCalculator : IElementSizeCalculator
     {
@@ -45,7 +45,7 @@ namespace Gift.Domain.Services
             }
             var parentSize = GetTrueSize(parent);
             int thickness = parent.Border.Thickness;
-            return new Size(parentSize.Height - thickness * 2, parentSize.Width - thickness * 2);
+            return new Size(parentSize.Height - (thickness * 2), parentSize.Width - (thickness * 2));
         }
 
         public Size GetTrueSize(UIElement element)

@@ -65,7 +65,7 @@ namespace Gift.ApplicationService.Services
             var container = selectableContainers[(selectableContainers.IndexOf(selectedContainer) + 1) %
                                                  selectableContainers.Count];
             _repository.SelectContainer(container);
-            _logger.LogDebug($"select container {container}");
+            _logger.LogDebug("select container {Container}", container);
         }
 
         public void PreviousContainer()
@@ -82,7 +82,7 @@ namespace Gift.ApplicationService.Services
                                                   selectableContainers.Count) %
                                                  selectableContainers.Count];
             _repository.SelectContainer(container);
-            _logger.LogDebug($"select container {container}");
+            _logger.LogDebug("select container {Container}", container);
         }
 
         public void NextElementInSelectedContainer()
@@ -113,9 +113,8 @@ namespace Gift.ApplicationService.Services
         {
             _logger.LogTrace("Resize");
             var root = _repository.GetRoot();
-            if (root is Container)
+            if (root is Container container)
             {
-                var container = (Container)root;
                 container.Resize(bound);
             }
         }

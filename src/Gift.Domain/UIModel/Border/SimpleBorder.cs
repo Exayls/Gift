@@ -16,7 +16,7 @@ namespace Gift.Domain.UIModel.Border
 
         public bool IsSimilarTo(IBorder border)
         {
-            if (!(border is SimpleBorder))
+            if (border is not SimpleBorder)
                 return false;
             if (Thickness != border.Thickness)
                 return false;

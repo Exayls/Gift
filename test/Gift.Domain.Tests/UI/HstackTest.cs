@@ -1,12 +1,12 @@
 ﻿using Gift.Domain.Builders.UIModel;
 using Gift.Domain.ServiceContracts;
-using Gift.Domain.Services;
+using Gift.Domain.Tests.Mocks;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
+using Gift.Domain.UIModel.Services;
 using Moq;
-using TestGift.Mocks;
 using Xunit;
 
 namespace Gift.Domain.Tests.UI
@@ -14,37 +14,23 @@ namespace Gift.Domain.Tests.UI
     public class HStackTest
     {
 
-        private Mock<IScreenDisplay> _screenDisplayMock1;
-        private Mock<IScreenDisplay> _screenDisplayMock2;
-        private Mock<UIElement> _uiElementMock1;
-        private Mock<UIElement> _uiElementMock2;
-        private Mock<IBorder> _borderMock;
+        private readonly Mock<IBorder> _borderMock;
         private HStack HStack;
 
         public HStackTest()
         {
-            _screenDisplayMock1 = new Mock<IScreenDisplay>();
-            _screenDisplayMock2 = new Mock<IScreenDisplay>();
-            _uiElementMock1 = new Mock<UIElement>();
-            _uiElementMock2 = new Mock<UIElement>();
             _borderMock = new Mock<IBorder>();
             HStack = new HStackBuilder().WithBorder(_borderMock.Object).Build();
         }
 
-        private HStack CreateHstack(IBorder? border = null, Size? bound = null)
+        private static HStack CreateHstack(IBorder? border = null, Size? bound = null)
         {
-            if (border == null)
-            {
-                border = new NoBorder();
-            }
-            if (bound == null)
-            {
-                bound = new Size(0, 0);
-            }
+            border ??= new NoBorder();
+            bound ??= new Size(0, 0);
             return new HStackBuilder().WithBound(bound).WithBorder(border).Build();
         }
 
-        private MockUIElement CreateUIElement(int height = 1, int width = 1, bool isFixed = false)
+        private static MockUIElement CreateUIElement(int height = 1, int width = 1)
         {
             return new MockUIElement(height, width);
         }
@@ -54,7 +40,7 @@ namespace Gift.Domain.Tests.UI
             Assert.Equal(expected, screenDisplay.DisplayString.ToString());
         }
 
-        private IScreenDisplay GetScreenDisplay(HStack hstack, char charFill = '*')
+        private static IScreenDisplay GetScreenDisplay(HStack hstack, char charFill = '*')
         {
             IRepository repository = Mock.Of<IRepository>();
             return hstack.GetDisplayWithBorder(charFill, new ColorResolver(repository), new TrueElementSizeCalculator(repository));
@@ -205,8 +191,8 @@ namespace Gift.Domain.Tests.UI
             // act
             Position context = HStack.GetContext(uielement, contextRenderable);
             // assert
-            Assert.Equal(0, context.y);
-            Assert.Equal(0, context.x);
+            Assert.Equal(0, context.Y);
+            Assert.Equal(0, context.X);
         }
 
         [Fact]
@@ -223,8 +209,8 @@ namespace Gift.Domain.Tests.UI
             // act
             Position context = HStack.GetContext(uielement2, contextRenderable);
             // assert
-            Assert.Equal(0, context.y);
-            Assert.Equal(2, context.x);
+            Assert.Equal(0, context.Y);
+            Assert.Equal(2, context.X);
         }
 
         [Fact]
@@ -241,8 +227,8 @@ namespace Gift.Domain.Tests.UI
             // act
             Position context = HStack.GetContext(uielement2, contextRenderable);
             // assert
-            Assert.Equal(0, context.y);
-            Assert.Equal(3, context.x);
+            Assert.Equal(0, context.Y);
+            Assert.Equal(3, context.X);
         }
 
         // Getrelative Tests
@@ -256,8 +242,8 @@ namespace Gift.Domain.Tests.UI
             // act
             Position position = HStack.GetRelativePosition(contextRenderable);
             // assert
-            Assert.Equal(0, position.y);
-            Assert.Equal(0, position.x);
+            Assert.Equal(0, position.Y);
+            Assert.Equal(0, position.X);
         }
         [Fact]
         public void GetRelativePosition_should_return_2_1_when_parent_at_2_1_and_no_border()
@@ -269,8 +255,8 @@ namespace Gift.Domain.Tests.UI
             // act
             Position position = HStack.GetRelativePosition(contextRenderable);
             // assert
-            Assert.Equal(2, position.y);
-            Assert.Equal(1, position.x);
+            Assert.Equal(2, position.Y);
+            Assert.Equal(1, position.X);
         }
         [Fact]
         public void GetRelativePosition_should_return_3_2_when_parent_at_3_2_and_no_border()
@@ -282,8 +268,8 @@ namespace Gift.Domain.Tests.UI
             // act
             Position position = HStack.GetRelativePosition(contextRenderable);
             // assert
-            Assert.Equal(3, position.y);
-            Assert.Equal(2, position.x);
+            Assert.Equal(3, position.Y);
+            Assert.Equal(2, position.X);
         }
     }
 }

@@ -1,19 +1,18 @@
 ﻿using Gift.Displayer.Rendering;
 using Gift.Domain.Builders.UIModel;
 using Gift.Domain.ServiceContracts;
-using Gift.Domain.Services;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
-using Gift.Repository;
-using Gift.XmlUiParser.Tests.Helper;
+using Gift.Domain.UIModel.Services;
+using Gift.Repository.Repository;
 using Microsoft.Extensions.Logging;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace TestGift.Test.UI
+namespace Gift.Displayer.Tests.Integration
 {
     public class RendererTest
     {
@@ -47,7 +46,7 @@ namespace TestGift.Test.UI
             Assert.Equal(expected, rendered.DisplayString.ToString());
         }
 
-        private static Container CreateContainer(Size bound, IBorder border)
+        private static VStack CreateContainer(Size bound, IBorder border)
         {
             return new VStackBuilder().WithBound(bound).WithBorder(border).Build();
         }
@@ -184,7 +183,7 @@ namespace TestGift.Test.UI
             };
 
             // clang-format on
-            var logger = LoggerHelper.GetLogger<RendererTest>(_output);
+            var logger = Helper.LoggerHelper.GetLogger<RendererTest>(_output);
 
             Print2DArray(expected, logger);
             Print2DArray(rendered.FrontColorMap, logger);

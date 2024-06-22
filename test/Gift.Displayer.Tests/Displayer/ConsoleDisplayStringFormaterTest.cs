@@ -4,11 +4,11 @@ using Gift.Domain.UIModel.MetaData;
 using Moq;
 using Xunit;
 
-namespace TestGift.UnitTest.Displayer
+namespace Gift.Displayer.Tests.Displayer
 {
     public class ConsoleDisplayStringFormaterTest
     {
-        private ConsoleDisplayStringFormater formater;
+        private readonly ConsoleDisplayStringFormater formater;
 
         public ConsoleDisplayStringFormaterTest()
         {

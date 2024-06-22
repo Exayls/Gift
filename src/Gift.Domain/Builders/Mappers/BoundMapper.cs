@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using Gift.Domain.UIModel.MetaData;
 
 namespace Gift.Domain.Builders.Mappers
@@ -9,8 +10,8 @@ namespace Gift.Domain.Builders.Mappers
         {
             try
             {
-                var splitBound = boundStr.Split(new[] { ',', ';' });
-                var bound = new Size(int.Parse(splitBound[0]), int.Parse(splitBound[1]));
+                var splitBound = boundStr.Split([',', ';']);
+                var bound = new Size(int.Parse(splitBound[0], NumberStyles.Integer, CultureInfo.InvariantCulture.NumberFormat), int.Parse(splitBound[1], NumberStyles.Integer, CultureInfo.InvariantCulture.NumberFormat));
                 return bound;
             }
             catch (Exception e)

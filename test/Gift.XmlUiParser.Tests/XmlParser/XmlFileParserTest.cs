@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using Gift.Displayer.Displayer;
 using Gift.Domain.Builders.Mappers;
 using Gift.Domain.Builders.UIModel;
 using Gift.Domain.ServiceContracts;
@@ -9,7 +8,6 @@ using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
 using Gift.XmlUiParser.FileParser;
 using Gift.XmlUiParser.Tests.Helper;
-using Microsoft.Extensions.Logging;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -18,10 +16,9 @@ namespace Gift.XmlUiParser.Tests.XmlParser
     public class XmlFileParserTests
     {
 
-        private XmlFileParser xmlParser;
+        private readonly XmlFileParser xmlParser;
         private readonly ITestOutputHelper _output;
 
-        private readonly ConsoleDisplayer _displayer;
 
         public XmlFileParserTests(ITestOutputHelper output)
         {
@@ -36,7 +33,6 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             _output = output;
             var logger = LoggerHelper.GetLogger<IDisplayer>(_output);
 
-            _displayer = new ConsoleDisplayer(new ConsoleDisplayStringFormater(), logger);
         }
 
         [Fact]
@@ -126,9 +122,5 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             Assert.True(result.Id == "bbb");
         }
 
-        private static void Log(ILogger<IXMLFileParser> logger, VStack element)
-        {
-            logger.LogTrace("{}", element.Childs[0].BackColor);
-        }
     }
 }

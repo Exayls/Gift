@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging.Xunit;
 using Xunit.Abstractions;
 
-namespace Gift.XmlUiParser.Tests.Helper
+namespace Gift.Displayer.Tests.Helper
 {
     public static class LoggerHelper
     {

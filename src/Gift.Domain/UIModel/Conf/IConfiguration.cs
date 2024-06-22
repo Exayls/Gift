@@ -6,6 +6,7 @@ namespace Gift.Domain.UIModel.Conf
     {
         public Color DefaultFrontColor { get; }
         public Color DefaultBackColor { get; }
+
         public Color SelectedElementFrontColor { get; }
         public Color SelectedElementBackColor { get; }
         public Color SelectedContainerFrontColor { get; }

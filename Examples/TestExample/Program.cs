@@ -1,10 +1,12 @@
+using System.Globalization;
+using Gift.Startup;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 
 internal class Program
 {
-    private static void Main(string[] args)
+    private static void Main()
     {
 
         var hostBuilder = new GiftHostBuilder();
@@ -19,7 +21,7 @@ internal class Program
             (hostContext, builder) =>
             {
                 var logger = new LoggerConfiguration()
-                                 .WriteTo.File($"logs/app_.log", rollingInterval: RollingInterval.Day)
+                                 .WriteTo.File($"logs/app_.log", rollingInterval: RollingInterval.Day, formatProvider: CultureInfo.InvariantCulture)
                                  .ReadFrom.Configuration(hostContext.Configuration)
                                  .CreateLogger();
 

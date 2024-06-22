@@ -172,7 +172,7 @@ namespace Gift.Domain.Tests.UI
                 .Build();
             var giftUIRef = new VStackBuilder()
                 .IsSelectableContainer(true)
-				.WithUnSelectableElement(element1)
+                .WithUnSelectableElement(element1)
                 .Build();
 
             var element2 = new VStackBuilder()
@@ -180,7 +180,7 @@ namespace Gift.Domain.Tests.UI
                 .Build();
             var giftUIComp = new VStackBuilder()
                 .IsSelectableContainer(true)
-				.WithUnSelectableElement(element2)
+                .WithUnSelectableElement(element2)
                 .Build();
             //Assert
             Assert.False(giftUIRef.IsSimilarTo(giftUIComp));
@@ -194,7 +194,7 @@ namespace Gift.Domain.Tests.UI
                 .WithBound(new Size(0, 0))
                 .Build();
             var giftUIRef = new VStackBuilder()
-				.WithUnSelectableElement(element1)
+                .WithUnSelectableElement(element1)
                 .Build();
 
             var giftUIComp = new VStackBuilder()

@@ -1,13 +1,13 @@
 ﻿using Gift.Domain.ServiceContracts;
-using Gift.Domain.Services;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.MetaData;
+using Gift.Domain.UIModel.Services;
 
 namespace Gift.Domain.UIModel.Element
 {
-    public abstract class UIElement : Renderable
+    public abstract class UIElement : IRenderable
     {
 
         public abstract int Height { get; }
@@ -16,16 +16,7 @@ namespace Gift.Domain.UIModel.Element
         public Color FrontColor { get; private set; }
         public Color BackColor { get; private set; }
         public string Id { get; }
-
-        private bool isSelectedElement;
-        public bool IsSelectedElement
-        {
-            get => isSelectedElement;
-            set
-            {
-                isSelectedElement = value;
-            }
-        }
+        public bool IsSelectedElement { get; set; }
 
         public bool IsInSelectedContainer { get; set; }
 
@@ -34,11 +25,11 @@ namespace Gift.Domain.UIModel.Element
             Border = border ?? new NoBorder();
             FrontColor = frontColor;
             BackColor = backColor;
-			Id = id;
+            Id = id;
         }
 
         public abstract IScreenDisplay GetDisplayWithoutBorder(IConfiguration configuration, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator);
-        public abstract IScreenDisplay GetDisplayBorder(IConfiguration configuratione, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator);
+        public abstract IScreenDisplay GetDisplayBorder(IConfiguration configuration, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator);
         public abstract Position GetRelativePosition(Position position);
         public abstract bool HasNoSize();
 
@@ -54,11 +45,11 @@ namespace Gift.Domain.UIModel.Element
 
         public virtual bool IsSimilarTo(UIElement element)
         {
-            if (!this.Border.IsSimilarTo(element.Border))
+            if (!Border.IsSimilarTo(element.Border))
                 return false;
-            if (!this.BackColor.Equals(element.BackColor))
+            if (!BackColor.Equals(element.BackColor))
                 return false;
-            if (!this.FrontColor.Equals(element.FrontColor))
+            if (!FrontColor.Equals(element.FrontColor))
                 return false;
             return true;
         }

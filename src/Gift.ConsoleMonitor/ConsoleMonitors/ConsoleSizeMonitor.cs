@@ -10,7 +10,7 @@ namespace Gift.ConsoleMonitor.ConsoleMonitors
     {
         private int ConsoleWidth;
         private int ConsoleHeight;
-        private ISignalBus _signalBus;
+        private readonly ISignalBus _signalBus;
 
         public ConsoleSizeMonitor(ISignalBus signalBus)
         {

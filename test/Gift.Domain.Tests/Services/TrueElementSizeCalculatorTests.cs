@@ -1,8 +1,8 @@
 ﻿using Gift.Domain.Builders.UIModel;
 using Gift.Domain.ServiceContracts;
-using Gift.Domain.Services;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.MetaData;
+using Gift.Domain.UIModel.Services;
 using Moq;
 using Xunit;
 
@@ -63,7 +63,7 @@ namespace Gift.Domain.Tests.Services
                              .WithBorder(new SimpleBorder(1, 'a'))
                              .Build();
 
-            Mock.Get<IRepository>(repository).Setup(r => r.GetParent(element)).Returns(parent);
+            Mock.Get(repository).Setup(r => r.GetParent(element)).Returns(parent);
 
             var sizeCalculator = new TrueElementSizeCalculator(repository);
             var size = sizeCalculator.GetTrueSize(element);

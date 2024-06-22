@@ -1,6 +1,6 @@
 using System;
 
-namespace Gift.Repository
+namespace Gift.Repository.Repository
 {
     [Serializable]
     public class ElementNotInHierarchyException : Exception

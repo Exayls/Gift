@@ -32,7 +32,7 @@ namespace Gift.ApplicationService.Services
         {
             while (true)
             {
-                await Task.Run(() => CheckMonitors());
+                await Task.Run(CheckMonitors);
             }
         }
 

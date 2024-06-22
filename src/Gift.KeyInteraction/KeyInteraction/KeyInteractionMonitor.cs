@@ -4,11 +4,11 @@ using Gift.ApplicationService.Services.SignalHandler;
 using Gift.ApplicationService.Services.SignalHandler.Bus;
 using Gift.Domain.ServiceContracts;
 
-namespace KeyInteraction.KeyInteraction
+namespace Gift.KeyInteraction.KeyInteraction
 {
     public class KeyInteractionMonitor : IKeyInteractionMonitor
     {
-        private ISignalBus _signalBus;
+        private readonly ISignalBus _signalBus;
         public KeyInteractionMonitor(ISignalBus signalBus)
         {
             _signalBus = signalBus;

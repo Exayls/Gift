@@ -1,11 +1,11 @@
 using Gift.Domain.Builders.Mappers;
 using Xunit;
 
-namespace TestGift.Builder
+namespace Gift.Domain.Tests.Builder.Mappers
 {
     public class BoundMapperTest
     {
-        private readonly IBoundMapper _mapper;
+        private readonly BoundMapper _mapper;
 
         public BoundMapperTest()
         {

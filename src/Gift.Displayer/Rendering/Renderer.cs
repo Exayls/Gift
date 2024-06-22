@@ -25,11 +25,11 @@ namespace Gift.Displayer.Rendering
             IScreenDisplay screen = CreateBorder(element);
             IScreenDisplay display = CreateDisplay(element);
             AddDisplayToBorder(screen, element, display);
-            RenderContainerOrElement(screen, position, element);
+            RenderContainerOrElement(screen, element);
             return screen;
         }
 
-        private void Render(IScreenDisplay screen, Renderable renderable, Position position)
+        private void Render(IScreenDisplay screen, IRenderable renderable, Position position)
         {
             IScreenDisplay border = CreateBorder(renderable);
             IScreenDisplay display = CreateDisplay(renderable);
@@ -47,23 +47,23 @@ namespace Gift.Displayer.Rendering
             AddDisplayToScreen(screen, container, context, border);
         }
 
-        private IScreenDisplay CreateBorder(Renderable element)
+        private IScreenDisplay CreateBorder(IRenderable element)
         {
             return element.GetDisplayBorder(_configuration, _colorResolver, _sizeCalculator);
         }
 
-        private IScreenDisplay CreateDisplay(Renderable container)
+        private IScreenDisplay CreateDisplay(IRenderable container)
         {
             return container.GetDisplayWithoutBorder(_configuration, _colorResolver, _sizeCalculator);
         }
 
-        private void AddDisplayToBorder(IScreenDisplay screen, Renderable renderable, IScreenDisplay display)
+        private static void AddDisplayToBorder(IScreenDisplay screen, IRenderable renderable, IScreenDisplay display)
         {
             Position relativePosition = new Position(renderable.Border.Thickness, renderable.Border.Thickness);
             screen.AddDisplay(display, relativePosition);
         }
 
-        private void AddDisplayToScreen(IScreenDisplay screen, Renderable renderable, Position position, IScreenDisplay display)
+        private static void AddDisplayToScreen(IScreenDisplay screen, IRenderable renderable, Position position, IScreenDisplay display)
         {
             Position relativePosition = renderable.GetRelativePosition(position);
             screen.AddDisplay(display, relativePosition);
@@ -73,14 +73,14 @@ namespace Gift.Displayer.Rendering
         {
             lock (container.Childs)
             {
-                foreach (Renderable renderable in container.Childs)
+                foreach (IRenderable renderable in container.Childs)
                 {
                     RenderContainerOrElement(screen, container, context, renderable);
                 }
             }
         }
 
-        private void RenderContainerOrElement(IScreenDisplay screen, Container container, Position context, Renderable renderable)
+        private void RenderContainerOrElement(IScreenDisplay screen, Container container, Position context, IRenderable renderable)
         {
             Position renderableContext = container.GetContext(renderable, context);
             switch (renderable)
@@ -93,7 +93,7 @@ namespace Gift.Displayer.Rendering
                     break;
             }
         }
-        private void RenderContainerOrElement(IScreenDisplay screen, Position context, Renderable renderable)
+        private void RenderContainerOrElement(IScreenDisplay screen, IRenderable renderable)
         {
             switch (renderable)
             {

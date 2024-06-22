@@ -1,8 +1,8 @@
 ﻿using Gift.Domain.Builders.UIModel;
+using Gift.Domain.Tests.Mocks;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Element;
 using Moq;
-using TestGift.Mocks;
 using Xunit;
 
 namespace Gift.Domain.Tests.UI
@@ -10,8 +10,8 @@ namespace Gift.Domain.Tests.UI
     public class ContainerTest
     {
 
-        private Mock<IBorder> _borderMock;
-        private VStack vstack;
+        private readonly Mock<IBorder> _borderMock;
+        private readonly VStack vstack;
 
         public ContainerTest()
         {
@@ -35,7 +35,7 @@ namespace Gift.Domain.Tests.UI
             Assert.Equal(element2, vstack.SelectedElement);
         }
 
-        private UIElement CreateUIElement()
+        private static MockUIElement CreateUIElement()
         {
             return new MockUIElement();
         }

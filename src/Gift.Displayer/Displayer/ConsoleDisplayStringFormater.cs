@@ -44,7 +44,7 @@ namespace Gift.Displayer.Displayer
                 }
                 if (i < displayMap.GetLength(0) - 1)
                 {
-                    displayString.Append("\n");
+                    displayString.Append('\n');
                 }
             }
 

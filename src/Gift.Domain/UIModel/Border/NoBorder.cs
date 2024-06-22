@@ -16,7 +16,7 @@ namespace Gift.Domain.UIModel.Border
 
         public bool IsSimilarTo(IBorder border)
         {
-            if (!(border is NoBorder))
+            if (border is not NoBorder)
                 return false;
             return true;
         }

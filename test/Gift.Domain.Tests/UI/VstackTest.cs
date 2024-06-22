@@ -1,12 +1,12 @@
 ﻿using Gift.Domain.Builders.UIModel;
 using Gift.Domain.ServiceContracts;
-using Gift.Domain.Services;
+using Gift.Domain.Tests.Mocks;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
+using Gift.Domain.UIModel.Services;
 using Moq;
-using TestGift.Mocks;
 using Xunit;
 
 namespace Gift.Domain.Tests.UI
@@ -14,26 +14,18 @@ namespace Gift.Domain.Tests.UI
     public class VstackTest
     {
 
-        private Mock<IScreenDisplay> _screenDisplayMock1;
-        private Mock<IScreenDisplay> _screenDisplayMock2;
-        private Mock<UIElement> _uiElementMock1;
-        private Mock<UIElement> _uiElementMock2;
-        private Mock<IBorder> _borderMock;
+        private readonly Mock<IBorder> _borderMock;
         private VStack vstack;
         private readonly IRepository _repository;
 
         public VstackTest()
         {
             _repository = Mock.Of<IRepository>();
-            _screenDisplayMock1 = new Mock<IScreenDisplay>();
-            _screenDisplayMock2 = new Mock<IScreenDisplay>();
-            _uiElementMock1 = new Mock<UIElement>();
-            _uiElementMock2 = new Mock<UIElement>();
             _borderMock = new Mock<IBorder>();
             vstack = new VStackBuilder().WithBorder(_borderMock.Object).Build();
         }
 
-        private VStack CreateVstack(IBorder? border = null, Size? bound = null)
+        private static VStack CreateVstack(IBorder? border = null, Size? bound = null)
         {
             var builder = new VStackBuilder();
             if (border != null)
@@ -47,7 +39,7 @@ namespace Gift.Domain.Tests.UI
             return builder.Build();
         }
 
-        private MockUIElement CreateUIElement(int height = 0, int width = 0, bool isFixed = false)
+        private static MockUIElement CreateUIElement(int height = 0, int width = 0, bool isFixed = false)
         {
             return new MockUIElement(height, width, isFixed);
         }
@@ -193,8 +185,8 @@ namespace Gift.Domain.Tests.UI
             // act
             Position context = vstack.GetContext(uielement, contextRenderable);
             // assert
-            Assert.Equal(0, context.y);
-            Assert.Equal(0, context.x);
+            Assert.Equal(0, context.Y);
+            Assert.Equal(0, context.X);
         }
 
         [Fact]
@@ -207,8 +199,8 @@ namespace Gift.Domain.Tests.UI
             // act
             Position context = vstack.GetContext(uielement, contextRenderable);
             // assert
-            Assert.Equal(0, context.y);
-            Assert.Equal(0, context.x);
+            Assert.Equal(0, context.Y);
+            Assert.Equal(0, context.X);
         }
 
         [Fact]
@@ -221,8 +213,8 @@ namespace Gift.Domain.Tests.UI
             // act
             Position context = vstack.GetContext(uielement, contextRenderable);
             // assert
-            Assert.Equal(0, context.y);
-            Assert.Equal(0, context.x);
+            Assert.Equal(0, context.Y);
+            Assert.Equal(0, context.X);
         }
 
         [Fact]
@@ -239,8 +231,8 @@ namespace Gift.Domain.Tests.UI
             // act
             Position context = vstack.GetContext(uielement1, contextRenderable);
             // assert
-            Assert.Equal(1, context.y);
-            Assert.Equal(0, context.x);
+            Assert.Equal(1, context.Y);
+            Assert.Equal(0, context.X);
         }
 
         [Fact]
@@ -257,8 +249,8 @@ namespace Gift.Domain.Tests.UI
             Position contextRenderable = new Position(0, 0);
             Position context = vstack.GetContext(uielement2, contextRenderable);
             // assert
-            Assert.Equal(2, context.y);
-            Assert.Equal(0, context.x);
+            Assert.Equal(2, context.Y);
+            Assert.Equal(0, context.X);
         }
 
         [Fact]
@@ -273,8 +265,8 @@ namespace Gift.Domain.Tests.UI
             // act
             Position context = vstack.GetContext(uielement, contextRenderable);
             // assert
-            Assert.Equal(-1, context.y);
-            Assert.Equal(0, context.x);
+            Assert.Equal(-1, context.Y);
+            Assert.Equal(0, context.X);
         }
 
         [Fact]
@@ -289,8 +281,8 @@ namespace Gift.Domain.Tests.UI
             // act
             Position context = vstack.GetContext(uielement, contextRenderable);
             // assert
-            Assert.Equal(1, context.y);
-            Assert.Equal(0, context.x);
+            Assert.Equal(1, context.Y);
+            Assert.Equal(0, context.X);
         }
 
 
@@ -305,8 +297,8 @@ namespace Gift.Domain.Tests.UI
             // act
             Position position = vstack.GetRelativePosition(contextRenderable);
             // assert
-            Assert.Equal(0, position.y);
-            Assert.Equal(0, position.x);
+            Assert.Equal(0, position.Y);
+            Assert.Equal(0, position.X);
         }
         [Fact]
         public void GetRelativePosition_should_return_2_1_when_parent_at_2_1_and_no_border()
@@ -318,8 +310,8 @@ namespace Gift.Domain.Tests.UI
             // act
             Position position = vstack.GetRelativePosition(contextRenderable);
             // assert
-            Assert.Equal(2, position.y);
-            Assert.Equal(1, position.x);
+            Assert.Equal(2, position.Y);
+            Assert.Equal(1, position.X);
         }
     }
 }

@@ -2,3 +2,53 @@
 
 # IDE0063: Use simple 'using' statement
 dotnet_diagnostic.IDE0063.severity = silent
+
+#primary constructor
+dotnet_diagnostic.IDE0290.severity = none
+
+#if statements
+dotnet_diagnostic.IDE0045.severity = none
+dotnet_diagnostic.IDE0046.severity = none
+dotnet_diagnostic.IDE0011.severity = none
+
+#statement never used
+dotnet_diagnostic.IDE0058.severity = none
+
+#allow var
+dotnet_diagnostic.IDE0008.severity = none
+
+#allow specifying Type even if not needed
+dotnet_diagnostic.IDE0090.severity = none
+
+#allow using Ilist instead of list
+#dotnet_diagnostic.CA1859.severity = none
+
+#intial value can be default
+dotnet_diagnostic.CA1805.severity = none
+dotnet_diagnostic.IDE0059.severity = none
+
+#any name
+dotnet_diagnostic.CA1711.severity = none
+dotnet_diagnostic.CA1716.severity = none
+dotnet_diagnostic.CA1725.severity = none
+
+#underscore in methods
+dotnet_diagnostic.CA1707.severity = none
+
+#LoggerMessage
+dotnet_diagnostic.CA1848.severity = none
+
+#logging with message
+dotnet_diagnostic.CA2254.severity = none
+
+#class not top level
+dotnet_diagnostic.IDE0210.severity = none
+
+#same line method
+dotnet_diagnostic.IDE0022.severity = none
+
+#using can be use anywhere
+dotnet_diagnostic.IDE0063.severity = none
+
+#fix formatting(a régler)
+dotnet_diagnostic.IDE0055.severity = none

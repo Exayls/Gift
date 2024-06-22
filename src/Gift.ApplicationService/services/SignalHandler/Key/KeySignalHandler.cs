@@ -7,8 +7,8 @@ namespace Gift.ApplicationService.Services.SignalHandler.Key
 {
     public class KeySignalHandler : IKeySignalHandler
     {
-        private ISignalBus _bus;
-        private IList<IKeyMapping> _mappings;
+        private readonly ISignalBus _bus;
+        private readonly IList<IKeyMapping> _mappings;
 
         public KeySignalHandler(ISignalBus bus, IKeyMapper keyMapper)
         {
@@ -18,9 +18,9 @@ namespace Gift.ApplicationService.Services.SignalHandler.Key
 
         public void HandleSignal(ISignal signal)
         {
-            if (signal.EventArgs is KeyEventArgs && signal.Name == "KeyPressed")
+            if (signal.EventArgs is KeyEventArgs args && signal.Name == "KeyPressed")
             {
-                KeyEventArgs eventsArgs = (KeyEventArgs)signal.EventArgs;
+                KeyEventArgs eventsArgs = args;
                 PushAllSignalMappedToKey(eventsArgs);
             }
         }

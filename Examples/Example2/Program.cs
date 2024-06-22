@@ -1,3 +1,4 @@
+using System.Globalization;
 using Gift.ApplicationService.ServiceContracts;
 using Gift.Domain.Builders.UIModel;
 using Gift.Domain.UIModel.Border;
@@ -50,7 +51,7 @@ vstack.Add(new LabelBuilder().Build());
 
 var services = new ServiceCollection();
 Log.Logger = new LoggerConfiguration()
-                 .WriteTo.File($"logs/Example4_.log", rollingInterval: RollingInterval.Day)
+                 .WriteTo.File($"logs/Example2_.log", rollingInterval: RollingInterval.Day, formatProvider: CultureInfo.InvariantCulture)
                  .MinimumLevel.Information()
                  .CreateLogger();
 services.AddLogging(builder =>

@@ -27,7 +27,7 @@ namespace Gift.Domain.UIModel.Element
                             maxHeightChild = renderable.Height;
                     }
                 }
-                return Border.Thickness * 2 + maxHeightChild;
+                return (Border.Thickness * 2) + maxHeightChild;
             }
         }
         public override int Width
@@ -47,7 +47,7 @@ namespace Gift.Domain.UIModel.Element
                     }
                 }
                 WidthAllChilds -= 1;
-                return Border.Thickness * 2 + WidthAllChilds;
+                return (Border.Thickness * 2) + WidthAllChilds;
             }
         }
 
@@ -56,18 +56,18 @@ namespace Gift.Domain.UIModel.Element
                       Color frontColor,
                       Color backColor,
                       bool IsSelectableContainer,
-					  string id)
+                      string id)
             : base(bound, border, frontColor: frontColor, backColor: backColor, isSelectableContainer: IsSelectableContainer, id)
         {
         }
 
-        public override Position GetContext(Renderable renderable, Position position)
+        public override Position GetContext(IRenderable renderable, Position position)
         {
             int ChildContextPosition = GetWidthRenderable(renderable);
             return new Position(0, ChildContextPosition - ScrollIndex);
         }
 
-        private int GetWidthRenderable(Renderable renderableToFind)
+        private int GetWidthRenderable(IRenderable renderableToFind)
         {
             int ChildContextPosition = 0;
             foreach (UIElement renderable in Childs)
@@ -91,8 +91,8 @@ namespace Gift.Domain.UIModel.Element
 
         public override Position GetRelativePosition(Position position)
         {
-            return new Position(position.y,
-                                position.x);
+            return new Position(position.Y,
+                                position.X);
         }
 
         public override IScreenDisplay GetDisplayWithoutBorder(IConfiguration configuration, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator)
@@ -101,24 +101,23 @@ namespace Gift.Domain.UIModel.Element
             var fullSize = sizeCalculator.GetTrueSize(this);
             Color frontColor = colorResolver.GetFrontColor(this, configuration);
             Color backColor = colorResolver.GetBackColor(this, configuration);
-            Size sizeInVStack = new Size(fullSize.Height - 2 * thickness, fullSize.Width - 2 * thickness);
+            Size sizeInVStack = new Size(fullSize.Height - (2 * thickness), fullSize.Width - (2 * thickness));
 
-            IScreenDisplay emptyVstackScreen = 
-				new ScreenDisplayBuilder()
-				.WithBound(sizeInVStack)
-				.WithBackColor(backColor)
-				.WithFrontColor(frontColor)
-				.WithChar(configuration.FillingChar)
-				.Build();
+            IScreenDisplay emptyVstackScreen =
+                new ScreenDisplayBuilder()
+                .WithBound(sizeInVStack)
+                .WithBackColor(backColor)
+                .WithFrontColor(frontColor)
+                .WithChar(configuration.FillingChar)
+                .Build();
             return emptyVstackScreen;
         }
 
-        public override bool IsSimilarTo(UIElement uiElement)
+        public override bool IsSimilarTo(UIElement element)
         {
-            if (!(uiElement is HStack))
+            if (element is not HStack)
                 return false;
-            var element = (HStack)uiElement;
-            return base.IsSimilarTo(uiElement);
+            return base.IsSimilarTo(element);
         }
     }
 }

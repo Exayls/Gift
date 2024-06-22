@@ -4,10 +4,10 @@ namespace Gift.ApplicationService.Services.SignalHandler.Bus
 {
     public class SignalBus : ISignalBus
     {
-        private IList<ISignalHandler> subscribers;
+        private readonly List<ISignalHandler> subscribers;
         public SignalBus()
         {
-            subscribers = new List<ISignalHandler>();
+            subscribers = [];
         }
 
         public void PushSignal(ISignal signal)

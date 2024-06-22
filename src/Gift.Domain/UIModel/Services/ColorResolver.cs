@@ -3,7 +3,7 @@ using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
 
-namespace Gift.Domain.Services
+namespace Gift.Domain.UIModel.Services
 {
     public class ColorResolver : IColorResolver
     {
@@ -51,7 +51,7 @@ namespace Gift.Domain.Services
             return false;
         }
 
-        private bool IsSelectedElement(UIElement element)
+        private static bool IsSelectedElement(UIElement element)
         {
             return element.IsSelectedElement;
         }

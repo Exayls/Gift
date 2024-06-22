@@ -11,16 +11,14 @@ namespace Gift.ApplicationService.Tests.Event
 {
     public class UiSignalHandlerTest
     {
-        private ISignalHandler signalHandler;
-        private Mock<IDisplayService> _mockDisplayManger;
-        private Mock<ISignal> _mockSignal;
-        private Mock<EventArgs> _mockEventArgs;
+        private readonly UISignalHandler signalHandler;
+        private readonly Mock<IDisplayService> _mockDisplayManger;
+        private readonly Mock<ISignal> _mockSignal;
 
         public UiSignalHandlerTest()
         {
             _mockDisplayManger = new Mock<IDisplayService>();
             _mockSignal = new Mock<ISignal>();
-            _mockEventArgs = new Mock<EventArgs>();
             signalHandler = new UISignalHandler(_mockDisplayManger.Object);
         }
 
@@ -42,7 +40,7 @@ namespace Gift.ApplicationService.Tests.Event
         {
             //Arrange
             _mockSignal.Setup(s => s.Name).Returns("Ui.PreviousElementInSelectedContainer");
-            _mockSignal.Setup(s => s.EventArgs).Returns(System.EventArgs.Empty);
+            _mockSignal.Setup(s => s.EventArgs).Returns(EventArgs.Empty);
             //Act
             signalHandler.HandleSignal(_mockSignal.Object);
             //Assert

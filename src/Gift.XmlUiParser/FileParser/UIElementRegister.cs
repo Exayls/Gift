@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using Gift.Domain.Builders.Mappers;
 using Gift.Domain.Builders.UIModel;
 using Gift.Domain.ServiceContracts;
@@ -15,8 +16,8 @@ namespace Gift.XmlUiParser.FileParser
         private readonly IBoundMapper _boundMapper;
         private readonly IColorMapper _colorMapper;
         private readonly IBooleanMapper _booleanMapper;
-        private IDictionary<string, Type> _elements;
-        private Dictionary<(Type builderType, string attribute), Func<IBuilder<UIElement>, object, IBuilder<UIElement>>>
+        private readonly Dictionary<string, Type> _elements;
+        private readonly Dictionary<(Type builderType, string attribute), Func<IBuilder<UIElement>, object, IBuilder<UIElement>>>
             _builderMethods;
 
         public UIElementRegister(ILogger<IUIElementRegister> logger, IBorderMapper borderMapper,
@@ -28,80 +29,80 @@ namespace Gift.XmlUiParser.FileParser
             _boundMapper = boundMapper;
             _booleanMapper = booleanMapper;
             _logger = logger;
-            _elements = new Dictionary<string, Type>();
-            _builderMethods = new Dictionary<(Type builderType, string attribute),
-                                             Func<IBuilder<UIElement>, object, IBuilder<UIElement>>>();
+            _elements = [];
+            _builderMethods = [];
 
-            this.Register<LabelBuilder>("Label");
-            this.Register<VStackBuilder>("VStack");
-            this.Register<HStackBuilder>("HStack");
+            Register<LabelBuilder>("Label");
+            Register<VStackBuilder>("VStack");
+            Register<HStackBuilder>("HStack");
 
-            this.Register<LabelBuilder>(typeof(LabelBuilder), "text", (b, text) => b.WithText(text));
+            Register<LabelBuilder>(typeof(LabelBuilder), "text", (b, text) => b.WithText(text));
         }
 
         public Type GetBuilder(string typeName)
         {
-            string key = typeName.ToLower();
-            if (!_elements.ContainsKey(key))
+            string key = typeName.ToLower(CultureInfo.CurrentCulture);
+            if (!_elements.TryGetValue(key, out Type? value))
             {
                 throw new NotSupportedException("Unknown component: " + typeName);
             }
-            return _elements[key];
+            return value;
         }
 
-        public Func<IBuilder<UIElement>, object, IBuilder<UIElement>> GetMethod<Builder>(string attribute)
+        public Func<IBuilder<UIElement>, object, IBuilder<UIElement>> GetMethod<TBuilder>(string attribute)
         {
-            string key = attribute.ToLower();
-            return _builderMethods[(typeof(Builder), key)];
+            string key = attribute.ToLower(CultureInfo.CurrentCulture);
+            return _builderMethods[(typeof(TBuilder), key)];
         }
 
         public Func<IBuilder<UIElement>, object, IBuilder<UIElement>> GetMethod(Type builder, string attribute)
         {
-            string key = attribute.ToLower();
+            string key = attribute.ToLower(CultureInfo.CurrentCulture);
             return _builderMethods[(builder, key)];
         }
 
         public Func<IBuilder<UIElement>, object, IBuilder<UIElement>> GetMethod(string builderName, string attribute)
         {
-            string key = attribute.ToLower();
+            string key = attribute.ToLower(CultureInfo.CurrentCulture);
             return _builderMethods[(_elements[builderName], key)];
         }
 
         public void Register(string name, Type type)
         {
-            _elements.Add(name.ToLower(), type);
+            _logger.LogDebug("registering {Element}", name);
+            _elements.Add(name.ToLower(CultureInfo.CurrentCulture), type);
         }
 
         public void Register<TBuilder>(string name)
             where TBuilder : IUIElementBuilder
         {
             var buildertype = typeof(TBuilder);
-            _elements.Add(name.ToLower(), buildertype);
+            _elements.Add(name.ToLower(CultureInfo.CurrentCulture), buildertype);
 
             if (typeof(IContainerBuilder).IsAssignableFrom(buildertype))
             {
-                this.Register<IContainerBuilder>(buildertype, "size", (b, bd) => b.WithBound(bd, _boundMapper));
-                this.Register<IContainerBuilder>(buildertype, "height", (b, height) => b.WithHeight(height));
-                this.Register<IContainerBuilder>(buildertype, "width", (b, width) => b.WithWidth(width));
-                this.Register<IContainerBuilder>(buildertype, "selectablecontainer",
+                Register<IContainerBuilder>(buildertype, "size", (b, bd) => b.WithBound(bd, _boundMapper));
+                Register<IContainerBuilder>(buildertype, "height", (b, height) => b.WithHeight(height));
+                Register<IContainerBuilder>(buildertype, "width", (b, width) => b.WithWidth(width));
+                Register<IContainerBuilder>(buildertype, "selectablecontainer",
                                                  (b, isSelectableContainer) =>
                                                      b.IsSelectableContainer(isSelectableContainer, _booleanMapper));
             }
             if (typeof(IUIElementBuilder).IsAssignableFrom(buildertype))
             {
-                this.Register<IUIElementBuilder>(buildertype, "backgroundcolor",
+                Register<IUIElementBuilder>(buildertype, "backgroundcolor",
                                                  (b, c) => b.WithBackgroundColor(c, _colorMapper));
-                this.Register<IUIElementBuilder>(buildertype, "backcolor",
+                Register<IUIElementBuilder>(buildertype, "backcolor",
                                                  (b, c) => b.WithBackgroundColor(c, _colorMapper));
 
-                this.Register<IUIElementBuilder>(buildertype, "frontgroundcolor",
+                Register<IUIElementBuilder>(buildertype, "frontgroundcolor",
                                                  (b, c) => b.WithForegroundColor(c, _colorMapper));
-                this.Register<IUIElementBuilder>(buildertype, "frontcolor",
+                Register<IUIElementBuilder>(buildertype, "frontcolor",
                                                  (b, c) => b.WithForegroundColor(c, _colorMapper));
 
-                this.Register<IUIElementBuilder>(buildertype, "border", (b, a) => b.WithBorder(a, _borderMapper));
+                Register<IUIElementBuilder>(buildertype, "border", (b, a) => b.WithBorder(a, _borderMapper));
 
-                this.Register<IUIElementBuilder>(buildertype, "id", (b, id) => b.WithId(id));
+                Register<IUIElementBuilder>(buildertype, "id", (b, id) => b.WithId(id));
             }
         }
 

@@ -7,7 +7,7 @@ namespace Gift.ApplicationService.Tests.Monitoring
 {
     public class MonitorTest
     {
-        private MonitorService _monitorManager;
+        private readonly MonitorService _monitorManager;
 
         public MonitorTest()
         {

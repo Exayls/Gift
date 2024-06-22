@@ -7,10 +7,10 @@ using Gift.Domain.UIModel.Conf;
 using Gift.ApplicationService.Services;
 using Gift.Displayer.Rendering;
 using Gift.Domain.Builders.UIModel;
-using Gift.Repository;
-using Gift.Domain.Services;
 using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel.Element;
+using Gift.Repository.Repository;
+using Gift.Domain.UIModel.Services;
 
 namespace Gift.Displayer.Tests.Integration
 {
@@ -45,7 +45,7 @@ namespace Gift.Displayer.Tests.Integration
             }
         }
 
-        private static Container GetGiftUI(Size bound)
+        private static VStack GetGiftUI(Size bound)
         {
             return new VStackBuilder().WithBound(bound).Build();
         }

@@ -13,18 +13,8 @@ namespace Gift.Domain.UIModel.Element
         public string Text { get; private set; }
         public IDispositionStrategy Disposition { get; private set; }
 
-        public override int Height
-        {
-            get {
-                return 1 + 2 * Border.Thickness;
-            }
-        }
-        public override int Width
-        {
-            get {
-                return Text.Length + 2 * Border.Thickness;
-            }
-        }
+        public override int Height => 1 + (2 * Border.Thickness);
+        public override int Width => Text.Length + (2 * Border.Thickness);
 
         public Label(string text, Position? position, IBorder? border, Color frontColor,
                      Color backColor, string id)
@@ -48,24 +38,24 @@ namespace Gift.Domain.UIModel.Element
 
         public override Position GetRelativePosition(Position position)
         {
-            int context_y = position.y;
-            int context_x = position.x;
-            int relative_y = Disposition.Position.y;
-            int relative_x = Disposition.Position.x;
+            int context_y = position.Y;
+            int context_x = position.X;
+            int relative_y = Disposition.Position.Y;
+            int relative_x = Disposition.Position.X;
             int position_y = context_y + relative_y;
             int position_x = context_x + relative_x;
             Position finalPosition = new Position(position_y, position_x);
             return finalPosition;
         }
 
-        public override bool IsSimilarTo(UIElement uiElement)
+        public override bool IsSimilarTo(UIElement element)
         {
-            if (!(base.IsSimilarTo(uiElement)))
+            if (!base.IsSimilarTo(element))
                 return false;
-            if (!(uiElement is Label))
+            if (element is not Label)
                 return false;
-            Label element = (Label)uiElement;
-            if (this.Text != element.Text)
+            Label label = (Label)element;
+            if (Text != label.Text)
                 return false;
             return true;
         }

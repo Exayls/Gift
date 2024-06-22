@@ -14,8 +14,8 @@ namespace Gift.Domain.Builders.UIModel
         private Size _bound = new Size(0, 0);
         private Color backColor = Color.Default;
         private Color frontColor = Color.Default;
-        private IList<UIElement> selectableElements = new List<UIElement>();
-        private IList<UIElement> unSelectableElements = new List<UIElement>();
+        private readonly List<UIElement> selectableElements = [];
+        private readonly List<UIElement> unSelectableElements = [];
         private int? _height;
         private int? _width;
         private string _id = Guid.NewGuid().ToString();
@@ -59,7 +59,7 @@ namespace Gift.Domain.Builders.UIModel
 
         public VStackBuilder WithId(string id)
         {
-			_id = id;
+            _id = id;
             return this;
         }
 
@@ -179,12 +179,12 @@ namespace Gift.Domain.Builders.UIModel
 
         public IContainerBuilder WithHeight(string heightStr)
         {
-            return WithHeight(int.Parse(heightStr, NumberStyles.Integer));
+            return WithHeight(int.Parse(heightStr, NumberStyles.Integer, CultureInfo.InvariantCulture.NumberFormat));
         }
 
         public IContainerBuilder WithWidth(string widthStr)
         {
-            return WithWidth(int.Parse(widthStr, NumberStyles.Integer));
+            return WithWidth(int.Parse(widthStr, NumberStyles.Integer, CultureInfo.InvariantCulture.NumberFormat));
         }
 
         public IContainerBuilder IsSelectableContainer(string isSelectableContainer, IBooleanMapper boolMapper)

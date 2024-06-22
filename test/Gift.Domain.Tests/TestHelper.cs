@@ -1,4 +1,4 @@
-﻿namespace TestGift
+﻿namespace Gift.Domain.Tests
 {
     public class TestHelper
     {

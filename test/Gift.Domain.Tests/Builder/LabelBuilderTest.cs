@@ -3,7 +3,7 @@ using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
 using Xunit;
 
-namespace TestGift.Builder
+namespace Gift.Domain.Tests.Builder
 {
     public class LabelBuilderTest
     {
@@ -24,8 +24,8 @@ namespace TestGift.Builder
             LabelBuilder builder = new LabelBuilder();
             Label l = builder.Build();
 
-            Assert.Equal(0, l.Disposition.Position.y);
-            Assert.Equal(0, l.Disposition.Position.x);
+            Assert.Equal(0, l.Disposition.Position.Y);
+            Assert.Equal(0, l.Disposition.Position.X);
         }
 
         [Fact]

@@ -6,7 +6,7 @@ namespace Gift.Domain.Tests.Display
 {
     public class ScreenDisplayTest
     {
-        private char[,] convert_string_to_char(string[] stringArray)
+        private static char[,] Convert_string_to_char(string[] stringArray)
         {
             int numRows = stringArray.Length;
             int numCols = stringArray[0].Length;
@@ -31,13 +31,13 @@ namespace Gift.Domain.Tests.Display
             // act
             screen.AddDisplay(screenToAdd, new Position(1, 0));
             // assert
-            char[,] expectedDisplay = convert_string_to_char(new string[] {
+            char[,] expectedDisplay = Convert_string_to_char([
                 // clang-format off
 				 "@@@@@@@@@@",
                  "******@@@@",
                  "@@@@@@@@@@"
                 // clang-format on
-            });
+            ]);
 
             char[,] actual = screen.DisplayMap;
             Assert.Equal(expectedDisplay, actual);
@@ -52,7 +52,7 @@ namespace Gift.Domain.Tests.Display
             // act
             screen.AddDisplay(screenToAdd, new Position(2, 3));
             // assert
-            char[,] expectedDisplay = convert_string_to_char(new string[] { "@@@@@@@@@@", "@@@@@@@@@@", "@@@******@" });
+            char[,] expectedDisplay = Convert_string_to_char(["@@@@@@@@@@", "@@@@@@@@@@", "@@@******@"]);
 
             char[,] actual = screen.DisplayMap;
             Assert.Equal(expectedDisplay, actual);
@@ -66,7 +66,7 @@ namespace Gift.Domain.Tests.Display
             // act
             screen.AddDisplay(screenToAdd, new Position(1, 0));
             // assert
-            char[,] expectedDisplay = convert_string_to_char(new string[] { "          ", "pppppp    ", "          " });
+            char[,] expectedDisplay = Convert_string_to_char(["          ", "pppppp    ", "          "]);
 
             char[,] actual = screen.DisplayMap;
             Assert.Equal(expectedDisplay, actual);
@@ -80,7 +80,7 @@ namespace Gift.Domain.Tests.Display
             // act
             screen.AddDisplay(screenToAdd, new Position(2, -2));
             // assert
-            char[,] expectedDisplay = convert_string_to_char(new string[] { "@@@@@@@@@@", "@@@@@@@@@@", "****@@@@@@" });
+            char[,] expectedDisplay = Convert_string_to_char(["@@@@@@@@@@", "@@@@@@@@@@", "****@@@@@@"]);
 
             char[,] actual = screen.DisplayMap;
             Assert.Equal(expectedDisplay, actual);
@@ -94,7 +94,7 @@ namespace Gift.Domain.Tests.Display
             // act
             screen.AddDisplay(screenToAdd, new Position(2, -4));
             // assert
-            char[,] expectedDisplay = convert_string_to_char(new string[] { "@@@@@@@@@@", "@@@@@@@@@@", "**@@@@@@@@" });
+            char[,] expectedDisplay = Convert_string_to_char(["@@@@@@@@@@", "@@@@@@@@@@", "**@@@@@@@@"]);
 
             char[,] actual = screen.DisplayMap;
             Assert.Equal(expectedDisplay, actual);
@@ -108,7 +108,7 @@ namespace Gift.Domain.Tests.Display
             // act
             screen.AddDisplay(screenToAdd, new Position(2, 5));
             // assert
-            char[,] expectedDisplay = convert_string_to_char(new string[] { "@@@@@@@@@@", "@@@@@@@@@@", "@@@@@*****" });
+            char[,] expectedDisplay = Convert_string_to_char(["@@@@@@@@@@", "@@@@@@@@@@", "@@@@@*****"]);
 
             char[,] actual = screen.DisplayMap;
             Assert.Equal(expectedDisplay, actual);
@@ -122,7 +122,7 @@ namespace Gift.Domain.Tests.Display
             // act
             screen.AddDisplay(screenToAdd, new Position(2, 7));
             // assert
-            char[,] expectedDisplay = convert_string_to_char(new string[] { "@@@@@@@@@@", "@@@@@@@@@@", "@@@@@@@***" });
+            char[,] expectedDisplay = Convert_string_to_char(["@@@@@@@@@@", "@@@@@@@@@@", "@@@@@@@***"]);
 
             char[,] actual = screen.DisplayMap;
             Assert.Equal(expectedDisplay, actual);
@@ -136,7 +136,7 @@ namespace Gift.Domain.Tests.Display
             // act
             screen.AddDisplay(screenToAdd, new Position(5, 5));
             // assert
-            char[,] expectedDisplay = convert_string_to_char(new string[] { "@@@@@@@@@@", "@@@@@@@@@@", "@@@@@@@@@@" });
+            char[,] expectedDisplay = Convert_string_to_char(["@@@@@@@@@@", "@@@@@@@@@@", "@@@@@@@@@@"]);
 
             char[,] actual = screen.DisplayMap;
             Assert.Equal(expectedDisplay, actual);
@@ -151,7 +151,7 @@ namespace Gift.Domain.Tests.Display
             // act
             screen.AddDisplay(screenToAdd, new Position(-1, 5));
             // assert
-            char[,] expectedDisplay = convert_string_to_char(new string[] { "@@@@@*****", "@@@@@@@@@@", "@@@@@@@@@@" });
+            char[,] expectedDisplay = Convert_string_to_char(["@@@@@*****", "@@@@@@@@@@", "@@@@@@@@@@"]);
             char[,] actual = screen.DisplayMap;
             Assert.Equal(expectedDisplay, actual);
         }
@@ -164,7 +164,7 @@ namespace Gift.Domain.Tests.Display
             // act
             screen.AddDisplay(screenToAdd, new Position(2, 13));
             // assert
-            char[,] expectedDisplay = convert_string_to_char(new string[] { "@@@@@@@@@@", "@@@@@@@@@@", "@@@@@@@@@@" });
+            char[,] expectedDisplay = Convert_string_to_char(["@@@@@@@@@@", "@@@@@@@@@@", "@@@@@@@@@@"]);
             char[,] actual = screen.DisplayMap;
             Assert.Equal(expectedDisplay, actual);
         }
@@ -177,7 +177,7 @@ namespace Gift.Domain.Tests.Display
             // act
             screen.AddDisplay(screenToAdd, new Position(4, 5));
             // assert
-            char[,] expectedDisplay = convert_string_to_char(new string[] { "@@@@@@@@@@", "@@@@@@@@@@", "@@@@@@@@@@" });
+            char[,] expectedDisplay = Convert_string_to_char(["@@@@@@@@@@", "@@@@@@@@@@", "@@@@@@@@@@"]);
             char[,] actual = screen.DisplayMap;
             Assert.Equal(expectedDisplay, actual);
         }
@@ -190,7 +190,7 @@ namespace Gift.Domain.Tests.Display
             // act
             screen.AddDisplay(screenToAdd, new Position(1, 7));
             // assert
-            char[,] expectedDisplay = convert_string_to_char(new string[] { "@@@@@@@@@@", "@@@@@@@***", "@@@@@@@***" });
+            char[,] expectedDisplay = Convert_string_to_char(["@@@@@@@@@@", "@@@@@@@***", "@@@@@@@***"]);
             char[,] actual = screen.DisplayMap;
             Assert.Equal(expectedDisplay, actual);
         }
@@ -203,7 +203,7 @@ namespace Gift.Domain.Tests.Display
             // act
             screen.AddDisplay(screenToAdd, new Position(0, 0));
             // assert
-            char[,] expectedDisplay = convert_string_to_char(new string[] { "**********", "@@@@@@@@@@", "@@@@@@@@@@" });
+            char[,] expectedDisplay = Convert_string_to_char(["**********", "@@@@@@@@@@", "@@@@@@@@@@"]);
             char[,] actual = screen.DisplayMap;
             Assert.Equal(expectedDisplay, actual);
         }
@@ -216,7 +216,7 @@ namespace Gift.Domain.Tests.Display
             // act
             screen.AddDisplay(screenToAdd, new Position(0, 0));
             // assert
-            char[,] expectedDisplay = convert_string_to_char(new string[] { "**********", "**********", "**********" });
+            char[,] expectedDisplay = Convert_string_to_char(["**********", "**********", "**********"]);
             char[,] actual = screen.DisplayMap;
             Assert.Equal(expectedDisplay, actual);
         }
@@ -229,7 +229,7 @@ namespace Gift.Domain.Tests.Display
             // act
             screen.AddDisplay(screenToAdd, new Position(2, 0));
             // assert
-            char[,] expectedDisplay = convert_string_to_char(new string[] { "@@@@@@@@@@", "@@@@@@@@@@", "**********" });
+            char[,] expectedDisplay = Convert_string_to_char(["@@@@@@@@@@", "@@@@@@@@@@", "**********"]);
             char[,] actual = screen.DisplayMap;
             Assert.Equal(expectedDisplay, actual);
         }
@@ -241,7 +241,7 @@ namespace Gift.Domain.Tests.Display
             // act
             screen.AddString("aa", new Position(2, 0));
             // assert
-            char[,] expectedDisplay = convert_string_to_char(new string[] { "@@@", "@@@" });
+            char[,] expectedDisplay = Convert_string_to_char(["@@@", "@@@"]);
             char[,] actual = screen.DisplayMap;
             Assert.Equal(expectedDisplay, actual);
         }
@@ -253,7 +253,7 @@ namespace Gift.Domain.Tests.Display
             // act
             screen.AddString("aa", new Position(3, 0));
             // assert
-            char[,] expectedDisplay = convert_string_to_char(new string[] { "@@@", "@@@" });
+            char[,] expectedDisplay = Convert_string_to_char(["@@@", "@@@"]);
             char[,] actual = screen.DisplayMap;
             Assert.Equal(expectedDisplay, actual);
         }
@@ -265,7 +265,7 @@ namespace Gift.Domain.Tests.Display
             // act
             screen.AddString("aa", new Position(-1, 0));
             // assert
-            char[,] expectedDisplay = convert_string_to_char(new string[] { "@@@", "@@@" });
+            char[,] expectedDisplay = Convert_string_to_char(["@@@", "@@@"]);
             char[,] actual = screen.DisplayMap;
             Assert.Equal(expectedDisplay, actual);
         }
@@ -277,7 +277,7 @@ namespace Gift.Domain.Tests.Display
             // act
             screen.AddString("aa", new Position(0, 0));
             // assert
-            char[,] expectedDisplay = convert_string_to_char(new string[] { "aa@", "@@@" });
+            char[,] expectedDisplay = Convert_string_to_char(["aa@", "@@@"]);
             char[,] actual = screen.DisplayMap;
             Assert.Equal(expectedDisplay, actual);
         }
@@ -289,7 +289,7 @@ namespace Gift.Domain.Tests.Display
             // act
             screen.AddString("aa", new Position(0, 1));
             // assert
-            char[,] expectedDisplay = convert_string_to_char(new string[] { "@aa", "@@@" });
+            char[,] expectedDisplay = Convert_string_to_char(["@aa", "@@@"]);
             char[,] actual = screen.DisplayMap;
             Assert.Equal(expectedDisplay, actual);
         }
@@ -301,7 +301,7 @@ namespace Gift.Domain.Tests.Display
             // act
             screen.AddString("aa", new Position(0, 2));
             // assert
-            char[,] expectedDisplay = convert_string_to_char(new string[] { "@@a", "@@@" });
+            char[,] expectedDisplay = Convert_string_to_char(["@@a", "@@@"]);
             char[,] actual = screen.DisplayMap;
             Assert.Equal(expectedDisplay, actual);
         }
@@ -313,7 +313,7 @@ namespace Gift.Domain.Tests.Display
             // act
             screen.AddString("aa", new Position(0, -1));
             // assert
-            char[,] expectedDisplay = convert_string_to_char(new string[] { "a@@", "@@@" });
+            char[,] expectedDisplay = Convert_string_to_char(["a@@", "@@@"]);
             char[,] actual = screen.DisplayMap;
             Assert.Equal(expectedDisplay, actual);
         }
@@ -329,7 +329,7 @@ namespace Gift.Domain.Tests.Display
             screenToAdd.AddDisplay(screenToAdd2, new Position(0, 0));
             screen.AddDisplay(screenToAdd, new Position(1, 0));
             // assert
-            char[,] expectedDisplay = convert_string_to_char(new string[] { "@@@", " *@", "@@@" });
+            char[,] expectedDisplay = Convert_string_to_char(["@@@", " *@", "@@@"]);
             char[,] actual = screen.DisplayMap;
             Assert.Equal(expectedDisplay, actual);
         }

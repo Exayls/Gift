@@ -13,7 +13,7 @@ namespace Gift.XmlUiParser.Tests.XmlParser
 {
     public class UIElementRegisterTest
     {
-        private ITestOutputHelper _output;
+        private readonly ITestOutputHelper _output;
 
         public UIElementRegisterTest(ITestOutputHelper output)
         {
@@ -51,7 +51,7 @@ namespace Gift.XmlUiParser.Tests.XmlParser
 
             var elementRegister = GetElementRegister();
             var labelBuilderType = elementRegister.GetBuilder("label");
-            var labelBuilder = (IUIElementBuilder)labelBuilderType.GetConstructors()[0].Invoke(new object[] { });
+            var labelBuilder = (IUIElementBuilder)labelBuilderType.GetConstructors()[0].Invoke([]);
 
             elementRegister.Register<IUIElementBuilder>("UIElement");
             elementRegister.Register<IUIElementBuilder>(typeof(IUIElementBuilder), "test", (b, t) => { return b; });
@@ -65,10 +65,10 @@ namespace Gift.XmlUiParser.Tests.XmlParser
 
         private static object ConstructBuilder(Type labelBuilderType)
         {
-            return labelBuilderType.GetConstructors()[0].Invoke(new object[] { });
+            return labelBuilderType.GetConstructors()[0].Invoke([]);
         }
 
-        private IUIElementRegister GetElementRegister()
+        private UIElementRegister GetElementRegister()
         {
             var mockColorMapper = Mock.Of<IColorMapper>();
             var mockBorderMapper = Mock.Of<IBorderMapper>();

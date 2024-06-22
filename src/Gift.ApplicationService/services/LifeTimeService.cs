@@ -7,7 +7,7 @@ namespace Gift.ApplicationService.Services
 {
     public class LifeTimeService : ILifeTimeService
     {
-        private TaskCompletionSource<bool> completion;
+        private readonly TaskCompletionSource<bool> completion;
         private readonly IHostApplicationLifetime _lifeTime;
 
         public LifeTimeService(IHostApplicationLifetime lifeTime)

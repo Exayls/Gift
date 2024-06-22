@@ -11,8 +11,8 @@ namespace Gift.Domain.UIModel.Display
         public Color[,] BackColorMap { get; }
         public StringBuilder DisplayString { get; }
 
-        private Color frontColor;
-        private Color backColor;
+        private readonly Color frontColor;
+        private readonly Color backColor;
 
 
         public Size TotalBound { get; }
@@ -35,15 +35,15 @@ namespace Gift.Domain.UIModel.Display
             BackColorMap = new Color[bound.Height, bound.Width];
             DisplayMap = new char[bound.Height, bound.Width];
 
-            fillColor(FrontColorMap, frontColor);
-            fillColor(BackColorMap, backColor);
-            fillDisplayMap(DisplayMap, emptychar);
+            FillColor(FrontColorMap, frontColor);
+            FillColor(BackColorMap, backColor);
+            FillDisplayMap(DisplayMap, emptychar);
 
             this.frontColor = frontColor;
             this.backColor = backColor;
         }
 
-        public void fillColor(Color[,] colormap, Color color)
+        public static void FillColor(Color[,] colormap, Color color)
         {
             for (int i = 0; i < colormap.GetLength(0); i++)
             {
@@ -53,7 +53,7 @@ namespace Gift.Domain.UIModel.Display
                 }
             }
         }
-        public void fillDisplayMap(char[,] displaymap, char emptychar)
+        public static void FillDisplayMap(char[,] displaymap, char emptychar)
         {
             for (int i = 0; i < displaymap.GetLength(0); i++)
             {
@@ -78,8 +78,8 @@ namespace Gift.Domain.UIModel.Display
         {
             for (int i = 0; i < display.TotalBound.Height; i++)
             {
-                bool ShouldAddLine = globalPosition.x <= TotalBound.Width &&
-                                     globalPosition.y + i + 1 <= TotalBound.Height && globalPosition.y + i >= 0;
+                bool ShouldAddLine = globalPosition.X <= TotalBound.Width &&
+                                     globalPosition.Y + i + 1 <= TotalBound.Height && globalPosition.Y + i >= 0;
                 if (ShouldAddLine)
                 {
                     AddLineToDisplay(display, globalPosition, i);
@@ -89,46 +89,46 @@ namespace Gift.Domain.UIModel.Display
 
         private void AddLineToDisplay(IScreenDisplay display, Position position, int i)
         {
-            int indexLineToReplace = (position.y + i) * (TotalBound.Width + 1) + position.x;
-            int indexWidthToReplace = position.x;
+            int indexLineToReplace = ((position.Y + i) * (TotalBound.Width + 1)) + position.X;
+            int indexWidthToReplace = position.X;
             int lenghtToReplace = display.TotalBound.Width;
-            if (position.x + display.TotalBound.Width > TotalBound.Width)
+            if (position.X + display.TotalBound.Width > TotalBound.Width)
             {
-                lenghtToReplace = TotalBound.Width - position.x;
+                lenghtToReplace = TotalBound.Width - position.X;
             }
-            else if (position.x < 0)
+            else if (position.X < 0)
             {
-                indexLineToReplace = (position.y + i) * (TotalBound.Width + 1);
+                indexLineToReplace = (position.Y + i) * (TotalBound.Width + 1);
                 indexWidthToReplace = 0;
-                lenghtToReplace = display.TotalBound.Width + position.x;
+                lenghtToReplace = display.TotalBound.Width + position.X;
             }
 
             DisplayString.Remove(indexLineToReplace, lenghtToReplace);
             string lineToInsert = display.GetLine(i);
-            string stringToInsert = lineToInsert.Substring(0, lenghtToReplace);
+            string stringToInsert = lineToInsert[..lenghtToReplace];
             DisplayString.Insert(indexLineToReplace, stringToInsert);
 
-            FillColorMapAtPosition(display, position, i, indexLineToReplace, indexWidthToReplace, lenghtToReplace);
-            FillDisplayMapAtPosition(position, i, indexLineToReplace, indexWidthToReplace, lenghtToReplace,
+            FillColorMapAtPosition(display, position, i, indexWidthToReplace, lenghtToReplace);
+            FillDisplayMapAtPosition(position, i, indexWidthToReplace, lenghtToReplace,
                                      stringToInsert);
         }
 
-        private void FillColorMapAtPosition(IScreenDisplay display, Position position, int i, int indexLineToReplace,
+        private void FillColorMapAtPosition(IScreenDisplay display, Position position, int i,
                                             int indexWidthToReplace, int lenghtToReplace)
         {
             for (int j = 0; j < lenghtToReplace; j++)
             {
-                FrontColorMap[position.y + i, indexWidthToReplace + j] = display.FrontColorMap[i, j];
-                BackColorMap[position.y + i, indexWidthToReplace + j] = display.BackColorMap[i, j];
+                FrontColorMap[position.Y + i, indexWidthToReplace + j] = display.FrontColorMap[i, j];
+                BackColorMap[position.Y + i, indexWidthToReplace + j] = display.BackColorMap[i, j];
             }
         }
 
-        private void FillDisplayMapAtPosition(Position position, int i, int indexLineToReplace, int indexWidthToReplace,
+        private void FillDisplayMapAtPosition(Position position, int i, int indexWidthToReplace,
                                               int lenghtToReplace, string stringToInsert)
         {
             for (int j = 0; j < lenghtToReplace; j++)
             {
-                DisplayMap[position.y + i, indexWidthToReplace + j] = stringToInsert[j];
+                DisplayMap[position.Y + i, indexWidthToReplace + j] = stringToInsert[j];
             }
         }
 
@@ -149,7 +149,7 @@ namespace Gift.Domain.UIModel.Display
             AddDisplay(tmpScreen, position);
         }
 
-        private bool CheckEquality<T>(T[,] t1, T[,] t2)
+        private static bool CheckEquality<T>(T[,] t1, T[,] t2)
         {
             var equal =
                 t1.Rank == t2.Rank &&
@@ -160,10 +160,10 @@ namespace Gift.Domain.UIModel.Display
 
         public bool Equals(ScreenDisplay other)
         {
-            bool sameBackColor = CheckEquality<Color>(other.BackColorMap, this.BackColorMap);
-            bool sameFrontColor = CheckEquality<Color>(other.FrontColorMap, this.FrontColorMap);
-            bool sameChars = CheckEquality<char>(other.DisplayMap, this.DisplayMap);
-            return (sameChars && sameBackColor && sameFrontColor);
+            bool sameBackColor = CheckEquality(other.BackColorMap, BackColorMap);
+            bool sameFrontColor = CheckEquality(other.FrontColorMap, FrontColorMap);
+            bool sameChars = CheckEquality(other.DisplayMap, DisplayMap);
+            return sameChars && sameBackColor && sameFrontColor;
         }
 
 
@@ -219,18 +219,18 @@ namespace Gift.Domain.UIModel.Display
 
         private bool IsTopBorder(int x, int y, int thickness)
         {
-            return (y < thickness && y < x && y < TotalBound.Width - x - 1);
+            return y < thickness && y < x && y < TotalBound.Width - x - 1;
         }
 
         private bool IsBottomBorder(int x, int y, int thickness)
         {
-            return (y >= TotalBound.Height - thickness && TotalBound.Height - y - 1 < x &&
-                    TotalBound.Height - y - 1 < TotalBound.Width - x - 1);
+            return y >= TotalBound.Height - thickness && TotalBound.Height - y - 1 < x &&
+                    TotalBound.Height - y - 1 < TotalBound.Width - x - 1;
         }
 
         private bool IsLeftBorder(int x, int y, int thickness)
         {
-            return (x < thickness && x < y && x < TotalBound.Height - y - 1);
+            return x < thickness && x < y && x < TotalBound.Height - y - 1;
         }
 
         private bool IsRightBorder(int x, int y, int thickness)
@@ -241,28 +241,23 @@ namespace Gift.Domain.UIModel.Display
 
         private bool IsBottomLeftBorder(int x, int y, int thickness)
         {
-            return (x < thickness && y >= TotalBound.Height - thickness && x == TotalBound.Height - y - 1);
+            return x < thickness && y >= TotalBound.Height - thickness && x == TotalBound.Height - y - 1;
         }
 
         private bool IsBottomRightBorder(int x, int y, int thickness)
         {
-            return (x >= TotalBound.Width - thickness && y >= TotalBound.Height - thickness &&
-                    TotalBound.Width - x - 1 == TotalBound.Height - y - 1);
+            return x >= TotalBound.Width - thickness && y >= TotalBound.Height - thickness &&
+                    TotalBound.Width - x - 1 == TotalBound.Height - y - 1;
         }
 
-        private bool IsTopLeftBorder(int x, int y, int thickness)
+        private static bool IsTopLeftBorder(int x, int y, int thickness)
         {
-            return (x < thickness && y < thickness && x == y);
+            return x < thickness && y < thickness && x == y;
         }
 
         private bool IsTopRightBorder(int x, int y, int thickness)
         {
-            return (y < thickness && x >= TotalBound.Width - thickness && TotalBound.Width - x - 1 == y);
-        }
-
-        private bool IsBorder(int x, int y, int thickness)
-        {
-            return x < thickness || y < thickness || x >= TotalBound.Width - thickness || y >= TotalBound.Height - thickness;
+            return y < thickness && x >= TotalBound.Width - thickness && TotalBound.Width - x - 1 == y;
         }
     }
 }

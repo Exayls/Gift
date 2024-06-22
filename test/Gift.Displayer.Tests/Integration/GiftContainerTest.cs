@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using Xunit;
 using System.IO;
 using Gift.Domain.UIModel.MetaData;
@@ -8,12 +7,12 @@ using Gift.Domain.UIModel.Conf;
 using Gift.ApplicationService.Services;
 using Gift.Displayer.Rendering;
 using Gift.Domain.Builders.UIModel;
-using Gift.Repository;
 using Gift.Domain.ServiceContracts;
-using Gift.Domain.Services;
 using Gift.Domain.UIModel.Element;
+using Gift.Repository.Repository;
+using Gift.Domain.UIModel.Services;
 
-namespace TestGift.UI
+namespace Gift.Displayer.Tests.Integration
 {
     public class GiftContainerTest
     {
@@ -35,7 +34,7 @@ namespace TestGift.UI
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            string[] actual = renderedText.DisplayString.ToString().Split('\n') ?? Array.Empty<string>();
+            string[] actual = renderedText.DisplayString.ToString().Split('\n') ?? [];
             for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -45,7 +44,7 @@ namespace TestGift.UI
             }
         }
 
-        private static Container GetGiftUi(Size bound)
+        private static VStack GetGiftUi(Size bound)
         {
             return new VStackBuilder().WithBound(bound).Build();
         }
@@ -64,7 +63,7 @@ namespace TestGift.UI
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
+            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? [];
             for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -92,7 +91,7 @@ namespace TestGift.UI
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
+            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? [];
             for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -120,7 +119,7 @@ namespace TestGift.UI
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
+            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? [];
             for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -148,7 +147,7 @@ namespace TestGift.UI
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
+            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? [];
             for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -176,7 +175,7 @@ namespace TestGift.UI
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
+            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? [];
             for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -200,7 +199,7 @@ namespace TestGift.UI
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? Array.Empty<string>();
+            string[] actual = renderedText.DisplayString.ToString()?.Split('\n') ?? [];
             for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -228,7 +227,7 @@ namespace TestGift.UI
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            string[] actual = renderedText.DisplayString.ToString().Split('\n') ?? Array.Empty<string>();
+            string[] actual = renderedText.DisplayString.ToString().Split('\n') ?? [];
             for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -257,7 +256,7 @@ namespace TestGift.UI
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            string[] actual = renderedText.DisplayString.ToString().Split('\n') ?? Array.Empty<string>();
+            string[] actual = renderedText.DisplayString.ToString().Split('\n') ?? [];
             for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -286,7 +285,7 @@ namespace TestGift.UI
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            string[] actual = renderedText.DisplayString.ToString().Split('\n') ?? Array.Empty<string>();
+            string[] actual = renderedText.DisplayString.ToString().Split('\n') ?? [];
             for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
@@ -315,7 +314,7 @@ namespace TestGift.UI
 
             var expectedBuilder = new StringBuilder();
             string expected = "";
-            string[] actual = renderedText.DisplayString.ToString().Split('\n') ?? Array.Empty<string>();
+            string[] actual = renderedText.DisplayString.ToString().Split('\n') ?? [];
             for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();

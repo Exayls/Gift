@@ -36,20 +36,12 @@ namespace Gift.Domain.UIModel.Element
             }
         }
 
-        private bool isSelectedContainer;
-        public bool IsSelectedContainer
-        {
-            get => isSelectedContainer;
-            set
-            {
-                isSelectedContainer = value;
-            }
-        }
+        public bool IsSelectedContainer { get; set; }
 
 
         public Container(Size bound, IBorder border, Color frontColor,
                          Color backColor, bool isSelectableContainer, string id)
-            : base(border, frontColor: frontColor, backColor: backColor, id:id)
+            : base(border, frontColor: frontColor, backColor: backColor, id: id)
         {
             Size = bound;
             Childs = new List<UIElement>();
@@ -57,7 +49,7 @@ namespace Gift.Domain.UIModel.Element
             IsSelectableContainer = isSelectableContainer;
         }
 
-        public abstract Position GetContext(Renderable renderable, Position position);
+        public abstract Position GetContext(IRenderable renderable, Position position);
 
         public override IScreenDisplay GetDisplayBorder(IConfiguration configuration, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator)
         {
@@ -91,12 +83,12 @@ namespace Gift.Domain.UIModel.Element
 
         public void ScrollDown()
         {
-            this.ScrollIndex += 1;
+            ScrollIndex += 1;
         }
 
         public void ScrollUp()
         {
-            this.ScrollIndex -= 1;
+            ScrollIndex -= 1;
         }
 
         public void Add(UIElement uIElement)
@@ -114,35 +106,32 @@ namespace Gift.Domain.UIModel.Element
             {
                 SelectableElements.Add(uIElement);
             }
-            if (SelectedElement == null)
-            {
-                SelectedElement = uIElement;
-            }
+            SelectedElement ??= uIElement;
         }
 
-        public override bool IsSimilarTo(UIElement uiElement)
+        public override bool IsSimilarTo(UIElement element)
         {
-            if (!(base.IsSimilarTo(uiElement)))
+            if (!base.IsSimilarTo(element))
                 return false;
-            if (!(uiElement is Container))
+            if (element is not Container)
                 return false;
-            Container element = (Container)uiElement;
-            if (!Size.Equals(element.Size))
+            Container container = (Container)element;
+            if (!Size.Equals(container.Size))
                 return false;
 
-            if (Childs.Count != element.Childs.Count)
+            if (Childs.Count != container.Childs.Count)
                 return false;
-            foreach ((UIElement element1, UIElement element2) elementTuple in Childs.Zip(element.Childs))
+            foreach ((UIElement element1, UIElement element2) in Childs.Zip(container.Childs))
             {
-                if (!(elementTuple.element1.IsSimilarTo(elementTuple.element2)))
+                if (!element1.IsSimilarTo(element2))
                     return false;
             }
-            if (SelectableElements.Count != element.SelectableElements.Count)
+            if (SelectableElements.Count != container.SelectableElements.Count)
                 return false;
             foreach ((UIElement element1,
-                      UIElement element2) elementTuple in SelectableElements.Zip(element.SelectableElements))
+                      UIElement element2) in SelectableElements.Zip(container.SelectableElements))
             {
-                if (!(elementTuple.element1.IsSimilarTo(elementTuple.element2)))
+                if (!element1.IsSimilarTo(element2))
                     return false;
             }
             return true;

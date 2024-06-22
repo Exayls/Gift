@@ -12,7 +12,7 @@ namespace Gift.Domain.Builders.UIModel
     public class LabelBuilder : IUIElementBuilder
     {
         private string text = "Hello";
-        private Position? position = null;
+        private Position? position;
         private Color backColor = Color.Default;
         private Color frontColor = Color.Default;
         private IBorder? border = new NoBorder();
