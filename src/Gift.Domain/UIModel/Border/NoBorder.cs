@@ -14,10 +14,10 @@ namespace Gift.Domain.UIModel.Border
             Thickness = 0;
         }
 
-
         public bool IsSimilarTo(IBorder border)
         {
-            if (!(border is NoBorder)) return false;
+            if (!(border is NoBorder))
+                return false;
             return true;
         }
 

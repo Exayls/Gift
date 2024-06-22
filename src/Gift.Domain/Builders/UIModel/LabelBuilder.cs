@@ -1,4 +1,5 @@
-﻿using Gift.Domain.Builders.Mappers;
+﻿using System;
+using Gift.Domain.Builders.Mappers;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
@@ -15,6 +16,7 @@ namespace Gift.Domain.Builders.UIModel
         private Color backColor = Color.Default;
         private Color frontColor = Color.Default;
         private IBorder? border = new NoBorder();
+        private string _id = Guid.NewGuid().ToString();
 
         /// <summary>
         /// Get Label instance with "Hello" as default text and (0,0) as default position
@@ -45,6 +47,12 @@ namespace Gift.Domain.Builders.UIModel
             return this;
         }
 
+        public LabelBuilder WithId(string id)
+        {
+            _id = id;
+            return this;
+        }
+
         /// <summary>
         /// Set position parameter to the builder
         /// </summary>
@@ -68,7 +76,7 @@ namespace Gift.Domain.Builders.UIModel
         /// <returns>instance of Label</returns>
         public Label Build()
         {
-            return new Label(text, position: position, frontColor: frontColor, backColor: backColor, border: border);
+            return new Label(text, position: position, frontColor: frontColor, backColor: backColor, border: border, id: _id);
         }
 
         UIElement IBuilder<UIElement>.Build()
@@ -91,6 +99,11 @@ namespace Gift.Domain.Builders.UIModel
             return WithForegroundColor(color);
         }
 
+        IUIElementBuilder IUIElementBuilder.WithId(string id)
+        {
+            return WithId(id);
+        }
+
         public IUIElementBuilder WithBorder(string borderStr, IBorderMapper mapper)
         {
             return WithBorder(mapper.ToBorder(borderStr));
@@ -105,6 +118,7 @@ namespace Gift.Domain.Builders.UIModel
         {
             return WithForegroundColor(mapper.ToColor(colorStr));
         }
+
     }
 
 }

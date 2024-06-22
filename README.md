@@ -2,7 +2,7 @@
 
 G.I.F.T.: GIFT Is Fully terminal
 
-Gift is a Terminal User Interface library that try to provide a simple way of building simple application without needing to create complex user interface.
+Gift is a Terminal User Interface library that try to provide a simple way of building basic interfaces.
 
 
 ![resit](assets/example.gif)

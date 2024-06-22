@@ -14,7 +14,10 @@ namespace Gift.Displayer.Displayer
             char[,] displayMap = screenDisplay.DisplayMap;
             Color[,] frontColorMap = screenDisplay.FrontColorMap;
             Color[,] backColorMap = screenDisplay.BackColorMap;
-            if (displayMap.GetLength(0) != frontColorMap.GetLength(0) || displayMap.GetLength(0) != backColorMap.GetLength(0) || displayMap.GetLength(1) != frontColorMap.GetLength(1) || displayMap.GetLength(1) != backColorMap.GetLength(1))
+            if (displayMap.GetLength(0) != frontColorMap.GetLength(0)
+                    || displayMap.GetLength(0) != backColorMap.GetLength(0)
+                    || displayMap.GetLength(1) != frontColorMap.GetLength(1)
+                    || displayMap.GetLength(1) != backColorMap.GetLength(1))
             {
                 throw new RankException($"All maps are not of the same dimension in {screenDisplay}");
             }
@@ -27,14 +30,14 @@ namespace Gift.Displayer.Displayer
                 {
                     Color currentFrontColor = frontColorMap[i, j];
                     Color currentBackColor = backColorMap[i, j];
+                    if (oldBackColor != currentBackColor)
+                        displayString.Append(currentBackColor.GetBackgroundEscapeCode());
 
                     if (oldFrontColor != currentFrontColor)
                         displayString.Append(currentFrontColor.GetForegroundEscapeCode());
 
-                    if (oldBackColor != currentBackColor)
-                        displayString.Append(currentBackColor.GetBackgroundEscapeCode());
-
                     displayString.Append(displayMap[i, j]);
+
 
                     oldFrontColor = frontColorMap[i, j];
                     oldBackColor = backColorMap[i, j];

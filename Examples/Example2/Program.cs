@@ -6,7 +6,7 @@ using Gift.Startup.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 
-var ui = new GiftUIBuilder().Build();
+var ui = new VStackBuilder().Build();
 
 var hstack = new HStackBuilder()
                  .WithBorder(new DetailedBorder(

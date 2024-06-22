@@ -1,19 +1,30 @@
-using Gift.ApplicationService.ServiceContracts;
-using Gift.Startup.Extensions;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Serilog;
 
-var services = new ServiceCollection();
-services.AddGiftServices();
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        var hostBuilder = new GiftHostBuilder();
 
-Log.Logger = new LoggerConfiguration()
-                 .WriteTo.File($"logs/Example4_.log", rollingInterval: RollingInterval.Day)
-                 .MinimumLevel.Debug()
-                 .CreateLogger();
-services.AddLogging(builder =>
-                    { builder.AddSerilog(); });
+        hostBuilder.ConfigureAppConfiguration(
+            (hostContext, builder) =>
+            {
+                builder.AddJsonFile("appsettings.json");
+            });
 
-var serviceProvider = services.BuildServiceProvider();
-var gift = serviceProvider.GetRequiredService<IGiftService>();
-gift.Initialize("test.xml");
-gift.Run();
+        hostBuilder.ConfigureLogging(
+            (hostContext, builder) =>
+            {
+                var logger = new LoggerConfiguration()
+                                 .WriteTo.File($"logs/Example4_.log", rollingInterval: RollingInterval.Day)
+                                 .ReadFrom.Configuration(hostContext.Configuration)
+                                 .CreateLogger();
+
+                builder.AddSerilog(logger);
+            });
+        var host = hostBuilder.Build();
+        host.Run();
+    }
+}

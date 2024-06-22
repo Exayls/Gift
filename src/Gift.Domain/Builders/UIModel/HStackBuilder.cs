@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using Gift.Domain.Builders.Mappers;
 using Gift.Domain.UIModel.Border;
-using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
 
@@ -12,7 +12,6 @@ namespace Gift.Domain.Builders.UIModel
     {
         private IBorder _border = new NoBorder();
         private Size _bound = new Size(0, 0);
-        private IScreenDisplayFactory screenDisplayFactory = new ScreenDisplayFactory();
         private Color backColor = Color.Default;
         private Color frontColor = Color.Default;
         private int? _height;
@@ -21,6 +20,8 @@ namespace Gift.Domain.Builders.UIModel
         private IList<UIElement> selectableElements = new List<UIElement>();
 
         private bool _isSelectableContainer = false;
+
+        private string _id = Guid.NewGuid().ToString();
 
         public HStackBuilder WithBorder(IBorder border)
         {
@@ -75,15 +76,22 @@ namespace Gift.Domain.Builders.UIModel
             return this;
         }
 
+        public HStackBuilder WithId(string id)
+        {
+            _id = id;
+            return this;
+        }
+
+
         public HStack Build()
         {
             var bound = new Size(_height ?? _bound.Height, _width ?? _bound.Width);
             var hstack = new HStack(_border,
-                              screenDisplayFactory,
                               bound,
                               IsSelectableContainer: _isSelectableContainer,
                               frontColor: frontColor,
-                              backColor: backColor);
+                              backColor: backColor,
+							  id: _id);
 
             foreach (UIElement element in unSelectableElements)
             {
@@ -136,6 +144,11 @@ namespace Gift.Domain.Builders.UIModel
             return WithForegroundColor(color);
         }
 
+        IUIElementBuilder IUIElementBuilder.WithId(string id)
+        {
+            return WithId(id);
+        }
+
         IContainerBuilder IContainerBuilder.WithHeight(int height)
         {
             return WithHeight(height);
@@ -150,6 +163,7 @@ namespace Gift.Domain.Builders.UIModel
         {
             return IsSelectableContainer(isSelectableContainer);
         }
+
 
         public IUIElementBuilder WithBorder(string borderStr, IBorderMapper mapper)
         {

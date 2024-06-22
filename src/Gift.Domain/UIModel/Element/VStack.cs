@@ -1,4 +1,5 @@
-﻿using Gift.Domain.ServiceContracts;
+﻿using Gift.Domain.Builders.UIModel.Display;
+using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
@@ -20,7 +21,7 @@ namespace Gift.Domain.UIModel.Element
                 int HeightAllChilds = 0;
                 foreach (UIElement renderable in Childs)
                 {
-                    if (!renderable.IsFixed())
+                    if (!renderable.HasNoSize())
                     {
                         HeightAllChilds += renderable.Height;
                     }
@@ -39,7 +40,7 @@ namespace Gift.Domain.UIModel.Element
                 int maxWidthChild = 0;
                 foreach (UIElement renderable in Childs)
                 {
-                    if (!renderable.IsFixed())
+                    if (!renderable.HasNoSize())
                     {
                         if (maxWidthChild < renderable.Width)
                             maxWidthChild = renderable.Width;
@@ -50,8 +51,8 @@ namespace Gift.Domain.UIModel.Element
         }
 
 
-        public VStack(IBorder border, IScreenDisplayFactory screenDisplayFactory, Size bound, bool isSelectableContainer, Color frontColor = Color.Default, Color backColor = Color.Default)
-            : base(screenDisplayFactory, bound, border, frontColor: frontColor, backColor: backColor, isSelectableContainer: isSelectableContainer)
+        public VStack(IBorder border, Size bound, bool isSelectableContainer, Color frontColor, Color backColor, string id)
+            : base(bound, border, frontColor: frontColor, backColor: backColor, isSelectableContainer: isSelectableContainer, id:id)
         {
         }
 
@@ -66,7 +67,7 @@ namespace Gift.Domain.UIModel.Element
             int ChildContextPosition = 0;
             foreach (UIElement renderable in Childs)
             {
-                if (!renderable.IsFixed())
+                if (!renderable.HasNoSize())
                 {
                     if (renderable == renderableToFind)
                     {
@@ -78,7 +79,7 @@ namespace Gift.Domain.UIModel.Element
             return 0;
         }
 
-        public override bool IsFixed()
+        public override bool HasNoSize()
         {
             return false;
         }
@@ -93,10 +94,17 @@ namespace Gift.Domain.UIModel.Element
             int thickness = Border.Thickness;
 
             var fullSize = sizeCalculator.GetTrueSize(this);
-            Size boundEmptyVStack = new Size(fullSize.Height - 2 * thickness, fullSize.Width - 2 * thickness);
-            IScreenDisplay emptyVstackScreen = _screenDisplayFactory.Create(
-                boundEmptyVStack, FrontColor == Color.Default ? configuration.DefaultFrontColor : FrontColor,
-                BackColor == Color.Default ? configuration.DefaultBackColor : BackColor, configuration.FillingChar);
+            Color frontColor = colorResolver.GetFrontColor(this, configuration);
+            Color backColor = colorResolver.GetBackColor(this, configuration);
+            Size sizeInVStack = new Size(fullSize.Height - 2 * thickness, fullSize.Width - 2 * thickness);
+
+            IScreenDisplay emptyVstackScreen = 
+				new ScreenDisplayBuilder()
+				.WithBound(sizeInVStack)
+				.WithBackColor(backColor)
+				.WithFrontColor(frontColor)
+				.WithChar(configuration.FillingChar)
+				.Build();
             return emptyVstackScreen;
         }
 

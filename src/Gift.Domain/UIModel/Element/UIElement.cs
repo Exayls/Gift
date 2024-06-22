@@ -15,6 +15,7 @@ namespace Gift.Domain.UIModel.Element
         public IBorder Border { get; set; }
         public Color FrontColor { get; private set; }
         public Color BackColor { get; private set; }
+        public string Id { get; }
 
         private bool isSelectedElement;
         public bool IsSelectedElement
@@ -28,17 +29,18 @@ namespace Gift.Domain.UIModel.Element
 
         public bool IsInSelectedContainer { get; set; }
 
-        protected UIElement(IBorder? border = null, Color frontColor = Color.Default, Color backColor = Color.Default)
+        protected UIElement(IBorder? border, Color frontColor, Color backColor, string id)
         {
             Border = border ?? new NoBorder();
             FrontColor = frontColor;
             BackColor = backColor;
+			Id = id;
         }
 
         public abstract IScreenDisplay GetDisplayWithoutBorder(IConfiguration configuration, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator);
         public abstract IScreenDisplay GetDisplayBorder(IConfiguration configuratione, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator);
         public abstract Position GetRelativePosition(Position position);
-        public abstract bool IsFixed();
+        public abstract bool HasNoSize();
 
         public IScreenDisplay GetDisplayWithBorder(char fillingChar, ColorResolver colorResolver, IElementSizeCalculator sizeCalculator)
         {

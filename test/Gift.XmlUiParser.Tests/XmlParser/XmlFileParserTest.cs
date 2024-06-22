@@ -4,7 +4,6 @@ using Gift.Displayer.Displayer;
 using Gift.Domain.Builders.Mappers;
 using Gift.Domain.Builders.UIModel;
 using Gift.Domain.ServiceContracts;
-using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
@@ -49,7 +48,7 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             UIElement result = xmlParser.ParseUIFile(filePath);
             // Assert
             Assert.NotNull(result);
-            Assert.IsType<GiftUI>(result);
+            Assert.IsType<VStack>(result);
         }
 
         [Fact]
@@ -81,7 +80,7 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             UIElement result = xmlParser.ParseUIFile(filePath);
             // Assert
             var expected =
-                new GiftUIBuilder()
+                new VStackBuilder()
                     .WithUnSelectableElement(
                         new VStackBuilder()
                             .WithBound(new Size(5, 8))
@@ -96,7 +95,6 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             Assert.True(expected.IsSimilarTo(result));
         }
 
-
         [Fact]
         public void Given_xml_with_container_is_selectable_when_parsing_should_create_selectable_container()
         {
@@ -108,15 +106,27 @@ namespace Gift.XmlUiParser.Tests.XmlParser
             UIElement result = xmlParser.ParseUIFile(filePath);
             // Assert
             var expected =
-                new GiftUIBuilder()
-                    .WithSelectableContainer(
+                new VStackBuilder()
+                    .WithUnSelectableElement(
                         new VStackBuilder()
+                            .IsSelectableContainer(true)
                             .Build())
                     .Build();
             Assert.True(expected.IsSimilarTo(result));
         }
 
-        private static void Log(ILogger<IXMLFileParser> logger, GiftUI element)
+        [Fact]
+        public void Given_xml_with_id_element_should_have_id()
+        {
+
+            string filePath = "ressources/xml/id.xml";
+            // Act
+            UIElement result = xmlParser.ParseUIFile(filePath);
+            // Assert
+            Assert.True(result.Id == "bbb");
+        }
+
+        private static void Log(ILogger<IXMLFileParser> logger, VStack element)
         {
             logger.LogTrace("{}", element.Childs[0].BackColor);
         }

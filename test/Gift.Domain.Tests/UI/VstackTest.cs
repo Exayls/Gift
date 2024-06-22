@@ -19,7 +19,6 @@ namespace Gift.Domain.Tests.UI
         private Mock<UIElement> _uiElementMock1;
         private Mock<UIElement> _uiElementMock2;
         private Mock<IBorder> _borderMock;
-        private Mock<IScreenDisplayFactory> _ScreenDisplayFactoryMock;
         private VStack vstack;
         private readonly IRepository _repository;
 
@@ -31,10 +30,6 @@ namespace Gift.Domain.Tests.UI
             _uiElementMock1 = new Mock<UIElement>();
             _uiElementMock2 = new Mock<UIElement>();
             _borderMock = new Mock<IBorder>();
-            _ScreenDisplayFactoryMock = new Mock<IScreenDisplayFactory>();
-            _ScreenDisplayFactoryMock
-                .Setup(s => s.Create(It.IsAny<Size>(), It.IsAny<Color>(), It.IsAny<Color>(), It.IsAny<char>()))
-                .Returns(_screenDisplayMock1.Object);
             vstack = new VStackBuilder().WithBorder(_borderMock.Object).Build();
         }
 

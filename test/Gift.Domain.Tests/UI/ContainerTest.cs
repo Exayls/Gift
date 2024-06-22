@@ -1,6 +1,5 @@
 ﻿using Gift.Domain.Builders.UIModel;
 using Gift.Domain.UIModel.Border;
-using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Element;
 using Moq;
 using TestGift.Mocks;
@@ -12,13 +11,11 @@ namespace Gift.Domain.Tests.UI
     {
 
         private Mock<IBorder> _borderMock;
-        private Mock<IScreenDisplayFactory> _ScreenDisplayFactoryMock;
         private VStack vstack;
 
         public ContainerTest()
         {
             _borderMock = new Mock<IBorder>();
-            _ScreenDisplayFactoryMock = new Mock<IScreenDisplayFactory>();
             vstack = new VStackBuilder().WithBorder(_borderMock.Object).Build();
         }
 

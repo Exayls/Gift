@@ -14,6 +14,7 @@ namespace TestGift.Mocks
         private bool _isFixed;
 
         public MockUIElement(int height, int width, bool isFixed = false)
+            : base(border: null, backColor: Color.Default, frontColor: Color.Default, id: "id")
         {
             Height = height;
             Width = width;
@@ -21,6 +22,7 @@ namespace TestGift.Mocks
         }
 
         public MockUIElement()
+            : base(border: null, backColor: Color.Default, frontColor: Color.Default, id: "id")
         {
         }
 
@@ -29,7 +31,7 @@ namespace TestGift.Mocks
             throw new System.NotImplementedException();
         }
 
-        public override bool IsFixed()
+        public override bool HasNoSize()
         {
             return _isFixed;
         }

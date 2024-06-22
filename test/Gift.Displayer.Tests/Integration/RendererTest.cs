@@ -2,7 +2,6 @@
 using Gift.Domain.Builders.UIModel;
 using Gift.Domain.ServiceContracts;
 using Gift.Domain.Services;
-using Gift.Domain.UIModel;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Conf;
 using Gift.Domain.UIModel.Display;
@@ -35,7 +34,7 @@ namespace TestGift.Test.UI
         {
             InMemoryRepository repository = new InMemoryRepository();
             var renderer = GetRenderer(repository);
-            GiftUI ui = CreateGiftUi(new Size(5, 10), new NoBorder());
+            var ui = CreateContainer(new Size(5, 10), new NoBorder());
             IScreenDisplay rendered = renderer.GetRenderDisplay(ui);
             repository.SaveRoot(ui);
             // clang-format off
@@ -48,15 +47,15 @@ namespace TestGift.Test.UI
             Assert.Equal(expected, rendered.DisplayString.ToString());
         }
 
-        private static GiftUI CreateGiftUi(Size bound, IBorder border)
+        private static Container CreateContainer(Size bound, IBorder border)
         {
-            return new GiftUIBuilder().WithBound(bound).WithBorder(border).Build();
+            return new VStackBuilder().WithBound(bound).WithBorder(border).Build();
         }
 
         [Fact]
         public void Can_render_UI_with_elements()
         {
-            GiftUI ui = CreateGiftUi(new Size(10, 10), new NoBorder());
+            var ui = CreateContainer(new Size(10, 10), new NoBorder());
 
             VStack vstack = new VStackBuilder()
                                 .WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile("ressources/borderchars/double_border.json")))
@@ -119,7 +118,7 @@ namespace TestGift.Test.UI
         [Fact]
         public void Can_render_UI_with_elements_out_of_bound()
         {
-            GiftUI ui = CreateGiftUi(new Size(10, 10), new NoBorder());
+            var ui = CreateContainer(new Size(10, 10), new NoBorder());
 
             VStack vstack = new VStackBuilder()
                                 .WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile(
@@ -160,7 +159,7 @@ namespace TestGift.Test.UI
         [Fact]
         public void Can_render_color_of_border()
         {
-            GiftUI ui = CreateGiftUi(new Size(4, 10), new NoBorder());
+            var ui = CreateContainer(new Size(4, 10), new NoBorder());
 
             VStack vstack =
                 new VStackBuilder()

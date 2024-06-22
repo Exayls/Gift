@@ -30,12 +30,14 @@ namespace Gift.ApplicationService.Services
 
         public void UpdateDisplay()
         {
+            _logger.LogTrace("UpdateDisplay");
             IScreenDisplay view = CreateView();
             PrintFrame(view);
         }
 
         public IScreenDisplay CreateView()
         {
+            _logger.LogTrace("CreateView");
             UIElement ui = _repository.GetRoot();
             IScreenDisplay View = _renderer.GetRenderDisplay(ui);
             return View;
@@ -43,6 +45,7 @@ namespace Gift.ApplicationService.Services
 
         private void PrintFrame(IScreenDisplay? View)
         {
+            _logger.LogTrace("PrintFrame");
             if (View != null)
             {
                 _displayer.Display(View);
@@ -51,43 +54,64 @@ namespace Gift.ApplicationService.Services
 
         public void NextContainer()
         {
+            _logger.LogTrace("NextContainer");
             var selectedContainer = _repository.GetSelectedContainer();
-            if (selectedContainer != null)
+            if (selectedContainer == null)
             {
-                List<Container> selectableContainers = _repository.GetSelectableContainers().ToList();
-                var container = selectableContainers[(selectableContainers.IndexOf(selectedContainer) + 1) %
-                                                     selectableContainers.Count];
-                _repository.SelectContainer(container);
-                _logger.LogDebug($"select container {container}");
+                _logger.LogDebug("NextContainer: No selected container");
+                return;
             }
+            List<Container> selectableContainers = _repository.GetSelectableContainers().ToList();
+            var container = selectableContainers[(selectableContainers.IndexOf(selectedContainer) + 1) %
+                                                 selectableContainers.Count];
+            _repository.SelectContainer(container);
+            _logger.LogDebug($"select container {container}");
         }
 
         public void PreviousContainer()
         {
+            _logger.LogTrace("PreviousContainer");
             var selectedContainer = _repository.GetSelectedContainer();
-            if (selectedContainer != null)
+            if (selectedContainer == null)
             {
-                List<Container> selectableContainers = _repository.GetSelectableContainers().ToList();
-                var container = selectableContainers[(selectableContainers.IndexOf(selectedContainer) - 1 +
-                                                      selectableContainers.Count) %
-                                                     selectableContainers.Count];
-                _repository.SelectContainer(container);
-                _logger.LogDebug($"select container {container}");
+                _logger.LogDebug("PreviousContainer: No selected container");
+                return;
             }
+            List<Container> selectableContainers = _repository.GetSelectableContainers().ToList();
+            var container = selectableContainers[(selectableContainers.IndexOf(selectedContainer) - 1 +
+                                                  selectableContainers.Count) %
+                                                 selectableContainers.Count];
+            _repository.SelectContainer(container);
+            _logger.LogDebug($"select container {container}");
         }
 
         public void NextElementInSelectedContainer()
         {
-            _repository.GetSelectedContainer()?.NextElement();
+            _logger.LogTrace("NextElement");
+            var selectedContainer = _repository.GetSelectedContainer();
+            if (selectedContainer is null)
+            {
+                _logger.LogDebug("NextElement: No selected container");
+                return;
+            }
+            selectedContainer.NextElement();
         }
 
         public void PreviousElementInSelectedContainer()
         {
-            _repository.GetSelectedContainer()?.PreviousElement();
+            _logger.LogTrace("PreviousElement");
+            var selectedContainer = _repository.GetSelectedContainer();
+            if (selectedContainer is null)
+            {
+                _logger.LogDebug("PreviousElement: No selected container");
+                return;
+            }
+            selectedContainer.PreviousElement();
         }
 
         public void Resize(Size bound)
         {
+            _logger.LogTrace("Resize");
             var root = _repository.GetRoot();
             if (root is Container)
             {
@@ -98,12 +122,26 @@ namespace Gift.ApplicationService.Services
 
         public void ScrollUp()
         {
-            _repository.GetSelectedContainer()?.ScrollUp();
+            _logger.LogTrace("ScrollUp");
+            var selectedContainer = _repository.GetSelectedContainer();
+            if (selectedContainer is null)
+            {
+                _logger.LogDebug("ScrollUp: No selected container");
+                return;
+            }
+            selectedContainer.ScrollUp();
         }
 
         public void ScrollDown()
         {
-            _repository.GetSelectedContainer()?.ScrollDown();
+            _logger.LogTrace("ScrollDown");
+            var selectedContainer = _repository.GetSelectedContainer();
+            if (selectedContainer is null)
+            {
+                _logger.LogDebug("ScrollDown: No selected container");
+                return;
+            }
+            selectedContainer.ScrollDown();
         }
     }
 }

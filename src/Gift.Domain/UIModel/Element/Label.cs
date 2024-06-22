@@ -15,22 +15,20 @@ namespace Gift.Domain.UIModel.Element
 
         public override int Height
         {
-            get
-            {
+            get {
                 return 1 + 2 * Border.Thickness;
             }
         }
         public override int Width
         {
-            get
-            {
+            get {
                 return Text.Length + 2 * Border.Thickness;
             }
         }
 
-        public Label(string text, Position? position = null, IBorder? border = null, Color frontColor = Color.Default,
-                     Color backColor = Color.Default)
-            : base(border, frontColor, backColor)
+        public Label(string text, Position? position, IBorder? border, Color frontColor,
+                     Color backColor, string id)
+            : base(border, frontColor, backColor, id)
         {
             Text = text;
             if (position != null)
@@ -43,7 +41,7 @@ namespace Gift.Domain.UIModel.Element
             }
         }
 
-        public override bool IsFixed()
+        public override bool HasNoSize()
         {
             return Disposition is ExplicitDisposition;
         }
@@ -82,11 +80,10 @@ namespace Gift.Domain.UIModel.Element
         public override IScreenDisplay GetDisplayBorder(IConfiguration configuration, IColorResolver colorResolver, IElementSizeCalculator sizeCalculator)
         {
             var screen = new ScreenDisplayBuilder()
-                .WithFrontColor(colorResolver.GetFrontColor(this, configuration))
-                .WithBackColor(colorResolver.GetBackColor(this, configuration))
-                .WithBound(sizeCalculator.GetTrueSize(this));
+                             .WithFrontColor(colorResolver.GetFrontColor(this, configuration))
+                             .WithBackColor(colorResolver.GetBackColor(this, configuration))
+                             .WithBound(sizeCalculator.GetTrueSize(this));
             return Border.GetDisplay(screen);
-
         }
     }
 }
