@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package>
+	<metadata>
+		<id>Gift</id>
+		<version>0.1.0</version>
+		<authors>Alexis Gagoud</authors>
+		<owners>Alexis Gagoud</owners>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<license type="expression">MIT</license>
+		<!-- <icon>icon.png</icon> -->
+		<projectUrl>https://github.com/Exayls/Gift</projectUrl>
+		<description>Gift is a Terminal User Interface library that try to provide a simple way of
+			building basic interfaces.</description>
+		<releaseNotes>initial release, minimum to be used</releaseNotes>
+		<copyright>Copyright ©2024 Alexis Gagoud</copyright>
+		<tags>terminal tui interface library</tags>
+		<dependencies>
+			<dependency id="" />
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="README.md" target="" />
+		<file src="src/Gift.Domain/bin/Release/net8.0/ressources/" target="" />
+
+
+		<file src="src/Gift.ApplicationService/bin/Release/net8.0/Gift.ApplicationService.dll" target="net8.0" />
+		<file src="src/Gift.ConsoleMonitor/bin/Release/net8.0/Gift.ConsoleMonitor.dll" target="net8.0" />
+		<file src="src/Gift.Displayer/bin/Release/net8.0/Gift.Displayer.dll" target="net8.0" />
+		<file src="src/Gift.Domain/bin/Release/net8.0/Gift.Domain.dll" target="net8.0" />
+		<file src="src/Gift.KeyInteraction/bin/Release/net8.0/Gift.KeyInteraction.dll" target="net8.0" />
+		<file src="src/Gift.Repository/bin/Release/net8.0/Gift.Repository.dll" target="net8.0" />
+		<file src="src/Gift.Startup/bin/Release/net8.0/Gift.Startup.dll" target="net8.0" />
+		<file src="src/Gift.XmlUiParser/bin/Release/net8.0/Gift.XmlUiParser.dll" target="net8.0" />
+	</files>
+</package>
