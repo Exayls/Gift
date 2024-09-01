@@ -1,5 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+	<PropertyGroup>
+		<Product>Gift</Product>
+		<version>0.1.0</version>
+		<authors>Alexis Gagoud</authors>
+		<owners>Alexis Gagoud</owners>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<license> MIT</license>
+	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Gift.ApplicationService\Gift.ApplicationService.csproj" />
 	</ItemGroup>

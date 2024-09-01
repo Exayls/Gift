@@ -1,29 +1,42 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
+		<Product>Gift</Product>
+		<version>0.1.0</version>
+		<authors>Alexis Gagoud</authors>
+		<owners>Alexis Gagoud</owners>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<license> MIT</license>
+	</PropertyGroup>
+	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<GenerateDocumentationFile>False</GenerateDocumentationFile>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions"
+			Version="8.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Content Include="ressources\borderchars\double_border.json">
+		<content Include="ressources\borderchars\double_border.json" copyToOutput="true">
 			<CopyToOutputDirectory>always</CopyToOutputDirectory>
-		</Content>
-		<Content Include="ressources\borderchars\heavy_border.json">
+			<PackageCopyToOutput>true</PackageCopyToOutput>
+		</content>
+		<content Include="ressources\borderchars\heavy_border.json" copyToOutput="true">
 			<CopyToOutputDirectory>always</CopyToOutputDirectory>
-		</Content>
-		<Content Include="ressources\borderchars\simple_border.json">
+			<PackageCopyToOutput>true</PackageCopyToOutput>
+		</content>
+		<content Include="ressources\borderchars\simple_border.json" copyToOutput="true">
 			<CopyToOutputDirectory>always</CopyToOutputDirectory>
-		</Content>
-		<Content Include="ressources\keyconfig\keymap.json">
+			<PackageCopyToOutput>true</PackageCopyToOutput>
+		</content>
+		<content Include="ressources\keyconfig\keymap.json" copyToOutput="true">
 			<CopyToOutputDirectory>always</CopyToOutputDirectory>
-		</Content>
+			<PackageCopyToOutput>true</PackageCopyToOutput>
+		</content>
 	</ItemGroup>
 
 </Project>

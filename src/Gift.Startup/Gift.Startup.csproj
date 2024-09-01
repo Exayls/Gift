@@ -1,16 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
+		<PackageId>Gift</PackageId>
+		<Title>Gift</Title>
+		<Product>Gift</Product>
+		<version>0.1.0</version>
+		<authors>Alexis Gagoud</authors>
+		<owners>Alexis Gagoud</owners>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<license> MIT</license>
+		<PackageProjectUrl>https://github.com/Exayls/Gift</PackageProjectUrl>
+		<description>Gift is a Terminal User Interface library that try to provide a simple way of
+			building basic interfaces.</description>
+		<releaseNotes>initial release, minimum to be used</releaseNotes>
+		<copyright>Copyright ©2024 Alexis Gagoud</copyright>
+		<PackageTags>terminal tui interface library</PackageTags>
+
 		<TargetFramework>net8.0</TargetFramework>
 		<GenerateDocumentationFile>False</GenerateDocumentationFile>
 		<Nullable>enable</Nullable>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\Gift.ApplicationService\Gift.ApplicationService.csproj" />
 		<ProjectReference Include="..\Gift.ConsoleMonitor\Gift.ConsoleMonitor.csproj" />
 		<ProjectReference Include="..\Gift.Displayer\Gift.Displayer.csproj" />
-		<ProjectReference Include="..\Gift.Domain\Gift.Domain.csproj" />
+		<ProjectReference Include="..\Gift.Domain\Gift.Domain.csproj" PrivateAssets="analyzers;build"/>
 		<ProjectReference Include="..\Gift.KeyInteraction\Gift.KeyInteraction.csproj" />
 		<ProjectReference Include="..\Gift.Repository\Gift.Repository.csproj" />
 		<ProjectReference Include="..\Gift.XmlUiParser\Gift.XmlUiParser.csproj" />
@@ -25,5 +41,27 @@
 		<PackageReference Include="Serilog.Sinks.Console" Version="5.0.1" />
 		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
 	</ItemGroup>
+	<!-- <Target Name="AfterBuild" Condition="$(OutputType) == 'Exe'"> -->
+	<!-- 	<ItemGroup> -->
+	<!-- 		<_ContentFiles Include="$(MSBuildThisFileDirectory)..\contentFiles\any\any\**\*" /> -->
+	<!-- 	</ItemGroup> -->
+
+	<!-- 	<Copy SourceFiles="@(_ContentFiles)" DestinationFolder="$(OutDir)\%(RecursiveDir)" -->
+	<!-- 		SkipUnchangedFiles="true" OverwriteReadOnlyFiles="true" /> -->
+	<!-- </Target> -->
+
+	<ItemGroup>
+		<None Include="README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+	<!-- <ItemGroup> -->
+
+
+	<!-- 	<Content Include="$(MSBuildThisFileDirectory)..\contentFiles\**\*.*"> -->
+	<!-- 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory> -->
+	<!-- 	</Content> -->
+	<!-- </ItemGroup> -->
 
 </Project>
