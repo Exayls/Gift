@@ -39,7 +39,7 @@ namespace Gift.XmlUiParser.Tests.XmlParser
         public void ParseUIFile_ValidFilePath_ReturnsGiftUI()
         {
             // Arrange
-            string filePath = "ressources/xml/valid_xml.xml";
+            string filePath = "resources/xml/valid_xml.xml";
             // Act
             UIElement result = xmlParser.ParseUIFile(filePath);
             // Assert
@@ -51,7 +51,7 @@ namespace Gift.XmlUiParser.Tests.XmlParser
         public void ParseUIFile_InvalidFilePath_ThrowsException()
         {
             // Arrange
-            string filePath = "ressources/invalid/invalid.xml";
+            string filePath = "resources/invalid/invalid.xml";
             // Act & Assert
             Assert.Throws<DirectoryNotFoundException>(() => xmlParser.ParseUIFile(filePath));
         }
@@ -60,7 +60,7 @@ namespace Gift.XmlUiParser.Tests.XmlParser
         public void ParseUIFile_UnsupportedComponent_ThrowsNotSupportedException()
         {
             // Arrange
-            string filePath = "ressources/xml/not_supported.xml";
+            string filePath = "resources/xml/not_supported.xml";
             // Act & Assert
             Assert.Throws<NotSupportedException>(() => xmlParser.ParseUIFile(filePath));
         }
@@ -71,7 +71,7 @@ namespace Gift.XmlUiParser.Tests.XmlParser
 
             var logger = LoggerHelper.GetLogger<IXMLFileParser>(_output);
             // Arrange
-            string filePath = "ressources/xml/valid_xml.xml";
+            string filePath = "resources/xml/valid_xml.xml";
             // Act
             UIElement result = xmlParser.ParseUIFile(filePath);
             // Assert
@@ -97,7 +97,7 @@ namespace Gift.XmlUiParser.Tests.XmlParser
 
             var logger = LoggerHelper.GetLogger<IXMLFileParser>(_output);
             // Arrange
-            string filePath = "ressources/xml/selectable.xml";
+            string filePath = "resources/xml/selectable.xml";
             // Act
             UIElement result = xmlParser.ParseUIFile(filePath);
             // Assert
@@ -115,7 +115,7 @@ namespace Gift.XmlUiParser.Tests.XmlParser
         public void Given_xml_with_id_element_should_have_id()
         {
 
-            string filePath = "ressources/xml/id.xml";
+            string filePath = "resources/xml/id.xml";
             // Act
             UIElement result = xmlParser.ParseUIFile(filePath);
             // Assert

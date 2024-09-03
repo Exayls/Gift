@@ -13,7 +13,7 @@ namespace Gift.ApplicationService.Services.SignalHandler.Key
         public IList<IKeyMapping> GetMapping()
         {
             // Load the JSON file
-            string json = File.ReadAllText("ressources/keyconfig/keymap.json");
+            string json = File.ReadAllText("resources/keyconfig/keymap.json");
 
             // Deserialize the JSON into a KeyMap object
             Dictionary<string, string>? keyMap = JsonSerializer.Deserialize<Dictionary<string, string>>(json);

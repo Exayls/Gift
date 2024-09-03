@@ -19,7 +19,7 @@ namespace Gift.Domain.Tests.Builder.Mappers
         [Fact]
         public void When_having_path_to_json_border_config_should_create_border()
         {
-            var borderFile = "ressources/simple_border.json";
+            var borderFile = "resources/simple_border.json";
             var border = _mapper.ToBorder(borderFile);
             Assert.Equal(1, border.Thickness);
             var expectedString = "┌─┐\n" + "│ │\n" + "└─┘";

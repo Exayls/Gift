@@ -21,19 +21,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<content Include="ressources\borderchars\double_border.json" copyToOutput="true">
+		<content Include="resources\borderchars\double_border.json" copyToOutput="true">
 			<CopyToOutputDirectory>always</CopyToOutputDirectory>
 			<PackageCopyToOutput>true</PackageCopyToOutput>
 		</content>
-		<content Include="ressources\borderchars\heavy_border.json" copyToOutput="true">
+		<content Include="resources\borderchars\heavy_border.json" copyToOutput="true">
 			<CopyToOutputDirectory>always</CopyToOutputDirectory>
 			<PackageCopyToOutput>true</PackageCopyToOutput>
 		</content>
-		<content Include="ressources\borderchars\simple_border.json" copyToOutput="true">
+		<content Include="resources\borderchars\simple_border.json" copyToOutput="true">
 			<CopyToOutputDirectory>always</CopyToOutputDirectory>
 			<PackageCopyToOutput>true</PackageCopyToOutput>
 		</content>
-		<content Include="ressources\keyconfig\keymap.json" copyToOutput="true">
+		<content Include="resources\keyconfig\keymap.json" copyToOutput="true">
 			<CopyToOutputDirectory>always</CopyToOutputDirectory>
 			<PackageCopyToOutput>true</PackageCopyToOutput>
 		</content>

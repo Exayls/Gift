@@ -13,7 +13,7 @@ namespace Gift.Domain.Tests.Border
 
         public BorderTest()
         {
-            borderchars = BorderOption.GetBorderCharsFromFile("ressources/borderchars/double_border.json");
+            borderchars = BorderOption.GetBorderCharsFromFile("resources/borderchars/double_border.json");
             _border = new DetailedBorder(1, borderchars);
         }
         [Fact]
@@ -59,7 +59,7 @@ namespace Gift.Domain.Tests.Border
         public void GetDisplay_should_return_border_with_thickness_n_when_border_thickness_greater_than_1_1()
         {
             // arrange
-            _border = new DetailedBorder(2, BorderOption.GetBorderCharsFromFile("ressources/borderchars/simple_border.json"));
+            _border = new DetailedBorder(2, BorderOption.GetBorderCharsFromFile("resources/borderchars/simple_border.json"));
             var screen = new ScreenDisplayBuilder().WithChar(' ').WithBound(new Size(6, 6));
             // act
             IScreenDisplay display = _border.GetDisplay(screen);
@@ -76,7 +76,7 @@ namespace Gift.Domain.Tests.Border
         public void GetDisplay_should_return_border_with_thickness_n_when_border_thickness_greater_than_1_2()
         {
             // arrange
-            _border = new DetailedBorder(2, BorderOption.GetBorderCharsFromFile("ressources/borderchars/simple_border.json"));
+            _border = new DetailedBorder(2, BorderOption.GetBorderCharsFromFile("resources/borderchars/simple_border.json"));
             var screen = new ScreenDisplayBuilder().WithChar(' ').WithBound(new Size(8, 8));
             // act
             IScreenDisplay display = _border.GetDisplay(screen);
@@ -95,7 +95,7 @@ namespace Gift.Domain.Tests.Border
         public void GetDisplay_should_return_border_with_thickness_n_when_border_thickness_greater_than_1_3()
         {
             // arrange
-            _border = new DetailedBorder(3, BorderOption.GetBorderCharsFromFile("ressources/borderchars/simple_border.json"));
+            _border = new DetailedBorder(3, BorderOption.GetBorderCharsFromFile("resources/borderchars/simple_border.json"));
             var screen = new ScreenDisplayBuilder().WithChar(' ').WithBound(new Size(8, 8));
             // act
             IScreenDisplay display = _border.GetDisplay(screen);
@@ -114,7 +114,7 @@ namespace Gift.Domain.Tests.Border
         public void GetDisplay_should_return_border_when_border_not_square_1()
         {
             // arrange
-            _border = new DetailedBorder(3, BorderOption.GetBorderCharsFromFile("ressources/borderchars/simple_border.json"));
+            _border = new DetailedBorder(3, BorderOption.GetBorderCharsFromFile("resources/borderchars/simple_border.json"));
             var screen = new ScreenDisplayBuilder().WithChar(' ').WithBound(new Size(12, 8));
             // act
             IScreenDisplay display = _border.GetDisplay(screen);
@@ -137,7 +137,7 @@ namespace Gift.Domain.Tests.Border
         public void GetDisplay_should_return_border_when_border_not_square_2()
         {
             // arrange
-            _border = new DetailedBorder(3, BorderOption.GetBorderCharsFromFile("ressources/borderchars/simple_border.json"));
+            _border = new DetailedBorder(3, BorderOption.GetBorderCharsFromFile("resources/borderchars/simple_border.json"));
             var screen = new ScreenDisplayBuilder().WithChar(' ').WithBound(new Size(8, 12));
             // act
             IScreenDisplay display = _border.GetDisplay(screen);

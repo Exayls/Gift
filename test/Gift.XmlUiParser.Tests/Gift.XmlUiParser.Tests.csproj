@@ -33,19 +33,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Update="ressources\xml\not_supported.xml">
+		<None Update="resources\xml\not_supported.xml">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Update="ressources\xml\valid_xml.xml">
+		<None Update="resources\xml\valid_xml.xml">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Update="ressources\xml\vstack_border.xml">
+		<None Update="resources\xml\vstack_border.xml">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Update="ressources\xml\selectable.xml">
+		<None Update="resources\xml\selectable.xml">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Update="ressources\xml\id.xml">
+		<None Update="resources\xml\id.xml">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>

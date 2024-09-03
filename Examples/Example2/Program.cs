@@ -11,13 +11,13 @@ var ui = new VStackBuilder().Build();
 
 var hstack = new HStackBuilder()
                  .WithBorder(new DetailedBorder(
-                     2, BorderOption.GetBorderCharsFromFile("ressources/borderchars/double_border.json")))
+                     2, BorderOption.GetBorderCharsFromFile("resources/borderchars/double_border.json")))
                  .Build();
 ui.Add(hstack);
 
 var vstack = new VStackBuilder()
                  .WithBorder(new DetailedBorder(
-                     1, BorderOption.GetBorderCharsFromFile("ressources/borderchars/simple_border.json")))
+                     1, BorderOption.GetBorderCharsFromFile("resources/borderchars/simple_border.json")))
                  .Build();
 hstack.Add(vstack);
 hstack.Add(new LabelBuilder().WithText("test7").Build());
@@ -32,7 +32,7 @@ vstack.Add(new LabelBuilder().WithText("test4").Build());
 var vstack2 = new VStackBuilder()
                   .IsSelectableContainer(true)
                   .WithBorder(new DetailedBorder(
-                      1, BorderOption.GetBorderCharsFromFile("ressources/borderchars/simple_border.json")))
+                      1, BorderOption.GetBorderCharsFromFile("resources/borderchars/simple_border.json")))
                   .Build();
 vstack.AddSelectableChild(vstack2);
 var element1 = new LabelBuilder().WithText("testwithbiggerwidth").Build();

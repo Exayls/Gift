@@ -32,7 +32,7 @@
 	</ItemGroup>
 
 	<!-- <ItemGroup> -->
-	<!-- 	<None Update="ressources\borderChars\"> -->
+	<!-- 	<None Update="resources\borderChars\"> -->
 	<!-- 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory> -->
 	<!-- 	</None> -->
 	<!-- </ItemGroup> -->

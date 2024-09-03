@@ -57,13 +57,13 @@ namespace Gift.Displayer.Tests.Integration
             var ui = CreateContainer(new Size(10, 10), new NoBorder());
 
             VStack vstack = new VStackBuilder()
-                                .WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile("ressources/borderchars/double_border.json")))
+                                .WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile("resources/borderchars/double_border.json")))
                                 .WithBound(new(-1, -1))
                                 .Build();
             vstack.Add(new LabelBuilder().Build());
             ui.Add(vstack);
             VStack vstack2 = new VStackBuilder()
-                                 .WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile("ressources/borderchars/simple_border.json")))
+                                 .WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile("resources/borderchars/simple_border.json")))
                                  .Build();
             vstack.Add(vstack2);
             vstack2.Add(new LabelBuilder().WithText("hey").Build());
@@ -93,13 +93,13 @@ namespace Gift.Displayer.Tests.Integration
 
             VStack vstack = new VStackBuilder()
                                 .WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile(
-                                                                      "ressources/borderchars/double_border.json")))
+                                                                      "resources/borderchars/double_border.json")))
                                 .WithBound(new(4, 4))
                                 .Build();
             vstack.Add(new LabelBuilder().WithText("b").Build());
             VStack vstack2 = new VStackBuilder()
                                  .WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile(
-                                                                       "ressources/borderchars/simple_border.json")))
+                                                                       "resources/borderchars/simple_border.json")))
                                  .Build();
             InMemoryRepository repository = new InMemoryRepository();
             var renderer = GetRenderer(repository);
@@ -121,14 +121,14 @@ namespace Gift.Displayer.Tests.Integration
 
             VStack vstack = new VStackBuilder()
                                 .WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile(
-                                                                      "ressources/borderchars/double_border.json")))
+                                                                      "resources/borderchars/double_border.json")))
                                 .WithBound(new(-1, -1))
                                 .Build();
             vstack.Add(new LabelBuilder().Build());
             ui.Add(vstack);
             VStack vstack2 = new VStackBuilder()
                                  .WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile(
-                                                                       "ressources/borderchars/simple_border.json")))
+                                                                       "resources/borderchars/simple_border.json")))
                                  .Build();
             vstack.Add(vstack2);
             vstack2.Add(new LabelBuilder().WithText("hey").Build());

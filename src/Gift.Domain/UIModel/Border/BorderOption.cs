@@ -7,9 +7,9 @@ namespace Gift.Domain.UIModel.Border
     public class BorderOption
     {
 
-        public static BorderOption Default => GetBorderCharsFromFile("ressources/borderchars/simple_border.json");
-        public static BorderOption Simple => GetBorderCharsFromFile("ressources/borderchars/simple_border.json");
-        public static BorderOption Heavy => GetBorderCharsFromFile("ressources/borderchars/heavy_border.json");
+        public static BorderOption Default => GetBorderCharsFromFile("resources/borderchars/simple_border.json");
+        public static BorderOption Simple => GetBorderCharsFromFile("resources/borderchars/simple_border.json");
+        public static BorderOption Heavy => GetBorderCharsFromFile("resources/borderchars/heavy_border.json");
 
         public char TlBorder { get; }
         public char TrBorder { get; }
