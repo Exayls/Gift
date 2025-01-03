@@ -24,8 +24,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\src\Gift.ApplicationService\Gift.ApplicationService.csproj" />
-		<ProjectReference Include="..\..\src\Gift.Displayer\Gift.Displayer.csproj" />
 		<ProjectReference Include="..\..\src\Gift.Domain\Gift.Domain.csproj" />
 	</ItemGroup>
 

@@ -11,7 +11,6 @@ namespace Gift.Domain.Tests.Builder
         [Fact]
         public void BuilderNameTest()
         {
-
             HStackBuilder builder = new HStackBuilder();
             HStack h = builder.Build();
             Assert.True(h != null);

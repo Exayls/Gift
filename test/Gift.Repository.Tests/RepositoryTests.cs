@@ -10,16 +10,7 @@ namespace Gift.Repository.Tests
     public class RepositoryTests
     {
 
-#region root tests
-        private static UIElement GetRoot(IRepository repository)
-        {
-            return repository.GetRoot();
-        }
-
-        private static void SaveRoot(IRepository repository, VStack root)
-        {
-            repository.SaveRoot(root);
-        }
+        #region root tests
 
         [Fact]
         public void When_saving_root_should_be_able_to_retrieve_it()
@@ -30,9 +21,20 @@ namespace Gift.Repository.Tests
             var result = GetRoot(repository);
             Assert.Equal(root, result);
         }
-#endregion
 
-#region containers tests
+        private static UIElement GetRoot(IRepository repository)
+        {
+            return repository.GetRoot();
+        }
+
+        private static void SaveRoot(IRepository repository, VStack root)
+        {
+            repository.SaveRoot(root);
+        }
+
+        #endregion
+
+        #region containers tests
         private static IEnumerable<Container> GetContainers(IRepository repository)
         {
             return repository.GetContainers();
@@ -110,9 +112,9 @@ namespace Gift.Repository.Tests
                               container =>
                               { Assert.Equal(vstack, container); });
         }
-#endregion
+        #endregion
 
-#region selectable container tests
+        #region selectable container tests
         [Fact]
         public void Given_root_have_selectable_containers_in_hierarchy_when_GetContainer_should_retrieve_them()
         {
@@ -190,9 +192,9 @@ namespace Gift.Repository.Tests
 
             Assert.Throws<ElementNotInHierarchyException>(() => repository.SelectContainer(container));
         }
-#endregion
+        #endregion
 
-#region getParent tests
+        #region getParent tests
 
         [Fact]
         public void Given_element_is_root_GetParent_should_return_null()
@@ -223,9 +225,9 @@ namespace Gift.Repository.Tests
             // Assert
             Assert.Equal(hstack, container);
         }
-#endregion
+        #endregion
 
-#region getFromId tests
+        #region getFromId tests
 
         [Fact]
         public void Given_element_has_good_id_GetId_should_return_element()
@@ -258,6 +260,6 @@ namespace Gift.Repository.Tests
             // Assert
             Assert.NotEqual(vstack, element);
         }
-#endregion
+        #endregion
     }
 }

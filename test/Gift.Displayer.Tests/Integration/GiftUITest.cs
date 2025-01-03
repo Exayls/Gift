@@ -4,7 +4,6 @@ using System.IO;
 using Gift.Domain.UIModel.MetaData;
 using Gift.Domain.UIModel.Display;
 using Gift.Domain.UIModel.Conf;
-using Gift.ApplicationService.Services;
 using Gift.Displayer.Rendering;
 using Gift.Domain.Builders.UIModel;
 using Gift.Domain.ServiceContracts;
@@ -34,11 +33,11 @@ namespace Gift.Displayer.Tests.Integration
                 IScreenDisplay renderedText =
                     GetRenderer(repo).GetRenderDisplay(ui);
                 var expectedBuilder = new StringBuilder();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, 60));
+                expectedBuilder.Append(new string('*', 60));
                 for (int i = 1; i < 20; i++)
                 {
                     expectedBuilder.Append('\n');
-                    expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, 60));
+                    expectedBuilder.Append(new string('*', 60));
                 }
 
                 Assert.Equal(expectedBuilder.ToString(), renderedText.DisplayString.ToString());
@@ -47,7 +46,7 @@ namespace Gift.Displayer.Tests.Integration
 
         private static VStack GetGiftUI(Size bound)
         {
-            return new VStackBuilder().WithBound(bound).Build();
+            return new VStackBuilder().WithBound(bound).WithFillingChar('*').Build();
         }
 
         [Fact]
@@ -63,11 +62,11 @@ namespace Gift.Displayer.Tests.Integration
                 IScreenDisplay renderedText =
                     GetRenderer(repo).GetRenderDisplay(ui);
                 var expectedBuilder = new StringBuilder();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, 15));
+                expectedBuilder.Append(new string('*', 15));
                 for (int i = 1; i < 10; i++)
                 {
                     expectedBuilder.Append('\n');
-                    expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, 15));
+                    expectedBuilder.Append(new string('*', 15));
                 }
 
                 Assert.Equal(expectedBuilder.ToString(), renderedText.DisplayString.ToString());

@@ -12,10 +12,12 @@ namespace Gift.Domain.UIModel.Element
     public abstract class Container : UIElement
     {
         public Size Size { get; protected set; }
-        public int ScrollIndex { get; protected set; }
         public IList<UIElement> Childs { get; protected set; }
-        public IList<UIElement> SelectableElements { get; protected set; }
         public bool IsSelectableContainer { get; }
+
+        private IList<UIElement> _selectableElements;
+        protected char _fillingChar;
+        protected int _scrollIndex;
 
         private UIElement? selectedElement;
         public UIElement? SelectedElement
@@ -25,7 +27,7 @@ namespace Gift.Domain.UIModel.Element
             {
                 selectedElement = value;
 
-                foreach (UIElement element in SelectableElements)
+                foreach (UIElement element in _selectableElements)
                 {
                     element.IsSelectedElement = false;
                 }
@@ -39,14 +41,20 @@ namespace Gift.Domain.UIModel.Element
         public bool IsSelectedContainer { get; set; }
 
 
-        public Container(Size bound, IBorder border, Color frontColor,
-                         Color backColor, bool isSelectableContainer, string id)
+        public Container(Size bound,
+                         IBorder border,
+                         Color frontColor,
+                         Color backColor,
+                         bool isSelectableContainer,
+                         string id,
+						 char fillingChar)
             : base(border, frontColor: frontColor, backColor: backColor, id: id)
         {
             Size = bound;
             Childs = new List<UIElement>();
-            SelectableElements = new List<UIElement>();
+            _selectableElements = new List<UIElement>();
             IsSelectableContainer = isSelectableContainer;
+			_fillingChar = fillingChar;
         }
 
         public abstract Position GetContext(IRenderable renderable, Position position);
@@ -67,7 +75,7 @@ namespace Gift.Domain.UIModel.Element
             if (SelectedElement != null)
             {
                 SelectedElement =
-                    SelectableElements[(SelectableElements.IndexOf(SelectedElement) + 1) % SelectableElements.Count];
+                    _selectableElements[(_selectableElements.IndexOf(SelectedElement) + 1) % _selectableElements.Count];
             }
         }
 
@@ -76,19 +84,19 @@ namespace Gift.Domain.UIModel.Element
             if (SelectedElement != null)
             {
                 SelectedElement =
-                    SelectableElements[(SelectableElements.IndexOf(SelectedElement) - 1 + SelectableElements.Count) %
-                                       SelectableElements.Count];
+                    _selectableElements[(_selectableElements.IndexOf(SelectedElement) - 1 + _selectableElements.Count) %
+                                       _selectableElements.Count];
             }
         }
 
         public void ScrollDown()
         {
-            ScrollIndex += 1;
+            _scrollIndex += 1;
         }
 
         public void ScrollUp()
         {
-            ScrollIndex -= 1;
+            _scrollIndex -= 1;
         }
 
         public void Add(UIElement uIElement)
@@ -102,9 +110,9 @@ namespace Gift.Domain.UIModel.Element
             {
                 Childs.Add(uIElement);
             }
-            if (!SelectableElements.Contains(uIElement))
+            if (!_selectableElements.Contains(uIElement))
             {
-                SelectableElements.Add(uIElement);
+                _selectableElements.Add(uIElement);
             }
             SelectedElement ??= uIElement;
         }
@@ -126,10 +134,10 @@ namespace Gift.Domain.UIModel.Element
                 if (!element1.IsSimilarTo(element2))
                     return false;
             }
-            if (SelectableElements.Count != container.SelectableElements.Count)
+            if (_selectableElements.Count != container._selectableElements.Count)
                 return false;
             foreach ((UIElement element1,
-                      UIElement element2) in SelectableElements.Zip(container.SelectableElements))
+                      UIElement element2) in _selectableElements.Zip(container._selectableElements))
             {
                 if (!element1.IsSimilarTo(element2))
                     return false;

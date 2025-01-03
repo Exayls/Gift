@@ -33,11 +33,11 @@ namespace Gift.Domain.UIModel.Element
         public abstract Position GetRelativePosition(Position position);
         public abstract bool HasNoSize();
 
-        public IScreenDisplay GetDisplayWithBorder(char fillingChar, ColorResolver colorResolver, IElementSizeCalculator sizeCalculator)
+        public IScreenDisplay GetDisplayWithBorder(ColorResolver colorResolver, IElementSizeCalculator sizeCalculator)
         {
             int thickness = Border.Thickness;
             IScreenDisplay screenDisplay = GetDisplayBorder(new DefaultConfiguration(), colorResolver, sizeCalculator);
-            IScreenDisplay emptyHstackScreen = GetDisplayWithoutBorder(new Configuration(fillingChar: fillingChar), colorResolver, sizeCalculator);
+            IScreenDisplay emptyHstackScreen = GetDisplayWithoutBorder(new Configuration(), colorResolver, sizeCalculator);
             screenDisplay.AddDisplay(emptyHstackScreen, new Position(thickness, thickness));
             return screenDisplay;
         }

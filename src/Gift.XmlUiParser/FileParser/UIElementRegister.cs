@@ -28,7 +28,6 @@ namespace Gift.XmlUiParser.FileParser
             _colorMapper = colorMapper;
             _boundMapper = boundMapper;
             _booleanMapper = booleanMapper;
-            _logger = logger;
             _elements = [];
             _builderMethods = [];
 
@@ -74,48 +73,48 @@ namespace Gift.XmlUiParser.FileParser
         }
 
         public void Register<TBuilder>(string name)
-            where TBuilder : IUIElementBuilder
+            where TBuilder : UIElementBuilder
         {
             var buildertype = typeof(TBuilder);
             _elements.Add(name.ToLower(CultureInfo.CurrentCulture), buildertype);
 
-            if (typeof(IContainerBuilder).IsAssignableFrom(buildertype))
+            if (typeof(ContainerBuilder).IsAssignableFrom(buildertype))
             {
-                Register<IContainerBuilder>(buildertype, "size", (b, bd) => b.WithBound(bd, _boundMapper));
-                Register<IContainerBuilder>(buildertype, "height", (b, height) => b.WithHeight(height));
-                Register<IContainerBuilder>(buildertype, "width", (b, width) => b.WithWidth(width));
-                Register<IContainerBuilder>(buildertype, "selectablecontainer",
-                                                 (b, isSelectableContainer) =>
-                                                     b.IsSelectableContainer(isSelectableContainer, _booleanMapper));
+                Register<ContainerBuilder>(buildertype, "size", (b, bd) => b.WithBound(bd, _boundMapper));
+                Register<ContainerBuilder>(buildertype, "height", (b, height) => b.WithHeight(height));
+                Register<ContainerBuilder>(buildertype, "width", (b, width) => b.WithWidth(width));
+                Register<ContainerBuilder>(buildertype, "fillingchar", (b, fillingChar) => b.WithFillingChar(fillingChar));
+                Register<ContainerBuilder>(buildertype, "selectablecontainer",
+                                            (b, isSelectableContainer) =>
+                                                b.IsSelectableContainer(isSelectableContainer, _booleanMapper));
             }
-            if (typeof(IUIElementBuilder).IsAssignableFrom(buildertype))
+            if (typeof(UIElementBuilder).IsAssignableFrom(buildertype))
             {
-                Register<IUIElementBuilder>(buildertype, "backgroundcolor",
-                                                 (b, c) => b.WithBackgroundColor(c, _colorMapper));
-                Register<IUIElementBuilder>(buildertype, "backcolor",
-                                                 (b, c) => b.WithBackgroundColor(c, _colorMapper));
+                Register<UIElementBuilder>(buildertype, "backgroundcolor",
+                                            (b, c) => b.WithBackgroundColor(c, _colorMapper));
+                Register<UIElementBuilder>(buildertype, "backcolor",
+                                            (b, c) => b.WithBackgroundColor(c, _colorMapper));
 
-                Register<IUIElementBuilder>(buildertype, "frontgroundcolor",
-                                                 (b, c) => b.WithForegroundColor(c, _colorMapper));
-                Register<IUIElementBuilder>(buildertype, "frontcolor",
-                                                 (b, c) => b.WithForegroundColor(c, _colorMapper));
+                Register<UIElementBuilder>(buildertype, "frontgroundcolor",
+                                            (b, c) => b.WithForegroundColor(c, _colorMapper));
+                Register<UIElementBuilder>(buildertype, "frontcolor",
+                                            (b, c) => b.WithForegroundColor(c, _colorMapper));
 
-                Register<IUIElementBuilder>(buildertype, "border", (b, a) => b.WithBorder(a, _borderMapper));
+                Register<UIElementBuilder>(buildertype, "border", (b, a) => b.WithBorder(a, _borderMapper));
 
-                Register<IUIElementBuilder>(buildertype, "id", (b, id) => b.WithId(id));
+                Register<UIElementBuilder>(buildertype, "id", (b, id) => b.WithId(id));
             }
         }
 
         public void Register<T>(Type builderType, string attributeName, Func<T, string, T> builderMethod)
-            where T : IUIElementBuilder
+            where T : UIElementBuilder
         {
             Register<T, string>(builderType, attributeName, builderMethod);
         }
 
         public void Register<T1, T2>(Type builderType, string attributeName, Func<T1, T2, T1> builderMethod)
-            where T1 : IUIElementBuilder
+            where T1 : UIElementBuilder
         {
-            // _builderMethods.Add((typeof(T1), elementName), builderMethod);
             _builderMethods.Add((builderType, attributeName), (builder, arg) => builderMethod((T1)builder, (T2)arg));
         }
     }

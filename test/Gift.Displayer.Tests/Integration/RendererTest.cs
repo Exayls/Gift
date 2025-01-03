@@ -8,6 +8,7 @@ using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
 using Gift.Domain.UIModel.Services;
 using Gift.Repository.Repository;
+using Gift.TestsHelper.Tests.Helper;
 using Microsoft.Extensions.Logging;
 using Xunit;
 using Xunit.Abstractions;
@@ -33,7 +34,7 @@ namespace Gift.Displayer.Tests.Integration
         {
             InMemoryRepository repository = new InMemoryRepository();
             var renderer = GetRenderer(repository);
-            var ui = CreateContainer(new Size(5, 10), new NoBorder());
+            var ui = new VStackBuilder().WithBound(new Size(5, 10)).WithBorder(new NoBorder()).WithFillingChar('*').Build();
             IScreenDisplay rendered = renderer.GetRenderDisplay(ui);
             repository.SaveRoot(ui);
             // clang-format off
@@ -48,22 +49,24 @@ namespace Gift.Displayer.Tests.Integration
 
         private static VStack CreateContainer(Size bound, IBorder border)
         {
-            return new VStackBuilder().WithBound(bound).WithBorder(border).Build();
+            return new VStackBuilder().WithFillingChar('*').WithBound(bound).WithBorder(border).Build();
         }
 
         [Fact]
         public void Can_render_UI_with_elements()
         {
-            var ui = CreateContainer(new Size(10, 10), new NoBorder());
+            var ui = new VStackBuilder().WithBound(new Size(10, 10)).WithBorder(new NoBorder()).WithFillingChar('*').Build();
 
             VStack vstack = new VStackBuilder()
                                 .WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile("resources/borderchars/double_border.json")))
                                 .WithBound(new(-1, -1))
+                                .WithFillingChar('*')
                                 .Build();
             vstack.Add(new LabelBuilder().Build());
             ui.Add(vstack);
             VStack vstack2 = new VStackBuilder()
                                  .WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile("resources/borderchars/simple_border.json")))
+                                 .WithFillingChar('*')
                                  .Build();
             vstack.Add(vstack2);
             vstack2.Add(new LabelBuilder().WithText("hey").Build());
@@ -95,11 +98,13 @@ namespace Gift.Displayer.Tests.Integration
                                 .WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile(
                                                                       "resources/borderchars/double_border.json")))
                                 .WithBound(new(4, 4))
+                                .WithFillingChar('*')
                                 .Build();
             vstack.Add(new LabelBuilder().WithText("b").Build());
             VStack vstack2 = new VStackBuilder()
                                  .WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile(
                                                                        "resources/borderchars/simple_border.json")))
+                                 .WithFillingChar('*')
                                  .Build();
             InMemoryRepository repository = new InMemoryRepository();
             var renderer = GetRenderer(repository);
@@ -117,19 +122,21 @@ namespace Gift.Displayer.Tests.Integration
         [Fact]
         public void Can_render_UI_with_elements_out_of_bound()
         {
-            var ui = CreateContainer(new Size(10, 10), new NoBorder());
+            var ui = new VStackBuilder().WithBound(new Size(10, 10)).WithBorder(new NoBorder()).WithFillingChar('*').Build();
 
             VStack vstack = new VStackBuilder()
                                 .WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile(
                                                                       "resources/borderchars/double_border.json")))
+                                .WithFillingChar('*')
                                 .WithBound(new(-1, -1))
                                 .Build();
             vstack.Add(new LabelBuilder().Build());
             ui.Add(vstack);
             VStack vstack2 = new VStackBuilder()
-                                 .WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile(
+                                .WithBorder(new DetailedBorder(1, BorderOption.GetBorderCharsFromFile(
                                                                        "resources/borderchars/simple_border.json")))
-                                 .Build();
+                                .WithFillingChar('*')
+                                .Build();
             vstack.Add(vstack2);
             vstack2.Add(new LabelBuilder().WithText("hey").Build());
             vstack2.Add(
@@ -183,7 +190,7 @@ namespace Gift.Displayer.Tests.Integration
             };
 
             // clang-format on
-            var logger = Helper.LoggerHelper.GetLogger<RendererTest>(_output);
+            var logger = LoggerHelper.GetLogger<RendererTest>(_output);
 
             Print2DArray(expected, logger);
             Print2DArray(rendered.FrontColorMap, logger);

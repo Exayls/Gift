@@ -27,27 +27,4 @@
 		</PackageReference>
 	</ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\..\src\Gift.XmlUiParser\Gift.XmlUiParser.csproj" />
-		<ProjectReference Include="..\..\test\TestsHelper\TestsHelper.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Update="resources\xml\not_supported.xml">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="resources\xml\valid_xml.xml">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="resources\xml\vstack_border.xml">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="resources\xml\selectable.xml">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="resources\xml\id.xml">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
-
 </Project>

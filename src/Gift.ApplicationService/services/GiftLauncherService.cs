@@ -16,7 +16,6 @@ namespace Gift.ApplicationService.Services
         private readonly IDisplayService _displayService;
         private readonly IMonitorService _monitorService;
         private readonly IXMLFileParser _xmlParser;
-        public const char FILLINGCHAR = '*';
 
         public GiftLauncherService(
             IMonitorService monitorManager,

@@ -36,6 +36,7 @@ namespace Gift.Domain.Tests.UI
             {
                 builder.WithBound(bound);
             }
+			builder.WithFillingChar('*');
             return builder.Build();
         }
 
@@ -49,9 +50,9 @@ namespace Gift.Domain.Tests.UI
             Assert.Equal(expected, screenDisplay.DisplayString.ToString());
         }
 
-        private IScreenDisplay GetScreenDisplay(VStack vstack, char charFill = '*')
+        private IScreenDisplay GetScreenDisplay(VStack vstack)
         {
-            return vstack.GetDisplayWithBorder(charFill, new ColorResolver(_repository), new TrueElementSizeCalculator(_repository));
+            return vstack.GetDisplayWithBorder(new ColorResolver(_repository), new TrueElementSizeCalculator(_repository));
         }
 
         // GetDisplay tests
@@ -60,7 +61,7 @@ namespace Gift.Domain.Tests.UI
         {
             // arrange
             Size bound = new(2, 4);
-            vstack = CreateVstack(bound: bound);
+            vstack = new VStackBuilder().WithBound(bound).WithFillingChar('*').Build();
             // act
             IScreenDisplay screenDisplay = GetScreenDisplay(vstack: vstack);
             // assert
@@ -74,7 +75,7 @@ namespace Gift.Domain.Tests.UI
         {
             // arrange
             Size bound = new Size(3, 4);
-            vstack = CreateVstack(new SimpleBorder(1, '-'), bound);
+            vstack = new VStackBuilder().WithBound(bound).WithBorder(new SimpleBorder(1, '-')).WithFillingChar('*').Build();
             // act
             IScreenDisplay screenDisplay = GetScreenDisplay(vstack: vstack);
             // assert
@@ -86,9 +87,9 @@ namespace Gift.Domain.Tests.UI
         public void GetDisplay_should_return_screen_with_border_when_call_GetDisplay_with_border2()
         {
             Size bound = new Size(3, 4);
-            vstack = CreateVstack(new SimpleBorder(1, '-'), bound);
+            vstack = new VStackBuilder().WithBound(bound).WithBorder(new SimpleBorder(1, '-')).WithFillingChar('i').Build();
             // act
-            IScreenDisplay screenDisplay = GetScreenDisplay(vstack: vstack, 'i');
+            IScreenDisplay screenDisplay = GetScreenDisplay(vstack: vstack);
             // assert
             const string expected = "----\n" + "-ii-\n" + "----";
             AssertScreenDisplayEquals(expected, screenDisplay);
@@ -99,7 +100,7 @@ namespace Gift.Domain.Tests.UI
         {
             // arrange
             Size bound = new Size(3, 4);
-            vstack = CreateVstack(new SimpleBorder(1, 'i'), bound);
+            vstack = new VStackBuilder().WithBound(bound).WithBorder(new SimpleBorder(1, 'i')).WithFillingChar('*').Build();
             // act
             IScreenDisplay screenDisplay = GetScreenDisplay(vstack: vstack);
             // assert
@@ -112,7 +113,7 @@ namespace Gift.Domain.Tests.UI
         {
             // arrange
             Size bound = new Size(5, 5);
-            vstack = CreateVstack(new SimpleBorder(1, '-'), bound);
+            vstack = new VStackBuilder().WithBound(bound).WithBorder(new SimpleBorder(1, '-')).WithFillingChar('*').Build();
             // act
             IScreenDisplay screenDisplay = GetScreenDisplay(vstack: vstack);
             // assert
@@ -125,7 +126,7 @@ namespace Gift.Domain.Tests.UI
         {
             // arrange
             Size bound = new Size(5, 5);
-            vstack = CreateVstack(new SimpleBorder(2, '-'), bound);
+            vstack = new VStackBuilder().WithBound(bound).WithBorder(new SimpleBorder(2, '-')).WithFillingChar('*').Build();
             // act
             IScreenDisplay screenDisplay = GetScreenDisplay(vstack: vstack);
             // assert
@@ -165,9 +166,9 @@ namespace Gift.Domain.Tests.UI
         {
             // arrange
             Size bound = new Size(7, 7);
-            vstack = CreateVstack(new SimpleBorder(3, '-'), bound);
+            vstack = new VStackBuilder().WithBound(bound).WithBorder(new SimpleBorder(3, '-')).WithFillingChar('b').Build();
             // act
-            IScreenDisplay screenDisplay = GetScreenDisplay(vstack: vstack, charFill: 'b');
+            IScreenDisplay screenDisplay = GetScreenDisplay(vstack: vstack);
             // assert
             const string expected =
                 "-------\n" + "-------\n" + "-------\n" + "---b---\n" + "-------\n" + "-------\n" + "-------";

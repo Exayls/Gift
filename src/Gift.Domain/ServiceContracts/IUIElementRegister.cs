@@ -9,13 +9,13 @@ namespace Gift.Domain.ServiceContracts
         void Register(string name, Type type);
 
         public void Register<TBuilder>(string name)
-            where TBuilder : IUIElementBuilder;
+            where TBuilder : UIElementBuilder;
 
         void Register<TBuilder>(Type builderType, string attributeName, Func<TBuilder, string, TBuilder> builderMethod)
-            where TBuilder : IUIElementBuilder;
+            where TBuilder : UIElementBuilder;
 
         void Register<TBuilder, T2>(Type builderType, string attributeName, Func<TBuilder, T2, TBuilder> BuilderMethod)
-            where TBuilder : IUIElementBuilder;
+            where TBuilder : UIElementBuilder;
 
         Type GetBuilder(string componentName);
         public Func<IBuilder<UIElement>, object, IBuilder<UIElement>> GetMethod<TBuilder>(string attribute);

@@ -1,196 +1,127 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using Gift.Domain.Builders.Mappers;
+﻿using Gift.Domain.Builders.Mappers;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
 
 namespace Gift.Domain.Builders.UIModel
 {
-    public class VStackBuilder : IContainerBuilder
+    public class VStackBuilder : ContainerBuilder
     {
-        private IBorder _border = new NoBorder();
-        private Size _bound = new Size(0, 0);
-        private Color backColor = Color.Default;
-        private Color frontColor = Color.Default;
-        private readonly List<UIElement> selectableElements = [];
-        private readonly List<UIElement> unSelectableElements = [];
-        private int? _height;
-        private int? _width;
-        private string _id = Guid.NewGuid().ToString();
-
-        private bool _isSelectableContainer = false;
-
-        public VStackBuilder WithBorder(IBorder border)
+        public override VStackBuilder WithBound(Size bound)
         {
-            _border = border;
-            return this;
-        }
-        public VStackBuilder WithBound(Size bound)
-        {
-            _bound = bound;
-            return this;
+            return (VStackBuilder) base.WithBound(bound);
         }
 
-        public VStackBuilder WithBackgroundColor(Color color)
+        public override VStackBuilder WithBound(string boundStr, IBoundMapper mapper)
         {
-            backColor = color;
-            return this;
+            return (VStackBuilder) base.WithBound(boundStr, mapper);
         }
 
-        public VStackBuilder WithForegroundColor(Color color)
+        public override VStackBuilder WithHeight(int height)
         {
-            frontColor = color;
-            return this;
+            return (VStackBuilder) base.WithHeight(height);
         }
 
-        public VStackBuilder WithSelectableElement(UIElement element)
+        public override VStackBuilder WithHeight(string heightStr)
         {
-            selectableElements.Add(element);
-            return this;
+            return (VStackBuilder) base.WithHeight(heightStr);
         }
 
-        public VStackBuilder WithUnSelectableElement(UIElement element)
+        public override VStackBuilder WithWidth(int width)
         {
-            unSelectableElements.Add(element);
-            return this;
+            return (VStackBuilder) base.WithWidth(width);
         }
 
-        public VStackBuilder WithId(string id)
+        public override VStackBuilder WithWidth(string widthStr)
         {
-            _id = id;
-            return this;
+            return (VStackBuilder) base.WithWidth(widthStr);
         }
 
-        public VStackBuilder IsSelectableContainer(bool isSelectableContainer)
+        public override VStackBuilder WithSelectableElement(UIElement element)
         {
-            _isSelectableContainer = isSelectableContainer;
-            return this;
+            return (VStackBuilder) base.WithSelectableElement(element);
         }
 
-        public VStackBuilder WithHeight(int height)
+        public override VStackBuilder WithUnSelectableElement(UIElement element)
+
         {
-            _height = height;
-            return this;
+            return (VStackBuilder) base.WithUnSelectableElement(element);
         }
 
-        public VStackBuilder WithWidth(int width)
+        public override VStackBuilder IsSelectableContainer(bool isSelectableContainer)
         {
-            _width = width;
-            return this;
+            return (VStackBuilder) base.IsSelectableContainer(isSelectableContainer);
         }
 
-        public VStack Build()
+        public override VStackBuilder IsSelectableContainer(string isSelectableContainer, IBooleanMapper boolMapper)
+        {
+            return (VStackBuilder) base.IsSelectableContainer(isSelectableContainer, boolMapper);
+        }
+
+        public override VStackBuilder WithFillingChar(char fillingChar)
+        {
+            return (VStackBuilder) base.WithFillingChar(fillingChar);
+        }
+
+        public override VStackBuilder WithFillingChar(string fillingChar)
+        {
+            return (VStackBuilder) base.WithFillingChar(fillingChar);
+        }
+
+        public override VStackBuilder WithBorder(IBorder border)
+        {
+            return (VStackBuilder) base.WithBorder(border);
+        }
+
+        public override VStackBuilder WithBorder(string borderStr, IBorderMapper mapper)
+        {
+            return (VStackBuilder) base.WithBorder(borderStr, mapper);
+        }
+
+        public override VStackBuilder WithBackgroundColor(Color color)
+        {
+            return (VStackBuilder) base.WithBackgroundColor(color);
+        }
+
+        public override VStackBuilder WithBackgroundColor(string colorStr, IColorMapper mapper)
+        {
+            return (VStackBuilder) base.WithBackgroundColor(colorStr, mapper);
+        }
+
+        public override VStackBuilder WithForegroundColor(Color color)
+        {
+            return (VStackBuilder) base.WithForegroundColor(color);
+        }
+
+        public override VStackBuilder WithForegroundColor(string colorStr, IColorMapper mapper)
+        {
+            return (VStackBuilder) base.WithForegroundColor(colorStr, mapper);
+        }
+
+        public override VStackBuilder WithId(string id)
+        {
+            return (VStackBuilder) base.WithId(id);
+        }
+
+        public override VStack Build()
         {
             var bound = new Size(_height ?? _bound.Height, _width ?? _bound.Width);
-            var vstack = new VStack(_border, bound, frontColor: frontColor, backColor: backColor,
-                                    isSelectableContainer: _isSelectableContainer, id: _id);
-            foreach (UIElement element in unSelectableElements)
+            var vstack = new VStack(_border,
+                                    bound,
+                                    frontColor: frontColor,
+                                    backColor: backColor,
+                                    isSelectableContainer: _isSelectableContainer,
+                                    id: _id,
+                                    fillingChar: _fillingChar);
+            foreach (UIElement element in _unSelectableElements)
             {
                 vstack.Add(element);
             }
-            foreach (UIElement element in selectableElements)
+            foreach (UIElement element in _selectableElements)
             {
                 vstack.AddSelectableChild(element);
             }
             return vstack;
         }
-
-        UIElement IBuilder<UIElement>.Build()
-        {
-            return Build();
-        }
-
-        Container IBuilder<Container>.Build()
-        {
-            return Build();
-        }
-
-        IContainerBuilder IContainerBuilder.WithBound(Size bound)
-        {
-            return WithBound(bound);
-        }
-
-        IContainerBuilder IContainerBuilder.WithSelectableElement(UIElement element)
-        {
-            return WithSelectableElement(element);
-        }
-
-        IContainerBuilder IContainerBuilder.WithUnSelectableElement(UIElement element)
-        {
-            return WithUnSelectableElement(element);
-        }
-
-        IUIElementBuilder IUIElementBuilder.WithBorder(IBorder border)
-        {
-            return WithBorder(border);
-        }
-
-        IUIElementBuilder IUIElementBuilder.WithBackgroundColor(Color color)
-        {
-            return WithBackgroundColor(color);
-        }
-
-        IUIElementBuilder IUIElementBuilder.WithForegroundColor(Color color)
-        {
-            return WithForegroundColor(color);
-        }
-
-        IUIElementBuilder IUIElementBuilder.WithId(string id)
-        {
-            return WithId(id);
-        }
-
-        IContainerBuilder IContainerBuilder.WithHeight(int height)
-        {
-            return WithHeight(height);
-        }
-
-        IContainerBuilder IContainerBuilder.WithWidth(int width)
-        {
-            return WithWidth(width);
-        }
-
-        IContainerBuilder IContainerBuilder.IsSelectableContainer(bool isSelectableContainer)
-        {
-            return IsSelectableContainer(isSelectableContainer);
-        }
-
-        public IUIElementBuilder WithBorder(string borderStr, IBorderMapper mapper)
-        {
-            return WithBorder(mapper.ToBorder(borderStr));
-        }
-
-        public IUIElementBuilder WithBackgroundColor(string colorStr, IColorMapper mapper)
-        {
-            return WithBackgroundColor(mapper.ToColor(colorStr));
-        }
-
-        public IUIElementBuilder WithForegroundColor(string colorStr, IColorMapper mapper)
-        {
-            return WithForegroundColor(mapper.ToColor(colorStr));
-        }
-
-        public IContainerBuilder WithBound(string boundStr, IBoundMapper mapper)
-        {
-            return WithBound(mapper.ToBound(boundStr));
-        }
-
-        public IContainerBuilder WithHeight(string heightStr)
-        {
-            return WithHeight(int.Parse(heightStr, NumberStyles.Integer, CultureInfo.InvariantCulture.NumberFormat));
-        }
-
-        public IContainerBuilder WithWidth(string widthStr)
-        {
-            return WithWidth(int.Parse(widthStr, NumberStyles.Integer, CultureInfo.InvariantCulture.NumberFormat));
-        }
-
-        public IContainerBuilder IsSelectableContainer(string isSelectableContainer, IBooleanMapper boolMapper)
-        {
-            return IsSelectableContainer(boolMapper.ToBool(isSelectableContainer));
-        }
-
     }
 }

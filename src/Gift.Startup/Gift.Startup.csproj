@@ -41,14 +41,6 @@
 		<PackageReference Include="Serilog.Sinks.Console" Version="5.0.1" />
 		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
 	</ItemGroup>
-	<!-- <Target Name="AfterBuild" Condition="$(OutputType) == 'Exe'"> -->
-	<!-- 	<ItemGroup> -->
-	<!-- 		<_ContentFiles Include="$(MSBuildThisFileDirectory)..\contentFiles\any\any\**\*" /> -->
-	<!-- 	</ItemGroup> -->
-
-	<!-- 	<Copy SourceFiles="@(_ContentFiles)" DestinationFolder="$(OutDir)\%(RecursiveDir)" -->
-	<!-- 		SkipUnchangedFiles="true" OverwriteReadOnlyFiles="true" /> -->
-	<!-- </Target> -->
 
 	<ItemGroup>
 		<None Include="README.md">
@@ -56,12 +48,4 @@
 			<PackagePath>\</PackagePath>
 		</None>
 	</ItemGroup>
-	<!-- <ItemGroup> -->
-
-
-	<!-- 	<Content Include="$(MSBuildThisFileDirectory)..\contentFiles\**\*.*"> -->
-	<!-- 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory> -->
-	<!-- 	</Content> -->
-	<!-- </ItemGroup> -->
-
 </Project>

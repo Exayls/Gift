@@ -27,7 +27,7 @@ namespace Gift.Domain.Tests.UI
         {
             border ??= new NoBorder();
             bound ??= new Size(0, 0);
-            return new HStackBuilder().WithBound(bound).WithBorder(border).Build();
+            return new HStackBuilder().WithBound(bound).WithBorder(border).WithFillingChar('*').Build();
         }
 
         private static MockUIElement CreateUIElement(int height = 1, int width = 1)
@@ -43,7 +43,7 @@ namespace Gift.Domain.Tests.UI
         private static IScreenDisplay GetScreenDisplay(HStack hstack, char charFill = '*')
         {
             IRepository repository = Mock.Of<IRepository>();
-            return hstack.GetDisplayWithBorder(charFill, new ColorResolver(repository), new TrueElementSizeCalculator(repository));
+            return hstack.GetDisplayWithBorder(new ColorResolver(repository), new TrueElementSizeCalculator(repository));
         }
 
         // GetDisplay tests
@@ -79,7 +79,7 @@ namespace Gift.Domain.Tests.UI
         {
             // arrange
             Size bound = new Size(3, 4);
-            HStack = CreateHstack(new SimpleBorder(1, '-'), bound);
+            HStack = new HStackBuilder().WithFillingChar('i').WithBorder(new SimpleBorder(1, '-')).WithBound(bound).Build();
             // act
             IScreenDisplay screenDisplay = GetScreenDisplay(hstack: HStack, 'i');
             // assert
@@ -171,7 +171,7 @@ namespace Gift.Domain.Tests.UI
         {
             // arrange
             Size bound = new Size(7, 7);
-            HStack = CreateHstack(new SimpleBorder(3, '-'), bound);
+            HStack = new HStackBuilder().WithFillingChar('b').WithBorder(new SimpleBorder(3, '-')).WithBound(bound).Build();
             // act
             IScreenDisplay screenDisplay = GetScreenDisplay(hstack: HStack, charFill: 'b');
             // assert

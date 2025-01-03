@@ -53,18 +53,19 @@ namespace Gift.Domain.UIModel.Element
 
         public HStack(IBorder border,
                       Size bound,
+                      bool isSelectableContainer,
                       Color frontColor,
                       Color backColor,
-                      bool IsSelectableContainer,
-                      string id)
-            : base(bound, border, frontColor: frontColor, backColor: backColor, isSelectableContainer: IsSelectableContainer, id)
+                      string id,
+                      char fillingChar)
+            : base(bound, border, frontColor: frontColor, backColor: backColor, isSelectableContainer: isSelectableContainer, id, fillingChar: fillingChar)
         {
         }
 
         public override Position GetContext(IRenderable renderable, Position position)
         {
             int ChildContextPosition = GetWidthRenderable(renderable);
-            return new Position(0, ChildContextPosition - ScrollIndex);
+            return new Position(0, ChildContextPosition - _scrollIndex);
         }
 
         private int GetWidthRenderable(IRenderable renderableToFind)
@@ -108,7 +109,7 @@ namespace Gift.Domain.UIModel.Element
                 .WithBound(sizeInVStack)
                 .WithBackColor(backColor)
                 .WithFrontColor(frontColor)
-                .WithChar(configuration.FillingChar)
+                .WithChar(_fillingChar)
                 .Build();
             return emptyVstackScreen;
         }

@@ -1,202 +1,127 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using Gift.Domain.Builders.Mappers;
+﻿using Gift.Domain.Builders.Mappers;
 using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
 
 namespace Gift.Domain.Builders.UIModel
 {
-    public class HStackBuilder : IContainerBuilder
+    public class HStackBuilder : ContainerBuilder
     {
-        private IBorder _border = new NoBorder();
-        private Size _bound = new Size(0, 0);
-        private Color backColor = Color.Default;
-        private Color frontColor = Color.Default;
-        private int? _height;
-        private int? _width;
-        private readonly List<UIElement> _unSelectableElements = [];
-        private readonly List<UIElement> _selectableElementss = [];
-
-        private bool _isSelectableContainer = false;
-
-        private string _id = Guid.NewGuid().ToString();
-
-        public HStackBuilder WithBorder(IBorder border)
+        public override HStackBuilder WithBound(Size bound)
         {
-            _border = border;
-            return this;
-        }
-        public HStackBuilder WithBound(Size bound)
-        {
-            _bound = bound;
-            return this;
+            return (HStackBuilder) base.WithBound(bound);
         }
 
-        public HStackBuilder WithHeight(int height)
+        public override HStackBuilder WithBound(string boundStr, IBoundMapper mapper)
         {
-            _height = height;
-            return this;
+            return (HStackBuilder) base.WithBound(boundStr, mapper);
         }
 
-        public HStackBuilder WithWidth(int width)
+        public override HStackBuilder WithHeight(int height)
         {
-            _width = width;
-            return this;
+            return (HStackBuilder) base.WithHeight(height);
         }
 
-
-        public HStackBuilder WithBackgroundColor(Color color)
+        public override HStackBuilder WithHeight(string heightStr)
         {
-            backColor = color;
-            return this;
+            return (HStackBuilder) base.WithHeight(heightStr);
         }
 
-        public HStackBuilder WithForegroundColor(Color color)
+        public override HStackBuilder WithWidth(int width)
         {
-            frontColor = color;
-            return this;
+            return (HStackBuilder) base.WithWidth(width);
         }
 
-        public HStackBuilder WithSelectableElement(UIElement element)
+        public override HStackBuilder WithWidth(string widthStr)
         {
-            _selectableElementss.Add(element);
-            return this;
-        }
-        public HStackBuilder WithUnSelectableElement(UIElement element)
-        {
-            _unSelectableElements.Add(element);
-            return this;
+            return (HStackBuilder) base.WithWidth(widthStr);
         }
 
-        public HStackBuilder IsSelectableContainer(bool isSelectableContainer)
+        public override HStackBuilder WithSelectableElement(UIElement element)
         {
-            _isSelectableContainer = isSelectableContainer;
-            return this;
+            return (HStackBuilder) base.WithSelectableElement(element);
         }
 
-        public HStackBuilder WithId(string id)
+        public override HStackBuilder WithUnSelectableElement(UIElement element)
+
         {
-            _id = id;
-            return this;
+            return (HStackBuilder) base.WithUnSelectableElement(element);
         }
 
+        public override HStackBuilder IsSelectableContainer(bool isSelectableContainer)
+        {
+            return (HStackBuilder) base.IsSelectableContainer(isSelectableContainer);
+        }
 
-        public HStack Build()
+        public override HStackBuilder IsSelectableContainer(string isSelectableContainer, IBooleanMapper boolMapper)
+        {
+            return (HStackBuilder) base.IsSelectableContainer(isSelectableContainer, boolMapper);
+        }
+
+        public override HStackBuilder WithFillingChar(char fillingChar)
+        {
+            return (HStackBuilder) base.WithFillingChar(fillingChar);
+        }
+
+        public override HStackBuilder WithFillingChar(string fillingChar)
+        {
+            return (HStackBuilder) base.WithFillingChar(fillingChar);
+        }
+
+        public override HStackBuilder WithBorder(IBorder border)
+        {
+            return (HStackBuilder) base.WithBorder(border);
+        }
+
+        public override HStackBuilder WithBorder(string borderStr, IBorderMapper mapper)
+        {
+            return (HStackBuilder) base.WithBorder(borderStr, mapper);
+        }
+
+        public override HStackBuilder WithBackgroundColor(Color color)
+        {
+            return (HStackBuilder) base.WithBackgroundColor(color);
+        }
+
+        public override HStackBuilder WithBackgroundColor(string colorStr, IColorMapper mapper)
+        {
+            return (HStackBuilder) base.WithBackgroundColor(colorStr, mapper);
+        }
+
+        public override HStackBuilder WithForegroundColor(Color color)
+        {
+            return (HStackBuilder) base.WithForegroundColor(color);
+        }
+
+        public override HStackBuilder WithForegroundColor(string colorStr, IColorMapper mapper)
+        {
+            return (HStackBuilder) base.WithForegroundColor(colorStr, mapper);
+        }
+
+        public override HStackBuilder WithId(string id)
+        {
+            return (HStackBuilder) base.WithId(id);
+        }
+
+        public override HStack Build()
         {
             var bound = new Size(_height ?? _bound.Height, _width ?? _bound.Width);
             var hstack = new HStack(_border,
-                              bound,
-                              IsSelectableContainer: _isSelectableContainer,
-                              frontColor: frontColor,
-                              backColor: backColor,
-                              id: _id);
-
+                                    bound,
+                                    frontColor: frontColor,
+                                    backColor: backColor,
+                                    isSelectableContainer: _isSelectableContainer,
+                                    id: _id,
+                                    fillingChar: _fillingChar);
             foreach (UIElement element in _unSelectableElements)
             {
                 hstack.Add(element);
             }
-            foreach (UIElement element in _selectableElementss)
+            foreach (UIElement element in _selectableElements)
             {
                 hstack.AddSelectableChild(element);
             }
             return hstack;
-        }
-
-        UIElement IBuilder<UIElement>.Build()
-        {
-            return Build();
-        }
-
-        Container IBuilder<Container>.Build()
-        {
-            return Build();
-        }
-
-        IContainerBuilder IContainerBuilder.WithBound(Size bound)
-        {
-            return WithBound(bound);
-        }
-
-        IContainerBuilder IContainerBuilder.WithSelectableElement(UIElement element)
-        {
-            return WithSelectableElement(element);
-        }
-
-        IContainerBuilder IContainerBuilder.WithUnSelectableElement(UIElement element)
-        {
-            return WithUnSelectableElement(element);
-        }
-
-        IUIElementBuilder IUIElementBuilder.WithBorder(IBorder border)
-        {
-            return WithBorder(border);
-        }
-
-        IUIElementBuilder IUIElementBuilder.WithBackgroundColor(Color color)
-        {
-            return WithBackgroundColor(color);
-        }
-
-        IUIElementBuilder IUIElementBuilder.WithForegroundColor(Color color)
-        {
-            return WithForegroundColor(color);
-        }
-
-        IUIElementBuilder IUIElementBuilder.WithId(string id)
-        {
-            return WithId(id);
-        }
-
-        IContainerBuilder IContainerBuilder.WithHeight(int height)
-        {
-            return WithHeight(height);
-        }
-
-        IContainerBuilder IContainerBuilder.WithWidth(int width)
-        {
-            return WithWidth(width);
-        }
-
-        IContainerBuilder IContainerBuilder.IsSelectableContainer(bool isSelectableContainer)
-        {
-            return IsSelectableContainer(isSelectableContainer);
-        }
-
-
-        public IUIElementBuilder WithBorder(string borderStr, IBorderMapper mapper)
-        {
-            return WithBorder(mapper.ToBorder(borderStr));
-        }
-
-        public IUIElementBuilder WithBackgroundColor(string colorStr, IColorMapper mapper)
-        {
-            return WithBackgroundColor(mapper.ToColor(colorStr));
-        }
-
-        public IUIElementBuilder WithForegroundColor(string colorStr, IColorMapper mapper)
-        {
-            return WithForegroundColor(mapper.ToColor(colorStr));
-        }
-        public IContainerBuilder WithBound(string boundStr, IBoundMapper mapper)
-        {
-            return WithBound(mapper.ToBound(boundStr));
-        }
-
-        public IContainerBuilder WithHeight(string heightStr)
-        {
-            return WithHeight(int.Parse(heightStr, NumberStyles.Integer, CultureInfo.InvariantCulture.NumberFormat));
-        }
-
-        public IContainerBuilder WithWidth(string widthStr)
-        {
-            return WithWidth(int.Parse(widthStr, NumberStyles.Integer, CultureInfo.InvariantCulture.NumberFormat));
-        }
-
-        public IContainerBuilder IsSelectableContainer(string isSelectableContainer, IBooleanMapper boolMapper)
-        {
-            return IsSelectableContainer(boolMapper.ToBool(isSelectableContainer));
         }
     }
 }

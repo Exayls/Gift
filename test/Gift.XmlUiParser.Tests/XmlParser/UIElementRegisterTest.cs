@@ -4,10 +4,11 @@ using Gift.Domain.Builders.Mappers;
 using Gift.Domain.Builders.UIModel;
 using Gift.Domain.ServiceContracts;
 using Gift.XmlUiParser.FileParser;
-using Gift.XmlUiParser.Tests.Helper;
+using Gift.TestsHelper.Tests.Helper;
 using Moq;
 using Xunit;
 using Xunit.Abstractions;
+using Microsoft.Extensions.Logging;
 
 namespace Gift.XmlUiParser.Tests.XmlParser
 {
@@ -51,15 +52,45 @@ namespace Gift.XmlUiParser.Tests.XmlParser
 
             var elementRegister = GetElementRegister();
             var labelBuilderType = elementRegister.GetBuilder("label");
-            var labelBuilder = (IUIElementBuilder)labelBuilderType.GetConstructors()[0].Invoke([]);
+            var labelBuilder = (UIElementBuilder)labelBuilderType.GetConstructors()[0].Invoke([]);
 
-            elementRegister.Register<IUIElementBuilder>("UIElement");
-            elementRegister.Register<IUIElementBuilder>(typeof(IUIElementBuilder), "test", (b, t) => { return b; });
+            elementRegister.Register<UIElementBuilder>("UIElement");
+            elementRegister.Register<UIElementBuilder>(typeof(UIElementBuilder), "test", (b, t) => { return b; });
 
             // Act
-            var method = elementRegister.GetMethod<IUIElementBuilder>("test");
+            var method = elementRegister.GetMethod<UIElementBuilder>("test");
             // Assert
             Assert.Equal(typeof(LabelBuilder), method(labelBuilder, "hello").GetType());
+        }
+
+        [Fact]
+        public void When_retrieving_FillingChar_method_from_vstack_should_return_registered_method()
+        {
+            //Arrange
+
+            var elementRegister = GetElementRegister();
+            var vstackBuilderType = elementRegister.GetBuilder("vstack");
+            var vstackBuilder = (VStackBuilder)vstackBuilderType.GetConstructors()[0].Invoke([]);
+
+            // Act
+            var method = elementRegister.GetMethod<VStackBuilder>("fillingchar");
+            // Assert
+            Assert.Equal(typeof(VStackBuilder), method(vstackBuilder, "a").GetType());
+        }
+
+        [Fact]
+        public void When_retrieving_FillingChar_method_from_hstack_should_return_registered_method()
+        {
+            //Arrange
+
+            var elementRegister = GetElementRegister();
+            var vstackBuilderType = elementRegister.GetBuilder("hstack");
+            var vstackBuilder = (HStackBuilder)vstackBuilderType.GetConstructors()[0].Invoke([]);
+
+            // Act
+            var method = elementRegister.GetMethod<HStackBuilder>("fillingchar");
+            // Assert
+            Assert.Equal(typeof(HStackBuilder), method(vstackBuilder, "a").GetType());
         }
 
 

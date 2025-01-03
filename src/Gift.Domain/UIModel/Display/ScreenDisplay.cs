@@ -19,7 +19,7 @@ namespace Gift.Domain.UIModel.Display
         public char[,] DisplayMap { get; }
 
         public ScreenDisplay(string display, Color frontColor = Color.White, Color backColor = Color.Transparent)
-            : this(new(1, display.Length), frontColor, backColor, '*')
+            : this(new(1, display.Length), frontColor, backColor, ' ')
         {
             DisplayString.Clear().Append(display);
         }

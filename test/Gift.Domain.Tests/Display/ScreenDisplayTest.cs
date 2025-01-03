@@ -32,10 +32,10 @@ namespace Gift.Domain.Tests.Display
             screen.AddDisplay(screenToAdd, new Position(1, 0));
             // assert
             char[,] expectedDisplay = Convert_string_to_char([
-                // clang-format off
-				 "@@@@@@@@@@",
-                 "******@@@@",
-                 "@@@@@@@@@@"
+                 // clang-format off
+                 "@@@@@@@@@@",
+                "******@@@@",
+                "@@@@@@@@@@"
                 // clang-format on
             ]);
 

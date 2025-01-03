@@ -5,7 +5,7 @@ namespace Gift.Domain.Builders.UIModel.Display
 {
     public class ScreenDisplayBuilder
     {
-        private char _char = '*';
+        private char _char = ' ';
         private Color _backColor = Color.Default;
         private Color _frontColor = Color.Default;
         private Size _bound = new Size(0, 0);

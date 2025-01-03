@@ -7,7 +7,7 @@ using Gift.Domain.UIModel.Border;
 using Gift.Domain.UIModel.Element;
 using Gift.Domain.UIModel.MetaData;
 using Gift.XmlUiParser.FileParser;
-using Gift.XmlUiParser.Tests.Helper;
+using Gift.TestsHelper.Tests.Helper;
 using Xunit;
 using Xunit.Abstractions;
 

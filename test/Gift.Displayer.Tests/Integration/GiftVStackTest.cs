@@ -1,5 +1,4 @@
-﻿using Gift.ApplicationService.Services;
-using Gift.Displayer.Rendering;
+﻿using Gift.Displayer.Rendering;
 using Gift.Domain.Builders.UIModel;
 using Gift.Domain.ServiceContracts;
 using Gift.Domain.UIModel.Border;
@@ -46,7 +45,7 @@ namespace Gift.Displayer.Tests.Integration
             for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
+                expectedBuilder.Append(new string('*', ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 Assert.Equal(expected, actual[i]);
             }
@@ -54,13 +53,13 @@ namespace Gift.Displayer.Tests.Integration
 
         private static VStack CreateVstack()
         {
-            var vstack = new VStackBuilder().Build();
+            var vstack = new VStackBuilder().WithFillingChar('*').Build();
             return vstack;
         }
 
         private static VStack CreateUI(Size bound)
         {
-            var ui = new VStackBuilder().WithBound(bound).Build();
+            var ui = new VStackBuilder().WithBound(bound).WithFillingChar('*').Build();
             return ui;
         }
 
@@ -84,7 +83,7 @@ namespace Gift.Displayer.Tests.Integration
             for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
+                expectedBuilder.Append(new string('*', ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {
@@ -113,7 +112,7 @@ namespace Gift.Displayer.Tests.Integration
             for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
+                expectedBuilder.Append(new string('*', ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {
@@ -129,7 +128,7 @@ namespace Gift.Displayer.Tests.Integration
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
             var ui = CreateUI(new Size(20, 60));
-            var vstack = new VStackBuilder().Build();
+            var vstack = new VStackBuilder().WithFillingChar('*').Build();
             var label1 = new LabelBuilder().Build();
             var label2 = new LabelBuilder().WithText("test").Build();
             ui.Add(vstack);
@@ -145,7 +144,7 @@ namespace Gift.Displayer.Tests.Integration
             for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
+                expectedBuilder.Append(new string('*', ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {
@@ -165,7 +164,9 @@ namespace Gift.Displayer.Tests.Integration
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
             var ui = CreateUI(new Size(20, 60));
-            var vstack = new VStackBuilder().Build();
+            var vstack = new VStackBuilder()
+				.WithFillingChar('*')
+				.Build();
             var label1 = new LabelBuilder().Build();
             var label2 = new LabelBuilder().WithText("test").Build();
             var label3 = new LabelBuilder().WithText("label numero 3.").Build();
@@ -183,7 +184,7 @@ namespace Gift.Displayer.Tests.Integration
             for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
+                expectedBuilder.Append(new string('*', ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {
@@ -207,7 +208,9 @@ namespace Gift.Displayer.Tests.Integration
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
             var ui = CreateUI(new Size(20, 60));
-            var vstack = new VStackBuilder().Build();
+            var vstack = new VStackBuilder()
+				.WithFillingChar('*')
+				.Build();
             var label1 = new LabelBuilder().Build();
             var label2 = new LabelBuilder().WithText("test").WithPosition(new Position(4, 8)).Build();
             var label3 = new LabelBuilder().WithText("label numero 3.").Build();
@@ -226,7 +229,7 @@ namespace Gift.Displayer.Tests.Integration
             for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
+                expectedBuilder.Append(new string('*', ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {
@@ -250,7 +253,7 @@ namespace Gift.Displayer.Tests.Integration
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
             var ui = CreateUI(new Size(4, 60));
-            var vstack = new VStackBuilder().Build();
+            var vstack = new VStackBuilder().WithFillingChar('*').Build();
             var label1 = new LabelBuilder().Build();
             var label2 = new LabelBuilder().WithText("test").Build();
             var label3 = new LabelBuilder().WithText("label numero 3.").Build();
@@ -271,7 +274,7 @@ namespace Gift.Displayer.Tests.Integration
             for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
+                expectedBuilder.Append(new string('*', ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {
@@ -298,7 +301,7 @@ namespace Gift.Displayer.Tests.Integration
             var output = new StringBuilder();
             using var writer = new StringWriter(output);
             var ui = CreateUI(new Size(4, 60));
-            var vstack = new VStackBuilder().Build();
+            var vstack = new VStackBuilder().WithFillingChar('*').Build();
             var label1 = new LabelBuilder().Build();
             var label2 = new LabelBuilder().WithText("test").Build();
             var label3 = new LabelBuilder().WithText("label numero 3.").Build();
@@ -322,7 +325,7 @@ namespace Gift.Displayer.Tests.Integration
             for (int i = 0; i < ui.Size.Height; i++)
             {
                 expectedBuilder.Clear();
-                expectedBuilder.Append(new string(GiftLauncherService.FILLINGCHAR, ui.Size.Width));
+                expectedBuilder.Append(new string('*', ui.Size.Width));
                 expected = expectedBuilder.ToString();
                 if (i == 0)
                 {
@@ -346,7 +349,7 @@ namespace Gift.Displayer.Tests.Integration
 
         private static IScreenDisplay GetDisplay(UIElement element, IRepository repository)
         {
-            return element.GetDisplayWithBorder('*', new ColorResolver(repository), new TrueElementSizeCalculator(repository));
+            return element.GetDisplayWithBorder(new ColorResolver(repository), new TrueElementSizeCalculator(repository));
         }
 
         [Fact]
@@ -355,6 +358,7 @@ namespace Gift.Displayer.Tests.Integration
             var vstack = new VStackBuilder()
                              .WithUnSelectableElement(new LabelBuilder().WithText("****").Build())
                              .WithUnSelectableElement(new LabelBuilder().WithText("*").Build())
+							 .WithFillingChar('*')
                              .WithBorder(new NoBorder())
                              .Build();
             var repository = Mock.Of<IRepository>();
@@ -371,6 +375,7 @@ namespace Gift.Displayer.Tests.Integration
             var vstack = new VStackBuilder()
                              .WithUnSelectableElement(new LabelBuilder().WithText("**").Build())
                              .WithBorder(new SimpleBorder(1, '-'))
+                             .WithFillingChar('*')
                              .Build();
             IRepository repository = new InMemoryRepository();
             // act
@@ -389,6 +394,7 @@ namespace Gift.Displayer.Tests.Integration
             var vstack = new VStackBuilder()
                              .WithUnSelectableElement(new LabelBuilder().WithText("**").Build())
                              .WithBorder(new SimpleBorder(1, 'i'))
+                             .WithFillingChar('*')
                              .Build();
             IRepository repository = new InMemoryRepository();
             // act
@@ -408,6 +414,7 @@ namespace Gift.Displayer.Tests.Integration
                              .WithUnSelectableElement(new LabelBuilder().WithText("***").Build())
                              .WithUnSelectableElement(new LabelBuilder().WithText("*").Build())
                              .WithUnSelectableElement(new LabelBuilder().WithText("***").Build())
+                             .WithFillingChar('*')
                              .WithBorder(new SimpleBorder(1, '-'))
                              .Build();
             IRepository repository = new InMemoryRepository();
@@ -429,6 +436,7 @@ namespace Gift.Displayer.Tests.Integration
             var vstack = new VStackBuilder()
                              .WithUnSelectableElement(new LabelBuilder().WithText("aaaa").Build())
                              .WithBorder(new SimpleBorder(1, '-'))
+                             .WithFillingChar('*')
                              .Build();
             IRepository repository = new InMemoryRepository();
             // act
@@ -448,6 +456,7 @@ namespace Gift.Displayer.Tests.Integration
                              .WithUnSelectableElement(new LabelBuilder().WithText("***").Build())
                              .WithUnSelectableElement(new LabelBuilder().WithText("***").Build())
                              .WithBorder(new SimpleBorder(2, '-'))
+                             .WithFillingChar('*')
                              .Build();
             IRepository repository = new InMemoryRepository();
             // act
@@ -469,6 +478,7 @@ namespace Gift.Displayer.Tests.Integration
             var vstack = new VStackBuilder()
                              .WithUnSelectableElement(new LabelBuilder().WithText("a").Build())
                              .WithBorder(new SimpleBorder(3, '-'))
+                             .WithFillingChar('*')
                              .Build();
             IRepository repository = new InMemoryRepository();
             // act
